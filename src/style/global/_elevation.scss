@@ -1,0 +1,20 @@
+// https://m3.material.io/styles/elevation/tokens
+
+:root {
+    --sd-sys-elevation-level0: 0px;
+    --sd-sys-elevation-level1: 1px;
+    --sd-sys-elevation-level2: 3px;
+    --sd-sys-elevation-level3: 6px;
+    --sd-sys-elevation-level4: 8px;
+    --sd-sys-elevation-level5: 12px;
+}
+
+@mixin elevation-level1 {
+    box-shadow: 1px 1px var(--sd-sys-elevation-level1) rgba(0 0 0 / 0.1),
+        -1px 1px var(--sd-sys-elevation-level1) rgba(0 0 0 / 0.1);
+}
+
+@mixin elevation-level2 {
+    box-shadow: 1px 1px var(--sd-sys-elevation-level2) rgba(0 0 0 / 0.2),
+        -1px 1px var(--sd-sys-elevation-level2) rgba(0 0 0 / 0.2);
+}
