@@ -54,13 +54,17 @@ export function ripple<E extends HTMLElement>(ele: E, duration = 400) {
             ripple.style.transform = 'scale(101%)'
         })
 
+        const removeRipple = () => {
+            ripple.remove()
+            ele.removeEventListener('pointerup', onPointerUp)
+            ele.removeEventListener('pointercancel', onPointerUp)
+        }
+
+        ripple.ontransitioncancel = removeRipple
+
         const onPointerUp = () => {
-            ripple.ontransitionend = () => {
-                ripple.remove()
-                ele.removeEventListener('pointerup', onPointerUp)
-                ele.removeEventListener('pointercancel', onPointerUp)
-            }
-            // when pointer up or cancel, we remove current ripple as fast as possiable
+            // fade out and remove
+            ripple.ontransitionend = removeRipple
             requestAnimationFrame(() => {
                 ripple.style.opacity = '0'
             })

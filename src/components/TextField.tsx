@@ -1,28 +1,37 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import {
+    ReactNode,
+    forwardRef,
+    useImperativeHandle,
+    useRef,
+    useState,
+} from 'react'
 
 // @reference https://m3.material.io/components/text-fields/specs
-export const TextFields = forwardRef<
+export const TextField = forwardRef<
     unknown,
     {
         leadingIcon?: React.ReactNode
         tailingIcon?: React.ReactNode
         labelText?: string
+        supportingText?: string
         type?: 'text' | 'number'
         value?: string | number
         onChange?: (text: string | number) => void
         readonly?: boolean
         disabled?: boolean
+        error?: boolean
+        sdType?: 'filled' | 'outlined'
     }
 >(function (props, ref) {
     const stringValue = String(props.value || '')
-    const [focus, setFocus] = useState(false)
+    const [focusd, setFocusd] = useState(false)
     const [length, setLength] = useState(stringValue.length)
-    const populated = length > 0 || focus
+    const populated = length > 0 || focusd
     const inputRef = useRef<HTMLInputElement>(null)
 
     //? forward ref
     useImperativeHandle(ref, () => {
-        return inputRef
+        return inputRef.current
     })
 
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -35,28 +44,36 @@ export const TextFields = forwardRef<
 
     return (
         <div
-            className="sd-text_fields"
+            className="sd-text_field"
             onClick={() => {
                 inputRef.current?.focus() //? once the container is clicked, focus the input element
-                setFocus(true)
+                setFocusd(true)
             }}
             // https://stackoverflow.com/questions/37609049/how-to-correctly-catch-change-focusout-event-on-text-input-in-react-js
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onFocus={() => setFocusd(true)}
+            onBlur={() => setFocusd(false)}
+            tabIndex={-1}
             data-sd-label_text={populated ? 'populated' : 'empty'}
-            data-sd-input_text={props.disabled ? 'disabled' : ''}
+            data-sd-type={props.sdType === 'outlined' ? 'outlined' : 'filled'}
+            data-sd-disabled={props.disabled ? 'true' : 'false'}
+            data-sd-error={props.error ? 'true' : 'false'}
+            data-sd-focusd={focusd ? 'true' : 'false'}
         >
             {props.leadingIcon && (
-                <div className="sd-text_fields-leading_icon">
+                <div className="sd-text_field-leading_icon">
                     {props.leadingIcon}
                 </div>
             )}
 
-            <div className="sd-text_fields-helper">
-                <div className="sd-text_fields-label_text">
+            <Helper sdType={props.sdType}>
+                <div
+                    key="sd-text_field-label_text"
+                    className="sd-text_field-label_text"
+                >
                     {props.labelText}
                 </div>
                 <input
+                    key="input"
                     type={props.type}
                     ref={inputRef}
                     value={props.value}
@@ -64,15 +81,36 @@ export const TextFields = forwardRef<
                     readOnly={props.readonly}
                     disabled={props.disabled}
                 />
-            </div>
+            </Helper>
 
             {props.tailingIcon && (
-                <div className="sd-text_fields-tailing_icon">
+                <div className="sd-text_field-tailing_icon">
                     {props.tailingIcon}
                 </div>
             )}
 
-            <div className="sd-text_fields-active_indicator"></div>
+            {props.sdType !== 'outlined' && (
+                <div className="sd-text_field-active_indicator"></div>
+            )}
+
+            {props.supportingText && (
+                <div className="sd-text_field-supporting_text">
+                    {props.supportingText}
+                </div>
+            )}
         </div>
     )
 })
+
+const Helper = ({
+    children,
+    sdType,
+}: {
+    children: ReactNode
+    sdType?: 'filled' | 'outlined'
+}) =>
+    sdType === 'outlined' ? (
+        <>{children}</>
+    ) : (
+        <div className="sd-text_field-filled_helper">{children}</div>
+    )

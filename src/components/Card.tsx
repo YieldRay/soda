@@ -5,7 +5,7 @@ export const Card = forwardRef<
     unknown,
     {
         as?: string
-        class: 'outlined' | 'filled' | 'elevated'
+        sdType: 'outlined' | 'filled' | 'elevated'
         className?: string
     } & {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,7 +15,7 @@ export const Card = forwardRef<
     const As = props.as ?? 'div'
 
     const className =
-        `sd-cards sd-cards-${props.class}` + ' ' + (props.className ?? '')
+        `sd-card sd-card-${props.sdType}` + ' ' + (props.className ?? '')
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore

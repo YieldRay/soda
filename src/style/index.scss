@@ -1,3 +1,8 @@
 @import './button.scss';
-@import './cards.scss';
-@import './text-fields.scss';
+@import './card.scss';
+@import './text-field.scss';
+
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}

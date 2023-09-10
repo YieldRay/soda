@@ -6,7 +6,7 @@ export const Button = forwardRef<
     unknown,
     {
         as?: string
-        class: 'outlined' | 'filled' | 'elevated'
+        sdType: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
         className?: string
         disableRipple?: boolean
     } & {
@@ -17,7 +17,7 @@ export const Button = forwardRef<
     const As = props.as ?? 'button'
 
     const className =
-        `sd-button sd-button-${props.class}` + ' ' + (props.className ?? '')
+        `sd-button sd-button-${props.sdType}` + ' ' + (props.className ?? '')
 
     const btnRef = useRef<HTMLElement>(null)
 
@@ -26,7 +26,7 @@ export const Button = forwardRef<
     }, [props.disableRipple])
 
     useImperativeHandle(ref, () => {
-        return btnRef
+        return btnRef.current
     })
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
