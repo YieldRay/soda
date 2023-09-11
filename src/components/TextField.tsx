@@ -6,7 +6,7 @@ import {
     useState,
 } from 'react'
 
-// @reference https://m3.material.io/components/text-fields/specs
+// @specs https://m3.material.io/components/text-fields/specs
 export const TextField = forwardRef<
     unknown,
     {
@@ -20,7 +20,10 @@ export const TextField = forwardRef<
         readonly?: boolean
         disabled?: boolean
         error?: boolean
-        sdType?: 'filled' | 'outlined'
+        /**
+         * @default filled
+         */
+        sd?: 'filled' | 'outlined'
     }
 >(function (props, ref) {
     const stringValue = String(props.value || '')
@@ -54,7 +57,7 @@ export const TextField = forwardRef<
             onBlur={() => setFocusd(false)}
             tabIndex={-1}
             data-sd-label_text={populated ? 'populated' : 'empty'}
-            data-sd-type={props.sdType === 'outlined' ? 'outlined' : 'filled'}
+            data-sd-type={props.sd === 'outlined' ? 'outlined' : 'filled'}
             data-sd-disabled={props.disabled ? 'true' : 'false'}
             data-sd-error={props.error ? 'true' : 'false'}
             data-sd-focusd={focusd ? 'true' : 'false'}
@@ -65,7 +68,7 @@ export const TextField = forwardRef<
                 </div>
             )}
 
-            <Helper sdType={props.sdType}>
+            <Helper sd={props.sd}>
                 <div
                     key="sd-text_field-label_text"
                     className="sd-text_field-label_text"
@@ -89,7 +92,7 @@ export const TextField = forwardRef<
                 </div>
             )}
 
-            {props.sdType !== 'outlined' && (
+            {props.sd !== 'outlined' && (
                 <div className="sd-text_field-active_indicator"></div>
             )}
 
@@ -104,12 +107,12 @@ export const TextField = forwardRef<
 
 const Helper = ({
     children,
-    sdType,
+    sd,
 }: {
     children: ReactNode
-    sdType?: 'filled' | 'outlined'
+    sd?: 'filled' | 'outlined'
 }) =>
-    sdType === 'outlined' ? (
+    sd === 'outlined' ? (
         <>{children}</>
     ) : (
         <div className="sd-text_field-filled_helper">{children}</div>

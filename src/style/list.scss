@@ -1,0 +1,97 @@
+@import './global/index.scss';
+
+// https://m3.material.io/components/lists/specs
+
+.sd-list {
+    background: var(--sd-sys-color-surface);
+    display: flex;
+    align-items: center;
+    &[data-sd-lines='3'] {
+        align-items: flex-start;
+    }
+
+    transition: all 200ms;
+    &:hover {
+        filter: brightness(96%);
+        cursor: pointer;
+    }
+    &:active {
+        filter: brightness(92%);
+    }
+    &[disabled] {
+        color: var(--sd-sys-color-on-surface);
+        opacity: 0.38;
+        pointer-events: none;
+    }
+
+    &-helper {
+        margin: 0.75rem 1rem;
+        display: flex;
+        align-self: center;
+        flex-shrink: 1;
+        flex-grow: 1;
+        flex-direction: column;
+        word-break: break-all;
+        .sd-list-headline {
+            text-wrap: nowrap;
+        }
+        .sd-list-supporting_text {
+            color: var(--sd-sys-color-on-surface-variant);
+            font-size: smaller;
+            // max two lines
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+        }
+    }
+
+    &:has(&-leading_avatar_label_text),
+    &:has(&-leading_icon) {
+        padding-left: 1rem;
+    }
+    &:has(&-trailing_icon),
+    &:has(&-trailing_supporting_text) {
+        padding-right: 1.5rem;
+    }
+
+    &-trailing_supporting_text {
+        justify-self: flex-end;
+        flex-shrink: 0;
+        color: var(--sd-sys-color-on-surface-variant);
+        font-size: xx-small;
+        margin: 0.75rem 0;
+    }
+
+    &-trailing_icon {
+        justify-self: flex-end;
+        flex-shrink: 0;
+        margin: 0.75rem 0;
+    }
+
+    &-leading_avatar_label_text {
+        justify-self: flex-start;
+        flex-shrink: 0;
+        background: var(--sd-sys-color-primary-container);
+        font-size: 1rem;
+        --size: 2rem;
+        box-sizing: border-box;
+        line-height: var(--size);
+        width: var(--size);
+        height: var(--size);
+        border-radius: var(--size);
+        text-align: center;
+        margin: 0.75rem 0;
+    }
+
+    &-leading_icon {
+        justify-self: flex-start;
+        flex-shrink: 0;
+        margin: 0.75rem 0;
+    }
+
+    &-leading_video_thumbnail {
+        justify-self: flex-start;
+        flex-shrink: 0;
+    }
+}

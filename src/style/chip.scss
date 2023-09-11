@@ -1,0 +1,30 @@
+@import './global/index.scss';
+
+// https://m3.material.io/components/chips/specs
+
+.sd-chip {
+    &-assist {
+        .sd-chip-label_text {
+        }
+        .sd-chip-leading_icon {
+        }
+    }
+    &-filter {
+        .sd-chip-label_text {
+        }
+        .sd-chip-leading_icon {
+        }
+    }
+    &-input {
+        .sd-chip-label_text {
+        }
+        .sd-chip-leading_icon {
+        }
+        .sd-chip-trailing_icon {
+        }
+    }
+    &-suggestion {
+        .sd-chip-label_text {
+        }
+    }
+}

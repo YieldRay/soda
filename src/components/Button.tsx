@@ -1,12 +1,13 @@
 import { ripple } from '../utils/ripple'
 import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
+import clsx from 'clsx'
 
-// @reference https://m3.material.io/components/buttons/specs
+// @specs https://m3.material.io/components/buttons/specs
 export const Button = forwardRef<
     unknown,
     {
         as?: string
-        sdType: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
+        sd: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
         className?: string
         disableRipple?: boolean
     } & {
@@ -14,10 +15,8 @@ export const Button = forwardRef<
         [key: string]: any
     }
 >((props, ref) => {
-    const As = props.as ?? 'button'
-
-    const className =
-        `sd-button sd-button-${props.sdType}` + ' ' + (props.className ?? '')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const As: any = props.as ?? 'button'
 
     const btnRef = useRef<HTMLElement>(null)
 
@@ -31,5 +30,15 @@ export const Button = forwardRef<
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
-    return <As {...props} className={className} ref={btnRef}></As>
+    return (
+        <As
+            {...props}
+            className={clsx(
+                'sd-button',
+                `sd-button-${props.sd}`,
+                props.className,
+            )}
+            ref={btnRef}
+        ></As>
+    )
 })

@@ -30,7 +30,7 @@ export function ripple<E extends HTMLElement>(ele: E, duration = 400) {
             Math.hypot(rippleX, rippleY),
             Math.hypot(rippleX, height - rippleY),
             Math.hypot(width - rippleX, rippleY),
-            Math.hypot(width - rippleX, height - rippleY)
+            Math.hypot(width - rippleX, height - rippleY),
         )
 
         ele.style.position = 'relative'

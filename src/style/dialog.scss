@@ -1,0 +1,10 @@
+@import './global/index.scss';
+// https://m3.material.io/components/dialogs/specs
+.sd-dialog {
+    background: var(--sd-sys-color-surface-container-high);
+    @include elevation-level3;
+
+    &-scrim {
+        background: var(--sd-sys-color-scrim);
+    }
+}

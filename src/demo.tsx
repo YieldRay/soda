@@ -5,6 +5,8 @@ import './style/index.scss'
 import { TextField } from './components/TextField'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
+import { Divider } from './components/Divider'
+import { ListItem } from './components/List'
 
 // eslint-disable-next-line react-refresh/only-export-components
 function Demo() {
@@ -23,22 +25,24 @@ function Demo() {
             <p style={{ marginTop: '0' }}>underconstruction...</p>
 
             {['elevated', 'filled', 'outlined', 'tonal', 'text'].map((type) => (
-                <Button key={type} sdType={type}>
+                <Button key={type} sd={type}>
                     {type}
                 </Button>
             ))}
 
             {['elevated', 'filled', 'outlined'].map((type) => (
-                <Card key={type} sdType={type} style={{ padding: '1rem' }}>
+                <Card key={type} sd={type} style={{ padding: '1rem' }}>
                     {type}
                 </Card>
             ))}
+
+            <Divider />
 
             <TextField labelText="Label text"></TextField>
 
             <TextField
                 labelText="Label text"
-                sdType="outlined"
+                sd="outlined"
                 leadingIcon={<span>😀</span>}
             ></TextField>
 
@@ -55,6 +59,14 @@ function Demo() {
                 value={value}
                 onChange={setValue}
             ></TextField>
+
+            <ListItem
+                style={{ 'max-width': '200px' }}
+                headline="list here (headline)"
+                supportingText="supporting text is sooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo long!"
+                leadingAvatarLabelText="T"
+                trailingSupportingText="100+"
+            />
         </main>
     )
 }
@@ -62,5 +74,5 @@ function Demo() {
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Demo />
-    </React.StrictMode>
+    </React.StrictMode>,
 )
