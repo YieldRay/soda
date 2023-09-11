@@ -2,6 +2,7 @@
 
 .sd-divider {
     display: inline-block;
+    vertical-align: middle;
     background: var(--sd-sys-color-outline-variant);
 
     &[data-sd-type='horizon'] {

@@ -1,0 +1,57 @@
+@import './global/index.scss';
+
+// https://m3.material.io/components/radio-buttons/specs
+
+@mixin circle($r) {
+    box-sizing: border-box;
+    display: inline-block;
+    width: $r;
+    height: $r;
+    border-radius: $r;
+}
+
+@mixin center {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sd-radio_button {
+    display: inline-block;
+    vertical-align: middle;
+    @include circle(2rem);
+    cursor: pointer;
+    transition: all 200ms;
+    &:hover {
+        background: rgb(0 0 0 /0.1);
+    }
+    position: relative;
+
+    &::before {
+        @include center();
+        @include circle(1rem);
+    }
+    &::after {
+        @include center();
+        @include circle(0.5rem);
+    }
+
+    &[data-sd-checked='true'] {
+        &::before {
+            border: 2px solid var(--sd-sys-color-primary);
+        }
+        &::after {
+            background: var(--sd-sys-color-primary);
+        }
+    }
+    &[data-sd-checked='false'] {
+        &::before {
+            border: 2px solid var(--sd-sys-color-on-surface-variant);
+        }
+    }
+
+    &:not(:empty) {
+    }
+}

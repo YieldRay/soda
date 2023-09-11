@@ -1,6 +1,7 @@
 import { ripple } from '../utils/ripple'
 import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
 import clsx from 'clsx'
+import omit from 'lodash-es/omit'
 
 // @specs https://m3.material.io/components/buttons/specs
 export const Button = forwardRef<
@@ -32,11 +33,11 @@ export const Button = forwardRef<
     //@ts-ignore
     return (
         <As
-            {...props}
+            {...omit(props, ['as', 'sd', 'className', 'ref', 'disableRipple'])}
             className={clsx(
                 'sd-button',
                 `sd-button-${props.sd}`,
-                props.className,
+                props.className
             )}
             ref={btnRef}
         ></As>

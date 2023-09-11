@@ -18,8 +18,9 @@ export function ListItem(props: {
      * 3 means three lines of supporting text
      */
     lines?: 1 | 2 | 3
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any
+    className?: string
+    style?: React.CSSProperties
+    onClick?: () => void
 }) {
     const ref = useRef<HTMLDivElement>(null)
     useEffect(() => {
@@ -28,9 +29,10 @@ export function ListItem(props: {
 
     return (
         <div
-            {...props}
             className={clsx('sd-list', props.className)}
+            style={props.style}
             data-sd-lines={props.lines}
+            onClick={props.onClick}
             ref={ref}
         >
             {props.leadingVideoThubnail && (

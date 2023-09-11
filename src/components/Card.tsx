@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import omit from 'lodash-es/omit'
 import { forwardRef } from 'react'
 
 // @specs https://m3.material.io/components/cards/specs
@@ -20,7 +21,7 @@ export const Card = forwardRef<
     //@ts-ignore
     return (
         <As
-            {...props}
+            {...omit(props, ['as', 'sd', 'className', 'ref'])}
             className={clsx('sd-card', `sd-card-${props.sd}`, props.className)}
             ref={ref}
         ></As>
