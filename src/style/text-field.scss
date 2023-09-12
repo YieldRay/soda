@@ -81,8 +81,8 @@ $label_text_gap_size: 0.2rem;
     }
 }
 
-// outlined
-.sd-text_field[data-sd-type='outlined'] {
+// outlined (default filled)
+.sd-text_field[data-sd='outlined'] {
     border: 2px solid var(--sd-sys-color-outline);
     background: transparent;
     border-radius: 0.25rem;
@@ -116,6 +116,12 @@ $label_text_gap_size: 0.2rem;
         color: var(--sd-sys-color-primary);
         background: rgb(255 255 255);
         font-size: $label_text_populated_size;
+    }
+
+    // override default
+    &:hover,
+    &:active {
+        filter: none;
     }
 }
 

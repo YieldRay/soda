@@ -6,7 +6,9 @@ import {
     useState,
 } from 'react'
 
-// @specs https://m3.material.io/components/text-fields/specs
+/**
+ * @specs https://m3.material.io/components/text-fields/specs
+ */
 export const TextField = forwardRef<
     unknown,
     {
@@ -56,8 +58,8 @@ export const TextField = forwardRef<
             onFocus={() => setFocusd(true)}
             onBlur={() => setFocusd(false)}
             tabIndex={-1}
+            data-sd={props.sd === 'outlined' ? 'outlined' : 'filled'}
             data-sd-label_text={populated ? 'populated' : 'empty'}
-            data-sd-type={props.sd === 'outlined' ? 'outlined' : 'filled'}
             data-sd-disabled={props.disabled ? 'true' : 'false'}
             data-sd-error={props.error ? 'true' : 'false'}
             data-sd-focusd={focusd ? 'true' : 'false'}

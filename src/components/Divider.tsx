@@ -22,7 +22,7 @@ export const Divider = forwardRef<
 >((props, ref) => (
     <div
         {...omit(props, 'sd', 'direction', 'className', 'ref')}
-        data-sd-type={props.direction === 'vertical' ? 'vertical' : 'horizon'}
+        data-sd-direction={props.direction === 'vertical' ? 'vertical' : 'horizon'}
         className={clsx(
             {
                 'sd-divider': true,

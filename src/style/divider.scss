@@ -5,12 +5,12 @@
     vertical-align: middle;
     background: var(--sd-sys-color-outline-variant);
 
-    &[data-sd-type='horizon'] {
+    &[data-sd-direction='horizon'] {
         width: 100%;
         height: 1px;
     }
 
-    &[data-sd-type='vertical'] {
+    &[data-sd-direction='vertical'] {
         width: 1px;
         height: 100%;
     }

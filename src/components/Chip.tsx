@@ -2,7 +2,9 @@ import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { ripple } from '../utils/ripple'
 import clsx from 'clsx'
 
-// @specs https://m3.material.io/components/chips/specs
+/**
+ * @specs https://m3.material.io/components/chips/specs
+ */
 export const Chip = forwardRef<
     HTMLDivElement,
     {

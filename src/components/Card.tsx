@@ -2,7 +2,9 @@ import clsx from 'clsx'
 import omit from 'lodash-es/omit'
 import { forwardRef } from 'react'
 
-// @specs https://m3.material.io/components/cards/specs
+/**
+ * @specs https://m3.material.io/components/cards/specs
+ */
 export const Card = forwardRef<
     unknown,
     {

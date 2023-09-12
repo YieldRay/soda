@@ -2,7 +2,9 @@ import clsx from 'clsx'
 import { ripple } from '../utils/ripple'
 import { useRef, useEffect } from 'react'
 
-// @specs https://m3.material.io/components/lists/specs
+/**
+ * @specs https://m3.material.io/components/lists/specs
+ */
 export function ListItem(props: {
     headline: React.ReactNode
     supportingText?: React.ReactNode

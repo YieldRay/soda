@@ -3,7 +3,9 @@ import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
 import clsx from 'clsx'
 import omit from 'lodash-es/omit'
 
-// @specs https://m3.material.io/components/buttons/specs
+/**
+ * @specs https://m3.material.io/components/buttons/specs
+ */
 export const Button = forwardRef<
     unknown,
     {

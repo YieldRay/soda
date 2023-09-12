@@ -82,10 +82,22 @@ function Demo() {
                 just a chip!
             </Soda.Chip>
 
-            <div>
-                <Soda.RadioButton checked={radio} onChange={setRadio} />
+            <Soda.RadioButton checked={radio} onChange={setRadio}>
                 <span>{radio ? 'checked' : 'unchecked'}</span>
-            </div>
+            </Soda.RadioButton>
+
+            <Soda.Search
+                leadingIcon={[1, 2]}
+                trailingIcon={[3, 4]}
+                placeholder="placeholder"
+            ></Soda.Search>
+
+            <Soda.Search
+                leadingIcon={[1, 2]}
+                trailingIcon={[3, 4]}
+                placeholder="placeholder"
+                sd="view"
+            ></Soda.Search>
         </main>
     )
 }
