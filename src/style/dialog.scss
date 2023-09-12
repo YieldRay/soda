@@ -3,8 +3,78 @@
 .sd-dialog {
     background: var(--sd-sys-color-surface-container-high);
     @include elevation-level3;
+    width: fit-content;
+    z-index: 2;
+    border-radius: 28px;
+    min-width: 280px;
+    max-width: 560px;
+    max-height: 100vh;
 
-    &-scrim {
-        background: var(--sd-sys-color-scrim);
+    &-headline {
+        margin: 1.5rem 1.5rem 1rem;
+        // default style
+        font-size: x-large;
+    }
+    &-body {
+        margin: 1.5rem;
+        color: var(--sd-sys-color-on-surface-variant);
+    }
+    &-buttons {
+        margin: 1.5rem;
+        text-align: right;
+    }
+}
+
+.sd-dialog-scrim {
+    background: rgb(0 0 0 / 0.2);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sd-dialog-fullscreen {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--sd-sys-color-surface-container-high);
+    overflow: auto;
+
+    &-header {
+        height: 56px;
+        margin: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &-close {
+        cursor: pointer;
+        width: 2rem;
+        height: 2rem;
+        text-align: center;
+        line-height: 2rem;
+        border-radius: 50%;
+        &:hover {
+            background: rgb(0 0 0 / 0.1);
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &-headline {
+        margin: 0 1rem;
+        font-size: x-large;
+        margin-right: auto;
+    }
+    &-body {
+        margin: 1.5rem;
     }
 }

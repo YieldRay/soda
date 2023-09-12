@@ -10,6 +10,8 @@ function Demo() {
     const [chip, setChip] = React.useState(false)
     const [radio, setRadio] = React.useState(false)
     const [switcher, setSwitcher] = React.useState(false)
+    const [dialog, setDialog] = React.useState(false)
+    const [dialog2, setDialog2] = React.useState(false)
     return (
         <main
             style={{
@@ -120,6 +122,42 @@ function Demo() {
                     '×'
                 )}
             </Soda.Switch>
+
+            <Soda.Button sd="text" onClick={() => setDialog(true)}>
+                open dialog
+            </Soda.Button>
+
+            <Soda.Dialog
+                headline={'headline'}
+                open={dialog}
+                onScrimClick={() => setDialog(false)}
+                buttons={
+                    <>
+                        <Soda.Button sd="text" onClick={() => alert('wow!')}>
+                            wow!
+                        </Soda.Button>
+                        <Soda.Button sd="text" onClick={() => setDialog(false)}>
+                            close
+                        </Soda.Button>
+                    </>
+                }
+            >
+                A dialog is a type of modal ndo that appears in front of app
+                content to provide critical information, or ask for a decision.
+            </Soda.Dialog>
+
+            <Soda.Button sd="text" onClick={() => setDialog2(true)}>
+                open fullscreen dialog
+            </Soda.Button>
+
+            <Soda.FullScreenDialog
+                open={dialog2}
+                onCloseClick={() => setDialog2(false)}
+                headline={'FullScreenDialog Title'}
+                button="Save"
+            >
+                content
+            </Soda.FullScreenDialog>
         </main>
     )
 }
