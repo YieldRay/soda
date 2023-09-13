@@ -147,7 +147,7 @@ function Demo() {
                 onChange={setCheckbox}
             ></Soda.Checkbox>
 
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {(['small', 'default', 'large'] as const).map((size) =>
                     (['surface', 'secondary', 'tertiary'] as const).map(
                         (sd) => (
@@ -162,6 +162,10 @@ function Demo() {
                     Compose
                 </Soda.Fab>
             </div>
+
+            <Soda.LinearProgressIndicator></Soda.LinearProgressIndicator>
+
+            <Soda.CircularProgressIndicator></Soda.CircularProgressIndicator>
         </main>
     )
 }

@@ -7,7 +7,13 @@ export const Search = forwardRef<
     HTMLInputElement,
     {
         placeholder?: string
+        /**
+         * provide one item or an array, each item is an icon button
+         */
         leadingIcon?: React.ReactNode | React.ReactNode[]
+        /**
+         * provide one item or an array, each item is an icon button
+         */
         trailingIcon?: React.ReactNode | React.ReactNode[]
         sd?: 'bar' | 'view'
         value?: string

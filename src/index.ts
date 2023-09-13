@@ -11,3 +11,7 @@ export { Switch } from './components/Switch'
 export { Dialog, FullScreenDialog } from './components/Dialog'
 export { Checkbox } from './components/Checkbox'
 export { Fab } from './components/Fab'
+export {
+    LinearProgressIndicator,
+    CircularProgressIndicator,
+} from './components/ProgressIndicator'
