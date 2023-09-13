@@ -1,0 +1,77 @@
+@import './global/index.scss';
+
+// https://m3.material.io/components/floating-action-button/specs
+
+@mixin square($size, $radius: none) {
+    width: $size;
+    height: $size;
+    border-radius: $radius;
+}
+
+@mixin square-icon($size) {
+    display: inline-block;
+    width: $size;
+    height: $size;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.sd-fab {
+    @include elevation-level1; // 3 default 1 lowered
+    @include square(56px, 16px);
+    @include display-inline-flex-center;
+
+    &:hover {
+        filter: brightness(96%);
+        cursor: pointer;
+    }
+    &:active {
+        filter: brightness(92%);
+    }
+
+    &-icon {
+        @include square-icon(24px);
+        color: currentColor;
+    }
+
+    &[data-sd-size='small'] {
+        @include square(40px, 12px);
+        .sd-fab-icon {
+            @include square-icon(36);
+        }
+    }
+
+    &[data-sd-size='large'] {
+        @include square(96px, 28px);
+        .sd-fab-icon {
+            @include square-icon(36);
+        }
+    }
+
+    &[data-sd='surface'] {
+        background: var(--sd-sys-color-surface-container-high);
+        color: var(--sd-sys-color-primary);
+    }
+    &[data-sd='secondary'] {
+        background: var(--sd-sys-color-secondary-container);
+        color: var(--sd-sys-color-on-secondary-container);
+    }
+    &[data-sd='tertiary'] {
+        background: var(--sd-sys-color-tertiary);
+        color: var(--sd-sys-color-on-tertiary-container);
+    }
+
+    &[data-sd-extended='true'] {
+        width: max-content !important;
+        padding: 0 1rem;
+        .sd-fab-icon {
+            width: max-content !important;
+            font-size: 85%;
+            font-weight: bold;
+            display: inline-flex;
+            gap: 0.5rem;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+    }
+}

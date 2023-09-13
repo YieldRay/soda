@@ -1,4 +1,6 @@
 import { Ripple } from '../utils/Ripple.tsx'
+import clsx from 'clsx'
+import { type CSSProperties } from 'react'
 
 export function Checkbox(props: {
     checked?: boolean
@@ -9,6 +11,8 @@ export function Checkbox(props: {
      * this do not have any functional effect, just change the color
      */
     error?: boolean
+    className?: string
+    style?: CSSProperties
 }) {
     const checkedIcon = props.children || (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -24,7 +28,8 @@ export function Checkbox(props: {
 
     return (
         <Ripple
-            className="sd-checkbox"
+            style={props.style}
+            className={clsx('sd-checkbox', props.className)}
             data-sd={props.disabled ? 'disabled' : 'enabled'}
             data-sd-checked={props.checked ? 'true' : 'false'}
             data-sd-error={props.error ? 'true' : 'false'}

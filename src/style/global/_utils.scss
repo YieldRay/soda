@@ -1,0 +1,12 @@
+@mixin display-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin display-inline-flex-center {
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -14,11 +14,7 @@ $error: var(--sd-sys-color-error);
     &:hover {
         background: rgb(0 0 0 / 0.1);
     }
-    display: inline-block;
-    vertical-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include display-inline-flex-center;
 
     &-icon {
         display: inline-block;

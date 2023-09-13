@@ -1,15 +1,20 @@
+import clsx from 'clsx'
+import { type CSSProperties } from 'react'
+
 export function Switch(props: {
     checked?: boolean
     onChange?: (checked: boolean) => void
     children?: React.ReactNode
     disabled?: boolean
+    className?: string
+    style?: CSSProperties
 }) {
     return (
         <div
-            className="sd-switch"
+            className={clsx('sd-switch', props.className)}
+            style={props.style}
             data-sd={props.disabled ? 'disabled' : 'enabled'}
             data-sd-checked={props.checked ? 'true' : 'false'}
-            data-sd-error={props.error ? 'true' : 'false'}
             onClick={() => props.onChange?.(!props.checked)}
         >
             <div className="sd-switch-thumb">
