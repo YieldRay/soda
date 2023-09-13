@@ -2,6 +2,11 @@
 
 <https://m3.material.io/components>
 
+# Icon pack
+
+<https://fonts.google.com/icons>  
+<https://pictogrammers.com/library/mdi/>
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

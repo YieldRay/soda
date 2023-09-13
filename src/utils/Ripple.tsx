@@ -6,15 +6,17 @@ import React from 'react'
 
 export const Ripple: any = forwardRef<
     unknown,
-    { as?: string; children?: React.ReactNode }
+    { as?: string; children?: React.ReactNode; disabled?: boolean }
 >((props, ref) => {
     const Element: any = props.as ?? 'div'
     const eRef = useRef<HTMLElement>(null)
 
     useImperativeHandle(ref, () => eRef.current)
-    useEffect(() => ripple(eRef.current!))
+    useEffect(() => {
+        if (!props.disabled) return ripple(eRef.current!)
+    })
     return (
-        <Element ref={eRef} {...omit(props, ['as', 'ref'])}>
+        <Element ref={eRef} {...omit(props, ['as', 'ref', 'disabled'])}>
             {props.children}
         </Element>
     )

@@ -9,6 +9,7 @@ export function Switch(props: {
             className="sd-switch"
             data-sd={props.disabled ? 'disabled' : 'enabled'}
             data-sd-checked={props.checked ? 'true' : 'false'}
+            data-sd-error={props.error ? 'true' : 'false'}
             onClick={() => props.onChange?.(!props.checked)}
         >
             <div className="sd-switch-thumb">
