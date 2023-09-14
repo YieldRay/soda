@@ -1,4 +1,5 @@
 import './style/index.scss'
+
 export { Button } from './components/Button'
 export { Card } from './components/Card'
 export { TextField } from './components/TextField'
@@ -15,3 +16,5 @@ export {
     LinearProgressIndicator,
     CircularProgressIndicator,
 } from './components/ProgressIndicator'
+export { Badge } from './components/Badge'
+export { Snakebar } from './components/Snakebar'

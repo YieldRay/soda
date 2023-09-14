@@ -166,6 +166,20 @@ function Demo() {
             <Soda.LinearProgressIndicator></Soda.LinearProgressIndicator>
 
             <Soda.CircularProgressIndicator></Soda.CircularProgressIndicator>
+
+            <Soda.Badge>
+                <Soda.Button>▼</Soda.Button>
+            </Soda.Badge>
+            <Soda.Badge label="1">
+                <Soda.Button>▼</Soda.Button>
+            </Soda.Badge>
+            <Soda.Badge label="999+">
+                <Soda.Button>▼</Soda.Button>
+            </Soda.Badge>
+
+            <Soda.Snakebar action={<>Action</>} icon={closeIcon}>
+                This is a Snakebar
+            </Soda.Snakebar>
         </main>
     )
 }
