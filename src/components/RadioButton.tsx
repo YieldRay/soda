@@ -12,7 +12,7 @@ export function RadioButton(props: {
     children?: React.ReactNode
 }) {
     const rippleRef = useRef<HTMLDivElement>(null)
-    useEffect(() => ripple(rippleRef.current!))
+    useEffect(() => ripple(rippleRef.current!), [])
 
     return (
         <>

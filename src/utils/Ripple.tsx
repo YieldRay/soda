@@ -31,9 +31,18 @@ export const Ripple: any = forwardRef<
                 props.rippleDuration,
                 props.rippleColor
             )
-    })
+    }, [props])
     return (
-        <Element ref={eRef} {...omit(props, ['as', 'ref', 'disabled'])}>
+        <Element
+            ref={eRef}
+            {...omit(props, [
+                'as',
+                'ref',
+                'disabled',
+                'rippleDuration',
+                'rippleColor',
+            ])}
+        >
             {props.children}
         </Element>
     )

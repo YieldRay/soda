@@ -1,16 +1,10 @@
-import {
-    ReactNode,
-    forwardRef,
-    useImperativeHandle,
-    useRef,
-    useState,
-} from 'react'
+import { ReactNode, forwardRef, useRef, useState } from 'react'
 
 /**
  * @specs https://m3.material.io/components/text-fields/specs
  */
 export const TextField = forwardRef<
-    unknown,
+    HTMLInputElement,
     {
         leadingIcon?: React.ReactNode
         tailingIcon?: React.ReactNode
@@ -33,11 +27,6 @@ export const TextField = forwardRef<
     const [length, setLength] = useState(stringValue.length)
     const populated = length > 0 || focusd
     const inputRef = useRef<HTMLInputElement>(null)
-
-    //? forward ref
-    useImperativeHandle(ref, () => {
-        return inputRef.current
-    })
 
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -80,7 +69,7 @@ export const TextField = forwardRef<
                 <input
                     key="input"
                     type={props.type}
-                    ref={inputRef}
+                    ref={ref}
                     value={props.value}
                     onChange={onChange}
                     readOnly={props.readonly}

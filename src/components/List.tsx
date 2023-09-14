@@ -1,6 +1,5 @@
 import clsx from 'clsx'
-import { ripple } from '../utils/ripple'
-import { useRef, useEffect } from 'react'
+import { Ripple } from '../utils/Ripple.tsx'
 
 /**
  * @specs https://m3.material.io/components/lists/specs
@@ -24,18 +23,12 @@ export function ListItem(props: {
     style?: React.CSSProperties
     onClick?: () => void
 }) {
-    const ref = useRef<HTMLDivElement>(null)
-    useEffect(() => {
-        return ripple(ref.current!)
-    })
-
     return (
-        <div
+        <Ripple
             className={clsx('sd-list', props.className)}
             style={props.style}
             data-sd-lines={props.lines}
             onClick={props.onClick}
-            ref={ref}
         >
             {props.leadingVideoThubnail && (
                 <div className="sd-list-leading_video_thubnail">
@@ -65,6 +58,6 @@ export function ListItem(props: {
                     {props.trailingSupportingText}
                 </div>
             )}
-        </div>
+        </Ripple>
     )
 }

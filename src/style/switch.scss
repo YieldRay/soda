@@ -11,6 +11,7 @@
     border-radius: 1.25rem;
     background: var(--sd-sys-color-surface-container-highest);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     transition: all 200ms;
 
     position: relative;

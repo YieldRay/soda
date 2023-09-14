@@ -7,7 +7,7 @@ import omit from 'lodash-es/omit'
  * @specs https://m3.material.io/components/buttons/specs
  */
 export const Button = forwardRef<
-    unknown,
+    () => HTMLElement,
     {
         as?: string
         sd: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
@@ -28,7 +28,7 @@ export const Button = forwardRef<
     }, [props.disableRipple])
 
     useImperativeHandle(ref, () => {
-        return btnRef.current
+        return () => btnRef.current!
     })
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

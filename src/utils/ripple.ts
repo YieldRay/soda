@@ -48,31 +48,46 @@ export function ripple<E extends HTMLElement>(
         ripple.style.height = radius * 2 + 'px'
         ripple.style.borderRadius = '50%'
         ripple.style.transformOrigin = '50% 50%'
-        ripple.style.transform = 'scale(0%)'
-        ripple.style.transition = `all cubic-bezier(0.4, 0, 0.2, 1) ${duration}ms`
         ripple.style.background = color
         ele.append(ripple)
 
-        // if pointer is still down, we animate it slowly
-        requestAnimationFrame(() => {
-            ripple.style.transform = 'scale(101%)'
-        })
+        ripple.animate(
+            [
+                { transform: 'scale(0%)' },
+                {
+                    transform: 'scale(101%)',
+                },
+            ],
+            {
+                duration,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                fill: 'forwards',
+            }
+        )
 
-        const removeRipple = () => {
-            ripple.remove()
-            ele.removeEventListener('pointerup', onPointerUp)
-            ele.removeEventListener('pointercancel', onPointerUp)
+        const onPointerUp = (e: PointerEvent) => {
+            ele.releasePointerCapture(e.pointerId)
+
+            const animation = ripple.animate(
+                [
+                    { opacity: '1' },
+                    {
+                        opacity: '0',
+                    },
+                ],
+                {
+                    duration,
+                    fill: 'forwards',
+                }
+            )
+
+            animation.oncancel = animation.onfinish = () => {
+                ripple.remove()
+                ele.removeEventListener('pointerup', onPointerUp)
+                ele.removeEventListener('pointercancel', onPointerUp)
+            }
         }
 
-        ripple.ontransitioncancel = removeRipple
-
-        const onPointerUp = () => {
-            // fade out and remove
-            ripple.ontransitionend = removeRipple
-            requestAnimationFrame(() => {
-                ripple.style.opacity = '0'
-            })
-        }
         ele.addEventListener('pointerup', onPointerUp)
         ele.addEventListener('pointercancel', onPointerUp)
     }

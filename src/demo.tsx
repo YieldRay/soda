@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './style/index.scss'
 
 import * as Soda from '.'
+import { useRef } from 'react'
 
 // eslint-disable-next-line react-refresh/only-export-components
 function Demo() {
@@ -151,7 +152,7 @@ function Demo() {
                 {(['small', 'default', 'large'] as const).map((size) =>
                     (['surface', 'secondary', 'tertiary'] as const).map(
                         (sd) => (
-                            <Soda.Fab size={size} sd={sd}>
+                            <Soda.Fab size={size} sd={sd} key={`${size}-${sd}`}>
                                 {pencilIcon}
                             </Soda.Fab>
                         )
@@ -180,6 +181,8 @@ function Demo() {
             <Soda.Snakebar action={<>Action</>} icon={closeIcon}>
                 This is a Snakebar
             </Soda.Snakebar>
+
+            <BottomSheetDemo />
         </main>
     )
 }
@@ -189,6 +192,33 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Demo />
     </React.StrictMode>
 )
+
+const BottomSheetDemo = () => {
+    const sheetRef = useRef<Soda.BottomSheetHandle>(null)
+    return (
+        <>
+            <Soda.Button
+                sd="text"
+                onClick={() => {
+                    console.log(sheetRef)
+                    sheetRef.current?.().show()
+                }}
+            >
+                open sheet
+            </Soda.Button>
+
+            <Soda.BottomSheet ref={sheetRef}>
+                <Soda.Button onClick={() => sheetRef.current?.().show()}>
+                    ▲
+                </Soda.Button>
+                <p>bottom sheet</p>
+                <Soda.Button onClick={() => sheetRef.current?.().hide()}>
+                    ▼
+                </Soda.Button>
+            </Soda.BottomSheet>
+        </>
+    )
+}
 
 const pencilIcon = (
     <svg

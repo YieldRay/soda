@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     text-wrap: nowrap;
+    max-width: 100%;
 
     &-leading_icon {
         margin-left: 0.5rem;
@@ -42,6 +43,8 @@
         all: unset;
         height: 100%;
         margin: 1rem 1rem;
+        flex-shrink: 1;
+        min-width: 0;
         color: var(--sd-sys-color-on-surface);
         &::placeholder {
             color: var(--sd-sys-color-on-surface-variant);

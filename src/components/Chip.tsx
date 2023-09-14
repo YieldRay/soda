@@ -1,6 +1,6 @@
-import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
-import { ripple } from '../utils/ripple'
+import { forwardRef } from 'react'
 import clsx from 'clsx'
+import { Ripple } from '../utils/Ripple.tsx'
 
 /**
  * @specs https://m3.material.io/components/chips/specs
@@ -17,19 +17,11 @@ export const Chip = forwardRef<
         onClick?: () => void
     }
 >(function (props, ref) {
-    const divRef = useRef<HTMLDivElement>(null)
-    useEffect(() => {
-        return ripple(divRef.current!)
-    })
-    useImperativeHandle(ref, () => {
-        return divRef.current!
-    })
-
     return (
-        <div
+        <Ripple
             className={clsx('sd-chip', `sd-chip-${props.sd}`, props.className)}
             onClick={props.onClick}
-            ref={divRef}
+            ref={ref}
             data-sd={props.enabled ? 'enabled' : 'disabled'}
         >
             {props.leadingIcon && (
@@ -43,6 +35,6 @@ export const Chip = forwardRef<
                     {props.trailingIcon}
                 </div>
             )}
-        </div>
+        </Ripple>
     )
 })
