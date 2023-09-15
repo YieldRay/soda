@@ -47,24 +47,52 @@
 
 // https://m3.material.io/components/side-sheets/specs
 
-// we only implement: Modal side sheet
+//! we only implement: Modal side sheet
+
 .sd-side_sheet-scrim {
-    background: var(--sd-sys-color-scrim);
+    z-index: 1;
+    position: fixed;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    &:has(.sd-side_sheet[data-sd-position='right']) {
+        justify-content: flex-end;
+    }
 }
 
 .sd-side_sheet {
+    z-index: 2;
+    background: var(--sd-sys-color-surface-container-low);
     display: inline-block;
-    width: 156px;
-    max-width: 400px;
-    height: 100%;
+    box-sizing: border-box;
+    width: 256px + 16px + 24px;
     @include elevation-level1;
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
     overflow: hidden;
-
-    margin: 24px 24px 16px 24px;
+    &[data-sd-position='left'] {
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+    }
+    &[data-sd-position='right'] {
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }
+    display: flex;
+    flex-direction: column;
     &-action {
+        margin-top: auto;
+        flex-shrink: 0;
     }
     &-header {
+        padding: 24px 24px 16px 16px;
+        flex-shrink: 0;
+        font-size: x-large;
+    }
+    &-body {
+        padding: 0 24px 0 16px;
+        flex-shrink: 1;
     }
 }

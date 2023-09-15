@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom'
 import { Button } from './Button'
 import { Ripple } from '../utils/Ripple.tsx'
+import { IconClose } from '../utils/icons'
 
 /**
  * @specs https://m3.material.io/components/dialogs/specs
@@ -72,15 +73,7 @@ export function FullScreenDialog(props: {
                     className="sd-dialog-fullscreen-close"
                     onClick={props.onCloseClick}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <title>close</title>
-                        <path
-                            fill="currentColor"
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
-                        />
-                    </svg>
+                    <IconClose />
                 </Ripple>
                 <div className="sd-dialog-fullscreen-headline">
                     {props.headline}

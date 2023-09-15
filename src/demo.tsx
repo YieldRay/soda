@@ -1,4 +1,5 @@
-import React from 'react'
+/* eslint-disable react-refresh/only-export-components */
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import './style/index.scss'
 
@@ -183,6 +184,7 @@ function Demo() {
             </Soda.Snakebar>
 
             <BottomSheetDemo />
+            <SideSheetDemo />
         </main>
     )
 }
@@ -204,7 +206,7 @@ const BottomSheetDemo = () => {
                     sheetRef.current?.().show()
                 }}
             >
-                open sheet
+                open bottom sheet
             </Soda.Button>
 
             <Soda.BottomSheet ref={sheetRef}>
@@ -216,6 +218,39 @@ const BottomSheetDemo = () => {
                     ▼
                 </Soda.Button>
             </Soda.BottomSheet>
+        </>
+    )
+}
+
+const SideSheetDemo = () => {
+    const [open, setOpen] = useState(false)
+    return (
+        <>
+            <Soda.Button sd="text" onClick={() => setOpen(true)}>
+                open side sheet
+            </Soda.Button>
+
+            <Soda.SideSheet
+                open={open}
+                header="headline"
+                position="left"
+                onScrimClick={() => setOpen(false)}
+                action={
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <Soda.Button onClick={() => setOpen(false)}>
+                            Save
+                        </Soda.Button>
+                        <Soda.Button
+                            sd="outlined"
+                            onClick={() => setOpen(false)}
+                        >
+                            Close
+                        </Soda.Button>
+                    </div>
+                }
+            >
+                side sheet
+            </Soda.SideSheet>
         </>
     )
 }

@@ -38,7 +38,7 @@ export const Button = forwardRef<
             {...omit(props, ['as', 'sd', 'className', 'ref', 'disableRipple'])}
             className={clsx(
                 'sd-button',
-                `sd-button-${props.sd}`,
+                `sd-button-${props.sd ?? 'filled'}`,
                 props.className
             )}
             ref={btnRef}

@@ -134,8 +134,6 @@ export function drag(
         pointerDownTime = Date.now()
     }
 
-    dragHandle.addEventListener('pointerdown', onPointerDown)
-
     const onPointerMove = (e: PointerEvent) => {
         if (!isDragging) return
         const currY = e.clientY
@@ -149,8 +147,6 @@ export function drag(
             sheet.style.transform = `translateY(${nextTranslateY}px)`
         }
     }
-
-    dragHandle.addEventListener('pointermove', onPointerMove)
 
     const onPointerUp = (e: PointerEvent) => {
         dragHandle.releasePointerCapture(e.pointerId)
@@ -181,6 +177,8 @@ export function drag(
         }
     }
 
+    dragHandle.addEventListener('pointerdown', onPointerDown)
+    dragHandle.addEventListener('pointermove', onPointerMove)
     dragHandle.addEventListener('pointerup', onPointerUp)
     dragHandle.addEventListener('pointercancel', onPointerUp)
 
