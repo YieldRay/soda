@@ -1,36 +1,33 @@
-# A component library that may follow material design 3
+# Soda
 
-<https://m3.material.io/components>
+A component library that may follow [material design 3](https://m3.material.io/components)(a.k.a material you)
 
-# Icon pack
+# Installation
+
+TODO...
+
+docs is under development...
+
+# Resources
+
+Icon pack
 
 <https://fonts.google.com/icons>  
 <https://pictogrammers.com/library/mdi/>
 
-# React + TypeScript + Vite
+Font
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
--   Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```css
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    font-family: 'Roboto', sans-serif;
+}
 ```
 
--   Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
--   Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
--   Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# Development
+
+naming convention:
+
+-   a `.tsx` file with capitalized beginning is a react component (export a same name, no default export)
+-   a `.scss` file will use strigula to seperate component name in file name
+-   in any css code, use underscore to seperate component name, use strigula to seperate name segments
