@@ -1,0 +1,66 @@
+// https://m3.material.io/components/chips/specs
+
+.sd-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+
+    &:has(&-leading_icon) {
+        padding-left: 0.25rem;
+        padding-right: 0.5rem;
+    }
+    &:has(&-trailing_icon) {
+        padding-right: 0.5rem;
+    }
+
+    .sd-chip-label_text {
+        flex-shrink: 0;
+        margin: 0.25rem 0.5rem;
+    }
+    .sd-chip-leading_icon,
+    .sd-chip-trailing_icon {
+        flex-shrink: 0;
+        color: var(--sd-sys-color-primary);
+        width: 1rem;
+        height: 1rem;
+        line-height: 1rem;
+        text-align: center;
+        border-radius: 1rem;
+    }
+
+    transition: all 200ms;
+
+    &-outlined {
+        border: 1.25px solid var(--sd-sys-color-outline);
+        &[data-sd='disabled'] {
+            filter: grayscale(98%) opacity(40%);
+        }
+        &[data-sd='enabled'] {
+            &:hover {
+                background: rgb(0 0 0 / 0.04);
+            }
+            &:active {
+                background: rgb(0 0 0 / 0.08);
+            }
+        }
+    }
+
+    &-tonal {
+        border: 1.25px solid var(--sd-sys-color-surface-container-high);
+        background: var(--sd-sys-color-surface-container-high);
+        color: var(--sd-sys-color-on-surface);
+        &[data-sd='disabled'] {
+            filter: grayscale(98%) opacity(60%);
+        }
+        &[data-sd='enabled'] {
+            &:hover {
+                filter: brightness(96%);
+            }
+            &:active {
+                filter: brightness(92%);
+            }
+        }
+    }
+}

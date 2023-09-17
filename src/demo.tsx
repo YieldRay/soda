@@ -1,9 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
-import './style/index.scss'
 
-import * as Soda from '.'
+import * as Soda from '@/index.ts'
 import { useRef } from 'react'
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -209,7 +208,10 @@ const BottomSheetDemo = () => {
                 open bottom sheet
             </Soda.Button>
 
-            <Soda.BottomSheet ref={sheetRef}>
+            <Soda.BottomSheet
+                ref={sheetRef}
+                onScrimClick={() => sheetRef.current?.().hide()}
+            >
                 <Soda.Button onClick={() => sheetRef.current?.().show()}>
                     ▲
                 </Soda.Button>

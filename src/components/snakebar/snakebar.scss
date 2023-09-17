@@ -1,0 +1,44 @@
+// https://m3.material.io/components/snackbar/specs
+
+.sd-snakebar {
+    color: var(--sd-sys-color-inverse-on-surface);
+    background: var(--sd-sys-color-inverse-surface);
+    @include elevation-level3;
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+    border-radius: 2px;
+    font-size: small;
+    padding: 0 8px 0 12px;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+
+    &-supporting_text {
+        flex-shrink: 1;
+        color: var(--sd-sys-color-inverse-on-surface);
+        margin: 12px 16px 12px 0;
+    }
+    &-action {
+        flex-shrink: 0;
+        color: var(--sd-sys-color-inverse-primary);
+        background-color: transparent;
+        padding: 6px 10px;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        user-select: none;
+        transition: all 200ms;
+        &:hover {
+            background: rgb(255 255 255 / 0.09);
+        }
+    }
+    &-icon {
+        flex-shrink: 0;
+        color: var(--sd-sys-color-inverse-on-surface);
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin-left: 8px;
+        cursor: pointer;
+    }
+}

@@ -26,3 +26,4 @@ dist-ssr
 # Other
 demo
 package-lock.json
+.docz

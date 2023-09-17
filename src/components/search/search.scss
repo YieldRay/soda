@@ -1,0 +1,60 @@
+// https://m3.material.io/components/search/specs
+
+.sd-search {
+    background: var(--sd-sys-color-surface-container-high);
+    display: flex;
+    align-items: center;
+    text-wrap: nowrap;
+    max-width: 100%;
+
+    &-leading_icon {
+        margin-left: 0.5rem;
+        &:first-child {
+            margin-left: 1rem;
+        }
+    }
+    &-trailing_icon {
+        margin-right: 0.5rem;
+        &:last-child {
+            margin-right: 1rem;
+        }
+    }
+    &-leading_icon,
+    &-trailing_icon {
+        flex-shrink: 0;
+        box-sizing: content-box;
+        width: 1rem;
+        height: 1rem;
+        line-height: 1rem;
+        text-align: center;
+        padding: 0.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+        transition: background-color 200ms;
+        cursor: pointer;
+        &:hover {
+            background: rgb(0 0 0 / 0.1);
+        }
+    }
+
+    &-supporting_text {
+        all: unset;
+        height: 100%;
+        margin: 1rem 1rem;
+        flex-shrink: 1;
+        min-width: 0;
+        color: var(--sd-sys-color-on-surface);
+        &::placeholder {
+            color: var(--sd-sys-color-on-surface-variant);
+            font-size: 1rem;
+        }
+    }
+
+    &[data-sd='bar'] {
+        border-radius: 2rem;
+    }
+    &[data-sd='view'] {
+        border-radius: 0;
+        border-bottom: 1px solid var(--sd-sys-color-outline);
+    }
+}

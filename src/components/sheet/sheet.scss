@@ -1,0 +1,96 @@
+// https://m3.material.io/components/bottom-sheets/specs
+
+.sd-bottom_sheet-scrim {
+    // this scrim is entirely transparent, its only responsibility is
+    // to hold the sheet and place it to correct position
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.sd-bottom_sheet {
+    background: var(--sd-sys-color-surface-container-low);
+    @include elevation-level1;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    margin-top: 4px;
+    overflow: hidden;
+    width: 640px;
+    max-width: 100%;
+    overflow: hidden;
+
+    &-drag_handle {
+        cursor: grab;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &::after {
+            content: '';
+            background: var(--sd-sys-color-on-surface-variant);
+            width: 32px;
+            height: 4px;
+            margin: 8px;
+            border-radius: 2px;
+            filter: opacity(40%);
+        }
+    }
+}
+
+// https://m3.material.io/components/side-sheets/specs
+
+//! we only implement: Modal side sheet
+
+.sd-side_sheet-scrim {
+    z-index: 1;
+    position: fixed;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    &:has(.sd-side_sheet[data-sd-position='right']) {
+        justify-content: flex-end;
+    }
+}
+
+.sd-side_sheet {
+    z-index: 2;
+    background: var(--sd-sys-color-surface-container-low);
+    display: inline-block;
+    box-sizing: border-box;
+    width: 256px + 16px + 24px;
+    @include elevation-level1;
+    overflow: hidden;
+    &[data-sd-position='left'] {
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+    }
+    &[data-sd-position='right'] {
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }
+    display: flex;
+    flex-direction: column;
+    &-action {
+        margin-top: auto;
+        flex-shrink: 0;
+    }
+    &-header {
+        padding: 24px 24px 16px 16px;
+        flex-shrink: 0;
+        font-size: x-large;
+    }
+    &-body {
+        padding: 0 24px 0 16px;
+        flex-shrink: 1;
+    }
+}

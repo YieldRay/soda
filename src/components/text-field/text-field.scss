@@ -1,0 +1,221 @@
+// https://m3.material.io/components/cards/specs
+
+$label_text_empty_size: 1rem;
+$label_text_populated_size: 0.5rem;
+$label_text_gap_size: 0.2rem;
+
+.sd-text_field {
+    box-sizing: border-box;
+    min-width: 200px; // follow webkit input default min-width
+    display: inline-flex;
+    align-items: center;
+    background: var(--sd-sys-color-surface-container-highest);
+    cursor: text;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    padding: 0.75rem 0.5rem;
+    transition: all 200ms;
+
+    &:hover {
+        filter: brightness(96%);
+    }
+
+    &:active {
+        filter: brightness(92%);
+    }
+
+    &-leading_icon,
+    &-trailing_icon {
+        transform: translateY(1px);
+        font-size: 20px;
+    }
+    &-leading_icon {
+        margin-right: 0.5rem;
+    }
+    &-trailing_icon {
+        margin-left: 0.5rem;
+    }
+
+    &-supporting_text {
+        font-size: 0.5rem;
+    }
+
+    position: relative;
+
+    &-active_indicator {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        display: block;
+
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            height: 1px;
+        }
+    }
+
+    input {
+        all: unset;
+        flex-grow: 1;
+    }
+
+    &:has(&-supporting_text) {
+        margin-bottom: 1rem;
+    }
+
+    &-supporting_text {
+        position: absolute;
+        color: var(--sd-sys-color-on-surface-variant);
+        font-size: small;
+        left: 0;
+        bottom: -1rem;
+        text-wrap: nowrap;
+        padding: 0 0.5rem;
+    }
+}
+
+// outlined (default filled)
+.sd-text_field[data-sd='outlined'] {
+    border: 2px solid var(--sd-sys-color-outline);
+    background: transparent;
+    border-radius: 0.25rem;
+
+    &[data-sd-focusd='true'] {
+        border: 2px solid var(--sd-sys-color-primary);
+    }
+    //? limit the leading_icon to has max width 1rem
+    //? this make the component do not need javascript to calculate
+    //? the leading_icon's width, so we can just place the label_text
+    //? easily and correctly when the input value is empty
+    .sd-text_field-leading_icon {
+        margin-right: 1rem;
+        width: 1rem;
+    }
+    &:has(.sd-text_field-leading_icon) {
+        .sd-text_field-label_text {
+            left: 2.5rem;
+        }
+    }
+    .sd-text_field-label_text {
+        position: absolute;
+        transition: all 200ms;
+        left: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &[data-sd-label_text='populated'] .sd-text_field-label_text {
+        left: 0.5rem;
+        top: 0;
+        color: var(--sd-sys-color-primary);
+        background: rgb(255 255 255);
+        font-size: $label_text_populated_size;
+    }
+
+    // override default
+    &:hover,
+    &:active {
+        filter: none;
+    }
+}
+
+.sd-text_field .sd-text_field-filled_helper {
+    position: relative;
+    width: 100%;
+    height: $label_text_empty_size + $label_text_populated_size;
+
+    .sd-text_field-label_text {
+        display: block;
+        width: fit-content;
+        position: absolute;
+        transition: all 200ms;
+        text-wrap: nowrap;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    input {
+        position: absolute;
+    }
+}
+
+// label_text empty
+.sd-text_field[data-sd-label_text='empty'] {
+    .sd-text_field-filled_helper {
+        .sd-text_field-label_text {
+            top: 50%;
+            transform: translateY(-50%);
+            line-height: $label_text_empty_size;
+            font-size: $label_text_empty_size;
+            color: var(--sd-sys-color-on-surface-variant);
+        }
+        input {
+            // this make the input fill all the available container space
+            left: -0.5rem;
+            top: -0.75rem;
+            width: calc(100% + 0.5rem + 0.5rem);
+            height: calc(100% + 0.75rem + 0.75rem);
+        }
+    }
+
+    .sd-text_field-active_indicator {
+        &::before {
+            background: var(--sd-sys-color-on-surface-variant);
+        }
+        &::after {
+            background: transparent;
+        }
+    }
+}
+
+// label_text populated
+.sd-text_field[data-sd-label_text='populated'] {
+    .sd-text_field-filled_helper {
+        .sd-text_field-label_text {
+            top: -($label_text_gap_size);
+            line-height: $label_text_populated_size;
+            font-size: $label_text_populated_size;
+            color: var(--sd-sys-color-primary);
+        }
+        input {
+            top: $label_text_populated_size + $label_text_gap_size;
+        }
+    }
+
+    .sd-text_field-active_indicator {
+        &::before,
+        &::after {
+            background: var(--sd-sys-color-primary);
+        }
+    }
+}
+
+// disabled
+.sd-text_field[data-sd-disabled='true'] {
+    filter: grayscale(100%);
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+// error
+.sd-text_field[data-sd-error='true'] {
+    .sd-text_field-filled_helper {
+        .sd-text_field-label_text {
+            color: var(--sd-sys-color-error);
+        }
+    }
+
+    .sd-text_field-active_indicator {
+        &::before,
+        &::after {
+            background: var(--sd-sys-color-error);
+        }
+    }
+
+    .sd-text_field-supporting_text {
+        color: var(--sd-sys-color-error);
+    }
+}

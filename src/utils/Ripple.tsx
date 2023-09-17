@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
-import { ripple } from './ripple'
+import { rippleEffect } from './ripple-effect'
 import omit from 'lodash-es/omit'
 import React from 'react'
 
@@ -26,10 +26,10 @@ export const Ripple: any = forwardRef<
     useImperativeHandle(ref, () => eRef.current)
     useEffect(() => {
         if (!props.disabled)
-            return ripple(
+            return rippleEffect(
                 eRef.current!,
                 props.rippleDuration,
-                props.rippleColor
+                props.rippleColor,
             )
     }, [props])
     return (
