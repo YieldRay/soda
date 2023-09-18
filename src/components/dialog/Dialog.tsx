@@ -28,7 +28,7 @@ export function Dialog(props: {
                     if (
                         props.onScrimClick &&
                         (e.target as HTMLElement).classList.contains(
-                            'sd-dialog-scrim',
+                            'sd-dialog-scrim'
                         )
                     ) {
                         props.onScrimClick()
@@ -48,7 +48,7 @@ export function Dialog(props: {
                 </div>
             </div>
         </div>,
-        document.body,
+        document.body
     )
 }
 
@@ -87,6 +87,6 @@ export function FullScreenDialog(props: {
             </div>
             <div className="sd-dialog-fullscreen-body">{props.children}</div>
         </div>,
-        document.body,
+        document.body
     )
 }

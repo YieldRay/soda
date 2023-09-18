@@ -34,7 +34,7 @@ export const Divider = forwardRef<
                 'sd-divider-full': props.sd === 'full' || props.sd == undefined,
                 'sd-divider-inset': props.sd === 'inset',
             },
-            props.className,
+            props.className
         )}
         ref={ref}
     ></div>

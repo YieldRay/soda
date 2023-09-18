@@ -30,6 +30,6 @@
         "emitDeclarationOnly": true,
         "declarationDir": "dist"
     },
-    "include": ["src"],
+    "include": ["src", "src/demo"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

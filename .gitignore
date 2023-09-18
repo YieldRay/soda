@@ -27,3 +27,5 @@ dist-ssr
 demo
 package-lock.json
 .docz
+docs
+storybook-static

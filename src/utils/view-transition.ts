@@ -26,7 +26,7 @@ declare global {
          * @returns A ViewTransition object instance.
          */
         startViewTransition(
-            callback: () => Promise<void> | void,
+            callback: () => Promise<void> | void
         ): ViewTransition
     }
 

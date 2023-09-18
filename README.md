@@ -1,10 +1,14 @@
 # Soda
 
-A component library that may follow [material design 3](https://m3.material.io/components)(a.k.a material you)
+A component library that may follow [material design 3](https://m3.material.io/components) (a.k.a material you)
 
 # Installation
 
 TODO...
+
+# Documention
+
+See: <https://yieldray.github.io/soda/>
 
 docs is under development...
 

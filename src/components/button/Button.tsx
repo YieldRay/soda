@@ -40,7 +40,7 @@ export const Button = forwardRef<
             className={clsx(
                 'sd-button',
                 `sd-button-${props.sd ?? 'filled'}`,
-                props.className,
+                props.className
             )}
             ref={btnRef}
         ></As>

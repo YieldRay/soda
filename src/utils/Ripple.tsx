@@ -29,7 +29,7 @@ export const Ripple: any = forwardRef<
             return rippleEffect(
                 eRef.current!,
                 props.rippleDuration,
-                props.rippleColor,
+                props.rippleColor
             )
     }, [props])
     return (

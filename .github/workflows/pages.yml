@@ -30,16 +30,16 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
-            - name: Build
+            - name: Build storybook
               run: |
                   npm install
-                  npm run demo
+                  npm run build-storybook
             - name: Setup Pages
               uses: actions/configure-pages@v3
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v2
               with:
-                  path: './demo'
+                  path: './storybook-static'
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v2
