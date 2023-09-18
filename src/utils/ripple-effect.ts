@@ -3,6 +3,8 @@
 //     styleSheet.insertRule(css, styleSheet.cssRules.length)
 // }
 
+const DatasetName = 'sdRipple' //? dataset name will automatically convert to underscore style
+
 /**
  * warn: this is m2 ripple effect
  */
@@ -11,11 +13,16 @@ export function rippleEffect<E extends HTMLElement>(
     duration = 400,
     color = 'rgba(0, 0, 0, 0.1)'
 ) {
-    if (ele.hasAttribute('disabled') || ele.dataset['sd_ripple'] === 'true') {
+    if (
+        ele.hasAttribute('disabled') ||
+        ele.disabled === true ||
+        ele.dataset[DatasetName] === 'true' ||
+        ele.dataset.sdDisabled === 'true'
+    ) {
         // do not create ripple effect if element is disabled or effect has been attached
         return
     }
-    ele.dataset['sd_ripple'] = 'true'
+    ele.dataset[DatasetName] = 'true'
 
     const onPointerDown = (event: PointerEvent) => {
         if (event.button === 2) {
@@ -95,7 +102,7 @@ export function rippleEffect<E extends HTMLElement>(
     ele.addEventListener('pointerdown', onPointerDown)
 
     return () => {
-        ele.dataset['sd_ripple'] = 'false'
+        ele.dataset[DatasetName] = 'false'
         ele.removeEventListener('pointerdown', onPointerDown)
     }
 }

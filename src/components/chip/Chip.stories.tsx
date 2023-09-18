@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Chip } from './Chip'
+import { Chip } from './'
 
 const meta = {
     title: 'Chip',
@@ -20,6 +20,8 @@ export const Outlined: Story = {
         sd: 'outlined',
         children: 'outlined',
         enabled: true,
+        leadingIcon: '✨',
+        trailingIcon: '×',
     },
 }
 
@@ -28,5 +30,7 @@ export const Tonal: Story = {
         sd: 'tonal',
         children: 'tonal',
         enabled: true,
+        leadingIcon: '✨',
+        trailingIcon: '×',
     },
 }

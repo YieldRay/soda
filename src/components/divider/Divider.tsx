@@ -1,14 +1,13 @@
 import './divider.scss'
 import clsx from 'clsx'
 import omit from 'lodash-es/omit'
-import { forwardRef } from 'react'
 
 /**
  * @specs https://m3.material.io/components/divider/specs
+ * The divider has default margin included, you can remove it by adding `style={{margin:"0"}}`
  */
-export const Divider = forwardRef<
-    HTMLDivElement,
-    {
+export function Divider(
+    props: {
         /**
          * @default full
          */
@@ -18,24 +17,24 @@ export const Divider = forwardRef<
          */
         direction?: 'horizon' | 'vertical'
         className?: string
-    } & {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        [key: string]: any
-    }
->((props, ref) => (
-    <div
-        {...omit(props, 'sd', 'direction', 'className', 'ref')}
-        data-sd-direction={
-            props.direction === 'vertical' ? 'vertical' : 'horizon'
-        }
-        className={clsx(
-            {
-                'sd-divider': true,
-                'sd-divider-full': props.sd === 'full' || props.sd == undefined,
-                'sd-divider-inset': props.sd === 'inset',
-            },
-            props.className
-        )}
-        ref={ref}
-    ></div>
-))
+    } & Record<string, any>
+) {
+    return (
+        <div
+            {...omit(props, 'sd', 'direction', 'className')}
+            data-sd-direction={
+                props.direction === 'vertical' ? 'vertical' : 'horizon'
+            }
+            className={clsx(
+                {
+                    'sd-divider': true,
+                    'sd-divider-full':
+                        props.sd === 'full' || props.sd == undefined,
+                    'sd-divider-inset': props.sd === 'inset',
+                },
+                props.className
+            )}
+        ></div>
+    )
+}

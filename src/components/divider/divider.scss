@@ -12,12 +12,17 @@
 
     &[data-sd-direction='vertical'] {
         width: 1px;
-        height: 100%;
+        // height: 100%;
     }
 
-    &-full {
+    &-full[data-sd-direction='horizon'] {
         margin-top: 8px;
         margin-bottom: 8px;
+    }
+
+    &-full[data-sd-direction='vertical'] {
+        margin-left: 8px;
+        margin-right: 8px;
     }
 
     &-inset {

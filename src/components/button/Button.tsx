@@ -1,48 +1,34 @@
 import './button.scss'
-import { rippleEffect } from '@/utils/ripple-effect'
-import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
 import clsx from 'clsx'
 import omit from 'lodash-es/omit'
+import { Ripple } from '@/utils/Ripple'
 
 /**
  * @specs https://m3.material.io/components/buttons/specs
  */
-export const Button = forwardRef<
-    () => HTMLElement,
-    {
+export function Button(
+    props: {
         as?: string
-        sd: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
+        /**
+         * default filled
+         */
+        sd?: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
         className?: string
-        disableRipple?: boolean
-    } & {
+        disabled?: boolean
+        children?: React.ReactNode
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        [key: string]: any
-    }
->((props, ref) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const As: any = props.as ?? 'button'
-
-    const btnRef = useRef<HTMLElement>(null)
-
-    useEffect(() => {
-        if (!props.disableRipple) return rippleEffect(btnRef.current!)
-    }, [props.disableRipple])
-
-    useImperativeHandle(ref, () => {
-        return () => btnRef.current!
-    })
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
+    } & Record<string, any>
+) {
     return (
-        <As
-            {...omit(props, ['as', 'sd', 'className', 'ref', 'disableRipple'])}
+        <Ripple
+            {...omit(props, ['as', 'sd', 'className'])}
+            as={props.as ?? 'button'}
             className={clsx(
                 'sd-button',
                 `sd-button-${props.sd ?? 'filled'}`,
                 props.className
             )}
-            ref={btnRef}
-        ></As>
+            data-sd-disabled={props.disabled}
+        ></Ripple>
     )
-})
+}

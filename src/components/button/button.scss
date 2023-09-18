@@ -17,7 +17,8 @@ button.sd-button {
     transition: all 0.2s;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
-    &[disabled] {
+    &[disabled],
+    &[data-sd-disabled='true'] {
         color: var(--sd-sys-color-on-surface);
         opacity: 0.38;
         pointer-events: none;
