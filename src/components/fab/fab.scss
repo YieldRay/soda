@@ -31,6 +31,7 @@
     &-icon {
         @include square-icon(24px);
         color: currentColor;
+        text-align: center;
     }
 
     &[data-sd-size='small'] {

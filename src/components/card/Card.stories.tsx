@@ -9,6 +9,9 @@ const meta = {
         layout: 'centered',
     },
     tags: ['autodocs'],
+    args: {
+        children: <CardDemoChild />,
+    },
 } satisfies Meta<typeof Card>
 
 export default meta
@@ -17,21 +20,18 @@ type Story = StoryObj<typeof meta>
 export const Outlined: Story = {
     args: {
         sd: 'outlined',
-        children: <CardDemoChild />,
     },
 }
 
 export const Filled: Story = {
     args: {
         sd: 'filled',
-        children: <CardDemoChild />,
     },
 }
 
 export const Elevated: Story = {
     args: {
         sd: 'elevated',
-        children: <CardDemoChild />,
     },
 }
 

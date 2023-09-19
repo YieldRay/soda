@@ -10,8 +10,6 @@ TODO...
 
 See: <https://yieldray.github.io/soda/>
 
-docs is under development...
-
 # Resources
 
 Icon pack

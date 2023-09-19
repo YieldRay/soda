@@ -8,11 +8,11 @@ import { Ripple } from '../../utils/Ripple.tsx'
 export function ListItem(props: {
     headline: React.ReactNode
     supportingText?: React.ReactNode
-    trailingSupportingText?: React.ReactNode
-    trailingIcon?: React.ReactNode
-    leadingAvatarLabelText?: React.ReactNode
     leadingIcon?: React.ReactNode
+    leadingAvatarLabelText?: React.ReactNode
     leadingVideoThubnail?: React.ReactNode
+    trailingIcon?: React.ReactNode
+    trailingSupportingText?: React.ReactNode
     disabled?: boolean
     /**
      * 1 means only one line of headline and no supporting text
@@ -57,6 +57,12 @@ export function ListItem(props: {
             {props.trailingSupportingText && (
                 <div className="sd-list-trailing_supporting_text">
                     {props.trailingSupportingText}
+                </div>
+            )}
+
+            {props.trailingIcon && (
+                <div className="sd-list-trailing_icon">
+                    {props.trailingIcon}
                 </div>
             )}
         </Ripple>

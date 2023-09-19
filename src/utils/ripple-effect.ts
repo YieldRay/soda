@@ -15,7 +15,7 @@ export function rippleEffect<E extends HTMLElement>(
 ) {
     if (
         ele.hasAttribute('disabled') ||
-        ele.disabled === true ||
+        Reflect.get(ele, 'disabled') === true ||
         ele.dataset[DatasetName] === 'true' ||
         ele.dataset.sdDisabled === 'true'
     ) {
