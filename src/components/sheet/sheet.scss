@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    overflow: hidden;
 }
 
 .sd-bottom_sheet {
@@ -56,6 +57,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    overflow: hidden;
 
     &:has(.sd-side_sheet[data-sd-position='right']) {
         justify-content: flex-end;

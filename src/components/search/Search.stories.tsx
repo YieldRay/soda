@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Search } from '.'
+import { IconButton } from '../icon-button'
 import { useState } from 'react'
 
 const meta = {
@@ -35,7 +36,7 @@ export const View: Story = {
 export const WithIcon: Story = {
     args: {
         placeholder: 'placeholder',
-        leadingIcon: '═',
-        trailingIcon: '🔍',
+        leadingIcon: <IconButton>═</IconButton>,
+        trailingIcon: <IconButton>🔍</IconButton>,
     },
 }

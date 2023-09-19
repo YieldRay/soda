@@ -1,6 +1,8 @@
 # Soda
 
-A component library that may follow [material design 3](https://m3.material.io/components) (a.k.a material you)
+A component library that may follow [material design 3](https://m3.material.io/components) (a.k.a. material you)
+
+For production, you may use the official [material web](https://github.com/material-components/material-web) component library
 
 # Installation
 
@@ -27,17 +29,23 @@ See: <https://yieldray.github.io/soda/>
 
 # Resources
 
-Icon pack
+## Icons
 
-<https://fonts.google.com/icons>  
-<https://pictogrammers.com/library/mdi/>
+using google fonts: <https://fonts.google.com/icons>  
+using mdi library: <https://pictogrammers.com/library/mdi/>
 
-Font
+## Fonts
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/* using Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
 * {
     font-family: 'Roboto', sans-serif;
+}
+/* using Google Sans */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@100;200;300;400;500;700;900&display=swap');
+* {
+    font-family: 'Google Sans', sans-serif;
 }
 ```
 

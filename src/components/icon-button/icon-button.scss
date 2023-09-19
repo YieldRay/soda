@@ -1,0 +1,96 @@
+// https://m3.material.io/components/icon-buttons/specs
+
+// reset
+button.sd-icon_button {
+    all: unset;
+}
+
+.sd-icon_button {
+    @include display-inline-flex-center;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+
+    &-icon {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    &[disabled],
+    &[data-sd-disabled='true'] {
+        color: var(--sd-sys-color-on-surface);
+        opacity: 0.38;
+        pointer-events: none;
+    }
+
+    // filled
+
+    &-filled {
+        color: var(--sd-sys-color-on-primary);
+        background: var(--sd-sys-color-primary);
+        &[data-sd-selected='false'] {
+            color: var(--sd-sys-color-primary);
+            background: var(--sd-sys-color-surface-container-highest);
+        }
+    }
+
+    // tonal
+
+    &-tonal {
+        color: var(--sd-sys-color-on-secondary-container);
+        background: var(--sd-sys-color-secondary-container);
+        &[data-sd-selected='false'] {
+            color: var(--sd-sys-color-on-surface-variant);
+            background: var(--sd-sys-color-surface-container-highest);
+        }
+    }
+
+    // outlined
+
+    &-outlined {
+        outline: var(--sd-sys-color-outline) 1px solid;
+        color: var(--sd-sys-color-on-inverse-surface);
+        background: inherit;
+        &[data-sd-selected='false'] {
+            color: var(--sd-sys-color-surface-variant);
+            background: var(--sd-sys-color-outline);
+        }
+    }
+
+    // standard
+
+    &-standard {
+        color: var(--sd-sys-color-on-surface-variant);
+        background: inherit;
+        &[data-sd-selected='true'] {
+            color: var(--sd-sys-color-primary);
+        }
+    }
+
+    // :state
+    &-outlined,
+    &-standard {
+        &:hover {
+            background: rgb(0 0 0 / 0.04);
+        }
+        &:active {
+            background: rgb(0 0 0 / 0.08);
+        }
+    }
+    &-tonal,
+    &-filled {
+        &:hover {
+            filter: brightness(96%);
+        }
+        &:active {
+            filter: brightness(92%);
+        }
+    }
+}

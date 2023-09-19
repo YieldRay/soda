@@ -1,0 +1,62 @@
+// https://m3.material.io/components/segmented-buttons/specs
+
+.sd-segmented_button {
+    display: inline-flex;
+    align-items: center;
+    --height: 40px;
+    .sd-segmented_button-item {
+        height: var(--height);
+        padding: 0 12px;
+        cursor: pointer;
+        $border: solid 1px var(--sd-sys-color-outline);
+        border-right: $border;
+        border-top: $border;
+        border-bottom: $border;
+        &:first-child {
+            border-left: $border;
+            border-top-left-radius: var(--height);
+            border-bottom-left-radius: var(--height);
+        }
+        &:last-child {
+            border-right: $border;
+            border-top-right-radius: var(--height);
+            border-bottom-right-radius: var(--height);
+        }
+        font-size: 13px;
+        line-height: 18px;
+        color: var(--sd-sys-color-on-surface);
+        display: inline-flex;
+        align-items: center;
+
+        transition: all 200ms;
+        &[data-sd-selected='true'] {
+            color: var(--sd-sys-color-on-secondary-container);
+            background: var(--sd-sys-color-secondary-container);
+            &:hover {
+                filter: brightness(96%);
+            }
+            &:active {
+                filter: brightness(92%);
+            }
+        }
+        &[data-sd-selected='false'] {
+            &:hover {
+                background: rgb(0 0 0 / 0.04);
+            }
+            &:active {
+                background: rgb(0 0 0 / 0.08);
+            }
+        }
+        &[data-sd-disabled='true'] {
+            pointer-events: none;
+            opacity: 0.38;
+            border-right: none;
+            & ~ .sd-segmented_button-item {
+                border-left: $border;
+            }
+        }
+        .sd-segmented_button-label {
+            font-weight: bold;
+        }
+    }
+}
