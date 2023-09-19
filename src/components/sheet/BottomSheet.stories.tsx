@@ -16,7 +16,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     render: () => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         const sheetRef = useRef<BottomSheetHandle>(null)
         return (
             <div style={{ width: '400px', height: '400px' }}>

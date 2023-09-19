@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>
 
 export const WithLabel: Story = {
     args: {
-        label: 'with label',
+        label: '999+',
         children: <Button>Button</Button>,
     },
 }

@@ -1,12 +1,16 @@
 {
     "name": "soda-material",
+    "version": "0.0.3",
     "keywords": [
         "material design",
         "material you"
     ],
     "author": "YieldRay",
+    "bugs": {
+        "url": "https://github.com/YieldRay/soda/issues"
+    },
+    "homepage": "https://github.com/YieldRay/soda#readme",
     "license": "MIT",
-    "version": "0.0.3",
     "type": "module",
     "types": "dist",
     "main": "dist/index.js",

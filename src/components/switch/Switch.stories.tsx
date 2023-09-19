@@ -19,7 +19,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     render: () => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         const [checked, setChecked] = useState(false)
         return <Switch checked={checked} onChange={setChecked}></Switch>
     },
@@ -27,7 +26,6 @@ export const Default: Story = {
 
 export const WithIcon: Story = {
     render: () => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         const [checked, setChecked] = useState(false)
         return (
             <Switch checked={checked} onChange={setChecked}>

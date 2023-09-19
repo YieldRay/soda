@@ -89,7 +89,6 @@ export const BottomSheet = forwardRef<
     )
 })
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function drag(
     dragHandle: HTMLDivElement,
     sheet: HTMLDivElement,

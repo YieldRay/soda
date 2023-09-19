@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { SideSheet } from '.'
-import { Button } from '../button'
 import { useState } from 'react'
+import { Button } from '../button'
+import { TopAppBar } from '../app-bar'
+import { IconButton } from '../icon-button'
 
 const meta = {
     title: 'SideSheet',
@@ -16,14 +18,22 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     render: () => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         const [open, setOpen] = useState(false)
         return (
-            <div style={{ height: '400px' }}>
-                <Button sd="text" onClick={() => setOpen(true)}>
-                    open side sheet
-                </Button>
-
+            <>
+                <div style={{ paddingTop: '64px', height: '400px' }}>
+                    <TopAppBar
+                        fixed
+                        leadingNavigationIcon={
+                            <IconButton onClick={() => setOpen(true)}>
+                                ═
+                            </IconButton>
+                        }
+                    >
+                        TopAppBar
+                    </TopAppBar>
+                    <p>click the menu icon to open</p>
+                </div>
                 <SideSheet
                     open={open}
                     header="headline"
@@ -43,7 +53,7 @@ export const Default: Story = {
                 >
                     side sheet
                 </SideSheet>
-            </div>
+            </>
         )
     },
 }

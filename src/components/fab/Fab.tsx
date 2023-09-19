@@ -12,7 +12,6 @@ export const Fab = forwardRef<
         children?: React.ReactNode
         extended?: boolean
     } & {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         [key: string]: any
     }
 >((props, ref) => (

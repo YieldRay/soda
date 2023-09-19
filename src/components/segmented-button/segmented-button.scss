@@ -27,7 +27,7 @@
         color: var(--sd-sys-color-on-surface);
         display: inline-flex;
         align-items: center;
-
+        -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
         transition: all 200ms;
         &[data-sd-selected='true'] {
             color: var(--sd-sys-color-on-secondary-container);

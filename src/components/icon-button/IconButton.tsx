@@ -6,21 +6,23 @@ import omit from 'lodash-es/omit'
 /**
  * @specs https://m3.material.io/components/icon-buttons/specs
  */
-export function IconButton(props: {
-    as?: string
-    /**
-     * standard
-     */
-    sd?: 'standard' | 'filled' | 'tonal' | 'outlined'
-    children?: React.ReactNode
-    className?: string
-    disabled?: boolean
-    /**
-     * standard button is unselected by default,
-     * other button is selected by default.
-     */
-    selected?: boolean
-}) {
+export function IconButton(
+    props: {
+        as?: string
+        /**
+         * standard
+         */
+        sd?: 'standard' | 'filled' | 'tonal' | 'outlined'
+        children?: React.ReactNode
+        className?: string
+        disabled?: boolean
+        /**
+         * standard button is unselected by default,
+         * other button is selected by default.
+         */
+        selected?: boolean
+    } & Record<string, any>
+) {
     const sd = props.sd ?? 'standard'
     const selected = Reflect.has(props, 'selected')
         ? props.selected!

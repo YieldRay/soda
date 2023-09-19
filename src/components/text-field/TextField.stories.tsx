@@ -6,6 +6,12 @@ const meta = {
     title: 'TextField',
     component: TextField,
     tags: ['autodocs'],
+    parameters: {
+        layout: 'centered',
+    },
+    args: {
+        labelText: 'labelText',
+    },
 } satisfies Meta<typeof TextField>
 
 export default meta
@@ -15,13 +21,17 @@ type Story = StoryObj<typeof meta>
 export const Filled: Story = {
     args: {
         sd: 'filled',
-        labelText: 'labelText',
     },
 }
 
 export const Outlined: Story = {
     args: {
         sd: 'outlined',
-        labelText: 'labelText',
+    },
+}
+
+export const Error: Story = {
+    args: {
+        error: true,
     },
 }

@@ -30,9 +30,7 @@ export const TextField = forwardRef<
     const inputRef = useRef<HTMLInputElement>(null)
 
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        const value: ValueType = e.target.value
+        const value = (e.target as HTMLInputElement).value
         setLength(String(value).length)
         props.onChange?.(value)
     }

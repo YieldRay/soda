@@ -16,7 +16,6 @@ export function Button(
         className?: string
         disabled?: boolean
         children?: React.ReactNode
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } & Record<string, any>
 ) {
     return (

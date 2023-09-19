@@ -1,8 +1,3 @@
-// function insertStyle(css: string) {
-//     const styleSheet = document.styleSheets[0]
-//     styleSheet.insertRule(css, styleSheet.cssRules.length)
-// }
-
 const DatasetName = 'sdRipple' //? dataset name will automatically convert to underscore style
 
 /**

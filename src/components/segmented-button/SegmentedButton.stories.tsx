@@ -7,6 +7,9 @@ const meta = {
     title: 'SegmentedButton',
     component: SegmentedButton,
     tags: ['autodocs'],
+    parameters: {
+        layout: 'centered',
+    },
 } satisfies Meta<typeof SegmentedButton>
 
 export default meta
@@ -30,7 +33,6 @@ export const Default: Story = {
                 label: <>❎ disabled</>,
             },
         ]
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         const [value, setValue] = useState<string>('disabled')
         return (
             <SegmentedButton

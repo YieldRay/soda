@@ -39,8 +39,8 @@ function CardDemoChild() {
     return (
         <div
             style={{
-                minWidth: '300px',
-                minHeight: '400px',
+                minWidth: '400px',
+                minHeight: '200px',
                 display: 'grid',
                 placeItems: 'center',
             }}

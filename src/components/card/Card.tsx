@@ -10,10 +10,8 @@ export function Card(
         as?: string
         sd: 'outlined' | 'filled' | 'elevated'
         className?: string
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } & Record<string, any>
 ) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const As: any = props.as ?? 'div'
 
     return (
