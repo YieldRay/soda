@@ -1,7 +1,6 @@
 import './dialog.scss'
 import { createPortal } from 'react-dom'
 
-
 /**
  * @specs https://m3.material.io/components/dialogs/specs
  */

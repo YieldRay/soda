@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Snakebar } from './'
+import { Snakebar } from '.'
 import { IconClose } from '@/utils/icons'
 
 const meta = {

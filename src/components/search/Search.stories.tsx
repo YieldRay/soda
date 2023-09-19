@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Search } from './'
+import { Search } from '.'
 import { useState } from 'react'
 
 const meta = {

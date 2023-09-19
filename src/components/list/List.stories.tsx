@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ListItem } from './'
+import { ListItem } from '.'
 
 const meta = {
     title: 'ListItem',

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { BottomSheet, BottomSheetHandle } from './'
+import { BottomSheet, BottomSheetHandle } from '.'
 import { Button } from '../button'
 import { useRef } from 'react'
 

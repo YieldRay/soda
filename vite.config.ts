@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import path from 'path'
 
-// for build
+// https://vitejs.dev/config/
 export default defineConfig({
     resolve: {
         alias: {
@@ -21,6 +21,7 @@ export default defineConfig({
             entry: 'src/index.ts',
             name: 'soda',
             fileName: 'index',
+            formats: ['es'],
         },
         rollupOptions: {
             external: ['react'],

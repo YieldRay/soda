@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SideSheet } from './'
+import { SideSheet } from '.'
 import { Button } from '../button'
 import { useState } from 'react'
 

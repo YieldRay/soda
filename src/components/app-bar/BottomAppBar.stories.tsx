@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { BottomAppBar } from './'
+import { BottomAppBar } from '.'
 
 const meta = {
     title: 'BottomAppBar',

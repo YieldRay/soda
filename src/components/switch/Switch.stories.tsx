@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Switch } from './'
+import { Switch } from '.'
 import { useState } from 'react'
 import { IconChecked, IconClose } from '@/utils/icons'
 

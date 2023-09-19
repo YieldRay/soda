@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { FullScreenDialog } from './'
+import { FullScreenDialog } from '.'
 import { Button } from '../button'
 import { useState } from 'react'
 

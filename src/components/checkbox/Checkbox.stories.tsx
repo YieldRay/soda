@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Checkbox } from './'
+import { Checkbox } from '.'
 import { useState } from 'react'
 
 const meta = {
