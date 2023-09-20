@@ -55,22 +55,16 @@
     }
     &-close {
         cursor: pointer;
-        $size: 1.5rem;
-        width: $size;
-        height: $size;
-        line-height: $size;
-        padding: 0.5rem;
-        text-align: center;
-        border-radius: 50%;
-        &:hover {
-            background: rgb(0 0 0 / 0.1);
-        }
-        @include display-flex-center;
+        flex-shrink: 0;
     }
     &-headline {
+        flex-shrink: 1;
         margin: 0 1rem;
         font-size: x-large;
         margin-right: auto;
+        text-wrap: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     &-body {
         margin: 1.5rem;

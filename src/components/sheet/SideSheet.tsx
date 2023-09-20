@@ -39,7 +39,7 @@ export function SideSheet(props: {
                     if (
                         props.onScrimClick &&
                         (e.target as HTMLElement).classList.contains(
-                            'sd-side_sheet-scrim'
+                            'sd-side_sheet-scrim',
                         )
                     )
                         props.onScrimClick()

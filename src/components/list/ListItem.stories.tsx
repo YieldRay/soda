@@ -23,6 +23,20 @@ export const Default: Story = {
     args: {},
 }
 
+export const Multiline: Story = {
+    args: {
+        lines: 3,
+        supportingText: `this sentence is too l${'o'.repeat(100)}ng!`,
+    },
+    decorators: [
+        (Story) => (
+            <div style={{ maxWidth: '400px' }}>
+                <Story />
+            </div>
+        ),
+    ],
+}
+
 export const LeadingIcon: Story = {
     args: {
         leadingIcon: '✨',

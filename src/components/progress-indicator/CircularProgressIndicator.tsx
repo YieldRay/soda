@@ -17,7 +17,7 @@ export function CircularProgressIndicator(props: {
                     ? (e) =>
                           e?.style.setProperty(
                               '--value',
-                              `${props.value! * 100}%`
+                              `${props.value! * 100}%`,
                           )
                     : undefined
             }

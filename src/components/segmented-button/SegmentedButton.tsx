@@ -21,7 +21,7 @@ export function SegmentedButton<T extends React.Key>(props: {
                 if (props.density)
                     e?.style.setProperty(
                         '--height',
-                        `${40 + props.density * 4}px`
+                        `${40 + props.density * 4}px`,
                     )
             }}
         >

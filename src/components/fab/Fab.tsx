@@ -11,11 +11,10 @@ export const Fab = forwardRef<
         size?: 'default' | 'small' | 'large'
         children?: React.ReactNode
         extended?: boolean
-    } & {
-        [key: string]: any
-    }
+    } & React.HTMLProps<HTMLDivElement>
 >((props, ref) => (
     <Ripple
+        as="div"
         {...omit(props, ['ref', 'className', 'extended'])}
         ref={ref}
         className={clsx('sd-fab', props.className)}

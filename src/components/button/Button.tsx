@@ -16,16 +16,16 @@ export function Button(
         className?: string
         disabled?: boolean
         children?: React.ReactNode
-    } & Record<string, any>
+    } & React.HTMLProps<HTMLDivElement>,
 ) {
     return (
         <Ripple
-            {...omit(props, ['as', 'sd', 'className'])}
+            {...omit(props, ['as', 'sd', 'className', 'ref'])}
             as={props.as ?? 'button'}
             className={clsx(
                 'sd-button',
                 `sd-button-${props.sd ?? 'filled'}`,
-                props.className
+                props.className,
             )}
             data-sd-disabled={props.disabled}
         ></Ripple>

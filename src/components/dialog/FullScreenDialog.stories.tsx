@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FullScreenDialog } from '.'
 import { Button } from '../button'
 import { useState } from 'react'
+import { ModalHolder } from '@/headless/ModalHolder'
 
 const meta = {
     title: 'FullScreenDialog',
@@ -25,14 +26,20 @@ export const Default: Story = {
                 <Button sd="text" onClick={() => setOpen(true)}>
                     open fullscreen dialog
                 </Button>
-                <FullScreenDialog
-                    open={open}
-                    onCloseClick={() => setOpen(false)}
-                    headline="FullScreenDialog Title"
-                    button="Save"
-                >
-                    content
-                </FullScreenDialog>
+
+                <ModalHolder open={open}>
+                    <FullScreenDialog
+                        onCloseClick={() => setOpen(false)}
+                        headline="FullScreenDialog Title"
+                        button="Save"
+                    >
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Impedit nulla laboriosam, harum officiis
+                        blanditiis magni ipsam quas dolores labore
+                        necessitatibus quibusdam odio earum unde rerum dolore
+                        quae voluptates adipisci porro!
+                    </FullScreenDialog>
+                </ModalHolder>
             </>
         )
     },

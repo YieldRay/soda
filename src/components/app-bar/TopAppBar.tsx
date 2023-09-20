@@ -22,7 +22,7 @@ export function TopAppBar(props: {
                 props.fixed
                     ? { position: 'fixed', left: '0', top: '0' }
                     : undefined,
-                props.style
+                props.style,
             )}
             data-sd={sd}
         >

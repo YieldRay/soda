@@ -19,7 +19,7 @@ import { Button } from 'soda-material'
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Button sd="outlined">Button</Button>
-    </React.StrictMode>
+    </React.StrictMode>,
 )
 ```
 
@@ -32,7 +32,7 @@ See: <https://yieldray.github.io/soda/>
 ## Icons
 
 using google fonts: <https://fonts.google.com/icons>  
-using mdi library: <https://pictogrammers.com/library/mdi/>
+using mdi library: <https://materialdesignicons.com/>
 
 ## Fonts
 

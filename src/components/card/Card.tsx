@@ -7,17 +7,29 @@ import omit from 'lodash-es/omit'
  */
 export function Card(
     props: {
-        as?: string
-        sd: 'outlined' | 'filled' | 'elevated'
+        /**
+         * change the container component, custom container should accept className and children property,
+         * div by default
+         */
+        as?:
+            | keyof JSX.IntrinsicElements
+            | React.FC<{ className?: string; children?: React.ReactNode }>
+        sd?: 'outlined' | 'filled' | 'elevated'
         className?: string
-    } & Record<string, any>
+        children?: React.ReactNode
+    } & Record<string, any>,
 ) {
     const As: any = props.as ?? 'div'
-
     return (
         <As
             {...omit(props, ['as', 'sd', 'className'])}
-            className={clsx('sd-card', `sd-card-${props.sd}`, props.className)}
-        ></As>
+            className={clsx(
+                'sd-card',
+                `sd-card-${props.sd ?? 'elevated'}`,
+                props.className,
+            )}
+        >
+            {props.children}
+        </As>
     )
 }

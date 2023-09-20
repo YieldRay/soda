@@ -17,7 +17,7 @@ export function Divider(
          */
         direction?: 'horizon' | 'vertical'
         className?: string
-    } & Record<string, any>
+    } & React.HTMLProps<HTMLDivElement>,
 ) {
     return (
         <div
@@ -32,7 +32,7 @@ export function Divider(
                         props.sd === 'full' || props.sd == undefined,
                     'sd-divider-inset': props.sd === 'inset',
                 },
-                props.className
+                props.className,
             )}
         ></div>
     )

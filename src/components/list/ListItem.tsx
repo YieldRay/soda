@@ -17,7 +17,7 @@ export function ListItem(props: {
     /**
      * 1 means only one line of headline and no supporting text
      * 2 means one lines of supporting text
-     * 3 means three lines of supporting text
+     * 3 means two lines of supporting text
      */
     lines?: 1 | 2 | 3
     className?: string

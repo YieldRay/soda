@@ -19,7 +19,7 @@ export function BottomAppBar(props: {
                 props.fixed
                     ? { position: 'fixed', left: '0', bottom: '0' }
                     : undefined,
-                props.style
+                props.style,
             )}
         >
             {props.children}

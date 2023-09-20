@@ -67,7 +67,7 @@ export const BottomSheet = forwardRef<
                     if (
                         props.onScrimClick &&
                         (e.target as HTMLElement).classList.contains(
-                            'sd-bottom_sheet-scrim'
+                            'sd-bottom_sheet-scrim',
                         )
                     )
                         props.onScrimClick()
@@ -95,7 +95,7 @@ export function drag(
     options?: {
         onShow?(): void
         onHide?(): void
-    }
+    },
 ) {
     sheet.style.userSelect = 'none' // disable content copy so it does not affect dragging
 
@@ -112,7 +112,7 @@ export function drag(
             {
                 duration: 200,
                 easing: 'ease-out',
-            }
+            },
         )
         animation.onfinish = animation.oncancel = () => {
             sheet.style.transform = `translateY(${height}px)`

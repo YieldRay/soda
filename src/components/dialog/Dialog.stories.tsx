@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Dialog } from '.'
 import { Button } from '../button'
+import { ModalHolder } from '@/headless/ModalHolder'
 import { useState } from 'react'
 
 const meta = {
@@ -26,25 +27,29 @@ export const Default: Story = {
                     open dialog
                 </Button>
 
-                <Dialog
-                    headline="headline"
-                    open={open}
-                    onScrimClick={() => setOpen(false)}
-                    buttons={
-                        <>
-                            <Button sd="text" onClick={() => alert('wow!')}>
-                                wow!
-                            </Button>
-                            <Button sd="text" onClick={() => setOpen(false)}>
-                                close
-                            </Button>
-                        </>
-                    }
-                >
-                    A dialog is a type of modal node that appears in front of
-                    app content to provide critical information, or ask for a
-                    decision.
-                </Dialog>
+                <ModalHolder open={open}>
+                    <Dialog
+                        headline="headline"
+                        onScrimClick={() => setOpen(false)}
+                        buttons={
+                            <>
+                                <Button sd="text" onClick={() => alert('wow!')}>
+                                    wow!
+                                </Button>
+                                <Button
+                                    sd="text"
+                                    onClick={() => setOpen(false)}
+                                >
+                                    close
+                                </Button>
+                            </>
+                        }
+                    >
+                        A dialog is a type of modal node that appears in front
+                        of app content to provide critical information, or ask
+                        for a decision.
+                    </Dialog>
+                </ModalHolder>
             </>
         )
     },

@@ -1,9 +1,11 @@
 import './dialog.scss'
-import { createPortal } from 'react-dom'
-import { Button } from '../button/Button.tsx'
-import { Ripple } from '../../utils/Ripple.tsx'
-import { IconClose } from '../../utils/icons.tsx'
+import { Button } from '../button'
+import { IconButton } from '../icon-button'
+import { IconClose } from '@/utils/icons.tsx'
 
+/**
+ * @specs https://m3.material.io/components/dialogs/specs#bbf1acde-f8d2-4ae1-9d51-343e96c4ac20
+ */
 export function FullScreenDialog(props: {
     headline?: React.ReactNode
     button?: React.ReactNode
@@ -12,22 +14,15 @@ export function FullScreenDialog(props: {
     open?: boolean
     children?: React.ReactNode
 }) {
-    return createPortal(
-        <div
-            className="sd-dialog-fullscreen"
-            style={{
-                transition: 'all 200ms',
-                pointerEvents: props.open ? 'auto' : 'none',
-                opacity: props.open ? '1' : '0',
-            }}
-        >
+    return (
+        <div className="sd-dialog-fullscreen">
             <div className="sd-dialog-fullscreen-header">
-                <Ripple
+                <IconButton
                     className="sd-dialog-fullscreen-close"
                     onClick={props.onCloseClick}
                 >
                     <IconClose />
-                </Ripple>
+                </IconButton>
                 <div className="sd-dialog-fullscreen-headline">
                     {props.headline}
                 </div>
@@ -38,7 +33,6 @@ export function FullScreenDialog(props: {
                 )}
             </div>
             <div className="sd-dialog-fullscreen-body">{props.children}</div>
-        </div>,
-        document.body
+        </div>
     )
 }

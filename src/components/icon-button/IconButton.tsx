@@ -21,7 +21,7 @@ export function IconButton(
          * other button is selected by default.
          */
         selected?: boolean
-    } & Record<string, any>
+    } & React.HTMLProps<HTMLDivElement>,
 ) {
     const sd = props.sd ?? 'standard'
     const selected = Reflect.has(props, 'selected')
@@ -45,7 +45,7 @@ export function IconButton(
             className={clsx(
                 'sd-icon_button',
                 `sd-icon_button-${sd}`,
-                props.className
+                props.className,
             )}
             data-sd-selected={selected}
             data-sd-disabled={props.disabled}
