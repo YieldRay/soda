@@ -24,7 +24,7 @@ export const Default: Story = {
                     adipisci molestias reiciendis tenetur rem esse maxime ullam
                     facere consectetur, obcaecati sunt delectus necessitatibus.
                 </p>
-                <BottomAppBar fixed>
+                <BottomAppBar>
                     <div
                         style={{
                             display: 'flex',

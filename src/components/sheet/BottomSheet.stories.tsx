@@ -22,7 +22,6 @@ export const Default: Story = {
                 <Button
                     sd="text"
                     onClick={() => {
-                        console.log(sheetRef)
                         sheetRef.current?.().show()
                     }}
                 >
@@ -37,6 +36,10 @@ export const Default: Story = {
                         ▲
                     </Button>
                     <p>bottom sheet</p>
+                    <p>
+                        support <code>{`portalTo={document.body}`}</code> so you
+                        can port it to global
+                    </p>
                     <Button onClick={() => sheetRef.current?.().hide()}>
                         ▼
                     </Button>

@@ -1,0 +1,40 @@
+// there is no need to implement navigation-drawer
+// just use side-sheet and portal it to document.body
+
+// https://m3.material.io/components/navigation-bar/specs
+.sd-navigation_bar {
+    padding-top: 12px;
+    padding-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 4px;
+    background: var(--sd-sys-color-surface-container);
+
+    &-helper {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        align-items: center;
+        cursor: pointer;
+
+        .sd-navigation_bar-icon {
+            color: var(--sd-sys-color-on-surface);
+            &:hover {
+                box-shadow: none;
+            }
+        }
+        .sd-navigation_bar-label_text {
+            font-size: x-small;
+        }
+
+        &[data-sd-active='true'] {
+            .sd-navigation_bar-icon {
+                font-weight: bold;
+            }
+            .sd-navigation_bar-label_text {
+                font-weight: bold;
+            }
+        }
+    }
+}

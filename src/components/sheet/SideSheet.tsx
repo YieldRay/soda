@@ -1,5 +1,9 @@
 import './sheet.scss'
 import { Divider } from '../divider/Divider'
+import { Scrim } from '@/utils/Scrim'
+import { createPortal } from 'react-dom'
+import clsx from 'clsx'
+import assign from 'lodash-es/assign'
 
 export function SideSheet(props: {
     header?: React.ReactNode
@@ -11,27 +15,17 @@ export function SideSheet(props: {
     position?: 'left' | 'right'
     open?: boolean
     onScrimClick?(): void
+    className?: string
+    style?: React.CSSProperties
+    portalTo?: Element | DocumentFragment
 }) {
     const isRight = props.position !== 'left'
-    const isOpen = props.open
+    const isOpen = props.open ?? true
     const translateX = isRight ? '100%' : '-100%'
 
-    return (
+    const ele = (
         <>
-            <div
-                style={{
-                    background: 'rgb(0 0 0 / 0.1)',
-                    width: '100%',
-                    height: '100%',
-                    position: 'fixed',
-                    left: '0',
-                    top: '0',
-                    pointerEvents: 'none',
-                    opacity: isOpen ? '1' : '0',
-                    transition: 'opacity linear 200ms',
-                }}
-            ></div>
-
+            <Scrim open={isOpen}></Scrim>
             <div
                 className="sd-side_sheet-scrim"
                 style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
@@ -39,18 +33,23 @@ export function SideSheet(props: {
                     if (
                         props.onScrimClick &&
                         (e.target as HTMLElement).classList.contains(
-                            'sd-side_sheet-scrim',
+                            'sd-side_sheet-scrim'
                         )
                     )
                         props.onScrimClick()
                 }}
             >
                 <div
-                    className="sd-side_sheet"
-                    style={{
-                        transition: 'transform 200ms',
-                        transform: isOpen ? '' : `translateX(${translateX})`,
-                    }}
+                    className={clsx('sd-side_sheet', props.className)}
+                    style={assign(
+                        {
+                            transition: 'transform 200ms',
+                            transform: isOpen
+                                ? ''
+                                : `translateX(${translateX})`,
+                        },
+                        props.style
+                    )}
                     data-sd-position={isRight ? 'right' : 'left'}
                 >
                     {props.header && (
@@ -69,4 +68,7 @@ export function SideSheet(props: {
             </div>
         </>
     )
+
+    if (props.portalTo) return createPortal(ele, props.portalTo)
+    return ele
 }

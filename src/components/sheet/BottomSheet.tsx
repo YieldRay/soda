@@ -1,4 +1,7 @@
 import './sheet.scss'
+import { Scrim } from '@/utils/Scrim'
+import clsx from 'clsx'
+import assign from 'lodash-es/assign'
 import {
     forwardRef,
     useEffect,
@@ -6,6 +9,7 @@ import {
     useRef,
     useState,
 } from 'react'
+import { createPortal } from 'react-dom'
 
 export type BottomSheetHandle = () => ReturnType<typeof drag>
 
@@ -20,13 +24,16 @@ export const BottomSheet = forwardRef<
         hideDragHandle?: boolean
         onChange?: (visiable: boolean) => void
         onScrimClick?(): void
+        className?: string
+        style?: React.CSSProperties
+        portalTo?: Element | DocumentFragment
     }
 >((props, ref) => {
     const sheetRef = useRef<HTMLDivElement>(null)
     const handleRef = useRef<HTMLDivElement>(null)
 
     const dragHandlerRef = useRef<ReturnType<typeof drag> | null>(null)
-    const [visiable, setVisiable] = useState(false)
+    const [visiable, setVisiable] = useState(false) // = isOpen
 
     useEffect(() => {
         dragHandlerRef.current = drag(handleRef.current!, sheetRef.current!, {
@@ -44,30 +51,20 @@ export const BottomSheet = forwardRef<
 
     useImperativeHandle(ref, () => () => dragHandlerRef.current!)
 
-    return (
+    const ele = (
         <>
+            <Scrim open={visiable}></Scrim>
             <div
-                style={{
-                    background: 'rgb(0 0 0 / 0.1)',
-                    width: '100%',
-                    height: '100%',
-                    position: 'fixed',
-                    left: '0',
-                    top: '0',
-                    pointerEvents: 'none',
-                    opacity: visiable ? '1' : '0',
-                    transition: 'opacity linear 200ms',
-                }}
-            ></div>
-
-            <div
-                className="sd-bottom_sheet-scrim"
-                style={{ pointerEvents: visiable ? 'auto' : 'none' }}
+                className={clsx('sd-bottom_sheet-scrim', props.className)}
+                style={assign(
+                    { pointerEvents: visiable ? 'auto' : 'none' },
+                    props.style
+                )}
                 onClick={(e) => {
                     if (
                         props.onScrimClick &&
                         (e.target as HTMLElement).classList.contains(
-                            'sd-bottom_sheet-scrim',
+                            'sd-bottom_sheet-scrim'
                         )
                     )
                         props.onScrimClick()
@@ -87,6 +84,9 @@ export const BottomSheet = forwardRef<
             </div>
         </>
     )
+
+    if (props.portalTo) return createPortal(ele, props.portalTo)
+    return ele
 })
 
 export function drag(
@@ -95,7 +95,7 @@ export function drag(
     options?: {
         onShow?(): void
         onHide?(): void
-    },
+    }
 ) {
     sheet.style.userSelect = 'none' // disable content copy so it does not affect dragging
 
@@ -112,7 +112,7 @@ export function drag(
             {
                 duration: 200,
                 easing: 'ease-out',
-            },
+            }
         )
         animation.onfinish = animation.oncancel = () => {
             sheet.style.transform = `translateY(${height}px)`

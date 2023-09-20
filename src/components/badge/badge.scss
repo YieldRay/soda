@@ -12,6 +12,9 @@
         color: var(--sd-sys-color-on-error);
         pointer-events: none;
     }
+    &[data-sd='none'] &-label {
+        opacity: 0;
+    }
     &[data-sd='small'] &-label {
         left: calc(50% + 6px);
         top: calc(50% - 12px);

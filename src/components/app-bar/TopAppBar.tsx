@@ -1,5 +1,6 @@
 import './app-bar.scss'
 import clsx from 'clsx'
+import { createPortal } from 'react-dom'
 import assign from 'lodash-es/assign'
 
 /**
@@ -15,14 +16,14 @@ export function TopAppBar(props: {
     sd?: 'center' | 'small' | 'medium' | 'large'
 }) {
     const sd = props.sd ?? 'small'
-    return (
+    const ele = (
         <div
             className={clsx('sd-top_app_bar', props.className)}
             style={assign(
                 props.fixed
                     ? { position: 'fixed', left: '0', top: '0' }
                     : undefined,
-                props.style,
+                props.style
             )}
             data-sd={sd}
         >
@@ -44,4 +45,6 @@ export function TopAppBar(props: {
             )}
         </div>
     )
+    if (props.fixed) return createPortal(ele, document.body)
+    return ele
 }

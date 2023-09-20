@@ -21,19 +21,22 @@ export const Default: Story = {
         const [open, setOpen] = useState(false)
         return (
             <>
-                <div style={{ paddingTop: '64px', height: '400px' }}>
-                    <TopAppBar
-                        fixed
-                        leadingNavigationIcon={
-                            <IconButton onClick={() => setOpen(true)}>
-                                ═
-                            </IconButton>
-                        }
-                    >
-                        TopAppBar
-                    </TopAppBar>
+                <TopAppBar
+                    leadingNavigationIcon={
+                        <IconButton onClick={() => setOpen(true)}>═</IconButton>
+                    }
+                >
+                    TopAppBar
+                </TopAppBar>
+
+                <p style={{ height: '400px' }}>
                     <p>click the menu icon to open</p>
-                </div>
+                    <p>
+                        support <code>{`portalTo={document.body}`}</code> so you
+                        can port it to global
+                    </p>
+                </p>
+
                 <SideSheet
                     open={open}
                     header="headline"
