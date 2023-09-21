@@ -5,7 +5,7 @@ import { Fab } from '../fab'
 import { IconButton } from '../icon-button'
 
 const meta = {
-    title: 'BottomAppBar',
+    title: 'AppBar/BottomAppBar',
     component: BottomAppBar,
     tags: ['autodocs'],
 } satisfies Meta<typeof BottomAppBar>

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Search } from '.'
 import { IconButton } from '../icon-button'
 import { useState } from 'react'
+import { IconMagnify, IconMenu } from '@/utils/icons'
 
 const meta = {
     title: 'Search',
@@ -50,7 +51,15 @@ export const View: Story = {
 
 export const WithIcon: Story = {
     args: {
-        leadingIcon: <IconButton>═</IconButton>,
-        trailingIcon: <IconButton>🔍</IconButton>,
+        leadingIcon: (
+            <IconButton>
+                <IconMenu />
+            </IconButton>
+        ),
+        trailingIcon: (
+            <IconButton>
+                <IconMagnify />
+            </IconButton>
+        ),
     },
 }

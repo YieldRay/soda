@@ -16,7 +16,7 @@ export function Dialog(props: {
                 if (
                     props.onScrimClick &&
                     (e.target as HTMLElement).classList.contains(
-                        'sd-dialog-scrim',
+                        'sd-dialog-scrim'
                     )
                 ) {
                     props.onScrimClick()

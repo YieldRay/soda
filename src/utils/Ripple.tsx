@@ -27,7 +27,7 @@ export const Ripple = forwardRef<HTMLElement, Props>((props, ref) => {
             return rippleEffect(
                 eRef.current!,
                 props.rippleDuration,
-                props.rippleColor,
+                props.rippleColor
             )
     }, [props])
     const Element: any = props.as ?? 'div'

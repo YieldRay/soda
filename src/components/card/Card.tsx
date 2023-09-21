@@ -17,7 +17,7 @@ export function Card(
         sd?: 'outlined' | 'filled' | 'elevated'
         className?: string
         children?: React.ReactNode
-    } & Record<string, any>,
+    } & Record<string, any>
 ) {
     const As: any = props.as ?? 'div'
     return (
@@ -26,7 +26,7 @@ export function Card(
             className={clsx(
                 'sd-card',
                 `sd-card-${props.sd ?? 'elevated'}`,
-                props.className,
+                props.className
             )}
         >
             {props.children}

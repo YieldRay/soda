@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { NavigationBar } from '.'
+import { NavigationRail } from '.'
 import { useState } from 'react'
 import { Button } from '../button'
 import { IconMagnify } from '@/utils/icons'
+import { Fab } from '../fab/Fab'
 
 const meta = {
-    title: 'Navigation/NavigationBar',
-    component: NavigationBar,
+    title: 'Navigation/NavigationRail',
+    component: NavigationRail,
     tags: ['autodocs'],
-} satisfies Meta<typeof NavigationBar>
+} satisfies Meta<typeof NavigationRail>
 
 export default meta
 
@@ -17,6 +18,11 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
+        fab: (
+            <>
+                <Fab>＋</Fab>
+            </>
+        ),
         items: [
             {
                 key: 'home',
@@ -42,7 +48,8 @@ export const Default: Story = {
         return (
             <>
                 <Button onClick={() => setFixed(!fixed)}>toogle fixed</Button>
-                <NavigationBar
+                <NavigationRail
+                    fab={props.fab}
                     fixed={fixed}
                     items={items}
                     onChange={({ key }) => {
@@ -53,7 +60,7 @@ export const Default: Story = {
                             }))
                         )
                     }}
-                ></NavigationBar>
+                ></NavigationRail>
             </>
         )
     },

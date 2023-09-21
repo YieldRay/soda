@@ -10,31 +10,65 @@
     justify-content: space-around;
     gap: 4px;
     background: var(--sd-sys-color-surface-container);
+}
 
-    &-helper {
+// https://m3.material.io/components/navigation-rail/
+.sd-navigation_rail {
+    box-sizing: border-box;
+    width: 80px;
+    height: 100%;
+    background: var(--sd-sys-color-surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-top: 64px;
+    &-fab {
+        flex-shrink: 0;
+    }
+    &-items {
+        flex-grow: 1;
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 12px;
         align-items: center;
-        cursor: pointer;
+        justify-content: center;
+    }
+}
 
-        .sd-navigation_bar-icon {
-            color: var(--sd-sys-color-on-surface);
-            &:hover {
-                box-shadow: none;
-            }
-        }
-        .sd-navigation_bar-label_text {
-            font-size: x-small;
-        }
+// helper
+.sd-navigation_helper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+    transition: all 200ms;
+    text-align: center;
 
-        &[data-sd-active='true'] {
-            .sd-navigation_bar-icon {
-                font-weight: bold;
-            }
-            .sd-navigation_bar-label_text {
-                font-weight: bold;
-            }
+    .sd-navigation_helper-icon {
+        transition: all 200ms;
+        border-radius: 4rem;
+        color: var(--sd-sys-color-on-surface);
+        &:hover {
+            box-shadow: none;
+        }
+    }
+    .sd-navigation_helper-label_text {
+        transition: all 200ms;
+        font-size: x-small;
+        display: inline;
+        width: 100%;
+        height: 100%;
+    }
+
+    &[data-sd-active='true'] {
+        .sd-navigation_helper-icon {
+            font-weight: bold;
+        }
+        .sd-navigation_helper-label_text {
+            font-weight: bold;
         }
     }
 }

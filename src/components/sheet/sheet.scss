@@ -17,6 +17,7 @@
 
 .sd-bottom_sheet {
     background: var(--sd-sys-color-surface-container-low);
+    color: var(--sd-sys-color-on-surface-variant); // optional
     @include elevation-level1;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
@@ -67,6 +68,7 @@
 .sd-side_sheet {
     z-index: 2;
     background: var(--sd-sys-color-surface-container-low);
+    color: var(--sd-sys-color-on-surface-variant);
     display: inline-block;
     box-sizing: border-box;
     width: 256px + 16px + 24px;

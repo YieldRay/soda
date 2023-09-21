@@ -6,7 +6,7 @@ const DatasetName = 'sdRipple' //? dataset name will automatically convert to un
 export function rippleEffect<E extends HTMLElement>(
     ele: E,
     duration = 400,
-    color = 'rgba(0, 0, 0, 0.1)',
+    color = 'rgba(0, 0, 0, 0.1)'
 ) {
     if (
         ele.hasAttribute('disabled') ||
@@ -36,7 +36,7 @@ export function rippleEffect<E extends HTMLElement>(
             Math.hypot(rippleX, rippleY),
             Math.hypot(rippleX, height - rippleY),
             Math.hypot(width - rippleX, rippleY),
-            Math.hypot(width - rippleX, height - rippleY),
+            Math.hypot(width - rippleX, height - rippleY)
         )
 
         ele.style.position = 'relative'
@@ -64,7 +64,7 @@ export function rippleEffect<E extends HTMLElement>(
                 duration,
                 easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
                 fill: 'forwards',
-            },
+            }
         )
 
         const onPointerUp = (e: PointerEvent) => {
@@ -80,7 +80,7 @@ export function rippleEffect<E extends HTMLElement>(
                 {
                     duration,
                     fill: 'forwards',
-                },
+                }
             )
 
             animation.oncancel = animation.onfinish = () => {

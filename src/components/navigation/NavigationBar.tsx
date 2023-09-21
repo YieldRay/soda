@@ -1,29 +1,25 @@
 import './navigation.scss'
-import { Badge } from '../badge'
-import { Button } from '../button'
 import { createPortal } from 'react-dom'
+import assign from 'lodash-es/assign'
+import omit from 'lodash-es/omit'
+import clsx from 'clsx'
+import { Helper, HelperItem } from './Helper'
 
-interface Item {
-    key: React.Key
-    active?: boolean
-    icon?: React.ReactNode
-    label?: React.ReactNode
-    badge?: {
-        active?: boolean
-        label?: React.ReactNode
-        sd?: 'none' | 'small' | 'large'
-    }
-}
-
-export function NavigationBar(props: {
-    items: Array<Item>
-    onChange?(item: Item): void
-    fixed?: boolean
-}) {
+/**
+ * https://m3.material.io/components/navigation-bar/specs
+ */
+export function NavigationBar(
+    props: {
+        items: Array<HelperItem & { key: React.Key }>
+        onChange?(item: HelperItem & { key: React.Key }): void
+        fixed?: boolean
+    } & Omit<React.HTMLProps<HTMLDivElement>, 'onChange' | 'items' | 'fixed'>
+) {
     const ele = (
         <div
-            className="sd-navigation_bar"
-            style={
+            className={clsx('sd-navigation_bar', props.className)}
+            {...omit(props, ['className', 'style', 'onChange', 'fixed'])}
+            style={assign(
                 props.fixed
                     ? {
                           position: 'fixed',
@@ -31,31 +27,15 @@ export function NavigationBar(props: {
                           width: '100%',
                           boxSizing: 'border-box',
                       }
-                    : {}
-            }
+                    : {},
+                props.style
+            )}
         >
-            {props.items.map(({ key, active, icon, label, badge }, i, a) => (
-                <div
-                    className="sd-navigation_bar-helper"
-                    key={key}
-                    onClick={() => props.onChange?.(a[i])}
-                    data-sd-active={active ? 'true' : 'false'}
-                >
-                    <Badge
-                        sd={badge?.active ? badge?.sd : 'none'}
-                        label={badge?.label}
-                    >
-                        <Button
-                            sd={active ? 'tonal' : 'text'}
-                            className="sd-navigation_bar-icon"
-                        >
-                            {icon}
-                        </Button>
-                    </Badge>
-                    <span className="sd-navigation_bar-label_text">
-                        {label}
-                    </span>
-                </div>
+            {props.items.map((item) => (
+                <Helper
+                    {...item}
+                    onClick={() => props.onChange?.(item)}
+                ></Helper>
             ))}
         </div>
     )

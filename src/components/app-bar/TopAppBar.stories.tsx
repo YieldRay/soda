@@ -2,14 +2,19 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { TopAppBar } from '.'
 import { IconButton } from '../icon-button'
+import { IconMenu } from '@/utils/icons'
 
 const meta = {
-    title: 'TopAppBar',
+    title: 'AppBar/TopAppBar',
     component: TopAppBar,
     tags: ['autodocs'],
     args: {
         children: <>TopAppBar</>,
-        leadingNavigationIcon: <IconButton>◀</IconButton>,
+        leadingNavigationIcon: (
+            <IconButton>
+                <IconMenu />
+            </IconButton>
+        ),
         trailingIcon: (
             <>
                 <IconButton>❤</IconButton>

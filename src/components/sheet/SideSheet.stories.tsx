@@ -5,6 +5,8 @@ import { useState } from 'react'
 import { Button } from '../button'
 import { TopAppBar } from '../app-bar'
 import { IconButton } from '../icon-button'
+import { IconMenu } from '@/utils/icons'
+import { DrawerItem } from '../../composition/DrawerItem'
 
 const meta = {
     title: 'SideSheet',
@@ -23,7 +25,9 @@ export const Default: Story = {
             <>
                 <TopAppBar
                     leadingNavigationIcon={
-                        <IconButton onClick={() => setOpen(true)}>═</IconButton>
+                        <IconButton onClick={() => setOpen(true)}>
+                            <IconMenu />
+                        </IconButton>
                     }
                 >
                     TopAppBar
@@ -54,7 +58,9 @@ export const Default: Story = {
                         </div>
                     }
                 >
-                    side sheet
+                    <DrawerItem enabled>Home</DrawerItem>
+                    <DrawerItem>Search</DrawerItem>
+                    <DrawerItem>Settings</DrawerItem>
                 </SideSheet>
             </>
         )

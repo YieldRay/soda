@@ -17,7 +17,7 @@ export function Collapsible(props: {
                     overflow: 'hidden',
                     boxSizing: 'border-box',
                 },
-                props.style,
+                props.style
             )}
             ref={(e) => {
                 if (!e) return
