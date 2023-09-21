@@ -10,6 +10,9 @@ export const Search = forwardRef<
         placeholder?: string
         leadingIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
+        /**
+         * @default bar
+         */
         sd?: 'bar' | 'view'
         value?: string
         onChange?: (value: string) => void

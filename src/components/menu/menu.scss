@@ -1,0 +1,51 @@
+// https://m3.material.io/components/menus/specs
+
+.sd-menu {
+    background: var(--sd-sys-color-surface-container);
+    @include elevation-level2;
+    width: max-content;
+    border-radius: 4px;
+    box-sizing: border-box;
+    max-width: 280px;
+    padding: 4px 0;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.sd-menu_item {
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 48px;
+    padding: 0 12px;
+    max-width: 280px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    &-leading_icon {
+        width: 24px;
+        color: var(--sd-sys-color-on-surface-variant);
+    }
+    &-supporting_text {
+        flex-shrink: 1;
+        color: var(--sd-sys-color-on-surface);
+        min-width: 112px;
+    }
+    &-trailing_icon {
+        margin-left: auto;
+        width: 24px;
+        color: var(--sd-sys-color-on-surface-variant);
+    }
+    &-trailing_text {
+        margin-left: auto;
+        color: var(--sd-sys-color-on-surface-variant);
+        font-size: small;
+    }
+    transition: all 200ms;
+    &:hover {
+        background: rgb(0 0 0 / 0.04);
+    }
+    &:active {
+        background: rgb(0 0 0 / 0.08);
+    }
+}

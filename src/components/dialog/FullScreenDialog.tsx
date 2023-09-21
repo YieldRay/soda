@@ -8,6 +8,9 @@ import { IconClose } from '@/utils/icons.tsx'
  */
 export function FullScreenDialog(props: {
     headline?: React.ReactNode
+    /**
+     * Action Button
+     */
     button?: React.ReactNode
     onButtonClick?: () => void
     onCloseClick?: () => void

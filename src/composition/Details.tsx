@@ -7,6 +7,9 @@ export function Details(props: {
     children?: React.ReactNode
     open?: boolean
     onChange?: (open: boolean) => void
+    /**
+     * @default filled
+     */
     sd?: 'outlined' | 'filled'
 }) {
     const sd = props.sd ?? 'filled'

@@ -14,6 +14,9 @@ export function Card(
         as?:
             | keyof JSX.IntrinsicElements
             | React.FC<{ className?: string; children?: React.ReactNode }>
+        /**
+         * @default elevated
+         */
         sd?: 'outlined' | 'filled' | 'elevated'
         className?: string
         children?: React.ReactNode

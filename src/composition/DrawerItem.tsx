@@ -1,6 +1,9 @@
 import { Ripple } from '@/utils/Ripple'
 import clsx from 'clsx'
 
+/**
+ * To make a NavigationDrawer, use a SideSheet to contain DrawerItem
+ */
 export function DrawerItem(props: {
     icon?: React.ReactNode
     badge?: React.ReactNode

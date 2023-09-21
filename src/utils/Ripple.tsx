@@ -4,17 +4,17 @@ import omit from 'lodash-es/omit'
 
 type Props = {
     /**
-     * html tag name, div by default
+     * HTML tag name, div by default
      */
     as?: keyof JSX.IntrinsicElements
     children?: React.ReactNode
     disabled?: boolean
     /**
-     * in ms
+     * In ms
      */
     rippleDuration?: number
     /**
-     * any css color string
+     * Any css color string
      */
     rippleColor?: string
 } & Record<string, any>

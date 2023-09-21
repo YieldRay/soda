@@ -5,7 +5,7 @@ import './progress-indicator.scss'
  */
 export function LinearProgressIndicator(props: {
     /**
-     * between 0 and 1, if is unset, act as undeterminate
+     * Between 0 and 1, if is unset, act as undeterminate
      */
     value?: number
 }) {

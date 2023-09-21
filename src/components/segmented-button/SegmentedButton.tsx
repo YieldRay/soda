@@ -10,7 +10,7 @@ export function SegmentedButton<T extends React.Key>(props: {
     }>
     onChange?(value: T): void
     /**
-     * each step down in density removes 4px from the height
+     * Each step down in density removes 4px from the height
      */
     density?: 0 | -1 | -2 | -3
 }) {

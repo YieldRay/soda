@@ -1,14 +1,16 @@
 // https://m3.material.io/components/dialogs/specs
 
 .sd-dialog {
-    z-index: 2;
     background: var(--sd-sys-color-surface-container-high);
     @include elevation-level3;
     width: fit-content;
+    height: fit-content;
     border-radius: 28px;
     min-width: 280px;
-    max-width: 560px;
+    max-width: min(560px, 100vw);
     max-height: 100vh;
+    display: flex;
+    flex-direction: column;
 
     &-headline {
         margin: 1.5rem 1.5rem 1rem;
@@ -16,7 +18,6 @@
         font-size: x-large;
     }
     &-body {
-        margin: 1.5rem;
         color: var(--sd-sys-color-on-surface-variant);
     }
     &-buttons {
@@ -25,23 +26,8 @@
     }
 }
 
-.sd-dialog-scrim {
-    z-index: 1;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    box-sizing: border-box;
-    @include display-flex-center;
-    pointer-events: none;
-}
-
 .sd-dialog-fullscreen {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background: var(--sd-sys-color-surface-container-high);
     overflow: auto;

@@ -13,6 +13,9 @@ export function TopAppBar(props: {
     leadingNavigationIcon?: React.ReactNode
     trailingIcon?: React.ReactNode
     fixed?: boolean
+    /**
+     * @default small
+     */
     sd?: 'center' | 'small' | 'medium' | 'large'
 }) {
     const sd = props.sd ?? 'small'

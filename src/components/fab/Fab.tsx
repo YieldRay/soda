@@ -10,7 +10,13 @@ import clsx from 'clsx'
 export const Fab = forwardRef<
     HTMLElement,
     {
+        /**
+         * @default surface
+         */
         sd?: 'surface' | 'secondary' | 'tertiary'
+        /**
+         * @default default
+         */
         size?: 'default' | 'small' | 'large'
         children?: React.ReactNode
         extended?: boolean

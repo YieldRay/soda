@@ -10,14 +10,14 @@ export function IconButton(
     props: {
         as?: string
         /**
-         * standard
+         * @default standard
          */
         sd?: 'standard' | 'filled' | 'tonal' | 'outlined'
         children?: React.ReactNode
         className?: string
         disabled?: boolean
         /**
-         * standard button is unselected by default,
+         * Standard button is unselected by default,
          * other button is selected by default.
          */
         selected?: boolean

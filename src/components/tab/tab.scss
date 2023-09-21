@@ -1,0 +1,74 @@
+// https://m3.material.io/components/tabs/specs
+
+.sd-tab {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: max-content;
+    background: var(--sd-sys-color-surface);
+    position: relative;
+    overflow: hidden;
+}
+
+.sd-tab_item {
+    flex: 1;
+    padding: 0.5rem 1rem 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+    cursor: pointer;
+
+    &-icon {
+        transition: all 200ms;
+        svg {
+            height: 20px;
+            display: grid;
+            place-items: center;
+        }
+    }
+    &-label_text {
+        transition: all 200ms;
+        font-size: small;
+    }
+    &[data-sd-active='true'] {
+        .sd-tab_item-icon {
+            color: var(--sd-sys-color-primary);
+        }
+        .sd-tab_item-label_text {
+            color: var(--sd-sys-color-primary);
+        }
+    }
+    position: relative;
+    &-active_indicator {
+        transition: all 200ms;
+        position: absolute;
+        bottom: -3px;
+        height: 6px; // height 6px, we hide 3px, levaing 3px to display
+        width: 36px;
+        border-radius: 12px;
+        background: var(--sd-sys-color-primary);
+        opacity: 0;
+    }
+    &[data-sd-active='true'] {
+        .sd-tab_item-active_indicator {
+            opacity: 1;
+        }
+    }
+    &:not(:has(.sd-tab_item-icon)) {
+        .sd-tab_item-active_indicator {
+            width: 100%;
+            border-radius: 0;
+            height: 2px;
+            bottom: 0;
+        }
+    }
+    transition: all 200ms;
+    &:hover {
+        background: rgb(0 0 0 / 0.04);
+    }
+    &:active {
+        background: rgb(0 0 0 / 0.08);
+    }
+}

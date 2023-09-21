@@ -1,20 +1,22 @@
 import './checkbox.scss'
-import { Ripple } from '../../utils/Ripple.tsx'
 import clsx from 'clsx'
-import { type CSSProperties } from 'react'
-import { IconChecked } from '../../utils/icons.tsx'
+import { Ripple } from '@/utils/Ripple.tsx'
+import { IconChecked } from '@/utils/icons.tsx'
 
+/**
+ * @specs https://m3.material.io/components/checkbox/specs
+ */
 export function Checkbox(props: {
     checked?: boolean
     onChange?: (checked: boolean) => void
     children?: React.ReactNode
     disabled?: boolean
     /**
-     * this do not have any functional effect, just change the color
+     * This do not have any functional effect, just change color to red
      */
     error?: boolean
     className?: string
-    style?: CSSProperties
+    style?: React.CSSProperties
 }) {
     const checkedIcon = props.children || <IconChecked />
 

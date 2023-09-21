@@ -10,7 +10,7 @@ export function SideSheet(props: {
     action?: React.ReactNode
     children?: React.ReactNode
     /**
-     * default right
+     * @default left
      */
     position?: 'left' | 'right'
     open?: boolean
@@ -19,7 +19,7 @@ export function SideSheet(props: {
     style?: React.CSSProperties
     portalTo?: Element | DocumentFragment
 }) {
-    const isRight = props.position !== 'left'
+    const isRight = props.position === 'right'
     const isOpen = props.open ?? true
     const translateX = isRight ? '100%' : '-100%'
 

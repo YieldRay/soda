@@ -10,7 +10,7 @@ export function Button(
     props: {
         as?: string
         /**
-         * default filled
+         * @default filled
          */
         sd?: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
         className?: string
