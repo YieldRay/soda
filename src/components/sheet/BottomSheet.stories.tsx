@@ -5,7 +5,7 @@ import { Button } from '../button'
 import { useRef } from 'react'
 
 const meta = {
-    title: 'BottomSheet',
+    title: 'Sheet/BottomSheet',
     component: BottomSheet,
     tags: ['autodocs'],
 } satisfies Meta<typeof BottomSheet>

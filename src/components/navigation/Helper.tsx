@@ -15,6 +15,9 @@ export interface HelperItem {
     }
 }
 
+/**
+ * for internal use only
+ */
 export function Helper(
     props: HelperItem &
         Omit<

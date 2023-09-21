@@ -7,22 +7,9 @@ export function Dialog(props: {
     headline?: React.ReactNode
     children?: React.ReactNode
     buttons?: React.ReactNode
-    onScrimClick?: () => void
 }) {
     return (
-        <div
-            className="sd-dialog-scrim"
-            onClick={(e) => {
-                if (
-                    props.onScrimClick &&
-                    (e.target as HTMLElement).classList.contains(
-                        'sd-dialog-scrim'
-                    )
-                ) {
-                    props.onScrimClick()
-                }
-            }}
-        >
+        <div className="sd-dialog-scrim">
             <div className="sd-dialog">
                 {props.headline && (
                     <div className="sd-dialog-headline">{props.headline}</div>

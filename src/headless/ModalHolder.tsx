@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom'
 import assign from 'lodash-es/assign'
 import omit from 'lodash-es/omit'
+import { Scrim } from '@/utils/Scrim'
 
 /**
  * provide a scrim to document.body and hold the children
@@ -8,11 +9,15 @@ import omit from 'lodash-es/omit'
 export function ModalHolder(
     props: {
         open: boolean
+        /**
+         * children must has `position: fixed`
+         */
         children: React.ReactNode
         style?: React.CSSProperties
         className?: string
+        onScrimClick?: () => void
         portalTo?: Element | DocumentFragment
-    } & React.HTMLProps<HTMLDivElement>
+    } & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>
 ) {
     const portalTo = props.portalTo ?? document.body
 
@@ -22,7 +27,7 @@ export function ModalHolder(
             className={props.className}
             style={assign(
                 {
-                    pointerEvents: props.open ? 'auto' : 'none',
+                    pointerEvents: 'none',
                     position: 'fixed',
                     top: '0',
                     left: '0',
@@ -36,6 +41,10 @@ export function ModalHolder(
                 props.style
             )}
         >
+            <Scrim
+                open={props.open}
+                onClick={() => props.onScrimClick?.()}
+            ></Scrim>
             {props.children}
         </div>
     )

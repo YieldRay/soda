@@ -4,6 +4,9 @@ import { Ripple } from '../../utils/Ripple.tsx'
 import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 
+/**
+ * @specs https://m3.material.io/components/floating-action-button/specs
+ */
 export const Fab = forwardRef<
     HTMLElement,
     {

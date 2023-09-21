@@ -4,7 +4,7 @@ import { SegmentedButton } from '.'
 import { useState } from 'react'
 
 const meta = {
-    title: 'SegmentedButton',
+    title: 'Button/SegmentedButton',
     component: SegmentedButton,
     tags: ['autodocs'],
     parameters: {

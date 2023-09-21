@@ -9,7 +9,7 @@ import { IconMenu } from '@/utils/icons'
 import { DrawerItem } from '../../composition/DrawerItem'
 
 const meta = {
-    title: 'SideSheet',
+    title: 'Sheet/SideSheet',
     component: SideSheet,
     tags: ['autodocs'],
 } satisfies Meta<typeof SideSheet>

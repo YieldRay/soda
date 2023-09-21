@@ -3,8 +3,8 @@ import clsx from 'clsx'
 import omit from 'lodash-es/omit'
 
 /**
+ * The divider has margin included by default, you can remove it by adding `style={{margin:"0"}}`
  * @specs https://m3.material.io/components/divider/specs
- * The divider has default margin included, you can remove it by adding `style={{margin:"0"}}`
  */
 export function Divider(
     props: {

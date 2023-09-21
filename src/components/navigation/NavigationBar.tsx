@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { Helper, HelperItem } from './Helper'
 
 /**
- * https://m3.material.io/components/navigation-bar/specs
+ * @specs https://m3.material.io/components/navigation-bar/specs
  */
 export function NavigationBar(
     props: {

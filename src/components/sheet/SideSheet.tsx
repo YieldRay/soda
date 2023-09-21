@@ -25,20 +25,8 @@ export function SideSheet(props: {
 
     const ele = (
         <>
-            <Scrim open={isOpen}></Scrim>
-            <div
-                className="sd-side_sheet-scrim"
-                style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-                onClick={(e) => {
-                    if (
-                        props.onScrimClick &&
-                        (e.target as HTMLElement).classList.contains(
-                            'sd-side_sheet-scrim'
-                        )
-                    )
-                        props.onScrimClick()
-                }}
-            >
+            <Scrim open={isOpen} onClick={() => props.onScrimClick?.()}></Scrim>
+            <div className="sd-side_sheet-scrim">
                 <div
                     className={clsx('sd-side_sheet', props.className)}
                     style={assign(

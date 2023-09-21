@@ -14,7 +14,7 @@ const pencilIcon = (
 )
 
 const meta = {
-    title: 'Fab',
+    title: 'Button/Fab',
     component: Fab,
     parameters: {
         layout: 'centered',

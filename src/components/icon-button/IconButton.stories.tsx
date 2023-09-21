@@ -4,7 +4,7 @@ import { IconButton } from '.'
 import { IconChecked } from '@/utils/icons'
 
 const meta = {
-    title: 'IconButton',
+    title: 'Button/IconButton',
     component: IconButton,
     parameters: {
         layout: 'centered',

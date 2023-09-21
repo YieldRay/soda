@@ -53,27 +53,18 @@ export const BottomSheet = forwardRef<
 
     const ele = (
         <>
-            <Scrim open={visiable}></Scrim>
-            <div
-                className={clsx('sd-bottom_sheet-scrim', props.className)}
-                style={assign(
-                    { pointerEvents: visiable ? 'auto' : 'none' },
-                    props.style
-                )}
-                onClick={(e) => {
-                    if (
-                        props.onScrimClick &&
-                        (e.target as HTMLElement).classList.contains(
-                            'sd-bottom_sheet-scrim'
-                        )
-                    )
-                        props.onScrimClick()
-                }}
-            >
+            <Scrim
+                open={visiable}
+                onClick={() => props.onScrimClick?.()}
+            ></Scrim>
+            <div className="sd-bottom_sheet-scrim" style={props.style}>
                 <div
-                    className="sd-bottom_sheet"
+                    className={clsx('sd-bottom_sheet', props.className)}
                     ref={sheetRef}
-                    style={{ transform: 'translateY(100%)' }}
+                    style={assign(
+                        { transform: 'translateY(100%)' },
+                        props.style
+                    )}
                 >
                     <div
                         className="sd-bottom_sheet-drag_handle"

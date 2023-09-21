@@ -5,6 +5,9 @@ import assign from 'lodash-es/assign'
 import omit from 'lodash-es/omit'
 import { createPortal } from 'react-dom'
 
+/**
+ * @specs https://m3.material.io/components/navigation-rail/specs
+ */
 export function NavigationRail(
     props: {
         fab: React.ReactNode

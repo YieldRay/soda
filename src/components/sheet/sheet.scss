@@ -13,9 +13,11 @@
     align-items: center;
     justify-content: flex-end;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .sd-bottom_sheet {
+    pointer-events: auto;
     background: var(--sd-sys-color-surface-container-low);
     color: var(--sd-sys-color-on-surface-variant); // optional
     @include elevation-level1;
@@ -50,7 +52,7 @@
 //! we only implement: Modal side sheet
 
 .sd-side_sheet-scrim {
-    z-index: 1;
+    pointer-events: none;
     position: fixed;
     position: fixed;
     left: 0;
@@ -66,7 +68,7 @@
 }
 
 .sd-side_sheet {
-    z-index: 2;
+    pointer-events: auto;
     background: var(--sd-sys-color-surface-container-low);
     color: var(--sd-sys-color-on-surface-variant);
     display: inline-block;

@@ -6,7 +6,7 @@ import { ModalHolder } from '@/headless/ModalHolder'
 import { useState } from 'react'
 
 const meta = {
-    title: 'Dialog',
+    title: 'Dialog/Dialog',
     component: Dialog,
     parameters: {
         layout: 'centered',
@@ -27,10 +27,9 @@ export const Default: Story = {
                     open dialog
                 </Button>
 
-                <ModalHolder open={open}>
+                <ModalHolder open={open} onScrimClick={() => setOpen(false)}>
                     <Dialog
                         headline="headline"
-                        onScrimClick={() => setOpen(false)}
                         buttons={
                             <>
                                 <Button sd="text" onClick={() => alert('wow!')}>
