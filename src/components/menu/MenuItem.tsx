@@ -4,7 +4,7 @@ import { Ripple } from '@/utils/Ripple'
 import clsx from 'clsx'
 
 /**
- * use <Menu> to wrap it
+ * use `<Menu>` to wrap it
  */
 export function MenuItem(
     props: {
@@ -12,6 +12,7 @@ export function MenuItem(
         children?: React.ReactNode
         trailingIcon?: React.ReactNode
         trailingText?: React.ReactNode
+        disabled?: boolean
     } & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>
 ) {
     return (
@@ -19,6 +20,7 @@ export function MenuItem(
             as="div"
             className={clsx('sd-menu_item', props.className)}
             {...omit(props, 'className')}
+            data-sd-disabled={props.disabled}
         >
             {props.leadingIcon && (
                 <div className="sd-menu_item-leading_icon">

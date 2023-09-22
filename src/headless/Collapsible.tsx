@@ -1,6 +1,10 @@
 import omit from 'lodash-es/omit'
 import assign from 'lodash-es/assign'
 
+/**
+ * Low level component, use <Details> component if possiable
+ * @returns
+ */
 export function Collapsible(props: {
     open: boolean
     children: React.ReactNode

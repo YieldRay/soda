@@ -30,7 +30,7 @@ export const Outlined: Story = {
         return (
             <Chip
                 {...props}
-                enabled={enabled}
+                disabled={!enabled}
                 onClick={() => setEnabled(!enabled)}
             />
         )
@@ -47,7 +47,7 @@ export const Tonal: Story = {
         return (
             <Chip
                 {...props}
-                enabled={enabled}
+                disabled={!enabled}
                 onClick={() => setEnabled(!enabled)}
             />
         )

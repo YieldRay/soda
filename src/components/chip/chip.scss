@@ -34,10 +34,10 @@
 
     &-outlined {
         border: 1.25px solid var(--sd-sys-color-outline);
-        &[data-sd='disabled'] {
+        &[data-sd-disabled='true'] {
             filter: grayscale(98%) opacity(40%);
         }
-        &[data-sd='enabled'] {
+        &[data-sd-disabled='false'] {
             &:hover {
                 background: rgb(0 0 0 / 0.04);
             }
@@ -51,10 +51,10 @@
         border: 1.25px solid var(--sd-sys-color-surface-container-high);
         background: var(--sd-sys-color-surface-container-high);
         color: var(--sd-sys-color-on-surface);
-        &[data-sd='disabled'] {
+        &[data-sd-disabled='true'] {
             filter: grayscale(98%) opacity(60%);
         }
-        &[data-sd='enabled'] {
+        &[data-sd-disabled='false'] {
             &:hover {
                 filter: brightness(96%);
             }

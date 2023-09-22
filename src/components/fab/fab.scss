@@ -74,4 +74,8 @@
             justify-content: space-between;
         }
     }
+    &[data-sd-disabled='true'] {
+        pointer-events: none;
+        filter: grayscale(98%) opacity(40%);
+    }
 }

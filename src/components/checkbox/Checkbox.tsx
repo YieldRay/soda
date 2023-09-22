@@ -24,9 +24,9 @@ export function Checkbox(props: {
         <Ripple
             style={props.style}
             className={clsx('sd-checkbox', props.className)}
-            data-sd={props.disabled ? 'disabled' : 'enabled'}
-            data-sd-checked={props.checked ? 'true' : 'false'}
-            data-sd-error={props.error ? 'true' : 'false'}
+            data-sd-disabled={props.disabled}
+            data-sd-checked={props.checked}
+            data-sd-error={props.error}
             onClick={() => props.onChange?.(!props.checked)}
         >
             <div className="sd-checkbox-icon">

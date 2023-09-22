@@ -28,7 +28,7 @@ export function Helper(
     return (
         <div
             className={clsx('sd-navigation_helper', props.className)}
-            data-sd-active={props.active ? 'true' : 'false'}
+            data-sd-active={props.active}
             {...omit(props, ['className', 'active', 'icon', 'label', 'badge'])}
         >
             <Badge

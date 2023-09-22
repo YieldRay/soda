@@ -11,14 +11,14 @@ export function Chip(props: {
     className?: string
     leadingIcon?: React.ReactNode
     trailingIcon?: React.ReactNode
-    enabled?: boolean
+    disabled?: boolean
     onClick?: () => void
 }) {
     return (
         <Ripple
             className={clsx('sd-chip', `sd-chip-${props.sd}`, props.className)}
             onClick={props.onClick}
-            data-sd={props.enabled ? 'enabled' : 'disabled'}
+            data-sd-disabled={props.disabled}
         >
             {props.leadingIcon && (
                 <div className="sd-chip-leading_icon">{props.leadingIcon}</div>

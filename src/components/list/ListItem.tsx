@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { Ripple } from '../../utils/Ripple.tsx'
 
 /**
- * ListItem has `display: inline-block` by default,
+ * `<ListItem>` has `display: inline-block` by default,
  * to make it occupy full width, use `display: block`
  * @specs https://m3.material.io/components/lists/specs
  */
@@ -31,6 +31,7 @@ export function ListItem(props: {
             className={clsx('sd-list', props.className)}
             style={props.style}
             data-sd-lines={props.lines}
+            data-sd-disabled={props.disabled}
             onClick={props.onClick}
         >
             {props.leadingVideoThubnail && (

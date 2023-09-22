@@ -13,8 +13,8 @@ export function Switch(props: {
         <div
             className={clsx('sd-switch', props.className)}
             style={props.style}
-            data-sd={props.disabled ? 'disabled' : 'enabled'}
-            data-sd-checked={props.checked ? 'true' : 'false'}
+            data-sd-disabled={props.disabled}
+            data-sd-checked={props.checked}
             onClick={() => props.onChange?.(!props.checked)}
         >
             <div className="sd-switch-thumb">

@@ -4,7 +4,7 @@ import { Ripple } from '@/utils/Ripple'
 import omit from 'lodash-es/omit'
 
 /**
- * use <Tab> to wrap it
+ * use `<Tab>` to wrap it
  */
 export function TabItem(
     props: {
@@ -18,7 +18,7 @@ export function TabItem(
             as="div"
             {...omit(props, 'classNam')}
             className={clsx('sd-tab_item', props.className)}
-            data-sd-active={props.active ? 'true' : 'false'}
+            data-sd-active={props.active}
         >
             {props.icon && <div className="sd-tab_item-icon">{props.icon}</div>}
             <div className="sd-tab_item-label_text">{props.children}</div>

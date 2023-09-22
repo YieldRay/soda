@@ -24,6 +24,12 @@ export const Default: Story = {
     },
 }
 
+export const Disabled: Story = {
+    args: {
+        disabled: true,
+    },
+}
+
 export const WithIcon: Story = {
     render: () => {
         const [checked, setChecked] = useState(false)

@@ -96,4 +96,9 @@
         justify-self: flex-start;
         flex-shrink: 0;
     }
+
+    &[data-sd-disabled='true'] {
+        pointer-events: none;
+        filter: grayscale(98%) opacity(40%);
+    }
 }

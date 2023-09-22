@@ -84,7 +84,7 @@
         color: var(--sd-sys-color-on-surface);
     }
 
-    &[data-sd='disabled'] {
+    &[data-sd-disabled='true'] {
         pointer-events: none;
         filter: grayscale(98%) opacity(40%);
     }

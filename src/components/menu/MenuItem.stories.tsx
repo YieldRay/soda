@@ -33,6 +33,13 @@ export const Default: Story = {
                 <MenuItem leadingIcon={<IconClose />} trailingText={'⌘V'}>
                     Orange
                 </MenuItem>
+                <MenuItem
+                    leadingIcon={<IconClose />}
+                    trailingText={'⌘V'}
+                    disabled
+                >
+                    Orange
+                </MenuItem>
             </Menu>
         )
     },

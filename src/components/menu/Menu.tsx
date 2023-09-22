@@ -3,7 +3,7 @@ import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 
 /**
- * The Menu container, will contain MenuItem and Divider components
+ * The `<Menu>` container, will contain `<MenuItem>` and `<Divider>` components
  * @specs https://m3.material.io/components/menus/specs
  */
 export function Menu(

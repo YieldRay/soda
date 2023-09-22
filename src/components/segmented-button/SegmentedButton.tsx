@@ -31,7 +31,7 @@ export function SegmentedButton<T extends React.Key>(props: {
                         key={value}
                         className="sd-segmented_button-item"
                         data-sd-selected={props.value === value}
-                        data-sd-disabled={disabled ? 'true' : 'false'}
+                        data-sd-disabled={disabled}
                         onClick={() => props.onChange?.(value)}
                     >
                         <div className="sd-segmented_button-label">{label}</div>

@@ -48,9 +48,9 @@ export const TextField = forwardRef<
             tabIndex={-1}
             data-sd={props.sd === 'outlined' ? 'outlined' : 'filled'}
             data-sd-label_text={populated ? 'populated' : 'empty'}
-            data-sd-disabled={props.disabled ? 'true' : 'false'}
-            data-sd-error={props.error ? 'true' : 'false'}
-            data-sd-focusd={focusd ? 'true' : 'false'}
+            data-sd-disabled={props.disabled}
+            data-sd-error={props.error}
+            data-sd-focusd={focusd}
         >
             {props.leadingIcon && (
                 <div className="sd-text_field-leading_icon">

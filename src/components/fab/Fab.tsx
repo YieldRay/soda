@@ -20,6 +20,7 @@ export const Fab = forwardRef<
         size?: 'default' | 'small' | 'large'
         children?: React.ReactNode
         extended?: boolean
+        disabled?: boolean
     } & React.HTMLProps<HTMLDivElement>
 >((props, ref) => (
     <Ripple
@@ -29,7 +30,8 @@ export const Fab = forwardRef<
         className={clsx('sd-fab', props.className)}
         data-sd={props.sd || 'surface'}
         data-sd-size={props.size || 'default'}
-        data-sd-extended={props.extended ? 'true' : 'false'}
+        data-sd-extended={props.extended}
+        data-sd-disabled={props.disabled}
     >
         <div className="sd-fab-icon">{props.children}</div>
     </Ripple>

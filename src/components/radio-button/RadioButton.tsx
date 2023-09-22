@@ -18,7 +18,7 @@ export function RadioButton(props: {
     return (
         <>
             <div
-                data-sd-checked={props.checked ? 'true' : 'false'}
+                data-sd-checked={props.checked}
                 className={clsx('sd-radio_button', props.className)}
                 onClick={() => props.onChange?.(!props.checked)}
             >

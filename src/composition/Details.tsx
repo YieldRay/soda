@@ -1,5 +1,5 @@
 import { IconButton } from '@/components/icon-button'
-import { Collapsible } from '@/headless'
+import { Collapsible } from '@/headless/Collapsible'
 import clsx from 'clsx'
 
 export function Details(props: {

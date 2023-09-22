@@ -23,7 +23,7 @@ export function LinearProgressIndicator(props: {
                 style={{
                     width:
                         typeof props.value !== 'undefined'
-                            ? `${props.value * 100}%`
+                            ? `${Math.min(props.value, 1) * 100}%`
                             : '',
                 }}
             ></div>
