@@ -4,16 +4,17 @@ import assign from 'lodash-es/assign'
 import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { Helper, HelperItem } from './Helper'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * @specs https://m3.material.io/components/navigation-bar/specs
  */
 export function NavigationBar(
-    props: {
+    props: ExtendProps<{
         items: Array<HelperItem & { key: React.Key }>
         onChange?(item: HelperItem & { key: React.Key }): void
         fixed?: boolean
-    } & Omit<React.HTMLProps<HTMLDivElement>, 'onChange' | 'items' | 'fixed'>
+    }>
 ) {
     const ele = (
         <div

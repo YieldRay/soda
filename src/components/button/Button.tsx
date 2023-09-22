@@ -2,12 +2,13 @@ import './button.scss'
 import clsx from 'clsx'
 import omit from 'lodash-es/omit'
 import { Ripple } from '@/utils/Ripple'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * @specs https://m3.material.io/components/buttons/specs
  */
 export function Button(
-    props: {
+    props: ExtendProps<{
         as?: string
         /**
          * @default filled
@@ -16,7 +17,7 @@ export function Button(
         className?: string
         disabled?: boolean
         children?: React.ReactNode
-    } & React.HTMLProps<HTMLDivElement>
+    }>
 ) {
     return (
         <Ripple

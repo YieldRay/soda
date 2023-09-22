@@ -1,4 +1,5 @@
 import './divider.scss'
+import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import omit from 'lodash-es/omit'
 
@@ -7,7 +8,7 @@ import omit from 'lodash-es/omit'
  * @specs https://m3.material.io/components/divider/specs
  */
 export function Divider(
-    props: {
+    props: ExtendProps<{
         /**
          * @default full
          */
@@ -16,7 +17,7 @@ export function Divider(
          * @default horizon
          */
         direction?: 'horizon' | 'vertical'
-    } & React.HTMLProps<HTMLDivElement>
+    }>
 ) {
     return (
         <div

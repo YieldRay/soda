@@ -4,24 +4,30 @@ import { Ripple } from '../../utils/Ripple.tsx'
 import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 
+type ExtendProps<T extends HTMLElement, U extends object = object> = U &
+    Omit<React.HTMLProps<T>, keyof U>
+
 /**
  * @specs https://m3.material.io/components/floating-action-button/specs
  */
 export const Fab = forwardRef<
     HTMLElement,
-    {
-        /**
-         * @default surface
-         */
-        sd?: 'surface' | 'secondary' | 'tertiary'
-        /**
-         * @default default
-         */
-        size?: 'default' | 'small' | 'large'
-        children?: React.ReactNode
-        extended?: boolean
-        disabled?: boolean
-    } & React.HTMLProps<HTMLDivElement>
+    ExtendProps<
+        HTMLDivElement,
+        {
+            /**
+             * @default surface
+             */
+            sd?: 'surface' | 'secondary' | 'tertiary'
+            /**
+             * @default default
+             */
+            size?: 'default' | 'small' | 'large'
+            children?: React.ReactNode
+            extended?: boolean
+            disabled?: boolean
+        }
+    >
 >((props, ref) => (
     <Ripple
         as="div"

@@ -1,5 +1,6 @@
 import './tooltip.scss'
 import { ActionButton } from '@/composition/ActionButton'
+import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import omit from 'lodash-es/omit'
 
@@ -7,12 +8,12 @@ import omit from 'lodash-es/omit'
  * @specs https://m3.material.io/components/tooltips/specs
  */
 export function RichTooltip(
-    props: {
+    props: ExtendProps<{
         children?: React.ReactNode
         subhead?: React.ReactNode
         action?: React.ReactNode
         onActionClick?: () => void
-    } & React.HTMLProps<HTMLDivElement>
+    }>
 ) {
     return (
         <div

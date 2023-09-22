@@ -2,16 +2,20 @@ import './tab.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
 import omit from 'lodash-es/omit'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * use `<Tab>` to wrap it
  */
 export function TabItem(
-    props: {
-        children?: React.ReactNode
-        icon?: React.ReactNode
-        active?: boolean
-    } & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>
+    props: Omit<
+        ExtendProps<{
+            children?: React.ReactNode
+            icon?: React.ReactNode
+            active?: boolean
+        }>,
+        'ref'
+    >
 ) {
     return (
         <Ripple

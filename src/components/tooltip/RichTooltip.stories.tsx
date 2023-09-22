@@ -22,7 +22,7 @@ export const Default: Story = {
                 that warrants the user's focus.
             </>
         ),
-        action: <>Action</>,
+        action: <span>Action</span>,
         onActionClick() {
             console.log('clicked!')
         },

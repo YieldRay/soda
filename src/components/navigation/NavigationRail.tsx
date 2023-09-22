@@ -4,20 +4,18 @@ import clsx from 'clsx'
 import assign from 'lodash-es/assign'
 import omit from 'lodash-es/omit'
 import { createPortal } from 'react-dom'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * @specs https://m3.material.io/components/navigation-rail/specs
  */
 export function NavigationRail(
-    props: {
+    props: ExtendProps<{
         fab: React.ReactNode
         items: Array<HelperItem & { key: React.Key }>
         onChange?(item: HelperItem & { key: React.Key }): void
         fixed?: boolean
-    } & Omit<
-        React.HTMLProps<HTMLDivElement>,
-        'onChange' | 'items' | 'fixed' | 'fab'
-    >
+    }>
 ) {
     const ele = (
         <div

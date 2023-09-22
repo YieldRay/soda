@@ -1,9 +1,8 @@
 import assign from 'lodash-es/assign'
 import omit from 'lodash-es/omit'
+import { ExtendProps } from './type'
 
-export function Scrim(
-    props: { open?: boolean } & React.HTMLProps<HTMLDivElement>
-) {
+export function Scrim(props: ExtendProps<{ open?: boolean }>) {
     return (
         <div
             {...omit(props, ['open'])}

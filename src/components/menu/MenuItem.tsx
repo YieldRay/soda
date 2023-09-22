@@ -2,18 +2,22 @@ import './menu.scss'
 import omit from 'lodash-es/omit'
 import { Ripple } from '@/utils/Ripple'
 import clsx from 'clsx'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * use `<Menu>` to wrap it
  */
 export function MenuItem(
-    props: {
-        leadingIcon?: React.ReactNode
-        children?: React.ReactNode
-        trailingIcon?: React.ReactNode
-        trailingText?: React.ReactNode
-        disabled?: boolean
-    } & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>
+    props: Omit<
+        ExtendProps<{
+            leadingIcon?: React.ReactNode
+            children?: React.ReactNode
+            trailingIcon?: React.ReactNode
+            trailingText?: React.ReactNode
+            disabled?: boolean
+        }>,
+        'ref'
+    >
 ) {
     return (
         <Ripple

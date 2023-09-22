@@ -3,6 +3,7 @@ import { Badge } from '../badge'
 import { Button } from '../button'
 import { omit } from 'lodash-es'
 import clsx from 'clsx'
+import { ExtendProps } from '@/utils/type'
 
 export interface HelperItem {
     active?: boolean
@@ -18,13 +19,7 @@ export interface HelperItem {
 /**
  * for internal use only
  */
-export function Helper(
-    props: HelperItem &
-        Omit<
-            React.HTMLProps<HTMLDivElement>,
-            'active' | 'icon' | 'label' | 'badge'
-        >
-) {
+export function Helper(props: ExtendProps<HelperItem>) {
     return (
         <div
             className={clsx('sd-navigation_helper', props.className)}

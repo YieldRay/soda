@@ -1,2 +1,2 @@
-export * from './PlainToolTip'
+export * from './PlainTooltip'
 export * from './RichTooltip'

@@ -1,13 +1,17 @@
 import { Ripple } from '@/utils/Ripple'
 import omit from 'lodash-es/omit'
 import clsx from 'clsx'
+import { ExtendProps } from '@/utils/type'
 
 export function ActionButton(
-    props: {
-        inverse?: boolean
-        disabled?: boolean
-        children?: React.ReactNode
-    } & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>
+    props: Omit<
+        ExtendProps<{
+            inverse?: boolean
+            disabled?: boolean
+            children?: React.ReactNode
+        }>,
+        'ref'
+    >
 ) {
     return (
         <>
