@@ -25,6 +25,7 @@ export function DrawerItem(props: {
                     color: var(--sd-sys-color-on-surface-variant);
                     font-size: small;
                     font-weight: 500;
+                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
                 .container:hover {
                     background: rgb(0 0 0 / 0.04);

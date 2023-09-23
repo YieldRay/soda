@@ -31,6 +31,7 @@ export function Details(props: {
                     align-items: center;
                     justify-content: space-between;
                     padding: 8px 8px 8px 16px;
+                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
                 .summary.open.outlined {
                     border-bottom: solid 1px var(--sd-sys-color-outline);
