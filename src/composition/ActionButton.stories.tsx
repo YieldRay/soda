@@ -19,13 +19,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-    args: {},
+    args: { inverse: true },
 }
 
 export const Inverse: Story = {
-    args: {
-        inverse: true,
-    },
+    args: { inverse: true },
     decorators: [
         (Story) => (
             <div
