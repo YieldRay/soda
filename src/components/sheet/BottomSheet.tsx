@@ -4,18 +4,17 @@ import clsx from 'clsx'
 import assign from 'lodash-es/assign'
 import {
     forwardRef,
-    useEffect,
     useImperativeHandle,
+    useLayoutEffect,
     useRef,
     useState,
 } from 'react'
 import { createPortal } from 'react-dom'
 
-export type BottomSheetHandle = () => ReturnType<typeof drag>
+export type BottomSheetHandle = ReturnType<typeof drag>
 
 /**
  * @specs https://m3.material.io/components/bottom-sheets/specs
-
  */
 export const BottomSheet = forwardRef<
     BottomSheetHandle,
@@ -35,7 +34,9 @@ export const BottomSheet = forwardRef<
     const dragHandlerRef = useRef<ReturnType<typeof drag> | null>(null)
     const [visiable, setVisiable] = useState(false) // = isOpen
 
-    useEffect(() => {
+    // useLayoutEffect() rather than useEffect()
+    // this make sure ref.current exists in useImperativeHandle()
+    useLayoutEffect(() => {
         dragHandlerRef.current = drag(handleRef.current!, sheetRef.current!, {
             onShow() {
                 setVisiable(true)
@@ -49,7 +50,7 @@ export const BottomSheet = forwardRef<
         return dragHandlerRef.current.cleanup
     }, [props])
 
-    useImperativeHandle(ref, () => () => dragHandlerRef.current!)
+    useImperativeHandle(ref, () => dragHandlerRef.current!)
 
     const ele = (
         <>
@@ -88,8 +89,6 @@ export function drag(
         onHide?(): void
     }
 ) {
-    sheet.style.userSelect = 'none' // disable content copy so it does not affect dragging
-
     let isDragging = false
     let translateY = 0 // previous translateY in px
     let initY = 0

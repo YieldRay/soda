@@ -22,9 +22,16 @@ export interface HelperItem {
 export function Helper(props: ExtendProps<HelperItem>) {
     return (
         <div
+            {...omit(props, [
+                'className',
+                'active',
+                'icon',
+                'label',
+                'badge',
+                'children',
+            ])}
             className={clsx('sd-navigation_helper', props.className)}
             data-sd-active={props.active}
-            {...omit(props, ['className', 'active', 'icon', 'label', 'badge'])}
         >
             <Badge
                 sd={props.badge?.active ? props.badge?.sd : 'none'}

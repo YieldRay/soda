@@ -17,7 +17,7 @@ export function Badge(props: {
     return (
         <div
             className={clsx('sd-badge', props.className)}
-            data-sd={props.sd ?? (props.label ? 'large' : 'small')}
+            data-sd={props.sd || (props.label ? 'large' : 'small')}
         >
             {props.children}
             <div className="sd-badge-label">{props.label}</div>

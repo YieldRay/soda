@@ -22,9 +22,6 @@ export function Divider(
     return (
         <div
             {...omit(props, 'sd', 'direction', 'className')}
-            data-sd-direction={
-                props.direction === 'vertical' ? 'vertical' : 'horizon'
-            }
             className={clsx(
                 {
                     'sd-divider': true,
@@ -34,6 +31,9 @@ export function Divider(
                 },
                 props.className
             )}
+            data-sd-direction={
+                props.direction === 'vertical' ? 'vertical' : 'horizon'
+            }
         ></div>
     )
 }

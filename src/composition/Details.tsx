@@ -12,7 +12,7 @@ export function Details(props: {
      */
     sd?: 'outlined' | 'filled'
 }) {
-    const sd = props.sd ?? 'filled'
+    const sd = props.sd || 'filled'
     return (
         <>
             <style jsx>{`

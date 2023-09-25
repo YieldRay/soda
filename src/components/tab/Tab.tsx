@@ -10,8 +10,8 @@ import { ExtendProps } from '@/utils/type'
 export function Tab(props: ExtendProps<{ children?: React.ReactNode }>) {
     return (
         <div
-            className={clsx('sd-tab', props.className)}
             {...omit(props, 'className')}
+            className={clsx('sd-tab', props.className)}
         >
             {props.children}
         </div>

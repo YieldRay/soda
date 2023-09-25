@@ -1,38 +1,51 @@
 import './list.scss'
 import clsx from 'clsx'
 import { Ripple } from '../../utils/Ripple.tsx'
+import { ExtendProps, TagNameString } from '@/utils/type.ts'
+import { omit } from 'lodash-es'
 
 /**
  * `<ListItem>` has `display: inline-block` by default,
  * to make it occupy full width, use `display: block`
  * @specs https://m3.material.io/components/lists/specs
  */
-export function ListItem(props: {
-    headline: React.ReactNode
-    supportingText?: React.ReactNode
-    leadingIcon?: React.ReactNode
-    leadingAvatarLabelText?: React.ReactNode
-    leadingVideoThubnail?: React.ReactNode
-    trailingIcon?: React.ReactNode
-    trailingSupportingText?: React.ReactNode
-    disabled?: boolean
-    /**
-     * 1 means only one line of headline and no supporting text
-     * 2 means one lines of supporting text
-     * 3 means two lines of supporting text
-     */
-    lines?: 1 | 2 | 3
-    className?: string
-    style?: React.CSSProperties
-    onClick?: () => void
-}) {
+export function ListItem(
+    props: ExtendProps<{
+        headline: React.ReactNode
+        supportingText?: React.ReactNode
+        leadingIcon?: React.ReactNode
+        leadingAvatarLabelText?: React.ReactNode
+        leadingVideoThubnail?: React.ReactNode
+        trailingIcon?: React.ReactNode
+        trailingSupportingText?: React.ReactNode
+        disabled?: boolean
+        /**
+         * 1 means only one line of headline and no supporting text
+         * 2 means one lines of supporting text
+         * 3 means two lines of supporting text
+         */
+        lines?: 1 | 2 | 3
+        as?: TagNameString
+    }>
+) {
     return (
         <Ripple
+            {...omit(props, [
+                'className',
+                'children',
+                'headline',
+                'supportingText',
+                'leadingIcon',
+                'leadingAvatarLabelText',
+                'leadingVideoThubnail',
+                'trailingIcon',
+                'trailingSupportingText',
+                'disabled',
+                'lines',
+            ])}
             className={clsx('sd-list', props.className)}
-            style={props.style}
             data-sd-lines={props.lines}
             data-sd-disabled={props.disabled}
-            onClick={props.onClick}
         >
             {props.leadingVideoThubnail && (
                 <div className="sd-list-leading_video_thubnail">

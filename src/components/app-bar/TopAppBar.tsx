@@ -18,7 +18,7 @@ export function TopAppBar(props: {
      */
     sd?: 'center' | 'small' | 'medium' | 'large'
 }) {
-    const sd = props.sd ?? 'small'
+    const sd = props.sd || 'small'
     const ele = (
         <div
             className={clsx('sd-top_app_bar', props.className)}

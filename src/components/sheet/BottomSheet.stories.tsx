@@ -22,7 +22,7 @@ export const Default: Story = {
                 <Button
                     sd="text"
                     onClick={() => {
-                        sheetRef.current?.().show()
+                        sheetRef.current?.show()
                     }}
                 >
                     open bottom sheet
@@ -30,19 +30,15 @@ export const Default: Story = {
 
                 <BottomSheet
                     ref={sheetRef}
-                    onScrimClick={() => sheetRef.current?.().hide()}
+                    onScrimClick={() => sheetRef.current?.hide()}
                 >
-                    <Button onClick={() => sheetRef.current?.().show()}>
-                        ▲
-                    </Button>
+                    <Button onClick={() => sheetRef.current?.show()}>▲</Button>
                     <p>bottom sheet</p>
                     <p>
                         support <code>{`portalTo={document.body}`}</code> so you
                         can port it to global
                     </p>
-                    <Button onClick={() => sheetRef.current?.().hide()}>
-                        ▼
-                    </Button>
+                    <Button onClick={() => sheetRef.current?.hide()}>▼</Button>
                 </BottomSheet>
             </div>
         )

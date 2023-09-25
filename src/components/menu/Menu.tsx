@@ -10,8 +10,8 @@ import { ExtendProps } from '@/utils/type'
 export function Menu(props: ExtendProps<{ children?: React.ReactNode }>) {
     return (
         <div
+            {...omit(props, 'className', 'children')}
             className={clsx('sd-menu', props.className)}
-            {...omit(props, 'className')}
         >
             {props.children}
         </div>

@@ -28,6 +28,7 @@
     width: 640px;
     max-width: 100%;
     overflow: hidden;
+    touch-action: none;
 
     &-drag_handle {
         cursor: grab;

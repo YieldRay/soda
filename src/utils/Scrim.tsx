@@ -5,7 +5,7 @@ import { ExtendProps } from './type'
 export function Scrim(props: ExtendProps<{ open?: boolean }>) {
     return (
         <div
-            {...omit(props, ['open'])}
+            {...omit(props, ['open', 'children'])}
             style={assign(
                 {
                     background: 'rgb(0 0 0 / 0.1)',

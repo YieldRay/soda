@@ -21,7 +21,6 @@ export function DrawerItem(props: {
                     transition: all 200ms;
                     display: flex;
                     align-items: center;
-                    cursor: pointer;
                     color: var(--sd-sys-color-on-surface-variant);
                     font-size: small;
                     font-weight: 500;
@@ -55,7 +54,13 @@ export function DrawerItem(props: {
                     margin-left: auto;
                 }
             `}</style>
-            <Ripple style={{ borderRadius: '28px', overflow: 'hidden' }}>
+            <Ripple
+                style={{
+                    borderRadius: '28px',
+                    overflow: 'hidden',
+                    cursor: 'pointer',
+                }}
+            >
                 <div className={clsx('container', props.enabled && 'enabled')}>
                     <div className="icon">{props.icon}</div>
                     <div className="label-text">{props.children}</div>

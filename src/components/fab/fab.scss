@@ -14,6 +14,11 @@
     line-height: 24px;
 }
 
+// reset
+button.sd-fab {
+    border: none;
+}
+
 .sd-fab {
     @include elevation-level1; // 3 default 1 lowered
     @include square(56px, 16px);

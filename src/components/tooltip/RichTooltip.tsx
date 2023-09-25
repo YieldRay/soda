@@ -17,7 +17,6 @@ export function RichTooltip(
 ) {
     return (
         <div
-            className={clsx('sd-rich_tooltip', props.className)}
             {...omit(props, [
                 'className',
                 'subhead',
@@ -25,6 +24,7 @@ export function RichTooltip(
                 'action',
                 'onActionClick',
             ])}
+            className={clsx('sd-rich_tooltip', props.className)}
         >
             {props.subhead && (
                 <div className="sd-rich_tooltip-subhead">{props.subhead}</div>

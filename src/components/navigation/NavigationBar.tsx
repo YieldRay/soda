@@ -18,8 +18,8 @@ export function NavigationBar(
 ) {
     const ele = (
         <div
-            className={clsx('sd-navigation_bar', props.className)}
             {...omit(props, ['className', 'style', 'onChange', 'fixed'])}
+            className={clsx('sd-navigation_bar', props.className)}
             style={assign(
                 props.fixed
                     ? {

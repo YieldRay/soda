@@ -11,13 +11,13 @@ import { ActionButton } from '@/composition/ActionButton'
 export function Snakebar(props: {
     children?: React.ReactNode
     action?: React.ReactNode
-    onActionClick?: () => void
     icon?: React.ReactNode
     className?: string
+    style?: React.CSSProperties
+    onActionClick?: () => void
 }) {
     return (
         <div
-            className={clsx('sd-snakebar', props.className)}
             {...omit(props, [
                 'action',
                 'icon',
@@ -25,6 +25,8 @@ export function Snakebar(props: {
                 'children',
                 'onActionClick',
             ])}
+            className={clsx('sd-snakebar', props.className)}
+            style={props.style}
         >
             <div className="sd-snakebar-supporting_text">{props.children}</div>
             {props.action && (

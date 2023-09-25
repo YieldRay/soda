@@ -13,14 +13,21 @@ export function NavigationRail(
     props: ExtendProps<{
         fab: React.ReactNode
         items: Array<HelperItem & { key: React.Key }>
-        onChange?(item: HelperItem & { key: React.Key }): void
         fixed?: boolean
+        onChange?(item: HelperItem & { key: React.Key }): void
     }>
 ) {
     const ele = (
         <div
+            {...omit(props, [
+                'className',
+                'style',
+                'fixed',
+                'fab',
+                'items',
+                'onChange',
+            ])}
             className={clsx('sd-navigation_rail', props.className)}
-            {...omit(props, ['className', 'style', 'onChange', 'fixed', 'fab'])}
             style={assign(
                 props.fixed
                     ? {

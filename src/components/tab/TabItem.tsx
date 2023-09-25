@@ -2,25 +2,23 @@ import './tab.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
 import omit from 'lodash-es/omit'
-import { ExtendProps } from '@/utils/type'
+import { ExtendProps, TagNameString } from '@/utils/type'
 
 /**
  * use `<Tab>` to wrap it
  */
 export function TabItem(
-    props: Omit<
-        ExtendProps<{
-            children?: React.ReactNode
-            icon?: React.ReactNode
-            active?: boolean
-        }>,
-        'ref'
-    >
+    props: ExtendProps<{
+        children?: React.ReactNode
+        icon?: React.ReactNode
+        active?: boolean
+        as?: TagNameString
+    }>
 ) {
     return (
         <Ripple
-            as="div"
-            {...omit(props, 'classNam')}
+            {...omit(props, 'className')}
+            as={props.as}
             className={clsx('sd-tab_item', props.className)}
             data-sd-active={props.active}
         >
