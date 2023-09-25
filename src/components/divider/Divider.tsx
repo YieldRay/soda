@@ -2,13 +2,15 @@ import './divider.scss'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import omit from 'lodash-es/omit'
+import { forwardRef } from 'react'
 
 /**
  * The divider has margin included by default, you can remove it by adding `style={{margin:"0"}}`
  * @specs https://m3.material.io/components/divider/specs
  */
-export function Divider(
-    props: ExtendProps<{
+export const Divider = forwardRef<
+    HTMLHRElement,
+    ExtendProps<{
         /**
          * @default full
          */
@@ -18,10 +20,11 @@ export function Divider(
          */
         direction?: 'horizon' | 'vertical'
     }>
-) {
+>(function Divider(props, ref) {
     return (
         <div
             {...omit(props, 'sd', 'direction', 'className')}
+            ref={ref}
             className={clsx(
                 {
                     'sd-divider': true,
@@ -36,4 +39,4 @@ export function Divider(
             }
         ></div>
     )
-}
+})

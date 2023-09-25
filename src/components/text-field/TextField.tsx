@@ -2,6 +2,7 @@ import './text-field.scss'
 import { forwardRef, useRef, useState } from 'react'
 
 /**
+ * warn: this component forward the inner input element for ref
  * @specs https://m3.material.io/components/text-fields/specs
  */
 export const TextField = forwardRef<
@@ -22,7 +23,7 @@ export const TextField = forwardRef<
          */
         sd?: 'filled' | 'outlined'
     }
->(function (props, ref) {
+>(function TextField(props, ref) {
     const stringValue = String(props.value || '')
     const [focusd, setFocusd] = useState(false)
     const [length, setLength] = useState(stringValue.length)

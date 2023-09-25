@@ -2,6 +2,7 @@ import './search.scss'
 import { forwardRef } from 'react'
 
 /**
+ * warn: this component forward the inner input element for ref
  * @specs https://m3.material.io/components/search/specs
  */
 export const Search = forwardRef<
@@ -17,7 +18,7 @@ export const Search = forwardRef<
         value?: string
         onChange?: (value: string) => void
     }
->((props, ref) => {
+>(function Search(props, ref) {
     return (
         <div
             className="sd-search"

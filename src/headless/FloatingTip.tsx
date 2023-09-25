@@ -13,6 +13,7 @@ import {
 import { useState } from 'react'
 
 /**
+ * this component do not have ref forwarded
  * @ref https://floating-ui.com/docs/react
  */
 export function FloatingTip(props: {
@@ -48,7 +49,7 @@ export function FloatingTip(props: {
     ])
 
     return (
-        <div className="container">
+        <div className="trigger">
             <div
                 ref={refs.setReference}
                 onResize={update}
@@ -58,7 +59,7 @@ export function FloatingTip(props: {
             </div>
             {isOpen && (
                 <div
-                    className="tip"
+                    className="content"
                     ref={refs.setFloating}
                     style={floatingStyles}
                     {...getFloatingProps()}
@@ -67,12 +68,12 @@ export function FloatingTip(props: {
                 </div>
             )}
             <style jsx>{`
-                .container {
+                .trigger {
                     position: relative;
                     display: inline-block;
                     vertical-align: middle;
                 }
-                .tip {
+                .content {
                     width: max-content;
                     animation: sd-fade-in 200ms;
                 }

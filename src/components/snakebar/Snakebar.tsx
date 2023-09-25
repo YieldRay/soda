@@ -2,20 +2,23 @@ import './snakebar.scss'
 import clsx from 'clsx'
 import omit from 'lodash-es/omit'
 import { ActionButton } from '@/composition/ActionButton'
+import { ExtendProps } from '@/utils/type'
+import { forwardRef } from 'react'
 
 // TODO: add position
 
 /**
  * @specs https://m3.material.io/components/snackbar/specs
  */
-export function Snakebar(props: {
-    children?: React.ReactNode
-    action?: React.ReactNode
-    icon?: React.ReactNode
-    className?: string
-    style?: React.CSSProperties
-    onActionClick?: () => void
-}) {
+export const Snakebar = forwardRef<
+    HTMLDivElement,
+    ExtendProps<{
+        children?: React.ReactNode
+        action?: React.ReactNode
+        icon?: React.ReactNode
+        onActionClick?: () => void
+    }>
+>(function Snakebar(props, ref) {
     return (
         <div
             {...omit(props, [
@@ -25,6 +28,7 @@ export function Snakebar(props: {
                 'children',
                 'onActionClick',
             ])}
+            ref={ref}
             className={clsx('sd-snakebar', props.className)}
             style={props.style}
         >
@@ -41,4 +45,4 @@ export function Snakebar(props: {
             {props.icon && <div className="sd-snakebar-icon">{props.icon}</div>}
         </div>
     )
-}
+})

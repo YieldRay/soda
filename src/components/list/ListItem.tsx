@@ -1,16 +1,18 @@
 import './list.scss'
 import clsx from 'clsx'
-import { Ripple } from '../../utils/Ripple.tsx'
+import { Ripple } from '@/utils/Ripple.tsx'
 import { ExtendProps, TagNameString } from '@/utils/type.ts'
 import { omit } from 'lodash-es'
+import { forwardRef } from 'react'
 
 /**
  * `<ListItem>` has `display: inline-block` by default,
  * to make it occupy full width, use `display: block`
  * @specs https://m3.material.io/components/lists/specs
  */
-export function ListItem(
-    props: ExtendProps<{
+export const ListItem = forwardRef<
+    HTMLElement,
+    ExtendProps<{
         headline: React.ReactNode
         supportingText?: React.ReactNode
         leadingIcon?: React.ReactNode
@@ -27,7 +29,7 @@ export function ListItem(
         lines?: 1 | 2 | 3
         as?: TagNameString
     }>
-) {
+>(function ListItem(props, ref) {
     return (
         <Ripple
             {...omit(props, [
@@ -43,6 +45,7 @@ export function ListItem(
                 'disabled',
                 'lines',
             ])}
+            ref={ref}
             className={clsx('sd-list', props.className)}
             data-sd-lines={props.lines}
             data-sd-disabled={props.disabled}
@@ -83,4 +86,4 @@ export function ListItem(
             )}
         </Ripple>
     )
-}
+})

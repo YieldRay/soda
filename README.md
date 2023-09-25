@@ -19,13 +19,16 @@ import { Button } from 'soda-material'
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Button sd="outlined">Button</Button>
-    </React.StrictMode>,
+    </React.StrictMode>
 )
 ```
 
 # Documention
 
 See: <https://yieldray.github.io/soda/>
+
+> Most of the components forward `ref` attribute for library interactivity.  
+> If not, it will be documented and will be checked if you use typescript.
 
 # Resources
 

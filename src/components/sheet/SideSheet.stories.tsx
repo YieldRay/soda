@@ -6,7 +6,7 @@ import { Button } from '../button'
 import { TopAppBar } from '../app-bar'
 import { IconButton } from '../icon-button'
 import { IconMenu } from '@/utils/icons'
-import { DrawerItem } from '../../composition/DrawerItem'
+import { DrawerItem } from '@/composition/DrawerItem'
 
 const meta = {
     title: 'Sheet/SideSheet',

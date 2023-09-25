@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     render: () => {
-        const values = [
+        const items = [
             {
                 value: 'enabled',
                 label: <>✅ Enabled</>,
@@ -33,12 +33,12 @@ export const Default: Story = {
                 label: <>❎ disabled</>,
             },
         ]
-        const [value, setValue] = useState<string>('disabled')
+        const [activeIndex, setActiveIndex] = useState(0)
         return (
             <SegmentedButton
-                values={values}
-                value={value}
-                onChange={(v) => setValue(v)}
+                items={items}
+                activeIndex={activeIndex}
+                onChange={(i) => setActiveIndex(i)}
             />
         )
     },

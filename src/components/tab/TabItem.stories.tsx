@@ -34,7 +34,7 @@ export const Default: Story = {
                                 items.map((i) => ({ ...i, active: item === i }))
                             )
                         }}
-                    ></TabItem>
+                    />
                 ))}
             </Tab>
         )

@@ -3,19 +3,20 @@ import { Ripple } from '@/utils/Ripple'
 import { ExtendProps, TagNameString } from '@/utils/type'
 import clsx from 'clsx'
 import omit from 'lodash-es/omit'
+import { forwardRef } from 'react'
 
 /**
  * @specs https://m3.material.io/components/icon-buttons/specs
  */
-export function IconButton(
-    props: ExtendProps<{
+export const IconButton = forwardRef<
+    HTMLElement,
+    ExtendProps<{
         as?: TagNameString
         /**
          * @default standard
          */
         sd?: 'standard' | 'filled' | 'tonal' | 'outlined'
         children?: React.ReactNode
-        className?: string
         disabled?: boolean
         /**
          * Standard button is unselected by default,
@@ -23,7 +24,7 @@ export function IconButton(
          */
         selected?: boolean
     }>
-) {
+>(function IconButton(props, ref) {
     const sd = props.sd || 'standard'
     const selected = Reflect.has(props, 'selected')
         ? props.selected!
@@ -42,6 +43,7 @@ export function IconButton(
                 'data-sd-selected',
                 'data-sd-disabled',
             ])}
+            ref={ref}
             className={clsx(
                 'sd-icon_button',
                 `sd-icon_button-${sd}`,
@@ -53,4 +55,4 @@ export function IconButton(
             <div className="sd-icon_button-icon">{props.children}</div>
         </Ripple>
     )
-}
+})

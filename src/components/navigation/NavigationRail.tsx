@@ -5,18 +5,20 @@ import assign from 'lodash-es/assign'
 import omit from 'lodash-es/omit'
 import { createPortal } from 'react-dom'
 import { ExtendProps } from '@/utils/type'
+import { forwardRef } from 'react'
 
 /**
  * @specs https://m3.material.io/components/navigation-rail/specs
  */
-export function NavigationRail(
-    props: ExtendProps<{
+export const NavigationRail = forwardRef<
+    HTMLDivElement,
+    ExtendProps<{
         fab: React.ReactNode
         items: Array<HelperItem & { key: React.Key }>
         fixed?: boolean
         onChange?(item: HelperItem & { key: React.Key }): void
     }>
-) {
+>(function NavigationRail(props, ref) {
     const ele = (
         <div
             {...omit(props, [
@@ -27,6 +29,7 @@ export function NavigationRail(
                 'items',
                 'onChange',
             ])}
+            ref={ref}
             className={clsx('sd-navigation_rail', props.className)}
             style={assign(
                 props.fixed
@@ -55,4 +58,4 @@ export function NavigationRail(
 
     if (props.fixed) return createPortal(ele, document.body)
     return ele
-}
+})

@@ -2,15 +2,17 @@ import { Ripple } from '@/utils/Ripple'
 import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { ExtendProps, TagNameString } from '@/utils/type'
+import { forwardRef } from 'react'
 
-export function ActionButton(
-    props: ExtendProps<{
+export const ActionButton = forwardRef<
+    HTMLElement,
+    ExtendProps<{
         inverse?: boolean
         disabled?: boolean
         children?: React.ReactNode
         as?: TagNameString
     }>
-) {
+>((props, ref) => {
     return (
         <>
             <style jsx global>{`
@@ -52,6 +54,7 @@ export function ActionButton(
             `}</style>
             <Ripple
                 {...omit(props, ['className', 'inverse', 'disabled'])}
+                ref={ref}
                 className={clsx('sd-action_button', props.className)}
                 rippleColor={
                     props.inverse
@@ -66,4 +69,4 @@ export function ActionButton(
             </Ripple>
         </>
     )
-}
+})

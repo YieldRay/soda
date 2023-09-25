@@ -1,6 +1,7 @@
 // https://m3.material.io/components/divider/specs
 
 .sd-divider {
+    all: unset;
     display: inline-block;
     vertical-align: middle;
     background: var(--sd-sys-color-outline-variant);

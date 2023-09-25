@@ -1,11 +1,16 @@
 import assign from 'lodash-es/assign'
 import omit from 'lodash-es/omit'
 import { ExtendProps } from './type'
+import { forwardRef } from 'react'
 
-export function Scrim(props: ExtendProps<{ open?: boolean }>) {
+export const Scrim = forwardRef<
+    HTMLDivElement,
+    ExtendProps<{ open?: boolean }>
+>((props, ref) => {
     return (
         <div
             {...omit(props, ['open', 'children'])}
+            ref={ref}
             style={assign(
                 {
                     background: 'rgb(0 0 0 / 0.1)',
@@ -22,4 +27,4 @@ export function Scrim(props: ExtendProps<{ open?: boolean }>) {
             )}
         ></div>
     )
-}
+})

@@ -1,14 +1,16 @@
 import './fab.scss'
-import { Ripple } from '../../utils/Ripple.tsx'
+import { Ripple } from '@/utils/Ripple.tsx'
 import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { ExtendProps, TagNameString } from '@/utils/type.ts'
+import { forwardRef } from 'react'
 
 /**
  * @specs https://m3.material.io/components/floating-action-button/specs
  */
-export function Fab(
-    props: ExtendProps<{
+export const Fab = forwardRef<
+    HTMLElement,
+    ExtendProps<{
         /**
          * @default surface
          */
@@ -22,7 +24,7 @@ export function Fab(
         disabled?: boolean
         as?: TagNameString
     }>
-) {
+>(function Fab(props, ref) {
     return (
         <Ripple
             {...omit(props, [
@@ -34,6 +36,7 @@ export function Fab(
                 'disabled',
                 'as',
             ])}
+            ref={ref}
             as={props.as || 'button'}
             className={clsx('sd-fab', props.className)}
             data-sd={props.sd || 'surface'}
@@ -44,4 +47,4 @@ export function Fab(
             <div className="sd-fab-icon">{props.children}</div>
         </Ripple>
     )
-}
+})

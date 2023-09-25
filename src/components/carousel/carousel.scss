@@ -1,0 +1,54 @@
+// https://m3.material.io/components/carousel/specs
+
+.sd-carousel {
+    display: flex;
+    gap: 8px;
+    padding: 8px 16px;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    overflow: hidden;
+    cursor: pointer;
+    height: 12rem;
+
+    &-item {
+        flex: 0;
+        transition: all 400ms;
+        overflow: hidden;
+        border-radius: 2rem;
+        position: relative;
+    }
+    &-value,
+    &-value * {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 200ms;
+    }
+
+    &-item:has(&-label):before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            transparent 60%,
+            rgb(0 0 0 / 0.4)
+        );
+    }
+
+    &-item:hover > &-value {
+        transform: scale(1.05);
+    }
+
+    &-label {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        color: #fff;
+    }
+}

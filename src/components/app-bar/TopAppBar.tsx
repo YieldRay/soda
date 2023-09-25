@@ -2,25 +2,39 @@ import './app-bar.scss'
 import clsx from 'clsx'
 import { createPortal } from 'react-dom'
 import assign from 'lodash-es/assign'
+import { forwardRef } from 'react'
+import { ExtendProps } from '@/utils/type'
+import omit from 'lodash-es/omit'
 
 /**
  * @specs https://m3.material.io/components/top-app-bar/specs
  */
-export function TopAppBar(props: {
-    className?: string
-    style?: React.CSSProperties
-    children?: React.ReactNode
-    leadingNavigationIcon?: React.ReactNode
-    trailingIcon?: React.ReactNode
-    fixed?: boolean
-    /**
-     * @default small
-     */
-    sd?: 'center' | 'small' | 'medium' | 'large'
-}) {
+export const TopAppBar = forwardRef<
+    HTMLDivElement,
+    ExtendProps<{
+        children?: React.ReactNode
+        leadingNavigationIcon?: React.ReactNode
+        trailingIcon?: React.ReactNode
+        fixed?: boolean
+        /**
+         * @default small
+         */
+        sd?: 'center' | 'small' | 'medium' | 'large'
+    }>
+>(function TopAppBar(props, ref) {
     const sd = props.sd || 'small'
     const ele = (
         <div
+            {...omit(props, [
+                'className',
+                'style',
+                'children',
+                'leadingNavigationIcon',
+                'trailingIcon',
+                'fixed',
+                'sd',
+            ])}
+            ref={ref}
             className={clsx('sd-top_app_bar', props.className)}
             style={assign(
                 props.fixed
@@ -50,4 +64,4 @@ export function TopAppBar(props: {
     )
     if (props.fixed) return createPortal(ele, document.body)
     return ele
-}
+})

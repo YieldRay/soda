@@ -1,17 +1,21 @@
 import { IconButton } from '@/components/icon-button'
 import { Collapsible } from '@/headless/Collapsible'
 import clsx from 'clsx'
+import { forwardRef } from 'react'
 
-export function Details(props: {
-    summary?: React.ReactNode
-    children?: React.ReactNode
-    open?: boolean
-    onChange?: (open: boolean) => void
-    /**
-     * @default filled
-     */
-    sd?: 'outlined' | 'filled'
-}) {
+export const Details = forwardRef<
+    HTMLDivElement,
+    {
+        summary?: React.ReactNode
+        children?: React.ReactNode
+        open?: boolean
+        onChange?: (open: boolean) => void
+        /**
+         * @default filled
+         */
+        sd?: 'outlined' | 'filled'
+    }
+>(function Details(props, ref) {
     const sd = props.sd || 'filled'
     return (
         <>
@@ -42,7 +46,7 @@ export function Details(props: {
                     margin: 16px;
                 }
             `}</style>
-            <div className={clsx('details', sd)}>
+            <div className={clsx('details', sd)} ref={ref}>
                 <div
                     className={clsx('summary', sd, props.open && 'open')}
                     onClick={() => props.onChange?.(!props.open)}
@@ -73,4 +77,4 @@ export function Details(props: {
             </div>
         </>
     )
-}
+})

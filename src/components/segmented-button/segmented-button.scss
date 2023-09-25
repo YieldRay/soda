@@ -29,7 +29,7 @@
         align-items: center;
         -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
         transition: all 200ms;
-        &[data-sd-selected='true'] {
+        &[data-sd-active='true'] {
             color: var(--sd-sys-color-on-secondary-container);
             background: var(--sd-sys-color-secondary-container);
             &:hover {
@@ -39,7 +39,7 @@
                 filter: brightness(92%);
             }
         }
-        &[data-sd-selected='false'] {
+        &[data-sd-active='false'] {
             &:hover {
                 background: rgb(0 0 0 / 0.04);
             }

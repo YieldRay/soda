@@ -1,30 +1,34 @@
 import './radio-button.scss'
-import { useRef, useEffect } from 'react'
-import { rippleEffect } from '@/utils/ripple-effect'
 import clsx from 'clsx'
+import omit from 'lodash-es/omit'
+import { useRef, useEffect, forwardRef } from 'react'
+import { rippleEffect } from '@/utils/ripple-effect'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * @specs https://m3.material.io/components/radio-button/specs
  */
-export function RadioButton(props: {
-    checked?: boolean
-    onChange?(checked: boolean): void
-    className?: string
-    children?: React.ReactNode
-}) {
+export const RadioButton = forwardRef<
+    HTMLDivElement,
+    ExtendProps<{
+        checked?: boolean
+        onChange?(checked: boolean): void
+        children?: React.ReactNode
+    }>
+>(function RadioButton(props, ref) {
     const rippleRef = useRef<HTMLDivElement>(null)
     useEffect(() => rippleEffect(rippleRef.current!), [])
 
     return (
-        <>
-            <div
-                data-sd-checked={props.checked}
-                className={clsx('sd-radio_button', props.className)}
-                onClick={() => props.onChange?.(!props.checked)}
-            >
-                <div className="sd-radio_button-box" ref={rippleRef}></div>
-                <div className="sd-radio_button-label">{props.children}</div>
-            </div>
-        </>
+        <div
+            {...omit(props, ['className', 'checked', 'onChange', 'children'])}
+            ref={ref}
+            data-sd-checked={props.checked}
+            className={clsx('sd-radio_button', props.className)}
+            onClick={() => props.onChange?.(!props.checked)}
+        >
+            <div className="sd-radio_button-box" ref={rippleRef}></div>
+            <div className="sd-radio_button-label">{props.children}</div>
+        </div>
     )
-}
+})

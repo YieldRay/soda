@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { rippleEffect } from './ripple-effect'
 import omit from 'lodash-es/omit'
 import { ExtendProps, TagNameString } from './type'
@@ -20,17 +20,20 @@ type Props = ExtendProps<{
     rippleColor?: string
 }>
 
-export function Ripple(props: Props) {
-    const ref = useRef<HTMLElement>(null)
+export const Ripple = forwardRef<HTMLElement, Props>((props, ref) => {
+    const eRef = useRef<HTMLElement>(null)
 
     useEffect(() => {
         if (!props.disabled)
             return rippleEffect(
-                ref.current!,
+                eRef.current!,
                 props.rippleDuration,
                 props.rippleColor
             )
     }, [props])
+
+    useImperativeHandle(ref, () => eRef.current!)
+
     const As: any = props.as || 'div'
     return (
         <As
@@ -40,9 +43,9 @@ export function Ripple(props: Props) {
                 'rippleDuration',
                 'rippleColor',
             ])}
-            ref={ref}
+            ref={eRef}
         >
             {props.children}
         </As>
     )
-}
+})

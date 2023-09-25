@@ -1,20 +1,26 @@
 import './app-bar.scss'
+import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import assign from 'lodash-es/assign'
+import { forwardRef } from 'react'
 import { createPortal } from 'react-dom'
+import omit from 'lodash-es/omit'
 
 /**
  * BottonAppBar has fixed height = 80px
  * @specs https://m3.material.io/components/bottom-app-bar/specs
  */
-export function BottomAppBar(props: {
-    children?: React.ReactNode
-    style?: React.CSSProperties
-    className?: string
-    fixed?: boolean
-}) {
+export const BottomAppBar = forwardRef<
+    HTMLDivElement,
+    ExtendProps<{
+        children?: React.ReactNode
+        fixed?: boolean
+    }>
+>(function BottomAppBar(props, ref) {
     const ele = (
         <div
+            {...omit(props, ['className', 'style', 'fixed'])}
+            ref={ref}
             className={clsx('sd-bottom_app_bar', props.className)}
             style={assign(
                 props.fixed
@@ -29,4 +35,4 @@ export function BottomAppBar(props: {
 
     if (props.fixed) return createPortal(ele, document.body)
     return ele
-}
+})

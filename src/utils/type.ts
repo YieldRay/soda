@@ -4,6 +4,6 @@
 export type ExtendProps<
     T extends object = object,
     U extends HTMLElement = HTMLDivElement
-> = T & Omit<React.HTMLProps<U>, keyof T>
+> = T & Omit<React.HTMLProps<U>, keyof T | 'ref'>
 
 export type TagNameString = keyof JSX.IntrinsicElements

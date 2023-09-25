@@ -14,6 +14,8 @@ import { createPortal } from 'react-dom'
 export type BottomSheetHandle = ReturnType<typeof drag>
 
 /**
+ * this component use ref to control, so it's ref is not a element
+ * but an object that holds controller functions
  * @specs https://m3.material.io/components/bottom-sheets/specs
  */
 export const BottomSheet = forwardRef<

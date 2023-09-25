@@ -5,20 +5,23 @@ import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { Helper, HelperItem } from './Helper'
 import { ExtendProps } from '@/utils/type'
+import { forwardRef } from 'react'
 
 /**
  * @specs https://m3.material.io/components/navigation-bar/specs
  */
-export function NavigationBar(
-    props: ExtendProps<{
+export const NavigationBar = forwardRef<
+    HTMLDivElement,
+    ExtendProps<{
         items: Array<HelperItem & { key: React.Key }>
         onChange?(item: HelperItem & { key: React.Key }): void
         fixed?: boolean
     }>
-) {
+>(function NavigationBar(props, ref) {
     const ele = (
         <div
             {...omit(props, ['className', 'style', 'onChange', 'fixed'])}
+            ref={ref}
             className={clsx('sd-navigation_bar', props.className)}
             style={assign(
                 props.fixed
@@ -43,4 +46,4 @@ export function NavigationBar(
 
     if (props.fixed) return createPortal(ele, document.body)
     return ele
-}
+})

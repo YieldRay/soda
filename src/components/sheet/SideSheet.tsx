@@ -1,10 +1,14 @@
 import './sheet.scss'
-import { Divider } from '../divider/Divider'
+import { Divider } from '../divider'
 import { Scrim } from '@/utils/Scrim'
 import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 import assign from 'lodash-es/assign'
 
+/**
+ * this component do not have ref forwarded
+ * @specs https://m3.material.io/components/side-sheets/specs
+ */
 export function SideSheet(props: {
     header?: React.ReactNode
     action?: React.ReactNode

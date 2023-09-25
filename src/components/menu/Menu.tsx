@@ -2,18 +2,23 @@ import './menu.scss'
 import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
+import { forwardRef } from 'react'
 
 /**
  * The `<Menu>` container, will contain `<MenuItem>` and `<Divider>` components
  * @specs https://m3.material.io/components/menus/specs
  */
-export function Menu(props: ExtendProps<{ children?: React.ReactNode }>) {
+export const Menu = forwardRef<
+    HTMLMenuElement,
+    ExtendProps<{ children?: React.ReactNode }>
+>(function Menu(props, ref) {
     return (
-        <div
+        <menu
             {...omit(props, 'className', 'children')}
+            ref={ref}
             className={clsx('sd-menu', props.className)}
         >
             {props.children}
-        </div>
+        </menu>
     )
-}
+})
