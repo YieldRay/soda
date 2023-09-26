@@ -16,7 +16,7 @@
     background: var(--sd-sys-color-surface);
     box-sizing: border-box;
     width: 100%;
-    padding: 0 0.5rem;
+    padding: 0 8px;
     display: flex;
     flex-direction: column;
 
@@ -52,7 +52,7 @@
         height: 112px;
         .sd-top_app_bar-headline {
             width: 100%;
-            padding-left: 1rem;
+            padding-left: 16px;
             padding-bottom: 24px;
             font-size: x-large;
             margin-top: auto;
@@ -63,7 +63,7 @@
         height: 152px;
         .sd-top_app_bar-headline {
             width: 100%;
-            padding-left: 1rem;
+            padding-left: 16px;
             padding-bottom: 28px;
             font-size: x-large;
             margin-top: auto;

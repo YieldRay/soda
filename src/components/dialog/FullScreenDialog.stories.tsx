@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FullScreenDialog } from '.'
 import { Button } from '../button'
 import { useState } from 'react'
-import { ModalHolder } from '@/headless/ModalHolder'
+import { ModalHolder } from '@/composition/ModalHolder'
 
 const meta = {
     title: 'Dialog/FullScreenDialog',

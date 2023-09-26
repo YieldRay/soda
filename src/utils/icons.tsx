@@ -34,6 +34,18 @@ export const IconMenu = () => (
     </svg>
 )
 
+export const IconMenuRight = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <title>menu-right</title>
+        <path
+            fill="currentColor"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M10,17L15,12L10,7V17Z"
+        />
+    </svg>
+)
+
 export const IconMagnify = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <title>magnify</title>

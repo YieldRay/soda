@@ -2,7 +2,9 @@
 
 A component library that may follow [material design 3](https://m3.material.io/components) (a.k.a. material you)
 
-For production, you may use the official [material web](https://github.com/material-components/material-web) component library
+> Warn: working in progress, some features are missing or will not be fully implemented (such as ARIA).  
+> API is unstable and can be changed in any time.  
+> For production, you may want use the official [material web](https://github.com/material-components/material-web) component library.
 
 # Installation
 
@@ -26,6 +28,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 # Documention
 
 See: <https://yieldray.github.io/soda/>
+
+> Most components in `src/components` directory (exported directly) do not include logic.  
+> Those logic helper components can be found in `src/composition` directory
 
 > Most of the components forward `ref` attribute for library interactivity.  
 > If not, it will be documented and will be checked if you use typescript.

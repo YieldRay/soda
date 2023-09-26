@@ -1,5 +1,5 @@
 import { IconButton } from '@/components/icon-button'
-import { Collapsible } from '@/headless/Collapsible'
+import { Collapsible } from '@/composition/Collapsible'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 

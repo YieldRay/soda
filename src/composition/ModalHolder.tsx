@@ -17,6 +17,7 @@ export function ModalHolder(props: {
      * @default document.body
      */
     portalTo?: Element | DocumentFragment
+    zIndex?: number
 }) {
     const portalTo = props.portalTo ?? document.body
 
@@ -43,6 +44,7 @@ export function ModalHolder(props: {
                 style={{
                     pointerEvents: props.open ? 'auto' : 'none',
                     opacity: props.open ? '1' : '0',
+                    zIndex: props.zIndex,
                 }}
                 onClick={(e) => {
                     if (

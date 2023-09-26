@@ -49,6 +49,10 @@
     &:active {
         background: rgb(0 0 0 / 0.08);
     }
+    &:focus {
+        outline: none;
+        background: rgb(0 0 0 / 0.12);
+    }
 
     &[data-sd-disabled='true'] {
         pointer-events: none;

@@ -7,7 +7,7 @@ import { PlainTooltip } from '../components/tooltip'
 import { IconMenu } from '@/utils/icons'
 
 const meta = {
-    title: 'Headless/FloatingTip',
+    title: 'composition/FloatingTip',
     component: FloatingTip,
     tags: ['autodocs'],
 } satisfies Meta<typeof FloatingTip>

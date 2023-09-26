@@ -47,7 +47,11 @@ export const Carousel = forwardRef<
                 onDragStart={(e) => e.preventDefault()}
             >
                 <div className="sd-carousel-value">{value}</div>
-                {label && <div className="sd-carousel-label">{label}</div>}
+                {label && (
+                    <div className="sd-carousel-scrim">
+                        <div className="sd-carousel-label">{label}</div>
+                    </div>
+                )}
             </div>
         )
     })

@@ -1,8 +1,8 @@
 // https://m3.material.io/components/cards/specs
 
-$label_text_empty_size: 1rem;
-$label_text_populated_size: 0.5rem;
-$label_text_gap_size: 0.2rem;
+$label_text_empty_size: 16px;
+$label_text_populated_size: 12px;
+$label_text_gap_size: 3.2px;
 
 .sd-text_field {
     box-sizing: border-box;
@@ -37,7 +37,7 @@ $label_text_gap_size: 0.2rem;
     }
 
     &-supporting_text {
-        font-size: 0.5rem;
+        font-size: 12px;
     }
 
     position: relative;

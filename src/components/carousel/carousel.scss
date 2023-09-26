@@ -8,7 +8,8 @@
     align-items: stretch;
     overflow: hidden;
     cursor: pointer;
-    height: 12rem;
+    height: 12rem; // default height
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
     &-item {
         flex: 0;
@@ -26,7 +27,11 @@
         transition: all 200ms;
     }
 
-    &-item:has(&-label):before {
+    &-item:hover > &-value {
+        transform: scale(1.02);
+    }
+
+    &-scrim {
         position: absolute;
         content: '';
         top: 0;
@@ -39,10 +44,6 @@
             transparent 60%,
             rgb(0 0 0 / 0.4)
         );
-    }
-
-    &-item:hover > &-value {
-        transform: scale(1.05);
     }
 
     &-label {
