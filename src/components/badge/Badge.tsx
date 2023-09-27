@@ -1,7 +1,6 @@
 import './badge.scss'
 import { forwardRef } from 'react'
 import clsx from 'clsx'
-import omit from 'lodash-es/omit'
 import { ExtendProps } from '@/utils/type'
 
 /**
@@ -18,16 +17,18 @@ export const Badge = forwardRef<
          */
         sd?: 'none' | 'small' | 'large'
     }>
->(function Badge(props, ref) {
+>(function Badge({ label, children, sd: initSd, className, ...props }, ref) {
+    const sd = initSd || (label ? 'large' : 'small')
+
     return (
         <div
-            {...omit(props, ['className', 'children', 'sd'])}
-            className={clsx('sd-badge', props.className)}
+            {...props}
+            className={clsx('sd-badge', className)}
             ref={ref}
-            data-sd={props.sd || (props.label ? 'large' : 'small')}
+            data-sd={sd}
         >
-            {props.children}
-            <div className="sd-badge-label">{props.label}</div>
+            {children}
+            <div className="sd-badge-label">{label}</div>
         </div>
     )
 })

@@ -1,6 +1,8 @@
-import { ExtendProps } from '@/utils/type'
 import './carousel.scss'
+import { ExtendProps } from '@/utils/type'
 import { useRef, useState, forwardRef, useImperativeHandle } from 'react'
+import clsx from 'clsx'
+import assign from 'lodash-es/assign'
 
 export interface Item {
     key?: React.Key
@@ -25,14 +27,18 @@ export const Carousel = forwardRef<
          */
         items: Array<Item>
         /**
+         * shortcut for style.height
          * @default 12rem
          */
         height?: string
     }>
->(function Carousel(props, ref) {
-    if (props.items.length % 3 !== 0)
+>(function Carousel(
+    { items: initItems, height, className, style, ...props },
+    ref
+) {
+    if (initItems.length % 3 !== 0)
         throw new Error('the item array length must be a multiple of 3')
-    const [items, setItems] = useState(initFlex(props.items))
+    const [items, setItems] = useState(initFlex(initItems))
     const containerRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => containerRef.current!)
 
@@ -41,9 +47,10 @@ export const Carousel = forwardRef<
         const key = item.key ?? index
         return (
             <div
-                className="sd-carousel-item"
+                {...props}
+                className={clsx('sd-carousel-item', className)}
                 key={key}
-                style={{ flex }}
+                style={assign({ flex, height }, style)}
                 onDragStart={(e) => e.preventDefault()}
             >
                 <div className="sd-carousel-value">{value}</div>

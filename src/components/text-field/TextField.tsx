@@ -1,5 +1,6 @@
 import './text-field.scss'
 import { forwardRef, useRef, useState } from 'react'
+import clsx from 'clsx'
 
 /**
  * warn: this component forward the inner input element for ref
@@ -9,7 +10,7 @@ export const TextField = forwardRef<
     HTMLInputElement,
     {
         leadingIcon?: React.ReactNode
-        tailingIcon?: React.ReactNode
+        trailingIcon?: React.ReactNode
         labelText?: string
         supportingText?: string
         type?: 'text' | 'number'
@@ -22,9 +23,28 @@ export const TextField = forwardRef<
          * @default filled
          */
         sd?: 'filled' | 'outlined'
+        className?: string
+        style?: React.CSSProperties
     }
->(function TextField(props, ref) {
-    const stringValue = String(props.value || '')
+>(function TextField(
+    {
+        leadingIcon,
+        trailingIcon,
+        labelText,
+        supportingText,
+        type,
+        value,
+        readonly,
+        disabled,
+        error,
+        sd: initSd,
+        onChange: initOnChange,
+        className,
+        style,
+    },
+    ref
+) {
+    const stringValue = String(value || '')
     const [focusd, setFocusd] = useState(false)
     const [length, setLength] = useState(stringValue.length)
     const populated = length > 0 || focusd
@@ -33,12 +53,14 @@ export const TextField = forwardRef<
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
         const value = (e.target as HTMLInputElement).value
         setLength(String(value).length)
-        props.onChange?.(value)
+        initOnChange?.(value)
     }
 
+    const sd = initSd === 'outlined' ? 'outlined' : 'filled'
     return (
         <div
-            className="sd-text_field"
+            className={clsx('sd-text_field', className)}
+            style={style}
             onClick={() => {
                 inputRef.current?.focus() //? once the container is clicked, focus the input element
                 setFocusd(true)
@@ -47,49 +69,45 @@ export const TextField = forwardRef<
             onFocus={() => setFocusd(true)}
             onBlur={() => setFocusd(false)}
             tabIndex={-1}
-            data-sd={props.sd === 'outlined' ? 'outlined' : 'filled'}
+            data-sd={sd}
             data-sd-label_text={populated ? 'populated' : 'empty'}
-            data-sd-disabled={props.disabled}
-            data-sd-error={props.error}
+            data-sd-disabled={disabled}
+            data-sd-error={error}
             data-sd-focusd={focusd}
         >
-            {props.leadingIcon && (
-                <div className="sd-text_field-leading_icon">
-                    {props.leadingIcon}
-                </div>
+            {leadingIcon && (
+                <div className="sd-text_field-leading_icon">{leadingIcon}</div>
             )}
 
-            <Helper sd={props.sd}>
+            <Helper sd={sd}>
                 <div
                     key="sd-text_field-label_text"
                     className="sd-text_field-label_text"
                 >
-                    {props.labelText}
+                    {labelText}
                 </div>
                 <input
                     key="input"
-                    type={props.type}
+                    type={type}
                     ref={ref}
-                    value={props.value}
+                    value={value}
                     onChange={onChange}
-                    readOnly={props.readonly}
-                    disabled={props.disabled}
+                    readOnly={readonly}
+                    disabled={disabled}
                 />
             </Helper>
 
-            {props.tailingIcon && (
-                <div className="sd-text_field-tailing_icon">
-                    {props.tailingIcon}
-                </div>
+            {trailingIcon && (
+                <div className="sd-text_field-tailing_icon">{trailingIcon}</div>
             )}
 
-            {props.sd !== 'outlined' && (
+            {sd !== 'outlined' && (
                 <div className="sd-text_field-active_indicator"></div>
             )}
 
-            {props.supportingText && (
+            {supportingText && (
                 <div className="sd-text_field-supporting_text">
-                    {props.supportingText}
+                    {supportingText}
                 </div>
             )}
         </div>

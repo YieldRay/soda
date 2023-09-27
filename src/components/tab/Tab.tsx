@@ -1,5 +1,4 @@
 import './tab.scss'
-import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
@@ -11,14 +10,10 @@ import { forwardRef } from 'react'
 export const Tab = forwardRef<
     HTMLDivElement,
     ExtendProps<{ children?: React.ReactNode }>
->(function Tab(props, ref) {
+>(function Tab({ className, children, ...props }, ref) {
     return (
-        <div
-            {...omit(props, 'className')}
-            ref={ref}
-            className={clsx('sd-tab', props.className)}
-        >
-            {props.children}
+        <div {...props} ref={ref} className={clsx('sd-tab', className)}>
+            {children}
         </div>
     )
 })

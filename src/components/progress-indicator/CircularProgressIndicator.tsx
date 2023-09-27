@@ -12,12 +12,12 @@ export const CircularProgressIndicator = forwardRef<
          */
         value?: number
     }
->(function CircularProgressIndicator(props, ref) {
+>(function CircularProgressIndicator({ value }, ref) {
     const eRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => eRef.current!)
     useEffect(() => {
-        if (typeof props.value !== 'undefined') {
-            eRef.current!.style.setProperty('--value', `${props.value! * 100}%`)
+        if (typeof value !== 'undefined') {
+            eRef.current!.style.setProperty('--value', `${value! * 100}%`)
         }
     })
 
@@ -26,9 +26,7 @@ export const CircularProgressIndicator = forwardRef<
             className="sd-circular_progress_indicator"
             ref={eRef}
             data-sd={
-                typeof props.value !== 'undefined'
-                    ? 'determinate'
-                    : 'undeterminate'
+                typeof value !== 'undefined' ? 'determinate' : 'undeterminate'
             }
         ></div>
     )

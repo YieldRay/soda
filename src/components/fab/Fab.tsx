@@ -1,6 +1,5 @@
 import './fab.scss'
 import { Ripple } from '@/utils/Ripple.tsx'
-import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { ExtendProps, TagNameString } from '@/utils/type.ts'
 import { forwardRef } from 'react'
@@ -24,27 +23,22 @@ export const Fab = forwardRef<
         disabled?: boolean
         as?: TagNameString
     }>
->(function Fab(props, ref) {
+>(function Fab(
+    { sd, className, size, children, extended, disabled, as, ...props },
+    ref
+) {
     return (
         <Ripple
-            {...omit(props, [
-                'className',
-                'sd',
-                'size',
-                'children',
-                'extended',
-                'disabled',
-                'as',
-            ])}
+            {...props}
             ref={ref}
-            as={props.as || 'button'}
-            className={clsx('sd-fab', props.className)}
-            data-sd={props.sd || 'surface'}
-            data-sd-size={props.size || 'default'}
-            data-sd-extended={props.extended}
-            data-sd-disabled={props.disabled}
+            as={as || 'button'}
+            className={clsx('sd-fab', className)}
+            data-sd={sd || 'surface'}
+            data-sd-size={size || 'default'}
+            data-sd-extended={extended}
+            data-sd-disabled={disabled}
         >
-            <div className="sd-fab-icon">{props.children}</div>
+            <div className="sd-fab-icon">{children}</div>
         </Ripple>
     )
 })

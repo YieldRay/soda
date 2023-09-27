@@ -21,29 +21,28 @@ export const Checkbox = forwardRef<
          */
         error?: boolean
     }>
->(function Checkbox(props, ref) {
-    const checkedIcon = props.children || <IconChecked />
+>(function Checkbox(
+    { checked, onChange, children, disabled, error, ...props },
+    ref
+) {
+    const checkedIcon = children || <IconChecked />
 
     return (
         <Ripple
-            {...omit(props, [
-                'checked',
-                'onChange',
-                'children',
-                'disabled',
-                'error',
-                'as',
-            ])}
+            {...omit(props, 'as')}
             ref={ref}
             className={clsx('sd-checkbox', props.className)}
-            data-sd-disabled={props.disabled}
-            data-sd-checked={props.checked}
-            data-sd-error={props.error}
-            onClick={() => props.onChange?.(!props.checked)}
+            data-sd-disabled={disabled}
+            data-sd-checked={checked}
+            data-sd-error={error}
+            onClick={() => onChange?.(!checked)}
+            onKeyDown={(e) => {
+                if (onChange && !disabled && e.key === 'Enter') {
+                    onChange?.(!checked)
+                }
+            }}
         >
-            <div className="sd-checkbox-icon">
-                {props.checked && checkedIcon}
-            </div>
+            <div className="sd-checkbox-icon">{checked && checkedIcon}</div>
         </Ripple>
     )
 })

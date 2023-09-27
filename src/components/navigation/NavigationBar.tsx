@@ -1,7 +1,6 @@
 import './navigation.scss'
 import { createPortal } from 'react-dom'
 import assign from 'lodash-es/assign'
-import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { Helper, HelperItem } from './Helper'
 import { ExtendProps } from '@/utils/type'
@@ -17,14 +16,17 @@ export const NavigationBar = forwardRef<
         onChange?(item: HelperItem & { key: React.Key }): void
         fixed?: boolean
     }>
->(function NavigationBar(props, ref) {
+>(function NavigationBar(
+    { items, fixed, onChange, className, style, ...props },
+    ref
+) {
     const ele = (
         <div
-            {...omit(props, ['className', 'style', 'onChange', 'fixed'])}
+            {...props}
             ref={ref}
-            className={clsx('sd-navigation_bar', props.className)}
+            className={clsx('sd-navigation_bar', className)}
             style={assign(
-                props.fixed
+                fixed
                     ? {
                           position: 'fixed',
                           bottom: '0',
@@ -32,18 +34,15 @@ export const NavigationBar = forwardRef<
                           boxSizing: 'border-box',
                       }
                     : {},
-                props.style
+                style
             )}
         >
-            {props.items.map((item) => (
-                <Helper
-                    {...item}
-                    onClick={() => props.onChange?.(item)}
-                ></Helper>
+            {items.map((item) => (
+                <Helper {...item} onClick={() => onChange?.(item)}></Helper>
             ))}
         </div>
     )
 
-    if (props.fixed) return createPortal(ele, document.body)
+    if (fixed) return createPortal(ele, document.body)
     return ele
 })

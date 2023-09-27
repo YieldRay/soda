@@ -1,7 +1,6 @@
 import { Ripple } from '@/utils/Ripple'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
-import omit from 'lodash-es/omit'
 import { forwardRef } from 'react'
 
 /**
@@ -15,7 +14,7 @@ export const DrawerItem = forwardRef<
         children?: React.ReactNode
         enabled?: boolean
     }>
->((props, ref) => (
+>(({ icon, badge, children, enabled, ...props }, ref) => (
     <>
         <style jsx>{`
             .container {
@@ -67,13 +66,13 @@ export const DrawerItem = forwardRef<
             }}
         >
             <div
-                {...omit(props, 'className')}
+                {...props}
                 ref={ref}
-                className={clsx('container', props.enabled && 'enabled')}
+                className={clsx('container', enabled && 'enabled')}
             >
-                <div className="icon">{props.icon}</div>
-                <div className="label-text">{props.children}</div>
-                <div className="badge">{props.badge}</div>
+                <div className="icon">{icon}</div>
+                <div className="label-text">{children}</div>
+                <div className="badge">{badge}</div>
             </div>
         </Ripple>
     </>

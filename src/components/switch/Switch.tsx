@@ -1,7 +1,6 @@
 import { ExtendProps } from '@/utils/type'
 import './switch.scss'
 import clsx from 'clsx'
-import { omit } from 'lodash-es'
 import { forwardRef } from 'react'
 
 export const Switch = forwardRef<
@@ -12,18 +11,23 @@ export const Switch = forwardRef<
         children?: React.ReactNode
         disabled?: boolean
     }>
->(function Switch(props, ref) {
+>(function Switch({ checked, onChange, children, disabled, ...props }, ref) {
     return (
         <div
-            {...omit(props, ['checked', 'onChange', 'children', 'disabled'])}
+            {...props}
             ref={ref}
             className={clsx('sd-switch', props.className)}
-            data-sd-disabled={props.disabled}
-            data-sd-checked={props.checked}
-            onClick={() => props.onChange?.(!props.checked)}
+            data-sd-disabled={disabled}
+            data-sd-checked={checked}
+            onClick={() => onChange?.(!checked)}
+            onKeyDown={(e) => {
+                if (onChange && !disabled && e.key === 'Enter') {
+                    onChange?.(!checked)
+                }
+            }}
         >
             <div className="sd-switch-thumb">
-                <div className="sd-switch-icon">{props.children}</div>
+                <div className="sd-switch-icon">{children}</div>
             </div>
         </div>
     )

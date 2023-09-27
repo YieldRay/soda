@@ -1,6 +1,7 @@
 // https://m3.material.io/components/dialogs/specs
 
 .sd-dialog {
+    border: none;
     background: var(--sd-sys-color-surface-container-high);
     @include elevation-level3;
     width: fit-content;

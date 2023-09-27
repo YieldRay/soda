@@ -1,5 +1,4 @@
 import './menu.scss'
-import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
@@ -11,14 +10,10 @@ import { forwardRef } from 'react'
 export const Menu = forwardRef<
     HTMLMenuElement,
     ExtendProps<{ children?: React.ReactNode }>
->(function Menu(props, ref) {
+>(function Menu({ className, children, ...props }, ref) {
     return (
-        <menu
-            {...omit(props, 'className', 'children')}
-            ref={ref}
-            className={clsx('sd-menu', props.className)}
-        >
-            {props.children}
+        <menu {...props} ref={ref} className={clsx('sd-menu', className)}>
+            {children}
         </menu>
     )
 })

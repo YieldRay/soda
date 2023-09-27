@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import omit from 'lodash-es/omit'
 import { forwardRef } from 'react'
 
 /**
@@ -8,14 +7,14 @@ import { forwardRef } from 'react'
 export const PlainTooltip = forwardRef<
     HTMLDivElement,
     React.HTMLProps<HTMLDivElement>
->(function PlainTooltip(props, ref) {
+>(function PlainTooltip({ className, children, ...props }, ref) {
     return (
         <div
-            {...omit(props, 'className')}
+            {...props}
             ref={ref}
-            className={clsx('sd-plain_tooltip', props.className)}
+            className={clsx('sd-plain_tooltip', className)}
         >
-            {props.children}
+            {children}
         </div>
     )
 })

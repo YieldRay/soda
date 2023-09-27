@@ -18,22 +18,24 @@ export const Search = forwardRef<
         value?: string
         onChange?: (value: string) => void
     }
->(function Search(props, ref) {
+>(function Search(
+    { placeholder, leadingIcon, trailingIcon, sd: initSd, value, onChange },
+    ref
+) {
+    const sd = initSd === 'view' ? 'view' : 'bar'
+
     return (
-        <div
-            className="sd-search"
-            data-sd={props.sd === 'view' ? 'view' : 'bar'}
-        >
-            <div className="sd-search-leading_icon">{props.leadingIcon}</div>
+        <div className="sd-search" data-sd={sd}>
+            <div className="sd-search-leading_icon">{leadingIcon}</div>
             <input
                 type="text"
                 className="sd-search-supporting_text"
-                placeholder={props.placeholder}
-                value={props.value}
-                onChange={(e) => props.onChange?.(e.target.value)}
+                placeholder={placeholder}
+                value={value}
+                onChange={(e) => onChange?.(e.target.value)}
                 ref={ref}
             />
-            <div className="sd-search-trailing_icon">{props.trailingIcon}</div>
+            <div className="sd-search-trailing_icon">{trailingIcon}</div>
         </div>
     )
 })

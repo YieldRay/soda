@@ -29,60 +29,61 @@ export const ListItem = forwardRef<
         lines?: 1 | 2 | 3
         as?: TagNameString
     }>
->(function ListItem(props, ref) {
+>(function ListItem(
+    {
+        className,
+        headline,
+        supportingText,
+        leadingIcon,
+        leadingAvatarLabelText,
+        leadingVideoThubnail,
+        trailingIcon,
+        trailingSupportingText,
+        disabled,
+        lines,
+        ...props
+    },
+    ref
+) {
     return (
         <Ripple
-            {...omit(props, [
-                'className',
-                'children',
-                'headline',
-                'supportingText',
-                'leadingIcon',
-                'leadingAvatarLabelText',
-                'leadingVideoThubnail',
-                'trailingIcon',
-                'trailingSupportingText',
-                'disabled',
-                'lines',
-            ])}
+            {...omit(props, ['children'])}
             ref={ref}
-            className={clsx('sd-list', props.className)}
-            data-sd-lines={props.lines}
-            data-sd-disabled={props.disabled}
+            className={clsx('sd-list', className)}
+            data-sd-lines={lines}
+            data-sd-disabled={disabled}
         >
-            {props.leadingVideoThubnail && (
+            {leadingVideoThubnail && (
                 <div className="sd-list-leading_video_thubnail">
-                    {props.leadingVideoThubnail}
+                    {leadingVideoThubnail}
                 </div>
             )}
-            {props.leadingIcon && (
-                <div className="sd-list-leading_icon">{props.leadingIcon}</div>
+            {leadingIcon && (
+                <div className="sd-list-leading_icon">{leadingIcon}</div>
             )}
-            {props.leadingAvatarLabelText && (
+            {leadingAvatarLabelText && (
                 <div className="sd-list-leading_avatar_label_text">
-                    {props.leadingAvatarLabelText}
+                    {leadingAvatarLabelText}
                 </div>
             )}
 
             <div className="sd-list-helper">
-                <div className="sd-list-headline">{props.headline}</div>
-                {props.supportingText && (
+                <div className="sd-list-headline">{headline}</div>
+                {supportingText && (
                     <div className="sd-list-supporting_text">
-                        {props.supportingText}
+                        {supportingText}
                     </div>
                 )}
             </div>
 
-            {props.trailingSupportingText && (
+            {trailingSupportingText && (
                 <div className="sd-list-trailing_supporting_text">
-                    {props.trailingSupportingText}
+                    {trailingSupportingText}
                 </div>
             )}
 
-            {props.trailingIcon && (
-                <div className="sd-list-trailing_icon">
-                    {props.trailingIcon}
-                </div>
+            {trailingIcon && (
+                <div className="sd-list-trailing_icon">{trailingIcon}</div>
             )}
         </Ripple>
     )

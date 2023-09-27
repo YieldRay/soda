@@ -12,23 +12,21 @@ export const LinearProgressIndicator = forwardRef<
          */
         value?: number
     }
->(function LinearProgressIndicator(props, ref) {
+>(function LinearProgressIndicator({ value }, ref) {
     return (
         <div
             ref={ref}
             className="sd-linear_progress_indicator"
             data-sd={
-                typeof props.value !== 'undefined'
-                    ? 'determinate'
-                    : 'undeterminate'
+                typeof value !== 'undefined' ? 'determinate' : 'undeterminate'
             }
         >
             <div
                 className="sd-linear_progress_indicator-track"
                 style={{
                     width:
-                        typeof props.value !== 'undefined'
-                            ? `${Math.min(props.value, 1) * 100}%`
+                        typeof value !== 'undefined'
+                            ? `${Math.min(value, 1) * 100}%`
                             : '',
                 }}
             ></div>

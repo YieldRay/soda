@@ -1,7 +1,6 @@
 import './card.scss'
 import { ExtendProps, TagNameString } from '@/utils/type'
 import clsx from 'clsx'
-import omit from 'lodash-es/omit'
 import { forwardRef } from 'react'
 
 /**
@@ -23,19 +22,17 @@ export const Card = forwardRef<
         sd?: 'outlined' | 'filled' | 'elevated'
         children?: React.ReactNode
     }>
->(function Card(props, ref) {
-    const As: any = props.as || 'div'
+>(function Card({ sd: initSd, children, as, className, ...props }, ref) {
+    const As: any = as || 'div'
+    const sd = initSd || 'elevated'
+
     return (
         <As
-            {...omit(props, ['as', 'sd', 'className'])}
+            {...props}
             ref={ref}
-            className={clsx(
-                'sd-card',
-                `sd-card-${props.sd || 'elevated'}`,
-                props.className
-            )}
+            className={clsx('sd-card', `sd-card-${sd}`, className)}
         >
-            {props.children}
+            {children}
         </As>
     )
 })

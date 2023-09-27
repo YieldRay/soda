@@ -32,6 +32,10 @@ button.sd-fab {
     &:active {
         filter: brightness(92%);
     }
+    &:focus {
+        outline: none;
+        filter: brightness(88%);
+    }
 
     &-icon {
         @include square-icon(24px);

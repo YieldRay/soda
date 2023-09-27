@@ -16,17 +16,17 @@ export const TabItem = forwardRef<
         active?: boolean
         as?: TagNameString
     }>
->(function TabItem(props, ref) {
+>(function TabItem({ children, icon, active, as, className, ...props }, ref) {
     return (
         <Ripple
-            {...omit(props, 'className')}
+            {...omit(props, 'as')}
             ref={ref}
-            as={props.as}
-            className={clsx('sd-tab_item', props.className)}
-            data-sd-active={props.active}
+            as={as}
+            className={clsx('sd-tab_item', className)}
+            data-sd-active={active}
         >
-            {props.icon && <div className="sd-tab_item-icon">{props.icon}</div>}
-            <div className="sd-tab_item-label_text">{props.children}</div>
+            {icon && <div className="sd-tab_item-icon">{icon}</div>}
+            <div className="sd-tab_item-label_text">{children}</div>
             <div className="sd-tab_item-active_indicator"></div>
         </Ripple>
     )

@@ -1,5 +1,4 @@
 import { Ripple } from '@/utils/Ripple'
-import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { ExtendProps, TagNameString } from '@/utils/type'
 import { forwardRef } from 'react'
@@ -12,7 +11,7 @@ export const ActionButton = forwardRef<
         children?: React.ReactNode
         as?: TagNameString
     }>
->((props, ref) => {
+>(({ className, inverse, disabled, children, as, ...props }, ref) => {
     return (
         <>
             <style jsx global>{`
@@ -53,19 +52,17 @@ export const ActionButton = forwardRef<
                 }
             `}</style>
             <Ripple
-                {...omit(props, ['className', 'inverse', 'disabled'])}
+                {...props}
                 ref={ref}
-                className={clsx('sd-action_button', props.className)}
+                className={clsx('sd-action_button', className)}
                 rippleColor={
-                    props.inverse
-                        ? 'rgb(255 255 255 / 0.1)'
-                        : 'rgb(0 0 0 / 0.1)'
+                    inverse ? 'rgb(255 255 255 / 0.1)' : 'rgb(0 0 0 / 0.1)'
                 }
-                data-sd-inverse={props.inverse ? 'true' : 'false'}
-                data-sd-disabled={props.disabled ? 'true' : 'false'}
-                as={props.as || 'button'}
+                data-sd-inverse={inverse ? 'true' : 'false'}
+                data-sd-disabled={disabled ? 'true' : 'false'}
+                as={as || 'button'}
             >
-                {props.children}
+                {children}
             </Ripple>
         </>
     )

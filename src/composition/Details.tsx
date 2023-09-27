@@ -15,8 +15,12 @@ export const Details = forwardRef<
          */
         sd?: 'outlined' | 'filled'
     }
->(function Details(props, ref) {
-    const sd = props.sd || 'filled'
+>(function Details(
+    { summary, children, open, onChange, sd: initSd, ...props },
+    ref
+) {
+    const sd = initSd || 'filled'
+
     return (
         <>
             <style jsx>{`
@@ -46,24 +50,27 @@ export const Details = forwardRef<
                     margin: 16px;
                 }
             `}</style>
-            <div className={clsx('details', sd)} ref={ref}>
+            <div {...props} className={clsx('details', sd)} ref={ref}>
                 <div
-                    className={clsx('summary', sd, props.open && 'open')}
-                    onClick={() => props.onChange?.(!props.open)}
+                    className={clsx('summary', sd, open && 'open')}
+                    onClick={() => onChange?.(!open)}
                 >
-                    <span>{props.summary}</span>
+                    <span>{summary}</span>
                     <IconButton
                         sd={
-                            { outlined: 'standard', filled: 'tonal' }[sd] as any
+                            (
+                                {
+                                    outlined: 'standard',
+                                    filled: 'tonal',
+                                } as const
+                            )[sd]
                         }
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             style={{
-                                transform: `rotate(${
-                                    props.open ? '0' : '180deg'
-                                })`,
+                                transform: `rotate(${open ? '0' : '180deg'})`,
                                 transition: 'all 200ms',
                             }}
                         >
@@ -71,8 +78,8 @@ export const Details = forwardRef<
                         </svg>
                     </IconButton>
                 </div>
-                <Collapsible open={!!props.open}>
-                    <div className="children">{props.children}</div>
+                <Collapsible open={!!open}>
+                    <div className="children">{children}</div>
                 </Collapsible>
             </div>
         </>

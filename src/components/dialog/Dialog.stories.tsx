@@ -5,6 +5,7 @@ import { Button } from '../button'
 import { ModalHolder } from '@/composition/ModalHolder'
 import { useState } from 'react'
 import { FloatingOverlay } from '@floating-ui/react'
+import { DialogHolder } from '@/composition/DialogHolder'
 
 const meta = {
     title: 'Dialog/Dialog',
@@ -13,14 +14,23 @@ const meta = {
         layout: 'centered',
     },
     tags: ['autodocs'],
+    args: {
+        headline: 'headline',
+        children: (
+            <>
+                A dialog is a type of modal node that appears in front of app
+                content to provide critical information, or ask for a decision.
+            </>
+        ),
+    },
 } satisfies Meta<typeof Dialog>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-    render: () => {
+export const UseModalHolder: Story = {
+    render: (props) => {
         const [open, setOpen] = useState(false)
         return (
             <>
@@ -30,7 +40,7 @@ export const Default: Story = {
 
                 <ModalHolder open={open} onScrimClick={() => setOpen(false)}>
                     <Dialog
-                        headline="headline"
+                        {...props}
                         buttons={
                             <>
                                 <Button sd="text" onClick={() => alert('wow!')}>
@@ -44,19 +54,47 @@ export const Default: Story = {
                                 </Button>
                             </>
                         }
-                    >
-                        A dialog is a type of modal node that appears in front
-                        of app content to provide critical information, or ask
-                        for a decision.
-                    </Dialog>
+                    />
                 </ModalHolder>
             </>
         )
     },
 }
 
-export const FloatingUI: Story = {
-    render: () => {
+export const UseDialogHolder: Story = {
+    render: (props) => {
+        const [open, setOpen] = useState(false)
+        return (
+            <>
+                <Button sd="text" onClick={() => setOpen(true)}>
+                    {`open dialog (use <DialogHolder> from soda)`}
+                </Button>
+
+                <DialogHolder open={open}>
+                    <Dialog
+                        {...props}
+                        buttons={
+                            <>
+                                <Button sd="text" onClick={() => alert('wow!')}>
+                                    wow!
+                                </Button>
+                                <Button
+                                    sd="text"
+                                    onClick={() => setOpen(false)}
+                                >
+                                    close
+                                </Button>
+                            </>
+                        }
+                    />
+                </DialogHolder>
+            </>
+        )
+    },
+}
+
+export const UseFloatingUI: Story = {
+    render: (props) => {
         const [open, setOpen] = useState(false)
         return (
             <>
@@ -77,7 +115,7 @@ export const FloatingUI: Story = {
                         onClick={() => setOpen(false)}
                     >
                         <Dialog
-                            headline="headline"
+                            {...props}
                             buttons={
                                 <>
                                     <Button
@@ -94,11 +132,7 @@ export const FloatingUI: Story = {
                                     </Button>
                                 </>
                             }
-                        >
-                            A dialog is a type of modal node that appears in
-                            front of app content to provide critical
-                            information, or ask for a decision.
-                        </Dialog>
+                        />
                     </FloatingOverlay>
                 )}
             </>

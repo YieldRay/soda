@@ -24,7 +24,7 @@ export const IconButton = forwardRef<
          */
         selected?: boolean
     }>
->(function IconButton(props, ref) {
+>(function IconButton({ as, children, className, disabled, ...props }, ref) {
     const sd = props.sd || 'standard'
     const selected = Reflect.has(props, 'selected')
         ? props.selected!
@@ -34,25 +34,18 @@ export const IconButton = forwardRef<
 
     return (
         <Ripple
-            {...omit(props, [
-                'sd',
-                'children',
-                'className',
-                'disabled',
-                'selected',
-                'data-sd-selected',
-                'data-sd-disabled',
-            ])}
+            {...omit(props, ['sd', 'selected'])}
             ref={ref}
             className={clsx(
                 'sd-icon_button',
                 `sd-icon_button-${sd}`,
-                props.className
+                className
             )}
+            as={as}
             data-sd-selected={selected}
-            data-sd-disabled={props.disabled}
+            data-sd-disabled={disabled}
         >
-            <div className="sd-icon_button-icon">{props.children}</div>
+            <div className="sd-icon_button-icon">{children}</div>
         </Ripple>
     )
 })

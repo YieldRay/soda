@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import assign from 'lodash-es/assign'
 import { forwardRef } from 'react'
 import { createPortal } from 'react-dom'
-import omit from 'lodash-es/omit'
 
 /**
  * BottonAppBar has fixed height = 80px
@@ -16,23 +15,23 @@ export const BottomAppBar = forwardRef<
         children?: React.ReactNode
         fixed?: boolean
     }>
->(function BottomAppBar(props, ref) {
+>(function BottomAppBar({ fixed, className, style, ...props }, ref) {
     const ele = (
         <div
-            {...omit(props, ['className', 'style', 'fixed'])}
+            {...props}
             ref={ref}
-            className={clsx('sd-bottom_app_bar', props.className)}
+            className={clsx('sd-bottom_app_bar', className)}
             style={assign(
-                props.fixed
+                fixed
                     ? { position: 'fixed', left: '0', bottom: '0' }
                     : undefined,
-                props.style
+                style
             )}
         >
             {props.children}
         </div>
     )
 
-    if (props.fixed) return createPortal(ele, document.body)
+    if (fixed) return createPortal(ele, document.body)
     return ele
 })

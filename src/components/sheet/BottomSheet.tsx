@@ -1,3 +1,4 @@
+import { ExtendProps } from '@/utils/type'
 import './sheet.scss'
 import { Scrim } from '@/utils/Scrim'
 import clsx from 'clsx'
@@ -20,16 +21,26 @@ export type BottomSheetHandle = ReturnType<typeof drag>
  */
 export const BottomSheet = forwardRef<
     BottomSheetHandle,
-    {
+    ExtendProps<{
         children?: React.ReactNode
         hideDragHandle?: boolean
         onChange?: (visiable: boolean) => void
         onScrimClick?(): void
-        className?: string
-        style?: React.CSSProperties
         portalTo?: Element | DocumentFragment
-    }
->((props, ref) => {
+    }>
+>(function BottomSheet(
+    {
+        children,
+        hideDragHandle,
+        onChange,
+        onScrimClick,
+        className,
+        style,
+        portalTo,
+        ...props
+    },
+    ref
+) {
     const sheetRef = useRef<HTMLDivElement>(null)
     const handleRef = useRef<HTMLDivElement>(null)
 
@@ -42,44 +53,41 @@ export const BottomSheet = forwardRef<
         dragHandlerRef.current = drag(handleRef.current!, sheetRef.current!, {
             onShow() {
                 setVisiable(true)
-                props.onChange?.(true)
+                onChange?.(true)
             },
             onHide() {
                 setVisiable(false)
-                props.onChange?.(false)
+                onChange?.(false)
             },
         })
         return dragHandlerRef.current.cleanup
-    }, [props])
+    }, [onChange])
 
     useImperativeHandle(ref, () => dragHandlerRef.current!)
 
     const ele = (
         <>
-            <Scrim
-                open={visiable}
-                onClick={() => props.onScrimClick?.()}
-            ></Scrim>
-            <div className="sd-bottom_sheet-scrim" style={props.style}>
+            <Scrim open={visiable} onClick={() => onScrimClick?.()}></Scrim>
+            <div className="sd-bottom_sheet-scrim">
                 <div
-                    className={clsx('sd-bottom_sheet', props.className)}
+                    {...props}
+                    className={clsx('sd-bottom_sheet', className)}
                     ref={sheetRef}
-                    style={assign(
-                        { transform: 'translateY(100%)' },
-                        props.style
-                    )}
+                    style={assign({ transform: 'translateY(100%)' }, style)}
                 >
-                    <div
-                        className="sd-bottom_sheet-drag_handle"
-                        ref={handleRef}
-                    ></div>
-                    {props.children}
+                    {!hideDragHandle && (
+                        <div
+                            className="sd-bottom_sheet-drag_handle"
+                            ref={handleRef}
+                        />
+                    )}
+                    {children}
                 </div>
             </div>
         </>
     )
 
-    if (props.portalTo) return createPortal(ele, props.portalTo)
+    if (portalTo) return createPortal(ele, portalTo)
     return ele
 })
 

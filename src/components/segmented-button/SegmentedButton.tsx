@@ -21,29 +21,32 @@ export const SegmentedButton = forwardRef<
          */
         density?: 0 | -1 | -2 | -3
     }>
->(function SegmentedButton(props, ref) {
+>(function SegmentedButton({ activeIndex, items, onChange, density }, ref) {
     const eRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => eRef.current!)
     useEffect(() => {
-        if (props.density)
-            eRef.current!.style.setProperty(
-                '--height',
-                `${40 + props.density * 4}px`
-            )
-    }, [props])
+        if (density)
+            eRef.current!.style.setProperty('--height', `${40 + density * 4}px`)
+    }, [density])
 
     return (
         <div className="sd-segmented_button" ref={eRef}>
-            {props.items &&
-                props.items.map(({ label, disabled, key }, index) => (
+            {items &&
+                items.map(({ label, disabled, key }, index) => (
                     <Ripple
                         key={key ?? index}
+                        tabIndex={index + 1}
                         className="sd-segmented_button-item"
                         data-sd-active={
-                            props.activeIndex === index ? 'true' : 'false'
+                            activeIndex === index ? 'true' : 'false'
                         }
                         data-sd-disabled={disabled}
-                        onClick={() => props.onChange?.(index)}
+                        onClick={() => onChange?.(index)}
+                        onKeyDown={(e) => {
+                            if (onChange && e.key === 'Enter' && !disabled) {
+                                onChange(index)
+                            }
+                        }}
                     >
                         <div className="sd-segmented_button-label">{label}</div>
                     </Ripple>

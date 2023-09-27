@@ -2,7 +2,6 @@ import './dialog.scss'
 import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
-import omit from 'lodash-es/omit'
 
 /**
  * @specs https://m3.material.io/components/dialogs/specs
@@ -10,6 +9,7 @@ import omit from 'lodash-es/omit'
 export const Dialog = forwardRef<
     HTMLDivElement,
     ExtendProps<{
+        open?: boolean
         headline?: React.ReactNode
         children?: React.ReactNode
         /**
@@ -22,25 +22,21 @@ export const Dialog = forwardRef<
          */
         noPadding?: boolean
     }>
->(function Dialog(props, ref) {
+>(function Dialog({ headline, children, buttons, noPadding, ...props }, ref) {
     return (
         <div
-            {...omit(props, 'headline', 'children', 'buttons', 'noPadding')}
+            {...props}
             ref={ref}
             className={clsx('sd-dialog', props.className)}
         >
-            {props.headline && (
-                <div className="sd-dialog-headline">{props.headline}</div>
-            )}
+            {headline && <div className="sd-dialog-headline">{headline}</div>}
             <div
                 className="sd-dialog-body"
-                style={{ padding: props.noPadding ? '' : '0 1.5rem' }}
+                style={{ padding: noPadding ? '' : '0 1.5rem' }}
             >
-                {props.children}
+                {children}
             </div>
-            {props.buttons && (
-                <div className="sd-dialog-buttons">{props.buttons}</div>
-            )}
+            {buttons && <div className="sd-dialog-buttons">{buttons}</div>}
         </div>
     )
 })

@@ -1,7 +1,6 @@
 import './divider.scss'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
-import omit from 'lodash-es/omit'
 import { forwardRef } from 'react'
 
 /**
@@ -20,22 +19,21 @@ export const Divider = forwardRef<
          */
         direction?: 'horizon' | 'vertical'
     }>
->(function Divider(props, ref) {
+>(function Divider({ sd, direction, className, ...props }, ref) {
     return (
         <div
-            {...omit(props, 'sd', 'direction', 'className')}
+            {...props}
             ref={ref}
             className={clsx(
                 {
                     'sd-divider': true,
-                    'sd-divider-full':
-                        props.sd === 'full' || props.sd == undefined,
-                    'sd-divider-inset': props.sd === 'inset',
+                    'sd-divider-full': sd === 'full' || sd == undefined,
+                    'sd-divider-inset': sd === 'inset',
                 },
-                props.className
+                className
             )}
             data-sd-direction={
-                props.direction === 'vertical' ? 'vertical' : 'horizon'
+                direction === 'vertical' ? 'vertical' : 'horizon'
             }
         ></div>
     )

@@ -11,7 +11,10 @@ import omit from 'lodash-es/omit'
 export const Chip = forwardRef<
     HTMLElement,
     ExtendProps<{
-        sd: 'outlined' | 'tonal'
+        /**
+         * @default outlined
+         */
+        sd?: 'outlined' | 'tonal'
         children: React.ReactNode
         className?: string
         leadingIcon?: React.ReactNode
@@ -19,34 +22,30 @@ export const Chip = forwardRef<
         disabled?: boolean
         onClick?: () => void
     }>
->(function Chip(props, ref) {
+>(function Chip(
+    { sd, children, leadingIcon, trailingIcon, disabled, onClick, ...props },
+    ref
+) {
     return (
         <Ripple
-            {...omit(props, [
-                'sd',
-                'children',
-                'className',
-                'leadingIcon',
-                'trailingIcon',
-                'disabled',
-                'onClick',
-                'as',
-            ])}
+            {...omit(props, ['className', 'as'])}
             ref={ref}
-            className={clsx('sd-chip', `sd-chip-${props.sd}`, props.className)}
-            onClick={props.onClick}
-            data-sd-disabled={props.disabled}
+            className={clsx(
+                'sd-chip',
+                `sd-chip-${sd || 'outlined'}`,
+                props.className
+            )}
+            onClick={onClick}
+            data-sd-disabled={disabled}
         >
-            {props.leadingIcon && (
-                <div className="sd-chip-leading_icon">{props.leadingIcon}</div>
+            {leadingIcon && (
+                <div className="sd-chip-leading_icon">{leadingIcon}</div>
             )}
 
-            <div className="sd-chip-label_text">{props.children}</div>
+            <div className="sd-chip-label_text">{children}</div>
 
-            {props.trailingIcon && (
-                <div className="sd-chip-trailing_icon">
-                    {props.trailingIcon}
-                </div>
+            {trailingIcon && (
+                <div className="sd-chip-trailing_icon">{trailingIcon}</div>
             )}
         </Ripple>
     )

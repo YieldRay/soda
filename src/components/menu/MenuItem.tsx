@@ -17,41 +17,41 @@ export interface Props {
  * use `<Menu>` to wrap it
  */
 export const MenuItem = forwardRef<HTMLElement, ExtendProps<Props>>(
-    function MenuItem(props, ref) {
+    function MenuItem(
+        {
+            className,
+            leadingIcon,
+            children,
+            trailingIcon,
+            trailingText,
+            disabled,
+            ...props
+        },
+        ref
+    ) {
         return (
             <Ripple
-                {...omit(
-                    props,
-                    'className',
-                    'leadingIcon',
-                    'children',
-                    'trailingIcon',
-                    'trailingText',
-                    'disabled',
-                    'as'
-                )}
+                {...omit(props, ['as'])}
                 ref={ref}
-                className={clsx('sd-menu_item', props.className)}
-                data-sd-disabled={props.disabled}
+                className={clsx('sd-menu_item', className)}
+                data-sd-disabled={disabled}
             >
-                {props.leadingIcon && (
+                {leadingIcon && (
                     <div className="sd-menu_item-leading_icon">
-                        {props.leadingIcon}
+                        {leadingIcon}
                     </div>
                 )}
 
-                <div className="sd-menu_item-supporting_text">
-                    {props.children}
-                </div>
+                <div className="sd-menu_item-supporting_text">{children}</div>
 
-                {props.trailingIcon && (
+                {trailingIcon && (
                     <div className="sd-menu_item-trailing_icon">
-                        {props.trailingIcon}
+                        {trailingIcon}
                     </div>
                 )}
-                {props.trailingText && (
+                {trailingText && (
                     <div className="sd-menu_item-trailing_text">
-                        {props.trailingText}
+                        {trailingText}
                     </div>
                 )}
             </Ripple>

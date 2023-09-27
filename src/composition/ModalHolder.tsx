@@ -30,6 +30,7 @@ export function ModalHolder(props: {
                         inset: 0;
                         width: 100%;
                         height: 100%;
+                        padding: 1rem;
                         display: flex;
                         align-items: center;
                         justify-content: center;

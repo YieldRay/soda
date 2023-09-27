@@ -26,7 +26,7 @@ export const ViewTransition = forwardRef<
         },
     }))
     return (
-        <div ref={divRef} {...props}>
+        <div {...props} ref={divRef}>
             {children}
         </div>
     )

@@ -19,35 +19,30 @@ export interface HelperItem {
 /**
  * for internal use only
  */
-export function Helper(props: ExtendProps<HelperItem>) {
+export function Helper({
+    className,
+    active,
+    icon,
+    label,
+    badge,
+    ...props
+}: ExtendProps<HelperItem>) {
     return (
         <div
-            {...omit(props, [
-                'className',
-                'active',
-                'icon',
-                'label',
-                'badge',
-                'children',
-            ])}
-            className={clsx('sd-navigation_helper', props.className)}
-            data-sd-active={props.active}
+            {...omit(props, ['children'])}
+            className={clsx('sd-navigation_helper', className)}
+            data-sd-active={active}
         >
-            <Badge
-                sd={props.badge?.active ? props.badge?.sd : 'none'}
-                label={props.badge?.label}
-            >
+            <Badge sd={badge?.active ? badge?.sd : 'none'} label={badge?.label}>
                 <Button
                     as="div"
-                    sd={props.active ? 'tonal' : 'text'}
+                    sd={active ? 'tonal' : 'text'}
                     className="sd-navigation_helper-icon"
                 >
-                    {props.icon}
+                    {icon}
                 </Button>
             </Badge>
-            <span className="sd-navigation_helper-label_text">
-                {props.label}
-            </span>
+            <span className="sd-navigation_helper-label_text">{label}</span>
         </div>
     )
 }

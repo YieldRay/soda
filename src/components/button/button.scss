@@ -17,8 +17,10 @@ button.sd-button {
     vertical-align: middle;
     text-align: center;
     font-weight: 500;
+    line-height: 20px;
+    font-size: 14px;
+    border-radius: 40px;
     padding: 0.5rem 1.25rem;
-    border-radius: 1rem;
     cursor: pointer;
     transition: all 0.2s;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
@@ -28,6 +30,9 @@ button.sd-button {
         color: var(--sd-sys-color-on-surface);
         opacity: 0.38;
         pointer-events: none;
+    }
+    &:focus {
+        outline: none;
     }
 
     // elevated
@@ -42,10 +47,13 @@ button.sd-button {
             color: var(--sd-sys-color-primary);
             @include elevation-level2;
         }
-
         &:active {
             opacity: unset;
             filter: brightness(95%);
+        }
+        &:focus {
+            opacity: unset;
+            filter: brightness(90%);
         }
     }
 
@@ -62,6 +70,10 @@ button.sd-button {
             box-shadow: unset;
             filter: contrast(120%);
         }
+        &:focus {
+            box-shadow: unset;
+            filter: contrast(110%);
+        }
     }
 
     // outlined
@@ -74,9 +86,11 @@ button.sd-button {
         &:hover {
             filter: brightness(96%);
         }
-
         &:active {
             filter: brightness(92%);
+        }
+        &:focus {
+            filter: brightness(88%);
         }
     }
 
@@ -89,9 +103,11 @@ button.sd-button {
             @include elevation-level1;
             filter: brightness(96%);
         }
-
         &:active {
             filter: brightness(92%);
+        }
+        &:focus {
+            filter: brightness(88%);
         }
     }
 
@@ -106,9 +122,11 @@ button.sd-button {
         &:hover {
             background: rgb(0 0 0 / 0.04);
         }
-
         &:active {
             background: rgb(0 0 0 / 0.08);
+        }
+        &:focus {
+            background: rgb(0 0 0 / 0.12);
         }
     }
 }

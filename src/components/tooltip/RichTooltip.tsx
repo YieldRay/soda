@@ -2,7 +2,6 @@ import './tooltip.scss'
 import { ActionButton } from '@/composition/ActionButton'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
-import omit from 'lodash-es/omit'
 import { forwardRef } from 'react'
 
 /**
@@ -16,29 +15,26 @@ export const RichTooltip = forwardRef<
         action?: React.ReactNode
         onActionClick?: () => void
     }>
->(function RichTooltip(props, ref) {
+>(function RichTooltip(
+    { className, subhead, children, action, onActionClick, ...props },
+    ref
+) {
     return (
         <div
-            {...omit(props, [
-                'className',
-                'subhead',
-                'children',
-                'action',
-                'onActionClick',
-            ])}
+            {...props}
             ref={ref}
-            className={clsx('sd-rich_tooltip', props.className)}
+            className={clsx('sd-rich_tooltip', className)}
         >
-            {props.subhead && (
-                <div className="sd-rich_tooltip-subhead">{props.subhead}</div>
+            {subhead && (
+                <div className="sd-rich_tooltip-subhead">{subhead}</div>
             )}
 
-            <div className="sd-rich_tooltip-body">{props.children}</div>
+            <div className="sd-rich_tooltip-body">{children}</div>
 
-            {props.action && (
+            {action && (
                 <div className="sd-rich_tooltip-action">
-                    <ActionButton onClick={() => props.onActionClick?.()}>
-                        {props.action}
+                    <ActionButton onClick={() => onActionClick?.()}>
+                        {action}
                     </ActionButton>
                 </div>
             )}

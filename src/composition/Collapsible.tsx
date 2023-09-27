@@ -1,4 +1,3 @@
-import omit from 'lodash-es/omit'
 import assign from 'lodash-es/assign'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
@@ -12,12 +11,12 @@ export const Collapsible = forwardRef<
         open: boolean
         children: React.ReactNode
     }>
->(function Collapsible(props, ref) {
+>(function Collapsible({ open, children, className, ...props }, ref) {
     const eRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => eRef.current!)
     useEffect(() => {
         const e = eRef.current!
-        if (props.open) {
+        if (open) {
             e.style.maxHeight = e.scrollHeight + 'px'
         } else {
             e.style.maxHeight = 0 + 'px'
@@ -25,9 +24,9 @@ export const Collapsible = forwardRef<
     })
     return (
         <div
-            {...omit(props, ['open', 'style', 'className'])}
+            {...props}
             ref={ref}
-            className={props.className}
+            className={className}
             style={assign(
                 {
                     transition: 'all 200ms',
@@ -37,7 +36,7 @@ export const Collapsible = forwardRef<
                 props.style
             )}
         >
-            {props.children}
+            {children}
         </div>
     )
 })

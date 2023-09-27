@@ -2,7 +2,6 @@ import './navigation.scss'
 import { Helper, HelperItem } from './Helper'
 import clsx from 'clsx'
 import assign from 'lodash-es/assign'
-import omit from 'lodash-es/omit'
 import { createPortal } from 'react-dom'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
@@ -18,21 +17,17 @@ export const NavigationRail = forwardRef<
         fixed?: boolean
         onChange?(item: HelperItem & { key: React.Key }): void
     }>
->(function NavigationRail(props, ref) {
+>(function NavigationRail(
+    { fab, items, fixed, onChange, className, style, ...props },
+    ref
+) {
     const ele = (
         <div
-            {...omit(props, [
-                'className',
-                'style',
-                'fixed',
-                'fab',
-                'items',
-                'onChange',
-            ])}
+            {...props}
             ref={ref}
-            className={clsx('sd-navigation_rail', props.className)}
+            className={clsx('sd-navigation_rail', className)}
             style={assign(
-                props.fixed
+                fixed
                     ? {
                           position: 'fixed',
                           top: '0',
@@ -41,21 +36,18 @@ export const NavigationRail = forwardRef<
                           boxSizing: 'border-box',
                       }
                     : {},
-                props.style
+                style
             )}
         >
-            <div className="sd-navigation_rail-fab">{props.fab}</div>
+            <div className="sd-navigation_rail-fab">{fab}</div>
             <div className="sd-navigation_rail-items">
-                {props.items.map((item) => (
-                    <Helper
-                        {...item}
-                        onClick={() => props.onChange?.(item)}
-                    ></Helper>
+                {items.map((item) => (
+                    <Helper {...item} onClick={() => onChange?.(item)}></Helper>
                 ))}
             </div>
         </div>
     )
 
-    if (props.fixed) return createPortal(ele, document.body)
+    if (fixed) return createPortal(ele, document.body)
     return ele
 })
