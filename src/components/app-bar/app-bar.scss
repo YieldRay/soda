@@ -31,15 +31,19 @@
 
     &-leading_navigation_icon {
         flex-shrink: 0;
+        font-size: 24px;
     }
 
     &-trailing_icon {
         flex-shrink: 0;
         display: flex;
+        font-size: 24px;
     }
 
     &-headline {
+        font-size: 22px;
         font-weight: 400;
+        color: var(--sd-sys-color-on-surface);
         flex-shrink: 1;
     }
 
@@ -54,7 +58,7 @@
             width: 100%;
             padding-left: 16px;
             padding-bottom: 24px;
-            font-size: x-large;
+            font-size: 24px;
             margin-top: auto;
         }
     }

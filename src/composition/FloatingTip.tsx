@@ -9,6 +9,7 @@ import {
     useFocus,
     useDismiss,
     useRole,
+    safePolygon,
 } from '@floating-ui/react'
 import { useState } from 'react'
 
@@ -35,6 +36,7 @@ export function FloatingTip(props: {
             close: 100,
         },
         move: false,
+        handleClose: safePolygon({ blockPointerEvents: true }),
     })
     const focus = useFocus(context)
     const dismiss = useDismiss(context)

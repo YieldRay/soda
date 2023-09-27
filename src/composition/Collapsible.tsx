@@ -1,4 +1,3 @@
-import assign from 'lodash-es/assign'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 
@@ -8,10 +7,10 @@ import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 export const Collapsible = forwardRef<
     HTMLDivElement,
     ExtendProps<{
-        open: boolean
-        children: React.ReactNode
+        open?: boolean
+        children?: React.ReactNode
     }>
->(function Collapsible({ open, children, className, ...props }, ref) {
+>(function Collapsible({ open, children, ...props }, ref) {
     const eRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => eRef.current!)
     useEffect(() => {
@@ -21,21 +20,17 @@ export const Collapsible = forwardRef<
         } else {
             e.style.maxHeight = 0 + 'px'
         }
-    })
+    }, [open])
+
     return (
-        <div
-            {...props}
-            ref={ref}
-            className={className}
-            style={assign(
-                {
-                    transition: 'all 200ms',
-                    overflow: 'hidden',
-                    boxSizing: 'border-box',
-                },
-                props.style
-            )}
-        >
+        <div {...props} ref={eRef}>
+            <style jsx>{`
+                div {
+                    transition: all 200ms;
+                    overflow: hidden;
+                    boxsizing: border-box;
+                }
+            `}</style>
             {children}
         </div>
     )

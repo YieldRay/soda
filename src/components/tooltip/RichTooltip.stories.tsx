@@ -18,8 +18,10 @@ export const Default: Story = {
         subhead: <>Rich tooltip</>,
         children: (
             <>
-                Rich tooltips bring attention to a particular element of feature
-                that warrants the user's focus.
+                Rich tooltips bring attention to a particular
+                <br />
+                element of feature that warrants the user's
+                <br /> focus.
             </>
         ),
         action: <span>Action</span>,

@@ -19,6 +19,9 @@ type Props = ExtendProps<{
     rippleColor?: string
 }>
 
+/**
+ * Wrapper component for ripple-effect.ts
+ */
 export const Ripple = forwardRef<HTMLElement, Props>(
     ({ as, disabled, rippleColor, rippleDuration, ...props }, ref) => {
         const eRef = useRef<HTMLElement>(null)

@@ -44,6 +44,11 @@ using mdi library: <https://materialdesignicons.com/>
 
 ## Fonts
 
+It's highly recomended that you use a font that supports `font-weight: 500`,  
+as some component state requires it to behavior clear to user.
+
+The easiest way is to use the `Roboto` font, just simply add a few lines of css code as below!
+
 ```css
 /* using Roboto */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { TextField } from '.'
+import { IconClose, IconMagnify } from '@/utils/icons'
 
 const meta = {
     title: 'TextField',
@@ -11,6 +12,8 @@ const meta = {
     },
     args: {
         labelText: 'labelText',
+        leadingIcon: <IconMagnify />,
+        trailingIcon: <IconClose />,
     },
 } satisfies Meta<typeof TextField>
 

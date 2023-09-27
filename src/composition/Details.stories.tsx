@@ -7,6 +7,10 @@ const meta = {
     title: 'composition/Details',
     component: Details,
     tags: ['autodocs'],
+    args: {
+        summary: <>summary</>,
+        children: <>details</>,
+    },
 } satisfies Meta<typeof Details>
 
 export default meta
@@ -14,22 +18,20 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Outlined: Story = {
-    render: () => {
-        const [open, setOpen] = useState(true)
-        return (
-            <Details
-                sd="outlined"
-                summary="outlined"
-                open={open}
-                onChange={setOpen}
-            >
-                details
-            </Details>
-        )
+    args: {
+        sd: 'outlined',
+        summary: 'outlined',
     },
 }
 
 export const Filled: Story = {
+    args: {
+        sd: 'filled',
+        summary: 'filled',
+    },
+}
+
+export const Controlled: Story = {
     render: () => {
         const [open, setOpen] = useState(true)
         return (
@@ -37,7 +39,7 @@ export const Filled: Story = {
                 sd="filled"
                 summary="filled"
                 open={open}
-                onChange={setOpen}
+                onChange={() => setOpen(!open)}
             >
                 details
             </Details>

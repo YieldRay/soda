@@ -26,8 +26,12 @@ $label_text_gap_size: 3.2px;
 
     &-leading_icon,
     &-trailing_icon {
+        flex-shrink: 0;
         transform: translateY(1px);
         font-size: 20px;
+        svg {
+            width: 20px;
+        }
     }
     &-leading_icon {
         margin-right: 0.5rem;

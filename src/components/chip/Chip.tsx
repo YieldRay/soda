@@ -1,6 +1,6 @@
 import './chip.scss'
 import clsx from 'clsx'
-import { Ripple } from '@/utils/Ripple.tsx'
+import { Ripple } from '@/utils/Ripple'
 import { forwardRef } from 'react'
 import { ExtendProps, TagNameString } from '@/utils/type.ts'
 

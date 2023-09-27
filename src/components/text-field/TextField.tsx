@@ -99,7 +99,7 @@ export const TextField = forwardRef<
             </Helper>
 
             {trailingIcon && (
-                <div className="sd-text_field-tailing_icon">{trailingIcon}</div>
+                <div className="sd-text_field-trailing_icon">{trailingIcon}</div>
             )}
 
             {sd !== 'outlined' && (

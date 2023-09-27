@@ -19,7 +19,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-    args: { inverse: true },
+    args: { inverse: false },
 }
 
 export const Inverse: Story = {
@@ -29,8 +29,10 @@ export const Inverse: Story = {
             <div
                 style={{
                     background: `var(--sd-sys-color-inverse-surface)`,
-                    width: '100vw',
-                    height: '100vh',
+                    width: '50vw',
+                    height: '50vh',
+                    display: 'grid',
+                    placeItems: 'center',
                 }}
             >
                 <Story />

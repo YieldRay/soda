@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { forwardRef } from 'react'
 
 /**
+ * [tips]: You may consider manually add `<br />`
  * @specs https://m3.material.io/components/tooltips/specs
  */
 export const RichTooltip = forwardRef<

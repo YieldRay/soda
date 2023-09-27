@@ -30,7 +30,10 @@
     }
     &-label_text {
         transition: all 200ms;
-        font-size: small;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+        -webkit-text-stroke: 0.1px currentColor;
     }
     &[data-sd-active='true'] {
         .sd-tab_item-icon {

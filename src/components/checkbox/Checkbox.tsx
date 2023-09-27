@@ -1,6 +1,6 @@
 import './checkbox.scss'
 import clsx from 'clsx'
-import { Ripple } from '@/utils/Ripple.tsx'
+import { Ripple } from '@/utils/Ripple'
 import { IconChecked } from '@/utils/icons.tsx'
 import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
