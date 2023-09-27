@@ -15,7 +15,7 @@ interface ItemWithFlex extends Item {
 }
 
 /**
- * warn: incomplete implemention, and only three visiable items is implemented,
+ * [warn]: Incomplete implemention, and only three visiable items is implemented,
  * make sure the array length is multiple of 3, or it will throw error
  * @specs https://m3.material.io/components/carousel/specs
  */
@@ -27,7 +27,7 @@ export const Carousel = forwardRef<
          */
         items: Array<Item>
         /**
-         * shortcut for style.height
+         * Shortcut for style.height
          * @default 12rem
          */
         height?: string

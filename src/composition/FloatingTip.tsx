@@ -13,7 +13,6 @@ import {
 import { useState } from 'react'
 
 /**
- * this component do not have ref forwarded
  * @ref https://floating-ui.com/docs/react
  */
 export function FloatingTip(props: {

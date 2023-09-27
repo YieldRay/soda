@@ -14,8 +14,11 @@ export const NavigationRail = forwardRef<
     ExtendProps<{
         fab: React.ReactNode
         items: Array<HelperItem & { key: React.Key }>
-        fixed?: boolean
         onChange?(item: HelperItem & { key: React.Key }): void
+        /**
+         * Fix the component to the left of the window
+         */
+        fixed?: boolean
     }>
 >(function NavigationRail(
     { fab, items, fixed, onChange, className, style, ...props },

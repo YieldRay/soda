@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FloatingTip } from './FloatingTip'
 import { TopAppBar } from '../components/app-bar'
 import { IconButton } from '../components/icon-button'
-import { PlainTooltip } from '../components/tooltip'
+import { PlainTooltip, RichTooltip } from '../components/tooltip'
 import { IconMenu } from '@/utils/icons'
 
 const meta = {
@@ -56,7 +56,11 @@ export const Default: Story = {
 
             <FloatingTip
                 trigger={<IconButton>❤</IconButton>}
-                content={<PlainTooltip>love but so loooooooooong</PlainTooltip>}
+                content={
+                    <RichTooltip subhead="subhead" action="action">
+                        love but so loooooooooong
+                    </RichTooltip>
+                }
             ></FloatingTip>
 
             <h1>hover on the icon to see how it works!</h1>

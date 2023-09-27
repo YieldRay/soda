@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ListItem } from '.'
+import { List } from '.'
 
 const meta = {
-    title: 'ListItem',
-    component: ListItem,
+    title: 'List',
+    component: List,
     parameters: {
         layout: 'centered',
     },
@@ -13,7 +13,7 @@ const meta = {
         headline: 'headline',
         supportingText: 'supportingText',
     },
-} satisfies Meta<typeof ListItem>
+} satisfies Meta<typeof List>
 
 export default meta
 

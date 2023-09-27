@@ -2,6 +2,7 @@ import './segmented-button.scss'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 import { Ripple } from '@/utils/Ripple'
 import { ExtendProps } from '@/utils/type'
+import clsx from 'clsx'
 
 export const SegmentedButton = forwardRef<
     HTMLDivElement,
@@ -11,7 +12,7 @@ export const SegmentedButton = forwardRef<
             label: React.ReactNode
             disabled?: boolean
             /**
-             * optional, defaults to array index
+             * Optional, defaults to array index
              */
             key?: React.Key
         }>
@@ -21,7 +22,10 @@ export const SegmentedButton = forwardRef<
          */
         density?: 0 | -1 | -2 | -3
     }>
->(function SegmentedButton({ activeIndex, items, onChange, density }, ref) {
+>(function SegmentedButton(
+    { activeIndex, items, onChange, density, className, ...props },
+    ref
+) {
     const eRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => eRef.current!)
     useEffect(() => {
@@ -30,7 +34,11 @@ export const SegmentedButton = forwardRef<
     }, [density])
 
     return (
-        <div className="sd-segmented_button" ref={eRef}>
+        <div
+            {...props}
+            className={clsx('sd-segmented_button', className)}
+            ref={eRef}
+        >
             {items &&
                 items.map(({ label, disabled, key }, index) => (
                     <Ripple

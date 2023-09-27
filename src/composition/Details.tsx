@@ -1,25 +1,31 @@
 import { IconButton } from '@/components/icon-button'
 import { Collapsible } from '@/composition/Collapsible'
 import clsx from 'clsx'
-import { forwardRef } from 'react'
 
-export const Details = forwardRef<
-    HTMLDivElement,
-    {
-        summary?: React.ReactNode
-        children?: React.ReactNode
-        open?: boolean
-        onChange?: (open: boolean) => void
-        /**
-         * @default filled
-         */
-        sd?: 'outlined' | 'filled'
-    }
->(function Details(
-    { summary, children, open, onChange, sd: initSd, ...props },
-    ref
-) {
+export function Details({
+    summary,
+    children,
+    open,
+    onChange,
+    sd: initSd,
+    ...props
+}: {
+    summary?: React.ReactNode
+    children?: React.ReactNode
+    open?: boolean
+    onChange?: (open: boolean) => void
+    /**
+     * @default filled
+     */
+    sd?: 'outlined' | 'filled'
+}) {
     const sd = initSd || 'filled'
+    const iconSd = (
+        {
+            outlined: 'standard',
+            filled: 'tonal',
+        } as const
+    )[sd]
 
     return (
         <>
@@ -50,22 +56,13 @@ export const Details = forwardRef<
                     margin: 16px;
                 }
             `}</style>
-            <div {...props} className={clsx('details', sd)} ref={ref}>
+            <div {...props} className={clsx('details', sd)}>
                 <div
                     className={clsx('summary', sd, open && 'open')}
                     onClick={() => onChange?.(!open)}
                 >
                     <span>{summary}</span>
-                    <IconButton
-                        sd={
-                            (
-                                {
-                                    outlined: 'standard',
-                                    filled: 'tonal',
-                                } as const
-                            )[sd]
-                        }
-                    >
+                    <IconButton sd={iconSd}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -84,4 +81,4 @@ export const Details = forwardRef<
             </div>
         </>
     )
-})
+}

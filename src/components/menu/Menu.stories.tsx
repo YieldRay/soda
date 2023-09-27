@@ -5,13 +5,13 @@ import { IconChecked, IconClose, IconMagnify } from '@/utils/icons'
 import { Divider } from '../divider'
 
 const meta = {
-    title: 'MenuItem',
-    component: MenuItem,
+    title: 'Menu',
+    component: Menu,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof MenuItem>
+} satisfies Meta<typeof Menu>
 
 export default meta
 type Story = StoryObj<typeof meta>

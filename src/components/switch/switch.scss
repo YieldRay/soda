@@ -35,21 +35,27 @@
             transition: all 200ms;
         }
     }
+
+    &-thumb::before {
+        content: '';
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: rgb(0 0 0 / 0.1);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 200ms;
+        opacity: 0;
+    }
     &:hover,
     &:focus {
         outline: none;
         // the border
         .sd-switch-thumb::before {
-            content: '';
-            display: inline-block;
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            background: rgb(0 0 0 / 0.1);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            opacity: 1;
         }
     }
     &:active {

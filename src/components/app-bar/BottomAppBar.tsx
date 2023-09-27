@@ -6,7 +6,7 @@ import { forwardRef } from 'react'
 import { createPortal } from 'react-dom'
 
 /**
- * BottonAppBar has fixed height = 80px
+ * `<BottonAppBar>` has fixed height = 80px
  * @specs https://m3.material.io/components/bottom-app-bar/specs
  */
 export const BottomAppBar = forwardRef<

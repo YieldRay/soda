@@ -19,7 +19,12 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
     render: () => {
         const [checked, setChecked] = useState(false)
-        return <Checkbox checked={checked} onChange={setChecked}></Checkbox>
+        return (
+            <Checkbox
+                checked={checked}
+                onChange={() => setChecked(!checked)}
+            ></Checkbox>
+        )
     },
 }
 

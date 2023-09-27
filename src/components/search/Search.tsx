@@ -1,13 +1,14 @@
 import './search.scss'
+import { ExtendProps } from '@/utils/type'
+import clsx from 'clsx'
 import { forwardRef } from 'react'
 
 /**
- * warn: this component forward the inner input element for ref
  * @specs https://m3.material.io/components/search/specs
  */
 export const Search = forwardRef<
-    HTMLInputElement,
-    {
+    HTMLDivElement,
+    ExtendProps<{
         placeholder?: string
         leadingIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
@@ -17,15 +18,29 @@ export const Search = forwardRef<
         sd?: 'bar' | 'view'
         value?: string
         onChange?: (value: string) => void
-    }
+    }>
 >(function Search(
-    { placeholder, leadingIcon, trailingIcon, sd: initSd, value, onChange },
+    {
+        placeholder,
+        leadingIcon,
+        trailingIcon,
+        sd: initSd,
+        value,
+        onChange,
+        className,
+        ...props
+    },
     ref
 ) {
     const sd = initSd === 'view' ? 'view' : 'bar'
 
     return (
-        <div className="sd-search" data-sd={sd}>
+        <div
+            {...props}
+            ref={ref}
+            className={clsx('sd-search', className)}
+            data-sd={sd}
+        >
             <div className="sd-search-leading_icon">{leadingIcon}</div>
             <input
                 type="text"
@@ -33,7 +48,6 @@ export const Search = forwardRef<
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => onChange?.(e.target.value)}
-                ref={ref}
             />
             <div className="sd-search-trailing_icon">{trailingIcon}</div>
         </div>

@@ -2,9 +2,8 @@ import { createPortal } from 'react-dom'
 import { Scrim } from '@/utils/Scrim'
 
 /**
- * Provide a scrim to document.body and hold the children,
- * currently only a utility for `<Dialog>` component
- * this component have no ref forwarded
+ * Provide a scrim to document.body and hold the children.
+ * Currently only a utility for `<Dialog>` component
  */
 export function ModalHolder(props: {
     open: boolean
@@ -28,6 +27,7 @@ export function ModalHolder(props: {
                     .sd-modal-holder {
                         position: fixed;
                         inset: 0;
+                        box-sizing: border-box;
                         width: 100%;
                         height: 100%;
                         padding: 1rem;

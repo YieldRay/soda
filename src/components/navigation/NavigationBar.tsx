@@ -14,6 +14,9 @@ export const NavigationBar = forwardRef<
     ExtendProps<{
         items: Array<HelperItem & { key: React.Key }>
         onChange?(item: HelperItem & { key: React.Key }): void
+        /**
+         * Fix the component to the bottom of the window
+         */
         fixed?: boolean
     }>
 >(function NavigationBar(

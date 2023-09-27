@@ -20,7 +20,9 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
     render: () => {
         const [checked, setChecked] = useState(false)
-        return <Switch checked={checked} onChange={setChecked}></Switch>
+        return (
+            <Switch checked={checked} onChange={() => setChecked(!checked)} />
+        )
     },
 }
 
@@ -34,7 +36,7 @@ export const WithIcon: Story = {
     render: () => {
         const [checked, setChecked] = useState(false)
         return (
-            <Switch checked={checked} onChange={setChecked}>
+            <Switch checked={checked} onChange={() => setChecked(!checked)}>
                 {checked ? <IconChecked /> : <IconClose />}
             </Switch>
         )

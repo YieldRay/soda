@@ -205,8 +205,9 @@ const NestedMenuComponent = React.forwardRef<
 })
 
 /**
- * The root menu must has a label property, which will toggle the whole menu
- * any sub menu in it will automatically become a `MenuItem`
+ * The root menu must has a label property, which will toggle the whole menu,
+ * any sub menu in it will automatically become a `MenuItem`.
+ * Based on floating-ui, supports keyboard navigation.
  */
 export const NestedMenu = React.forwardRef<
     HTMLElement,

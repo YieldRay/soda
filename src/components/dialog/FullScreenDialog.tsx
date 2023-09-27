@@ -14,10 +14,13 @@ export const FullScreenDialog = forwardRef<
     ExtendProps<{
         headline?: React.ReactNode
         /**
-         * Action Button
+         * The button's child node inside the top area
          */
         button?: React.ReactNode
         onButtonClick?: () => void
+        /**
+         * Emit when the close button is clicked
+         */
         onCloseClick?: () => void
         children?: React.ReactNode
     }>

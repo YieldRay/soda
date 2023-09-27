@@ -3,11 +3,14 @@ import './switch.scss'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 
+/**
+ * @specs https://m3.material.io/components/switch/specs
+ */
 export const Switch = forwardRef<
     HTMLDivElement,
     ExtendProps<{
         checked?: boolean
-        onChange?: (checked: boolean) => void
+        onChange?: () => void
         children?: React.ReactNode
         disabled?: boolean
     }>
@@ -19,10 +22,10 @@ export const Switch = forwardRef<
             className={clsx('sd-switch', props.className)}
             data-sd-disabled={disabled}
             data-sd-checked={checked}
-            onClick={() => onChange?.(!checked)}
+            onClick={() => onChange?.()}
             onKeyDown={(e) => {
                 if (onChange && !disabled && e.key === 'Enter') {
-                    onChange?.(!checked)
+                    onChange?.()
                 }
             }}
         >

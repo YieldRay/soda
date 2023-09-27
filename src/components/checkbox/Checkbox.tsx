@@ -12,7 +12,7 @@ export const Checkbox = forwardRef<
     HTMLElement,
     ExtendProps<{
         checked?: boolean
-        onChange?: (checked: boolean) => void
+        onChange?: () => void
         children?: React.ReactNode
         disabled?: boolean
         /**
@@ -33,10 +33,10 @@ export const Checkbox = forwardRef<
             data-sd-disabled={disabled}
             data-sd-checked={checked}
             data-sd-error={error}
-            onClick={() => onChange?.(!checked)}
+            onClick={() => onChange?.()}
             onKeyDown={(e) => {
                 if (onChange && !disabled && e.key === 'Enter') {
-                    onChange?.(!checked)
+                    onChange?.()
                 }
             }}
         >

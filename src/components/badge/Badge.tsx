@@ -12,7 +12,7 @@ export const Badge = forwardRef<
         children?: React.ReactNode
         label?: React.ReactNode
         /**
-         * do not need specify this property by default, as it will automatically
+         * Do not need to specify this property in most cases, as it will automatically
          * choose small for empty label and large for none-empty label
          */
         sd?: 'none' | 'small' | 'large'

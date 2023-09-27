@@ -29,10 +29,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 See: <https://yieldray.github.io/soda/>
 
-> Most components in `src/components` directory (exported directly) do not include logic.  
+> Components in `src/components` directory (exported directly) do not include heavy logic.  
 > Those logic helper components can be found in `src/composition` directory
 
-> Most of the components forward `ref` attribute for library interactivity.  
+> Most components in `src/components` forward `ref` attribute for library interactivity.  
 > If not, it will be documented and will be checked if you use typescript.
 
 # Resources

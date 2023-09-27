@@ -1,14 +1,15 @@
 import './text-field.scss'
 import { forwardRef, useRef, useState } from 'react'
 import clsx from 'clsx'
+import { ExtendProps } from '@/utils/type'
 
 /**
- * warn: this component forward the inner input element for ref
+ * [warn]: This component forward the inner input element for ref
  * @specs https://m3.material.io/components/text-fields/specs
  */
 export const TextField = forwardRef<
     HTMLInputElement,
-    {
+    ExtendProps<{
         leadingIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
         labelText?: string
@@ -23,9 +24,7 @@ export const TextField = forwardRef<
          * @default filled
          */
         sd?: 'filled' | 'outlined'
-        className?: string
-        style?: React.CSSProperties
-    }
+    }>
 >(function TextField(
     {
         leadingIcon,
@@ -41,6 +40,7 @@ export const TextField = forwardRef<
         onChange: initOnChange,
         className,
         style,
+        ...props
     },
     ref
 ) {
@@ -59,6 +59,7 @@ export const TextField = forwardRef<
     const sd = initSd === 'outlined' ? 'outlined' : 'filled'
     return (
         <div
+            {...props}
             className={clsx('sd-text_field', className)}
             style={style}
             onClick={() => {

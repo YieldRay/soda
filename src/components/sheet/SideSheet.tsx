@@ -7,7 +7,7 @@ import assign from 'lodash-es/assign'
 import { ExtendProps } from '@/utils/type'
 
 /**
- * this component do not have ref forwarded
+ * This component do not have ref forwarded
  * @specs https://m3.material.io/components/side-sheets/specs
  */
 export function SideSheet({

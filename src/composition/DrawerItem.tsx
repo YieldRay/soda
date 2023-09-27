@@ -4,7 +4,8 @@ import clsx from 'clsx'
 import { forwardRef } from 'react'
 
 /**
- * To make a NavigationDrawer, use a `<SideSheet>` to contain `<DrawerItem>`
+ * To make a NavigationDrawer, use a `<SideSheet>` to contain `<DrawerItem>`.
+ * This component has ref forwarded.
  */
 export const DrawerItem = forwardRef<
     HTMLDivElement,

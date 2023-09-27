@@ -3,6 +3,10 @@ import clsx from 'clsx'
 import { ExtendProps, TagNameString } from '@/utils/type'
 import { forwardRef } from 'react'
 
+/**
+ * This component is primary for internal use.
+ * This component has ref forwarded.
+ */
 export const ActionButton = forwardRef<
     HTMLElement,
     ExtendProps<{

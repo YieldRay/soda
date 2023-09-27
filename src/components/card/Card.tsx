@@ -10,12 +10,10 @@ export const Card = forwardRef<
     HTMLElement,
     ExtendProps<{
         /**
-         * change the container component, custom container should accept className and children property,
-         * div by default
+         * Change the container component, div by default
          */
-        as?:
-            | TagNameString
-            | React.FC<{ className?: string; children?: React.ReactNode }>
+        as?: TagNameString
+
         /**
          * @default elevated
          */

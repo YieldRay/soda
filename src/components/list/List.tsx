@@ -6,11 +6,9 @@ import { omit } from 'lodash-es'
 import { forwardRef } from 'react'
 
 /**
- * `<ListItem>` has `display: inline-block` by default,
- * to make it occupy full width, use `display: block`
  * @specs https://m3.material.io/components/lists/specs
  */
-export const ListItem = forwardRef<
+export const List = forwardRef<
     HTMLElement,
     ExtendProps<{
         headline: React.ReactNode
@@ -29,7 +27,7 @@ export const ListItem = forwardRef<
         lines?: 1 | 2 | 3
         as?: TagNameString
     }>
->(function ListItem(
+>(function List(
     {
         className,
         headline,
