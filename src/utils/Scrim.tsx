@@ -6,17 +6,17 @@ import { forwardRef } from 'react'
 export const Scrim = forwardRef<
     HTMLDivElement,
     ExtendProps<{ open?: boolean }>
->((props, ref) => {
+>(({ open, ...props }, ref) => {
     return (
         <div
-            {...omit(props, ['open', 'children'])}
+            {...omit(props, ['children'])}
             ref={ref}
             style={assign(
                 {
                     background: 'rgb(0 0 0 / 0.1)',
                     transition: 'all 200ms',
-                    opacity: props.open ? '1' : '0',
-                    pointerEvents: props.open ? 'auto' : 'none',
+                    opacity: open ? '1' : '0',
+                    pointerEvents: open ? 'auto' : 'none',
                     position: 'fixed',
                     inset: '0',
                     width: '100%',

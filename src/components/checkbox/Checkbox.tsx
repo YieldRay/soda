@@ -4,7 +4,6 @@ import { Ripple } from '@/utils/Ripple.tsx'
 import { IconChecked } from '@/utils/icons.tsx'
 import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
-import omit from 'lodash-es/omit'
 
 /**
  * @specs https://m3.material.io/components/checkbox/specs
@@ -29,7 +28,6 @@ export const Checkbox = forwardRef<
 
     return (
         <Ripple
-            {...omit(props, 'as')}
             ref={ref}
             className={clsx('sd-checkbox', props.className)}
             data-sd-disabled={disabled}

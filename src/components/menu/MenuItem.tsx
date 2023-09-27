@@ -1,8 +1,7 @@
 import './menu.scss'
-import omit from 'lodash-es/omit'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
-import { ExtendProps } from '@/utils/type'
+import { ExtendProps, TagNameString } from '@/utils/type'
 import { forwardRef } from 'react'
 
 export interface Props {
@@ -11,6 +10,7 @@ export interface Props {
     trailingIcon?: React.ReactNode
     trailingText?: React.ReactNode
     disabled?: boolean
+    as?: TagNameString
 }
 
 /**
@@ -25,14 +25,16 @@ export const MenuItem = forwardRef<HTMLElement, ExtendProps<Props>>(
             trailingIcon,
             trailingText,
             disabled,
+            as,
             ...props
         },
         ref
     ) {
         return (
             <Ripple
-                {...omit(props, ['as'])}
+                {...props}
                 ref={ref}
+                as={as}
                 className={clsx('sd-menu_item', className)}
                 data-sd-disabled={disabled}
             >

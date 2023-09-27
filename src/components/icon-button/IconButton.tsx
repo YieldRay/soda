@@ -2,7 +2,6 @@ import './icon-button.scss'
 import { Ripple } from '@/utils/Ripple'
 import { ExtendProps, TagNameString } from '@/utils/type'
 import clsx from 'clsx'
-import omit from 'lodash-es/omit'
 import { forwardRef } from 'react'
 
 /**
@@ -24,17 +23,29 @@ export const IconButton = forwardRef<
          */
         selected?: boolean
     }>
->(function IconButton({ as, children, className, disabled, ...props }, ref) {
-    const sd = props.sd || 'standard'
-    const selected = Reflect.has(props, 'selected')
-        ? props.selected!
-        : sd === 'standard'
-        ? false
-        : true
+>(function IconButton(
+    {
+        as,
+        children,
+        className,
+        disabled,
+        sd: initSd,
+        selected: initSelected,
+        ...props
+    },
+    ref
+) {
+    const sd = initSd || 'standard'
+    const selected =
+        initSelected !== undefined
+            ? initSelected!
+            : sd === 'standard'
+            ? false
+            : true
 
     return (
         <Ripple
-            {...omit(props, ['sd', 'selected'])}
+            {...props}
             ref={ref}
             className={clsx(
                 'sd-icon_button',

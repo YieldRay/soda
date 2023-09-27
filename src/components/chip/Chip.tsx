@@ -2,8 +2,7 @@ import './chip.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple.tsx'
 import { forwardRef } from 'react'
-import { ExtendProps } from '@/utils/type.ts'
-import omit from 'lodash-es/omit'
+import { ExtendProps, TagNameString } from '@/utils/type.ts'
 
 /**
  * @specs https://m3.material.io/components/chips/specs
@@ -21,21 +20,30 @@ export const Chip = forwardRef<
         trailingIcon?: React.ReactNode
         disabled?: boolean
         onClick?: () => void
+        as?: TagNameString
     }>
 >(function Chip(
-    { sd, children, leadingIcon, trailingIcon, disabled, onClick, ...props },
+    {
+        sd: initSd,
+        children,
+        leadingIcon,
+        trailingIcon,
+        disabled,
+        onClick,
+        className,
+        as,
+        ...props
+    },
     ref
 ) {
+    const sd = initSd || 'outlined'
     return (
         <Ripple
-            {...omit(props, ['className', 'as'])}
+            {...props}
             ref={ref}
-            className={clsx(
-                'sd-chip',
-                `sd-chip-${sd || 'outlined'}`,
-                props.className
-            )}
+            className={clsx('sd-chip', `sd-chip-${sd}`, className)}
             onClick={onClick}
+            as={as}
             data-sd-disabled={disabled}
         >
             {leadingIcon && (

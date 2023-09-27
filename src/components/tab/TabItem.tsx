@@ -1,7 +1,6 @@
 import './tab.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
-import omit from 'lodash-es/omit'
 import { ExtendProps, TagNameString } from '@/utils/type'
 import { forwardRef } from 'react'
 
@@ -19,7 +18,7 @@ export const TabItem = forwardRef<
 >(function TabItem({ children, icon, active, as, className, ...props }, ref) {
     return (
         <Ripple
-            {...omit(props, 'as')}
+            {...props}
             ref={ref}
             as={as}
             className={clsx('sd-tab_item', className)}

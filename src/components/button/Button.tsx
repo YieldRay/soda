@@ -3,13 +3,12 @@ import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
-import omit from 'lodash-es/omit'
 
 /**
  * @specs https://m3.material.io/components/buttons/specs
  */
 export const Button = forwardRef<
-    HTMLElement,
+    HTMLButtonElement,
     ExtendProps<
         {
             /**
@@ -29,7 +28,8 @@ export const Button = forwardRef<
 
     return (
         <Ripple
-            {...omit(props, 'as')}
+            {...props}
+            as="button"
             ref={ref}
             type={type ?? 'button'}
             className={clsx('sd-button', `sd-button-${sd}`, className)}
