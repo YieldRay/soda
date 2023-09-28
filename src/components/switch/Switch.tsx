@@ -19,9 +19,11 @@ export const Switch = forwardRef<
         <div
             {...props}
             ref={ref}
+            role="switch"
             className={clsx('sd-switch', props.className)}
             data-sd-disabled={disabled}
             data-sd-checked={checked}
+            aria-checked={checked}
             onClick={() => onChange?.()}
             onKeyDown={(e) => {
                 if (onChange && !disabled && e.key === 'Enter') {

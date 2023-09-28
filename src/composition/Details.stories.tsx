@@ -33,13 +33,13 @@ export const Filled: Story = {
 
 export const Controlled: Story = {
     render: () => {
-        const [open, setOpen] = useState(true)
+        const [expanded, setExpanded] = useState(true)
         return (
             <Details
                 sd="filled"
                 summary="filled"
-                open={open}
-                onChange={() => setOpen(!open)}
+                expanded={expanded}
+                onChange={() => setExpanded(!expanded)}
             >
                 details
             </Details>

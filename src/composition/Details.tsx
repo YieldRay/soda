@@ -9,8 +9,8 @@ import { useState } from 'react'
 export function Details({
     summary,
     children,
-    open,
-    defaultOpen,
+    expanded,
+    defaultExpanded,
     sd: initSd,
     onChange,
     ...props
@@ -20,13 +20,13 @@ export function Details({
     /**
      * If any not null value is provided, act as a controlled
      */
-    open?: boolean
+    expanded?: boolean
     /**
      * For uncontrolled use
      * @default false
      */
-    defaultOpen?: boolean
-    onChange?: (open: boolean) => void
+    defaultExpanded?: boolean
+    onChange?: (expanded: boolean) => void
     /**
      * @default filled
      */
@@ -40,9 +40,9 @@ export function Details({
         } as const
     )[sd]
 
-    const controlled = open !== undefined
-    const [stateOpen, setStateOpen] = useState(!!defaultOpen)
-    const isOpen = controlled ? open : stateOpen
+    const controlled = expanded !== undefined
+    const [stateExpanded, setStateExpanded] = useState(!!defaultExpanded)
+    const isExpanded = controlled ? expanded : stateExpanded
 
     return (
         <div {...props} className={clsx('details', sd)}>
@@ -64,22 +64,22 @@ export function Details({
                     padding: 8px 8px 8px 16px;
                     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
-                .summary.open.outlined {
+                .summary.expanded.outlined {
                     border-bottom: solid 1px var(--sd-sys-color-outline);
                 }
-                .summary.open.filled {
+                .summary.expanded.filled {
                 }
                 .children {
                     margin: 16px;
                 }
             `}</style>
             <div
-                className={clsx('summary', sd, isOpen && 'open')}
+                className={clsx('summary', sd, isExpanded && 'expanded')}
                 onClick={() => {
                     if (controlled) {
-                        onChange?.(!open)
+                        onChange?.(!expanded)
                     } else {
-                        setStateOpen(!stateOpen)
+                        setStateExpanded(!stateExpanded)
                     }
                 }}
             >
@@ -89,7 +89,7 @@ export function Details({
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         style={{
-                            transform: `rotate(${isOpen ? '0' : '180deg'})`,
+                            transform: `rotate(${isExpanded ? '180deg' : '0'})`,
                             transition: 'all 200ms',
                         }}
                     >
@@ -97,7 +97,7 @@ export function Details({
                     </svg>
                 </IconButton>
             </div>
-            <Collapsible open={isOpen}>
+            <Collapsible expanded={isExpanded}>
                 <div className="children">{children}</div>
             </Collapsible>
         </div>

@@ -30,8 +30,10 @@ export const Checkbox = forwardRef<
         <Ripple
             ref={ref}
             className={clsx('sd-checkbox', props.className)}
+            role="checkbox"
             data-sd-disabled={disabled}
             data-sd-checked={checked}
+            aria-checked={checked}
             data-sd-error={error}
             onClick={() => onChange?.()}
             onKeyDown={(e) => {

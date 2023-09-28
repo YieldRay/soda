@@ -16,11 +16,20 @@ export const RadioButton = forwardRef<
          * Must provide for grouped radio (`inside <RadioGroup>`)
          */
         value?: string
+        disabled?: boolean
         onChange?(value?: string): void
         children?: React.ReactNode
     }>
 >(function RadioButton(
-    { checked: initChecked, value, onChange, children, className, ...props },
+    {
+        checked: initChecked,
+        value,
+        onChange,
+        disabled,
+        children,
+        className,
+        ...props
+    },
     ref
 ) {
     const rippleRef = useRef<HTMLDivElement>(null)
@@ -35,11 +44,20 @@ export const RadioButton = forwardRef<
         <div
             {...props}
             ref={ref}
-            data-sd-checked={checked}
+            role="radio"
             className={clsx('sd-radio_button', className)}
+            data-sd-checked={checked}
+            aria-checked={checked}
+            data-sd-disabled={disabled}
             onClick={() => {
                 onChange?.(value)
                 groupContext?.onChange?.(value!)
+            }}
+            onKeyDown={(e) => {
+                if (!disabled && e.key === 'Enter') {
+                    onChange?.(value)
+                    groupContext?.onChange?.(value!)
+                }
             }}
         >
             <div className="sd-radio_button-box" ref={rippleRef}></div>

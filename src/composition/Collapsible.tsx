@@ -7,20 +7,20 @@ import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 export const Collapsible = forwardRef<
     HTMLDivElement,
     ExtendProps<{
-        open?: boolean
+        expanded?: boolean
         children?: React.ReactNode
     }>
->(function Collapsible({ open, children, ...props }, ref) {
+>(function Collapsible({ expanded, children, ...props }, ref) {
     const eRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => eRef.current!)
     useEffect(() => {
         const e = eRef.current!
-        if (open) {
+        if (expanded) {
             e.style.maxHeight = e.scrollHeight + 'px'
         } else {
             e.style.maxHeight = 0 + 'px'
         }
-    }, [open])
+    }, [expanded])
 
     return (
         <div {...props} ref={eRef}>

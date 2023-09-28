@@ -1,6 +1,5 @@
 export const IconChecked = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <title>check</title>
         <path
             fill="currentColor"
             fillRule="evenodd"
@@ -12,7 +11,6 @@ export const IconChecked = () => (
 
 export const IconClose = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <title>close</title>
         <path
             fill="currentColor"
             fillRule="evenodd"
@@ -24,7 +22,6 @@ export const IconClose = () => (
 
 export const IconMenu = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <title>menu</title>
         <path
             fill="currentColor"
             fillRule="evenodd"
@@ -36,7 +33,6 @@ export const IconMenu = () => (
 
 export const IconMenuRight = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <title>menu-right</title>
         <path
             fill="currentColor"
             fillRule="evenodd"
@@ -48,12 +44,22 @@ export const IconMenuRight = () => (
 
 export const IconMagnify = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <title>magnify</title>
         <path
             fill="currentColor"
             fillRule="evenodd"
             clipRule="evenodd"
             d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+        />
+    </svg>
+)
+
+export const IconDotsVertical = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+            fill="currentColor"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"
         />
     </svg>
 )

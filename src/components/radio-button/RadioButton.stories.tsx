@@ -38,8 +38,15 @@ export const Group: Story = {
 
         return (
             <RadioGroup value={value} onChange={(v) => setValue(v)}>
-                {values.map((v) => (
-                    <RadioButton value={v}>{v}</RadioButton>
+                {values.map((v, i) => (
+                    <RadioButton
+                        value={v}
+                        tabIndex={i + 1}
+                        key={i}
+                        disabled={i === 0}
+                    >
+                        {v}
+                    </RadioButton>
                 ))}
             </RadioGroup>
         )

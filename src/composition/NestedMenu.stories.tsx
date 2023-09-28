@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { NestedMenu as Menu, NestedMenuItem as MenuItem } from './NestedMenu'
+import { IconButton } from '..'
+import { IconDotsVertical } from '@/utils/icons'
 
 const meta = {
     title: 'composition/NestedMenu',
@@ -11,41 +13,60 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-    render: () => (
-        <div style={{ minHeight: '100vh' }}>
-            <h1>Floating UI Dropdown Menu</h1>
-            <p>(Soda with floating-ui)</p>
-
-            <Menu label={<button>open</button>} defaultOpen>
-                <MenuItem onClick={() => console.log('Undo')}>Undo</MenuItem>
-                <MenuItem disabled>Redo</MenuItem>
-                <MenuItem>Cut</MenuItem>
-                <Menu label="Copy as" leadingIcon={'*'}>
-                    <MenuItem>Text</MenuItem>
-                    <MenuItem>Video</MenuItem>
-                    <Menu label="Image">
-                        <MenuItem>.png</MenuItem>
-                        <MenuItem>.jpg</MenuItem>
-                        <MenuItem>.svg</MenuItem>
-                        <MenuItem>.git</MenuItem>
-                    </Menu>
-                    <MenuItem>Audio</MenuItem>
-                </Menu>
-                <Menu label="Share">
-                    <MenuItem>Twitter</MenuItem>
-                    <MenuItem>Instagram</MenuItem>
-                </Menu>
+const submenus = (
+    <>
+        <MenuItem onClick={() => console.log('Undo')}>Undo</MenuItem>
+        <MenuItem disabled>Redo</MenuItem>
+        <MenuItem>Cut</MenuItem>
+        <Menu label="Copy as" leadingIcon={'*'}>
+            <MenuItem>Text</MenuItem>
+            <MenuItem>Video</MenuItem>
+            <Menu label="Image">
+                <MenuItem>.png</MenuItem>
+                <MenuItem>.jpg</MenuItem>
+                <MenuItem>.svg</MenuItem>
+                <MenuItem>.git</MenuItem>
             </Menu>
+            <MenuItem>Audio</MenuItem>
+        </Menu>
+        <Menu label="Share">
+            <MenuItem>Twitter</MenuItem>
+            <MenuItem>Instagram</MenuItem>
+        </Menu>
+    </>
+)
 
-            <h3>ARIA Authoring Practices Guide</h3>
-            <a
-                target="_blank"
-                href="https://www.w3.org/WAI/ARIA/apg/patterns/menubutton/"
-                rel="noreferrer"
-            >
-                Menu Button
-            </a>
-        </div>
-    ),
+export const Default: Story = {
+    args: {
+        label: (
+            <IconButton>
+                <IconDotsVertical />
+            </IconButton>
+        ),
+        defaultOpen: true,
+        children: submenus,
+    },
+    decorators: [
+        (Story) => (
+            <div style={{ minHeight: '50vh' }}>
+                <h1>Dropdown Menu</h1>
+                <p>(Soda with floating-ui)</p>
+                <Story />
+            </div>
+        ),
+    ],
+}
+
+export const ContextMenu: Story = {
+    args: { contextMenu: true, children: submenus },
+    decorators: [
+        (Story) => (
+            <div style={{ minHeight: '50vh' }}>
+                <h1>Context Menu</h1>
+                <p>Right click the document to display</p>
+                <p>(Soda with floating-ui)</p>
+                <Story />
+            </div>
+        ),
+    ],
 }
