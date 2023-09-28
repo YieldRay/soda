@@ -11,6 +11,7 @@ import {
     useRole,
     safePolygon,
 } from '@floating-ui/react'
+import type { Placement } from '@floating-ui/react'
 import { useState } from 'react'
 
 /**
@@ -19,12 +20,13 @@ import { useState } from 'react'
 export function FloatingTip(props: {
     content?: React.ReactNode
     trigger?: React.ReactNode
+    placement?: Placement
 }) {
     const [isOpen, setIsOpen] = useState(false)
 
     const { refs, floatingStyles, update, context } = useFloating({
         whileElementsMounted: autoUpdate,
-        placement: 'bottom-start',
+        placement: props.placement || 'bottom-start',
         middleware: [offset(4), flip(), shift()],
         open: isOpen,
         onOpenChange: setIsOpen,

@@ -15,9 +15,9 @@ export const Divider = forwardRef<
          */
         sd?: 'full' | 'inset'
         /**
-         * @default horizon
+         * @default horizontal
          */
-        direction?: 'horizon' | 'vertical'
+        direction?: 'horizontal' | 'vertical'
     }>
 >(function Divider({ sd, direction, className, ...props }, ref) {
     return (
@@ -33,7 +33,7 @@ export const Divider = forwardRef<
                 className
             )}
             data-sd-direction={
-                direction === 'vertical' ? 'vertical' : 'horizon'
+                direction === 'vertical' ? 'vertical' : 'horizontal'
             }
         ></div>
     )

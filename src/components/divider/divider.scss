@@ -6,7 +6,7 @@
     vertical-align: middle;
     background: var(--sd-sys-color-outline-variant);
 
-    &[data-sd-direction='horizon'] {
+    &[data-sd-direction='horizontal'] {
         width: 100%;
         height: 1px;
     }
@@ -16,7 +16,7 @@
         // height: 100%;
     }
 
-    &-full[data-sd-direction='horizon'] {
+    &-full[data-sd-direction='horizontal'] {
         margin-top: 8px;
         margin-bottom: 8px;
     }

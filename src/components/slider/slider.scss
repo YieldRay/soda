@@ -1,0 +1,116 @@
+// https://m3.material.io/components/sliders/specs
+
+.sd-slider {
+    --percentage: 0%;
+    --min-length: 5rem;
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+
+    &-inactive_track,
+    &-active_track {
+        display: inline-block;
+        position: absolute;
+    }
+
+    &-inactive_track {
+        background: var(--sd-sys-color-surface-container-highest);
+        width: 100%;
+        border-radius: 8px;
+    }
+    &-active_track {
+        background: var(--sd-sys-color-primary);
+    }
+
+    //? horizontal
+    &[data-sd-direction='horizontal'] {
+        min-width: var(--min-length);
+        height: 40px;
+        margin: 0 20px;
+        .sd-slider-inactive_track,
+        .sd-slider-active_track {
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 4px;
+        }
+        .sd-slider-inactive_track {
+            width: 100%;
+        }
+        .sd-slider-active_track {
+            width: var(--percentage);
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .sd-slider-handle,
+        .sd-slider-state_layer {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .sd-slider-handle {
+            left: calc(var(--percentage) - 10px);
+        }
+        .sd-slider-state_layer {
+            left: calc(var(--percentage) - 20px);
+        }
+    }
+
+    //? vertical
+    &[data-sd-direction='vertical'] {
+        min-height: var(--min-length);
+        width: 40px;
+        margin: 20px 0;
+        .sd-slider-inactive_track,
+        .sd-slider-active_track {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+        }
+        .sd-slider-inactive_track {
+            height: 100%;
+        }
+        .sd-slider-active_track {
+            height: var(--percentage);
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .sd-slider-handle,
+        .sd-slider-state_layer {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .sd-slider-handle {
+            bottom: calc(var(--percentage) - 10px);
+        }
+        .sd-slider-state_layer {
+            bottom: calc(var(--percentage) - 20px);
+        }
+    }
+
+    &-handle,
+    &-state_layer {
+        display: inline-block;
+        box-sizing: border-box;
+        border-radius: 50%;
+        position: absolute;
+        border-radius: 50%;
+    }
+
+    &-handle {
+        cursor: grab;
+        height: 20px;
+        width: 20px;
+        background: var(--sd-sys-color-primary);
+    }
+    &-state_layer {
+        height: 40px;
+        width: 40px;
+        pointer-events: none;
+        transition: opacity 200ms;
+        background-color: rgb(0 0 0 / 0.1);
+    }
+}

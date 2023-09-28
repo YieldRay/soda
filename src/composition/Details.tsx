@@ -18,7 +18,7 @@ export function Details({
     summary: React.ReactNode
     children: React.ReactNode
     /**
-     * If any not null value is provided, act as a controlled
+     * If any none-null value is provided, act as a controlled
      */
     expanded?: boolean
     /**
