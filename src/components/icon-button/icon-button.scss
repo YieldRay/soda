@@ -84,7 +84,7 @@ button.sd-icon_button {
         &:active {
             background: rgb(0 0 0 / 0.08);
         }
-        &:focus {
+        &:focus-visible {
             background: rgb(0 0 0 / 0.12);
         }
     }
@@ -96,7 +96,7 @@ button.sd-icon_button {
         &:active {
             filter: brightness(92%);
         }
-        &:focus {
+        &:focus-visible {
             filter: brightness(88%);
         }
     }

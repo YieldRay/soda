@@ -6,11 +6,11 @@ import { Scrim } from '@/utils/Scrim'
  * Currently only a utility for `<Dialog>` component
  */
 export function ModalHolder(props: {
-    open: boolean
+    open?: boolean
     /**
      * Children must has `position: fixed`
      */
-    children: React.ReactNode
+    children?: React.ReactNode
     onScrimClick?: () => void
     /**
      * @default document.body

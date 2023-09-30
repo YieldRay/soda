@@ -1,4 +1,5 @@
 import './card.scss'
+import { Ripple } from '@/utils/Ripple'
 import { ExtendProps, TagNameString } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
@@ -20,16 +21,16 @@ export const Card = forwardRef<
         children?: React.ReactNode
     }>
 >(function Card({ sd: initSd, children, as, className, ...props }, ref) {
-    const As: any = as || 'div'
     const sd = initSd || 'elevated'
 
     return (
-        <As
+        <Ripple
             {...props}
             ref={ref}
+            as={as || 'div'}
             className={clsx('sd-card', `sd-card-${sd}`, className)}
         >
             {children}
-        </As>
+        </Ripple>
     )
 })

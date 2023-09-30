@@ -41,7 +41,7 @@ export const ActionButton = forwardRef<
                 .sd-action_button[data-sd-inverse='false']:active {
                     background: rgb(0 0 0 / 0.08);
                 }
-                .sd-action_button[data-sd-inverse='false']:focus {
+                .sd-action_button[data-sd-inverse='false']:focus-visiable {
                     background: rgb(0 0 0 / 0.12);
                 }
                 .sd-action_button[data-sd-inverse='true'] {
@@ -53,7 +53,7 @@ export const ActionButton = forwardRef<
                 .sd-action_button[data-sd-inverse='true']:active {
                     background: rgb(255 255 255 / 0.08);
                 }
-                .sd-action_button[data-sd-inverse='true']:focus {
+                .sd-action_button[data-sd-inverse='true']:focus-visiable {
                     background: rgb(255 255 255 / 0.12);
                 }
                 .sd-action_button[data-sd-disabled='true'] {

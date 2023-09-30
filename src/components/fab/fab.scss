@@ -33,7 +33,7 @@ button.sd-fab {
     &:active {
         filter: brightness(92%);
     }
-    &:focus {
+    &:focus-visible {
         outline: none;
         filter: brightness(88%);
     }

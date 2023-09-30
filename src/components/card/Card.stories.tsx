@@ -17,9 +17,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Outlined: Story = {
+export const Elevated: Story = {
     args: {
-        sd: 'outlined',
+        sd: 'elevated',
     },
 }
 
@@ -29,9 +29,9 @@ export const Filled: Story = {
     },
 }
 
-export const Elevated: Story = {
+export const Outlined: Story = {
     args: {
-        sd: 'elevated',
+        sd: 'outlined',
     },
 }
 
@@ -39,10 +39,9 @@ function CardDemoChild() {
     return (
         <div
             style={{
-                minWidth: '400px',
-                minHeight: '200px',
-                display: 'grid',
-                placeItems: 'center',
+                minWidth: '200px',
+                minHeight: '100px',
+                padding: '1rem',
             }}
         >
             This is a card

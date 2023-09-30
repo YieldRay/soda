@@ -46,7 +46,7 @@
             &:active {
                 background: rgb(0 0 0 / 0.08);
             }
-            &:focus {
+            &:focus-visible {
                 outline: none;
                 background: rgb(0 0 0 / 0.12);
             }

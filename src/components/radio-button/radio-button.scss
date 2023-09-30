@@ -67,7 +67,7 @@
             background: rgb(0 0 0 /0.1);
         }
     }
-    &:focus {
+    &:focus-visible {
         outline: none;
         .sd-radio_button-box {
             background: rgb(0 0 0 /0.12);

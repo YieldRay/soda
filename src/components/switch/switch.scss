@@ -53,7 +53,7 @@
         opacity: 0;
     }
     &:hover,
-    &:focus {
+    &:focus-visible {
         outline: none;
         // the border
         .sd-switch-thumb::before {

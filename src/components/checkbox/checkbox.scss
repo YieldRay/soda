@@ -13,7 +13,7 @@ $error: var(--sd-sys-color-error);
     &:hover {
         background: rgb(0 0 0 / 0.1);
     }
-    &:focus {
+    &:focus-visible {
         outline: none;
         background: rgb(0 0 0 / 0.12);
     }

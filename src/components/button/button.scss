@@ -48,7 +48,7 @@ button.sd-button {
             opacity: unset;
             filter: brightness(95%);
         }
-        &:focus {
+        &:focus-visible {
             outline: none;
             opacity: unset;
             filter: brightness(90%);
@@ -68,7 +68,7 @@ button.sd-button {
             box-shadow: unset;
             filter: contrast(120%);
         }
-        &:focus {
+        &:focus-visible {
             outline: none;
             box-shadow: unset;
             filter: contrast(110%);
@@ -88,7 +88,7 @@ button.sd-button {
         &:active {
             filter: brightness(92%);
         }
-        &:focus {
+        &:focus-visible {
             filter: brightness(88%);
         }
     }
@@ -105,7 +105,7 @@ button.sd-button {
         &:active {
             filter: brightness(92%);
         }
-        &:focus {
+        &:focus-visible {
             filter: brightness(88%);
         }
     }
@@ -124,7 +124,7 @@ button.sd-button {
         &:active {
             background: rgb(0 0 0 / 0.08);
         }
-        &:focus {
+        &:focus-visible {
             background: rgb(0 0 0 / 0.12);
         }
     }
