@@ -22,7 +22,31 @@ export const Default: Story = {
         return (
             <div style={{ minWidth: '20rem' }}>
                 <p>{value}</p>
-                <Slider value={value} onChange={setValue} steps={5}></Slider>
+                <Slider value={value} onChange={setValue} />
+            </div>
+        )
+    },
+}
+
+export const Steps: Story = {
+    render: () => {
+        const [value, setValue] = useState(0)
+        return (
+            <div style={{ minWidth: '20rem' }}>
+                <p>{value}</p>
+                <Slider value={value} onChange={setValue} steps={5} />
+            </div>
+        )
+    },
+}
+
+export const Limit: Story = {
+    render: () => {
+        const [value, setValue] = useState(10)
+        return (
+            <div style={{ minWidth: '20rem' }}>
+                <p>{value}</p>
+                <Slider value={value} onChange={setValue} min={10} max={50} />
             </div>
         )
     },
@@ -37,9 +61,8 @@ export const Vertical: Story = {
                 <Slider
                     value={value}
                     onChange={setValue}
-                    steps={5}
                     direction="vertical"
-                ></Slider>
+                />
             </div>
         )
     },

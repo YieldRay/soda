@@ -1,6 +1,6 @@
 import './icon-button.scss'
 import { Ripple } from '@/utils/Ripple'
-import { ExtendProps, TagNameString } from '@/utils/type'
+import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 
@@ -10,7 +10,6 @@ import { forwardRef } from 'react'
 export const IconButton = forwardRef<
     HTMLElement,
     ExtendProps<{
-        as?: TagNameString
         /**
          * @default standard
          */
@@ -25,7 +24,6 @@ export const IconButton = forwardRef<
     }>
 >(function IconButton(
     {
-        as,
         children,
         className,
         disabled,
@@ -52,7 +50,7 @@ export const IconButton = forwardRef<
                 `sd-icon_button-${sd}`,
                 className
             )}
-            as={as}
+            as="button"
             data-sd-selected={selected}
             data-sd-disabled={disabled}
         >

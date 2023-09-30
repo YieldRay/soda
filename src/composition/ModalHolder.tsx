@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom'
 import { Scrim } from '@/utils/Scrim'
 
 /**
- * Provide a scrim to document.body and hold the children.
+ * Provide a clickable scrim to document.body and hold the children.
  * Currently only a utility for `<Dialog>` component
  */
 export function ModalHolder(props: {

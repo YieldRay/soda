@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { FloatingTip } from './FloatingTip'
+import { TooltipHolder } from './TooltipHolder'
 import { TopAppBar } from '../components/app-bar'
 import { IconButton } from '../components/icon-button'
 import { PlainTooltip, RichTooltip } from '../components/tooltip'
 import { IconMenu } from '@/utils/icons'
 
 const meta = {
-    title: 'composition/FloatingTip',
-    component: FloatingTip,
+    title: 'composition/TooltipHolder',
+    component: TooltipHolder,
     tags: ['autodocs'],
-} satisfies Meta<typeof FloatingTip>
+} satisfies Meta<typeof TooltipHolder>
 
 export default meta
 
@@ -21,47 +21,48 @@ export const Default: Story = {
         <>
             <TopAppBar
                 leadingNavigationIcon={
-                    <FloatingTip
+                    <TooltipHolder
                         trigger={
                             <IconButton>
                                 <IconMenu />
                             </IconButton>
                         }
                         content={<PlainTooltip>menu</PlainTooltip>}
-                    ></FloatingTip>
+                    ></TooltipHolder>
                 }
                 trailingIcon={
                     <>
-                        <FloatingTip
+                        <TooltipHolder
                             trigger={<IconButton>❤</IconButton>}
                             content={
                                 <PlainTooltip>
                                     love but so loooooooooong
                                 </PlainTooltip>
                             }
-                        ></FloatingTip>
-                        <FloatingTip
+                        ></TooltipHolder>
+                        <TooltipHolder
                             trigger={<IconButton>×</IconButton>}
                             content={
                                 <PlainTooltip>
                                     close but so loooooooooong
                                 </PlainTooltip>
                             }
-                        ></FloatingTip>
+                        ></TooltipHolder>
                     </>
                 }
             >
                 TopAppBar
             </TopAppBar>
 
-            <FloatingTip
+            <TooltipHolder
+                placement="right"
                 trigger={<IconButton>❤</IconButton>}
                 content={
                     <RichTooltip subhead="subhead" action="action">
                         love but so loooooooooong
                     </RichTooltip>
                 }
-            ></FloatingTip>
+            ></TooltipHolder>
 
             <h1>hover on the icon to see how it works!</h1>
 

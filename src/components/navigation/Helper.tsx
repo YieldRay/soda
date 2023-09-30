@@ -35,7 +35,6 @@ export function Helper({
         >
             <Badge sd={badge?.active ? badge?.sd : 'none'} label={badge?.label}>
                 <Button
-                    as="div"
                     sd={active ? 'tonal' : 'text'}
                     className="sd-navigation_helper-icon"
                 >

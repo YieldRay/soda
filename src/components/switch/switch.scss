@@ -6,6 +6,8 @@
     box-sizing: content-box;
     width: 2rem;
     height: 1rem;
+    display: inline-block;
+    vertical-align: middle;
     border-radius: 1.25rem;
     background: var(--sd-sys-color-surface-container-highest);
     cursor: pointer;

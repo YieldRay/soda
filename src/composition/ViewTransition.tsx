@@ -4,7 +4,7 @@ import { startViewTransition } from '@/utils/view-transition'
 import { ExtendProps } from '@/utils/type'
 
 /**
- * [Experimental]: This component use ref to toggle transition.
+ * [experimental]: This component use ref to toggle transition.
  */
 export const ViewTransition = forwardRef<
     { replace(children: React.ReactNode): void },

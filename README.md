@@ -55,6 +55,11 @@ The easiest way is to use the `Roboto` font, just simply add a few lines of css 
 * {
     font-family: 'Roboto', sans-serif;
 }
+// Tips:
+// Chinese user may prefer:
+// @import url('https://fonts.loli.net/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
+// @import url('https://fonts.font.im/css?family=Roboto:100,300,400,500,700,900');
+
 /* using Google Sans */
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@100;200;300;400;500;700;900&display=swap');
 * {

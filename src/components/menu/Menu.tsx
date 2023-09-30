@@ -8,12 +8,12 @@ import { forwardRef } from 'react'
  * @specs https://m3.material.io/components/menus/specs
  */
 export const Menu = forwardRef<
-    HTMLMenuElement,
+    HTMLUListElement,
     ExtendProps<{ children?: React.ReactNode }>
 >(function Menu({ className, children, ...props }, ref) {
     return (
-        <menu {...props} ref={ref} className={clsx('sd-menu', className)}>
+        <ul {...props} ref={ref} className={clsx('sd-menu', className)}>
             {children}
-        </menu>
+        </ul>
     )
 })

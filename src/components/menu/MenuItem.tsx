@@ -1,7 +1,7 @@
 import './menu.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
-import { ExtendProps, TagNameString } from '@/utils/type'
+import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
 
 export interface Props {
@@ -10,7 +10,6 @@ export interface Props {
     trailingIcon?: React.ReactNode
     trailingText?: React.ReactNode
     disabled?: boolean
-    as?: TagNameString
 }
 
 /**
@@ -25,7 +24,6 @@ export const MenuItem = forwardRef<HTMLElement, ExtendProps<Props>>(
             trailingIcon,
             trailingText,
             disabled,
-            as,
             ...props
         },
         ref
@@ -34,7 +32,7 @@ export const MenuItem = forwardRef<HTMLElement, ExtendProps<Props>>(
             <Ripple
                 {...props}
                 ref={ref}
-                as={as}
+                as="li"
                 className={clsx('sd-menu_item', className)}
                 data-sd-disabled={disabled}
             >

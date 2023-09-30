@@ -1,7 +1,7 @@
 import './fab.scss'
 import { Ripple } from '@/utils/Ripple'
 import clsx from 'clsx'
-import { ExtendProps, TagNameString } from '@/utils/type.ts'
+import { ExtendProps } from '@/utils/type.ts'
 import { forwardRef } from 'react'
 
 /**
@@ -21,17 +21,16 @@ export const Fab = forwardRef<
         children?: React.ReactNode
         extended?: boolean
         disabled?: boolean
-        as?: TagNameString
     }>
 >(function Fab(
-    { sd, className, size, children, extended, disabled, as, ...props },
+    { sd, className, size, children, extended, disabled, ...props },
     ref
 ) {
     return (
         <Ripple
             {...props}
             ref={ref}
-            as={as || 'button'}
+            as={'button'}
             className={clsx('sd-fab', className)}
             data-sd={sd || 'surface'}
             data-sd-size={size || 'default'}

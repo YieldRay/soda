@@ -1,7 +1,7 @@
 import './tab.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
-import { ExtendProps, TagNameString } from '@/utils/type'
+import { ExtendProps } from '@/utils/type'
 import { forwardRef, useContext } from 'react'
 import { TabContext } from '.'
 
@@ -15,19 +15,9 @@ export const TabItem = forwardRef<
         children?: React.ReactNode
         icon?: React.ReactNode
         active?: boolean
-        as?: TagNameString
     }>
 >(function TabItem(
-    {
-        children,
-        icon,
-        value,
-        active: initActive,
-        as,
-        className,
-        onClick,
-        ...props
-    },
+    { children, icon, value, active: initActive, className, onClick, ...props },
     ref
 ) {
     const tabContext = useContext(TabContext)
@@ -37,7 +27,6 @@ export const TabItem = forwardRef<
         <Ripple
             {...props}
             ref={ref}
-            as={as}
             className={clsx('sd-tab_item', className)}
             data-sd-active={active}
             onClick={(e) => {

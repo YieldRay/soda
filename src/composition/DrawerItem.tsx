@@ -49,6 +49,7 @@ export const DrawerItem = forwardRef<
             }
             .label-text {
                 text-wrap: nowrap;
+                white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 margin-left: 16px;

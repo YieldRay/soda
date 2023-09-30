@@ -12,12 +12,15 @@ import {
     safePolygon,
 } from '@floating-ui/react'
 import type { Placement } from '@floating-ui/react'
+import assign from 'lodash-es/assign'
 import { useState } from 'react'
 
 /**
- * @ref https://floating-ui.com/docs/react
+ * Just a simple wrapper of `floating-ui` for convenience.
+ *
+ * You may use `floating-ui` directly for better control.
  */
-export function FloatingTip(props: {
+export function TooltipHolder(props: {
     content?: React.ReactNode
     trigger?: React.ReactNode
     placement?: Placement
@@ -33,10 +36,6 @@ export function FloatingTip(props: {
     })
 
     const hover = useHover(context, {
-        delay: {
-            open: 300,
-            close: 100,
-        },
         move: false,
         handleClose: safePolygon({ blockPointerEvents: true }),
     })
@@ -60,16 +59,22 @@ export function FloatingTip(props: {
             >
                 {props.trigger}
             </div>
-            {isOpen && (
-                <div
-                    className="content"
-                    ref={refs.setFloating}
-                    style={floatingStyles}
-                    {...getFloatingProps()}
-                >
-                    {props.content}
-                </div>
-            )}
+
+            <div
+                className="content"
+                ref={refs.setFloating}
+                style={assign(
+                    {
+                        pointerEvents: isOpen ? 'auto' : 'none',
+                        opacity: isOpen ? '1' : '0',
+                    },
+                    floatingStyles
+                )}
+                {...getFloatingProps()}
+            >
+                {props.content}
+            </div>
+
             <style jsx>{`
                 .trigger {
                     position: relative;
@@ -78,15 +83,7 @@ export function FloatingTip(props: {
                 }
                 .content {
                     width: max-content;
-                    animation: sd-fade-in 200ms;
-                }
-                @keyframes sd-fade-in {
-                    from {
-                        opacity: 0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
+                    transition: opacity 200ms;
                 }
             `}</style>
         </div>

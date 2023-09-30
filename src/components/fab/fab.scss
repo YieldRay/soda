@@ -23,6 +23,7 @@ button.sd-fab {
     @include elevation-level1; // 3 default 1 lowered
     @include square(56px, 16px);
     @include display-inline-flex-center;
+    vertical-align: middle;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 

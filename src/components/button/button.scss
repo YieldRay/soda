@@ -31,9 +31,6 @@ button.sd-button {
         opacity: 0.38;
         pointer-events: none;
     }
-    &:focus {
-        outline: none;
-    }
 
     // elevated
 
@@ -52,6 +49,7 @@ button.sd-button {
             filter: brightness(95%);
         }
         &:focus {
+            outline: none;
             opacity: unset;
             filter: brightness(90%);
         }
@@ -71,6 +69,7 @@ button.sd-button {
             filter: contrast(120%);
         }
         &:focus {
+            outline: none;
             box-shadow: unset;
             filter: contrast(110%);
         }

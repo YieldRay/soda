@@ -1,6 +1,6 @@
 import { Ripple } from '@/utils/Ripple'
 import clsx from 'clsx'
-import { ExtendProps, TagNameString } from '@/utils/type'
+import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
 
 /**
@@ -13,15 +13,15 @@ export const ActionButton = forwardRef<
         inverse?: boolean
         disabled?: boolean
         children?: React.ReactNode
-        as?: TagNameString
     }>
->(({ className, inverse, disabled, children, as, ...props }, ref) => {
+>(({ className, inverse, disabled, children, ...props }, ref) => {
     return (
         <>
             <style jsx global>{`
                 .sd-action_button {
                     all: unset;
                     display: inline-block;
+                    vertical-align: middle;
                     line-height: 20px;
                     font-size: 14px;
                     font-weight: 500;
@@ -41,6 +41,9 @@ export const ActionButton = forwardRef<
                 .sd-action_button[data-sd-inverse='false']:active {
                     background: rgb(0 0 0 / 0.08);
                 }
+                .sd-action_button[data-sd-inverse='false']:focus {
+                    background: rgb(0 0 0 / 0.12);
+                }
                 .sd-action_button[data-sd-inverse='true'] {
                     color: var(--sd-sys-color-inverse-primary);
                 }
@@ -50,6 +53,9 @@ export const ActionButton = forwardRef<
                 .sd-action_button[data-sd-inverse='true']:active {
                     background: rgb(255 255 255 / 0.08);
                 }
+                .sd-action_button[data-sd-inverse='true']:focus {
+                    background: rgb(255 255 255 / 0.12);
+                }
                 .sd-action_button[data-sd-disabled='true'] {
                     pointer-events: none;
                     filter: grayscale(98%) opacity(40%);
@@ -58,13 +64,13 @@ export const ActionButton = forwardRef<
             <Ripple
                 {...props}
                 ref={ref}
+                as="button"
                 className={clsx('sd-action_button', className)}
                 rippleColor={
                     inverse ? 'rgb(255 255 255 / 0.1)' : 'rgb(0 0 0 / 0.1)'
                 }
                 data-sd-inverse={inverse ? 'true' : 'false'}
                 data-sd-disabled={disabled ? 'true' : 'false'}
-                as={as || 'button'}
             >
                 {children}
             </Ripple>

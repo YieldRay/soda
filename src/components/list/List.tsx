@@ -1,7 +1,7 @@
 import './list.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
-import { ExtendProps, TagNameString } from '@/utils/type.ts'
+import { ExtendProps } from '@/utils/type.ts'
 import { omit } from 'lodash-es'
 import { forwardRef } from 'react'
 
@@ -25,7 +25,6 @@ export const List = forwardRef<
          * 3 means two lines of supporting text
          */
         lines?: 1 | 2 | 3
-        as?: TagNameString
     }>
 >(function List(
     {
@@ -47,6 +46,7 @@ export const List = forwardRef<
         <Ripple
             {...omit(props, ['children'])}
             ref={ref}
+            as="li"
             className={clsx('sd-list', className)}
             data-sd-lines={lines}
             data-sd-disabled={disabled}

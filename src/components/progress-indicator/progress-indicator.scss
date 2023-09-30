@@ -4,6 +4,7 @@
     display: inline-block;
     vertical-align: middle;
     height: 4px;
+    min-width: 5rem; //! min-width
     width: 100%;
     background: var(--sd-sys-color-surface-container-highest);
 

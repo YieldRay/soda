@@ -67,7 +67,7 @@ export const BottomSheet = forwardRef<
 
     const ele = (
         <>
-            <Scrim open={visiable} onClick={() => onScrimClick?.()}></Scrim>
+            <Scrim open={visiable} onClick={() => onScrimClick?.()} />
             <div className="sd-bottom_sheet-scrim">
                 <div
                     {...props}

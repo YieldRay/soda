@@ -13,7 +13,6 @@ export const Card = forwardRef<
          * Change the container component, div by default
          */
         as?: TagNameString
-
         /**
          * @default elevated
          */

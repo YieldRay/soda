@@ -1,6 +1,6 @@
 {
     "name": "soda-material",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "keywords": [
         "material design",
         "material you"
@@ -26,9 +26,9 @@
         "format": "prettier --write ./src",
         "preview": "vite preview"
     },
-    "dependencies": {
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+    "peerDependencies": {
+        "react": ">=18",
+        "react-dom": ">=18"
     },
     "devDependencies": {
         "@floating-ui/react": "^0.25.4",

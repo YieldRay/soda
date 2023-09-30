@@ -1,6 +1,9 @@
 import { useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
+/**
+ * Based on HTMLDialogElement, this can be a replacement for `<ModalHolder>`
+ */
 export function DialogHolder({
     portalTo,
     open,
@@ -10,6 +13,7 @@ export function DialogHolder({
      * @default document.body
      */
     portalTo?: Element | DocumentFragment
+    open?: boolean
 }) {
     const ref = useRef<HTMLDialogElement>(null)
     useLayoutEffect(() => {
