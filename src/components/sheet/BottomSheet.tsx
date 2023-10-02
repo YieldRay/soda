@@ -165,12 +165,7 @@ export function drag(
         const pointerMoveDuration = Date.now() - pointerDownTime
         const { height } = sheet.getBoundingClientRect() // the sheet height
 
-        // hide if space is not enought to display the drag handle
-        if (height - nextTranslateY < 20) {
-            hide()
-        }
-        // 150ms
-        else if (pointerMoveDuration <= 150) {
+        if (pointerMoveDuration <= 200 /** ms */) {
             // if fast drag to bottom, hide it
             if (distanceY >= 32) {
                 hide()
@@ -179,9 +174,13 @@ export function drag(
             else if (distanceY <= -32) {
                 show()
             }
-            // not fast drag
         } else {
-            translateY = nextTranslateY
+            // not fast drag
+            if (nextTranslateY / height > 0.5) {
+                hide()
+            } else {
+                show()
+            }
         }
     }
 

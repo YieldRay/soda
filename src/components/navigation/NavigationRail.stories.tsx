@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { NavigationRail } from '.'
 import { useState } from 'react'
-import { Button } from '../button'
 import { IconMagnify } from '@/utils/icons'
-import { Fab } from '../fab/Fab'
+import { Button } from '../button'
+import { Fab } from '../fab'
 
 const meta = {
     title: 'Navigation/NavigationRail',
