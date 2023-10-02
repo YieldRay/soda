@@ -13,7 +13,7 @@ $label_text_gap_size: 3.2px;
     cursor: text;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
-    padding: 0.75rem 0.5rem;
+    padding: 0.75rem;
     transition: all 200ms;
 
     &:hover {
@@ -79,6 +79,25 @@ $label_text_gap_size: 3.2px;
         bottom: -1rem;
         text-wrap: nowrap;
         padding: 0 0.5rem;
+    }
+
+    // support for textarea
+    textarea {
+        flex-grow: 1;
+        border: none;
+        outline: none;
+        padding: 0;
+        font-family: unset;
+        margin-top: 8px;
+        background: transparent;
+        box-sizing: border-box;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 15px;
+    }
+
+    &:has(textarea) {
+        align-items: flex-start;
     }
 }
 
@@ -185,7 +204,7 @@ $label_text_gap_size: 3.2px;
             color: var(--sd-sys-color-primary);
         }
         input {
-            top: $label_text_populated_size + $label_text_gap_size;
+            top: $label_text_populated_size;
         }
     }
 

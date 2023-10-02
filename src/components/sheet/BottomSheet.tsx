@@ -10,7 +10,7 @@ import {
     useRef,
     useState,
 } from 'react'
-import { createPortal } from 'react-dom'
+import { Portal } from '@/utils/Portal'
 
 export type BottomSheetHandle = ReturnType<typeof drag>
 
@@ -65,8 +65,8 @@ export const BottomSheet = forwardRef<
 
     useImperativeHandle(ref, () => dragHandlerRef.current!)
 
-    const ele = (
-        <>
+    return (
+        <Portal container={portalTo}>
             <Scrim open={visiable} onClick={() => onScrimClick?.()} />
             <div className="sd-bottom_sheet-scrim">
                 <div
@@ -84,11 +84,8 @@ export const BottomSheet = forwardRef<
                     {children}
                 </div>
             </div>
-        </>
+        </Portal>
     )
-
-    if (portalTo) return createPortal(ele, portalTo)
-    return ele
 })
 
 export function drag(

@@ -1,5 +1,5 @@
+import { Portal } from '@/utils/Portal'
 import { useLayoutEffect, useRef } from 'react'
-import { createPortal } from 'react-dom'
 
 /**
  * Based on HTMLDialogElement, this can be a replacement for `<ModalHolder>`
@@ -28,31 +28,32 @@ export function DialogHolder({
         }
     }, [open])
 
-    const ele = (
-        <dialog {...props} ref={ref}>
-            <style jsx>{`
-                dialog {
-                    border: none;
-                    background: transparent;
-                    position: fixed;
-                    inset: 0;
-                    display: block;
-                    visibility: hidden;
-                    opacity: 0;
-                    transform: scale(0.9);
-                    transition: 0.2s;
-                }
-                dialog[open] {
-                    visibility: visible;
-                    opacity: 1;
-                    transform: scale(1);
-                }
-                dialog:focus {
-                    outline: none;
-                }
-            `}</style>
-            {props.children}
-        </dialog>
+    return (
+        <Portal container={portalTo ?? document.body}>
+            <dialog {...props} ref={ref}>
+                <style jsx>{`
+                    dialog {
+                        border: none;
+                        background: transparent;
+                        position: fixed;
+                        inset: 0;
+                        display: block;
+                        visibility: hidden;
+                        opacity: 0;
+                        transform: scale(0.9);
+                        transition: 0.2s;
+                    }
+                    dialog[open] {
+                        visibility: visible;
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                    dialog:focus {
+                        outline: none;
+                    }
+                `}</style>
+                {props.children}
+            </dialog>
+        </Portal>
     )
-    return createPortal(ele, portalTo ?? document.body)
 }

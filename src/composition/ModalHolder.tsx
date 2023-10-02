@@ -1,11 +1,17 @@
-import { createPortal } from 'react-dom'
 import { Scrim } from '@/utils/Scrim'
+import { Portal } from '@/utils/Portal'
 
 /**
  * Provide a clickable scrim to document.body and hold the children.
  * Currently only a utility for `<Dialog>` component
  */
-export function ModalHolder(props: {
+export function ModalHolder({
+    open,
+    children,
+    onScrimClick,
+    portalTo,
+    zIndex,
+}: {
     open?: boolean
     /**
      * Children must has `position: fixed`
@@ -18,10 +24,8 @@ export function ModalHolder(props: {
     portalTo?: Element | DocumentFragment
     zIndex?: number
 }) {
-    const portalTo = props.portalTo ?? document.body
-
-    const ele = (
-        <>
+    return (
+        <Portal container={portalTo ?? document.body}>
             <style jsx>
                 {`
                     .sd-modal-holder {
@@ -38,28 +42,26 @@ export function ModalHolder(props: {
                     }
                 `}
             </style>
-            <Scrim open={props.open} />
+            <Scrim open={open} />
             <div
                 className="sd-modal-holder"
                 style={{
-                    pointerEvents: props.open ? 'auto' : 'none',
-                    opacity: props.open ? '1' : '0',
-                    zIndex: props.zIndex,
+                    pointerEvents: open ? 'auto' : 'none',
+                    opacity: open ? '1' : '0',
+                    zIndex,
                 }}
                 onClick={(e) => {
                     if (
-                        props.onScrimClick &&
+                        onScrimClick &&
                         (e.target as HTMLDivElement).classList.contains(
                             'sd-modal-holder'
                         )
                     )
-                        props.onScrimClick()
+                        onScrimClick()
                 }}
             >
-                {props.children}
+                {children}
             </div>
-        </>
+        </Portal>
     )
-
-    return createPortal(ele, portalTo)
 }

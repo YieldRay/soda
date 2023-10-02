@@ -38,3 +38,13 @@ export const Error: Story = {
         error: true,
     },
 }
+
+export const Textarea: Story = {
+    args: {
+        textarea: true,
+        labelText: 'labelText',
+        leadingIcon: undefined,
+        trailingIcon: undefined,
+        rows: 3,
+    },
+}

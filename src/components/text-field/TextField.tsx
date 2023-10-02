@@ -3,20 +3,24 @@ import { forwardRef, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
 
+type InternalHTMLElement = HTMLInputElement | HTMLTextAreaElement
+
+//TODO: min/max length validity is planned
+// https://material-web.dev/components/text-field/
+
 /**
- * [warn]: This component forward the inner input element for ref
+ * [warn]: This component forward the inner input/textarea element for ref
  * @specs https://m3.material.io/components/text-fields/specs
  */
 export const TextField = forwardRef<
-    HTMLInputElement,
+    InternalHTMLElement,
     ExtendProps<{
         leadingIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
         labelText?: string
         supportingText?: string
-        type?: 'text' | 'number'
         value?: string | number
-        onChange?: (text: string | number) => void
+        onChange?: (text: string) => void
         readonly?: boolean
         disabled?: boolean
         error?: boolean
@@ -24,6 +28,15 @@ export const TextField = forwardRef<
          * @default filled
          */
         sd?: 'filled' | 'outlined'
+        /**
+         * set to true to change the internal element to `<textarea>`
+         */
+        textarea?: boolean
+        /**
+         * rows only for textarea
+         * @default 2
+         */
+        rows?: number
     }>
 >(function TextField(
     {
@@ -31,13 +44,14 @@ export const TextField = forwardRef<
         trailingIcon,
         labelText,
         supportingText,
-        type,
         value,
         readonly,
         disabled,
         error,
         sd: initSd,
         onChange: initOnChange,
+        textarea,
+        rows = 2,
         className,
         style,
         ...props
@@ -48,15 +62,20 @@ export const TextField = forwardRef<
     const [focusd, setFocusd] = useState(false)
     const [length, setLength] = useState(stringValue.length)
     const populated = length > 0 || focusd
-    const inputRef = useRef<HTMLInputElement>(null)
+    const inputRef = useRef<InternalHTMLElement>(null)
 
-    const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-        const value = (e.target as HTMLInputElement).value
+    const onChange = (e: React.FormEvent<InternalHTMLElement>) => {
+        const value = (e.target as InternalHTMLElement).value
         setLength(String(value).length)
         initOnChange?.(value)
     }
 
-    const sd = initSd === 'outlined' ? 'outlined' : 'filled'
+    const sd = textarea
+        ? 'filled'
+        : initSd === 'outlined'
+        ? 'outlined'
+        : 'filled'
+
     return (
         <div
             {...props}
@@ -87,16 +106,27 @@ export const TextField = forwardRef<
                 >
                     {labelText}
                 </div>
-                <input
-                    key="input"
-                    type={type}
-                    ref={ref}
-                    value={value}
+                {!textarea && (
+                    <input
+                        ref={ref as React.ForwardedRef<HTMLInputElement>}
+                        onChange={onChange}
+                        value={value}
+                        readOnly={readonly}
+                        disabled={disabled}
+                    />
+                )}
+            </Helper>
+
+            {textarea && (
+                <textarea
+                    ref={ref as React.ForwardedRef<HTMLTextAreaElement>}
                     onChange={onChange}
+                    value={value}
                     readOnly={readonly}
                     disabled={disabled}
+                    rows={rows}
                 />
-            </Helper>
+            )}
 
             {trailingIcon && (
                 <div className="sd-text_field-trailing_icon">

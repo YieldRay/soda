@@ -1,10 +1,10 @@
 import './sheet.scss'
 import { Divider } from '../divider'
 import { Scrim } from '@/utils/Scrim'
-import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 import assign from 'lodash-es/assign'
 import { ExtendProps } from '@/utils/type'
+import { Portal } from '@/utils/Portal'
 
 /**
  * This component do not have ref forwarded
@@ -36,8 +36,8 @@ export function SideSheet({
     const isOpen = open ?? true
     const translateX = isRight ? '100%' : '-100%'
 
-    const ele = (
-        <>
+    return (
+        <Portal container={portalTo}>
             <Scrim open={isOpen} onClick={() => onScrimClick?.()}></Scrim>
             <div className="sd-side_sheet-scrim">
                 <div
@@ -65,9 +65,6 @@ export function SideSheet({
                     )}
                 </div>
             </div>
-        </>
+        </Portal>
     )
-
-    if (portalTo) return createPortal(ele, portalTo)
-    return ele
 }
