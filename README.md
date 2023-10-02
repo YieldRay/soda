@@ -6,6 +6,9 @@ A component library that may follow [material design 3](https://m3.material.io/c
 > API is unstable and can be changed in any time.  
 > For production, you may want use the official [material web](https://github.com/material-components/material-web) component library.
 
+This is an experimental project, browser support:  
+Chrome>=105, Safari>=15.4, Firefox NoSupport
+
 # Installation
 
 ```sh
@@ -33,6 +36,7 @@ See: <https://yieldray.github.io/soda/>
 > Those logic helper components can be found in `src/composition` directory
 
 > Most components in `src/components` forward `ref` attribute for library interactivity.  
+> If has, it will be the root DOM node of the entire component.  
 > If not, it will be documented and will be checked if you use typescript.
 
 # Resources

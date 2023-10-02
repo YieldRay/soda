@@ -79,6 +79,8 @@ $label_text_gap_size: 3.2px;
         bottom: -1rem;
         text-wrap: nowrap;
         padding: 0 0.5rem;
+        box-sizing: border-box;
+        width: 100%;
     }
 
     // support for textarea

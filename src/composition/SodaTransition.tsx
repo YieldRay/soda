@@ -6,7 +6,10 @@ import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 // React react-transition-group: https://reactcommunity.org/react-transition-group/switch-transition
 
 /**
- * A simple state based transition for element's show and hide
+ * A simple state based transition for element's enter and exit (to DOM)
+ *
+ * [warn]: transition property should set to beforeEnter/beforeLeave to activate css transition
+ * or set transition to style property to manage them all
  */
 export function SodaTransition({
     beforeEnter = {},
@@ -15,6 +18,7 @@ export function SodaTransition({
     afterLeave = {},
     style,
     state = false,
+    allowFristRun = false,
     children,
     ...props
 }: ExtendProps<{
@@ -27,16 +31,17 @@ export function SodaTransition({
      * `true` for enter, `false` for leave
      */
     state?: boolean
+    allowFristRun?: boolean
     children?: React.ReactNode
 }>) {
     const [show, setShow] = useState(false)
     const [transitionStyle, setTransitionStyle] = useState(
         state ? beforeEnter : beforeLeave
     )
-    const isFristMount = useRef(true)
+    const isFristRun = useRef(!allowFristRun)
 
     useLayoutEffect(() => {
-        if (isFristMount.current) {
+        if (isFristRun.current) {
             // do not transition if is first run
             setTransitionStyle(state ? afterEnter : afterLeave)
             setShow(state)
@@ -47,9 +52,9 @@ export function SodaTransition({
     }, [state, beforeEnter, beforeLeave, afterEnter, afterLeave])
 
     useEffect(() => {
-        if (isFristMount.current!) {
+        if (isFristRun.current!) {
             // do not transition if is first run
-            isFristMount.current = false
+            isFristRun.current = false
             return
         }
 

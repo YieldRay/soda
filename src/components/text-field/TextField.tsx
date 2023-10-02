@@ -1,42 +1,53 @@
 import './text-field.scss'
-import { forwardRef, useRef, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
+import { type ExtendProps } from '@/utils/type'
+import { type ReactRef, setReactRef } from '@/utils/react-ref'
 
 type InternalHTMLElement = HTMLInputElement | HTMLTextAreaElement
 
-//TODO: min/max length validity is planned
-// https://material-web.dev/components/text-field/
-
 /**
- * [warn]: This component forward the inner input/textarea element for ref
  * @specs https://m3.material.io/components/text-fields/specs
  */
 export const TextField = forwardRef<
-    InternalHTMLElement,
+    HTMLDivElement,
     ExtendProps<{
         leadingIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
-        labelText?: string
-        supportingText?: string
+        labelText?: React.ReactNode
+        supportingText?: React.ReactNode
         value?: string | number
         onChange?: (text: string) => void
         readonly?: boolean
         disabled?: boolean
         error?: boolean
         /**
+         * Textarea will ignore this and only show as filled style
          * @default filled
          */
         sd?: 'filled' | 'outlined'
         /**
-         * set to true to change the internal element to `<textarea>`
+         * Set to true to change the internal element to `<textarea>`
          */
         textarea?: boolean
         /**
-         * rows only for textarea
+         * Rows only for textarea
          * @default 2
          */
         rows?: number
+        placeholder?: string
+        /**
+         * For access the internal input element
+         *
+         * [warn]: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
+         */
+        inputRef?: ReactRef<HTMLInputElement | undefined>
+        /**
+         * For access the internal textarea element
+         *
+         * [warn]: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
+         */
+        textareaRef?: ReactRef<HTMLTextAreaElement | undefined>
     }>
 >(function TextField(
     {
@@ -52,6 +63,9 @@ export const TextField = forwardRef<
         onChange: initOnChange,
         textarea,
         rows = 2,
+        placeholder: initPlaceholder,
+        inputRef,
+        textareaRef,
         className,
         style,
         ...props
@@ -62,13 +76,23 @@ export const TextField = forwardRef<
     const [focusd, setFocusd] = useState(false)
     const [length, setLength] = useState(stringValue.length)
     const populated = length > 0 || focusd
-    const inputRef = useRef<InternalHTMLElement>(null)
+    const placeholder = populated || !labelText ? initPlaceholder : undefined
+    const innerRef = useRef<InternalHTMLElement>(null)
 
     const onChange = (e: React.FormEvent<InternalHTMLElement>) => {
         const value = (e.target as InternalHTMLElement).value
         setLength(String(value).length)
         initOnChange?.(value)
     }
+
+    useEffect(() => {
+        // set ref
+        if (textarea) {
+            setReactRef(textareaRef, innerRef.current)
+        } else {
+            setReactRef(inputRef, innerRef.current)
+        }
+    }, [textarea, textareaRef, inputRef])
 
     const sd = textarea
         ? 'filled'
@@ -79,10 +103,11 @@ export const TextField = forwardRef<
     return (
         <div
             {...props}
+            ref={ref}
             className={clsx('sd-text_field', className)}
             style={style}
             onClick={() => {
-                inputRef.current?.focus() //? once the container is clicked, focus the input element
+                innerRef.current?.focus() //? once the container is clicked, focus the input element
                 setFocusd(true)
             }}
             // https://stackoverflow.com/questions/37609049/how-to-correctly-catch-change-focusout-event-on-text-input-in-react-js
@@ -99,31 +124,35 @@ export const TextField = forwardRef<
                 <div className="sd-text_field-leading_icon">{leadingIcon}</div>
             )}
 
-            <Helper sd={sd}>
-                <div
-                    key="sd-text_field-label_text"
-                    className="sd-text_field-label_text"
-                >
-                    {labelText}
-                </div>
+            <Helper sd={labelText ? sd : 'outlined'}>
+                {labelText && (
+                    <div
+                        key="sd-text_field-label_text"
+                        className="sd-text_field-label_text"
+                    >
+                        {labelText}
+                    </div>
+                )}
                 {!textarea && (
                     <input
-                        ref={ref as React.ForwardedRef<HTMLInputElement>}
+                        ref={innerRef as React.ForwardedRef<HTMLInputElement>}
                         onChange={onChange}
                         value={value}
                         readOnly={readonly}
                         disabled={disabled}
+                        placeholder={placeholder}
                     />
                 )}
             </Helper>
 
             {textarea && (
                 <textarea
-                    ref={ref as React.ForwardedRef<HTMLTextAreaElement>}
+                    ref={innerRef as React.ForwardedRef<HTMLTextAreaElement>}
                     onChange={onChange}
                     value={value}
                     readOnly={readonly}
                     disabled={disabled}
+                    placeholder={placeholder}
                     rows={rows}
                 />
             )}
