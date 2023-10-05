@@ -32,9 +32,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 See: <https://yieldray.github.io/soda/>
 
-> Components in `src/components` directory (exported directly) do not include heavy logic.  
+> [!IMPORTANT]  
+> Components in `src/components` directory (exported directly) do NOT include heavy logic.  
 > Those logic helper components can be found in `src/composition` directory
 
+> [!NOTE]  
 > Most components in `src/components` forward `ref` attribute for library interactivity.  
 > If has, it will be the root DOM node of the entire component.  
 > If not, it will be documented and will be checked if you use typescript.
@@ -59,10 +61,14 @@ The easiest way is to use the `Roboto` font, just simply add a few lines of css 
 * {
     font-family: 'Roboto', sans-serif;
 }
-// Tips:
-// Chinese user may prefer:
-// @import url('https://fonts.loli.net/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
-// @import url('https://fonts.font.im/css?family=Roboto:100,300,400,500,700,900');
+/*
+Tips:
+Chinese user may prefer:
+@import url('https://fonts.loli.net/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
+@import url('https://fonts.upset.dev/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
+@import url('https://fonts.font.im/css?family=Roboto:100,300,400,500,700,900');
+@import url(https://fonts.bunny.net/css?family=roboto:100,300,400,500,700,900);
+*/
 
 /* using Google Sans */
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@100;200;300;400;500;700;900&display=swap');
