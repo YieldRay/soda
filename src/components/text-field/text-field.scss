@@ -64,7 +64,6 @@ $label_text_gap_size: 3.2px;
 
     input {
         all: unset;
-        flex-grow: 1;
     }
 
     &:has(&-supporting_text) {
@@ -144,6 +143,12 @@ $label_text_gap_size: 3.2px;
     &:hover,
     &:active {
         filter: none;
+    }
+
+    input {
+        width: 0; // this will auto grow as we specify flex-grow:1
+        max-width: 100%;
+        flex-grow: 1;
     }
 }
 

@@ -2,7 +2,8 @@
 
 A component library that may follow [material design 3](https://m3.material.io/components) (a.k.a. material you)
 
-> Warn: working in progress, some features are missing or will not be fully implemented (such as ARIA).  
+> [!WARNING]  
+> working in progress, some features are missing or will not be fully implemented (such as ARIA).  
 > API is unstable and can be changed in any time.  
 > For production, you may want use the official [material web](https://github.com/material-components/material-web) component library.
 
@@ -76,6 +77,10 @@ Chinese user may prefer:
     font-family: 'Google Sans', sans-serif;
 }
 ```
+
+# TODO
+
+-   [ ] integrate [@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript) to support dynamic color theme
 
 # Development
 

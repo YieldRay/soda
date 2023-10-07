@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import './time-picker.scss'
 import { Button } from '../button'
 import { useState, useEffect } from 'react'
@@ -5,10 +6,12 @@ import { IconButton } from '../icon-button'
 import { IconClock } from '@/utils/icons'
 import { Ripple } from '@/utils/Ripple'
 import { useMediaQuery } from '@/utils/hooks'
+import assign from 'lodash-es/assign'
 
 /**
  * [warn]: data itself always use 24 hours system,
  * but it's appearance varys by changing the `use24hourSystem` property
+ * @specs https://m3.material.io/components/time-pickers/specs
  */
 export function TimePicker({
     direction: initDirection,
@@ -19,6 +22,7 @@ export function TimePicker({
      * Initial value use 24 hours system, for example `[18, 30]` represents to 6:30 PM
      */
     initValue = [new Date().getHours(), new Date().getMinutes()],
+    i18n: initI18n,
 }: {
     initValue?: readonly [hour: number, minute: number]
     /**
@@ -31,10 +35,17 @@ export function TimePicker({
     use24hourSystem?: boolean
     onOK?(time: readonly [hour: number, minute: number]): void
     onCancel?(time: readonly [hour: number, minute: number]): void
+    i18n?: Partial<typeof i18n_english>
 }) {
     const isCompact = useMediaQuery('only screen and (max-width : 600px)')
     const direction = initDirection ?? (isCompact ? 'vertical' : 'horizontal')
-    const [mode, setMode] = useState<'Enter time' | 'Select time'>('Enter time')
+    const i18n = assign(
+        navigator.language === 'zh-CN' ? i18n_chinese : i18n_english,
+        initI18n
+    )
+
+    const [enterOrSelect, setEnterOrSelect] = useState(false) // false for enter, true for select
+
     const [hour, setHour] = useState(initValue[0].toString().padStart(2, '0'))
     const hourNumber = Number(hour)
     const [minute, setMinute] = useState(
@@ -122,12 +133,14 @@ export function TimePicker({
         <div className="sd-time_picker" data-sd-direction={direction}>
             <div className="sd-time_picker-clock_container">
                 <div className="sd-time_picker-clock_left">
-                    <div className="sd-time_picker-headline">{mode}</div>
+                    <div className="sd-time_picker-headline">
+                        {enterOrSelect ? i18n.select_time : i18n.enter_time}
+                    </div>
                     <div className="sd-time_picker-selectors">
                         <div className="sd-time_picker-time_selectors">
                             <label className="sd-time_picker-time_selector">
                                 <input value={hour} onInput={onHourInput} />
-                                <span>Hour</span>
+                                <span>{i18n.hour}</span>
                             </label>
                             <span className="sd-time_picker-time_selector_separator">
                                 <span>:</span>
@@ -135,7 +148,7 @@ export function TimePicker({
                             </span>
                             <label className="sd-time_picker-time_selector">
                                 <input value={minute} onInput={onMinuteInput} />
-                                <span>Minute</span>
+                                <span>{i18n.minute}</span>
                             </label>
                         </div>
                         <div className="sd-time_picker-period_selectors">
@@ -149,7 +162,7 @@ export function TimePicker({
                                     checked={period === 'AM'}
                                     onClick={() => setPeriod('AM')}
                                 />
-                                <span>AM</span>
+                                <span>{i18n.am}</span>
                             </Ripple>
                             <Ripple
                                 as="label"
@@ -161,13 +174,13 @@ export function TimePicker({
                                     checked={period === 'PM'}
                                     onClick={() => setPeriod('PM')}
                                 />
-                                <span>PM</span>
+                                <span>{i18n.pm}</span>
                             </Ripple>
                         </div>
                     </div>
                 </div>
 
-                {mode === 'Select time' && (
+                {enterOrSelect === true && (
                     <div className="sd-time_picker-clock_right">
                         <div className="sd-time_picker-clock">
                             {[12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
@@ -199,26 +212,40 @@ export function TimePicker({
             </div>
 
             <div className="sd-time_picker-footer">
-                <IconButton
-                    onClick={() =>
-                        setMode((mode) =>
-                            mode === 'Select time'
-                                ? 'Enter time'
-                                : 'Select time'
-                        )
-                    }
-                >
+                <IconButton onClick={() => setEnterOrSelect((x) => !x)}>
                     <IconClock />
                 </IconButton>
                 <div className="sd-time_picker-buttons">
                     <Button sd="text" onClick={onCancel}>
-                        Cancel
+                        {i18n.cancel}
                     </Button>
                     <Button sd="text" onClick={onOK}>
-                        OK
+                        {i18n.ok}
                     </Button>
                 </div>
             </div>
         </div>
     )
 }
+
+export const i18n_english = {
+    select_time: 'Select time',
+    enter_time: 'Enter time',
+    hour: 'Hour',
+    minute: 'Minute',
+    am: 'AM',
+    pm: 'PM',
+    ok: 'OK',
+    cancel: 'Cancel',
+} as const
+
+export const i18n_chinese = {
+    select_time: '选择时间',
+    enter_time: '输入时间',
+    hour: '时',
+    minute: '分',
+    am: '上午',
+    pm: '下午',
+    ok: '确认',
+    cancel: '取消',
+} as const

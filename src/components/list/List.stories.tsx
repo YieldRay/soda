@@ -23,9 +23,17 @@ export const Default: Story = {
     args: {},
 }
 
-export const Multiline: Story = {
+export const SingleLine: Story = {
+    args: {
+        leadingIcon: '✨',
+        supportingText: '',
+    },
+}
+
+export const MultiLine: Story = {
     args: {
         lines: 3,
+        leadingIcon: '✨',
         supportingText: `this sentence is too l${'o'.repeat(100)}ng!`,
     },
     decorators: [

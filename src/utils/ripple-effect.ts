@@ -8,13 +8,8 @@ export function rippleEffect<E extends HTMLElement>(
     duration = 400,
     color = 'rgba(0, 0, 0, 0.1)'
 ) {
-    if (
-        ele.hasAttribute('disabled') ||
-        Reflect.get(ele, 'disabled') === true ||
-        ele.dataset[DatasetName] === 'true' ||
-        ele.dataset.sdDisabled === 'true'
-    ) {
-        // do not create ripple effect if element is disabled or effect has been attached
+    if (ele.dataset[DatasetName] === 'true') {
+        // do not create ripple effect if effect has been attached
         return
     }
     ele.dataset[DatasetName] = 'true'
@@ -22,6 +17,14 @@ export function rippleEffect<E extends HTMLElement>(
     const onPointerDown = (event: PointerEvent) => {
         if (event.button === 2) {
             // do not handle right click
+            return
+        }
+        if (
+            ele.hasAttribute('disabled') ||
+            Reflect.get(ele, 'disabled') === true ||
+            ele.dataset.sdDisabled === 'true'
+        ) {
+            // do not handle if is disabled
             return
         }
 
