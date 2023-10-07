@@ -9,16 +9,29 @@ const meta = {
     parameters: {
         layout: 'centered',
     },
+    args: {
+        onOK: alert,
+    },
 } satisfies Meta<typeof TimePicker>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Vertical: Story = {}
+export const Vertical: Story = {
+    args: {
+        direction: 'vertical',
+    },
+}
 
 export const Horizontal: Story = {
     args: {
         direction: 'horizontal',
+    },
+}
+
+export const Use24hourSystem: Story = {
+    args: {
+        use24hourSystem: true,
     },
 }

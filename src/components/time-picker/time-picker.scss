@@ -50,6 +50,7 @@
         background: var(--sd-sys-color-surface-container-highest);
         border: solid 2px transparent;
         border-radius: 8px;
+        outline: none;
 
         &:focus {
             background: var(--sd-sys-color-primary-container);
@@ -95,6 +96,7 @@
         text-align: center;
         cursor: pointer;
         line-height: 40px;
+        -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     }
 
     &[data-sd-direction='vertical'] {
@@ -167,6 +169,7 @@
     &-clock {
         box-sizing: content-box;
         --clock-size: 256px;
+        --time-size: 48px;
         width: var(--clock-size);
         height: var(--clock-size);
         border-radius: var(--clock-size);
@@ -174,10 +177,10 @@
         background: var(--sd-sys-color-surface-container-highest);
         margin: auto;
         position: relative;
+        user-select: none;
 
         time {
             position: absolute;
-            --time-size: 48px;
             width: var(--time-size);
             height: var(--time-size);
             border-radius: var(--time-size);
@@ -208,7 +211,14 @@
         }
 
         &_arm {
-            //TODO
+            position: absolute;
+            top: calc(var(--time-size) * 0.85);
+            left: calc(50% - 1px);
+            width: 2px;
+            height: calc((var(--clock-size) - var(--time-size) * 0.85 * 2) / 2);
+            transform-origin: bottom;
+            background: var(--sd-sys-color-primary);
+            transform: rotate(var(--degree)); // change `--degree` in js
         }
     }
 
