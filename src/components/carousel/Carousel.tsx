@@ -110,7 +110,7 @@ function updateFlex(
     const firstVisiableIndex = prev.findIndex(({ flex }) => flex > 0)!
     let virtualItems = prev.slice(0)
 
-    console.debug({ gesture, firstVisiableIndex })
+    // console.debug({ gesture, firstVisiableIndex })
 
     // what we click, what to enlarge
     switch (gesture) {

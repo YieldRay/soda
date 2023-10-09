@@ -1,5 +1,5 @@
-import { ExtendProps } from '@/utils/type'
-import { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { ExtendProps, TagNameString } from '@/utils/type'
+import { useState, useEffect, useLayoutEffect, useRef, forwardRef } from 'react'
 // Vue CSS-Based Transitions: https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
 // enter-from enter-active enter-to
 // leave-from leave-active leave-to
@@ -11,29 +11,38 @@ import { useState, useEffect, useLayoutEffect, useRef } from 'react'
  * [warn]: transition property should set to beforeEnter/beforeLeave to activate css transition
  * or set transition to style property to manage them all
  */
-export function SodaTransition({
-    beforeEnter = {},
-    afterEnter = {},
-    beforeLeave = {},
-    afterLeave = {},
-    style,
-    state = false,
-    allowFristRun = false,
-    children,
-    ...props
-}: ExtendProps<{
-    style?: React.CSSProperties
-    beforeEnter?: React.CSSProperties
-    afterEnter?: React.CSSProperties
-    beforeLeave?: React.CSSProperties
-    afterLeave?: React.CSSProperties
-    /**
-     * `true` for enter, `false` for leave
-     */
-    state?: boolean
-    allowFristRun?: boolean
-    children?: React.ReactNode
-}>) {
+export const SodaTransition = forwardRef<
+    HTMLElement,
+    ExtendProps<{
+        as?: TagNameString
+        style?: React.CSSProperties
+        className?: string
+        beforeEnter?: React.CSSProperties
+        afterEnter?: React.CSSProperties
+        beforeLeave?: React.CSSProperties
+        afterLeave?: React.CSSProperties
+        /**
+         * `true` for enter, `false` for leave
+         */
+        state?: boolean
+        allowFristRun?: boolean
+        children?: React.ReactNode
+    }>
+>(function SodaTransition(
+    {
+        beforeEnter = {},
+        afterEnter = {},
+        beforeLeave = {},
+        afterLeave = {},
+        style,
+        state = false,
+        allowFristRun = false,
+        children,
+        as,
+        ...props
+    },
+    ref
+) {
     const [show, setShow] = useState(false)
     const [transitionStyle, setTransitionStyle] = useState(
         state ? beforeEnter : beforeLeave
@@ -67,17 +76,38 @@ export function SodaTransition({
         if (state === false) setShow(false)
     }
 
+    const As: any = as || 'div'
+
     return (
         <>
             {show && (
-                <div
+                <As
                     {...props}
+                    ref={ref}
                     style={{ ...style, ...transitionStyle }}
                     onTransitionEnd={onTransitionEnd}
                 >
                     {children}
-                </div>
+                </As>
             )}
         </>
     )
-}
+})
+
+export const SimpleFadeTransition = forwardRef<
+    HTMLElement,
+    Parameters<typeof SodaTransition>[0]
+>(function SimpleFadeTransition(props, ref) {
+    return (
+        <SodaTransition
+            {...{
+                beforeEnter: { opacity: '0' },
+                afterEnter: { opacity: '1' },
+                beforeLeave: { opacity: '1' },
+                afterLeave: { opacity: '0' },
+                ...props,
+                ref,
+            }}
+        />
+    )
+})

@@ -20,7 +20,7 @@ export const Default: Story = {
         const collection = {
             true: <div>True</div>,
             false: <div>False</div>,
-        }
+        } as const
         const getAnotherOne = () => {
             bool = !bool
             return collection[String(bool) as keyof typeof collection]
