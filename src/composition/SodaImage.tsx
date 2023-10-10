@@ -1,39 +1,63 @@
-import { ExtendProps } from '@/utils/type'
-import assign from 'lodash-es/assign'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { CircularProgressIndicator } from '..'
+import {
+    forwardRef,
+    useEffect,
+    useImperativeHandle,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from 'react'
+import { CircularProgressIndicator } from '../components/progress-indicator/CircularProgressIndicator'
 import { SimpleFadeTransition } from './SodaTransition'
+import { ExtendProps } from '@/utils/type'
+import clsx from 'clsx'
 
-export function SodaImage({
-    src,
-    style,
-    placeholder,
-    objectFit = 'contain',
-    description,
-    lazy = false,
-    ...props
-}: ExtendProps<
+export const SodaImage = forwardRef<
+    { reload(): void },
+    ExtendProps<
+        {
+            src?: string
+            lazy?: boolean
+            placeholder?: React.ReactNode
+            description?: React.ReactNode
+            error?: React.ReactNode
+            objectFit?: React.CSSProperties['objectFit']
+            alt?: HTMLImageElement['alt']
+            crossOrigin?: React.ImgHTMLAttributes<HTMLImageElement>['crossOrigin']
+            referrerPolicy?: React.ImgHTMLAttributes<HTMLImageElement>['referrerPolicy']
+        },
+        HTMLDivElement
+    >
+>(function SodaImage(
     {
-        lazy?: boolean
-        placeholder?: React.ReactNode
-        description?: React.ReactNode
-        objectFit?: React.CSSProperties['objectFit']
+        src,
+        width,
+        height,
+        className,
+        placeholder,
+        objectFit = 'contain',
+        description,
+        error,
+        lazy = false,
+        alt,
+        crossOrigin,
+        referrerPolicy,
+        ...props
     },
-    HTMLImageElement
->) {
+    ref
+) {
     const [state, setState] = useState<'loading' | 'error' | 'loaded'>(
         'loading'
     )
     const [inview, setInview] = useState(!lazy)
 
-    const ref = useRef<HTMLImageElement>(null)
+    const eRef = useRef<HTMLImageElement>(null)
 
     useEffect(() => {
         setState('loading')
     }, [src])
 
     useLayoutEffect(() => {
-        const img = ref.current!
+        const img = eRef.current!
         img.onload = () => setState('loaded')
         img.onerror = () => setState('error')
         if (lazy) {
@@ -46,8 +70,21 @@ export function SodaImage({
         }
     }, [src, lazy])
 
+    useImperativeHandle(ref, () => ({
+        reload() {
+            setState('loading')
+            const img = eRef.current!
+            const src = img.src
+            img.src = undefined as any
+            img.src = src
+        },
+    }))
+
+    const isImgShow =
+        state === 'loaded' || (state === 'error' && error == undefined)
+
     return (
-        <div className="sd-image">
+        <div className={clsx('sd-image', className)} {...props}>
             <SimpleFadeTransition
                 className="sd-image-placeholder"
                 state={state === 'loading'}
@@ -56,18 +93,31 @@ export function SodaImage({
             </SimpleFadeTransition>
 
             <img
-                ref={ref}
-                style={assign(
-                    {
-                        opacity: state === 'loaded' ? '1' : '0',
-                        pointerEvents: state === 'loaded' ? '' : 'none',
-                    },
-                    style,
-                    { objectFit }
-                )}
+                ref={eRef}
+                style={{
+                    opacity: isImgShow ? '1' : '0',
+                    pointerEvents: isImgShow ? undefined : 'none',
+                    userSelect: isImgShow ? undefined : 'none',
+                    objectFit,
+                }}
                 src={inview ? src : undefined}
-                {...props}
+                alt={alt}
+                width={width}
+                height={height}
+                crossOrigin={crossOrigin}
+                referrerPolicy={referrerPolicy}
+                loading={lazy ? undefined : 'lazy'}
             />
+
+            {error && (
+                <SimpleFadeTransition
+                    className="sd-image-error"
+                    state={state === 'error'}
+                >
+                    {error}
+                </SimpleFadeTransition>
+            )}
+
             {description && (
                 <div className="sd-image-scrim">
                     <div className="sd-image-description">{description}</div>
@@ -79,9 +129,12 @@ export function SodaImage({
                 .sd-image > * {
                     display: inline-block;
                     vertical-align: middle;
+                    max-width: 100%;
+                    max-height: 100%;
                 }
                 .sd-image {
                     position: relative;
+                    overflow: hidden;
                     mix-blend-mode: plus-lighter;
                 }
                 .sd-image > img {
@@ -123,7 +176,14 @@ export function SodaImage({
                     left: 50%;
                     transform: translate(-50%);
                 }
+                .sd-image .sd-image-error {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
             `}</style>
         </div>
     )
-}
+})

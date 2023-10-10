@@ -96,7 +96,7 @@ export function TimePicker({
         }
     }, [use24hourSystem, hourNumber, setPeriod, setHour])
 
-    // handle degree
+    // handle degree (transform time to degree, 0-360deg)
 
     const [degree, setDegree] = useState(0)
 
@@ -183,6 +183,16 @@ export function TimePicker({
                 {enterOrSelect === true && (
                     <div className="sd-time_picker-clock_right">
                         <div className="sd-time_picker-clock">
+                            <div className="sd-time_picker-clock_center" />
+                            <div
+                                className="sd-time_picker-clock_arm"
+                                ref={(e) => {
+                                    e?.style.setProperty(
+                                        '--degree',
+                                        `${degree}deg`
+                                    )
+                                }}
+                            />
                             {[12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
                                 (h) => (
                                     <time
@@ -195,17 +205,6 @@ export function TimePicker({
                                     </time>
                                 )
                             )}
-
-                            <div className="sd-time_picker-clock_center" />
-                            <div
-                                className="sd-time_picker-clock_arm"
-                                ref={(e) => {
-                                    e?.style.setProperty(
-                                        '--degree',
-                                        `${degree}deg`
-                                    )
-                                }}
-                            />
                         </div>
                     </div>
                 )}

@@ -194,7 +194,7 @@
         }
 
         @for $i from 1 through 12 {
-            time:nth-child(#{$i}) {
+            time:nth-of-type(#{$i}) {
                 --d: calc(calc(#{$i} - 4) * 30deg);
             }
         }
@@ -219,6 +219,17 @@
             transform-origin: bottom;
             background: var(--sd-sys-color-primary);
             transform: rotate(var(--degree)); // change `--degree` in js
+
+            &::before {
+                top: calc(var(--time-size) - 100%);
+                left: calc(50% - var(--time-size) / 2);
+                position: absolute;
+                content: '';
+                width: var(--time-size);
+                height: var(--time-size);
+                border-radius: var(--time-size);
+                background: var(--sd-sys-color-primary);
+            }
         }
     }
 
@@ -226,7 +237,8 @@
     &-clock time {
         &:hover {
             cursor: pointer;
-            background: var(--sd-sys-color-primary);
+            //TODO: this should use js to calculate
+            // background: var(--sd-sys-color-primary);
             color: var(--sd-sys-color-on-primary);
         }
     }

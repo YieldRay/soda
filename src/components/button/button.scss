@@ -106,6 +106,7 @@ button.sd-button {
             filter: brightness(92%);
         }
         &:focus-visible {
+            outline: none;
             filter: brightness(88%);
         }
     }
@@ -125,6 +126,7 @@ button.sd-button {
             background: rgb(0 0 0 / 0.08);
         }
         &:focus-visible {
+            outline: none;
             background: rgb(0 0 0 / 0.12);
         }
     }

@@ -36,8 +36,9 @@
 }
 
 .sd-circular_progress_indicator {
-    width: 36px;
-    height: 36px;
+    --size: 36px;
+    width: var(--size);
+    height: var(--size);
     overflow: hidden;
     border-radius: 50%;
     $defaultValue: 75%;
@@ -46,7 +47,7 @@
         var(--sd-sys-color-primary) var(--value, $defaultValue),
         transparent var(--value, $defaultValue)
     );
-    --mask: radial-gradient(closest-side, transparent 80%, black 81%);
+    --mask: radial-gradient(closest-side, transparent 80%, black 80%);
     -webkit-mask-image: var(--mask);
     mask-image: var(--mask);
 

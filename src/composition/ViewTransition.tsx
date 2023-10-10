@@ -1,33 +1,49 @@
-import { useImperativeHandle, forwardRef, useState, useRef } from 'react'
+import { useImperativeHandle, forwardRef, useState, useEffect } from 'react'
 import { flushSync } from 'react-dom'
 import { startViewTransition } from '@/utils/view-transition'
-import { ExtendProps } from '@/utils/type'
+import { ExtendProps, TagNameString } from '@/utils/type'
 
 /**
- * [experimental]: This component use ref to toggle transition.
+ * [experimental]: This component can use both ref or props to toggle transition.
  */
 export const ViewTransition = forwardRef<
-    { replace(children: React.ReactNode): void },
+    {
+        replace(children: React.ReactNode): void
+    },
     ExtendProps<{
         children?: React.ReactNode
-        style?: React.CSSProperties
-        className?: string
+        old?: React.ReactNode
+        new?: React.ReactNode
+        as?: TagNameString
     }>
->((props, ref) => {
-    const [children, setChildren] = useState<React.ReactNode>(props.children)
-    const divRef = useRef<HTMLDivElement>(null)
+>(({ old: oldView, new: newView, as, children, ...props }, ref) => {
+    const As: any = as || 'div'
+    const [view, setView] = useState<React.ReactNode>(children)
+
+    useEffect(() => {
+        const setViewTransition = (view: React.ReactNode) =>
+            startViewTransition(() => {
+                flushSync(() => {
+                    setView(view)
+                })
+            })
+        if (oldView && newView) {
+            setViewTransition(newView)
+        } else if (oldView) {
+            setView(oldView)
+        } else if (newView) {
+            setView(newView)
+        }
+    }, [oldView, newView])
+
     useImperativeHandle(ref, () => ({
         replace(next) {
             startViewTransition(() => {
                 flushSync(() => {
-                    setChildren(next)
+                    setView(next)
                 })
             })
         },
     }))
-    return (
-        <div {...props} ref={divRef}>
-            {children}
-        </div>
-    )
+    return <As {...props}>{view}</As>
 })
