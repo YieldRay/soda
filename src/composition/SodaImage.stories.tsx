@@ -81,7 +81,7 @@ export const LazyLoad: Story = {
     },
 }
 
-export const Error: Story = {
+export const DefaultError: Story = {
     render: () => {
         const ref = useRef<{ reload: VoidFunction }>(null)
 
@@ -89,14 +89,10 @@ export const Error: Story = {
             <>
                 <SodaImage
                     ref={ref}
-                    src="https://httpstat.us/404?sleep=3000"
-                    error={
-                        <Button onClick={() => ref.current?.reload()}>
-                            fail to load, click to reload
-                        </Button>
-                    }
+                    src="https://httpstat.us/404?sleep=5000"
                     width="200px"
                     height="200px"
+                    timeout={1000}
                 />
             </>
         )
