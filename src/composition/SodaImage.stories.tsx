@@ -8,13 +8,17 @@ const meta = {
     title: 'composition/SodaImage',
     component: SodaImage,
     tags: ['autodocs'],
+    args: {
+        minWidth: 100,
+        minHeight: 100,
+    },
 } satisfies Meta<typeof SodaImage>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+export const WithDescription: Story = {
     render: () => {
         const [src, setSrc] = useState('https://temp.im/123x456')
         const [description, setDescription] = useState('123x456')
@@ -76,13 +80,11 @@ export const LazyLoad: Story = {
     args: {
         lazy: true,
         src: 'https://picsum.photos/200',
-        width: 200,
-        height: 200,
     },
 }
 
 export const DefaultError: Story = {
-    render: () => {
+    render: (props) => {
         const ref = useRef<{ reload: VoidFunction }>(null)
 
         return (
@@ -90,11 +92,22 @@ export const DefaultError: Story = {
                 <SodaImage
                     ref={ref}
                     src="https://httpstat.us/404?sleep=5000"
-                    width="200px"
-                    height="200px"
                     timeout={1000}
+                    {...props}
                 />
             </>
         )
+    },
+}
+
+export const CrossOrigin: Story = {
+    args: {
+        lazy: true,
+        src: 'https://fakeimg.pl/440x230/282828/eae0d0/?retina=1&text=Supports%20emojis!%20%F0%9F%98%8B',
+        width: 440,
+        height: 230,
+        crossOrigin: 'anonymous',
+        cache: 'no-cache',
+        referrerPolicy: 'no-referrer',
     },
 }

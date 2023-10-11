@@ -1,5 +1,6 @@
 import {
     forwardRef,
+    useCallback,
     useImperativeHandle,
     useLayoutEffect,
     useRef,
@@ -11,34 +12,70 @@ import isFunction from 'lodash-es/isFunction'
 import { CircularProgressIndicator } from '../components/progress-indicator/CircularProgressIndicator'
 import { SimpleFadeTransition } from './SodaTransition'
 import { IconButton } from '../components/icon-button'
+import isNumber from 'lodash-es/isNumber'
 
+/**
+ * A high-level image component, supports loading progress (when `crossOrigin` is specified),
+ * timeout with default reload button, lazy load, and so on.
+ * When use this component, explicit set the width and height (or min-height/min-width) is recommended,
+ * otherwise the loading placeholder cannot be rendered as width and height is zero by default.
+ */
 export const SodaImage = forwardRef<
     { reload(): void },
     ExtendProps<
         {
             src?: string
+            /**
+             * This prevent the image to load until the image get into the viewport
+             */
             lazy?: boolean
             /**
              * Timeout in ms, default 10,000
              */
             timeout?: number
+            /**
+             * Placeholder when the image is loading, by default use `<CircularProgressIndicator/>`
+             */
             placeholder?: React.ReactNode
+            /**
+             * Description string
+             */
             description?: React.ReactNode
+            /**
+             * Customize behavior
+             */
             customize?: (
-                state: 'loading' | 'error' | 'loaded'
+                state: 'lazy' | 'loading' | 'error' | 'loaded'
             ) => React.ReactNode | undefined
+            /**
+             * Adjust the image's object-fit
+             */
             objectFit?: React.CSSProperties['objectFit']
             alt?: HTMLImageElement['alt']
+            /**
+             * Send CORS request to fetch the image, this allow us to known how much we have downloaded
+             * so we can display a concrete value in the placeholder of `<CircularProgressIndicator/>`
+             */
             crossOrigin?: React.ImgHTMLAttributes<HTMLImageElement>['crossOrigin']
             referrerPolicy?: React.ImgHTMLAttributes<HTMLImageElement>['referrerPolicy']
+            /**
+             * Cache property for fetch, works when `crossOrigin` is specified
+             */
+            cache?: RequestCache
+            width?: string | number
+            height?: string | number
+            minWidth?: string | number
+            minHeight?: string | number
         },
         HTMLDivElement
     >
 >(function SodaImage(
     {
-        src,
+        src = '', // make sure src is string, not undefined
         width,
         height,
+        minWidth,
+        minHeight,
         timeout = 10000,
         className,
         placeholder,
@@ -49,72 +86,144 @@ export const SodaImage = forwardRef<
         alt,
         crossOrigin,
         referrerPolicy,
+        cache,
         ...props
     },
     ref
 ) {
-    const [state, setState] = useState<'loading' | 'error' | 'loaded'>(
+    const [state, setState] = useState<'lazy' | 'loading' | 'error' | 'loaded'>(
         'loading'
     )
-
     const eRef = useRef<HTMLImageElement>(null)
     const timeoutRef = useRef<number | undefined>(undefined)
+    const [loadPercentage, setLoadPercentage] = useState<number | undefined>(
+        undefined
+    )
+    const hasIntoView = useRef(false)
+
+    const clearEffect = () => {
+        const img = eRef.current!
+        // clear last effect
+        window.clearTimeout(timeoutRef.current)
+        img.onload = null
+        img.onerror = null
+        URL.revokeObjectURL(img.src)
+    }
+
+    const load = useCallback(async () => {
+        setState('loading')
+        clearEffect()
+        const img = eRef.current!
+        // start to load
+        if (crossOrigin) {
+            // crossOrigin, manually use fetch() to download image
+            try {
+                const res = await fetch(src!, {
+                    credentials:
+                        crossOrigin === 'use-credentials'
+                            ? 'include'
+                            : 'same-origin',
+                    referrerPolicy,
+                    signal: timeout ? AbortSignal.timeout(timeout) : undefined,
+                    cache,
+                })
+                if (!res.body) {
+                    setState('error')
+                    return
+                }
+                const contentLength = Number.parseInt(
+                    res.headers.get('content-length')!
+                )
+                if (contentLength) {
+                    // content-length is provided
+                    let receivedLength = 0
+                    const chunks = []
+                    const reader = res.body.getReader()
+                    for (;;) {
+                        const { done, value } = await reader.read()
+                        if (done) break
+                        chunks.push(value)
+                        receivedLength += value.length
+                        setLoadPercentage(receivedLength / contentLength)
+                    }
+                    const chunksAll = new Uint8Array(receivedLength)
+                    let position = 0
+                    for (const chunk of chunks) {
+                        chunksAll.set(chunk, position)
+                        position += chunk.length
+                    }
+                    const blob = new Blob([chunksAll], {
+                        type: res.headers.get('content-type')!,
+                    })
+                    setState('loaded')
+                    img.src = URL.createObjectURL(blob)
+                } else {
+                    // content-length is not provided
+                    const blob = await res.blob()
+                    setState('loaded')
+                    img.src = URL.createObjectURL(blob)
+                }
+            } catch (e) {
+                // fail to load or timeout
+                setState('error')
+                img.src = ''
+            }
+        } else {
+            // not crossOrigin, just act as normal Image()
+            img.src = src!
+            img.onload = () => {
+                window.clearTimeout(timeoutRef.current)
+                setState('loaded')
+            }
+            img.onerror = () => {
+                window.clearTimeout(timeoutRef.current)
+                setState('error')
+            }
+            timeoutRef.current = window.setTimeout(() => {
+                if (state === 'loading') {
+                    // if is still loading, stop it
+                    setState('error')
+                    img.src = ''
+                }
+            }, timeout)
+        }
+        // [warn]: only src change trigger this function to re-cache
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [src])
+
+    const reload = () => {
+        const img = eRef.current!
+        img.src = ''
+        return load()
+    }
 
     useLayoutEffect(() => {
-        setState('loading')
         const img = eRef.current!
-        img.onload = () => setState('loaded')
-        img.onerror = () => setState('error')
-        if (lazy) {
+        if (lazy && !hasIntoView.current) {
             const io = new IntersectionObserver((entries) => {
                 const entry = entries[0]
-                if (entry.intersectionRatio > 0) {
-                    img.src = src!
-                    window.clearTimeout(timeoutRef.current)
-                    timeoutRef.current = window.setTimeout(() => {
-                        img.src = ''
-                        setState('error')
-                    }, timeout)
+                if (entry.intersectionRatio > 0 && !hasIntoView.current) {
+                    hasIntoView.current = true
+                    load()
                 }
             })
             io.observe(img)
             return () => {
                 io.unobserve(img)
-                window.clearTimeout(timeoutRef.current)
-                img.onload = null
-                img.onerror = null
+                clearEffect()
             }
         } else {
-            img.src = src!
-            window.clearTimeout(timeoutRef.current)
-            timeoutRef.current = window.setTimeout(() => {
-                img.src = ''
-                setState('error')
-            }, timeout)
-            return () => {
-                window.clearTimeout(timeoutRef.current)
-                img.onload = null
-                img.onerror = null
-            }
+            hasIntoView.current = true
+            load()
+            return clearEffect
         }
-    }, [lazy, src, timeout])
-
-    const reload = () => {
-        setState('loading')
-        const img = eRef.current!
-        img.src = ''
-        img.src = src!
-        window.clearTimeout(timeoutRef.current)
-        timeoutRef.current = window.setTimeout(() => {
-            img.src = ''
-            setState('error')
-        }, timeout)
-    }
+    }, [lazy, load])
 
     useImperativeHandle(ref, () => ({
         reload,
     }))
 
+    const isLoading = state === 'loading'
     const isImgShow = state === 'loaded'
     const isErrorShow = state === 'error'
 
@@ -122,9 +231,11 @@ export const SodaImage = forwardRef<
         <div className={clsx('sd-image', className)} {...props}>
             <SimpleFadeTransition
                 className="sd-image-placeholder"
-                state={state === 'loading'}
+                state={isLoading}
             >
-                {placeholder ?? <CircularProgressIndicator />}
+                {placeholder ?? (
+                    <CircularProgressIndicator value={loadPercentage} />
+                )}
             </SimpleFadeTransition>
 
             <img
@@ -134,6 +245,10 @@ export const SodaImage = forwardRef<
                     pointerEvents: isImgShow ? undefined : 'none',
                     userSelect: isImgShow ? undefined : 'none',
                     objectFit,
+                    minWidth: isNumber(minWidth) ? `${minWidth}px` : minWidth,
+                    minHeight: isNumber(minHeight)
+                        ? `${minHeight}px`
+                        : minHeight,
                 }}
                 alt={alt}
                 width={width}
