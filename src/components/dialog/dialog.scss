@@ -32,6 +32,8 @@
     height: 100vh;
     background: var(--sd-sys-color-surface-container-high);
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 
     &-header {
         height: 56px;
@@ -56,5 +58,14 @@
     }
     &-body {
         margin: 1.5rem;
+        flex: 1;
+        overflow-y: auto;
+    }
+    &-footer {
+        margin-top: auto;
+        padding-bottom: 8px;
+        &_content {
+            margin: 4px 12px;
+        }
     }
 }

@@ -31,7 +31,18 @@ export const Default: Story = {
                     <FullScreenDialog
                         onCloseClick={() => setOpen(false)}
                         headline="FullScreenDialog Title"
-                        button="Save"
+                        button={<Button sd="text">Save</Button>}
+                        footer={
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                }}
+                            >
+                                <Button sd="text">Cancel</Button>
+                                <Button sd="text">OK</Button>
+                            </div>
+                        }
                     >
                         Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Impedit nulla laboriosam, harum officiis

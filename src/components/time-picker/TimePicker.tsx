@@ -1,42 +1,58 @@
 /* eslint-disable react-refresh/only-export-components */
 import './time-picker.scss'
 import { Button } from '../button'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, forwardRef } from 'react'
 import { IconButton } from '../icon-button'
 import { IconClock } from '@/utils/icons'
 import { Ripple } from '@/utils/Ripple'
 import { useMediaQuery } from '@/utils/hooks'
+import { ExtendProps } from '@/utils/type'
+import clsx from 'clsx'
 import assign from 'lodash-es/assign'
+
+type TimeValue = readonly [hour: number, minute: number]
 
 /**
  * [warn]: data itself always use 24 hours system,
  * but it's appearance varys by changing the `use24hourSystem` property
  * @specs https://m3.material.io/components/time-pickers/specs
  */
-export function TimePicker({
-    direction: initDirection,
-    use24hourSystem = false,
-    onOK: initOnOK,
-    onCancel: initOnCancel,
-    /**
-     * Initial value use 24 hours system, for example `[18, 30]` represents to 6:30 PM
-     */
-    initValue = [new Date().getHours(), new Date().getMinutes()],
-    i18n: initI18n,
-}: {
-    initValue?: readonly [hour: number, minute: number]
-    /**
-     * If is not spcified, choose when screen width <= 600px, use vertical, otherwise horizontal
-     */
-    direction?: 'vertical' | 'horizontal'
-    /**
-     * Use 12 hours system by default
-     */
-    use24hourSystem?: boolean
-    onOK?(time: readonly [hour: number, minute: number]): void
-    onCancel?(time: readonly [hour: number, minute: number]): void
-    i18n?: Partial<typeof i18n_english>
-}) {
+export const TimePicker = forwardRef<
+    HTMLDivElement,
+    ExtendProps<{
+        initValue?: TimeValue
+        /**
+         * If is not spcified, choose when screen width <= 600px, use vertical, otherwise horizontal
+         */
+        direction?: 'vertical' | 'horizontal'
+        /**
+         * Use 12 hours system by default
+         */
+        use24hourSystem?: boolean
+        onOK?(time: TimeValue): void
+        onCancel?(time: TimeValue): void
+        i18n?: Partial<typeof i18n_english>
+        initShowClock?: boolean
+    }>
+>(function TimePicker(
+    {
+        direction: initDirection,
+        use24hourSystem = false,
+        onOK: initOnOK,
+        onCancel: initOnCancel,
+        /**
+         * Initial value use 24 hours system, for example `[18, 30]` represents to 6:30 PM
+         */
+        initValue = [new Date().getHours(), new Date().getMinutes()],
+        i18n: initI18n,
+        initShowClock = false,
+        className,
+        ...props
+    },
+    ref
+) {
+    // init state
+
     const isCompact = useMediaQuery('only screen and (max-width : 600px)')
     const direction = initDirection ?? (isCompact ? 'vertical' : 'horizontal')
     const i18n = assign(
@@ -44,13 +60,12 @@ export function TimePicker({
         initI18n
     )
 
-    const [enterOrSelect, setEnterOrSelect] = useState(false) // false for enter, true for select
+    // state
 
-    const [hour, setHour] = useState(initValue[0].toString().padStart(2, '0'))
+    const [enterOrSelect, setEnterOrSelect] = useState(initShowClock) // false for enter, true for select
+    const [hour, setHour] = useState(normalizeTime(initValue[0]))
     const hourNumber = Number(hour)
-    const [minute, setMinute] = useState(
-        initValue[1].toString().padStart(2, '0')
-    )
+    const [minute, setMinute] = useState(normalizeTime(initValue[1]))
     const minuteNumber = Number(minute)
 
     // handle input
@@ -63,7 +78,7 @@ export function TimePicker({
     const onHourInput = (e: React.FormEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement
         const str = input.value.replace(/\D/g, '').slice(0, 2)
-        const max = use24hourSystem ? 24 : 12
+        const max = use24hourSystem ? 23 : 11
         if (Number(str) >= max) {
             setHour(String(max))
         } else {
@@ -81,9 +96,9 @@ export function TimePicker({
         if (!use24hourSystem) return
         // for 24 hours system
         if (period === 'AM' && hourNumber >= 12) {
-            setHour((hourNumber - 12).toString().padStart(2, '0'))
+            setHour(normalizeTime(hourNumber - 12))
         } else if (period === 'PM' && hourNumber < 12) {
-            setHour((hourNumber + 12).toString().padStart(2, '0'))
+            setHour(normalizeTime(hourNumber + 12))
         }
     }, [use24hourSystem, hourNumber, period])
 
@@ -92,7 +107,7 @@ export function TimePicker({
         // for 12 hours system
         if (hourNumber >= 12) {
             setPeriod('PM')
-            setHour((hourNumber - 12).toString().padStart(2, '0'))
+            setHour(normalizeTime(hourNumber - 12))
         }
     }, [use24hourSystem, hourNumber, setPeriod, setHour])
 
@@ -103,13 +118,6 @@ export function TimePicker({
     useEffect(() => {
         setDegree((((hourNumber % 12) + minuteNumber / 60) / 12) * 360)
     }, [hourNumber, minuteNumber, setDegree])
-
-    const onClockHover = (h: number) => {
-        setDegree(((h + (period === 'PM' ? 12 : 0)) / 12) * 360)
-    }
-    const onClockClick = (h: number) => {
-        setHour(String(h + (period === 'PM' ? 12 : 0)).padStart(2, '0'))
-    }
 
     // handle buttons
 
@@ -129,8 +137,65 @@ export function TimePicker({
         initOnCancel?.(computeTuple())
     }
 
+    // handle events
+
+    const onClockClick = (
+        h: number,
+        ev: React.PointerEvent<HTMLTimeElement>
+    ) => {
+        if (ev.type === 'touch') return
+        setHour(normalizeTime(h + (period === 'PM' ? 12 : 0)))
+        setMinute('00')
+    }
+
+    const isMoving = useRef(false)
+    const lastPosition = useRef<[number, number]>([0, 0])
+
+    const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+        isMoving.current = true
+        ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+        const { clientX, clientY } = e
+        lastPosition.current = [clientX, clientY]
+    }
+
+    const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+        if (!isMoving.current) return
+        const clock = (e.target as HTMLElement).closest(
+            '.sd-time_picker-clock'
+        ) as HTMLElement
+        const [cX, cY] = centerOfElement(clock)
+        const { clientX, clientY } = e
+        const [initX, initY] = lastPosition.current
+        lastPosition.current = [clientX, clientY] // update for next
+        const degree =
+            (Math.atan2(clientY - cY, clientX - cX) -
+                Math.atan2(initY - cY, initX - cX)) *
+            (180 / Math.PI)
+        // how much degree we need to move
+        setDegree((d) => {
+            const nextDegree = normalizeDegree(d + degree)
+            const nextTime =
+                (nextDegree / 360) * 12 + (period === 'PM' ? 12 : 0)
+            const nextHour = Math.trunc(nextTime)
+            const nextMinute = Math.trunc((nextTime - nextHour) * 60)
+            setHour(normalizeTime(nextHour))
+            setMinute(normalizeTime(nextMinute))
+            return normalizeDegree(nextDegree)
+        })
+    }
+
+    const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+        isMoving.current = false
+        ;(e.target as HTMLElement).releasePointerCapture(e.pointerId)
+    }
+
     return (
-        <div className="sd-time_picker" data-sd-direction={direction}>
+        <div
+            {...props}
+            ref={ref}
+            className={clsx('sd-time_picker', className)}
+            data-sd-direction={direction}
+        >
             <div className="sd-time_picker-clock_container">
                 <div className="sd-time_picker-clock_left">
                     <div className="sd-time_picker-headline">
@@ -182,7 +247,12 @@ export function TimePicker({
 
                 {enterOrSelect === true && (
                     <div className="sd-time_picker-clock_right">
-                        <div className="sd-time_picker-clock">
+                        <div
+                            className="sd-time_picker-clock"
+                            onPointerDown={onPointerDown}
+                            onPointerMove={onPointerMove}
+                            onPointerUp={onPointerUp}
+                        >
                             <div className="sd-time_picker-clock_center" />
                             <div
                                 className="sd-time_picker-clock_arm"
@@ -198,8 +268,22 @@ export function TimePicker({
                                     <time
                                         key={h}
                                         dateTime={`${h}:00`}
-                                        onPointerEnter={() => onClockHover(h)}
-                                        onPointerDown={() => onClockClick(h)}
+                                        onPointerDown={(ev) =>
+                                            onClockClick(h, ev)
+                                        }
+                                        style={{
+                                            color: isActive(
+                                                (h % 12) +
+                                                    (use24hourSystem &&
+                                                    period === 'PM'
+                                                        ? 12
+                                                        : 0),
+                                                hourNumber,
+                                                minuteNumber
+                                            )
+                                                ? 'var(--sd-sys-color-on-primary)'
+                                                : undefined,
+                                        }}
                                     >
                                         {h}
                                     </time>
@@ -225,7 +309,7 @@ export function TimePicker({
             </div>
         </div>
     )
-}
+})
 
 export const i18n_english = {
     select_time: 'Select time',
@@ -248,3 +332,31 @@ export const i18n_chinese = {
     ok: '确认',
     cancel: '取消',
 } as const
+
+function centerOfElement(ele: HTMLElement) {
+    const rect = ele.getBoundingClientRect()
+    const x = rect.x + rect.width / 2
+    const y = rect.y + rect.height / 2
+    return [x, y] as const
+}
+
+function normalizeDegree(degree: number) {
+    let result = degree % 360
+    if (result < 0) result += 360
+    return result
+}
+
+function normalizeTime(hourOrMinute: number) {
+    return String(hourOrMinute).padStart(2, '0')
+}
+
+/**
+ * is time (in hour) is active
+ */
+function isActive(hour: number, h: number, m: number) {
+    if (hour === h && m < 30) return true
+    else if (hour - 1 === h && m > 30) return true
+    else if (h === 11 && hour === 0 && m > 30) return true
+    else if (h === 23 && hour === 12 && m > 30) return true
+    else return false
+}

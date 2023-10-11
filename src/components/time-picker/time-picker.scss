@@ -178,6 +178,7 @@
         margin: auto;
         position: relative;
         user-select: none;
+        touch-action: none;
 
         time {
             position: absolute;
@@ -237,9 +238,7 @@
     &-clock time {
         &:hover {
             cursor: pointer;
-            //TODO: this should use js to calculate
-            // background: var(--sd-sys-color-primary);
-            color: var(--sd-sys-color-on-primary);
+            -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
         }
     }
 }

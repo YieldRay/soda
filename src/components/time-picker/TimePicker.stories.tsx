@@ -33,5 +33,6 @@ export const Horizontal: Story = {
 export const Use24hourSystem: Story = {
     args: {
         use24hourSystem: true,
+        initShowClock: true,
     },
 }
