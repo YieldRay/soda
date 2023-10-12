@@ -36,8 +36,8 @@ export const Default: Story = {
                 <p style={{ height: '400px' }}>
                     <p>click the menu icon to open</p>
                     <p>
-                        support <code>{`portalTo={document.body}`}</code> so you
-                        can port it to global
+                        support <code>{`teleportTo={document.body}`}</code> so
+                        you can teleport it to global
                     </p>
                 </p>
 
@@ -46,7 +46,7 @@ export const Default: Story = {
                     header="headline"
                     position="left"
                     onScrimClick={() => setOpen(false)}
-                    action={
+                    footer={
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                             <Button onClick={() => setOpen(false)}>Save</Button>
                             <Button

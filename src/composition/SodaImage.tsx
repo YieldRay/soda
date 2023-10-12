@@ -51,6 +51,13 @@ export const SodaImage = forwardRef<
              * Adjust the image's object-fit
              */
             objectFit?: React.CSSProperties['objectFit']
+            /**
+             * Adjust the image's aspect-ratio
+             */
+            aspectRatio?: React.CSSProperties['aspectRatio']
+            /**
+             * Alt attribute for the image itself
+             */
             alt?: HTMLImageElement['alt']
             /**
              * Send CORS request to fetch the image, this allow us to known how much we have downloaded
@@ -80,6 +87,7 @@ export const SodaImage = forwardRef<
         className,
         placeholder,
         objectFit = 'contain',
+        aspectRatio,
         description,
         customize,
         lazy = false,
@@ -245,6 +253,7 @@ export const SodaImage = forwardRef<
                     pointerEvents: isImgShow ? undefined : 'none',
                     userSelect: isImgShow ? undefined : 'none',
                     objectFit,
+                    aspectRatio,
                     minWidth: isNumber(minWidth) ? `${minWidth}px` : minWidth,
                     minHeight: isNumber(minHeight)
                         ? `${minHeight}px`

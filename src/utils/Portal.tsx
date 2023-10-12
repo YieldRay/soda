@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom'
 
 /**
  * Wrapper component of `createPortal()`
+ * Just like https://vuejs.org/guide/built-ins/teleport.html
  */
 export function Portal({
     children,

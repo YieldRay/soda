@@ -35,8 +35,8 @@ export const Default: Story = {
                     <Button onClick={() => sheetRef.current?.show()}>▲</Button>
                     <p>bottom sheet</p>
                     <p>
-                        support <code>{`portalTo={document.body}`}</code> so you
-                        can port it to global
+                        support <code>{`teleportTo={document.body}`}</code> so
+                        you can teleport it to global
                     </p>
                     <Button onClick={() => sheetRef.current?.hide()}>▼</Button>
                 </BottomSheet>

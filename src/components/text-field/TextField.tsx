@@ -94,11 +94,7 @@ export const TextField = forwardRef<
         }
     }, [textarea, textareaRef, inputRef])
 
-    const sd = textarea
-        ? 'filled'
-        : initSd === 'outlined'
-        ? 'outlined'
-        : 'filled'
+    const sd = initSd === 'outlined' ? 'outlined' : 'filled'
 
     return (
         <div

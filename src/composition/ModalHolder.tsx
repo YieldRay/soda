@@ -9,7 +9,7 @@ export function ModalHolder({
     open,
     children,
     onScrimClick,
-    portalTo,
+    teleportTo,
     zIndex,
 }: {
     open?: boolean
@@ -21,11 +21,11 @@ export function ModalHolder({
     /**
      * @default document.body
      */
-    portalTo?: Element | DocumentFragment
+    teleportTo?: Element | DocumentFragment
     zIndex?: number
 }) {
     return (
-        <Portal container={portalTo ?? document.body}>
+        <Portal container={teleportTo ?? document.body}>
             <style jsx>
                 {`
                     .sd-modal-holder {

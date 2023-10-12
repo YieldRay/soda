@@ -3,8 +3,7 @@ import clsx from 'clsx'
 import { ActionButton } from '@/composition/ActionButton'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
-
-// TODO: add position
+import { IconClose } from '@/utils/icons'
 
 /**
  * @specs https://m3.material.io/components/snackbar/specs
@@ -14,15 +13,29 @@ export const Snakebar = forwardRef<
     ExtendProps<{
         children?: React.ReactNode
         action?: React.ReactNode
-        icon?: React.ReactNode
+        onCloseClick?: () => void
         onActionClick?: () => void
+        thirdLine?: boolean
     }>
 >(function Snakebar(
-    { action, icon, className, children, onActionClick, ...props },
+    {
+        action,
+        onCloseClick,
+        className,
+        children,
+        onActionClick,
+        thirdLine,
+        ...props
+    },
     ref
 ) {
     return (
-        <div {...props} ref={ref} className={clsx('sd-snakebar', className)}>
+        <div
+            {...props}
+            ref={ref}
+            className={clsx('sd-snakebar', className)}
+            data-sd-third_line={thirdLine}
+        >
             <div className="sd-snakebar-supporting_text">{children}</div>
             {action && (
                 <ActionButton
@@ -33,7 +46,15 @@ export const Snakebar = forwardRef<
                     {action}
                 </ActionButton>
             )}
-            {icon && <div className="sd-snakebar-icon">{icon}</div>}
+            {onCloseClick && (
+                <ActionButton
+                    inverse
+                    className="sd-snakebar-icon"
+                    onClick={() => onCloseClick()}
+                >
+                    <IconClose />
+                </ActionButton>
+            )}
         </div>
     )
 })

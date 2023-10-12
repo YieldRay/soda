@@ -67,8 +67,20 @@ export const WithoutLabelText: Story = {
     },
 }
 
-export const Textarea: Story = {
+export const TextareaFilled: Story = {
     args: {
+        sd: 'filled',
+        textarea: true,
+        labelText: 'labelText',
+        leadingIcon: undefined,
+        trailingIcon: undefined,
+        rows: 3,
+    },
+}
+
+export const TextareaOutlined: Story = {
+    args: {
+        sd: 'outlined',
         textarea: true,
         labelText: 'labelText',
         leadingIcon: undefined,

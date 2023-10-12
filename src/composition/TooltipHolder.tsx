@@ -29,7 +29,7 @@ export function TooltipHolder(props: {
 
     const { refs, floatingStyles, update, context } = useFloating({
         whileElementsMounted: autoUpdate,
-        placement: props.placement || 'bottom-start',
+        placement: props.placement || 'top',
         middleware: [offset(4), flip(), shift()],
         open: isOpen,
         onOpenChange: setIsOpen,

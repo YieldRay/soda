@@ -26,7 +26,7 @@ export const BottomSheet = forwardRef<
         hideDragHandle?: boolean
         onChange?: (visiable: boolean) => void
         onScrimClick?(): void
-        portalTo?: Element | DocumentFragment
+        teleportTo?: Element | DocumentFragment
     }>
 >(function BottomSheet(
     {
@@ -36,7 +36,7 @@ export const BottomSheet = forwardRef<
         onScrimClick,
         className,
         style,
-        portalTo,
+        teleportTo,
         ...props
     },
     ref
@@ -66,7 +66,7 @@ export const BottomSheet = forwardRef<
     useImperativeHandle(ref, () => dragHandlerRef.current!)
 
     return (
-        <Portal container={portalTo}>
+        <Portal container={teleportTo}>
             <Scrim open={visiable} onClick={() => onScrimClick?.()} />
             <div className="sd-bottom_sheet-scrim">
                 <div

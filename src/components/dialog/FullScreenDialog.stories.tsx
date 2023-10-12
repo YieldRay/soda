@@ -37,6 +37,7 @@ export const Default: Story = {
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'flex-end',
+                                    gap: '0.5rem',
                                 }}
                             >
                                 <Button sd="text">Cancel</Button>

@@ -5,14 +5,14 @@ import { useLayoutEffect, useRef } from 'react'
  * Based on HTMLDialogElement, this can be a replacement for `<ModalHolder>`
  */
 export function DialogHolder({
-    portalTo,
+    teleportTo,
     open,
     ...props
 }: React.HTMLProps<HTMLDialogElement> & {
     /**
      * @default document.body
      */
-    portalTo?: Element | DocumentFragment
+    teleportTo?: Element | DocumentFragment
     open?: boolean
 }) {
     const ref = useRef<HTMLDialogElement>(null)
@@ -29,7 +29,7 @@ export function DialogHolder({
     }, [open])
 
     return (
-        <Portal container={portalTo ?? document.body}>
+        <Portal container={teleportTo ?? document.body}>
             <dialog {...props} ref={ref}>
                 <style jsx>{`
                     dialog {

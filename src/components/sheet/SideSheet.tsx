@@ -12,32 +12,32 @@ import { Portal } from '@/utils/Portal'
  */
 export function SideSheet({
     header,
-    action,
+    footer,
     children,
     position,
     open,
     onScrimClick,
-    portalTo,
+    teleportTo,
     className,
     style,
 }: ExtendProps<{
     header?: React.ReactNode
-    action?: React.ReactNode
     children?: React.ReactNode
     /**
      * @default left
      */
+    footer?: React.ReactNode
     position?: 'left' | 'right'
     open?: boolean
     onScrimClick?(): void
-    portalTo?: Element | DocumentFragment
+    teleportTo?: Element | DocumentFragment
 }>) {
     const isRight = position === 'right'
     const isOpen = open ?? true
     const translateX = isRight ? '100%' : '-100%'
 
     return (
-        <Portal container={portalTo}>
+        <Portal container={teleportTo}>
             <Scrim open={isOpen} onClick={() => onScrimClick?.()}></Scrim>
             <div className="sd-side_sheet-scrim">
                 <div
@@ -57,10 +57,12 @@ export function SideSheet({
                         <div className="sd-side_sheet-header">{header}</div>
                     )}
                     <div className="sd-side_sheet-body">{children}</div>
-                    {action && (
-                        <div className="sd-side_sheet-action">
-                            <Divider style={{ margin: '0' }}></Divider>
-                            <div style={{ margin: '16px' }}>{action}</div>
+                    {footer && (
+                        <div className="sd-side_sheet-footer">
+                            <Divider />
+                            <div className="sd-side_sheet-footer_content">
+                                {footer}
+                            </div>
                         </div>
                     )}
                 </div>

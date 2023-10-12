@@ -19,4 +19,5 @@ export default function Tag({
         e.innerHTML = children
         appendTo.append(e)
     }, [as, appendTo, children, props])
+    return undefined
 }

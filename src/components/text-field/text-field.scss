@@ -14,7 +14,7 @@ $label_text_gap_size: 3.2px;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     padding: 0.75rem;
-    transition: all 200ms;
+    transition: filter 200ms;
 
     &:hover {
         filter: brightness(96%);
@@ -84,6 +84,9 @@ $label_text_gap_size: 3.2px;
 
     // support for textarea
     textarea {
+        all: unset;
+        resize: both;
+        display: inline-block;
         flex-grow: 1;
         border: none;
         outline: none;
@@ -91,14 +94,22 @@ $label_text_gap_size: 3.2px;
         font-family: unset;
         margin-top: 8px;
         background: transparent;
+        // occupy whole area
         box-sizing: border-box;
         min-width: 100%;
-        min-height: 100%;
+        min-height: max(100%, 4rem);
         font-size: 15px;
     }
 
     &:has(textarea) {
         align-items: flex-start;
+        // this make the textarea to place at the right bottom of the container without padding
+        // allowing the resizer to place at the correct place
+        padding: 0;
+        padding: 0.75rem 0 0 0.75rem;
+        textarea {
+            padding: 0 0.75rem 0.75rem 0;
+        }
     }
 }
 
@@ -130,6 +141,15 @@ $label_text_gap_size: 3.2px;
         left: 0.5rem;
         top: 50%;
         transform: translateY(-50%);
+    }
+    // adjust for the textarea
+    &:has(textarea) {
+        .sd-text_field-label_text {
+            top: 1.5rem;
+        }
+        textarea {
+            margin-top: 0;
+        }
     }
     &[data-sd-label_text='populated'] .sd-text_field-label_text {
         left: 0.5rem;
