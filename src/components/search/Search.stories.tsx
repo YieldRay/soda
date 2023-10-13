@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Search } from '.'
 import { IconButton } from '../icon-button'
 import { useState } from 'react'
-import { IconMagnify, IconMenu } from '@/utils/icons'
+import { mdiMagnify, mdiMenu } from '@mdi/js'
 
 const meta = {
     title: 'Search',
@@ -51,15 +51,7 @@ export const View: Story = {
 
 export const WithIcon: Story = {
     args: {
-        leadingIcon: (
-            <IconButton>
-                <IconMenu />
-            </IconButton>
-        ),
-        trailingIcon: (
-            <IconButton>
-                <IconMagnify />
-            </IconButton>
-        ),
+        leadingIcon: <IconButton path={mdiMenu} />,
+        trailingIcon: <IconButton path={mdiMagnify} />,
     },
 }

@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { IconButton } from '.'
-import { IconChecked } from '@/utils/icons'
+import Icon from '@mdi/react'
+import { mdiCheck } from '@mdi/js'
 
 const meta = {
     title: 'Button/IconButton',
@@ -10,7 +11,7 @@ const meta = {
         layout: 'centered',
     },
     tags: ['autodocs'],
-    args: { children: <IconChecked /> },
+    args: { children: <Icon path={mdiCheck}></Icon> },
     argTypes: {
         disabled: {
             type: 'boolean',

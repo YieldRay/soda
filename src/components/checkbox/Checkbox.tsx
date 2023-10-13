@@ -1,9 +1,10 @@
 import './checkbox.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
-import { IconChecked } from '@/utils/icons.tsx'
 import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
+import { Icon } from '@mdi/react'
+import { mdiCheck } from '@mdi/js'
 
 /**
  * @specs https://m3.material.io/components/checkbox/specs
@@ -24,7 +25,7 @@ export const Checkbox = forwardRef<
     { checked, onChange, children, disabled, error, ...props },
     ref
 ) {
-    const checkedIcon = children || <IconChecked />
+    const checkedIcon = children || <Icon path={mdiCheck} />
 
     return (
         <Ripple

@@ -1,7 +1,7 @@
 import * as Soda from '@/components/menu'
-import { IconMenuRight } from '@/utils/icons'
 import { ExtendProps } from '@/utils/type'
-
+import Icon from '@mdi/react'
+import { mdiMenuRight } from '@mdi/js'
 import {
     autoUpdate,
     flip,
@@ -241,7 +241,7 @@ const NestedMenuComponent = React.forwardRef<
                 ref={useMergeRefs([refs.setReference, item.ref, forwardedRef])}
                 tabIndex={parent.activeIndex === item.index ? 0 : -1}
                 {...getReferenceProps(parent.getItemProps({ ...props }))}
-                trailingIcon={<IconMenuRight />}
+                trailingIcon={<Icon path={mdiMenuRight}></Icon>}
             >
                 {label}
             </Soda.MenuItem>

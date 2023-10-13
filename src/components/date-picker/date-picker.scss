@@ -1,11 +1,13 @@
 // https://m3.material.io/components/date-pickers/specs
 
 .sd-date_picker {
-    display: inline-block;
-    vertical-align: middle;
-    border: 2px solid var(--sd-sys-color-outline);
-    background: transparent;
-    border-radius: 0.25rem;
-    padding: 0.75rem;
     position: relative;
+    &-icon {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        svg {
+            color: var(--sd-sys-color-outline);
+        }
+    }
 }

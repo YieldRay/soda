@@ -2,9 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { NavigationRail } from '.'
 import { useState } from 'react'
-import { IconMagnify } from '@/utils/icons'
 import { Button } from '../button'
 import { Fab } from '../fab'
+import Icon from '@mdi/react'
+import { mdiMagnify } from '@mdi/js'
 
 const meta = {
     title: 'Navigation/NavigationRail',
@@ -33,7 +34,7 @@ export const Default: Story = {
             {
                 key: 'search',
                 label: 'search',
-                icon: <IconMagnify />,
+                icon: <Icon path={mdiMagnify}></Icon>,
             },
             {
                 key: 'settings',

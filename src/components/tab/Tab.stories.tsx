@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Tab, TabItem } from '.'
-import { IconChecked, IconClose, IconMagnify } from '@/utils/icons'
 import { useState } from 'react'
+import Icon from '@mdi/react'
+import { mdiCheck, mdiClose, mdiMagnify } from '@mdi/js'
 
 const meta = {
     title: 'Tab',
@@ -22,13 +23,13 @@ export const Default: Story = {
 
         return (
             <Tab value={value} onChange={setValue}>
-                <TabItem icon={<IconChecked />} value="0">
+                <TabItem icon={<Icon path={mdiCheck} />} value="0">
                     Apple
                 </TabItem>
-                <TabItem icon={<IconClose />} value="1">
+                <TabItem icon={<Icon path={mdiClose} />} value="1">
                     Banana
                 </TabItem>
-                <TabItem icon={<IconMagnify />} value="2">
+                <TabItem icon={<Icon path={mdiMagnify} />} value="2">
                     Orange
                 </TabItem>
             </Tab>

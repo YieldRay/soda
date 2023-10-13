@@ -3,7 +3,8 @@ import clsx from 'clsx'
 import { ActionButton } from '@/composition/ActionButton'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
-import { IconClose } from '@/utils/icons'
+import { mdiClose } from '@mdi/js'
+import Icon from '@mdi/react'
 
 /**
  * @specs https://m3.material.io/components/snackbar/specs
@@ -52,7 +53,7 @@ export const Snakebar = forwardRef<
                     className="sd-snakebar-icon"
                     onClick={() => onCloseClick()}
                 >
-                    <IconClose />
+                    <Icon path={mdiClose} />
                 </ActionButton>
             )}
         </div>

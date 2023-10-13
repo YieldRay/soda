@@ -5,8 +5,8 @@ import { useState } from 'react'
 import { Button } from '../button'
 import { TopAppBar } from '../app-bar'
 import { IconButton } from '../icon-button'
-import { IconMenu } from '@/utils/icons'
 import { DrawerItem } from '@/composition/DrawerItem'
+import { mdiMenu } from '@mdi/js'
 
 const meta = {
     title: 'Sheet/SideSheet',
@@ -25,9 +25,10 @@ export const Default: Story = {
             <>
                 <TopAppBar
                     leadingNavigationIcon={
-                        <IconButton onClick={() => setOpen(true)}>
-                            <IconMenu />
-                        </IconButton>
+                        <IconButton
+                            onClick={() => setOpen(true)}
+                            path={mdiMenu}
+                        />
                     }
                 >
                     TopAppBar

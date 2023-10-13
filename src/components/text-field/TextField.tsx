@@ -96,6 +96,42 @@ export const TextField = forwardRef<
 
     const sd = initSd === 'outlined' ? 'outlined' : 'filled'
 
+    const inputNode = (
+        <>
+            <Helper sd={labelText ? sd : 'outlined'}>
+                {labelText && (
+                    <div
+                        key="sd-text_field-label_text"
+                        className="sd-text_field-label_text"
+                    >
+                        {labelText}
+                    </div>
+                )}
+                {!textarea && (
+                    <input
+                        ref={innerRef as React.ForwardedRef<HTMLInputElement>}
+                        onChange={onChange}
+                        value={value}
+                        readOnly={readonly}
+                        disabled={disabled}
+                        placeholder={placeholder}
+                    />
+                )}
+            </Helper>
+            {textarea && (
+                <textarea
+                    ref={innerRef as React.ForwardedRef<HTMLTextAreaElement>}
+                    onChange={onChange}
+                    value={value}
+                    readOnly={readonly}
+                    disabled={disabled}
+                    placeholder={placeholder}
+                    rows={rows}
+                />
+            )}
+        </>
+    )
+
     return (
         <div
             {...props}
@@ -120,38 +156,7 @@ export const TextField = forwardRef<
                 <div className="sd-text_field-leading_icon">{leadingIcon}</div>
             )}
 
-            <Helper sd={labelText ? sd : 'outlined'}>
-                {labelText && (
-                    <div
-                        key="sd-text_field-label_text"
-                        className="sd-text_field-label_text"
-                    >
-                        {labelText}
-                    </div>
-                )}
-                {!textarea && (
-                    <input
-                        ref={innerRef as React.ForwardedRef<HTMLInputElement>}
-                        onChange={onChange}
-                        value={value}
-                        readOnly={readonly}
-                        disabled={disabled}
-                        placeholder={placeholder}
-                    />
-                )}
-            </Helper>
-
-            {textarea && (
-                <textarea
-                    ref={innerRef as React.ForwardedRef<HTMLTextAreaElement>}
-                    onChange={onChange}
-                    value={value}
-                    readOnly={readonly}
-                    disabled={disabled}
-                    placeholder={placeholder}
-                    rows={rows}
-                />
-            )}
+            {inputNode}
 
             {trailingIcon && (
                 <div className="sd-text_field-trailing_icon">

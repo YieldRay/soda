@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { MenuItem, Menu } from '.'
-import { IconChecked, IconClose, IconMagnify } from '@/utils/icons'
 import { Divider } from '../divider'
+import { mdiCheck, mdiClose, mdiMagnify } from '@mdi/js'
+import Icon from '@mdi/react'
 
 const meta = {
     title: 'Menu',
@@ -21,20 +22,26 @@ export const Default: Story = {
         return (
             <Menu>
                 <MenuItem
-                    leadingIcon={<IconMagnify />}
-                    trailingIcon={<IconMagnify />}
+                    leadingIcon={<Icon path={mdiMagnify}></Icon>}
+                    trailingIcon={<Icon path={mdiMagnify}></Icon>}
                 >
                     Apple
                 </MenuItem>
                 <Divider />
-                <MenuItem leadingIcon={<IconChecked />} trailingText={'⌘C'}>
+                <MenuItem
+                    leadingIcon={<Icon path={mdiCheck}></Icon>}
+                    trailingText={'⌘C'}
+                >
                     Banana
                 </MenuItem>
-                <MenuItem leadingIcon={<IconClose />} trailingText={'⌘V'}>
+                <MenuItem
+                    leadingIcon={<Icon path={mdiClose}></Icon>}
+                    trailingText={'⌘V'}
+                >
                     Orange
                 </MenuItem>
                 <MenuItem
-                    leadingIcon={<IconClose />}
+                    leadingIcon={<Icon path={mdiClose}></Icon>}
                     trailingText={'⌘V'}
                     disabled
                 >

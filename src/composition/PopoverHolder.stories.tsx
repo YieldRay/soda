@@ -4,7 +4,7 @@ import { PopoverHolder } from './PopoverHolder'
 import { TopAppBar } from '../components/app-bar'
 import { IconButton } from '../components/icon-button'
 import { PlainTooltip, RichTooltip } from '../components/tooltip'
-import { IconMenu } from '@/utils/icons'
+import { mdiMenu } from '@mdi/js'
 
 const meta = {
     title: 'composition/PopoverHolder',
@@ -22,11 +22,7 @@ export const Default: Story = {
             <TopAppBar
                 leadingNavigationIcon={
                     <PopoverHolder
-                        trigger={
-                            <IconButton>
-                                <IconMenu />
-                            </IconButton>
-                        }
+                        trigger={<IconButton path={mdiMenu} />}
                         content={<PlainTooltip>menu</PlainTooltip>}
                     ></PopoverHolder>
                 }

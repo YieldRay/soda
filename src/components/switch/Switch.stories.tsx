@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Switch } from '.'
 import { useState } from 'react'
-import { IconChecked, IconClose } from '@/utils/icons'
+import Icon from '@mdi/react'
+import { mdiCheck, mdiClose } from '@mdi/js'
 
 const meta = {
     title: 'Switch',
@@ -37,7 +38,7 @@ export const WithIcon: Story = {
         const [checked, setChecked] = useState(false)
         return (
             <Switch checked={checked} onChange={() => setChecked(!checked)}>
-                {checked ? <IconChecked /> : <IconClose />}
+                {<Icon path={checked ? mdiCheck : mdiClose} />}
             </Switch>
         )
     },

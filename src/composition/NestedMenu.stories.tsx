@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { NestedMenu as Menu, NestedMenuItem as MenuItem } from './NestedMenu'
 import { IconButton } from '..'
-import { IconDotsVertical } from '@/utils/icons'
+import { mdiDotsVertical } from '@mdi/js'
 
 const meta = {
     title: 'composition/NestedMenu',
@@ -38,11 +38,7 @@ const submenus = (
 
 export const Default: Story = {
     args: {
-        label: (
-            <IconButton>
-                <IconDotsVertical />
-            </IconButton>
-        ),
+        label: <IconButton path={mdiDotsVertical} />,
         defaultOpen: true,
         children: submenus,
     },

@@ -1,10 +1,10 @@
 import './dialog.scss'
-import { IconButton } from '../icon-button'
-import { IconClose } from '@/utils/icons.tsx'
 import { forwardRef } from 'react'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
+import { ExtendProps } from '@/utils/type'
 import { Divider } from '../divider/Divider'
+import { IconButton } from '../icon-button'
+import { mdiClose } from '@mdi/js'
 
 /**
  * @specs https://m3.material.io/components/dialogs/specs#bbf1acde-f8d2-4ae1-9d51-343e96c4ac20
@@ -38,9 +38,8 @@ export const FullScreenDialog = forwardRef<
                 <IconButton
                     className="sd-dialog-fullscreen-close"
                     onClick={onCloseClick}
-                >
-                    <IconClose />
-                </IconButton>
+                    path={mdiClose}
+                />
                 <div className="sd-dialog-fullscreen-headline">{headline}</div>
                 {button}
             </div>

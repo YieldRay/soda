@@ -14,7 +14,7 @@ $label_text_gap_size: 3.2px;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     padding: 0.75rem;
-    transition: filter 200ms;
+    transition: filter 200ms, border 200ms;
 
     &:hover {
         filter: brightness(96%);
@@ -40,10 +40,6 @@ $label_text_gap_size: 3.2px;
         margin-left: 0.5rem;
     }
 
-    &-supporting_text {
-        font-size: 12px;
-    }
-
     position: relative;
 
     &-active_indicator {
@@ -62,24 +58,26 @@ $label_text_gap_size: 3.2px;
         }
     }
 
-    input {
-        all: unset;
-    }
-
     &:has(&-supporting_text) {
-        margin-bottom: 1rem;
+        margin-bottom: 18px;
     }
 
     &-supporting_text {
+        font-size: 12px;
         position: absolute;
         color: var(--sd-sys-color-on-surface-variant);
         font-size: small;
         left: 0;
-        bottom: -1rem;
+        bottom: -18px;
         text-wrap: nowrap;
-        padding: 0 0.5rem;
+        padding: 0 8px;
         box-sizing: border-box;
         width: 100%;
+    }
+
+    input {
+        all: unset;
+        max-width: 100%;
     }
 
     // support for textarea
@@ -92,28 +90,23 @@ $label_text_gap_size: 3.2px;
         outline: none;
         padding: 0;
         font-family: unset;
-        margin-top: 8px;
         background: transparent;
         // occupy whole area
         box-sizing: border-box;
         min-width: 100%;
-        min-height: max(100%, 4rem);
+        min-height: 100%;
         font-size: 15px;
+        scrollbar-gutter: stable;
     }
 
     &:has(textarea) {
         align-items: flex-start;
         // this make the textarea to place at the right bottom of the container without padding
         // allowing the resizer to place at the correct place
-        padding: 0;
-        padding: 0.75rem 0 0 0.75rem;
-        textarea {
-            padding: 0 0.75rem 0.75rem 0;
-        }
     }
 }
 
-// outlined (default filled)
+//! outlined (default filled)
 .sd-text_field[data-sd='outlined'] {
     border: 2px solid var(--sd-sys-color-outline);
     background: transparent;
@@ -138,25 +131,17 @@ $label_text_gap_size: 3.2px;
     .sd-text_field-label_text {
         position: absolute;
         transition: all 200ms;
-        left: 0.5rem;
-        top: 50%;
-        transform: translateY(-50%);
+        left: 8px;
+        top: 16px;
     }
-    // adjust for the textarea
-    &:has(textarea) {
-        .sd-text_field-label_text {
-            top: 1.5rem;
-        }
-        textarea {
-            margin-top: 0;
-        }
-    }
+
     &[data-sd-label_text='populated'] .sd-text_field-label_text {
-        left: 0.5rem;
-        top: 0;
+        left: 8px;
+        top: -8px;
         color: var(--sd-sys-color-primary);
         background: rgb(255 255 255);
         font-size: $label_text_populated_size;
+        padding: 0 4px;
     }
 
     // override default
@@ -172,27 +157,33 @@ $label_text_gap_size: 3.2px;
     }
 }
 
-.sd-text_field .sd-text_field-filled_helper {
-    position: relative;
-    width: 100%;
-    height: $label_text_empty_size + $label_text_populated_size;
+//! filled
+.sd-text_field[data-sd='filled'] {
+    .sd-text_field-filled_helper {
+        position: relative;
+        width: 100%;
+        height: $label_text_empty_size + $label_text_populated_size;
 
-    .sd-text_field-label_text {
-        display: block;
-        width: fit-content;
-        position: absolute;
-        transition: all 200ms;
-        text-wrap: nowrap;
-        user-select: none;
-        pointer-events: none;
+        .sd-text_field-label_text {
+            display: block;
+            width: fit-content;
+            position: absolute;
+            transition: all 200ms;
+            text-wrap: nowrap;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        input {
+            position: absolute;
+        }
     }
-
-    input {
-        position: absolute;
+    textarea {
+        margin-top: 0.75rem;
     }
 }
 
-// label_text empty
+//! label_text empty
 .sd-text_field[data-sd-label_text='empty'] {
     .sd-text_field-filled_helper {
         .sd-text_field-label_text {
@@ -221,7 +212,7 @@ $label_text_gap_size: 3.2px;
     }
 }
 
-// label_text populated
+//! label_text populated
 .sd-text_field[data-sd-label_text='populated'] {
     .sd-text_field-filled_helper {
         .sd-text_field-label_text {

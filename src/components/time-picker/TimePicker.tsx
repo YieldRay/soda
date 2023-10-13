@@ -3,7 +3,7 @@ import './time-picker.scss'
 import { Button } from '../button'
 import { useState, useEffect, useRef, forwardRef } from 'react'
 import { IconButton } from '../icon-button'
-import { IconClock } from '@/utils/icons'
+import { mdiClockOutline } from '@mdi/js'
 import { Ripple } from '@/utils/Ripple'
 import { useMediaQuery } from '@/utils/hooks'
 import { ExtendProps } from '@/utils/type'
@@ -295,9 +295,10 @@ export const TimePicker = forwardRef<
             </div>
 
             <div className="sd-time_picker-footer">
-                <IconButton onClick={() => setEnterOrSelect((x) => !x)}>
-                    <IconClock />
-                </IconButton>
+                <IconButton
+                    path={mdiClockOutline}
+                    onClick={() => setEnterOrSelect((x) => !x)}
+                />
                 <div className="sd-time_picker-buttons">
                     <Button sd="text" onClick={onCancel}>
                         {i18n.cancel}

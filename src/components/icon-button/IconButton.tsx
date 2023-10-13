@@ -3,6 +3,7 @@ import { Ripple } from '@/utils/Ripple'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
+import { Icon } from '@mdi/react'
 
 /**
  * @specs https://m3.material.io/components/icon-buttons/specs
@@ -21,6 +22,8 @@ export const IconButton = forwardRef<
          * other button is selected by default.
          */
         selected?: boolean
+
+        path?: string
     }>
 >(function IconButton(
     {
@@ -29,6 +32,7 @@ export const IconButton = forwardRef<
         disabled,
         sd: initSd,
         selected: initSelected,
+        path,
         ...props
     },
     ref
@@ -54,7 +58,9 @@ export const IconButton = forwardRef<
             data-sd-selected={selected}
             data-sd-disabled={disabled}
         >
-            <div className="sd-icon_button-icon">{children}</div>
+            <div className="sd-icon_button-icon">
+                {path ? <Icon path={path}></Icon> : children}
+            </div>
         </Ripple>
     )
 })
