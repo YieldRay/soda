@@ -5,6 +5,7 @@ import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
 import { Icon } from '@mdi/react'
 import { mdiCheck } from '@mdi/js'
+import { SimpleSodaTransition } from '@/composition/SodaTransition'
 
 /**
  * @specs https://m3.material.io/components/checkbox/specs
@@ -43,7 +44,11 @@ export const Checkbox = forwardRef<
                 }
             }}
         >
-            <div className="sd-checkbox-icon">{checked && checkedIcon}</div>
+            <div className="sd-checkbox-icon">
+                <SimpleSodaTransition state={checked}>
+                    {checkedIcon}
+                </SimpleSodaTransition>
+            </div>
         </Ripple>
     )
 })

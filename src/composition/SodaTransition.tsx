@@ -94,17 +94,36 @@ export const SodaTransition = forwardRef<
     )
 })
 
-export const SimpleFadeTransition = forwardRef<
+/**
+ * A simple wrapper of `<SodaTransition>`, with default fade transition included.
+ */
+export const SimpleSodaTransition = forwardRef<
     HTMLElement,
-    Parameters<typeof SodaTransition>[0]
->(function SimpleFadeTransition(props, ref) {
+    Parameters<typeof SodaTransition>[0] & {
+        enter?: React.CSSProperties
+        leave?: React.CSSProperties
+    }
+>(function SimpleFadeTransition(
+    {
+        enter = { opacity: '1' },
+        leave = { opacity: '0' },
+        beforeEnter,
+        afterEnter,
+        beforeLeave,
+        afterLeave,
+        style,
+        ...props
+    },
+    ref
+) {
     return (
         <SodaTransition
             {...{
-                beforeEnter: { opacity: '0' },
-                afterEnter: { opacity: '1' },
-                beforeLeave: { opacity: '1' },
-                afterLeave: { opacity: '0' },
+                beforeEnter: { ...beforeEnter, ...leave },
+                afterEnter: { ...afterEnter, ...enter },
+                beforeLeave: { ...beforeLeave, ...enter },
+                afterLeave: { ...afterLeave, ...leave },
+                style: { transition: 'all 200ms', ...style },
                 ...props,
                 ref,
             }}

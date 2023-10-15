@@ -46,8 +46,10 @@ See: <https://yieldray.github.io/soda/>
 
 ## Icons
 
-using google fonts: <https://fonts.google.com/icons>  
-using mdi library: <https://materialdesignicons.com/>
+This library use the [MDI Icon Library](https://pictogrammers.com/library/mdi/)  
+You can refer it at <https://materialdesignicons.com/>
+
+A replacement is google fonts: <https://fonts.google.com/icons>
 
 ## Fonts
 

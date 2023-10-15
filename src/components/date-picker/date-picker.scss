@@ -1,13 +1,48 @@
 // https://m3.material.io/components/date-pickers/specs
 
 .sd-date_picker {
-    position: relative;
-    &-icon {
-        position: absolute;
-        right: 4px;
-        top: 4px;
-        svg {
-            color: var(--sd-sys-color-outline);
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    align-items: stretch;
+
+    &-docked {
+        background: var(--sd-sys-color-surface-container-high);
+        border-radius: 2rem;
+        padding: 0 4px;
+
+        &_header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        &_body {
+            margin-top: 10px;
+        }
+        &_footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+
+        table {
+            user-select: none;
+            width: 100%;
+            table-layout: fixed;
+            td {
+                text-align: center;
+            }
+            tr time {
+                @include display-inline-flex-center;
+                box-sizing: border-box;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                overflow: hidden;
+            }
         }
     }
 }

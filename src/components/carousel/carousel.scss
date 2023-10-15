@@ -7,9 +7,9 @@
     flex-wrap: nowrap;
     align-items: stretch;
     overflow: hidden;
-    cursor: pointer;
     height: 12rem; // default height
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+    user-select: none;
 
     &-item {
         flex: 0;

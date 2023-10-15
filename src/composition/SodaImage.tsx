@@ -10,7 +10,7 @@ import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
 import isFunction from 'lodash-es/isFunction'
 import { CircularProgressIndicator } from '../components/progress-indicator/CircularProgressIndicator'
-import { SimpleFadeTransition } from './SodaTransition'
+import { SimpleSodaTransition } from './SodaTransition'
 import { IconButton } from '../components/icon-button'
 import isNumber from 'lodash-es/isNumber'
 
@@ -237,14 +237,14 @@ export const SodaImage = forwardRef<
 
     return (
         <div className={clsx('sd-image', className)} {...props}>
-            <SimpleFadeTransition
+            <SimpleSodaTransition
                 className="sd-image-placeholder"
                 state={isLoading}
             >
                 {placeholder ?? (
                     <CircularProgressIndicator value={loadPercentage} />
                 )}
-            </SimpleFadeTransition>
+            </SimpleSodaTransition>
 
             <img
                 ref={eRef}
@@ -350,6 +350,7 @@ export const SodaImage = forwardRef<
                     box-sizing: border-box;
                     width: 100%;
                     height: 100%;
+                    background: var(--sd-sys-color-surface-bright);
                     border: solid 1px var(--sd-sys-color-outline);
                     border-radius: 4px;
                     padding: 4px;

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SodaTransition } from './SodaTransition'
+import { SodaTransition, SimpleSodaTransition } from './SodaTransition'
 import { Button } from '..'
 import { useState } from 'react'
 
@@ -39,6 +39,28 @@ export const Default: Story = {
                 >
                     SodaTransition
                 </SodaTransition>
+            </>
+        )
+    },
+}
+
+export const Simple: Story = {
+    render: () => {
+        const [show, setShow] = useState(true)
+        return (
+            <>
+                <Button onClick={() => setShow(!show)}>toggle state</Button>
+                <SimpleSodaTransition
+                    state={show}
+                    style={{
+                        transformOrigin: 'center',
+                        display: 'inline-block',
+                    }}
+                    leave={{ opacity: '0', scale: '0' }}
+                    enter={{ opacity: '1', scale: '1' }}
+                >
+                    SodaTransition
+                </SimpleSodaTransition>
             </>
         )
     },
