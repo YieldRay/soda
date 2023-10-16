@@ -16,13 +16,20 @@ import { getFormatCalendar, isSameDay } from './calendar'
  */
 export function DatePicker({
     initDate = new Date(),
+    supportingText = 'YYYY/MM/DD',
+    onOK,
+    onCancel,
 }: {
     initDate?: Date
     format?: (value: Date) => string
+    supportingText?: string
+    onOK?: (value: Date) => string
+    onCancel?: (value: Date) => string
 }) {
     // just for UI display
     const [year, setYear] = useState(initDate.getFullYear())
     const [month, setMonth] = useState(initDate.getMonth() + 1)
+    const dateDisplay = new Date(year, month - 1, initDate.getDate())
     // internal value
     const [date, setDate] = useState(initDate)
     const calendar = getFormatCalendar(year, month)
@@ -36,7 +43,7 @@ export function DatePicker({
                     readOnly
                     value={new Intl.DateTimeFormat().format(date)}
                     labelText="Date"
-                    supportingText="YYYY/MM/DD"
+                    supportingText={supportingText}
                 />
                 <div className="input-icon">
                     <IconButton path={mdiCalendarBlank} />
@@ -52,7 +59,7 @@ export function DatePicker({
                         {
                             new Intl.DateTimeFormat(undefined, {
                                 month: 'long',
-                            }).formatToParts(date)[0].value
+                            }).formatToParts(dateDisplay)[0].value
                         }
                     </MenuButton>
                     <MenuButton
@@ -62,7 +69,7 @@ export function DatePicker({
                         {
                             new Intl.DateTimeFormat(undefined, {
                                 year: 'numeric',
-                            }).formatToParts(date)[0].value
+                            }).formatToParts(dateDisplay)[0].value
                         }
                     </MenuButton>
                 </header>
@@ -114,8 +121,12 @@ export function DatePicker({
                     </table>
                 </div>
                 <footer className="sd-date_picker-docked_footer">
-                    <Button sd="text">Cancel</Button>
-                    <Button sd="text">OK</Button>
+                    <Button sd="text" onClick={() => onCancel?.(date)}>
+                        Cancel
+                    </Button>
+                    <Button sd="text" onClick={() => onOK?.(date)}>
+                        OK
+                    </Button>
                 </footer>
             </section>
 
@@ -139,10 +150,11 @@ export function DatePicker({
                         color: var(--sd-sys-color-on-primary);
                     }
                     time.disabled {
-                        color: var(--sd-sys-color-on-surface-variant);
+                        filter: grayscale(1) opacity(0.6);
                     }
                     time:not(.disabled) {
                         cursor: pointer;
+                        revert: true;
                     }
                 `}
             </style>

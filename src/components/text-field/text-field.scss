@@ -83,20 +83,23 @@ $label_text_gap_size: 3.2px;
     // support for textarea
     textarea {
         all: unset;
-        resize: both;
         display: inline-block;
+        resize: both;
         flex-grow: 1;
         border: none;
         outline: none;
         padding: 0;
         font-family: unset;
         background: transparent;
-        // occupy whole area
         box-sizing: border-box;
+        // occupy whole area
         min-width: 100%;
         min-height: 100%;
         font-size: 15px;
         scrollbar-gutter: stable;
+        // wrap
+        word-break: break-all;
+        text-wrap: wrap;
     }
 
     &:has(textarea) {

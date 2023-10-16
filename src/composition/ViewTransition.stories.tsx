@@ -16,18 +16,18 @@ type Story = StoryObj<typeof meta>
 
 const Tips = () => (
     <>
-        window.top?.location.href.endsWith('--docs') && (
-        <p>
-            As you are currently in the summary page, view transition does not
-            work because of the restriction saying that duplicate
-            view-transition-name (you can see it in the console), please go to
-            the{' '}
-            <a href="./?path=/story/composition-viewtransition--ref">
-                detailed page
-            </a>{' '}
-            and it will work there.
-        </p>
-        )
+        {window.top?.location.href.endsWith('--docs') && (
+            <p>
+                As you are currently in the summary page, view transition does
+                not work because of the restriction saying that duplicate
+                view-transition-name (you can see it in the console), please go
+                to the{' '}
+                <a href="./?path=/story/composition-viewtransition--ref">
+                    detailed page
+                </a>{' '}
+                and it will work there.
+            </p>
+        )}
     </>
 )
 
@@ -45,6 +45,7 @@ export const Ref: Story = {
                 <Button onClick={() => ref.current?.replace(getAnotherOne())}>
                     switch
                 </Button>
+                <br />
 
                 <ViewTransition ref={ref} className="ViewTransitionDemo">
                     {getAnotherOne()}
@@ -117,6 +118,7 @@ export const Props: Story = {
                 >
                     switch
                 </Button>
+                <br />
 
                 <ViewTransition
                     className="ViewTransitionDemoProps"

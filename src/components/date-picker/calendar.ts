@@ -58,24 +58,25 @@ function getCalendarOfMonth(year: number, month: number) {
 export function getFormatCalendar(year: number, month: number) {
     const { calendar } = getCalendarOfMonth(year, month)
     const today = new Date()
+    const thisMonth = new Date(year, month - 1, 1)
     return chunk(
         calendar.map((date) => {
             return {
                 date,
                 week: getWeekOfDate(date),
                 day: date.getDate(),
-                isThisMonth: date.getMonth() + 1 === month,
                 isToday: isSameDay(today, date),
+                isThisMonth: isSameMonth(thisMonth, date),
             }
         }),
         7
     )
 }
 
+export function isSameMonth(a: Date, b: Date) {
+    return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth()
+}
+
 export function isSameDay(a: Date, b: Date) {
-    return (
-        a.getFullYear() === b.getFullYear() &&
-        a.getMonth() === b.getMonth() &&
-        a.getDate() === b.getDate()
-    )
+    return isSameMonth(a, b) && a.getDate() === b.getDate()
 }
