@@ -1,13 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path'
+import { fileURLToPath, URL } from 'node:url'
+import { basename } from 'node:path'
 import { micromark } from 'micromark'
 
 // https://vitejs.dev/config/
 export default defineConfig({
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, 'src'),
+            '@': fileURLToPath(new URL('./src', import.meta.url)),
         },
     },
     css: {
@@ -18,7 +19,7 @@ export default defineConfig({
         },
     },
     build: {
-        target: 'es2020',
+        target: 'es2021',
         lib: {
             entry: 'src/index.ts',
             name: 'soda',
@@ -47,7 +48,7 @@ function mdPlugin() {
         name: 'md-plugin',
         transform(src: string, id: string) {
             const url = new URL(id, 'file://')
-            const filename = path.basename(url.pathname)
+            const filename = basename(url.pathname)
             if (filename.endsWith('.md')) {
                 return {
                     code: [

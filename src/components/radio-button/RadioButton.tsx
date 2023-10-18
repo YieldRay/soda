@@ -1,7 +1,7 @@
 import './radio-button.scss'
 import clsx from 'clsx'
-import { useRef, useEffect, forwardRef, useContext } from 'react'
-import { rippleEffect } from '@/utils/ripple-effect'
+import { useRef, forwardRef, useContext } from 'react'
+import { useRippleEffect } from '@/utils/ripple-effect'
 import { ExtendProps } from '@/utils/type'
 import { RadioGroupContext } from '@/composition/RadioGroup'
 
@@ -33,7 +33,7 @@ export const RadioButton = forwardRef<
     ref
 ) {
     const rippleRef = useRef<HTMLDivElement>(null)
-    useEffect(() => rippleEffect(rippleRef.current!), [])
+    useRippleEffect(rippleRef)
 
     const groupContext = useContext(RadioGroupContext)
     const checked = groupContext ? groupContext.value === value : initChecked

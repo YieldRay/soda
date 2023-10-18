@@ -142,10 +142,12 @@ export const Slider = forwardRef<
         thumb.releasePointerCapture(e.pointerId)
     }
 
+    // floating-ui
+
     const arrowRef = useRef(null)
     const { refs, floatingStyles, update, context } = useFloating({
         whileElementsMounted: autoUpdate,
-        placement: direction === 'vertical' ? 'right' : 'top',
+        placement: direction === 'vertical' ? 'left' : 'top',
         middleware: [
             offset(10),
             flip(),
@@ -210,7 +212,7 @@ export const Slider = forwardRef<
                             floatingStyles
                         )}
                     >
-                        <span style={{ overflow: 'hidden' }}>{value}</span>
+                        <div style={{ overflow: 'hidden' }}>{value}</div>
                         <FloatingArrow
                             ref={arrowRef}
                             context={context}

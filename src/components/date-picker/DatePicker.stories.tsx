@@ -6,13 +6,19 @@ const meta = {
     title: 'DatePicker',
     component: DatePicker,
     tags: ['autodocs'],
-    parameters: {
-        layout: 'centered',
-    },
 } satisfies Meta<typeof DatePicker>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Docked: Story = {
+    args: { sd: 'docked' },
+    decorators: [
+        (Story) => (
+            <div style={{ minHeight: '50vh' }}>
+                <Story />
+            </div>
+        ),
+    ],
+}

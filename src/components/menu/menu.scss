@@ -19,13 +19,13 @@
     box-sizing: border-box;
     height: 48px;
     padding: 0 12px;
-    max-width: 280px;
     display: flex;
     align-items: center;
     gap: 12px;
     &-leading_icon {
         width: 24px;
         color: var(--sd-sys-color-on-surface-variant);
+        @include display-inline-flex-center;
     }
     &-supporting_text {
         flex-shrink: 1;
@@ -38,6 +38,7 @@
         margin-left: auto;
         width: 24px;
         color: var(--sd-sys-color-on-surface-variant);
+        @include display-inline-flex-center;
     }
     &-trailing_text {
         margin-left: auto;

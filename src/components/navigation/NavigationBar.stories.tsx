@@ -4,7 +4,14 @@ import { NavigationBar } from '.'
 import { useState } from 'react'
 import { Button } from '../button'
 import Icon from '@mdi/react'
-import { mdiMagnify } from '@mdi/js'
+import {
+    mdiHome,
+    mdiHomeOutline,
+    mdiCardSearch,
+    mdiCardSearchOutline,
+    mdiCog,
+    mdiCogOutline,
+} from '@mdi/js'
 
 const meta = {
     title: 'Navigation/NavigationBar',
@@ -22,18 +29,26 @@ export const Default: Story = {
             {
                 key: 'home',
                 label: 'home',
-                icon: '🏠',
+                icon: (active) => (
+                    <Icon path={active ? mdiHome : mdiHomeOutline} />
+                ),
                 active: true,
             },
             {
                 key: 'search',
                 label: 'search',
-                icon: <Icon path={mdiMagnify}></Icon>,
+                icon: (active) => (
+                    <Icon
+                        path={active ? mdiCardSearch : mdiCardSearchOutline}
+                    />
+                ),
             },
             {
                 key: 'settings',
                 label: 'settings',
-                icon: '⚙',
+                icon: (active) => (
+                    <Icon path={active ? mdiCog : mdiCogOutline} />
+                ),
             },
         ],
     },

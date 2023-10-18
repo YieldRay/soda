@@ -5,11 +5,14 @@
     flex-direction: column;
     width: 360px;
     align-items: stretch;
+    position: relative;
 
     &-docked {
+        position: absolute;
         background: var(--sd-sys-color-surface-container-high);
         border-radius: 2rem;
         padding: 0 4px;
+        width: 100%;
 
         &_header {
             display: flex;
@@ -34,15 +37,16 @@
             table-layout: fixed;
             td {
                 text-align: center;
-            }
-            tr time {
-                @include display-inline-flex-center;
-                box-sizing: border-box;
-                width: 2rem;
-                height: 2rem;
-                border-radius: 50%;
-                overflow: hidden;
-                transition: all 200ms;
+                time {
+                    @include display-inline-flex-center;
+                    box-sizing: border-box;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    transition: all 200ms;
+                    margin: 2px 0;
+                }
             }
         }
     }

@@ -55,7 +55,6 @@ export function PopoverHolder(props: {
 
             <div
                 className="content"
-                ref={refs.setFloating}
                 style={assign(
                     {
                         pointerEvents: isOpen ? 'auto' : 'none',
@@ -63,6 +62,7 @@ export function PopoverHolder(props: {
                     },
                     floatingStyles
                 )}
+                ref={refs.setFloating}
                 {...getFloatingProps()}
             >
                 {props.content}

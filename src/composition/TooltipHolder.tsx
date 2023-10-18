@@ -62,7 +62,6 @@ export function TooltipHolder(props: {
 
             <div
                 className="content"
-                ref={refs.setFloating}
                 style={assign(
                     {
                         pointerEvents: isOpen ? 'auto' : 'none',
@@ -70,6 +69,7 @@ export function TooltipHolder(props: {
                     },
                     floatingStyles
                 )}
+                ref={refs.setFloating}
                 {...getFloatingProps()}
             >
                 {props.content}

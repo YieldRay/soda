@@ -1,10 +1,11 @@
+import { useEffect } from 'react'
 const DatasetName = 'sdRipple' //? dataset name will automatically convert to underscore style
 
 /**
  * warn: this is m2 ripple effect
  */
-export function rippleEffect<E extends HTMLElement>(
-    ele: E,
+export function rippleEffect(
+    ele: HTMLElement,
     duration = 400,
     color = 'rgba(0, 0, 0, 0.1)'
 ) {
@@ -103,4 +104,21 @@ export function rippleEffect<E extends HTMLElement>(
         ele.dataset[DatasetName] = 'false'
         ele.removeEventListener('pointerdown', onPointerDown)
     }
+}
+
+/**
+ * Hooks wrapper of the raw dom function
+ */
+export function useRippleEffect(
+    eleRef: React.RefObject<HTMLElement>,
+    duration?: number,
+    color?: string
+) {
+    useEffect(
+        () =>
+            eleRef.current
+                ? rippleEffect(eleRef.current, duration, color)
+                : undefined,
+        [eleRef, duration, color]
+    )
 }

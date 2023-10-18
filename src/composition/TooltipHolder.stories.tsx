@@ -4,7 +4,7 @@ import { TooltipHolder } from './TooltipHolder'
 import { TopAppBar } from '../components/app-bar'
 import { IconButton } from '../components/icon-button'
 import { PlainTooltip, RichTooltip } from '../components/tooltip'
-import { mdiMenu } from '@mdi/js'
+import { mdiAccount, mdiDotsVertical, mdiMenu } from '@mdi/js'
 
 const meta = {
     title: 'composition/TooltipHolder',
@@ -24,26 +24,22 @@ export const Default: Story = {
                     <TooltipHolder
                         trigger={<IconButton path={mdiMenu} />}
                         content={<PlainTooltip>menu</PlainTooltip>}
-                    ></TooltipHolder>
+                    />
                 }
                 trailingIcon={
                     <>
                         <TooltipHolder
-                            trigger={<IconButton>❤</IconButton>}
+                            trigger={<IconButton path={mdiAccount} />}
                             content={
-                                <PlainTooltip>
-                                    love but so loooooooooong
-                                </PlainTooltip>
+                                <PlainTooltip>so loooooooooong</PlainTooltip>
                             }
-                        ></TooltipHolder>
+                        />
                         <TooltipHolder
-                            trigger={<IconButton>×</IconButton>}
+                            trigger={<IconButton path={mdiDotsVertical} />}
                             content={
-                                <PlainTooltip>
-                                    close but so loooooooooong
-                                </PlainTooltip>
+                                <PlainTooltip>so loooooooooong</PlainTooltip>
                             }
-                        ></TooltipHolder>
+                        />
                     </>
                 }
             >

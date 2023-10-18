@@ -7,18 +7,22 @@ export function MenuButton({
     children,
     onLeft,
     onRight,
+    onClick,
 }: {
     children?: React.ReactNode
     onLeft?(): void
     onRight?(): void
+    onClick?(): void
 }) {
     return (
         <div className="sd-menu_button-outer">
             <IconButton path={mdiChevronLeft} onClick={onLeft} />
-            <Ripple className="sd-menu_button">
-                <span>{children}</span>
-                <Icon size={1} path={mdiMenuDown}></Icon>
-            </Ripple>
+            {children && (
+                <Ripple className="sd-menu_button" onClick={onClick}>
+                    <span>{children}</span>
+                    <Icon size={1} path={mdiMenuDown}></Icon>
+                </Ripple>
+            )}
             <IconButton path={mdiChevronRight} onClick={onRight} />
             <style jsx global>{`
                 .sd-menu_button-outer {
