@@ -26,6 +26,7 @@ button.sd-fab {
     vertical-align: middle;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+    transition: all 200ms;
 
     &:hover {
         filter: brightness(96%);

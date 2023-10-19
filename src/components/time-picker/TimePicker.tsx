@@ -152,10 +152,21 @@ export const TimePicker = forwardRef<
     const lastPosition = useRef<[number, number]>([0, 0])
 
     const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+        if (e.button !== 0) return
         isMoving.current = true
         ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
         const { clientX, clientY } = e
         lastPosition.current = [clientX, clientY]
+    }
+
+    const degreeSetState = (degree: number, delta: number) => {
+        const nextDegree = normalizeDegree(degree + delta)
+        const nextTime = (nextDegree / 360) * 12 + (period === 'PM' ? 12 : 0)
+        const nextHour = Math.trunc(nextTime)
+        const nextMinute = Math.trunc((nextTime - nextHour) * 60)
+        setHour(normalizeTime(nextHour))
+        setMinute(normalizeTime(nextMinute))
+        return normalizeDegree(nextDegree)
     }
 
     const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -167,27 +178,31 @@ export const TimePicker = forwardRef<
         const { clientX, clientY } = e
         const [initX, initY] = lastPosition.current
         lastPosition.current = [clientX, clientY] // update for next
-        const degree =
+        const deltaDegree =
             (Math.atan2(clientY - cY, clientX - cX) -
                 Math.atan2(initY - cY, initX - cX)) *
             (180 / Math.PI)
-        // how much degree we need to move
-        setDegree((d) => {
-            const nextDegree = normalizeDegree(d + degree)
-            const nextTime =
-                (nextDegree / 360) * 12 + (period === 'PM' ? 12 : 0)
-            const nextHour = Math.trunc(nextTime)
-            const nextMinute = Math.trunc((nextTime - nextHour) * 60)
-            setHour(normalizeTime(nextHour))
-            setMinute(normalizeTime(nextMinute))
-            return normalizeDegree(nextDegree)
-        })
+        setDegree((degree) => degreeSetState(degree, deltaDegree))
     }
 
     const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
         isMoving.current = false
         ;(e.target as HTMLElement).releasePointerCapture(e.pointerId)
     }
+
+    const clockRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const clock = clockRef.current
+        if (!clock) return
+        const onWheel = (e: WheelEvent) => {
+            e.preventDefault()
+            const delta = e.deltaY / 100
+            setDegree((degree) => degreeSetState(degree, delta * 3))
+        }
+        clock.addEventListener('wheel', onWheel, { passive: false })
+        return () => clock.removeEventListener('wheel', onWheel)
+    })
 
     return (
         <div
@@ -252,6 +267,7 @@ export const TimePicker = forwardRef<
                             onPointerDown={onPointerDown}
                             onPointerMove={onPointerMove}
                             onPointerUp={onPointerUp}
+                            ref={clockRef}
                         >
                             <div className="sd-time_picker-clock_center" />
                             <div
