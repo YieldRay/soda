@@ -1,0 +1,63 @@
+@keyframes sd-fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes sd-fade-out {
+    to {
+        opacity: 0;
+    }
+}
+
+.sd-vt-slide_right_to_left {
+    view-transition-name: sd-vt-slide_right_to_left;
+}
+
+@keyframes sd-slide-to-left {
+    to {
+        transform: translateX(-30px);
+    }
+}
+
+@keyframes sd-slide-from-right {
+    from {
+        transform: translateX(30px);
+    }
+}
+
+::view-transition-old(sd-vt-slide_right_to_left) {
+    animation: 90ms cubic-bezier(0.4, 0, 1, 1) both sd-fade-out,
+        300ms cubic-bezier(0.4, 0, 0.2, 1) both sd-slide-to-left;
+}
+
+::view-transition-new(sd-vt-slide_right_to_left) {
+    animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both sd-fade-in,
+        300ms cubic-bezier(0.4, 0, 0.2, 1) both sd-slide-from-right;
+}
+
+.sd-vt-slide_left_to_right {
+    view-transition-name: sd-vt-slide_left_to_right;
+}
+
+@keyframes sd-slide-to-right {
+    to {
+        transform: translateX(30px);
+    }
+}
+
+@keyframes sd-slide-from-left {
+    from {
+        transform: translateX(-30px);
+    }
+}
+
+::view-transition-old(sd-vt-slide_left_to_right) {
+    animation: 90ms cubic-bezier(0.4, 0, 1, 1) both sd-fade-out,
+        300ms cubic-bezier(0.4, 0, 0.2, 1) both sd-slide-to-right;
+}
+
+::view-transition-new(sd-vt-slide_left_to_right) {
+    animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both sd-fade-in,
+        300ms cubic-bezier(0.4, 0, 0.2, 1) both sd-slide-from-left;
+}

@@ -1,5 +1,6 @@
 import './date-picker.scss'
-import { useState } from 'react'
+import '@/style/view-transition.scss'
+import { useRef, useState } from 'react'
 import { Button } from '../button'
 import { TextField } from '../text-field'
 import { IconButton } from '../icon-button'
@@ -18,6 +19,7 @@ import assign from 'lodash-es/assign'
 import { YearList } from './YearList'
 import { MonthList } from './MonthList'
 import { DayList } from './DayList'
+import { startViewTransitionFlushSync } from '@/utils/view-transition'
 
 /**
  * @specs https://m3.material.io/components/date-pickers/specs
@@ -37,6 +39,7 @@ export function DockedDatePicker({
     // just for UI display
     const [year, setYear] = useState(initDate.getFullYear())
     const [month, setMonth] = useState(initDate.getMonth() + 1)
+
     const dateDisplay = new Date(year, month - 1, initDate.getDate())
 
     // internal value
@@ -56,6 +59,15 @@ export function DockedDatePicker({
     const { getReferenceProps, getFloatingProps } = useInteractions([role])
 
     // panel state
+    const bodyRef = useRef<HTMLDivElement>(null)
+    const slideLeftToRight = [
+        () => bodyRef.current?.classList.add('sd-vt-slide_left_to_right'),
+        () => bodyRef.current?.classList.remove('sd-vt-slide_left_to_right'),
+    ] as const
+    const slideRightToLeft = [
+        () => bodyRef.current?.classList.add('sd-vt-slide_right_to_left'),
+        () => bodyRef.current?.classList.remove('sd-vt-slide_right_to_left'),
+    ]
     const [state, setState] = useState<'calendar' | 'year' | 'month'>(
         'calendar'
     )
@@ -73,19 +85,23 @@ export function DockedDatePicker({
             year: (
                 <YearList
                     current={year}
-                    onChange={(y) => {
-                        setState('calendar')
-                        setYear(y)
-                    }}
+                    onChange={(y) =>
+                        startViewTransitionFlushSync(() => {
+                            setState('calendar')
+                            setYear(y)
+                        })
+                    }
                 />
             ),
             month: (
                 <MonthList
                     current={month}
-                    onChange={(m) => {
-                        setState('calendar')
-                        setMonth(m)
-                    }}
+                    onChange={(m) =>
+                        startViewTransitionFlushSync(() => {
+                            setState('calendar')
+                            setMonth(m)
+                        })
+                    }
                 />
             ),
         } as const
@@ -131,11 +147,25 @@ export function DockedDatePicker({
             >
                 <header className="sd-date_picker-docked_header">
                     <MenuButton
-                        onLeft={() => setMonth((m) => m - 1)}
-                        onRight={() => setMonth((m) => m + 1)}
+                        onLeft={() =>
+                            state === 'calendar' &&
+                            startViewTransitionFlushSync(
+                                () => setMonth((m) => m - 1),
+                                ...slideLeftToRight
+                            )
+                        }
+                        onRight={() =>
+                            state === 'calendar' &&
+                            startViewTransitionFlushSync(
+                                () => setMonth((m) => m + 1),
+                                ...slideRightToLeft
+                            )
+                        }
                         onClick={() =>
-                            setState((state) =>
-                                state === 'month' ? 'calendar' : 'month'
+                            startViewTransitionFlushSync(() =>
+                                setState((state) =>
+                                    state === 'month' ? 'calendar' : 'month'
+                                )
                             )
                         }
                     >
@@ -146,11 +176,23 @@ export function DockedDatePicker({
                         }
                     </MenuButton>
                     <MenuButton
-                        onLeft={() => setYear((y) => y - 1)}
-                        onRight={() => setYear((y) => y + 1)}
+                        onLeft={() =>
+                            state === 'calendar' &&
+                            startViewTransitionFlushSync(() =>
+                                setYear((y) => y - 1)
+                            )
+                        }
+                        onRight={() =>
+                            state === 'calendar' &&
+                            startViewTransitionFlushSync(() =>
+                                setYear((y) => y - 1)
+                            )
+                        }
                         onClick={() =>
-                            setState((state) =>
-                                state === 'year' ? 'calendar' : 'year'
+                            startViewTransitionFlushSync(() =>
+                                setState((state) =>
+                                    state === 'year' ? 'calendar' : 'year'
+                                )
                             )
                         }
                     >
@@ -161,7 +203,9 @@ export function DockedDatePicker({
                         }
                     </MenuButton>
                 </header>
-                <div className="sd-date_picker-docked_body">{body}</div>
+                <div className="sd-date_picker-docked_body" ref={bodyRef}>
+                    {body}
+                </div>
                 <footer className="sd-date_picker-docked_footer">
                     <Button
                         sd="text"
