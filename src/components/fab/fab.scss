@@ -20,7 +20,7 @@ button.sd-fab {
 }
 
 .sd-fab {
-    @include elevation-level1; // 3 default 1 lowered
+    // @include elevation-level1;
     @include square(56px, 16px);
     @include display-inline-flex-center;
     vertical-align: middle;

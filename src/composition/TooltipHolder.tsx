@@ -10,9 +10,10 @@ import {
     useDismiss,
     useRole,
     safePolygon,
+    useTransitionStyles,
 } from '@floating-ui/react'
 import type { Placement } from '@floating-ui/react'
-import assign from 'lodash-es/assign'
+import { useTransitionStylesProps } from '@/utils/floating-ui'
 import { useState } from 'react'
 
 /**
@@ -35,9 +36,15 @@ export function TooltipHolder(props: {
         onOpenChange: setIsOpen,
     })
 
+    const { styles } = useTransitionStyles(context, useTransitionStylesProps)
+
     const hover = useHover(context, {
         move: false,
         handleClose: safePolygon({ blockPointerEvents: true }),
+        delay: {
+            open: 150,
+            close: 0,
+        },
     })
     const focus = useFocus(context)
     const dismiss = useDismiss(context)
@@ -51,8 +58,9 @@ export function TooltipHolder(props: {
     ])
 
     return (
-        <div className="trigger">
+        <div className="container">
             <div
+                className="reference"
                 ref={refs.setReference}
                 onResize={update}
                 {...getReferenceProps()}
@@ -61,27 +69,21 @@ export function TooltipHolder(props: {
             </div>
 
             <div
-                className="content"
-                style={assign(
-                    {
-                        pointerEvents: isOpen ? 'auto' : 'none',
-                        opacity: isOpen ? '1' : '0',
-                    },
-                    floatingStyles
-                )}
+                className="floating"
+                style={floatingStyles}
                 ref={refs.setFloating}
                 {...getFloatingProps()}
             >
-                {props.content}
+                <div style={styles}>{props.content}</div>
             </div>
 
             <style jsx>{`
-                .trigger {
+                .container {
                     position: relative;
                     display: inline-block;
                     vertical-align: middle;
                 }
-                .content {
+                .floating {
                     width: max-content;
                     transition: opacity 200ms;
                 }

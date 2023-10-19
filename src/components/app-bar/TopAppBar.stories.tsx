@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { TopAppBar } from '.'
 import { IconButton } from '../icon-button'
-import { mdiMenu } from '@mdi/js'
+import { mdiDotsVertical, mdiMagnify, mdiMenu } from '@mdi/js'
 
 const meta = {
     title: 'AppBar/TopAppBar',
@@ -13,8 +13,8 @@ const meta = {
         leadingNavigationIcon: <IconButton path={mdiMenu}></IconButton>,
         trailingIcon: (
             <>
-                <IconButton>❤</IconButton>
-                <IconButton>×</IconButton>
+                <IconButton path={mdiMagnify} />
+                <IconButton path={mdiDotsVertical} />
             </>
         ),
     },

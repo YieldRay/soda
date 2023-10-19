@@ -5,6 +5,14 @@ import { Fab } from '../fab'
 import { IconButton } from '../icon-button'
 import { Button } from '../button'
 import { useState } from 'react'
+import {
+    mdiCheckboxOutline,
+    mdiGreasePencil,
+    mdiImageOutline,
+    mdiMicrophone,
+    mdiPlus,
+} from '@mdi/js'
+import Icon from '@mdi/react'
 
 const meta = {
     title: 'AppBar/BottomAppBar',
@@ -30,24 +38,22 @@ export const Default: Story = {
                     facere consectetur, obcaecati sunt delectus necessitatibus.
                 </p>
 
-                <BottomAppBar fixed={fixed}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                        }}
-                    >
-                        <div>
-                            <IconButton>✅</IconButton>
-                            <IconButton>✏</IconButton>
-                            <IconButton>🎧</IconButton>
-                            <IconButton>🖼</IconButton>
-                        </div>
-
-                        <Fab sd="secondary">＋</Fab>
-                    </div>
-                </BottomAppBar>
+                <BottomAppBar
+                    fixed={fixed}
+                    buttons={
+                        <>
+                            <IconButton path={mdiCheckboxOutline} />
+                            <IconButton path={mdiGreasePencil} />
+                            <IconButton path={mdiMicrophone} />
+                            <IconButton path={mdiImageOutline} />
+                        </>
+                    }
+                    fab={
+                        <Fab sd="secondary">
+                            <Icon path={mdiPlus} />
+                        </Fab>
+                    }
+                ></BottomAppBar>
             </div>
         )
     },

@@ -31,13 +31,17 @@ export function MenuButton({
                     align-items: center;
                 }
                 .sd-menu_button {
+                    flex-shrink: 1;
                     display: inline-flex;
-                    gap: 0.5rem;
+                    gap: 0.15rem;
                     padding: 0.5rem 0;
                     align-items: center;
                     cursor: pointer;
                     transition: all 200ms;
+                    word-break: keep-all;
+                    font-size: 14px;
                     user-select: none;
+                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
                 .sd-menu_button:hover {
                     background: rgb(0 0 0 / 0.04);

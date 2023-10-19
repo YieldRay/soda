@@ -8,6 +8,18 @@
     overflow: hidden;
     background: var(--sd-sys-color-surface-container);
     @include elevation-level2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-buttons {
+        display: flex;
+        gap: 0.25rem;
+    }
+    &-fab {
+        user-select: none;
+    }
 }
 
 // https://m3.material.io/components/top-app-bar/specs
@@ -37,6 +49,7 @@
     &-trailing_icon {
         flex-shrink: 0;
         display: flex;
+        gap: 2px;
         font-size: 24px;
     }
 

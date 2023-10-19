@@ -43,6 +43,8 @@ export function YearList({
                     cursor: pointer;
                     overflow: hidden;
                     transition: all 200ms;
+                    user-select: none;
+                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
                 li:hover {
                     background: rgba(0 0 0 / 0.04);

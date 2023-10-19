@@ -48,27 +48,77 @@
     text-align: center;
 
     .sd-navigation_helper-icon {
+        display: inline-block;
         transition: all 200ms;
         border-radius: 4rem;
-        color: var(--sd-sys-color-on-surface);
-        &:hover {
-            box-shadow: none;
-        }
     }
+
     .sd-navigation_helper-label_text {
         transition: all 200ms;
         font-size: x-small;
         display: inline;
         width: 100%;
         height: 100%;
+        font-weight: 500;
+    }
+
+    &[data-sd-active='false'] {
+        .sd-navigation_helper-icon,
+        .sd-navigation_helper-label_text {
+            &,
+            & * {
+                color: var(--sd-sys-color-on-surface-variant);
+            }
+        }
     }
 
     &[data-sd-active='true'] {
-        .sd-navigation_helper-icon {
-            font-weight: 500;
-        }
+        .sd-navigation_helper-icon,
         .sd-navigation_helper-label_text {
-            font-weight: 500;
+            &,
+            & * {
+                color: var(--sd-sys-color-on-surface);
+            }
         }
+    }
+
+    &-active_indicator {
+        @include display-flex-center;
+        display: flex !important;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        width: 64px;
+        height: 32px;
+        border-radius: 40px;
+        -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+        transition: all 200ms;
+
+        svg {
+            height: 18px;
+            display: grid;
+            place-items: center;
+        }
+    }
+
+    &[data-sd-hover='true'] {
+        .sd-navigation_helper-active_indicator {
+            background: rgb(0 0 0 / 0.04);
+        }
+    }
+
+    &[data-sd-active='true'] {
+        .sd-navigation_helper-active_indicator {
+            background: var(--sd-sys-color-secondary-container);
+            animation: sd-navigation_helper-active_indicator 100ms ease-out;
+        }
+    }
+}
+
+@keyframes sd-navigation_helper-active_indicator {
+    from {
+        clip-path: circle(16px);
+    }
+    to {
+        clip-path: circle(32px);
     }
 }

@@ -44,6 +44,10 @@ export const Slider = forwardRef<
          * @default horizon
          */
         direction?: 'horizontal' | 'vertical'
+        /**
+         * Customize the label, by default show the value
+         */
+        label?: React.ReactNode
         hideLabel?: boolean
     }>
 >(function Slider(
@@ -54,6 +58,7 @@ export const Slider = forwardRef<
         min: minValue = 0,
         max: maxValue = 100,
         direction = 'horizontal',
+        label,
         hideLabel,
         className,
         ...props
@@ -212,7 +217,9 @@ export const Slider = forwardRef<
                             floatingStyles
                         )}
                     >
-                        <div style={{ overflow: 'hidden' }}>{value}</div>
+                        <div style={{ overflow: 'hidden' }}>
+                            {label ?? value}
+                        </div>
                         <FloatingArrow
                             ref={arrowRef}
                             context={context}

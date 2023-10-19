@@ -12,10 +12,20 @@ import { createPortal } from 'react-dom'
 export const BottomAppBar = forwardRef<
     HTMLDivElement,
     ExtendProps<{
-        children?: React.ReactNode
+        /**
+         * Place `<IconButton>` here
+         */
+        buttons?: React.ReactNode
+        /**
+         * Place `<Fab>` here
+         */
+        fab?: React.ReactNode
         fixed?: boolean
     }>
->(function BottomAppBar({ fixed, className, style, ...props }, ref) {
+>(function BottomAppBar(
+    { buttons, fab, fixed, className, style, ...props },
+    ref
+) {
     const ele = (
         <div
             {...props}
@@ -28,7 +38,8 @@ export const BottomAppBar = forwardRef<
                 style
             )}
         >
-            {props.children}
+            <div className="sd-bottom_app_bar-buttons">{buttons}</div>
+            <div className="sd-bottom_app_bar-fab">{fab}</div>
         </div>
     )
 

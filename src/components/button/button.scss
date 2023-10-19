@@ -19,6 +19,8 @@ button.sd-button {
     font-weight: 500;
     line-height: 20px;
     font-size: 14px;
+    height: 40px;
+    min-width: 40px + 16px;
     border-radius: 40px;
     padding: 0.5rem 1.25rem;
     cursor: pointer;

@@ -33,8 +33,8 @@ export function DockedDatePicker({
     initDate?: Date
     format?: (value: Date) => string
     supportingText?: string
-    onOK?: (value: Date) => string
-    onCancel?: (value: Date) => string
+    onOK?: (value: Date) => void
+    onCancel?: (value: Date) => void
 }) {
     // just for UI display
     const [year, setYear] = useState(initDate.getFullYear())

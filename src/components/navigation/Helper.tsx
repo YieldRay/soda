@@ -1,10 +1,11 @@
 import './navigation.scss'
-import { Badge } from '../badge'
-import { Button } from '../button'
-import { omit } from 'lodash-es'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
+import omit from 'lodash-es/omit'
 import isFunction from 'lodash-es/isFunction'
+import { Badge } from '../badge'
+import { ExtendProps } from '@/utils/type'
+import { useRippleEffect } from '@/utils/ripple-effect'
+import { useRef, useState } from 'react'
 
 type ReactNodeBuilder = React.ReactNode | ((active: boolean) => React.ReactNode)
 
@@ -26,7 +27,7 @@ export interface HelperItem {
 }
 
 /**
- * for internal use only
+ * @warn For internal use only
  */
 export function Helper({
     className,
@@ -36,22 +37,28 @@ export function Helper({
     badge,
     ...props
 }: ExtendProps<HelperItem>) {
+    const ref = useRef<HTMLDivElement>(null)
+    useRippleEffect(ref)
+    const [hover, setHover] = useState(false)
+
     return (
         <div
             {...omit(props, ['children'])}
             className={clsx('sd-navigation_helper', className)}
             data-sd-active={active}
+            data-sd-hover={hover}
+            onPointerEnter={() => setHover(true)}
+            onPointerLeave={() => setHover(false)}
         >
             <Badge
+                ref={ref}
+                className="sd-navigation_helper-active_indicator"
                 sd={badge?.active ? badge?.sd : 'none'}
                 label={buildReactNode(badge?.label, badge?.active)}
             >
-                <Button
-                    sd={active ? 'tonal' : 'text'}
-                    className="sd-navigation_helper-icon"
-                >
+                <div className="sd-navigation_helper-icon">
                     {buildReactNode(icon, active)}
-                </Button>
+                </div>
             </Badge>
             <span className="sd-navigation_helper-label_text">
                 {buildReactNode(label, active)}

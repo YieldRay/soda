@@ -3,3 +3,14 @@
 .docs-story * {
     font-family: 'Roboto', sans-serif;
 }
+
+pre {
+    &,
+    * {
+        font-size: 15px;
+        font-family: Consolas, Courier, Courier New, monospace !important;
+    }
+    .token.operator {
+        background: transparent;
+    }
+}

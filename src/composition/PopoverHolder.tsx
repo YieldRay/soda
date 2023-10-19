@@ -8,9 +8,10 @@ import {
     useDismiss,
     useRole,
     useClick,
+    useTransitionStyles,
 } from '@floating-ui/react'
 import type { Placement } from '@floating-ui/react'
-import assign from 'lodash-es/assign'
+import { useTransitionStylesProps } from '@/utils/floating-ui'
 import { useState } from 'react'
 
 /**
@@ -33,6 +34,8 @@ export function PopoverHolder(props: {
         onOpenChange: setIsOpen,
     })
 
+    const { styles } = useTransitionStyles(context, useTransitionStylesProps)
+
     const click = useClick(context)
     const dismiss = useDismiss(context)
     const role = useRole(context)
@@ -44,8 +47,9 @@ export function PopoverHolder(props: {
     ])
 
     return (
-        <div className="trigger">
+        <div className="container">
             <div
+                className="reference"
                 ref={refs.setReference}
                 onResize={update}
                 {...getReferenceProps()}
@@ -54,27 +58,21 @@ export function PopoverHolder(props: {
             </div>
 
             <div
-                className="content"
-                style={assign(
-                    {
-                        pointerEvents: isOpen ? 'auto' : 'none',
-                        opacity: isOpen ? '1' : '0',
-                    },
-                    floatingStyles
-                )}
+                className="floating"
                 ref={refs.setFloating}
+                style={floatingStyles}
                 {...getFloatingProps()}
             >
-                {props.content}
+                <div style={styles}>{props.content}</div>
             </div>
 
             <style jsx>{`
-                .trigger {
+                .container {
                     position: relative;
                     display: inline-block;
                     vertical-align: middle;
                 }
-                .content {
+                .floating {
                     width: max-content;
                     transition: opacity 200ms;
                 }

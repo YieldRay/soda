@@ -5,7 +5,7 @@ A component library that may follow [material design 3](https://m3.material.io/c
 > [!WARNING]  
 > working in progress, some features are missing or will not be fully implemented (such as ARIA).  
 > API is unstable and can be changed in any time.  
-> For production, you may want use the official [material web](https://github.com/material-components/material-web) component library.
+> For production, you may want use the official [material web](https://github.com/material-components/material-web) component library or the [MDUI](https://www.mdui.org/) library.
 
 This is an experimental project, browser support:  
 Chrome>=105, Safari>=15.4, Firefox NoSupport
@@ -48,6 +48,19 @@ See: <https://yieldray.github.io/soda/>
 
 This library use the [MDI Icon Library](https://pictogrammers.com/library/mdi/)  
 You can refer it at <https://materialdesignicons.com/>
+
+```tsx
+import { mdiMagnify } from '@mdi/js'
+import Icon from '@mdi/react'
+import { IconButton } from 'soda-material'
+
+const App = () => (
+    <>
+        <Icon path={mdiMagnify} size={1} />
+        <IconButton path={mdiMagnify} />
+    </>
+)
+```
 
 A replacement is google fonts: <https://fonts.google.com/icons>
 
