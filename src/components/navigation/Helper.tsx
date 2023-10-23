@@ -4,8 +4,8 @@ import omit from 'lodash-es/omit'
 import isFunction from 'lodash-es/isFunction'
 import { Badge } from '../badge'
 import { ExtendProps } from '@/utils/type'
-import { useRippleEffect } from '@/utils/ripple-effect'
-import { useRef, useState } from 'react'
+import { useRippleRef } from '@/utils/ripple-effect'
+import { useState } from 'react'
 
 type ReactNodeBuilder = React.ReactNode | ((active: boolean) => React.ReactNode)
 
@@ -37,8 +37,6 @@ export function Helper({
     badge,
     ...props
 }: ExtendProps<HelperItem>) {
-    const ref = useRef<HTMLDivElement>(null)
-    useRippleEffect(ref)
     const [hover, setHover] = useState(false)
 
     return (
@@ -51,7 +49,7 @@ export function Helper({
             onPointerLeave={() => setHover(false)}
         >
             <Badge
-                ref={ref}
+                ref={useRippleRef()}
                 className="sd-navigation_helper-active_indicator"
                 sd={badge?.active ? badge?.sd : 'none'}
                 label={buildReactNode(badge?.label, badge?.active)}

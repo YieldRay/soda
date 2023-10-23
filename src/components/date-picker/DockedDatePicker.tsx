@@ -185,7 +185,7 @@ export function DockedDatePicker({
                         onRight={() =>
                             state === 'calendar' &&
                             startViewTransitionFlushSync(() =>
-                                setYear((y) => y - 1)
+                                setYear((y) => y + 1)
                             )
                         }
                         onClick={() =>
