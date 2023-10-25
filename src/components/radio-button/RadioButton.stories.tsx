@@ -25,7 +25,7 @@ export const Default: Story = {
                 checked={checked}
                 onChange={() => setChecked(!checked)}
             >
-                Label
+                Label {checked.toString()}
             </RadioButton>
         )
     },
@@ -50,5 +50,12 @@ export const Group: Story = {
                 ))}
             </RadioGroup>
         )
+    },
+}
+
+export const Uncontrolled: Story = {
+    args: {
+        defaultChecked: true,
+        children: <>Label</>,
     },
 }

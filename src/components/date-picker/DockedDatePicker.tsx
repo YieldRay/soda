@@ -14,12 +14,14 @@ import {
     shift,
     useInteractions,
     useRole,
+    useTransitionStyles,
 } from '@floating-ui/react'
 import assign from 'lodash-es/assign'
 import { YearList } from './YearList'
 import { MonthList } from './MonthList'
 import { DayList } from './DayList'
 import { startViewTransitionFlushSync } from '@/utils/view-transition'
+import { common } from '@/utils/floating-ui'
 
 /**
  * @specs https://m3.material.io/components/date-pickers/specs
@@ -54,6 +56,13 @@ export function DockedDatePicker({
         middleware: [offset(4), flip(), shift()],
         open: isOpen,
         onOpenChange: setIsOpen,
+    })
+    const { styles } = useTransitionStyles(context, {
+        initial: { maxHeight: '0' },
+        open: { maxHeight: '580px' },
+        close: { maxHeight: '0' },
+        common,
+        duration: { open: 150, close: 300 },
     })
     const role = useRole(context)
     const { getReferenceProps, getFloatingProps } = useInteractions([role])
@@ -132,101 +141,95 @@ export function DockedDatePicker({
                 </div>
             </div>
 
-            <section
-                className="sd-date_picker-docked"
-                style={assign(
-                    {
-                        pointerEvents: isOpen ? 'auto' : 'none',
-                        opacity: isOpen ? '1' : '0',
-                        transition: 'all 200ms',
-                    },
-                    floatingStyles
-                )}
+            <div
+                style={assign({ width: '100%' }, floatingStyles)}
                 ref={refs.setFloating}
                 {...getFloatingProps()}
             >
-                <header className="sd-date_picker-docked_header">
-                    <MenuButton
-                        onLeft={() =>
-                            state === 'calendar' &&
-                            startViewTransitionFlushSync(
-                                () => setMonth((m) => m - 1),
-                                ...slideLeftToRight
-                            )
-                        }
-                        onRight={() =>
-                            state === 'calendar' &&
-                            startViewTransitionFlushSync(
-                                () => setMonth((m) => m + 1),
-                                ...slideRightToLeft
-                            )
-                        }
-                        onClick={() =>
-                            startViewTransitionFlushSync(() =>
-                                setState((state) =>
-                                    state === 'month' ? 'calendar' : 'month'
+                <section className="sd-date_picker-docked" style={styles}>
+                    <header className="sd-date_picker-docked_header">
+                        <MenuButton
+                            onLeft={() =>
+                                state === 'calendar' &&
+                                startViewTransitionFlushSync(
+                                    () => setMonth((m) => m - 1),
+                                    ...slideLeftToRight
                                 )
-                            )
-                        }
-                    >
-                        {
-                            new Intl.DateTimeFormat(undefined, {
-                                month: 'long',
-                            }).formatToParts(dateDisplay)[0].value
-                        }
-                    </MenuButton>
-                    <MenuButton
-                        onLeft={() =>
-                            state === 'calendar' &&
-                            startViewTransitionFlushSync(() =>
-                                setYear((y) => y - 1)
-                            )
-                        }
-                        onRight={() =>
-                            state === 'calendar' &&
-                            startViewTransitionFlushSync(() =>
-                                setYear((y) => y + 1)
-                            )
-                        }
-                        onClick={() =>
-                            startViewTransitionFlushSync(() =>
-                                setState((state) =>
-                                    state === 'year' ? 'calendar' : 'year'
+                            }
+                            onRight={() =>
+                                state === 'calendar' &&
+                                startViewTransitionFlushSync(
+                                    () => setMonth((m) => m + 1),
+                                    ...slideRightToLeft
                                 )
-                            )
-                        }
-                    >
-                        {
-                            new Intl.DateTimeFormat(undefined, {
-                                year: 'numeric',
-                            }).formatToParts(dateDisplay)[0].value
-                        }
-                    </MenuButton>
-                </header>
-                <div className="sd-date_picker-docked_body" ref={bodyRef}>
-                    {body}
-                </div>
-                <footer className="sd-date_picker-docked_footer">
-                    <Button
-                        sd="text"
-                        onClick={() => {
-                            setIsOpen(false)
-                            onCancel?.(date)
-                        }}
-                    >
-                        Cancel
-                    </Button>
-                    <Button
-                        sd="text"
-                        onClick={() => {
-                            setIsOpen(false)
-                            onOK?.(date)
-                        }}
-                    >
-                        OK
-                    </Button>
-                </footer>
-            </section>
+                            }
+                            onClick={() =>
+                                startViewTransitionFlushSync(() =>
+                                    setState((state) =>
+                                        state === 'month' ? 'calendar' : 'month'
+                                    )
+                                )
+                            }
+                        >
+                            {
+                                new Intl.DateTimeFormat(undefined, {
+                                    month: 'long',
+                                }).formatToParts(dateDisplay)[0].value
+                            }
+                        </MenuButton>
+                        <MenuButton
+                            onLeft={() =>
+                                state === 'calendar' &&
+                                startViewTransitionFlushSync(() =>
+                                    setYear((y) => y - 1)
+                                )
+                            }
+                            onRight={() =>
+                                state === 'calendar' &&
+                                startViewTransitionFlushSync(() =>
+                                    setYear((y) => y + 1)
+                                )
+                            }
+                            onClick={() =>
+                                startViewTransitionFlushSync(() =>
+                                    setState((state) =>
+                                        state === 'year' ? 'calendar' : 'year'
+                                    )
+                                )
+                            }
+                        >
+                            {
+                                new Intl.DateTimeFormat(undefined, {
+                                    year: 'numeric',
+                                }).formatToParts(dateDisplay)[0].value
+                            }
+                        </MenuButton>
+                    </header>
+                    <div className="sd-date_picker-docked_body" ref={bodyRef}>
+                        {body}
+                    </div>
+                    <footer className="sd-date_picker-docked_footer">
+                        <Button
+                            sd="text"
+                            onClick={() => {
+                                setIsOpen(false)
+                                onCancel?.(date)
+                            }}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            sd="text"
+                            onClick={() => {
+                                setIsOpen(false)
+                                onOK?.(date)
+                            }}
+                        >
+                            OK
+                        </Button>
+                    </footer>
+                </section>
+            </div>
 
             <style jsx>
                 {`

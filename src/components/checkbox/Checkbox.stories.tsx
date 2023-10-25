@@ -34,3 +34,9 @@ export const Disabled: Story = {
         checked: true,
     },
 }
+
+export const Uncontrolled: Story = {
+    args: {
+        defaultChecked: true,
+    },
+}

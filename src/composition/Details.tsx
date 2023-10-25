@@ -41,22 +41,29 @@ export function Details({
     )[sd]
 
     const controlled = expanded !== undefined
-    const [stateExpanded, setStateExpanded] = useState(!!defaultExpanded)
-    const isExpanded = controlled ? expanded : stateExpanded
+    const [expanded$, setExpanded$] = useState(!!defaultExpanded)
+    const isExpanded = controlled ? expanded : expanded$
+    const dispatchChange = () => {
+        if (controlled) {
+            onChange?.(!expanded)
+        } else {
+            setExpanded$(!expanded$)
+        }
+    }
 
     return (
-        <div {...props} className={clsx('details', sd)}>
+        <div {...props} className={clsx('sd-details', sd)}>
             <style jsx>{`
-                .details {
+                .sd-details {
                     border-radius: 28px;
                 }
-                .details.outlined {
+                .sd-details.outlined {
                     border: solid 1px var(--sd-sys-color-outline);
                 }
-                .details.filled {
+                .sd-details.filled {
                     background: var(--sd-sys-color-surface-container-low);
                 }
-                .summary {
+                .sd-summary {
                     cursor: pointer;
                     display: flex;
                     align-items: center;
@@ -64,24 +71,18 @@ export function Details({
                     padding: 8px 8px 8px 16px;
                     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
-                .summary.expanded.outlined {
+                .sd-summary.expanded.outlined {
                     border-bottom: solid 1px var(--sd-sys-color-outline);
                 }
-                .summary.expanded.filled {
+                .sd-summary.expanded.filled {
                 }
                 .children {
                     margin: 16px;
                 }
             `}</style>
             <div
-                className={clsx('summary', sd, isExpanded && 'expanded')}
-                onClick={() => {
-                    if (controlled) {
-                        onChange?.(!expanded)
-                    } else {
-                        setStateExpanded(!stateExpanded)
-                    }
-                }}
+                className={clsx('sd-summary', sd, isExpanded && 'expanded')}
+                onClick={dispatchChange}
             >
                 <span>{summary}</span>
                 <IconButton sd={iconSd}>

@@ -43,3 +43,9 @@ export const WithIcon: Story = {
         )
     },
 }
+
+export const Uncontrolled: Story = {
+    args: {
+        defaultChecked: true,
+    },
+}

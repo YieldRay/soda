@@ -31,6 +31,10 @@ export const Slider = forwardRef<
     ExtendProps<{
         value?: number
         onChange?: (value: number) => void
+        /**
+         * For uncontrolled
+         */
+        defaultValue?: number
         steps?: number
         /**
          * @default 0
@@ -54,7 +58,8 @@ export const Slider = forwardRef<
     {
         onChange,
         steps,
-        value = 0,
+        value,
+        defaultValue,
         min: minValue = 0,
         max: maxValue = 100,
         direction = 'horizontal',
@@ -68,8 +73,23 @@ export const Slider = forwardRef<
     const eRef = useRef<HTMLDivElement>(null)
     const thumbRef = useRef<HTMLDivElement>(null)
 
+    const controlled = value !== undefined
+    const [value$, setValue$] = useState(defaultValue ?? 0)
+    const realValue = controlled ? value : value$
+    const dispatchChange = useCallback(
+        (v: number) => {
+            if (controlled) {
+                onChange?.(v)
+            } else {
+                setValue$(v)
+            }
+        },
+        [onChange, controlled]
+    )
+
+    // just util function
     const valueLimitStep = useCallback(
-        function (value: number) {
+        (value: number) => {
             if (!steps || steps === Infinity) return value
 
             const unit = (maxValue - minValue) / steps
@@ -81,10 +101,9 @@ export const Slider = forwardRef<
         [steps, minValue, maxValue]
     )
 
+    // just util function
     const valueLimitRange = useCallback(
-        function (value: number) {
-            return clamp(value, minValue, maxValue)
-        },
+        (value: number) => clamp(value, minValue, maxValue),
         [minValue, maxValue]
     )
 
@@ -92,15 +111,15 @@ export const Slider = forwardRef<
         const container = eRef.current!
         container.style.setProperty(
             '--percentage',
-            toPercentage((value - minValue) / (maxValue - minValue))
+            toPercentage((realValue - minValue) / (maxValue - minValue))
         )
-    }, [value, minValue, maxValue])
+    }, [realValue, minValue, maxValue])
 
     useEffect(() => {
         // fix the value to the limited value
-        const fixedValue = valueLimitRange(valueLimitStep(value))
-        if (value !== fixedValue) onChange?.(fixedValue)
-    }, [onChange, value, valueLimitRange, valueLimitStep])
+        const fixedValue = valueLimitRange(valueLimitStep(realValue))
+        if (realValue !== fixedValue) dispatchChange(fixedValue)
+    }, [realValue, dispatchChange, valueLimitRange, valueLimitStep])
 
     useImperativeHandle(ref, () => eRef.current!)
 
@@ -122,7 +141,7 @@ export const Slider = forwardRef<
             percentage = (pX - cX) / cWidth
         }
 
-        onChange?.(
+        dispatchChange(
             valueLimitRange(
                 valueLimitStep(minValue + (maxValue - minValue) * percentage)
             )
@@ -218,7 +237,7 @@ export const Slider = forwardRef<
                         )}
                     >
                         <div style={{ overflow: 'hidden' }}>
-                            {label ?? value}
+                            {label ?? realValue}
                         </div>
                         <FloatingArrow
                             ref={arrowRef}

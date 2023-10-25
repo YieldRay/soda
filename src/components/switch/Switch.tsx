@@ -1,7 +1,7 @@
 import { ExtendProps } from '@/utils/type'
 import './switch.scss'
 import clsx from 'clsx'
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 
 /**
  * @specs https://m3.material.io/components/switch/specs
@@ -10,11 +10,25 @@ export const Switch = forwardRef<
     HTMLDivElement,
     ExtendProps<{
         checked?: boolean
-        onChange?: () => void
+        onChange?: (checked: boolean) => void
+        defaultChecked?: boolean
         children?: React.ReactNode
         disabled?: boolean
     }>
->(function Switch({ checked, onChange, children, disabled, ...props }, ref) {
+>(function Switch(
+    { checked, onChange, defaultChecked, children, disabled, ...props },
+    ref
+) {
+    const controlled = checked !== undefined
+    const [checked$, setChecked$] = useState(!!defaultChecked)
+    const isChecked = controlled ? checked : checked$
+    const dispatchChange = () => {
+        if (controlled) {
+            onChange?.(!checked)
+        } else {
+            setChecked$(!checked$)
+        }
+    }
     return (
         <div
             {...props}
@@ -22,12 +36,12 @@ export const Switch = forwardRef<
             role="switch"
             className={clsx('sd-switch', props.className)}
             data-sd-disabled={disabled}
-            data-sd-checked={checked}
-            aria-checked={checked}
-            onClick={() => onChange?.()}
+            data-sd-checked={isChecked}
+            aria-checked={isChecked}
+            onClick={dispatchChange}
             onKeyDown={(e) => {
                 if (onChange && !disabled && e.key === 'Enter') {
-                    onChange?.()
+                    dispatchChange()
                 }
             }}
         >

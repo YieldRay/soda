@@ -1,6 +1,6 @@
 import './radio-button.scss'
 import clsx from 'clsx'
-import { forwardRef, useContext } from 'react'
+import { forwardRef, useContext, useState } from 'react'
 import { useRippleRef } from '@/utils/ripple-effect'
 import { ExtendProps } from '@/utils/type'
 import { RadioGroupContext } from '@/composition/RadioGroup'
@@ -16,6 +16,10 @@ export const RadioButton = forwardRef<
          * Must provide for grouped radio (`inside <RadioGroup>`)
          */
         value?: string
+        /**
+         * For uncontrolled
+         */
+        defaultChecked?: boolean
         disabled?: boolean
         onChange?(value?: string): void
         children?: React.ReactNode
@@ -23,6 +27,7 @@ export const RadioButton = forwardRef<
 >(function RadioButton(
     {
         checked: initChecked,
+        defaultChecked,
         value,
         onChange,
         disabled,
@@ -37,23 +42,31 @@ export const RadioButton = forwardRef<
     // if groupContext provide a value, that's to say, current radio-button is in a group
     // so ignore the checked property
 
+    const controlled = checked !== undefined
+    const [checked$, setChecked$] = useState(!!defaultChecked)
+    const isChecked = controlled ? checked : checked$
+    const dispatchChange = () => {
+        if (controlled) {
+            onChange?.(value)
+            groupContext?.onChange?.(value!)
+        } else {
+            setChecked$(!checked$)
+        }
+    }
+
     return (
         <div
             {...props}
             ref={ref}
             role="radio"
             className={clsx('sd-radio_button', className)}
-            data-sd-checked={checked}
-            aria-checked={checked}
+            data-sd-checked={isChecked}
+            aria-checked={isChecked}
             data-sd-disabled={disabled}
-            onClick={() => {
-                onChange?.(value)
-                groupContext?.onChange?.(value!)
-            }}
+            onClick={dispatchChange}
             onKeyDown={(e) => {
                 if (!disabled && e.key === 'Enter') {
-                    onChange?.(value)
-                    groupContext?.onChange?.(value!)
+                    dispatchChange()
                 }
             }}
         >

@@ -1,7 +1,7 @@
 import './checkbox.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/utils/Ripple'
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 import { ExtendProps } from '@/utils/type'
 import { Icon } from '@mdi/react'
 import { mdiCheck } from '@mdi/js'
@@ -13,8 +13,15 @@ import { SimpleSodaTransition } from '@/composition/SodaTransition'
 export const Checkbox = forwardRef<
     HTMLElement,
     ExtendProps<{
+        /**
+         * This components is controlled if checked !== undefined
+         */
         checked?: boolean
-        onChange?: () => void
+        onChange?: (checked: boolean) => void
+        /**
+         * For uncontrolled
+         */
+        defaultChecked?: boolean
         children?: React.ReactNode
         disabled?: boolean
         /**
@@ -23,9 +30,19 @@ export const Checkbox = forwardRef<
         error?: boolean
     }>
 >(function Checkbox(
-    { checked, onChange, children, disabled, error, ...props },
+    { checked, onChange, defaultChecked, children, disabled, error, ...props },
     ref
 ) {
+    const controlled = checked !== undefined
+    const [checked$, setChecked$] = useState(!!defaultChecked)
+    const isChecked = controlled ? checked : checked$
+    const dispatchChange = () => {
+        if (controlled) {
+            onChange?.(!isChecked)
+        } else {
+            setChecked$(!checked$)
+        }
+    }
     const checkedIcon = children || <Icon path={mdiCheck} />
 
     return (
@@ -34,18 +51,18 @@ export const Checkbox = forwardRef<
             className={clsx('sd-checkbox', props.className)}
             role="checkbox"
             data-sd-disabled={disabled}
-            data-sd-checked={checked}
-            aria-checked={checked}
             data-sd-error={error}
-            onClick={() => onChange?.()}
+            data-sd-checked={isChecked}
+            aria-checked={isChecked}
+            onClick={dispatchChange}
             onKeyDown={(e) => {
                 if (onChange && !disabled && e.key === 'Enter') {
-                    onChange?.()
+                    dispatchChange()
                 }
             }}
         >
             <div className="sd-checkbox-icon">
-                <SimpleSodaTransition state={checked}>
+                <SimpleSodaTransition state={isChecked}>
                     {checkedIcon}
                 </SimpleSodaTransition>
             </div>
