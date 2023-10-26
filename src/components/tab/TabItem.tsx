@@ -7,6 +7,8 @@ import { TabContext } from '.'
 
 /**
  * Use `<Tab>` to wrap it
+ *
+ * It's style depends on whether you provide `icon`
  */
 export const TabItem = forwardRef<
     HTMLElement,

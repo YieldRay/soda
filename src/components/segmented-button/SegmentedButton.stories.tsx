@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { SegmentedButton } from '.'
 import { useState } from 'react'
+import { mdiCheck, mdiStarOutline, mdiTriangleOutline } from '@mdi/js'
+import Icon from '@mdi/react'
 
 const meta = {
     title: 'Button/SegmentedButton',
@@ -21,16 +23,28 @@ export const Default: Story = {
         const items = [
             {
                 value: 'enabled',
-                label: <>✅ Enabled</>,
+                label: (
+                    <>
+                        <Icon path={mdiStarOutline} /> Enabled
+                    </>
+                ),
             },
             {
                 value: 'unknown',
-                label: <>🔄 Unknown</>,
+                label: (
+                    <>
+                        <Icon path={mdiCheck} /> Selected
+                    </>
+                ),
                 disabled: true,
             },
             {
                 value: 'disabled',
-                label: <>❎ disabled</>,
+                label: (
+                    <>
+                        <Icon path={mdiTriangleOutline} /> Unknown
+                    </>
+                ),
             },
         ]
         const [activeIndex, setActiveIndex] = useState(0)

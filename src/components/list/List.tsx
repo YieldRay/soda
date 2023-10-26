@@ -1,9 +1,10 @@
 import './list.scss'
 import clsx from 'clsx'
-import { Ripple } from '@/utils/Ripple'
 import { ExtendProps } from '@/utils/type.ts'
 import { omit } from 'lodash-es'
 import { forwardRef } from 'react'
+import { useRippleRef } from '@/utils/ripple-effect'
+import { useMergeRefs } from '@floating-ui/react'
 
 /**
  * @specs https://m3.material.io/components/lists/specs
@@ -43,10 +44,9 @@ export const List = forwardRef<
     ref
 ) {
     return (
-        <Ripple
+        <li
             {...omit(props, ['children'])}
-            ref={ref}
-            as="li"
+            ref={useMergeRefs([ref, useRippleRef()])}
             className={clsx('sd-list', className)}
             data-sd-lines={lines}
             data-sd-disabled={disabled}
@@ -83,6 +83,6 @@ export const List = forwardRef<
             {trailingIcon && (
                 <div className="sd-list-trailing_icon">{trailingIcon}</div>
             )}
-        </Ripple>
+        </li>
     )
 })

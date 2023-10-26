@@ -50,7 +50,9 @@ export const BottomSheet = forwardRef<
     // useLayoutEffect() rather than useEffect()
     // this make sure ref.current exists in useImperativeHandle()
     useLayoutEffect(() => {
-        dragHandlerRef.current = drag(handleRef.current!, sheetRef.current!, {
+        const sheet = sheetRef.current!
+        const handle = hideDragHandle ? sheet : handleRef.current!
+        dragHandlerRef.current = drag(handle, sheet, {
             onShow() {
                 setVisiable(true)
                 onChange?.(true)
@@ -61,7 +63,7 @@ export const BottomSheet = forwardRef<
             },
         })
         return dragHandlerRef.current.cleanup
-    }, [onChange])
+    }, [onChange, hideDragHandle])
 
     useImperativeHandle(ref, () => dragHandlerRef.current!)
 
@@ -133,7 +135,7 @@ export function drag(
     }
 
     const onPointerDown = (e: PointerEvent) => {
-        dragHandle.setPointerCapture(e.pointerId)
+        // dragHandle.setPointerCapture(e.pointerId)
         isDragging = true
         initY = e.clientY
         pointerDownTime = Date.now()
@@ -154,7 +156,7 @@ export function drag(
     }
 
     const onPointerUp = (e: PointerEvent) => {
-        dragHandle.releasePointerCapture(e.pointerId)
+        // dragHandle.releasePointerCapture(e.pointerId)
         isDragging = false
         const currY = e.clientY
         const distanceY = currY - initY

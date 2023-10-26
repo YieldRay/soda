@@ -115,9 +115,6 @@ $label_text_gap_size: 3.2px;
     background: transparent;
     border-radius: 0.25rem;
 
-    &[data-sd-focusd='true'] {
-        border: 2px solid var(--sd-sys-color-primary);
-    }
     //? limit the leading_icon to has max width 1rem
     //? this make the component do not need javascript to calculate
     //? the leading_icon's width, so we can just place the label_text
@@ -136,15 +133,22 @@ $label_text_gap_size: 3.2px;
         transition: all 200ms;
         left: 8px;
         top: 16px;
+        color: var(--sd-sys-color-on-surface-variant);
     }
 
     &[data-sd-label_text='populated'] .sd-text_field-label_text {
         left: 8px;
         top: -8px;
-        color: var(--sd-sys-color-primary);
         background: rgb(255 255 255);
         font-size: $label_text_populated_size;
         padding: 0 4px;
+    }
+
+    &[data-sd-focusd='true'] {
+        border: 2px solid var(--sd-sys-color-primary);
+        .sd-text_field-label_text {
+            color: var(--sd-sys-color-primary);
+        }
     }
 
     // override default

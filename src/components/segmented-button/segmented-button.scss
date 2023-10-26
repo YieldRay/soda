@@ -12,6 +12,7 @@
         border-right: $border;
         border-top: $border;
         border-bottom: $border;
+        user-select: none;
         &:first-child {
             border-left: $border;
             border-top-left-radius: var(--height);
@@ -29,6 +30,10 @@
         align-items: center;
         -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
         transition: all 200ms;
+        svg {
+            width: 16px;
+            vertical-align: text-bottom;
+        }
         &[data-sd-active='true'] {
             color: var(--sd-sys-color-on-secondary-container);
             background: var(--sd-sys-color-secondary-container);

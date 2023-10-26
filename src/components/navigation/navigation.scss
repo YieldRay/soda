@@ -92,11 +92,9 @@
         border-radius: 40px;
         -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
         transition: all 200ms;
-
         svg {
             height: 18px;
-            display: grid;
-            place-items: center;
+            vertical-align: middle;
         }
     }
 

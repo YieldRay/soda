@@ -10,8 +10,8 @@ button.sd-button {
 .sd-button {
     svg {
         height: 20px;
-        display: grid;
-        place-items: center;
+        display: inline;
+        vertical-align: text-bottom;
     }
     display: inline-block;
     vertical-align: middle;

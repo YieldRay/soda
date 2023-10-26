@@ -50,3 +50,16 @@ export const WithoutIcon: Story = {
         )
     },
 }
+
+export const Uncontrolled: Story = {
+    args: {
+        defaultValue: '1',
+        children: (
+            <>
+                <TabItem value="0">Apple</TabItem>
+                <TabItem value="1">Banana</TabItem>
+                <TabItem value="2">Orange</TabItem>
+            </>
+        ),
+    },
+}

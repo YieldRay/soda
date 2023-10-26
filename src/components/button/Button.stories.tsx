@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from '.'
+import Icon from '@mdi/react'
+import { mdiCheck } from '@mdi/js'
 
 const meta = {
     title: 'Button/Button',
@@ -53,5 +55,15 @@ export const Text: Story = {
     args: {
         sd: 'text',
         children: 'Button',
+    },
+}
+
+export const WithIcon: Story = {
+    args: {
+        children: (
+            <>
+                <Icon path={mdiCheck} /> Button
+            </>
+        ),
     },
 }

@@ -2,7 +2,6 @@
 
 .sd-tab {
     display: flex;
-    align-items: flex-end;
     justify-content: space-around;
     width: max-content;
     background: var(--sd-sys-color-surface);
@@ -18,6 +17,7 @@
     flex-direction: column;
     gap: 4px;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+    user-select: none;
     cursor: pointer;
 
     &-icon {
@@ -45,7 +45,6 @@
     }
     position: relative;
     &-active_indicator {
-        transition: all 200ms;
         position: absolute;
         bottom: -3px;
         height: 6px; // height 6px, we hide 3px, levaing 3px to display

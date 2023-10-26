@@ -27,8 +27,10 @@
     overflow: hidden;
     width: 640px;
     max-width: 100%;
+    min-height: 1rem;
     overflow: hidden;
     touch-action: none;
+    user-select: none;
 
     &-drag_handle {
         cursor: grab;

@@ -21,6 +21,7 @@ export const ActionButton = forwardRef<
                 .sd-action_button {
                     all: unset;
                     display: inline-block;
+                    text-align: center;
                     vertical-align: middle;
                     line-height: 20px;
                     font-size: 14px;
