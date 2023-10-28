@@ -1,2 +1,3 @@
+export * from './Tabs'
 export * from './Tab'
-export * from './TabItem'
+export * from './TabPanel'

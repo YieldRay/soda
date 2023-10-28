@@ -1,32 +1,30 @@
 import './tab.scss'
 import clsx from 'clsx'
-import { Ripple } from '@/utils/Ripple'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef, useContext } from 'react'
 import { TabContext } from '.'
 
 /**
  * Use `<Tab>` to wrap it
- *
- * It's style depends on whether you provide `icon`
  */
-export const TabItem = forwardRef<
-    HTMLElement,
+export const TabPanel = forwardRef<
+    HTMLDivElement,
     ExtendProps<{
         value: string
         children?: React.ReactNode
-        icon?: React.ReactNode
         active?: boolean
     }>
->(function TabItem(
-    { children, icon, value, active: initActive, className, onClick, ...props },
+>(function TabPanel(
+    { children, value, active: initActive, className, onClick, ...props },
     ref
 ) {
     const tabContext = useContext(TabContext)
     const active = tabContext ? tabContext.value === value : initActive
 
+    if (!active) return <></>
+
     return (
-        <Ripple
+        <div
             {...props}
             ref={ref}
             className={clsx('sd-tab_item', className)}
@@ -36,9 +34,7 @@ export const TabItem = forwardRef<
                 tabContext?.onChange?.(value)
             }}
         >
-            {icon && <div className="sd-tab_item-icon">{icon}</div>}
-            <div className="sd-tab_item-label_text">{children}</div>
-            <div className="sd-tab_item-active_indicator"></div>
-        </Ripple>
+            {children}
+        </div>
     )
 })

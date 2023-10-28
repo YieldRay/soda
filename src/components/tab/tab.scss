@@ -1,24 +1,32 @@
 // https://m3.material.io/components/tabs/specs
 
-.sd-tab {
-    display: flex;
-    justify-content: space-around;
+.sd-tabs {
     width: max-content;
-    background: var(--sd-sys-color-surface);
-    position: relative;
     overflow: hidden;
 }
 
-.sd-tab_item {
-    flex: 1;
-    padding: 0.5rem 1rem 0.8rem 1rem;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 4px;
+.sd-tab {
+    background: var(--sd-sys-color-surface);
+    display: inline-block;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     user-select: none;
     cursor: pointer;
+    overflow: hidden;
+
+    &-helper {
+        padding: 0.5rem 1rem 0.8rem 1rem;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 4px;
+        transition: all 200ms;
+        &:hover {
+            background: rgb(0 0 0 / 0.04);
+        }
+        &:active {
+            background: rgb(0 0 0 / 0.08);
+        }
+    }
 
     &-icon {
         transition: all 200ms;
@@ -36,10 +44,10 @@
         -webkit-text-stroke: 0.1px currentColor;
     }
     &[data-sd-active='true'] {
-        .sd-tab_item-icon {
+        .sd-tab-icon {
             color: var(--sd-sys-color-primary);
         }
-        .sd-tab_item-label_text {
+        .sd-tab-label_text {
             color: var(--sd-sys-color-primary);
         }
     }
@@ -54,23 +62,16 @@
         opacity: 0;
     }
     &[data-sd-active='true'] {
-        .sd-tab_item-active_indicator {
+        .sd-tab-active_indicator {
             opacity: 1;
         }
     }
-    &:not(:has(.sd-tab_item-icon)) {
-        .sd-tab_item-active_indicator {
+    &:not(:has(.sd-tab-icon)) {
+        .sd-tab-active_indicator {
             width: 100%;
             border-radius: 0;
             height: 2px;
             bottom: 0;
         }
-    }
-    transition: all 200ms;
-    &:hover {
-        background: rgb(0 0 0 / 0.04);
-    }
-    &:active {
-        background: rgb(0 0 0 / 0.08);
     }
 }

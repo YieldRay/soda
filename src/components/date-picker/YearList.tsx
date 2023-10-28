@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useRippleRef } from '../../utils/ripple-effect'
 
 export function YearList({
     current,
@@ -14,12 +15,15 @@ export function YearList({
                     className={clsx(current === year && 'active')}
                     onClick={() => onChange?.(year)}
                     key={year}
+                    ref={useRippleRef()}
                 >
-                    {
-                        new Intl.DateTimeFormat(undefined, {
-                            year: 'numeric',
-                        }).formatToParts(new Date(year, 1, 1))[0].value
-                    }
+                    <div className="cell">
+                        {
+                            new Intl.DateTimeFormat(undefined, {
+                                year: 'numeric',
+                            }).formatToParts(new Date(year, 1, 1))[0].value
+                        }
+                    </div>
                 </li>
             ))}
             <style jsx>{`
@@ -29,10 +33,16 @@ export function YearList({
                     grid-template-columns: repeat(3, 1fr);
                     align-items: center;
                     justify-items: center;
-                    row-gap: 1rem;
                 }
                 li {
                     all: unset;
+                    display: grid;
+                    width: 100%;
+                    place-items: center;
+                    padding: 6px 0;
+                    cursor: pointer;
+                }
+                .cell {
                     display: inline-block;
                     width: 76px;
                     height: 36px;
@@ -40,7 +50,6 @@ export function YearList({
                     text-align: center;
                     border-radius: 2rem;
                     color: var(--sd-sys-color-on-surface-variant);
-                    cursor: pointer;
                     overflow: hidden;
                     transition: all 200ms;
                     user-select: none;
@@ -52,7 +61,7 @@ export function YearList({
                 li:active {
                     background: rgba(0 0 0 / 0.08);
                 }
-                li.active {
+                li.active > .cell {
                     background: var(--sd-sys-color-primary);
                     color: var(--sd-sys-color-on-primary);
                 }

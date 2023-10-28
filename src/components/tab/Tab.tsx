@@ -1,50 +1,46 @@
 import './tab.scss'
 import clsx from 'clsx'
+import { Ripple } from '@/utils/Ripple'
 import { ExtendProps } from '@/utils/type'
-import { forwardRef, createContext, useState } from 'react'
-
-export const TabContext = createContext<
-    | {
-          value?: string
-          onChange?: (value: string) => void
-      }
-    | undefined
->(undefined)
+import { forwardRef, useContext } from 'react'
+import { TabContext } from '.'
 
 /**
- * You can set its width like `style={{width: "100vw"}}` to occupy more width.
- * Child elements (`<TabItem>`) will divide its width equally.
- * @specs https://m3.material.io/components/tabs/specs
+ * Use `<Tab>` to wrap it
+ *
+ * It's style depends on whether you provide `icon`
  */
 export const Tab = forwardRef<
-    HTMLDivElement,
+    HTMLElement,
     ExtendProps<{
+        value: string
         children?: React.ReactNode
-        value?: string
-        defaultValue?: string
-        onChange?: (value: string) => void
+        icon?: React.ReactNode
+        active?: boolean
     }>
 >(function Tab(
-    { className, children, value, onChange, defaultValue, ...props },
+    { children, icon, value, active: initActive, className, onClick, ...props },
     ref
 ) {
-    const controlled = value !== undefined
-    const [value$, setValue$] = useState(defaultValue)
-    const realValue = controlled ? value : value$
-    const dispatchChange = (v: string) => {
-        if (controlled) {
-            onChange?.(v)
-        } else {
-            setValue$(v)
-        }
-    }
+    const tabContext = useContext(TabContext)
+    const active = tabContext ? tabContext.value === value : initActive
+
     return (
-        <div {...props} ref={ref} className={clsx('sd-tab', className)}>
-            <TabContext.Provider
-                value={{ value: realValue, onChange: dispatchChange }}
-            >
-                {children}
-            </TabContext.Provider>
-        </div>
+        <Ripple
+            {...props}
+            ref={ref}
+            className={clsx('sd-tab', className)}
+            data-sd-active={active}
+            onClick={(e) => {
+                onClick?.(e)
+                tabContext?.onChange?.(value)
+            }}
+        >
+            <div className="sd-tab-helper">
+                {icon && <div className="sd-tab-icon">{icon}</div>}
+                <div className="sd-tab-label_text">{children}</div>
+                <div className="sd-tab-active_indicator"></div>
+            </div>
+        </Ripple>
     )
 })

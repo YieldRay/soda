@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { getFormatCalendar, isSameDay } from './calendar'
+import { useRippleRef } from '@/utils/ripple-effect'
 
 export function DayList({
     year,
@@ -39,11 +40,13 @@ export function DayList({
                                         col.isToday && 'today',
                                         !col.isThisMonth && 'disabled'
                                     )}
+                                    data-sd-disabled={!col.isThisMonth}
                                     dateTime={`${year}-${month}-${col.day}`}
                                     onClick={() => {
                                         if (col.isThisMonth && onChange)
                                             onChange(col.date)
                                     }}
+                                    ref={useRippleRef()}
                                 >
                                     {col.day}
                                 </time>

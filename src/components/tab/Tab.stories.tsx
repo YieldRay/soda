@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Tab, TabItem } from '.'
+import { Tabs, Tab, TabPanel } from '.'
 import { useState } from 'react'
 import Icon from '@mdi/react'
 import { mdiCheck, mdiClose, mdiMagnify } from '@mdi/js'
 
 const meta = {
     title: 'Tab',
-    component: Tab,
+    component: Tabs,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof Tab>
+} satisfies Meta<typeof Tabs>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -22,17 +22,21 @@ export const Default: Story = {
         const [value, setValue] = useState('0')
 
         return (
-            <Tab value={value} onChange={setValue}>
-                <TabItem icon={<Icon path={mdiCheck} />} value="0">
+            <Tabs value={value} onChange={setValue}>
+                <Tab icon={<Icon path={mdiCheck} />} value="0">
                     Apple
-                </TabItem>
-                <TabItem icon={<Icon path={mdiClose} />} value="1">
+                </Tab>
+                <Tab icon={<Icon path={mdiClose} />} value="1">
                     Banana
-                </TabItem>
-                <TabItem icon={<Icon path={mdiMagnify} />} value="2">
+                </Tab>
+                <Tab icon={<Icon path={mdiMagnify} />} value="2">
                     Orange
-                </TabItem>
-            </Tab>
+                </Tab>
+
+                <TabPanel value="0">Panel 0</TabPanel>
+                <TabPanel value="1">Panel 1</TabPanel>
+                <TabPanel value="2">Panel 2</TabPanel>
+            </Tabs>
         )
     },
 }
@@ -42,11 +46,11 @@ export const WithoutIcon: Story = {
         const [value, setValue] = useState('0')
 
         return (
-            <Tab value={value} onChange={setValue}>
-                <TabItem value="0">Apple</TabItem>
-                <TabItem value="1">Banana</TabItem>
-                <TabItem value="2">Orange</TabItem>
-            </Tab>
+            <Tabs value={value} onChange={setValue}>
+                <Tab value="0">Apple</Tab>
+                <Tab value="1">Banana</Tab>
+                <Tab value="2">Orange</Tab>
+            </Tabs>
         )
     },
 }
@@ -56,9 +60,9 @@ export const Uncontrolled: Story = {
         defaultValue: '1',
         children: (
             <>
-                <TabItem value="0">Apple</TabItem>
-                <TabItem value="1">Banana</TabItem>
-                <TabItem value="2">Orange</TabItem>
+                <Tab value="0">Apple</Tab>
+                <Tab value="1">Banana</Tab>
+                <Tab value="2">Orange</Tab>
             </>
         ),
     },
