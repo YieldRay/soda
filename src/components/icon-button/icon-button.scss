@@ -13,6 +13,7 @@ button.sd-icon_button {
     height: 40px;
     border-radius: 40px;
     cursor: pointer;
+    overflow: hidden;
     transition: all 0.2s;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 

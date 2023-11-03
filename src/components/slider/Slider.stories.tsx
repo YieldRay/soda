@@ -71,5 +71,6 @@ export const Vertical: Story = {
 export const Uncontrolled: Story = {
     args: {
         defaultValue: 50,
+        onChange: console.log,
     },
 }

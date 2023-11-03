@@ -31,6 +31,7 @@ export const ActionButton = forwardRef<
                     cursor: pointer;
                     user-select: none;
                     transition: all 200ms;
+                    overflow: hidden;
                     -webkit-tap-highlight-color: transparent;
                 }
                 .sd-action_button[data-sd-inverse='false'] {

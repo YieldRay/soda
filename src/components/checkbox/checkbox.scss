@@ -8,6 +8,7 @@ $error: var(--sd-sys-color-error);
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
+    overflow: hidden;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     transition: all 200ms;
     &:hover {

@@ -31,6 +31,7 @@ export function MenuButton({
                     align-items: center;
                 }
                 .sd-menu_button {
+                    overflow: hidden;
                     flex-shrink: 1;
                     display: inline-flex;
                     gap: 0.15rem;

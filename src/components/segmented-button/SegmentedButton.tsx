@@ -1,58 +1,70 @@
 import './segmented-button.scss'
-import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
+import { forwardRef, useState } from 'react'
 import { Ripple } from '@/utils/Ripple'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
+import { useMergeRefs } from '@floating-ui/react'
 
 export const SegmentedButton = forwardRef<
     HTMLDivElement,
     ExtendProps<{
-        activeIndex?: number
+        value?: string
+        defaultValue?: string
+        onChange?: (value: string) => void
         items?: Array<{
-            label: React.ReactNode
-            disabled?: boolean
+            value: string
             /**
-             * Optional, defaults to array index
+             * You can omit the label, it will show the `value`
              */
-            key?: React.Key
+            label?: React.ReactNode
+            disabled?: boolean
         }>
-        onChange?(activeIndex: number): void
+
         /**
          * Each step down in density removes 4px from the height
          */
         density?: 0 | -1 | -2 | -3
     }>
 >(function SegmentedButton(
-    { activeIndex, items, onChange, density, className, ...props },
+    { value, defaultValue, items, onChange, density, className, ...props },
     ref
 ) {
-    const eRef = useRef<HTMLDivElement>(null)
-    useImperativeHandle(ref, () => eRef.current!)
-    useEffect(() => {
-        if (density)
-            eRef.current!.style.setProperty('--height', `${40 + density * 4}px`)
-    }, [density])
+    const controlled = value !== undefined
+    const [value$, setValue$] = useState(defaultValue)
+    const realValue = controlled ? value : value$
+    const dispatchChange = (v: string) => {
+        onChange?.(v)
+        if (!controlled) {
+            setValue$(v)
+        }
+    }
 
     return (
         <div
             {...props}
             className={clsx('sd-segmented_button', className)}
-            ref={eRef}
+            ref={useMergeRefs([
+                (e) =>
+                    e &&
+                    e.style.setProperty(
+                        '--density',
+                        density ? String(density) : '0'
+                    ),
+                ref,
+            ])}
         >
             {items &&
-                items.map(({ label, disabled, key }, index) => (
+                items.map(({ label, disabled, value }, index) => (
                     <Ripple
-                        key={key ?? index}
+                        key={value ?? index}
                         tabIndex={index + 1}
                         className="sd-segmented_button-item"
-                        data-sd-active={
-                            activeIndex === index ? 'true' : 'false'
-                        }
+                        data-sd-active={value === realValue ? 'true' : 'false'}
                         data-sd-disabled={disabled}
-                        onClick={() => onChange?.(index)}
+                        onClick={() => dispatchChange(value)}
                         onKeyDown={(e) => {
                             if (onChange && e.key === 'Enter' && !disabled) {
-                                onChange(index)
+                                dispatchChange(value)
                             }
                         }}
                     >

@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { forwardRef, useContext, useState } from 'react'
 import { useRippleRef } from '@/utils/ripple-effect'
 import { ExtendProps } from '@/utils/type'
-import { RadioGroupContext } from '@/composition/RadioGroup'
+import { RadioGroupContext } from '@/components/radio-button/RadioGroup'
 
 /**
  * @specs https://m3.material.io/components/radio-button/specs
@@ -46,10 +46,9 @@ export const RadioButton = forwardRef<
     const [checked$, setChecked$] = useState(!!defaultChecked)
     const isChecked = controlled ? checked : checked$
     const dispatchChange = () => {
-        if (controlled) {
-            onChange?.(value)
-            groupContext?.onChange?.(value!)
-        } else {
+        onChange?.(value)
+        groupContext?.onChange?.(value!)
+        if (!controlled) {
             setChecked$(!checked$)
         }
     }

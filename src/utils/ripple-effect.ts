@@ -44,7 +44,6 @@ export function ripple(
         )
 
         ele.style.position = 'relative'
-        ele.style.overflow = 'hidden'
         const ripple = document.createElement('div')
         ripple.style.pointerEvents = 'none'
         ripple.style.position = 'absolute'

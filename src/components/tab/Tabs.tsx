@@ -32,9 +32,8 @@ export const Tabs = forwardRef<
     const [value$, setValue$] = useState(defaultValue)
     const realValue = controlled ? value : value$
     const dispatchChange = (v: string) => {
-        if (controlled) {
-            onChange?.(v)
-        } else {
+        onChange?.(v)
+        if (!controlled) {
             setValue$(v)
         }
     }

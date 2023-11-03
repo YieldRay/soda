@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { RadioButton } from '.'
+import { RadioButton, RadioGroup } from '.'
 import { useState } from 'react'
-import { RadioGroup } from '@/composition/RadioGroup'
 
 const meta = {
     title: 'RadioButton',
@@ -57,5 +56,26 @@ export const Uncontrolled: Story = {
     args: {
         defaultChecked: true,
         children: <>Label</>,
+    },
+}
+
+export const UncontrolledGroup: Story = {
+    render: () => {
+        const values = ['apple', 'banana', 'orange']
+
+        return (
+            <RadioGroup onChange={console.log}>
+                {values.map((v, i) => (
+                    <RadioButton
+                        value={v}
+                        tabIndex={i + 1}
+                        key={i}
+                        disabled={i === 0}
+                    >
+                        {v}
+                    </RadioButton>
+                ))}
+            </RadioGroup>
+        )
     },
 }

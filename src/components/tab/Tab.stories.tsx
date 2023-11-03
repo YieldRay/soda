@@ -65,5 +65,6 @@ export const Uncontrolled: Story = {
                 <Tab value="2">Orange</Tab>
             </>
         ),
+        onChange: console.log,
     },
 }

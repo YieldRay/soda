@@ -25,6 +25,7 @@ button.sd-fab {
     @include display-inline-flex-center;
     vertical-align: middle;
     cursor: pointer;
+    overflow: hidden;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     transition: all 200ms;
 

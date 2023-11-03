@@ -78,9 +78,8 @@ export const Slider = forwardRef<
     const realValue = controlled ? value : value$
     const dispatchChange = useCallback(
         (v: number) => {
-            if (controlled) {
-                onChange?.(v)
-            } else {
+            onChange?.(v)
+            if (!controlled) {
                 setValue$(v)
             }
         },

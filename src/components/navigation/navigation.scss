@@ -91,6 +91,7 @@
         height: 32px;
         border-radius: 40px;
         -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+        overflow: hidden;
         transition: all 200ms;
         svg {
             height: 18px;

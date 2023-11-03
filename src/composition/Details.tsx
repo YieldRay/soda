@@ -44,9 +44,8 @@ export function Details({
     const [expanded$, setExpanded$] = useState(!!defaultExpanded)
     const isExpanded = controlled ? expanded : expanded$
     const dispatchChange = () => {
-        if (controlled) {
-            onChange?.(!expanded)
-        } else {
+        onChange?.(!expanded)
+        if (!controlled) {
             setExpanded$(!expanded$)
         }
     }

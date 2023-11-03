@@ -23,9 +23,8 @@ export const Switch = forwardRef<
     const [checked$, setChecked$] = useState(!!defaultChecked)
     const isChecked = controlled ? checked : checked$
     const dispatchChange = () => {
-        if (controlled) {
-            onChange?.(!checked)
-        } else {
+        onChange?.(!checked)
+        if (!controlled) {
             setChecked$(!checked$)
         }
     }

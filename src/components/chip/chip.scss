@@ -5,6 +5,7 @@
     align-items: center;
     border-radius: 0.5rem;
     cursor: pointer;
+    overflow: hidden;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
     &:has(&-leading_icon) {

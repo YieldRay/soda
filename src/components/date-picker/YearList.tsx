@@ -41,6 +41,7 @@ export function YearList({
                     place-items: center;
                     padding: 6px 0;
                     cursor: pointer;
+                    overflow: hidden;
                 }
                 .cell {
                     display: inline-block;

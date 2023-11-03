@@ -59,6 +59,7 @@ export function DayList({
             <style jsx>{`
                 .day.today {
                     border: solid 1px;
+                    overflow: hidden;
                 }
                 .day:hover {
                     background: rgba(0 0 0 / 0.04);

@@ -24,6 +24,7 @@
 
     &-box {
         display: inline-block;
+        overflow: hidden;
         vertical-align: middle;
         @include circle(2rem);
         transition: all 200ms;

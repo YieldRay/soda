@@ -3,8 +3,10 @@
 .sd-segmented_button {
     display: inline-flex;
     align-items: center;
-    --height: 40px;
+    --density: 0;
+    --height: calc(var(--density) * 4px + 40px);
     .sd-segmented_button-item {
+        overflow: hidden;
         height: var(--height);
         padding: 0 12px;
         cursor: pointer;
