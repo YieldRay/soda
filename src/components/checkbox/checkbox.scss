@@ -1,23 +1,13 @@
 // https://m3.material.io/components/checkbox/specs
 
-$priamy: var(--sd-sys-color-primary);
+$primary: var(--sd-sys-color-primary);
 $error: var(--sd-sys-color-error);
 
 .sd-checkbox {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
     cursor: pointer;
-    overflow: hidden;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     transition: all 200ms;
-    &:hover {
-        background: rgb(0 0 0 / 0.1);
-    }
-    &:focus-visible {
-        outline: none;
-        background: rgb(0 0 0 / 0.12);
-    }
+    position: relative;
     @include display-inline-flex-center;
 
     &-icon {
@@ -29,10 +19,40 @@ $error: var(--sd-sys-color-error);
         border: 2px solid var(--sd-sys-color-outline);
         color: var(--sd-sys-color-surface-container-highest);
     }
+    &:active .sd-checkbox-icon {
+        border: 2px solid $primary;
+    }
+
+    &-ripple {
+        position: absolute;
+        overflow: hidden;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        clip-path: circle(50%);
+        border-radius: 50%;
+        transition: all 200ms;
+        &:hover {
+            background: rgb(0 0 0 / 0.1);
+        }
+        > * {
+            // make the ripple full size
+            display: block;
+            height: 100%;
+        }
+    }
+    &:focus-visible {
+        outline: none;
+        .sd-checkbox-ripple {
+            background: rgb(0 0 0 / 0.12);
+        }
+    }
 
     &[data-sd-checked='true'] &-icon {
-        background: $priamy;
-        border: 2px solid $priamy;
+        background: $primary;
+        border: 2px solid $primary;
     }
 
     &[data-sd-checked='true'][data-sd-error='true'] &-icon {

@@ -1,5 +1,5 @@
-import { useRef, forwardRef, useImperativeHandle } from 'react'
-import { useRippleEffect } from './ripple-effect'
+import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
+import { ripple } from './ripple-effect'
 import { ExtendProps, TagNameString } from './type'
 
 type Props = ExtendProps<{
@@ -19,14 +19,35 @@ type Props = ExtendProps<{
     rippleColor?: string
 }>
 
+type RippleAt = (
+    rippleX: number,
+    rippleY: number,
+    autoRemove?: boolean
+) => (onFinish?: VoidFunction | undefined) => void
+
+export type RippleHandle = HTMLElement & { rippleAt?: RippleAt }
+
 /**
  * Wrapper component for ripple-effect.ts
  */
-export const Ripple = forwardRef<HTMLElement, Props>(
+export const Ripple = forwardRef<RippleHandle, Props>(
     ({ as, disabled, rippleColor, rippleDuration, ...props }, ref) => {
         const eRef = useRef<HTMLElement>(null)
-        useRippleEffect(eRef, rippleDuration, rippleColor)
-        useImperativeHandle(ref, () => eRef.current!)
+        const fnRef = useRef<undefined | RippleAt>(undefined)
+        useEffect(() => {
+            const rippleResult = ripple(
+                eRef.current!,
+                rippleDuration,
+                rippleColor
+            )
+            fnRef.current = rippleResult?.rippleAt
+            return rippleResult?.cleanup
+        })
+        useImperativeHandle(ref, () => {
+            const e = eRef.current!
+            Reflect.set(e, 'rippleAt', fnRef.current)
+            return e
+        })
 
         const As: any = as || 'div'
 

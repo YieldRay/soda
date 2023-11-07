@@ -1,11 +1,13 @@
 import './radio-button.scss'
 import clsx from 'clsx'
-import { forwardRef, useContext, useState } from 'react'
-import { useRippleRef } from '@/utils/ripple-effect'
+import { forwardRef, useContext, useRef, useState } from 'react'
 import { ExtendProps } from '@/utils/type'
 import { RadioGroupContext } from '@/components/radio-button/RadioGroup'
+import { Ripple, type RippleHandle } from '@/utils/Ripple'
 
 /**
+ * According to the official implementation, the ripple effect should not occupy space.
+ * Therefore, if the parent container has `overflow: hidden`, make sure that there is enough area to show the ripple effect.
  * @specs https://m3.material.io/components/radio-button/specs
  */
 export const RadioButton = forwardRef<
@@ -53,6 +55,9 @@ export const RadioButton = forwardRef<
         }
     }
 
+    // for create ripple manually
+    const rippleRef = useRef<RippleHandle>(null)
+
     return (
         <div
             {...props}
@@ -69,8 +74,32 @@ export const RadioButton = forwardRef<
                 }
             }}
         >
-            <div className="sd-radio_button-box" ref={useRippleRef()}></div>
-            <div className="sd-radio_button-label">{children}</div>
+            <div className="sd-radio_button-box">
+                <div className="sd-radio_button-ripple">
+                    <Ripple ref={rippleRef} />
+                </div>
+            </div>
+            <div
+                className="sd-radio_button-label"
+                ref={(el) => {
+                    if (el) {
+                        el.onpointerdown = (e) => {
+                            // pointer capture is necessary here
+                            el.setPointerCapture(e.pointerId)
+                            const removeRipple = rippleRef.current?.rippleAt?.(
+                                Infinity,
+                                16
+                            )
+                            el.onpointerup = el.onpointercancel = () => {
+                                el.releasePointerCapture(e.pointerId)
+                                removeRipple?.()
+                            }
+                        }
+                    }
+                }}
+            >
+                {children}
+            </div>
         </div>
     )
 })

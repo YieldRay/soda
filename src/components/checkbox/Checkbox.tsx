@@ -8,10 +8,12 @@ import { mdiCheck } from '@mdi/js'
 import { SimpleSodaTransition } from '@/composition/SodaTransition'
 
 /**
+ * According to the official implementation, the ripple effect should not occupy space.
+ * Therefore, if the parent container has `overflow: hidden`, make sure that there is enough area to show the ripple effect.
  * @specs https://m3.material.io/components/checkbox/specs
  */
 export const Checkbox = forwardRef<
-    HTMLElement,
+    HTMLDivElement,
     ExtendProps<{
         /**
          * This components is controlled if checked !== undefined
@@ -45,7 +47,7 @@ export const Checkbox = forwardRef<
     const checkedIcon = children || <Icon path={mdiCheck} />
 
     return (
-        <Ripple
+        <div
             ref={ref}
             className={clsx('sd-checkbox', props.className)}
             role="checkbox"
@@ -65,6 +67,9 @@ export const Checkbox = forwardRef<
                     {checkedIcon}
                 </SimpleSodaTransition>
             </div>
-        </Ripple>
+            <div className="sd-checkbox-ripple">
+                <Ripple />
+            </div>
+        </div>
     )
 })

@@ -15,26 +15,13 @@ export function ripple(
     }
     ele.dataset[DatasetName] = 'true'
 
-    const onPointerDown = (event: PointerEvent) => {
-        if (event.button === 2) {
-            // do not handle right click
-            return
-        }
-        if (
-            ele.hasAttribute('disabled') ||
-            Reflect.get(ele, 'disabled') === true ||
-            ele.dataset.sdDisabled === 'true'
-        ) {
-            // do not handle if is disabled
-            return
-        }
+    const rippleAt = (rippleX: number, rippleY: number, autoRemove = false) => {
+        const { width, height } = ele.getBoundingClientRect() // ele pos
 
-        ele.setPointerCapture(event.pointerId) // redirect all event to element
-
-        const { x: eleX, y: eleY, width, height } = ele.getBoundingClientRect() // ele pos
-        const { clientX: pointerX, clientY: pointerY } = event // pointer pos
-        const rippleX = pointerX - eleX
-        const rippleY = pointerY - eleY
+        if (rippleX < 0) rippleX = 0
+        if (rippleY < 0) rippleY = 0
+        if (rippleX > width) rippleX = width
+        if (rippleY > height) rippleY = height
 
         const radius = Math.max(
             Math.hypot(rippleX, rippleY),
@@ -56,13 +43,8 @@ export function ripple(
         ripple.style.background = color
         ele.append(ripple)
 
-        ripple.animate(
-            [
-                { transform: 'scale(0%)' },
-                {
-                    transform: 'scale(101%)',
-                },
-            ],
+        const scaleUpAnimation = ripple.animate(
+            { transform: ['scale(0%)', 'scale(101%)'] },
             {
                 duration,
                 easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -70,38 +52,70 @@ export function ripple(
             }
         )
 
-        const onPointerUp = (e: PointerEvent) => {
-            ele.releasePointerCapture(e.pointerId)
+        const removeRipple = (onFinish?: VoidFunction) => {
+            if (!ripple) return
 
-            const animation = ripple.animate(
-                [
-                    { opacity: '1' },
-                    {
-                        opacity: '0',
-                    },
-                ],
+            const fadeOutAnimation = ripple.animate(
+                { opacity: ['1', '0'] },
                 {
                     duration,
                     fill: 'forwards',
                 }
             )
 
-            animation.oncancel = animation.onfinish = () => {
+            fadeOutAnimation.oncancel = fadeOutAnimation.onfinish = () => {
                 ripple.remove()
-                ele.removeEventListener('pointerup', onPointerUp)
-                ele.removeEventListener('pointercancel', onPointerUp)
+                onFinish?.()
             }
         }
 
+        if (autoRemove) {
+            scaleUpAnimation.onfinish = () => removeRipple()
+        }
+
+        return removeRipple
+    }
+
+    // handle pointer event
+    const onPointerDown = (event: PointerEvent) => {
+        if (event.button === 2) {
+            // do not handle right click
+            return
+        }
+        if (
+            ele.hasAttribute('disabled') ||
+            Reflect.get(ele, 'disabled') === true ||
+            ele.dataset.sdDisabled === 'true'
+        ) {
+            // do not handle if is disabled
+            return
+        }
+
+        ele.setPointerCapture(event.pointerId) // redirect all event to element
+
+        const { clientX: pointerX, clientY: pointerY } = event // pointer pos
+        const { x: eleX, y: eleY } = ele.getBoundingClientRect() // ele pos
+
+        const removeRipple = rippleAt(pointerX - eleX, pointerY - eleY)
+
+        const onPointerUp = (e: PointerEvent) => {
+            ele.releasePointerCapture(e.pointerId)
+            removeRipple(() => {
+                ele.removeEventListener('pointerup', onPointerUp)
+                ele.removeEventListener('pointercancel', onPointerUp)
+            })
+        }
         ele.addEventListener('pointerup', onPointerUp)
         ele.addEventListener('pointercancel', onPointerUp)
     }
-
     ele.addEventListener('pointerdown', onPointerDown)
 
-    return () => {
-        ele.dataset[DatasetName] = 'false'
-        ele.removeEventListener('pointerdown', onPointerDown)
+    return {
+        cleanup: () => {
+            ele.dataset[DatasetName] = 'false'
+            ele.removeEventListener('pointerdown', onPointerDown)
+        },
+        rippleAt,
     }
 }
 
@@ -116,7 +130,7 @@ export function useRippleEffect<T extends HTMLElement>(
     useEffect(
         () =>
             eleRef.current
-                ? ripple(eleRef.current, duration, color)
+                ? ripple(eleRef.current, duration, color)?.cleanup
                 : undefined,
         [eleRef, duration, color]
     )
