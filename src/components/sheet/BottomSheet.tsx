@@ -98,6 +98,12 @@ export function drag(
         onHide?(): void
     }
 ) {
+    /**
+     * do not capture pointer when the dragHandle is the entire sheet (when `hideDragHandle` set to true),
+     * this is because the children of the sheet may want to capture the pointer,
+     * for example, the <Ripple> element
+     */
+    const isCapturePointer = dragHandle !== sheet
     let isDragging = false
     let translateY = 0 // previous translateY in px
     let initY = 0
@@ -135,7 +141,7 @@ export function drag(
     }
 
     const onPointerDown = (e: PointerEvent) => {
-        // dragHandle.setPointerCapture(e.pointerId)
+        if (isCapturePointer) dragHandle.setPointerCapture(e.pointerId)
         isDragging = true
         initY = e.clientY
         pointerDownTime = Date.now()
@@ -156,7 +162,7 @@ export function drag(
     }
 
     const onPointerUp = (e: PointerEvent) => {
-        // dragHandle.releasePointerCapture(e.pointerId)
+        if (isCapturePointer) dragHandle.releasePointerCapture(e.pointerId)
         isDragging = false
         const currY = e.clientY
         const distanceY = currY - initY

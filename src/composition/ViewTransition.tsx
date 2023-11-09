@@ -3,13 +3,15 @@ import { flushSync } from 'react-dom'
 import { startViewTransition } from '@/utils/view-transition'
 import { ExtendProps, TagNameString } from '@/utils/type'
 
+export type ViewTransitionHandle = {
+    replace(children: React.ReactNode): void
+}
+
 /**
  * [experimental]: This component can use both ref or props to toggle transition.
  */
 export const ViewTransition = forwardRef<
-    {
-        replace(children: React.ReactNode): void
-    },
+    ViewTransitionHandle,
     ExtendProps<{
         children?: React.ReactNode
         old?: React.ReactNode

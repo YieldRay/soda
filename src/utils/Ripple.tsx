@@ -33,19 +33,19 @@ export type RippleHandle = HTMLElement & { rippleAt?: RippleAt }
 export const Ripple = forwardRef<RippleHandle, Props>(
     ({ as, disabled, rippleColor, rippleDuration, ...props }, ref) => {
         const eRef = useRef<HTMLElement>(null)
-        const fnRef = useRef<undefined | RippleAt>(undefined)
+        const rippleAtRef = useRef<RippleAt | undefined>(undefined)
         useEffect(() => {
             const rippleResult = ripple(
                 eRef.current!,
                 rippleDuration,
                 rippleColor
             )
-            fnRef.current = rippleResult?.rippleAt
+            rippleAtRef.current = rippleResult?.rippleAt
             return rippleResult?.cleanup
         })
         useImperativeHandle(ref, () => {
             const e = eRef.current!
-            Reflect.set(e, 'rippleAt', fnRef.current)
+            Reflect.set(e, 'rippleAt', rippleAtRef.current)
             return e
         })
 
