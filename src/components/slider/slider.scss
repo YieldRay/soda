@@ -25,6 +25,15 @@
         background: var(--sd-sys-color-primary);
     }
 
+    &:focus {
+        outline: none;
+    }
+
+    &[data-sd-disabled='true'] {
+        pointer-events: none;
+        filter: grayscale(98%) opacity(40%);
+    }
+
     //? horizontal
     &[data-sd-direction='horizontal'] {
         min-width: var(--min-length);

@@ -28,6 +28,13 @@
         }
     }
 
+    &:focus-visible {
+        outline: none;
+        .sd-tab-helper {
+            background: rgb(0 0 0 / 0.06);
+        }
+    }
+
     &-icon {
         transition: all 200ms;
         svg {

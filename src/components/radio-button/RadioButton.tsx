@@ -62,6 +62,7 @@ export const RadioButton = forwardRef<
         <div
             {...props}
             ref={ref}
+            tabIndex={disabled ? undefined : 0}
             role="radio"
             className={clsx('sd-radio_button', className)}
             data-sd-checked={isChecked}

@@ -73,9 +73,11 @@ export const TextField = forwardRef<
     ref
 ) {
     const stringValue = String(value || '')
-    const [focusd, setFocusd] = useState(false)
+    const [focus, setFocus] = useState(false)
     const [length, setLength] = useState(stringValue.length)
-    const populated = length > 0 || focusd
+    const populated = length > 0 || focus
+    // use css `:placeholder-shown` requires `placeholder` attribute (even empty) present
+    // but we use js here so we can bypass that limitation
     const placeholder = populated || !labelText ? initPlaceholder : undefined
     const innerRef = useRef<InternalHTMLElement>(null)
 
@@ -140,17 +142,17 @@ export const TextField = forwardRef<
             style={style}
             onClick={() => {
                 innerRef.current?.focus() //? once the container is clicked, focus the input element
-                setFocusd(true)
+                setFocus(true)
             }}
             // https://stackoverflow.com/questions/37609049/how-to-correctly-catch-change-focusout-event-on-text-input-in-react-js
-            onFocus={() => setFocusd(true)}
-            onBlur={() => setFocusd(false)}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
             tabIndex={-1}
             data-sd={sd}
             data-sd-label_text={populated ? 'populated' : 'empty'}
             data-sd-disabled={disabled}
             data-sd-error={error}
-            data-sd-focusd={focusd}
+            data-sd-focus={focus}
         >
             {leadingIcon && (
                 <div className="sd-text_field-leading_icon">{leadingIcon}</div>

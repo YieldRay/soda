@@ -35,6 +35,7 @@ export const Slider = forwardRef<
          * For uncontrolled
          */
         defaultValue?: number
+        disabled?: boolean
         steps?: number
         /**
          * @default 0
@@ -63,6 +64,7 @@ export const Slider = forwardRef<
         min: minValue = 0,
         max: maxValue = 100,
         direction = 'horizontal',
+        disabled,
         label,
         hideLabel,
         className,
@@ -124,6 +126,7 @@ export const Slider = forwardRef<
 
     const [isPressing, setPressing] = useState(false)
     const [isHover, setHover] = useState(false)
+    const [isFocus, setFocus] = useState(false)
 
     const updatePercentage = (e: React.PointerEvent<HTMLDivElement>) => {
         const container = eRef.current!
@@ -186,6 +189,23 @@ export const Slider = forwardRef<
     return (
         <div
             {...props}
+            tabIndex={disabled ? undefined : 0}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+            data-sd-disabled={disabled}
+            onKeyDown={(e) => {
+                if (!disabled) {
+                    const step = (maxValue - minValue) / (steps ?? 10)
+                    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+                        e.preventDefault() // prevent scroll
+                        dispatchChange(realValue - step)
+                    } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+                        e.preventDefault() // prevent scroll
+                        dispatchChange(realValue + step)
+                    }
+                }
+            }}
+            role="slider"
             className={clsx('sd-slider', className)}
             ref={eRef}
             data-sd-direction={direction}
@@ -204,7 +224,7 @@ export const Slider = forwardRef<
                 className="sd-slider-state_layer"
                 onDragStart={(e) => e.preventDefault()}
                 style={{
-                    opacity: isPressing ? 1 : isHover ? 0.6 : 0,
+                    opacity: isPressing ? 1 : isHover || isFocus ? 0.6 : 0,
                 }}
             />
             <div
@@ -227,7 +247,7 @@ export const Slider = forwardRef<
                         className="sd-slider-label"
                         ref={refs.setFloating}
                         style={assign(
-                            isHover
+                            isHover || isFocus
                                 ? {
                                       opacity: 1,
                                   }

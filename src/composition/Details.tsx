@@ -84,7 +84,12 @@ export function Details({
                 onClick={dispatchChange}
             >
                 <span>{summary}</span>
-                <IconButton sd={iconSd}>
+                <IconButton
+                    sd={iconSd}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') dispatchChange()
+                    }}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"

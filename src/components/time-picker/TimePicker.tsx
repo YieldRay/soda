@@ -159,6 +159,9 @@ export const TimePicker = forwardRef<
         lastPosition.current = [clientX, clientY]
     }
 
+    /**
+     * compute new degree by adding delta degree
+     */
     const degreeSetState = (degree: number, delta: number) => {
         const nextDegree = normalizeDegree(degree + delta)
         const nextTime = (nextDegree / 360) * 12 + (period === 'PM' ? 12 : 0)
@@ -234,10 +237,15 @@ export const TimePicker = forwardRef<
                         <div className="sd-time_picker-period_selectors">
                             <Ripple
                                 as="label"
+                                tabIndex={0}
+                                onKeyDown={(e) =>
+                                    e.key === 'Enter' && setPeriod('AM')
+                                }
                                 className="sd-time_picker-period_selector"
                             >
                                 <input
                                     type="radio"
+                                    tabIndex={-1}
                                     readOnly
                                     checked={period === 'AM'}
                                     onClick={() => setPeriod('AM')}
@@ -246,10 +254,15 @@ export const TimePicker = forwardRef<
                             </Ripple>
                             <Ripple
                                 as="label"
+                                tabIndex={0}
+                                onKeyDown={(e) =>
+                                    e.key === 'Enter' && setPeriod('PM')
+                                }
                                 className="sd-time_picker-period_selector"
                             >
                                 <input
                                     type="radio"
+                                    tabIndex={-1}
                                     readOnly
                                     checked={period === 'PM'}
                                     onClick={() => setPeriod('PM')}
@@ -267,6 +280,24 @@ export const TimePicker = forwardRef<
                             onPointerDown={onPointerDown}
                             onPointerMove={onPointerMove}
                             onPointerUp={onPointerUp}
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                                if (
+                                    e.key === 'ArrowRight' ||
+                                    e.key === 'ArrowDown'
+                                ) {
+                                    e.preventDefault() // prevent scroll
+                                    setDegree((degree) =>
+                                        degreeSetState(degree, 10)
+                                    )
+                                } else if (
+                                    e.key === 'ArrowLeft' ||
+                                    e.key === 'ArrowUp'
+                                ) {
+                                    e.preventDefault() // prevent scroll
+                                    degreeSetState(degree, -10)
+                                }
+                            }}
                             ref={clockRef}
                         >
                             <div className="sd-time_picker-clock_center" />
@@ -350,6 +381,9 @@ export const i18n_chinese = {
     cancel: '取消',
 } as const
 
+/**
+ * get center position of an element
+ */
 function centerOfElement(ele: HTMLElement) {
     const rect = ele.getBoundingClientRect()
     const x = rect.x + rect.width / 2
@@ -357,12 +391,18 @@ function centerOfElement(ele: HTMLElement) {
     return [x, y] as const
 }
 
+/**
+ * normalize any degree (>360 or <0) to 0~360
+ */
 function normalizeDegree(degree: number) {
     let result = degree % 360
     if (result < 0) result += 360
     return result
 }
 
+/**
+ * normalize hour or minute number to string
+ */
 function normalizeTime(hourOrMinute: number) {
     return String(hourOrMinute).padStart(2, '0')
 }

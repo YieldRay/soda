@@ -29,11 +29,17 @@ export const Tab = forwardRef<
         <Ripple
             {...props}
             ref={ref}
+            tabIndex={0}
             className={clsx('sd-tab', className)}
             data-sd-active={active}
             onClick={(e) => {
                 onClick?.(e)
                 tabContext?.onChange?.(value)
+            }}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    tabContext?.onChange?.(value)
+                }
             }}
         >
             <div className="sd-tab-helper">

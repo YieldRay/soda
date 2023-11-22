@@ -50,6 +50,7 @@ export const Checkbox = forwardRef<
         <div
             ref={ref}
             className={clsx('sd-checkbox', props.className)}
+            tabIndex={disabled ? undefined : 0}
             role="checkbox"
             data-sd-disabled={disabled}
             data-sd-error={error}
@@ -57,7 +58,7 @@ export const Checkbox = forwardRef<
             aria-checked={isChecked}
             onClick={dispatchChange}
             onKeyDown={(e) => {
-                if (onChange && !disabled && e.key === 'Enter') {
+                if (!disabled && e.key === 'Enter') {
                     dispatchChange()
                 }
             }}

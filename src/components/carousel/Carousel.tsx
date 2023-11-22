@@ -66,7 +66,15 @@ export const Carousel = forwardRef<
     return (
         <div
             ref={containerRef}
+            tabIndex={0}
             className="sd-carousel"
+            onKeyDown={(e) => {
+                if (e.key === 'ArrowRight') {
+                    setItems((prev) => updateFlex(prev, 'rr'))
+                } else if (e.key === 'ArrowLeft') {
+                    setItems((prev) => updateFlex(prev, 'll'))
+                }
+            }}
             onPointerDown={(e) => {
                 const container = containerRef.current!
                 const rect = container.getBoundingClientRect()

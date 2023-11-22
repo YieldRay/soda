@@ -1,14 +1,20 @@
 # Soda
 
-A component library that may follow [material design 3](https://m3.material.io/components) (a.k.a. material you)
+A component library that may follow [Material Design 3](https://m3.material.io/components) (a.k.a. Material You)
+
+Features:
+
+-   Follow the Material You design
+-   More complete implementation of Material You components (than any other library)
+-   Keyboard accessibility
+-   Support both controlled and uncontrolled
 
 > [!WARNING]  
-> working in progress, some features are missing or will not be fully implemented (such as ARIA).  
-> API is unstable and can be changed in any time.  
+> Working in progress, API is unstable and can be changed in any time.  
 > For production, you may want use the official [material web](https://github.com/material-components/material-web) component library or the [MDUI](https://www.mdui.org/) library.
 
 This is an experimental project, browser support:  
-Chrome>=105, Safari>=15.4, Firefox NoSupport
+Chrome>=105, Safari>=15.4, Firefox (partial support for latest version)
 
 # Installation
 
@@ -95,11 +101,20 @@ Chinese user may prefer:
 
 # TODO
 
--   [ ] integrate [@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript) to support dynamic color theme
+-   [ ] Integrate [@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript) to support dynamic color theme
+
+-   [ ] ARIA support
+
+-   [ ] More customizable css vars
 
 # Development
 
-naming convention:
+```sh
+npm install
+npm run storybook
+```
+
+Naming convention:
 
 -   a `.tsx` file with capitalized beginning is a react component (export a same name, no default export)
 -   a `.scss` file will use strigula to seperate component name in file name

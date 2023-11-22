@@ -32,6 +32,7 @@ export const Switch = forwardRef<
         <div
             {...props}
             ref={ref}
+            tabIndex={0}
             role="switch"
             className={clsx('sd-switch', props.className)}
             data-sd-disabled={disabled}
@@ -39,7 +40,7 @@ export const Switch = forwardRef<
             aria-checked={isChecked}
             onClick={dispatchChange}
             onKeyDown={(e) => {
-                if (onChange && !disabled && e.key === 'Enter') {
+                if (!disabled && e.key === 'Enter') {
                     dispatchChange()
                 }
             }}

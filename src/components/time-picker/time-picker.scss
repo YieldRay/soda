@@ -98,6 +98,14 @@
         line-height: 40px;
         overflow: hidden;
         -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+
+        & > input {
+            all: unset;
+        }
+
+        &:has(input:checked) {
+            background: var(--sd-sys-color-tertiary-container);
+        }
     }
 
     &[data-sd-direction='vertical'] {
@@ -116,14 +124,6 @@
         .sd-time_picker-period_selector:first-child {
             border-right: 1px solid var(--sd-sys-color-outline);
         }
-    }
-
-    &-period_selector > input {
-        all: unset;
-    }
-
-    &-period_selector:has(input:checked) {
-        background: var(--sd-sys-color-tertiary-container);
     }
 
     // footer
