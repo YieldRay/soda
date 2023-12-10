@@ -26,7 +26,7 @@ export const DrawerItem = forwardRef<
                 transition: all 200ms;
                 display: flex;
                 align-items: center;
-                color: var(--sd-sys-color-on-surface-variant);
+                color: var(--md-sys-color-on-surface-variant);
                 font-size: small;
                 font-weight: 500;
                 -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
@@ -38,7 +38,7 @@ export const DrawerItem = forwardRef<
                 background: rgb(0 0 0 / 0.08);
             }
             .container.enabled {
-                background: var(--sd-sys-color-secondary-container);
+                background: var(--md-sys-color-secondary-container);
             }
             .icon {
                 flex-shrink: 0;

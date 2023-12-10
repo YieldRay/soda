@@ -350,8 +350,8 @@ export const SodaImage = forwardRef<
                     box-sizing: border-box;
                     width: 100%;
                     height: 100%;
-                    background: var(--sd-sys-color-surface-bright);
-                    border: solid 1px var(--sd-sys-color-outline);
+                    background: var(--md-sys-color-surface-bright);
+                    border: solid 1px var(--md-sys-color-outline);
                     border-radius: 4px;
                     padding: 4px;
                     display: flex;

@@ -4,7 +4,7 @@
     all: unset;
     display: inline-block;
     vertical-align: middle;
-    background: var(--sd-sys-color-outline-variant);
+    background: var(--md-sys-color-outline-variant);
 
     &[data-sd-direction='horizontal'] {
         width: 100%;

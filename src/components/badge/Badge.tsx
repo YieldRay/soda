@@ -18,7 +18,7 @@ export const Badge = forwardRef<
         sd?: 'none' | 'small' | 'large'
     }>
 >(function Badge({ label, children, sd: initSd, className, ...props }, ref) {
-    const sd = initSd || (label ? 'large' : 'small')
+    const sd = initSd || (label == undefined ? 'small' : 'large')
 
     return (
         <div

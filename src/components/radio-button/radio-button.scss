@@ -61,7 +61,7 @@ $borderWidth: 2px;
     }
     &:active {
         .sd-radio_button-box::before {
-            border: $borderWidth solid var(--sd-sys-color-primary);
+            border: $borderWidth solid var(--md-sys-color-primary);
         }
     }
     &:focus-visible {
@@ -72,15 +72,15 @@ $borderWidth: 2px;
     }
 
     &-box::before {
-        border: $borderWidth solid var(--sd-sys-color-on-surface-variant);
+        border: $borderWidth solid var(--md-sys-color-on-surface-variant);
     }
 
     &[data-sd-checked='true'] .sd-radio_button-box {
         &::before {
-            border: $borderWidth solid var(--sd-sys-color-primary);
+            border: $borderWidth solid var(--md-sys-color-primary);
         }
         &::after {
-            background: var(--sd-sys-color-primary);
+            background: var(--md-sys-color-primary);
         }
     }
 

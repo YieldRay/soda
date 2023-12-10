@@ -2,7 +2,7 @@
 
 .sd-dialog {
     border: none;
-    background: var(--sd-sys-color-surface-container-high);
+    background: var(--md-sys-color-surface-container-high);
     @include elevation-level3;
     width: fit-content;
     height: fit-content;
@@ -19,7 +19,7 @@
         font-size: x-large;
     }
     &-body {
-        color: var(--sd-sys-color-on-surface-variant);
+        color: var(--md-sys-color-on-surface-variant);
     }
     &-buttons {
         margin: 1.5rem;
@@ -30,7 +30,7 @@
 .sd-dialog-fullscreen {
     width: 100vw;
     height: 100vh;
-    background: var(--sd-sys-color-surface-container-high);
+    background: var(--md-sys-color-surface-container-high);
     overflow: auto;
     display: flex;
     flex-direction: column;

@@ -2,7 +2,7 @@
 
 .sd-menu {
     all: unset;
-    background: var(--sd-sys-color-surface-container);
+    background: var(--md-sys-color-surface-container);
     @include elevation-level2;
     width: max-content;
     border-radius: 4px;
@@ -25,12 +25,12 @@
     gap: 12px;
     &-leading_icon {
         width: 24px;
-        color: var(--sd-sys-color-on-surface-variant);
+        color: var(--md-sys-color-on-surface-variant);
         @include display-inline-flex-center;
     }
     &-supporting_text {
         flex-shrink: 1;
-        color: var(--sd-sys-color-on-surface);
+        color: var(--md-sys-color-on-surface);
         min-width: 112px;
         font-size: 14px;
         font-weight: 500;
@@ -38,12 +38,12 @@
     &-trailing_icon {
         margin-left: auto;
         width: 24px;
-        color: var(--sd-sys-color-on-surface-variant);
+        color: var(--md-sys-color-on-surface-variant);
         @include display-inline-flex-center;
     }
     &-trailing_text {
         margin-left: auto;
-        color: var(--sd-sys-color-on-surface-variant);
+        color: var(--md-sys-color-on-surface-variant);
         font-size: small;
     }
     transition: all 200ms;

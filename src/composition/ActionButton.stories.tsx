@@ -28,7 +28,7 @@ export const Inverse: Story = {
         (Story) => (
             <div
                 style={{
-                    background: `var(--sd-sys-color-inverse-surface)`,
+                    background: `var(--md-sys-color-inverse-surface)`,
                     width: '50vw',
                     height: '50vh',
                     display: 'grid',

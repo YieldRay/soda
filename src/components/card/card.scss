@@ -9,7 +9,7 @@
     // elevated
 
     &-elevated {
-        background: var(--sd-sys-color-surface-container-low);
+        background: var(--md-sys-color-surface-container-low);
         @include elevation-level1;
         &:hover {
             @include elevation-level2;
@@ -19,7 +19,7 @@
     // filled
 
     &-filled {
-        background: var(--sd-sys-color-surface-container-highest);
+        background: var(--md-sys-color-surface-container-highest);
         &:hover {
             @include elevation-level1;
         }
@@ -28,7 +28,7 @@
     // outlined
 
     &-outlined {
-        background: var(--sd-sys-color-surface);
-        outline: var(--sd-sys-color-outline) 1px solid;
+        background: var(--md-sys-color-surface);
+        outline: var(--md-sys-color-outline) 1px solid;
     }
 }

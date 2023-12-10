@@ -17,9 +17,9 @@ import {
     useTransitionStyles,
 } from '@floating-ui/react'
 import assign from 'lodash-es/assign'
-import { YearList } from './YearList'
-import { MonthList } from './MonthList'
-import { DayList } from './DayList'
+import { SelectYear } from './SelectYear'
+import { SelectMonth } from './SelectMonth'
+import { SelectDay } from './SelectDay'
 import { startViewTransitionFlushSync } from '@/utils/view-transition'
 import { common } from '@/utils/floating-ui'
 
@@ -81,10 +81,11 @@ export function DockedDatePicker({
         'calendar'
     )
 
+    // the state result
     const body = (
         {
             calendar: (
-                <DayList
+                <SelectDay
                     year={year}
                     month={month}
                     current={date}
@@ -92,7 +93,7 @@ export function DockedDatePicker({
                 />
             ),
             year: (
-                <YearList
+                <SelectYear
                     current={year}
                     onChange={(y) =>
                         startViewTransitionFlushSync(() => {
@@ -103,7 +104,7 @@ export function DockedDatePicker({
                 />
             ),
             month: (
-                <MonthList
+                <SelectMonth
                     current={month}
                     onChange={(m) =>
                         startViewTransitionFlushSync(() => {
@@ -132,6 +133,7 @@ export function DockedDatePicker({
                     value={new Intl.DateTimeFormat().format(date)}
                     labelText="Date"
                     supportingText={supportingText}
+                    data-sd-focus={isOpen}
                 />
                 <div className="input-icon">
                     <IconButton
@@ -241,7 +243,7 @@ export function DockedDatePicker({
                         position: absolute;
                         right: 4px;
                         top: 4px;
-                        color: var(--sd-sys-color-outline);
+                        color: var(--md-sys-color-outline);
                     }
                 `}
             </style>

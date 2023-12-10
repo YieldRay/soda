@@ -57,10 +57,10 @@ export function Details({
                     border-radius: 28px;
                 }
                 .sd-details.outlined {
-                    border: solid 1px var(--sd-sys-color-outline);
+                    border: solid 1px var(--md-sys-color-outline);
                 }
                 .sd-details.filled {
-                    background: var(--sd-sys-color-surface-container-low);
+                    background: var(--md-sys-color-surface-container-low);
                 }
                 .sd-summary {
                     cursor: pointer;
@@ -71,7 +71,7 @@ export function Details({
                     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
                 .sd-summary.expanded.outlined {
-                    border-bottom: solid 1px var(--sd-sys-color-outline);
+                    border-bottom: solid 1px var(--md-sys-color-outline);
                 }
                 .sd-summary.expanded.filled {
                 }

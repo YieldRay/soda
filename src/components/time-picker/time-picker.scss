@@ -3,12 +3,12 @@
 .sd-time_picker {
     display: flex;
     flex-direction: column;
-    background: var(--sd-sys-color-surface);
+    background: var(--md-sys-color-surface);
     box-sizing: border-box;
     display: inline-block;
     padding: 24px;
     border-radius: 24px;
-    color: var(--sd-sys-color-on-surface-variant);
+    color: var(--md-sys-color-on-surface-variant);
     &-headline {
         font-size: 14px;
         margin-bottom: 20px;
@@ -47,14 +47,14 @@
         line-height: 80px;
         text-align: center;
         font-size: 60px;
-        background: var(--sd-sys-color-surface-container-highest);
+        background: var(--md-sys-color-surface-container-highest);
         border: solid 2px transparent;
         border-radius: 8px;
         outline: none;
 
         &:focus {
-            background: var(--sd-sys-color-primary-container);
-            border-color: var(--sd-sys-color-on-primary-container);
+            background: var(--md-sys-color-primary-container);
+            border-color: var(--md-sys-color-on-primary-container);
         }
     }
 
@@ -70,7 +70,7 @@
 
     &-period_selectors {
         display: inline-flex;
-        border: 1px solid var(--sd-sys-color-outline);
+        border: 1px solid var(--md-sys-color-outline);
         border-radius: 8px;
         box-sizing: border-box;
         overflow: hidden;
@@ -104,7 +104,7 @@
         }
 
         &:has(input:checked) {
-            background: var(--sd-sys-color-tertiary-container);
+            background: var(--md-sys-color-tertiary-container);
         }
     }
 
@@ -113,7 +113,7 @@
             height: 50%;
         }
         .sd-time_picker-period_selector:first-child {
-            border-bottom: 1px solid var(--sd-sys-color-outline);
+            border-bottom: 1px solid var(--md-sys-color-outline);
         }
     }
 
@@ -122,7 +122,7 @@
             width: 50%;
         }
         .sd-time_picker-period_selector:first-child {
-            border-right: 1px solid var(--sd-sys-color-outline);
+            border-right: 1px solid var(--md-sys-color-outline);
         }
     }
 
@@ -175,7 +175,7 @@
         height: var(--clock-size);
         border-radius: var(--clock-size);
         overflow: hidden;
-        background: var(--sd-sys-color-surface-container-highest);
+        background: var(--md-sys-color-surface-container-highest);
         margin: auto;
         position: relative;
         user-select: none;
@@ -206,7 +206,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: var(--sd-sys-color-primary);
+            background: var(--md-sys-color-primary);
             width: 6px;
             height: 6px;
             border-radius: 50%;
@@ -219,7 +219,7 @@
             width: 2px;
             height: calc((var(--clock-size) - var(--time-size) * 0.85 * 2) / 2);
             transform-origin: bottom;
-            background: var(--sd-sys-color-primary);
+            background: var(--md-sys-color-primary);
             transform: rotate(var(--degree)); // change `--degree` in js
 
             &::before {
@@ -230,7 +230,7 @@
                 width: var(--time-size);
                 height: var(--time-size);
                 border-radius: var(--time-size);
-                background: var(--sd-sys-color-primary);
+                background: var(--md-sys-color-primary);
             }
         }
     }

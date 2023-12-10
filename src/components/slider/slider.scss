@@ -17,12 +17,12 @@
     }
 
     &-inactive_track {
-        background: var(--sd-sys-color-surface-container-highest);
+        background: var(--md-sys-color-surface-container-highest);
         width: 100%;
         border-radius: 8px;
     }
     &-active_track {
-        background: var(--sd-sys-color-primary);
+        background: var(--md-sys-color-primary);
     }
 
     &:focus {
@@ -115,7 +115,7 @@
         cursor: grab;
         height: 20px;
         width: 20px;
-        background: var(--sd-sys-color-primary);
+        background: var(--md-sys-color-primary);
         touch-action: none;
     }
     &-state_layer {
@@ -128,8 +128,8 @@
     &-label {
         font-size: 10px;
         font-weight: 500;
-        background: var(--sd-sys-color-primary);
-        color: var(--sd-sys-color-on-primary);
+        background: var(--md-sys-color-primary);
+        color: var(--md-sys-color-on-primary);
         display: inline-block;
         box-sizing: border-box;
         width: 28px;

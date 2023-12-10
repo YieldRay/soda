@@ -1,12 +1,12 @@
 // https://m3.material.io/components/tooltips/specs
 
 .sd-plain_tooltip {
-    background: var(--sd-sys-color-inverse-surface);
+    background: var(--md-sys-color-inverse-surface);
     border-radius: 4px;
     line-height: 16px;
     font-size: 12px;
     font-weight: 400;
-    color: var(--sd-sys-color-inverse-on-surface);
+    color: var(--md-sys-color-inverse-on-surface);
     min-height: 24px;
     padding: 0 8px;
     display: grid;
@@ -14,7 +14,7 @@
 }
 
 .sd-rich_tooltip {
-    background: var(--sd-sys-color-surface-container);
+    background: var(--md-sys-color-surface-container);
     @include elevation-level2;
     border-radius: 12px;
     padding: 12px 16px 8px 16px;

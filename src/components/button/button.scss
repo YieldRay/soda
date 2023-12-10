@@ -30,7 +30,7 @@ button.sd-button {
 
     &[disabled],
     &[data-sd-disabled='true'] {
-        color: var(--sd-sys-color-on-surface);
+        color: var(--md-sys-color-on-surface);
         opacity: 0.38;
         pointer-events: none;
     }
@@ -38,13 +38,13 @@ button.sd-button {
     // elevated
 
     &-elevated {
-        background: var(--sd-sys-color-surface-container-low);
-        color: var(--sd-sys-color-primary);
+        background: var(--md-sys-color-surface-container-low);
+        color: var(--md-sys-color-primary);
         @include elevation-level1;
 
         &:hover {
             opacity: 0.8;
-            color: var(--sd-sys-color-primary);
+            color: var(--md-sys-color-primary);
             @include elevation-level2;
         }
         &:active {
@@ -61,8 +61,8 @@ button.sd-button {
     // filled
 
     &-filled {
-        background: var(--sd-sys-color-primary);
-        color: var(--sd-sys-color-on-primary);
+        background: var(--md-sys-color-primary);
+        color: var(--md-sys-color-on-primary);
 
         &:hover {
             @include elevation-level1;
@@ -81,9 +81,9 @@ button.sd-button {
     // outlined
 
     &-outlined {
-        color: var(--sd-sys-color-primary);
-        background: var(--sd-sys-color-surface);
-        outline: var(--sd-sys-color-outline) 1px solid;
+        color: var(--md-sys-color-primary);
+        background: var(--md-sys-color-surface);
+        outline: var(--md-sys-color-outline) 1px solid;
 
         &:hover {
             filter: brightness(96%);
@@ -99,8 +99,8 @@ button.sd-button {
     // tonal
 
     &-tonal {
-        color: var(--sd-sys-color-on-secondary-container);
-        background: var(--sd-sys-color-secondary-container);
+        color: var(--md-sys-color-on-secondary-container);
+        background: var(--md-sys-color-secondary-container);
         &:hover {
             @include elevation-level1;
             filter: brightness(96%);
@@ -117,7 +117,7 @@ button.sd-button {
     // text
 
     &-text {
-        color: var(--sd-sys-color-primary);
+        color: var(--md-sys-color-primary);
         background-color: transparent;
 
         // TODO: this should be primary color background with opacity layer

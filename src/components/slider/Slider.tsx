@@ -261,7 +261,7 @@ export const Slider = forwardRef<
                         <FloatingArrow
                             ref={arrowRef}
                             context={context}
-                            fill="var(--sd-sys-color-primary)"
+                            fill="var(--md-sys-color-primary)"
                             style={{ transform: 'translateY(-2px)' }}
                         />
                     </div>

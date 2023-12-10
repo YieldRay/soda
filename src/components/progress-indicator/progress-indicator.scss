@@ -6,11 +6,11 @@
     height: 4px;
     min-width: 5rem; //! min-width
     width: 100%;
-    background: var(--sd-sys-color-surface-container-highest);
+    background: var(--md-sys-color-surface-container-highest);
 
     &-track {
         height: 4px;
-        background: var(--sd-sys-color-primary);
+        background: var(--md-sys-color-primary);
     }
     &[data-sd='determinate'] .sd-linear_progress_indicator-track {
         transition: width 200ms linear;
@@ -43,8 +43,8 @@
     border-radius: 50%;
     $defaultValue: 75%;
     background: conic-gradient(
-        var(--sd-sys-color-primary),
-        var(--sd-sys-color-primary) var(--value, $defaultValue),
+        var(--md-sys-color-primary),
+        var(--md-sys-color-primary) var(--value, $defaultValue),
         transparent var(--value, $defaultValue)
     );
     --mask: radial-gradient(closest-side, transparent 80%, black 80%);

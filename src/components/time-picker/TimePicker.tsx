@@ -328,7 +328,7 @@ export const TimePicker = forwardRef<
                                                 hourNumber,
                                                 minuteNumber
                                             )
-                                                ? 'var(--sd-sys-color-on-primary)'
+                                                ? 'var(--md-sys-color-on-primary)'
                                                 : undefined,
                                         }}
                                     >

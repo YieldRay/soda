@@ -61,16 +61,16 @@ button.sd-fab {
     }
 
     &[data-sd='surface'] {
-        background: var(--sd-sys-color-surface-container-high);
-        color: var(--sd-sys-color-primary);
+        background: var(--md-sys-color-surface-container-high);
+        color: var(--md-sys-color-primary);
     }
     &[data-sd='secondary'] {
-        background: var(--sd-sys-color-secondary-container);
-        color: var(--sd-sys-color-on-secondary-container);
+        background: var(--md-sys-color-secondary-container);
+        color: var(--md-sys-color-on-secondary-container);
     }
     &[data-sd='tertiary'] {
-        background: var(--sd-sys-color-tertiary);
-        color: var(--sd-sys-color-on-tertiary-container);
+        background: var(--md-sys-color-tertiary);
+        color: var(--md-sys-color-on-tertiary-container);
     }
 
     &[data-sd-extended='true'] {

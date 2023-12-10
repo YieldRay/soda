@@ -1,7 +1,7 @@
 // https://m3.material.io/components/checkbox/specs
 
-$primary: var(--sd-sys-color-primary);
-$error: var(--sd-sys-color-error);
+$primary: var(--md-sys-color-primary);
+$error: var(--md-sys-color-error);
 
 .sd-checkbox {
     cursor: pointer;
@@ -16,8 +16,8 @@ $error: var(--sd-sys-color-error);
         width: 18px;
         height: 18px;
         border-radius: 2px;
-        border: 2px solid var(--sd-sys-color-outline);
-        color: var(--sd-sys-color-surface-container-highest);
+        border: 2px solid var(--md-sys-color-outline);
+        color: var(--md-sys-color-surface-container-highest);
     }
     &:active .sd-checkbox-icon {
         border: 2px solid $primary;

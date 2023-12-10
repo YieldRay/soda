@@ -6,8 +6,8 @@
     position: relative;
     &-label {
         position: absolute;
-        background: var(--sd-sys-color-error);
-        color: var(--sd-sys-color-on-error);
+        background: var(--md-sys-color-error);
+        color: var(--md-sys-color-on-error);
         pointer-events: none;
     }
     &[data-sd='none'] &-label {

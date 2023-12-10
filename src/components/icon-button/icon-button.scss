@@ -29,7 +29,7 @@ button.sd-icon_button {
 
     &[disabled],
     &[data-sd-disabled='true'] {
-        color: var(--sd-sys-color-on-surface);
+        color: var(--md-sys-color-on-surface);
         opacity: 0.38;
         pointer-events: none;
     }
@@ -37,44 +37,44 @@ button.sd-icon_button {
     // filled
 
     &-filled {
-        color: var(--sd-sys-color-on-primary);
-        background: var(--sd-sys-color-primary);
+        color: var(--md-sys-color-on-primary);
+        background: var(--md-sys-color-primary);
         &[data-sd-selected='false'] {
-            color: var(--sd-sys-color-primary);
-            background: var(--sd-sys-color-surface-container-highest);
+            color: var(--md-sys-color-primary);
+            background: var(--md-sys-color-surface-container-highest);
         }
     }
 
     // tonal
 
     &-tonal {
-        color: var(--sd-sys-color-on-secondary-container);
-        background: var(--sd-sys-color-secondary-container);
+        color: var(--md-sys-color-on-secondary-container);
+        background: var(--md-sys-color-secondary-container);
         &[data-sd-selected='false'] {
-            color: var(--sd-sys-color-on-surface-variant);
-            background: var(--sd-sys-color-surface-container-highest);
+            color: var(--md-sys-color-on-surface-variant);
+            background: var(--md-sys-color-surface-container-highest);
         }
     }
 
     // outlined
 
     &-outlined {
-        outline: var(--sd-sys-color-outline) 1px solid;
-        color: var(--sd-sys-color-on-inverse-surface);
+        outline: var(--md-sys-color-outline) 1px solid;
+        color: var(--md-sys-color-on-inverse-surface);
         background: inherit;
         &[data-sd-selected='false'] {
-            color: var(--sd-sys-color-surface-variant);
-            background: var(--sd-sys-color-outline);
+            color: var(--md-sys-color-surface-variant);
+            background: var(--md-sys-color-outline);
         }
     }
 
     // standard
 
     &-standard {
-        color: var(--sd-sys-color-on-surface-variant);
+        color: var(--md-sys-color-on-surface-variant);
         background: inherit;
         &[data-sd-selected='true'] {
-            color: var(--sd-sys-color-primary);
+            color: var(--md-sys-color-primary);
         }
     }
 

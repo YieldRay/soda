@@ -18,8 +18,8 @@
 
 .sd-bottom_sheet {
     pointer-events: auto;
-    background: var(--sd-sys-color-surface-container-low);
-    color: var(--sd-sys-color-on-surface-variant); // optional
+    background: var(--md-sys-color-surface-container-low);
+    color: var(--md-sys-color-on-surface-variant); // optional
     @include elevation-level1;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
@@ -40,7 +40,7 @@
         justify-content: center;
         &::after {
             content: '';
-            background: var(--sd-sys-color-on-surface-variant);
+            background: var(--md-sys-color-on-surface-variant);
             width: 32px;
             height: 4px;
             margin: 8px;
@@ -72,8 +72,8 @@
 
 .sd-side_sheet {
     pointer-events: auto;
-    background: var(--sd-sys-color-surface-container-low);
-    color: var(--sd-sys-color-on-surface-variant);
+    background: var(--md-sys-color-surface-container-low);
+    color: var(--md-sys-color-on-surface-variant);
     display: inline-block;
     box-sizing: border-box;
     width: 256px + 16px + 24px;

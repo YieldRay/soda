@@ -99,9 +99,35 @@ Chinese user may prefer:
 }
 ```
 
-# TODO
+## Theming
 
--   [ ] Integrate [@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript) to support dynamic color theme
+This library use the official material design css variable (`--md-sys-color-<token>`, at `:root`) to theming.  
+So you can simply overwrite them or use the [@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript) package to apply theme.
+
+```ts
+import {
+    argbFromHex,
+    themeFromSourceColor,
+    applyTheme,
+} from '@material/material-color-utilities'
+
+const theme = themeFromSourceColor(argbFromHex('#f82506'), [
+    // Array of custom colors, optional
+    {
+        name: 'custom-1',
+        value: argbFromHex('#ff0000'),
+        blend: true,
+    },
+])
+
+// Check if the user has dark mode turned on
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+// Apply the theme to the :root by updating custom properties for material tokens
+applyTheme(theme, { target: document.documentElement, dark: systemDark })
+```
+
+# TODO
 
 -   [ ] ARIA support
 

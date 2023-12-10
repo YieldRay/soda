@@ -48,6 +48,10 @@ export const TextField = forwardRef<
          * [warn]: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
          */
         textareaRef?: ReactRef<HTMLTextAreaElement | undefined>
+        /**
+         * For internal use, control if focused is shown
+         */
+        'data-sd-focus'?: boolean
     }>
 >(function TextField(
     {
@@ -68,6 +72,7 @@ export const TextField = forwardRef<
         textareaRef,
         className,
         style,
+        'data-sd-focus': dataSdFocus,
         ...props
     },
     ref
@@ -152,7 +157,7 @@ export const TextField = forwardRef<
             data-sd-label_text={populated ? 'populated' : 'empty'}
             data-sd-disabled={disabled}
             data-sd-error={error}
-            data-sd-focus={focus}
+            data-sd-focus={dataSdFocus || focus}
         >
             {leadingIcon && (
                 <div className="sd-text_field-leading_icon">{leadingIcon}</div>

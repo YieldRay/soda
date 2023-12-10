@@ -6,7 +6,7 @@
 }
 
 .sd-tab {
-    background: var(--sd-sys-color-surface);
+    background: var(--md-sys-color-surface);
     display: inline-block;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     user-select: none;
@@ -52,10 +52,10 @@
     }
     &[data-sd-active='true'] {
         .sd-tab-icon {
-            color: var(--sd-sys-color-primary);
+            color: var(--md-sys-color-primary);
         }
         .sd-tab-label_text {
-            color: var(--sd-sys-color-primary);
+            color: var(--md-sys-color-primary);
         }
     }
     position: relative;
@@ -65,7 +65,7 @@
         height: 6px; // height 6px, we hide 3px, levaing 3px to display
         width: 36px;
         border-radius: 12px;
-        background: var(--sd-sys-color-primary);
+        background: var(--md-sys-color-primary);
         opacity: 0;
     }
     &[data-sd-active='true'] {

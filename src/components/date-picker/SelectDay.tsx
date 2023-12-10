@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { getFormatCalendar, isSameDay } from './calendar'
 import { useRippleRef } from '@/utils/ripple-effect'
 
-export function DayList({
+export function SelectDay({
     year,
     month,
     current,
@@ -68,8 +68,8 @@ export function DayList({
                     background: rgba(0 0 0 / 0.08);
                 }
                 .day.selected {
-                    background: var(--sd-sys-color-primary);
-                    color: var(--sd-sys-color-on-primary);
+                    background: var(--md-sys-color-primary);
+                    color: var(--md-sys-color-on-primary);
                 }
                 .day.disabled {
                     background: none;

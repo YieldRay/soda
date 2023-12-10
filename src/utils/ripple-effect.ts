@@ -91,23 +91,25 @@ export function ripple(
             return
         }
 
-        ele.setPointerCapture(event.pointerId) // redirect all event to element
-
+        // DO NOT setPointerCapture, this will cause any child element
+        // cannot get pointed
         const { clientX: pointerX, clientY: pointerY } = event // pointer pos
         const { x: eleX, y: eleY } = ele.getBoundingClientRect() // ele pos
 
         const removeRipple = rippleAt(pointerX - eleX, pointerY - eleY)
 
-        const onPointerUp = (e: PointerEvent) => {
-            ele.releasePointerCapture(e.pointerId)
+        const onPointerUp = () => {
             removeRipple(() => {
-                ele.removeEventListener('pointerup', onPointerUp)
                 ele.removeEventListener('pointercancel', onPointerUp)
+                window.removeEventListener('pointerup', onPointerUp)
             })
         }
-        ele.addEventListener('pointerup', onPointerUp)
+
         ele.addEventListener('pointercancel', onPointerUp)
+        window.addEventListener('pointerup', onPointerUp)
     }
+
+    // listen pointer down
     ele.addEventListener('pointerdown', onPointerDown)
 
     return {

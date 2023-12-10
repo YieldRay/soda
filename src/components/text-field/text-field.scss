@@ -9,7 +9,7 @@ $label_text_gap_size: 3.2px;
     min-width: 200px; // follow webkit input default min-width
     display: inline-flex;
     align-items: center;
-    background: var(--sd-sys-color-surface-container-highest);
+    background: var(--md-sys-color-surface-container-highest);
     cursor: text;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
@@ -65,7 +65,7 @@ $label_text_gap_size: 3.2px;
     &-supporting_text {
         font-size: 12px;
         position: absolute;
-        color: var(--sd-sys-color-on-surface-variant);
+        color: var(--md-sys-color-on-surface-variant);
         font-size: small;
         left: 0;
         bottom: -18px;
@@ -111,7 +111,7 @@ $label_text_gap_size: 3.2px;
 
 //! outlined (default filled)
 .sd-text_field[data-sd='outlined'] {
-    border: 2px solid var(--sd-sys-color-outline);
+    border: 2px solid var(--md-sys-color-outline);
     background: transparent;
     border-radius: 0.25rem;
 
@@ -133,7 +133,7 @@ $label_text_gap_size: 3.2px;
         transition: all 200ms;
         left: 8px;
         top: 16px;
-        color: var(--sd-sys-color-on-surface-variant);
+        color: var(--md-sys-color-on-surface-variant);
     }
 
     &[data-sd-label_text='populated'] .sd-text_field-label_text {
@@ -144,10 +144,10 @@ $label_text_gap_size: 3.2px;
         padding: 0 4px;
     }
 
-    &[data-sd-focusd='true'] {
-        border: 2px solid var(--sd-sys-color-primary);
+    &[data-sd-focus='true'] {
+        border: 2px solid var(--md-sys-color-primary);
         .sd-text_field-label_text {
-            color: var(--sd-sys-color-primary);
+            color: var(--md-sys-color-primary);
         }
     }
 
@@ -198,7 +198,7 @@ $label_text_gap_size: 3.2px;
             transform: translateY(-50%);
             line-height: $label_text_empty_size;
             font-size: $label_text_empty_size;
-            color: var(--sd-sys-color-on-surface-variant);
+            color: var(--md-sys-color-on-surface-variant);
         }
         input {
             // this make the input fill all the available container space
@@ -211,7 +211,7 @@ $label_text_gap_size: 3.2px;
 
     .sd-text_field-active_indicator {
         &::before {
-            background: var(--sd-sys-color-on-surface-variant);
+            background: var(--md-sys-color-on-surface-variant);
         }
         &::after {
             background: transparent;
@@ -226,7 +226,7 @@ $label_text_gap_size: 3.2px;
             top: -($label_text_gap_size);
             line-height: $label_text_populated_size;
             font-size: $label_text_populated_size;
-            color: var(--sd-sys-color-primary);
+            color: var(--md-sys-color-primary);
         }
         input {
             top: $label_text_populated_size;
@@ -236,7 +236,7 @@ $label_text_gap_size: 3.2px;
     .sd-text_field-active_indicator {
         &::before,
         &::after {
-            background: var(--sd-sys-color-primary);
+            background: var(--md-sys-color-primary);
         }
     }
 }
@@ -252,18 +252,18 @@ $label_text_gap_size: 3.2px;
 .sd-text_field[data-sd-error='true'] {
     .sd-text_field-filled_helper {
         .sd-text_field-label_text {
-            color: var(--sd-sys-color-error);
+            color: var(--md-sys-color-error);
         }
     }
 
     .sd-text_field-active_indicator {
         &::before,
         &::after {
-            background: var(--sd-sys-color-error);
+            background: var(--md-sys-color-error);
         }
     }
 
     .sd-text_field-supporting_text {
-        color: var(--sd-sys-color-error);
+        color: var(--md-sys-color-error);
     }
 }

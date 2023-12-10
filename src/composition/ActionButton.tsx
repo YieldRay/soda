@@ -35,7 +35,7 @@ export const ActionButton = forwardRef<
                     -webkit-tap-highlight-color: transparent;
                 }
                 .sd-action_button[data-sd-inverse='false'] {
-                    color: var(--sd-sys-color-primary);
+                    color: var(--md-sys-color-primary);
                 }
                 .sd-action_button[data-sd-inverse='false']:hover {
                     background: rgb(0 0 0 / 0.04);
@@ -47,7 +47,7 @@ export const ActionButton = forwardRef<
                     background: rgb(0 0 0 / 0.12);
                 }
                 .sd-action_button[data-sd-inverse='true'] {
-                    color: var(--sd-sys-color-inverse-primary);
+                    color: var(--md-sys-color-inverse-primary);
                 }
                 .sd-action_button[data-sd-inverse='true']:hover {
                     background: rgb(255 255 255 / 0.04);

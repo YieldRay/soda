@@ -10,7 +10,7 @@
         height: var(--height);
         padding: 0 12px;
         cursor: pointer;
-        $border: solid 1px var(--sd-sys-color-outline);
+        $border: solid 1px var(--md-sys-color-outline);
         border-right: $border;
         border-top: $border;
         border-bottom: $border;
@@ -27,7 +27,7 @@
         }
         font-size: 13px;
         line-height: 18px;
-        color: var(--sd-sys-color-on-surface);
+        color: var(--md-sys-color-on-surface);
         display: inline-flex;
         align-items: center;
         -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
@@ -37,8 +37,8 @@
             vertical-align: text-bottom;
         }
         &[data-sd-active='true'] {
-            color: var(--sd-sys-color-on-secondary-container);
-            background: var(--sd-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            background: var(--md-sys-color-secondary-container);
             &:hover {
                 filter: brightness(96%);
             }

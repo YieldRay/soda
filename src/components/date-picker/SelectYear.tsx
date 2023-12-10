@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { useRippleRef } from '../../utils/ripple-effect'
+import { useRippleRef } from '@/utils/ripple-effect'
 
-export function YearList({
+export function SelectYear({
     current,
     onChange,
 }: {
@@ -50,7 +50,7 @@ export function YearList({
                     line-height: 36px;
                     text-align: center;
                     border-radius: 2rem;
-                    color: var(--sd-sys-color-on-surface-variant);
+                    color: var(--md-sys-color-on-surface-variant);
                     overflow: hidden;
                     transition: all 200ms;
                     user-select: none;
@@ -63,8 +63,8 @@ export function YearList({
                     background: rgba(0 0 0 / 0.08);
                 }
                 li.active > .cell {
-                    background: var(--sd-sys-color-primary);
-                    color: var(--sd-sys-color-on-primary);
+                    background: var(--md-sys-color-primary);
+                    color: var(--md-sys-color-on-primary);
                 }
             `}</style>
         </ul>
