@@ -25,6 +25,6 @@ export const Scrim = forwardRef<
                 },
                 props?.style
             )}
-        ></div>
+        />
     )
 })

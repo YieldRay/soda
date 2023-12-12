@@ -1,5 +1,5 @@
 /**
- * extend a built-in HTMLElement's react properties (by default HTMLDivElement)
+ * Extend a built-in HTMLElement's react properties (by default HTMLDivElement)
  */
 export type ExtendProps<
     Props extends object = object,

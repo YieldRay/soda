@@ -29,8 +29,8 @@ export const Inverse: Story = {
             <div
                 style={{
                     background: `var(--md-sys-color-inverse-surface)`,
-                    width: '50vw',
-                    height: '50vh',
+                    width: '50vmax',
+                    height: '50vmin',
                     display: 'grid',
                     placeItems: 'center',
                 }}

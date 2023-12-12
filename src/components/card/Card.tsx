@@ -16,6 +16,7 @@ export const Card = forwardRef<
          */
         as?: TagNameString
         /**
+         * Variant
          * @default elevated
          */
         sd?: 'outlined' | 'filled' | 'elevated'

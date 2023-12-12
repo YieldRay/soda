@@ -4,7 +4,7 @@ export const isViewTransitionSupported = !!document.startViewTransition
 
 /**
  * Not a `document.startViewTransition()` polyfill,
- * do nothing in the browser that does not support this API,
+ * just do nothing in the browser that does not support this API,
  * but returns the same interface as it supports.
  * @example
  * // for react, use flushSync() to synchronously set state

@@ -17,7 +17,7 @@ export type ReactRef<T> =
     | null
 
 /**
- * support callback and object.current
+ * Support callback and object.current
  */
 export function setReactRef<T>(ref: ReactRef<T> | undefined, value: T) {
     if (!ref) return

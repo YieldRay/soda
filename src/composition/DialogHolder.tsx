@@ -42,6 +42,7 @@ export function DialogHolder({
                         opacity: 0;
                         transform: scale(0.9);
                         transition: 0.2s;
+                        overflow: hidden;
                     }
                     dialog[open] {
                         visibility: visible;

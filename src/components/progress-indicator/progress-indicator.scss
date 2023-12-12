@@ -47,7 +47,11 @@
         var(--md-sys-color-primary) var(--value, $defaultValue),
         transparent var(--value, $defaultValue)
     );
-    --mask: radial-gradient(closest-side, transparent 80%, black 80%);
+    --mask: radial-gradient(
+        closest-side,
+        transparent 78.5%,
+        var(--md-sys-color-primary) 82.5%
+    );
     -webkit-mask-image: var(--mask);
     mask-image: var(--mask);
 

@@ -22,36 +22,17 @@
             overflow: hidden;
             margin-top: 20px;
         }
+
         &_body {
             margin-top: 10px;
             overflow: hidden;
         }
+
         &_footer {
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            margin-top: 8px;
             margin-bottom: 12px;
-        }
-
-        table {
-            user-select: none;
-            width: 100%;
-            table-layout: fixed;
-            td {
-                text-align: center;
-                time {
-                    @include display-inline-flex-center;
-                    box-sizing: border-box;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    overflow: hidden;
-                    transition: all 200ms;
-                    margin: 2px 0;
-                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
-                }
-            }
         }
     }
 }

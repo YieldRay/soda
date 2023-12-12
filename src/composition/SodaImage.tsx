@@ -8,11 +8,11 @@ import {
 } from 'react'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
-import isFunction from 'lodash-es/isFunction'
-import { CircularProgressIndicator } from '../components/progress-indicator/CircularProgressIndicator'
+import { CircularProgressIndicator } from '@/components/progress-indicator/CircularProgressIndicator'
+import { IconButton } from '@/components/icon-button'
 import { SimpleSodaTransition } from './SodaTransition'
-import { IconButton } from '../components/icon-button'
 import isNumber from 'lodash-es/isNumber'
+import isFunction from 'lodash-es/isFunction'
 
 /**
  * A high-level image component, supports loading progress (when `crossOrigin` is specified),

@@ -15,48 +15,79 @@ export function SelectDay({
 }) {
     const calendar = getFormatCalendar(year, month)
     return (
-        <table>
-            <thead>
-                <tr>
-                    {['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun'].map(
-                        (day) => (
-                            <td key={day}>
-                                <time>{day}</time>
-                            </td>
-                        )
-                    )}
-                </tr>
-            </thead>
-            <tbody>
+        <div className="select-day">
+            <header className="select-day-header">
+                {['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun'].map(
+                    (day) => (
+                        <div key={day}>
+                            <time>{day}</time>
+                        </div>
+                    )
+                )}
+            </header>
+            <div className="select-day-body">
                 {calendar.map((row, i) => (
-                    <tr key={i}>
+                    <div className="select-day-row" key={i}>
                         {row.map((col, j) => (
-                            <td key={j}>
-                                <time
-                                    className={clsx(
-                                        'day',
-                                        isSameDay(col.date, current) &&
-                                            'selected',
-                                        col.isToday && 'today',
-                                        !col.isThisMonth && 'disabled'
-                                    )}
-                                    data-sd-disabled={!col.isThisMonth}
-                                    dateTime={`${year}-${month}-${col.day}`}
-                                    onClick={() => {
-                                        if (col.isThisMonth && onChange)
-                                            onChange(col.date)
-                                    }}
-                                    ref={useRippleRef()}
-                                >
-                                    {col.day}
-                                </time>
-                            </td>
+                            <time
+                                key={j}
+                                className={clsx(
+                                    'select-day-col',
+                                    'day',
+                                    isSameDay(col.date, current) && 'selected',
+                                    col.isToday && 'today',
+                                    !col.isThisMonth && 'disabled'
+                                )}
+                                data-sd-disabled={!col.isThisMonth}
+                                dateTime={`${year}-${month}-${col.day}`}
+                                onClick={() => {
+                                    if (col.isThisMonth && onChange)
+                                        onChange(col.date)
+                                }}
+                                ref={useRippleRef()}
+                            >
+                                {col.day}
+                            </time>
                         ))}
-                    </tr>
+                    </div>
                 ))}
-            </tbody>
+            </div>
 
             <style jsx>{`
+                .select-day {
+                    user-select: none;
+                    margin: 14px;
+                }
+                .select-day-header {
+                    margin-top: 30px;
+                    margin-bottom: 16px;
+                }
+
+                .select-day-row {
+                    margin-top: 6px;
+                }
+
+                .select-day-header,
+                .select-day-row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                }
+
+                .select-day-col {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-sizing: border-box;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    transition: all 200ms;
+                    margin: 2px 0;
+                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+                }
+
                 .day.today {
                     border: solid 1px;
                     overflow: hidden;
@@ -80,6 +111,6 @@ export function SelectDay({
                     revert: true;
                 }
             `}</style>
-        </table>
+        </div>
     )
 }

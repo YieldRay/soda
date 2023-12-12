@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type { DetailedHTMLProps, StyleHTMLAttributes } from 'react'
+import type { DetailedHTMLProps } from 'react'
 
 declare module 'react' {
     interface StyleHTMLAttributes<T>
