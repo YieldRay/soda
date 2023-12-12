@@ -5,7 +5,7 @@ import { Button } from '../button'
 import { IconButton } from '../icon-button'
 import { mdiClockOutline } from '@mdi/js'
 import { useMediaQuery } from '@/hooks/use-media-query'
-import { Ripple } from '@/utils/Ripple'
+import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import assign from 'lodash-es/assign'
@@ -22,7 +22,7 @@ export const TimePicker = forwardRef<
     ExtendProps<{
         initValue?: TimeValue
         /**
-         * If is not spcified, choose when screen width <= 600px, use vertical, otherwise horizontal
+         * If is not spcified, will be vertical when screen width <= 600px, otherwise horizontal
          */
         direction?: 'vertical' | 'horizontal'
         /**

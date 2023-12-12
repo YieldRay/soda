@@ -4,8 +4,8 @@ import {
     applyTheme,
     themeFromSourceColor,
     themeFromImage,
-    type Theme,
     hexFromArgb,
+    type Theme,
 } from '@material/material-color-utilities'
 import { Card } from '@/components/card'
 import { Button } from '@/components/button'
@@ -17,7 +17,9 @@ import { useEffect, useState } from 'react'
  */
 export default function ThemingExample() {
     const prefersDark = useMediaQuery('(prefers-color-scheme: dark)')
-    const [sourceColor, setSourceColor] = useState('#6750a4')
+    const [sourceColor, setSourceColor] = useState(
+        localStorage.getItem('sourceColor') || '#6750a4'
+    )
     const [customColors, setCustomColors] = useState<string[]>([])
     const [file, setFile] = useState<File | null>(null)
     const customColorArray = customColors.map((color, index) => ({
@@ -25,6 +27,20 @@ export default function ThemingExample() {
         value: argbFromHex(color),
         blend: true,
     }))
+
+    useEffect(() => {
+        localStorage.setItem('sourceColor', sourceColor)
+    }, [sourceColor])
+
+    useEffect(() => {
+        // this make our element not be affected by sb's style
+        const divs = document.querySelectorAll('.sbdocs-content *')
+        divs.forEach((div) => {
+            if (!(div instanceof HTMLElement)) return
+            if (!div.className.includes('sd-')) return
+            div.classList.add('sb-unstyled')
+        })
+    }, [])
 
     useEffect(() => {
         // eslint-disable-next-line no-extra-semi
@@ -62,7 +78,11 @@ export default function ThemingExample() {
 
     return (
         <Card
-            style={{ padding: '1rem', margin: '0 0 3rem', maxWidth: '350px' }}
+            style={{
+                padding: '1rem',
+                margin: '2.5rem 0 5rem',
+                maxWidth: '350px',
+            }}
             disabled
         >
             <section>
@@ -75,7 +95,7 @@ export default function ThemingExample() {
                         setFile(null)
                         setSourceColor(e.target.value)
                     }}
-                ></input>
+                />
 
                 <input
                     type="file"
@@ -85,7 +105,7 @@ export default function ThemingExample() {
                         if (!file) return
                         setFile(file)
                     }}
-                ></input>
+                />
             </section>
 
             <section>
@@ -114,7 +134,7 @@ export default function ThemingExample() {
                                     )
                                 )
                             }}
-                        ></input>
+                        />
                         <Badge label={index}>
                             <Button
                                 onClick={() => {

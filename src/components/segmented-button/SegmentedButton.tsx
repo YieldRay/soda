@@ -1,6 +1,6 @@
 import './segmented-button.scss'
 import { forwardRef, useState } from 'react'
-import { Ripple } from '@/utils/Ripple'
+import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { useMergeRefs } from '@floating-ui/react'

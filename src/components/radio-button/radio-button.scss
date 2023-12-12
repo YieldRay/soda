@@ -25,9 +25,11 @@ $borderWidth: 2px;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
     &-box {
+        @include circle(18px);
         display: inline-block;
         vertical-align: middle;
         transition: all 200ms;
+
         &::before {
             transition: all 200ms;
             @include center();
@@ -92,7 +94,10 @@ $borderWidth: 2px;
     &-label {
         display: inline-block;
         vertical-align: middle;
-        padding: 0 16px;
         font-weight: 400;
+
+        &:not(:empty) {
+            padding: 0 8px;
+        }
     }
 }

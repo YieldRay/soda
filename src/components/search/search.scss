@@ -2,7 +2,8 @@
 
 .sd-search {
     background: var(--md-sys-color-surface-container-high);
-    display: flex;
+    display: inline-flex;
+    vertical-align: middle;
     align-items: center;
     text-wrap: nowrap;
     max-width: 100%;

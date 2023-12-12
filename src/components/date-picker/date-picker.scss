@@ -9,6 +9,7 @@
 
     &-docked {
         position: absolute;
+        z-index: 2;
         background: var(--md-sys-color-surface-container-high);
         border-radius: 2rem;
         padding: 0 4px;

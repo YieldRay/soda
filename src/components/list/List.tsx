@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type.ts'
 import { omit } from 'lodash-es'
 import { forwardRef } from 'react'
-import { useRippleRef } from '@/utils/ripple-effect'
+import { useRippleRef } from '@/ripple/hooks'
 import { useMergeRefs } from '@floating-ui/react'
 
 /**

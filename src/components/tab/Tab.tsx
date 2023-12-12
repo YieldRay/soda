@@ -1,6 +1,6 @@
 import './tab.scss'
 import clsx from 'clsx'
-import { Ripple } from '@/utils/Ripple'
+import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef, useContext } from 'react'
 import { TabContext } from '.'

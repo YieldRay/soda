@@ -1,6 +1,6 @@
 # Soda
 
-A component library that may follow [Material Design 3](https://m3.material.io/components) (a.k.a. Material You)
+A React(>=18) component library that may follow [Material Design 3](https://m3.material.io/components) (a.k.a. Material You)
 
 Features:
 

@@ -1,5 +1,5 @@
 import './icon-button.scss'
-import { Ripple } from '@/utils/Ripple'
+import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'

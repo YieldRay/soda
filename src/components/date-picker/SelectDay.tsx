@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { getFormatCalendar, isSameDay } from './calendar'
-import { useRippleRef } from '@/utils/ripple-effect'
+import { useRippleRef } from '@/ripple/hooks'
 
 export function SelectDay({
     year,

@@ -1,5 +1,5 @@
 import './fab.scss'
-import { Ripple } from '@/utils/Ripple'
+import { Ripple } from '@/ripple/Ripple'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type.ts'
 import { forwardRef } from 'react'

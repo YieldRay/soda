@@ -28,6 +28,7 @@ button.sd-fab {
     overflow: hidden;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     transition: all 200ms;
+    font-size: inherit;
 
     &:hover {
         filter: brightness(96%);

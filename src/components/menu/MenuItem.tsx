@@ -1,6 +1,6 @@
 import './menu.scss'
 import clsx from 'clsx'
-import { Ripple } from '@/utils/Ripple'
+import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
 

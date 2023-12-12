@@ -4,7 +4,7 @@ import omit from 'lodash-es/omit'
 import isFunction from 'lodash-es/isFunction'
 import { Badge } from '../badge'
 import { ExtendProps } from '@/utils/type'
-import { useRippleRef } from '@/utils/ripple-effect'
+import { useRippleRef } from '@/ripple/hooks'
 import { useState } from 'react'
 
 type ReactNodeBuilder = React.ReactNode | ((active: boolean) => React.ReactNode)

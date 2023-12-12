@@ -36,6 +36,8 @@
 }
 
 .sd-circular_progress_indicator {
+    display: inline-block;
+    vertical-align: middle;
     --size: 36px;
     width: var(--size);
     height: var(--size);

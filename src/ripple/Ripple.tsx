@@ -1,6 +1,6 @@
 import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
 import { ripple } from './ripple-effect'
-import { ExtendProps, TagNameString } from './type'
+import { ExtendProps, TagNameString } from '@/utils/type'
 
 type Props = ExtendProps<{
     /**

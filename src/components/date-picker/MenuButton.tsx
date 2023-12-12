@@ -1,4 +1,4 @@
-import { Ripple } from '@/utils/Ripple'
+import { Ripple } from '@/ripple/Ripple'
 import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js'
 import { IconButton } from '../icon-button/IconButton'
 import Icon from '@mdi/react'

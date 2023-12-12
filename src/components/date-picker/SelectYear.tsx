@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useRippleRef } from '@/utils/ripple-effect'
+import { useRippleRef } from '@/ripple/hooks'
 
 export function SelectYear({
     current,

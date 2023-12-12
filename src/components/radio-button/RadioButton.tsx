@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { forwardRef, useContext, useRef, useState } from 'react'
 import { ExtendProps } from '@/utils/type'
 import { RadioGroupContext } from '@/components/radio-button/RadioGroup'
-import { Ripple, type RippleHandle } from '@/utils/Ripple'
+import { Ripple, type RippleHandle } from '@/ripple/Ripple'
 
 /**
  * According to the official implementation, the ripple effect should not occupy space.
