@@ -57,6 +57,7 @@ export function SelectDay({
                 .select-day {
                     user-select: none;
                     margin: 14px;
+                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
                 .select-day-header {
                     margin-top: 30px;
@@ -85,7 +86,6 @@ export function SelectDay({
                     overflow: hidden;
                     transition: all 200ms;
                     margin: 2px 0;
-                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
 
                 .day.today {

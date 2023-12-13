@@ -33,6 +33,7 @@ export function SelectYear({
                     grid-template-columns: repeat(3, 1fr);
                     align-items: center;
                     justify-items: center;
+                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
                 li {
                     all: unset;
@@ -54,7 +55,6 @@ export function SelectYear({
                     overflow: hidden;
                     transition: all 200ms;
                     user-select: none;
-                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
                 li:hover {
                     background: rgba(0 0 0 / 0.04);

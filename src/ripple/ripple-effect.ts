@@ -1,3 +1,8 @@
+import {
+    applyCSSStyleDeclaration,
+    withCSSStyleDeclaration,
+} from '@/utils/style'
+
 const DatasetName = 'sdRipple' //? dataset name will automatically convert to underscore style
 
 /**
@@ -29,17 +34,27 @@ export function ripple(
             Math.hypot(width - rippleX, height - rippleY)
         )
 
-        ele.style.position = 'relative'
+        // position:relative is required for ripple
+        // after ripple is removed, reset the position
+        const resetCSSStyleDeclaration = withCSSStyleDeclaration(ele, {
+            position: 'relative',
+        })
+
         const ripple = document.createElement('div')
-        ripple.style.pointerEvents = 'none'
-        ripple.style.position = 'absolute'
-        ripple.style.left = rippleX - radius + 'px'
-        ripple.style.top = rippleY - radius + 'px'
-        ripple.style.width = radius * 2 + 'px'
-        ripple.style.height = radius * 2 + 'px'
-        ripple.style.borderRadius = '50%'
-        ripple.style.transformOrigin = '50% 50%'
-        ripple.style.background = color
+
+        applyCSSStyleDeclaration(ripple, {
+            pointerEvents: 'none',
+            position: 'absolute',
+            left: rippleX - radius + 'px',
+            top: rippleY - radius + 'px',
+            width: radius * 2 + 'px',
+            height: radius * 2 + 'px',
+            borderRadius: '50%',
+            transformOrigin: '50% 50%',
+            backgroundColor: color,
+            zIndex: '1', // ripple has default z-index:1
+        })
+
         ele.append(ripple)
 
         const scaleUpAnimation = ripple.animate(
@@ -64,6 +79,7 @@ export function ripple(
 
             fadeOutAnimation.oncancel = fadeOutAnimation.onfinish = () => {
                 ripple.remove()
+                resetCSSStyleDeclaration()
                 onFinish?.()
             }
         }
@@ -91,7 +107,7 @@ export function ripple(
         }
 
         // DO NOT setPointerCapture, this will cause any child element
-        // cannot get pointed
+        // within it not able to get pointed
         const { clientX: pointerX, clientY: pointerY } = event // pointer pos
         const { x: eleX, y: eleY } = ele.getBoundingClientRect() // ele pos
 
