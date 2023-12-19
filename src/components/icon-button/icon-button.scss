@@ -19,7 +19,7 @@ button.sd-icon_button {
 
     // center the internal icon
     &-icon {
-        display: inline-block;
+        @include display-inline-flex-center;
         width: 24px;
         height: 24px;
         line-height: 24px;

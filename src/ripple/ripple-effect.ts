@@ -1,7 +1,4 @@
-import {
-    applyCSSStyleDeclaration,
-    withCSSStyleDeclaration,
-} from '@/utils/style'
+import { applyCSSStyleDeclaration } from '@/utils/style'
 
 const DatasetName = 'sdRipple' //? dataset name will automatically convert to underscore style
 
@@ -34,9 +31,8 @@ export function ripple(
             Math.hypot(width - rippleX, height - rippleY)
         )
 
-        // position:relative is required for ripple
-        // after ripple is removed, reset the position
-        const resetCSSStyleDeclaration = withCSSStyleDeclaration(ele, {
+        // position:relative is a MUST for ripple
+        applyCSSStyleDeclaration(ele, {
             position: 'relative',
         })
 
@@ -79,7 +75,6 @@ export function ripple(
 
             fadeOutAnimation.oncancel = fadeOutAnimation.onfinish = () => {
                 ripple.remove()
-                resetCSSStyleDeclaration()
                 onFinish?.()
             }
         }

@@ -4,6 +4,7 @@ import { TextField } from '.'
 import { useState } from 'react'
 import { mdiClose, mdiMagnify } from '@mdi/js'
 import Icon from '@mdi/react'
+import { IconRippleButton } from '@/composition/IconRippleButton'
 
 const meta = {
     title: 'TextField',
@@ -15,7 +16,7 @@ const meta = {
     args: {
         labelText: 'labelText',
         leadingIcon: <Icon path={mdiMagnify} />,
-        trailingIcon: <Icon path={mdiClose} />,
+        trailingIcon: <IconRippleButton path={mdiClose} />,
         placeholder: 'placeholder',
     },
 } satisfies Meta<typeof TextField>
@@ -50,6 +51,10 @@ export const WithoutLabelText: Story = {
         return (
             <>
                 <p>You can use supportingText to display string length</p>
+                <p>
+                    You may use IconRippleButton over IconButton for
+                    trailingIcon
+                </p>
                 <TextField
                     inputRef={(e) => {
                         console.dir(e)
@@ -61,6 +66,12 @@ export const WithoutLabelText: Story = {
                         <span style={{ float: 'right' }}>
                             {value.length}/100
                         </span>
+                    }
+                    trailingIcon={
+                        <IconRippleButton
+                            onClick={() => setValue('')}
+                            path={mdiClose}
+                        />
                     }
                 />
             </>

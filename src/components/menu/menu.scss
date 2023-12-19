@@ -15,6 +15,7 @@
 
 .sd-menu_item {
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+    user-select: none;
     overflow: hidden;
     cursor: pointer;
     box-sizing: border-box;
