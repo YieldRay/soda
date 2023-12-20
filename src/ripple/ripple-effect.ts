@@ -48,7 +48,9 @@ export function ripple(
             borderRadius: '50%',
             transformOrigin: '50% 50%',
             backgroundColor: color,
-            zIndex: '1', // ripple has default z-index:1
+            zIndex: 'auto',
+            // the ripple element is absolute positioned to it's parent (the input element)
+            // force z-index to auto, this prevent stacking context's creation
         })
 
         ele.append(ripple)

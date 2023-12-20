@@ -24,10 +24,8 @@ $error: var(--md-sys-color-error);
     }
 
     &-ripple {
-        position: absolute;
         overflow: hidden;
-        left: 50%;
-        top: 50%;
+        @include position-absolute(50%, 50%);
         transform: translate(-50%, -50%);
         width: 40px;
         height: 40px;

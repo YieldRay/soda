@@ -144,7 +144,7 @@ export function DockedDatePicker({
             </div>
 
             <div
-                style={assign({ width: '100%' }, floatingStyles)}
+                style={assign({ width: '100%', zIndex: '2' }, floatingStyles)}
                 ref={refs.setFloating}
                 {...getFloatingProps()}
             >

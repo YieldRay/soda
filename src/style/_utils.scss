@@ -10,3 +10,9 @@
     align-items: center;
     justify-content: center;
 }
+
+@mixin position-absolute($left: 0, $top: 0) {
+    position: absolute;
+    left: $left;
+    top: $top;
+}

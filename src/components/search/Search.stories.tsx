@@ -24,28 +24,14 @@ type Story = StoryObj<typeof meta>
 export const Bar: Story = {
     render: (props) => {
         const [value, setValue] = useState('')
-        return (
-            <Search
-                {...props}
-                sd="bar"
-                value={value}
-                onChange={setValue}
-            ></Search>
-        )
+        return <Search {...props} sd="bar" value={value} onChange={setValue} />
     },
 }
 
 export const View: Story = {
     render: (props) => {
         const [value, setValue] = useState('')
-        return (
-            <Search
-                {...props}
-                sd="view"
-                value={value}
-                onChange={setValue}
-            ></Search>
-        )
+        return <Search {...props} sd="view" value={value} onChange={setValue} />
     },
 }
 

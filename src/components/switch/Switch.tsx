@@ -45,7 +45,8 @@ export const Switch = forwardRef<
                 }
             }}
         >
-            <div className="sd-switch-thumb">
+            <div className="sd-switch-movable">
+                <div className="sd-switch-thumb"></div>
                 <div className="sd-switch-icon">{children}</div>
             </div>
         </div>

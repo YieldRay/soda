@@ -202,9 +202,7 @@
         }
 
         &_center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            @include position-absolute(50%, 50%);
             transform: translate(-50%, -50%);
             background: var(--md-sys-color-primary);
             width: 6px;

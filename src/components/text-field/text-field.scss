@@ -63,12 +63,12 @@ $label_text_gap_size: 3.2px;
     }
 
     &-supporting_text {
-        font-size: 12px;
         position: absolute;
-        color: var(--md-sys-color-on-surface-variant);
-        font-size: small;
         left: 0;
         bottom: -18px;
+        font-size: 12px;
+        color: var(--md-sys-color-on-surface-variant);
+        font-size: small;
         text-wrap: nowrap;
         padding: 0 8px;
         box-sizing: border-box;
@@ -129,10 +129,8 @@ $label_text_gap_size: 3.2px;
         }
     }
     .sd-text_field-label_text {
-        position: absolute;
+        @include position-absolute(8px, 16px);
         transition: all 200ms;
-        left: 8px;
-        top: 16px;
         color: var(--md-sys-color-on-surface-variant);
     }
 
