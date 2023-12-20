@@ -24,9 +24,7 @@ dist-ssr
 *.sw?
 
 # Other
-demo
 package-lock.json
 pnpm-lock.yaml
-.docz
-docs
 storybook-static
+*.tgz

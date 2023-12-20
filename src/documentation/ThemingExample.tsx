@@ -166,7 +166,7 @@ export default function ThemingExample() {
  */
 function applySurfaceStyles(
     theme: Theme,
-    { dark, target }: { dark: boolean; target: HTMLElement }
+    { dark, target }: { dark?: boolean; target: HTMLElement }
 ): void {
     if (dark) {
         const elevationProps = {

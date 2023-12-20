@@ -1,8 +1,8 @@
 *
-!src/**/*
+# !src/**/*
 !dist/**/*
 **/*.stories.ts
 **/*.stories.tsx
 **/*.stories.d.ts
-src/document/
-dist/document/
+src/documentation/
+dist/documentation/

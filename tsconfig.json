@@ -30,6 +30,6 @@
         "emitDeclarationOnly": true,
         "declarationDir": "dist"
     },
-    "include": ["src", "src/demo", "vite-md-plugin.ts"],
+    "include": ["src"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }
