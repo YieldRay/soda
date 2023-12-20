@@ -1,7 +1,6 @@
 import './navigation.scss'
 import { Helper, HelperItem } from './Helper'
 import clsx from 'clsx'
-import assign from 'lodash-es/assign'
 import { createPortal } from 'react-dom'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
@@ -29,8 +28,8 @@ export const NavigationRail = forwardRef<
             {...props}
             ref={ref}
             className={clsx('sd-navigation_rail', className)}
-            style={assign(
-                fixed
+            style={{
+                ...(fixed
                     ? {
                           position: 'fixed',
                           top: '0',
@@ -38,9 +37,9 @@ export const NavigationRail = forwardRef<
                           height: '100%',
                           boxSizing: 'border-box',
                       }
-                    : {},
-                style
-            )}
+                    : undefined),
+                ...style,
+            }}
         >
             <div className="sd-navigation_rail-fab">{fab}</div>
             <div className="sd-navigation_rail-items">

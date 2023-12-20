@@ -2,7 +2,6 @@ import './carousel.scss'
 import { ExtendProps } from '@/utils/type'
 import { useRef, useState, forwardRef, useImperativeHandle } from 'react'
 import clsx from 'clsx'
-import assign from 'lodash-es/assign'
 
 export interface Item {
     key?: React.Key
@@ -50,7 +49,7 @@ export const Carousel = forwardRef<
                 {...props}
                 className={clsx('sd-carousel-item', className)}
                 key={key}
-                style={assign({ flex, height }, style)}
+                style={{ flex, height, ...style }}
                 onDragStart={(e) => e.preventDefault()}
             >
                 <div className="sd-carousel-value">{value}</div>

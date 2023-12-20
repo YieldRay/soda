@@ -10,7 +10,6 @@ import {
 import clamp from 'lodash-es/clamp'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
-import assign from 'lodash-es/assign'
 import {
     autoUpdate,
     useFloating,
@@ -246,14 +245,10 @@ export const Slider = forwardRef<
                     <div
                         className="sd-slider-label"
                         ref={refs.setFloating}
-                        style={assign(
-                            isHover || isFocus
-                                ? {
-                                      opacity: 1,
-                                  }
-                                : { opacity: 0 },
-                            floatingStyles
-                        )}
+                        style={{
+                            opacity: isHover || isFocus ? 1 : 0,
+                            ...floatingStyles,
+                        }}
                     >
                         <div style={{ overflow: 'hidden' }}>
                             {label ?? realValue}

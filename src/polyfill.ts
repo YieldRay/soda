@@ -1,4 +1,6 @@
 declare global {
+    // typescript already provided this in es2023
+    // our target is under it, but we only use these methods in documentation code
     interface Array<T> {
         toReversed(): T[]
         toSpliced(start: number, deleteCount?: number): T[]

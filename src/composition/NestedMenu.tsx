@@ -27,7 +27,6 @@ import {
     useRole,
     useTypeahead,
 } from '@floating-ui/react'
-import assign from 'lodash-es/assign'
 import * as React from 'react'
 
 const NestedMenuContext = React.createContext<{
@@ -252,7 +251,7 @@ const NestedMenuComponent = React.forwardRef<
                 aria-haspopup
                 ref={useMergeRefs([refs.setReference, item.ref, forwardedRef])}
                 {...getReferenceProps(parent.getItemProps({ ...props }))}
-                style={assign({ display: 'inline-block' }, props.style)}
+                style={{ display: 'inline-block', ...props.style }}
             >
                 {label}
             </div>

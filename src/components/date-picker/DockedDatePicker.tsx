@@ -16,7 +16,6 @@ import {
     useRole,
     useTransitionStyles,
 } from '@floating-ui/react'
-import assign from 'lodash-es/assign'
 import { SelectYear } from './SelectYear'
 import { SelectMonth } from './SelectMonth'
 import { SelectDay } from './SelectDay'
@@ -144,7 +143,7 @@ export function DockedDatePicker({
             </div>
 
             <div
-                style={assign({ width: '100%', zIndex: '2' }, floatingStyles)}
+                style={{ width: '100%', zIndex: '2', ...floatingStyles }}
                 ref={refs.setFloating}
                 {...getFloatingProps()}
             >

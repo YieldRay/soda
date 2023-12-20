@@ -1,7 +1,6 @@
 import './app-bar.scss'
 import clsx from 'clsx'
 import { createPortal } from 'react-dom'
-import assign from 'lodash-es/assign'
 import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
 
@@ -39,10 +38,12 @@ export const TopAppBar = forwardRef<
             {...props}
             ref={ref}
             className={clsx('sd-top_app_bar', className)}
-            style={assign(
-                fixed ? { position: 'fixed', left: '0', top: '0' } : undefined,
-                style
-            )}
+            style={{
+                ...(fixed
+                    ? { position: 'fixed', left: '0', top: '0' }
+                    : undefined),
+                ...style,
+            }}
             data-sd={sd}
         >
             <div className="sd-top_app_bar-helper">

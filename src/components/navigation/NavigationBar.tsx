@@ -1,6 +1,5 @@
 import './navigation.scss'
 import { createPortal } from 'react-dom'
-import assign from 'lodash-es/assign'
 import clsx from 'clsx'
 import { Helper, HelperItem } from './Helper'
 import { ExtendProps } from '@/utils/type'
@@ -28,17 +27,17 @@ export const NavigationBar = forwardRef<
             {...props}
             ref={ref}
             className={clsx('sd-navigation_bar', className)}
-            style={assign(
-                fixed
+            style={{
+                ...(fixed
                     ? {
                           position: 'fixed',
                           bottom: '0',
                           width: '100%',
                           boxSizing: 'border-box',
                       }
-                    : {},
-                style
-            )}
+                    : undefined),
+                ...style,
+            }}
         >
             {items.map((item) => (
                 <Helper {...item} onClick={() => onChange?.(item)}></Helper>

@@ -1,7 +1,6 @@
 import './app-bar.scss'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
-import assign from 'lodash-es/assign'
 import { forwardRef } from 'react'
 import { createPortal } from 'react-dom'
 
@@ -31,12 +30,12 @@ export const BottomAppBar = forwardRef<
             {...props}
             ref={ref}
             className={clsx('sd-bottom_app_bar', className)}
-            style={assign(
-                fixed
+            style={{
+                ...(fixed
                     ? { position: 'fixed', left: '0', bottom: '0' }
-                    : undefined,
-                style
-            )}
+                    : undefined),
+                ...style,
+            }}
         >
             <div className="sd-bottom_app_bar-buttons">{buttons}</div>
             <div className="sd-bottom_app_bar-fab">{fab}</div>

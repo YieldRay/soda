@@ -19,6 +19,25 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+    render: () => (
+        <SideSheet
+            header="headline"
+            footer={
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <Button>Save</Button>
+                    <Button sd="outlined">Close</Button>
+                </div>
+            }
+            style={{ minHeight: 'max(66.6vh, 400px)' }}
+        >
+            <DrawerItem enabled>Home</DrawerItem>
+            <DrawerItem>Search</DrawerItem>
+            <DrawerItem>Settings</DrawerItem>
+        </SideSheet>
+    ),
+}
+
+export const Fixed: Story = {
     render: () => {
         const [open, setOpen] = useState(false)
         return (
@@ -34,7 +53,7 @@ export const Default: Story = {
                     TopAppBar
                 </TopAppBar>
 
-                <p style={{ height: '400px' }}>
+                <p style={{ minHeight: 'max(66.6vh, 400px)' }}>
                     <p>click the menu icon to open</p>
                     <p>
                         support <code>{`teleportTo={document.body}`}</code> so
@@ -43,6 +62,7 @@ export const Default: Story = {
                 </p>
 
                 <SideSheet
+                    fixed
                     open={open}
                     header="headline"
                     position="left"

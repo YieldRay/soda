@@ -2,7 +2,6 @@ import { ExtendProps } from '@/utils/type'
 import './sheet.scss'
 import { Scrim } from '@/utils/Scrim'
 import clsx from 'clsx'
-import assign from 'lodash-es/assign'
 import {
     forwardRef,
     useImperativeHandle,
@@ -75,7 +74,7 @@ export const BottomSheet = forwardRef<
                     {...props}
                     className={clsx('sd-bottom_sheet', className)}
                     ref={sheetRef}
-                    style={assign({ transform: 'translateY(100%)' }, style)}
+                    style={{ transform: 'translateY(100%)', ...style }}
                 >
                     {!hideDragHandle && (
                         <div

@@ -72,6 +72,7 @@
 
 .sd-side_sheet {
     pointer-events: auto;
+    transition: transform 200ms;
     background: var(--md-sys-color-surface-container-low);
     color: var(--md-sys-color-on-surface-variant);
     display: inline-block;
