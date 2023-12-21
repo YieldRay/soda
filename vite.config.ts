@@ -4,6 +4,7 @@ import { fileURLToPath, URL } from 'node:url'
 import fs from 'node:fs'
 import path from 'node:path'
 import type { LibraryOptions } from 'vite'
+import { chunkSplitPlugin } from 'vite-plugin-chunk-split'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -35,6 +36,13 @@ export default defineConfig({
         react({
             babel: {
                 plugins: [['styled-jsx/babel', { optimizeForSpeed: true }]],
+            },
+        }),
+        // https://github.com/sanyuan0704/vite-plugin-chunk-split
+        chunkSplitPlugin({
+            strategy: 'all-in-one',
+            customSplitting: {
+                shared: [/src\//],
             },
         }),
     ],
