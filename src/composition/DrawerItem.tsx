@@ -31,8 +31,10 @@ export const DrawerItem = forwardRef<
                 font-weight: 500;
                 -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
             }
-            .container:hover {
-                background: rgb(0 0 0 / 0.04);
+            @media (any-hover: hover) {
+                .container:hover {
+                    background: rgb(0 0 0 / 0.04);
+                }
             }
             .container:active {
                 background: rgb(0 0 0 / 0.08);

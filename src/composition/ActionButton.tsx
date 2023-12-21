@@ -37,8 +37,10 @@ export const ActionButton = forwardRef<
                 .sd-action_button[data-sd-inverse='false'] {
                     color: var(--md-sys-color-primary);
                 }
-                .sd-action_button[data-sd-inverse='false']:hover {
-                    background: rgb(0 0 0 / 0.04);
+                @media (any-hover: hover) {
+                    .sd-action_button[data-sd-inverse='false']:hover {
+                        background: rgb(0 0 0 / 0.04);
+                    }
                 }
                 .sd-action_button[data-sd-inverse='false']:active {
                     background: rgb(0 0 0 / 0.08);
@@ -49,8 +51,10 @@ export const ActionButton = forwardRef<
                 .sd-action_button[data-sd-inverse='true'] {
                     color: var(--md-sys-color-inverse-primary);
                 }
-                .sd-action_button[data-sd-inverse='true']:hover {
-                    background: rgb(255 255 255 / 0.04);
+                @media (any-hover: hover) {
+                    .sd-action_button[data-sd-inverse='true']:hover {
+                        background: rgb(255 255 255 / 0.04);
+                    }
                 }
                 .sd-action_button[data-sd-inverse='true']:active {
                     background: rgb(255 255 255 / 0.08);

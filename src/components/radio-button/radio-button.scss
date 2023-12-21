@@ -20,9 +20,15 @@ $borderWidth: 2px;
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
+    user-select: none;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
     &-box {
+        position: relative;
+        display: inline-block;
+    }
+
+    &-circle {
         @include circle(18px);
         display: inline-block;
         vertical-align: middle;
@@ -39,7 +45,6 @@ $borderWidth: 2px;
             @include center();
             @include circle(10px);
         }
-        position: relative;
     }
 
     &-ripple {
@@ -54,13 +59,15 @@ $borderWidth: 2px;
         }
     }
 
-    &:hover {
-        .sd-radio_button-ripple {
-            background: rgb(0 0 0 /0.1);
+    @media (any-hover: hover) {
+        &:hover {
+            .sd-radio_button-ripple {
+                background: rgb(0 0 0 /0.1);
+            }
         }
     }
     &:active {
-        .sd-radio_button-box::before {
+        .sd-radio_button-circle::before {
             border: $borderWidth solid var(--md-sys-color-primary);
         }
     }
@@ -71,11 +78,11 @@ $borderWidth: 2px;
         }
     }
 
-    &-box::before {
+    &-circle::before {
         border: $borderWidth solid var(--md-sys-color-on-surface-variant);
     }
 
-    &[data-sd-checked='true'] .sd-radio_button-box {
+    &[data-sd-checked='true'] .sd-radio_button-circle {
         &::before {
             border: $borderWidth solid var(--md-sys-color-primary);
         }
@@ -93,7 +100,6 @@ $borderWidth: 2px;
         display: inline-block;
         vertical-align: middle;
         font-weight: 400;
-        user-select: none;
 
         &:not(:empty) {
             padding: 0 8px;

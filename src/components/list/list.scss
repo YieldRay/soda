@@ -13,9 +13,10 @@
     }
 
     transition: all 200ms;
-    &:hover {
-        filter: brightness(96%);
-        cursor: pointer;
+    @media (any-hover: hover) {
+        &:hover {
+            filter: brightness(96%);
+        }
     }
     &:active {
         filter: brightness(92%);

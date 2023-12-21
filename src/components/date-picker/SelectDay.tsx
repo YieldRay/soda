@@ -92,8 +92,10 @@ export function SelectDay({
                     border: solid 1px;
                     overflow: hidden;
                 }
-                .day:hover {
-                    background: rgba(0 0 0 / 0.04);
+                @media (any-hover: hover) {
+                    .day:hover {
+                        background: rgba(0 0 0 / 0.04);
+                    }
                 }
                 .day:active {
                     background: rgba(0 0 0 / 0.08);

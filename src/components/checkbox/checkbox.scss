@@ -32,8 +32,10 @@ $error: var(--md-sys-color-error);
         clip-path: circle(50%);
         border-radius: 50%;
         transition: all 200ms;
-        &:hover {
-            background: rgb(0 0 0 / 0.1);
+        @media (any-hover: hover) {
+            &:hover {
+                background: rgb(0 0 0 / 0.1);
+            }
         }
         > * {
             // make the ripple full size

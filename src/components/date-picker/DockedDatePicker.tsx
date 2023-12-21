@@ -3,8 +3,8 @@ import '@/style/view-transition.scss'
 import { useRef, useState } from 'react'
 import { Button } from '../button'
 import { TextField } from '../text-field'
-import { IconButton } from '../icon-button'
 import { MenuButton } from './MenuButton'
+import { IconRippleButton } from '@/composition/IconRippleButton'
 import { mdiCalendarBlank } from '@mdi/js'
 import {
     useFloating,
@@ -16,11 +16,11 @@ import {
     useRole,
     useTransitionStyles,
 } from '@floating-ui/react'
+import { common } from '@/utils/floating-ui'
+import { startViewTransitionFlushSync } from '@/utils/view-transition'
 import { SelectYear } from './SelectYear'
 import { SelectMonth } from './SelectMonth'
 import { SelectDay } from './SelectDay'
-import { startViewTransitionFlushSync } from '@/utils/view-transition'
-import { common } from '@/utils/floating-ui'
 
 /**
  * @specs https://m3.material.io/components/date-pickers/specs
@@ -124,23 +124,21 @@ export function DockedDatePicker({
             ref={refs.setReference}
             onResize={update}
         >
-            <div className="input">
-                <TextField
-                    style={{ width: '100%' }}
-                    sd="outlined"
-                    readOnly
-                    value={new Intl.DateTimeFormat().format(date)}
-                    labelText="Date"
-                    supportingText={supportingText}
-                    data-sd-focus={isOpen}
-                />
-                <div className="input-icon">
-                    <IconButton
+            <TextField
+                style={{ width: '100%', padding: '0.5rem 0.75rem' }}
+                sd="outlined"
+                readonly
+                value={new Intl.DateTimeFormat().format(date)}
+                labelText="Date"
+                supportingText={supportingText}
+                data-sd-focus={isOpen}
+                trailingIcon={
+                    <IconRippleButton
                         path={mdiCalendarBlank}
                         onClick={() => setIsOpen((x) => !x)}
                     />
-                </div>
-            </div>
+                }
+            />
 
             <div
                 style={{ width: '100%', zIndex: '2', ...floatingStyles }}
@@ -231,21 +229,6 @@ export function DockedDatePicker({
                     </footer>
                 </section>
             </div>
-
-            <style jsx>
-                {`
-                    .input {
-                        display: inline-block;
-                        position: relative;
-                    }
-                    .input-icon {
-                        position: absolute;
-                        right: 4px;
-                        top: 4px;
-                        color: var(--md-sys-color-outline);
-                    }
-                `}
-            </style>
         </div>
     )
 }

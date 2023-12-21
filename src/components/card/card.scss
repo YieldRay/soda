@@ -11,8 +11,10 @@
     &-elevated {
         background: var(--md-sys-color-surface-container-low);
         @include elevation-level1;
-        &:hover {
-            @include elevation-level2;
+        @media (any-hover: hover) {
+            &:hover {
+                @include elevation-level2;
+            }
         }
     }
 
@@ -20,8 +22,10 @@
 
     &-filled {
         background: var(--md-sys-color-surface-container-highest);
-        &:hover {
-            @include elevation-level1;
+        @media (any-hover: hover) {
+            &:hover {
+                @include elevation-level1;
+            }
         }
     }
 

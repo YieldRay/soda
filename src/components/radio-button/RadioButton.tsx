@@ -76,6 +76,7 @@ export const RadioButton = forwardRef<
             }}
         >
             <div className="sd-radio_button-box">
+                <div className="sd-radio_button-circle" />
                 <div className="sd-radio_button-ripple">
                     <Ripple ref={rippleRef} />
                 </div>

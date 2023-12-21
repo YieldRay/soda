@@ -42,10 +42,12 @@ button.sd-button {
         color: var(--md-sys-color-primary);
         @include elevation-level1;
 
-        &:hover {
-            opacity: 0.8;
-            color: var(--md-sys-color-primary);
-            @include elevation-level2;
+        @media (any-hover: hover) {
+            &:hover {
+                opacity: 0.8;
+                color: var(--md-sys-color-primary);
+                @include elevation-level2;
+            }
         }
         &:active {
             opacity: unset;
@@ -64,8 +66,10 @@ button.sd-button {
         background: var(--md-sys-color-primary);
         color: var(--md-sys-color-on-primary);
 
-        &:hover {
-            @include elevation-level1;
+        @media (any-hover: hover) {
+            &:hover {
+                @include elevation-level1;
+            }
         }
         &:active {
             box-shadow: unset;
@@ -85,8 +89,10 @@ button.sd-button {
         background: var(--md-sys-color-surface);
         outline: var(--md-sys-color-outline) 1px solid;
 
-        &:hover {
-            filter: brightness(96%);
+        @media (any-hover: hover) {
+            &:hover {
+                filter: brightness(96%);
+            }
         }
         &:active {
             filter: brightness(92%);
@@ -101,9 +107,11 @@ button.sd-button {
     &-tonal {
         color: var(--md-sys-color-on-secondary-container);
         background: var(--md-sys-color-secondary-container);
-        &:hover {
-            @include elevation-level1;
-            filter: brightness(96%);
+        @media (any-hover: hover) {
+            &:hover {
+                @include elevation-level1;
+                filter: brightness(96%);
+            }
         }
         &:active {
             filter: brightness(92%);
@@ -122,8 +130,10 @@ button.sd-button {
 
         // TODO: this should be primary color background with opacity layer
         // here just simply use a grey color instead
-        &:hover {
-            background: rgb(0 0 0 / 0.04);
+        @media (any-hover: hover) {
+            &:hover {
+                background: rgb(0 0 0 / 0.04);
+            }
         }
         &:active {
             background: rgb(0 0 0 / 0.08);

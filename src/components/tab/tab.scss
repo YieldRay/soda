@@ -20,8 +20,10 @@
         flex-direction: column;
         gap: 4px;
         transition: all 200ms;
-        &:hover {
-            background: rgb(0 0 0 / 0.04);
+        @media (any-hover: hover) {
+            &:hover {
+                background: rgb(0 0 0 / 0.04);
+            }
         }
         &:active {
             background: rgb(0 0 0 / 0.08);

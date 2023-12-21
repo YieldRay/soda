@@ -30,8 +30,10 @@ button.sd-fab {
     transition: all 200ms;
     font-size: inherit;
 
-    &:hover {
-        filter: brightness(96%);
+    @media (any-hover: hover) {
+        &:hover {
+            filter: brightness(96%);
+        }
     }
     &:active {
         filter: brightness(92%);

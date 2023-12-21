@@ -39,8 +39,10 @@
             filter: grayscale(98%) opacity(40%);
         }
         &[data-sd-disabled='false'] {
-            &:hover {
-                background: rgb(0 0 0 / 0.04);
+            @media (any-hover: hover) {
+                &:hover {
+                    background: rgb(0 0 0 / 0.04);
+                }
             }
             &:active {
                 background: rgb(0 0 0 / 0.08);
@@ -56,8 +58,10 @@
             filter: grayscale(98%) opacity(60%);
         }
         &[data-sd-disabled='false'] {
-            &:hover {
-                filter: brightness(96%);
+            @media (any-hover: hover) {
+                &:hover {
+                    filter: brightness(96%);
+                }
             }
             &:active {
                 filter: brightness(92%);

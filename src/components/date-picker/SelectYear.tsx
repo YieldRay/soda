@@ -56,8 +56,10 @@ export function SelectYear({
                     transition: all 200ms;
                     user-select: none;
                 }
-                li:hover {
-                    background: rgba(0 0 0 / 0.04);
+                @media (any-hover: hover) {
+                    li:hover {
+                        background: rgba(0 0 0 / 0.04);
+                    }
                 }
                 li:active {
                     background: rgba(0 0 0 / 0.08);

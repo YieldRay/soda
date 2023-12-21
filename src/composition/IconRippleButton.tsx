@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
 import Icon from '@mdi/react'
+import { useMergeRefs } from '@floating-ui/react'
 
 /**
  * This component is a replacement for <IconButton> when you want the element
@@ -13,9 +14,13 @@ export const IconRippleButton = forwardRef<
     HTMLDivElement,
     ExtendProps<{
         path?: string
+        /**
+         * @default 24px
+         */
+        size?: string
         children?: React.ReactNode
     }>
->(({ className, path, children, ...props }, ref) => {
+>(({ className, path, size, children, ...props }, ref) => {
     return (
         <>
             <style jsx global>{`
@@ -23,9 +28,10 @@ export const IconRippleButton = forwardRef<
                     cursor: pointer;
                     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                     transition: all 200ms;
-                    width: 24px;
-                    height: 24px;
-                    line-height: 24px;
+                    --size: 24px;
+                    width: var(--size);
+                    height: var(--size);
+                    line-height: var(--size);
                     text-align: center;
                     display: inline-flex;
                     align-items: center;
@@ -38,23 +44,28 @@ export const IconRippleButton = forwardRef<
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);
-                    width: 40px;
-                    height: 40px;
+                    width: calc(var(--size) * 1.666666);
+                    height: calc(var(--size) * 1.666666);
                     clip-path: circle(50%);
                     border-radius: 50%;
                     transition: all 200ms;
-                }
-                .sd-icon_ripple_button-ripple:hover {
-                    background: rgb(0 0 0 / 0.1);
                 }
                 .sd-icon_ripple_button-ripple > div {
                     width: 100%;
                     height: 100%;
                 }
+                @media (any-hover: hover) {
+                    .sd-icon_ripple_button-ripple:hover {
+                        background: rgb(0 0 0 / 0.1);
+                    }
+                }
             `}</style>
             <div
                 {...props}
-                ref={ref}
+                ref={useMergeRefs([
+                    ref,
+                    (e) => size && e?.style.setProperty('--size', size),
+                ])}
                 className={clsx('sd-icon_ripple_button', className)}
             >
                 {path ? <Icon path={path}></Icon> : children}

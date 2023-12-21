@@ -44,8 +44,10 @@ export function MenuButton({
                     user-select: none;
                     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
-                .sd-menu_button:hover {
-                    background: rgb(0 0 0 / 0.04);
+                @media (any-hover: hover) {
+                    .sd-menu_button:hover {
+                        background: rgb(0 0 0 / 0.04);
+                    }
                 }
             `}</style>
         </div>

@@ -34,6 +34,7 @@ export function ripple(
         // position:relative is a MUST for ripple
         applyCSSStyleDeclaration(ele, {
             position: 'relative',
+            ['-webkit-tap-highlight-color' as string]: 'transparent',
         })
 
         const ripple = document.createElement('div')

@@ -80,8 +80,10 @@ button.sd-icon_button {
 
     &-outlined,
     &-standard {
-        &:hover {
-            background: rgb(0 0 0 / 0.04);
+        @media (any-hover: hover) {
+            &:hover {
+                background: rgb(0 0 0 / 0.04);
+            }
         }
         &:active {
             background: rgb(0 0 0 / 0.08);
@@ -92,8 +94,10 @@ button.sd-icon_button {
     }
     &-tonal,
     &-filled {
-        &:hover {
-            filter: brightness(96%);
+        @media (any-hover: hover) {
+            &:hover {
+                filter: brightness(96%);
+            }
         }
         &:active {
             filter: brightness(92%);
