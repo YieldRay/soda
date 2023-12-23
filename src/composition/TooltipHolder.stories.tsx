@@ -20,6 +20,7 @@ export const Default: Story = {
     render: () => (
         <>
             <TopAppBar
+                fixed
                 leadingNavigationIcon={
                     <TooltipHolder
                         trigger={<IconButton path={mdiMenu} />}
@@ -46,6 +47,8 @@ export const Default: Story = {
                 TopAppBar
             </TopAppBar>
 
+            <div style={{ height: '64px' }} />
+
             <TooltipHolder
                 placement="right"
                 trigger={<IconButton>❤</IconButton>}
@@ -54,7 +57,7 @@ export const Default: Story = {
                         love but so loooooooooong
                     </RichTooltip>
                 }
-            ></TooltipHolder>
+            />
 
             <h1>hover on the icon to see how it works!</h1>
 

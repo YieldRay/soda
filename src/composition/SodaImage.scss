@@ -1,0 +1,77 @@
+.sd-image,
+.sd-image > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.sd-image > img,
+.sd-image .sd-image-placeholder {
+    transition: all 300ms;
+}
+
+.sd-image {
+    position: relative;
+    overflow: hidden;
+    mix-blend-mode: plus-lighter;
+
+    > img {
+        object-fit: contain;
+        box-sizing: border-box;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .sd-image-placeholder {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .sd-image-scrim {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            rgb(0 0 0 / 0.01),
+            rgb(0 0 0 / 0.01) 80%,
+            rgb(0 0 0 / 0.2)
+        );
+        color: #fff;
+        overflow: hidden;
+        pointer-events: none;
+        user-select: none;
+    }
+    .sd-image-description {
+        position: absolute;
+        bottom: clamp(5%, 1rem, 15%);
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .sd-image-error {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        background: var(--md-sys-color-surface-bright);
+        border: solid 1px var(--md-sys-color-outline);
+        border-radius: 4px;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sd-image-customize {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+    }
+}

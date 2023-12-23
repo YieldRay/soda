@@ -14,7 +14,7 @@ export const RichTooltip = forwardRef<
         children?: React.ReactNode
         subhead?: React.ReactNode
         action?: React.ReactNode
-        onActionClick?: () => void
+        onActionClick?: VoidFunction
     }>
 >(function RichTooltip(
     { className, subhead, children, action, onActionClick, ...props },

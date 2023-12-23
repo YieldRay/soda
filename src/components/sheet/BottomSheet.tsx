@@ -1,7 +1,7 @@
-import { ExtendProps } from '@/utils/type'
 import './sheet.scss'
-import { Scrim } from '@/utils/Scrim'
 import clsx from 'clsx'
+import { ExtendProps } from '@/utils/type'
+import { Scrim } from '@/composition/Scrim'
 import {
     forwardRef,
     useImperativeHandle,
@@ -14,23 +14,45 @@ import { Portal } from '@/utils/Portal'
 export type BottomSheetHandle = ReturnType<typeof drag>
 
 /**
- * This component use ref to control, so it's ref is not a element
- * but an object that holds controller functions
+ * This component DO NOT have ref forwarded.
+ *
+ * This component use ref to control show and hide,
+ * you can call `ref.current.show()` to show and `ref.current.hide()` to hide
  * @specs https://m3.material.io/components/bottom-sheets/specs
  */
 export const BottomSheet = forwardRef<
     BottomSheetHandle,
     ExtendProps<{
         children?: React.ReactNode
+        /**
+         * Hide the drag handle element, this make
+         * the entire bottom sheet draggable
+         */
         hideDragHandle?: boolean
+        /**
+         * Set fixed to true allow you toggle show and hide via ref
+         */
+        fixed?: boolean
+        /**
+         * Only works if `fixed` set to true
+         */
         onChange?: (visiable: boolean) => void
+        /**
+         * Only works if `fixed` set to true
+         *
+         * Most of the case you want call `ref.current.close()`
+         */
         onScrimClick?(): void
+        /**
+         * Only works if `fixed` set to true
+         */
         teleportTo?: Element | DocumentFragment
     }>
 >(function BottomSheet(
     {
         children,
         hideDragHandle,
+        fixed,
         onChange,
         onScrimClick,
         className,
@@ -49,9 +71,11 @@ export const BottomSheet = forwardRef<
     // useLayoutEffect() rather than useEffect()
     // this make sure ref.current exists in useImperativeHandle()
     useLayoutEffect(() => {
+        // do nothing if not fixed
+        if (!fixed) return
         const sheet = sheetRef.current!
         const handle = hideDragHandle ? sheet : handleRef.current!
-        dragHandlerRef.current = drag(handle, sheet, {
+        const handler = drag(handle, sheet, {
             onShow() {
                 setVisiable(true)
                 onChange?.(true)
@@ -61,32 +85,41 @@ export const BottomSheet = forwardRef<
                 onChange?.(false)
             },
         })
-        return dragHandlerRef.current.cleanup
-    }, [onChange, hideDragHandle])
+        dragHandlerRef.current = handler
+        return handler.cleanup
+    }, [fixed, onChange, hideDragHandle])
 
     useImperativeHandle(ref, () => dragHandlerRef.current!)
 
-    return (
-        <Portal container={teleportTo}>
-            <Scrim open={visiable} onClick={() => onScrimClick?.()} />
-            <div className="sd-bottom_sheet-scrim">
+    const bottomSheet = (
+        <div
+            {...props}
+            className={clsx('sd-bottom_sheet', className)}
+            ref={fixed ? sheetRef : null}
+            style={{
+                transform: fixed ? 'translateY(100%)' : undefined,
+                ...style,
+            }}
+        >
+            {!hideDragHandle && (
                 <div
-                    {...props}
-                    className={clsx('sd-bottom_sheet', className)}
-                    ref={sheetRef}
-                    style={{ transform: 'translateY(100%)', ...style }}
-                >
-                    {!hideDragHandle && (
-                        <div
-                            className="sd-bottom_sheet-drag_handle"
-                            ref={handleRef}
-                        />
-                    )}
-                    {children}
-                </div>
-            </div>
-        </Portal>
+                    className="sd-bottom_sheet-drag_handle"
+                    ref={fixed ? handleRef : null}
+                />
+            )}
+            {children}
+        </div>
     )
+
+    if (fixed)
+        return (
+            <Portal container={teleportTo}>
+                <Scrim open={visiable} onClick={() => onScrimClick?.()} />
+                <div className="sd-bottom_sheet-scrim">{bottomSheet}</div>
+            </Portal>
+        )
+
+    return bottomSheet
 })
 
 export function drag(

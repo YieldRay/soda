@@ -1,0 +1,51 @@
+.sd-action_button {
+    all: unset;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 200ms;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+
+    &[data-sd-inverse='false'] {
+        color: var(--md-sys-color-primary);
+        @media (any-hover: hover) {
+            &:hover {
+                background: rgb(0 0 0 / 0.04);
+            }
+        }
+        &:active {
+            background: rgb(0 0 0 / 0.08);
+        }
+        &:focus-visiable {
+            background: rgb(0 0 0 / 0.12);
+        }
+    }
+
+    &[data-sd-inverse='true'] {
+        color: var(--md-sys-color-inverse-primary);
+        @media (any-hover: hover) {
+            &:hover {
+                background: rgb(255 255 255 / 0.04);
+            }
+        }
+        &:active {
+            background: rgb(255 255 255 / 0.08);
+        }
+        &:focus-visiable {
+            background: rgb(255 255 255 / 0.12);
+        }
+    }
+
+    &[data-sd-disabled='true'] {
+        pointer-events: none;
+        filter: grayscale(98%) opacity(40%);
+    }
+}

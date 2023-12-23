@@ -20,7 +20,7 @@ export const FullScreenDialog = forwardRef<
         /**
          * Fires when the close icon button is click
          */
-        onCloseClick?: () => void
+        onCloseClick?: VoidFunction
         children?: React.ReactNode
         footer?: React.ReactNode
     }>

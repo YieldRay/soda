@@ -10,7 +10,7 @@ export const Collapsible = forwardRef<
         expanded?: boolean
         children?: React.ReactNode
     }>
->(function Collapsible({ expanded, children, ...props }, ref) {
+>(function Collapsible({ expanded, children, style, ...props }, ref) {
     const eRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => eRef.current!)
     useEffect(() => {
@@ -23,14 +23,16 @@ export const Collapsible = forwardRef<
     }, [expanded])
 
     return (
-        <div {...props} ref={eRef}>
-            <style jsx>{`
-                div {
-                    transition: all 200ms;
-                    overflow: hidden;
-                    boxsizing: border-box;
-                }
-            `}</style>
+        <div
+            {...props}
+            ref={eRef}
+            style={{
+                transition: 'all 200ms',
+                overflow: 'hidden',
+                boxSizing: 'border-box',
+                ...style,
+            }}
+        >
             {children}
         </div>
     )

@@ -19,7 +19,7 @@ export const Chip = forwardRef<
         leadingIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
         disabled?: boolean
-        onClick?: () => void
+        onClick?: VoidFunction
     }>
 >(function Chip(
     {

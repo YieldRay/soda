@@ -21,12 +21,12 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        enabled: false,
+        active: false,
     },
 }
 
 export const Enabled: Story = {
     args: {
-        enabled: true,
+        active: true,
     },
 }

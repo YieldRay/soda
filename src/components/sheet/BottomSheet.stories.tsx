@@ -19,27 +19,22 @@ export const Default: Story = {
     render: () => {
         const sheetRef = useRef<BottomSheetHandle>(null)
         return (
-            <div style={{ minHeight: '400px' }}>
-                <Button
-                    sd="text"
-                    onClick={() => {
-                        sheetRef.current?.show()
-                    }}
-                >
+            <div style={{ willChange: 'transform', minHeight: '400px' }}>
+                <Button sd="text" onClick={() => sheetRef.current!.show()}>
                     open bottom sheet
                 </Button>
 
                 <BottomSheet
+                    fixed
                     ref={sheetRef}
-                    onScrimClick={() => sheetRef.current?.hide()}
+                    onScrimClick={() => sheetRef.current!.hide()}
                 >
-                    <Button onClick={() => sheetRef.current?.show()}>▲</Button>
-                    <p>bottom sheet</p>
+                    <Button onClick={() => sheetRef.current!.show()}>▲</Button>
                     <p>
-                        support <code>{`teleportTo={document.body}`}</code> so
-                        you can teleport it to global
+                        Set the fixed property to true, so you can toggle it's
+                        show and hide via it's ref!
                     </p>
-                    <Button onClick={() => sheetRef.current?.hide()}>▼</Button>
+                    <Button onClick={() => sheetRef.current!.hide()}>▼</Button>
                 </BottomSheet>
             </div>
         )
@@ -50,32 +45,28 @@ export const HideDragHandle: Story = {
     render: () => {
         const sheetRef = useRef<BottomSheetHandle>(null)
         return (
-            <div style={{ minHeight: '400px' }}>
-                <Button
-                    sd="text"
-                    onClick={() => {
-                        sheetRef.current?.show()
-                    }}
-                >
+            <div style={{ willChange: 'transform', minHeight: '400px' }}>
+                <Button sd="text" onClick={() => sheetRef.current!.show()}>
                     open bottom sheet
                 </Button>
 
                 <BottomSheet
+                    fixed
                     ref={sheetRef}
-                    onScrimClick={() => sheetRef.current?.hide()}
+                    onScrimClick={() => sheetRef.current!.hide()}
                     hideDragHandle
                 >
                     <List
                         headline="Apple"
-                        onClick={() => sheetRef.current?.hide()}
+                        onClick={() => sheetRef.current!.hide()}
                     />
                     <List
                         headline="Banana"
-                        onClick={() => sheetRef.current?.hide()}
+                        onClick={() => sheetRef.current!.hide()}
                     />
                     <List
                         headline="Orange"
-                        onClick={() => sheetRef.current?.hide()}
+                        onClick={() => sheetRef.current!.hide()}
                     />
                 </BottomSheet>
             </div>

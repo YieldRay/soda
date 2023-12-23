@@ -30,7 +30,7 @@ export const Default: Story = {
             }
             style={{ minHeight: 'max(66.6vh, 400px)' }}
         >
-            <DrawerItem enabled>Home</DrawerItem>
+            <DrawerItem active>Home</DrawerItem>
             <DrawerItem>Search</DrawerItem>
             <DrawerItem>Settings</DrawerItem>
         </SideSheet>
@@ -41,7 +41,12 @@ export const Fixed: Story = {
     render: () => {
         const [open, setOpen] = useState(false)
         return (
-            <>
+            <div
+                style={{
+                    willChange: 'transform',
+                    minHeight: 'max(66.6vh, 400px)',
+                }}
+            >
                 <TopAppBar
                     leadingNavigationIcon={
                         <IconButton
@@ -53,13 +58,8 @@ export const Fixed: Story = {
                     TopAppBar
                 </TopAppBar>
 
-                <p style={{ minHeight: 'max(66.6vh, 400px)' }}>
-                    <p>click the menu icon to open</p>
-                    <p>
-                        support <code>{`teleportTo={document.body}`}</code> so
-                        you can teleport it to global
-                    </p>
-                </p>
+                <p>Click the menu icon to open.</p>
+                <p>Set the fixed property to true for convenience!</p>
 
                 <SideSheet
                     fixed
@@ -79,11 +79,11 @@ export const Fixed: Story = {
                         </div>
                     }
                 >
-                    <DrawerItem enabled>Home</DrawerItem>
+                    <DrawerItem active>Home</DrawerItem>
                     <DrawerItem>Search</DrawerItem>
                     <DrawerItem>Settings</DrawerItem>
                 </SideSheet>
-            </>
+            </div>
         )
     },
 }

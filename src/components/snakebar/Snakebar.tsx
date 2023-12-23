@@ -14,8 +14,8 @@ export const Snakebar = forwardRef<
     ExtendProps<{
         children?: React.ReactNode
         action?: React.ReactNode
-        onCloseClick?: () => void
-        onActionClick?: () => void
+        onCloseClick?: VoidFunction
+        onActionClick?: VoidFunction
         thirdLine?: boolean
     }>
 >(function Snakebar(

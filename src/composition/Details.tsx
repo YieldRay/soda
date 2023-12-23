@@ -1,5 +1,8 @@
+import './Details.scss'
 import { IconButton } from '@/components/icon-button'
 import { Collapsible } from '@/composition/Collapsible'
+import { mdiChevronDown } from '@mdi/js'
+import Icon from '@mdi/react'
 import clsx from 'clsx'
 import { useState } from 'react'
 
@@ -33,6 +36,7 @@ export function Details({
     sd?: 'outlined' | 'filled'
 }) {
     const sd = initSd || 'filled'
+    // icon sd is corresponding to sd
     const iconSd = (
         {
             outlined: 'standard',
@@ -51,38 +55,12 @@ export function Details({
     }
 
     return (
-        <div {...props} className={clsx('sd-details', sd)}>
-            <style jsx>{`
-                .sd-details {
-                    border-radius: 28px;
-                }
-                .sd-details.outlined {
-                    border: solid 1px var(--md-sys-color-outline);
-                }
-                .sd-details.filled {
-                    background: var(--md-sys-color-surface-container-low);
-                }
-                .sd-summary {
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 8px 8px 8px 16px;
-                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
-                }
-                .sd-summary.expanded.outlined {
-                    border-bottom: solid 1px var(--md-sys-color-outline);
-                }
-                .sd-summary.expanded.filled {
-                }
-                .children {
-                    margin: 16px;
-                }
-            `}</style>
-            <div
-                className={clsx('sd-summary', sd, isExpanded && 'expanded')}
-                onClick={dispatchChange}
-            >
+        <div
+            {...props}
+            className={clsx('sd-details', `sd-details-${sd}`, sd)}
+            data-sd-expanded={isExpanded}
+        >
+            <div className="sd-details_summary" onClick={dispatchChange}>
                 <span>{summary}</span>
                 <IconButton
                     sd={iconSd}
@@ -90,20 +68,18 @@ export function Details({
                         if (e.key === 'Enter') dispatchChange()
                     }}
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
+                    <Icon
+                        path={mdiChevronDown}
+                        size={1}
                         style={{
                             transform: `rotate(${isExpanded ? '180deg' : '0'})`,
                             transition: 'all 200ms',
                         }}
-                    >
-                        <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                    </svg>
+                    />
                 </IconButton>
             </div>
             <Collapsible expanded={isExpanded}>
-                <div className="children">{children}</div>
+                <div style={{ padding: '16px' }}>{children}</div>
             </Collapsible>
         </div>
     )

@@ -2,7 +2,7 @@ import './app-bar.scss'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
-import { createPortal } from 'react-dom'
+import { Portal } from '@/utils/Portal'
 
 /**
  * `<BottonAppBar>` has fixed style `height: 80px`
@@ -20,20 +20,22 @@ export const BottomAppBar = forwardRef<
          */
         fab?: React.ReactNode
         fixed?: boolean
+        /**
+         * Only works if `fixed` set to true
+         */
+        teleportTo?: Element | DocumentFragment
     }>
 >(function BottomAppBar(
-    { buttons, fab, fixed, className, style, ...props },
+    { buttons, fab, fixed, teleportTo, className, style, ...props },
     ref
 ) {
-    const ele = (
+    const bottomAppBar = (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-bottom_app_bar', className)}
             style={{
-                ...(fixed
-                    ? { position: 'fixed', left: '0', bottom: '0' }
-                    : undefined),
+                position: fixed ? 'fixed' : undefined,
                 ...style,
             }}
         >
@@ -42,6 +44,6 @@ export const BottomAppBar = forwardRef<
         </div>
     )
 
-    if (fixed) return createPortal(ele, document.body)
-    return ele
+    if (fixed) return <Portal container={teleportTo}>{bottomAppBar}</Portal>
+    return bottomAppBar
 })

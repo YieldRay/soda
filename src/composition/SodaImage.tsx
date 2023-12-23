@@ -1,3 +1,4 @@
+import './SodaImage.scss'
 import {
     forwardRef,
     useCallback,
@@ -11,6 +12,7 @@ import { ExtendProps } from '@/utils/type'
 import { CircularProgressIndicator } from '@/components/progress-indicator/CircularProgressIndicator'
 import { IconButton } from '@/components/icon-button'
 import { SimpleSodaTransition } from './SodaTransition'
+import { mdiImageBrokenVariant } from '@mdi/js'
 import isNumber from 'lodash-es/isNumber'
 import isFunction from 'lodash-es/isFunction'
 
@@ -83,7 +85,7 @@ export const SodaImage = forwardRef<
         height,
         minWidth,
         minHeight,
-        timeout = 10000,
+        timeout = 30 * 1000,
         className,
         placeholder,
         objectFit = 'contain',
@@ -195,7 +197,7 @@ export const SodaImage = forwardRef<
                 }
             }, timeout)
         }
-        // [warn]: only src change trigger this function to re-cache
+        // [warn]: only changes of `src` trigger this function to re-cache
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [src])
 
@@ -269,16 +271,7 @@ export const SodaImage = forwardRef<
 
             {isErrorShow && (
                 <div className="sd-image-error">
-                    <IconButton onClick={reload} title="reload">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="24px"
-                            height="24px"
-                        >
-                            <path d="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41" />
-                        </svg>
-                    </IconButton>
+                    <IconButton onClick={reload} path={mdiImageBrokenVariant} />
                 </div>
             )}
 
@@ -291,82 +284,6 @@ export const SodaImage = forwardRef<
             {isFunction(customize) && (
                 <div className="sd-image-customize">{customize(state)}</div>
             )}
-
-            <style jsx global>{`
-                .sd-image,
-                .sd-image > * {
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-                .sd-image {
-                    position: relative;
-                    overflow: hidden;
-                    mix-blend-mode: plus-lighter;
-                }
-                .sd-image > img {
-                    object-fit: contain;
-                    box-sizing: border-box;
-                    max-width: 100%;
-                    max-height: 100%;
-                }
-                .sd-image > img,
-                .sd-image .sd-image-placeholder {
-                    transition: all 300ms;
-                }
-                .sd-image .sd-image-placeholder {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-                .sd-image .sd-image-scrim {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    box-sizing: border-box;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(
-                        to bottom,
-                        rgb(0 0 0 / 0.01),
-                        rgb(0 0 0 / 0.01) 80%,
-                        rgb(0 0 0 / 0.2)
-                    );
-                    color: #fff;
-                    overflow: hidden;
-                    pointer-events: none;
-                    user-select: none;
-                }
-                .sd-image .sd-image-description {
-                    position: absolute;
-                    bottom: clamp(5%, 1rem, 15%);
-                    left: 50%;
-                    transform: translate(-50%);
-                }
-                .sd-image .sd-image-error {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    box-sizing: border-box;
-                    width: 100%;
-                    height: 100%;
-                    background: var(--md-sys-color-surface-bright);
-                    border: solid 1px var(--md-sys-color-outline);
-                    border-radius: 4px;
-                    padding: 4px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-                .sd-image .sd-image-customize {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    box-sizing: border-box;
-                    width: 100%;
-                    height: 100%;
-                }
-            `}</style>
         </div>
     )
 })

@@ -1,0 +1,26 @@
+.sd-details {
+    border-radius: 28px;
+    &-outlined {
+        border: solid 1px var(--md-sys-color-outline);
+    }
+    &-filled {
+        background: var(--md-sys-color-surface-container-low);
+    }
+
+    &_summary {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 8px 8px 16px;
+        -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+
+        &[data-sd-expanded][data-sd-outlined] {
+            border-bottom: solid 1px var(--md-sys-color-outline);
+        }
+    }
+
+    &-outlined[data-sd-expanded='true'] &_summary {
+        border-bottom: solid 1px var(--md-sys-color-outline);
+    }
+}

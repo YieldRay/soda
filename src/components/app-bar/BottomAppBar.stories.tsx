@@ -40,6 +40,7 @@ export const Default: Story = {
 
                 <BottomAppBar
                     fixed={fixed}
+                    teleportTo={document.body}
                     buttons={
                         <>
                             <IconButton path={mdiCheckboxOutline} />
@@ -53,7 +54,7 @@ export const Default: Story = {
                             <Icon path={mdiPlus} />
                         </Fab>
                     }
-                ></BottomAppBar>
+                />
             </div>
         )
     },

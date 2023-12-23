@@ -1,0 +1,48 @@
+.sd-drawer_item {
+    border-radius: 28px;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    height: 56px;
+    padding-left: 16px;
+    padding-right: 24px;
+    transition: all 200ms;
+    display: flex;
+    align-items: center;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: small;
+    font-weight: 500;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+
+    @media (any-hover: hover) {
+        &:hover {
+            background: rgb(0 0 0 / 0.04);
+        }
+    }
+    &:active {
+        background: rgb(0 0 0 / 0.08);
+    }
+    &[data-sd-active='true'] {
+        background: var(--md-sys-color-secondary-container);
+    }
+    &-icon {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+    }
+    &-label {
+        text-wrap: nowrap;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-left: 16px;
+        margin-right: 12px;
+    }
+    &-badge {
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+}

@@ -1,29 +1,38 @@
 import './app-bar.scss'
 import clsx from 'clsx'
-import { createPortal } from 'react-dom'
 import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
+import { Portal } from '@/utils/Portal'
 
 /**
+ *
  * @specs https://m3.material.io/components/top-app-bar/specs
  */
 export const TopAppBar = forwardRef<
     HTMLDivElement,
     ExtendProps<{
         children?: React.ReactNode
+        /**
+         * This affect the hight, e.g.:
+         *
+         * small/medium 64px  medium 112px  large 152px
+         * @default small
+         */
+        sd?: 'center' | 'small' | 'medium' | 'large'
         leadingNavigationIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
         fixed?: boolean
         /**
-         * @default small
+         * Only works if `fixed` set to true
          */
-        sd?: 'center' | 'small' | 'medium' | 'large'
+        teleportTo?: Element | DocumentFragment
     }>
 >(function TopAppBar(
     {
         leadingNavigationIcon,
         trailingIcon,
         fixed,
+        teleportTo,
         children,
         sd: initSd,
         className,
@@ -33,15 +42,14 @@ export const TopAppBar = forwardRef<
     ref
 ) {
     const sd = initSd || 'small'
-    const ele = (
+
+    const topAppBar = (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-top_app_bar', className)}
             style={{
-                ...(fixed
-                    ? { position: 'fixed', left: '0', top: '0' }
-                    : undefined),
+                position: fixed ? 'fixed' : undefined,
                 ...style,
             }}
             data-sd={sd}
@@ -58,10 +66,11 @@ export const TopAppBar = forwardRef<
                 </div>
             </div>
             {(sd === 'medium' || sd === 'large') && (
-                <div className="sd-top_app_bar-headline"> {children}</div>
+                <div className="sd-top_app_bar-headline">{children}</div>
             )}
         </div>
     )
-    if (fixed) return createPortal(ele, document.body)
-    return ele
+
+    if (fixed) return <Portal container={teleportTo}>{topAppBar}</Portal>
+    return topAppBar
 })

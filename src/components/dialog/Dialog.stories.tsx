@@ -5,7 +5,6 @@ import { Button } from '../button'
 import { ModalHolder } from '@/composition/ModalHolder'
 import { useState } from 'react'
 import { FloatingOverlay } from '@floating-ui/react'
-import { DialogHolder } from '@/composition/DialogHolder'
 
 const meta = {
     title: 'Dialog/Dialog',
@@ -32,6 +31,23 @@ type Story = StoryObj<typeof meta>
 export const UseModalHolder: Story = {
     render: (props) => {
         const [open, setOpen] = useState(false)
+
+        const dialog = (
+            <Dialog
+                {...props}
+                buttons={
+                    <>
+                        <Button sd="text" onClick={() => alert('wow!')}>
+                            wow!
+                        </Button>
+                        <Button sd="text" onClick={() => setOpen(false)}>
+                            close
+                        </Button>
+                    </>
+                }
+            />
+        )
+
         return (
             <>
                 <Button sd="text" onClick={() => setOpen(true)}>
@@ -39,55 +55,8 @@ export const UseModalHolder: Story = {
                 </Button>
 
                 <ModalHolder open={open} onScrimClick={() => setOpen(false)}>
-                    <Dialog
-                        {...props}
-                        buttons={
-                            <>
-                                <Button sd="text" onClick={() => alert('wow!')}>
-                                    wow!
-                                </Button>
-                                <Button
-                                    sd="text"
-                                    onClick={() => setOpen(false)}
-                                >
-                                    close
-                                </Button>
-                            </>
-                        }
-                    />
+                    {dialog}
                 </ModalHolder>
-            </>
-        )
-    },
-}
-
-export const UseDialogHolder: Story = {
-    render: (props) => {
-        const [open, setOpen] = useState(false)
-        return (
-            <>
-                <Button sd="text" onClick={() => setOpen(true)}>
-                    {`open dialog (use <DialogHolder> from soda)`}
-                </Button>
-
-                <DialogHolder open={open}>
-                    <Dialog
-                        {...props}
-                        buttons={
-                            <>
-                                <Button sd="text" onClick={() => alert('wow!')}>
-                                    wow!
-                                </Button>
-                                <Button
-                                    sd="text"
-                                    onClick={() => setOpen(false)}
-                                >
-                                    close
-                                </Button>
-                            </>
-                        }
-                    />
-                </DialogHolder>
             </>
         )
     },

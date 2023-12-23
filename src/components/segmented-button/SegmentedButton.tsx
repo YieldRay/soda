@@ -59,7 +59,7 @@ export const SegmentedButton = forwardRef<
                         key={value ?? index}
                         tabIndex={index + 1}
                         className="sd-segmented_button-item"
-                        data-sd-active={value === realValue ? 'true' : 'false'}
+                        data-sd-active={value === realValue}
                         data-sd-disabled={disabled}
                         onClick={() => dispatchChange(value)}
                         onKeyDown={(e) => {
