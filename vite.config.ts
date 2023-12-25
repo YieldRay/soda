@@ -65,7 +65,7 @@ function inventory() {
                 ])
         )
 
-    const entiresForComponents = Object.fromEntries(
+    const entriesForComponents = Object.fromEntries(
         fs
             .readdirSync('src/components')
             .filter((name) =>
@@ -96,7 +96,7 @@ function inventory() {
         ...entriesFromDir('hooks'),
         ...entriesFromDir('ripple'),
         ...entriesFromDir('utils'),
-        ...entiresForComponents,
+        ...entriesForComponents,
         ...entriesForComposition,
     }
     return entry

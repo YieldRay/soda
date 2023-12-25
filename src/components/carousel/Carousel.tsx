@@ -14,7 +14,7 @@ interface ItemWithFlex extends Item {
 }
 
 /**
- * [warn]: Incomplete implemention, and only three visiable items is implemented,
+ * [warn]: Incomplete implementation, and only three visible items is implemented,
  * make sure the array length is multiple of 3, or it will throw error
  * @specs https://m3.material.io/components/carousel/specs
  */
@@ -114,53 +114,53 @@ function updateFlex(
     prev: ItemWithFlex[],
     gesture: 'rr' | 'r' | 'l' | 'll'
 ): ItemWithFlex[] {
-    const firstVisiableIndex = prev.findIndex(({ flex }) => flex > 0)!
+    const firstVisibleIndex = prev.findIndex(({ flex }) => flex > 0)!
     let virtualItems = prev.slice(0)
 
-    // console.debug({ gesture, firstVisiableIndex })
+    // console.debug({ gesture, firstVisibleIndex })
 
     // what we click, what to enlarge
     switch (gesture) {
         case 'rr':
-            if (firstVisiableIndex < prev.length - 3) {
+            if (firstVisibleIndex < prev.length - 3) {
                 virtualItems = clearFlex(virtualItems)
-                virtualItems[firstVisiableIndex + 3].flex = 4
-                virtualItems[firstVisiableIndex + 4].flex = 2
-                virtualItems[firstVisiableIndex + 5].flex = 1
+                virtualItems[firstVisibleIndex + 3].flex = 4
+                virtualItems[firstVisibleIndex + 4].flex = 2
+                virtualItems[firstVisibleIndex + 5].flex = 1
             } else {
                 virtualItems = clearFlex(virtualItems)
-                virtualItems[firstVisiableIndex].flex = 1
-                virtualItems[firstVisiableIndex + 1].flex = 2
-                virtualItems[firstVisiableIndex + 2].flex = 4
+                virtualItems[firstVisibleIndex].flex = 1
+                virtualItems[firstVisibleIndex + 1].flex = 2
+                virtualItems[firstVisibleIndex + 2].flex = 4
             }
             break
         case 'r':
-            if (prev[firstVisiableIndex + 2].flex === 1) {
+            if (prev[firstVisibleIndex + 2].flex === 1) {
                 virtualItems = clearFlex(virtualItems)
-                virtualItems[firstVisiableIndex].flex = 1
-                virtualItems[firstVisiableIndex + 1].flex = 2
-                virtualItems[firstVisiableIndex + 2].flex = 4
+                virtualItems[firstVisibleIndex].flex = 1
+                virtualItems[firstVisibleIndex + 1].flex = 2
+                virtualItems[firstVisibleIndex + 2].flex = 4
             }
             break
         case 'll':
-            if (firstVisiableIndex > 2) {
+            if (firstVisibleIndex > 2) {
                 virtualItems = clearFlex(virtualItems)
-                virtualItems[firstVisiableIndex - 3].flex = 1
-                virtualItems[firstVisiableIndex - 2].flex = 2
-                virtualItems[firstVisiableIndex - 1].flex = 4
+                virtualItems[firstVisibleIndex - 3].flex = 1
+                virtualItems[firstVisibleIndex - 2].flex = 2
+                virtualItems[firstVisibleIndex - 1].flex = 4
             } else {
                 virtualItems = clearFlex(virtualItems)
-                virtualItems[firstVisiableIndex].flex = 4
-                virtualItems[firstVisiableIndex + 1].flex = 2
-                virtualItems[firstVisiableIndex + 2].flex = 1
+                virtualItems[firstVisibleIndex].flex = 4
+                virtualItems[firstVisibleIndex + 1].flex = 2
+                virtualItems[firstVisibleIndex + 2].flex = 1
             }
             break
         case 'l':
-            if (prev[firstVisiableIndex].flex !== 4) {
+            if (prev[firstVisibleIndex].flex !== 4) {
                 virtualItems = clearFlex(virtualItems)
-                virtualItems[firstVisiableIndex].flex = 4
-                virtualItems[firstVisiableIndex + 1].flex = 2
-                virtualItems[firstVisiableIndex + 2].flex = 1
+                virtualItems[firstVisibleIndex].flex = 4
+                virtualItems[firstVisibleIndex + 1].flex = 2
+                virtualItems[firstVisibleIndex + 2].flex = 1
             }
             break
     }

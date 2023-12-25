@@ -36,7 +36,7 @@ export const BottomSheet = forwardRef<
         /**
          * Only works if `fixed` set to true
          */
-        onChange?: (visiable: boolean) => void
+        onChange?: (visible: boolean) => void
         /**
          * Only works if `fixed` set to true
          *
@@ -66,7 +66,7 @@ export const BottomSheet = forwardRef<
     const handleRef = useRef<HTMLDivElement>(null)
 
     const dragHandlerRef = useRef<ReturnType<typeof drag> | null>(null)
-    const [visiable, setVisiable] = useState(false) // = isOpen
+    const [visible, setVisible] = useState(false) // = isOpen
 
     // useLayoutEffect() rather than useEffect()
     // this make sure ref.current exists in useImperativeHandle()
@@ -77,11 +77,11 @@ export const BottomSheet = forwardRef<
         const handle = hideDragHandle ? sheet : handleRef.current!
         const handler = drag(handle, sheet, {
             onShow() {
-                setVisiable(true)
+                setVisible(true)
                 onChange?.(true)
             },
             onHide() {
-                setVisiable(false)
+                setVisible(false)
                 onChange?.(false)
             },
         })
@@ -114,7 +114,7 @@ export const BottomSheet = forwardRef<
     if (fixed)
         return (
             <Portal container={teleportTo}>
-                <Scrim open={visiable} onClick={() => onScrimClick?.()} />
+                <Scrim open={visible} onClick={() => onScrimClick?.()} />
                 <div className="sd-bottom_sheet-scrim">{bottomSheet}</div>
             </Portal>
         )
@@ -235,7 +235,7 @@ export function drag(
         },
         show,
         hide,
-        visiable() {
+        visible() {
             return translateY > 0
         },
     }

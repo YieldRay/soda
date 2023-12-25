@@ -1,6 +1,6 @@
 // https://m3.material.io/components/snackbar/specs
 
-.sd-snakebar {
+.sd-snackbar {
     background: var(--md-sys-color-inverse-surface);
     color: var(--md-sys-color-inverse-on-surface);
     @include elevation-level3;
@@ -21,6 +21,10 @@
         line-height: 20px;
         font-size: 14px;
         font-weight: 400;
+
+        &:empty {
+            height: 16px;
+        }
     }
     &-action {
         flex-shrink: 0;
@@ -47,10 +51,10 @@
     &[data-sd-third_line] {
         flex-direction: column;
         padding-bottom: 8px;
-        .sd-snakebar-action {
+        .sd-snackbar-action {
             align-self: flex-end;
         }
-        .sd-snakebar-icon {
+        .sd-snackbar-icon {
             display: none;
         }
     }

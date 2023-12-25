@@ -15,18 +15,18 @@
     &[data-sd='determinate'] .sd-linear_progress_indicator-track {
         transition: width 200ms linear;
     }
-    &[data-sd='undeterminate'] {
+    &[data-sd='indeterminate'] {
         overflow: hidden;
         .sd-linear_progress_indicator-track {
             width: 50%;
-            animation: sd-linear_progress_indicator-undeterminate 2.1s
+            animation: sd-linear_progress_indicator-indeterminate 2.1s
                 cubic-bezier(0.65, 0.815, 0.735, 0.395) 0s infinite;
         }
     }
 }
 
 // TODO: this is material 2 animation, material you animation requires more work
-@keyframes sd-linear_progress_indicator-undeterminate {
+@keyframes sd-linear_progress_indicator-indeterminate {
     from {
         transform: translateX(-100%);
     }
@@ -60,14 +60,14 @@
     &[data-sd='determinate'] .sd-linear_progress_indicator-track {
         transition: all 200ms linear;
     }
-    &[data-sd='undeterminate'] {
-        animation: sd-circular_progress_indicator-undeterminate 1.05s
+    &[data-sd='indeterminate'] {
+        animation: sd-circular_progress_indicator-indeterminate 1.05s
             cubic-bezier(0.65, 0.815, 0.735, 0.395) 0s infinite;
     }
 }
 
 // TODO: this is not correct animation, but easy to implement
-@keyframes sd-circular_progress_indicator-undeterminate {
+@keyframes sd-circular_progress_indicator-indeterminate {
     from {
         transform: rotate(0deg);
     }

@@ -304,7 +304,7 @@ const NestedMenuComponent = React.forwardRef<
  * any sub menu in it will automatically become a `<MenuItem>`.
  *
  * These two components add logic to `<Menu>` `<MenuItem>` components.
- * Refer relative components documentd to see how to use.
+ * Refer relative components documented to see how to use.
  *
  * Based on floating-ui, supports keyboard navigation.
  */

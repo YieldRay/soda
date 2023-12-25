@@ -25,7 +25,7 @@ export const SodaTransition = forwardRef<
          * `true` for enter, `false` for leave
          */
         state?: boolean
-        allowFristRun?: boolean
+        allowFirstRun?: boolean
         children?: React.ReactNode
     }>
 >(function SodaTransition(
@@ -36,7 +36,7 @@ export const SodaTransition = forwardRef<
         afterLeave = {},
         style,
         state = false,
-        allowFristRun = false,
+        allowFirstRun = false,
         children,
         as,
         ...props
@@ -47,10 +47,10 @@ export const SodaTransition = forwardRef<
     const [transitionStyle, setTransitionStyle] = useState(
         state ? beforeEnter : beforeLeave
     )
-    const isFristRun = useRef(!allowFristRun)
+    const isFirstRun = useRef(!allowFirstRun)
 
     useLayoutEffect(() => {
-        if (isFristRun.current) {
+        if (isFirstRun.current) {
             // do not transition if is first run
             setTransitionStyle(state ? afterEnter : afterLeave)
             setShow(state)
@@ -61,9 +61,9 @@ export const SodaTransition = forwardRef<
     }, [state, beforeEnter, beforeLeave, afterEnter, afterLeave])
 
     useEffect(() => {
-        if (isFristRun.current!) {
+        if (isFirstRun.current!) {
             // do not transition if is first run
-            isFristRun.current = false
+            isFirstRun.current = false
             return
         }
 

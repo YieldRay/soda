@@ -5,7 +5,7 @@ import { forwardRef } from 'react'
 import { Portal } from '@/utils/Portal'
 
 /**
- * `<BottonAppBar>` has fixed style `height: 80px`
+ * `<BottomAppBar>` has fixed style `height: 80px`
  * @specs https://m3.material.io/components/bottom-app-bar/specs
  */
 export const BottomAppBar = forwardRef<

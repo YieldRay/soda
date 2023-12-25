@@ -7,7 +7,7 @@ export const ProgressIndicator = forwardRef<
     {
         sd: 'circular' | 'linear'
         /**
-         * Between 0 and 1, if is unset, act as undeterminate
+         * Between 0 and 1, if is unset, act as indeterminate
          */
         value?: number
     }

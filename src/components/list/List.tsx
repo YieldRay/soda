@@ -16,7 +16,7 @@ export const List = forwardRef<
         supportingText?: React.ReactNode
         leadingIcon?: React.ReactNode
         leadingAvatarLabelText?: React.ReactNode
-        leadingVideoThubnail?: React.ReactNode
+        leadingVideoThumbnail?: React.ReactNode
         trailingIcon?: React.ReactNode
         trailingSupportingText?: React.ReactNode
         disabled?: boolean
@@ -34,7 +34,7 @@ export const List = forwardRef<
         supportingText,
         leadingIcon,
         leadingAvatarLabelText,
-        leadingVideoThubnail,
+        leadingVideoThumbnail,
         trailingIcon,
         trailingSupportingText,
         disabled,
@@ -51,9 +51,9 @@ export const List = forwardRef<
             data-sd-lines={lines}
             data-sd-disabled={disabled}
         >
-            {leadingVideoThubnail && (
-                <div className="sd-list-leading_video_thubnail">
-                    {leadingVideoThubnail}
+            {leadingVideoThumbnail && (
+                <div className="sd-list-leading_video_thumbnail">
+                    {leadingVideoThumbnail}
                 </div>
             )}
             {leadingIcon && (

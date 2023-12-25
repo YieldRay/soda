@@ -14,7 +14,7 @@ type TimeValue = readonly [hour: number, minute: number]
 
 /**
  * [warn]: data itself always use 24 hours system,
- * but it's appearance varys by changing the `use24hourSystem` property
+ * but it's appearance varies by changing the `use24hourSystem` property
  * @specs https://m3.material.io/components/time-pickers/specs
  */
 export const TimePicker = forwardRef<
@@ -22,7 +22,7 @@ export const TimePicker = forwardRef<
     ExtendProps<{
         initValue?: TimeValue
         /**
-         * If is not spcified, will be vertical when screen width <= 600px, otherwise horizontal
+         * If is not specified, will be vertical when screen width <= 600px, otherwise horizontal
          */
         direction?: 'vertical' | 'horizontal'
         /**

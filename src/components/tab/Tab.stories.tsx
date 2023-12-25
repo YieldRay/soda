@@ -23,19 +23,23 @@ export const Default: Story = {
 
         return (
             <Tabs value={value} onChange={setValue}>
-                <Tab icon={<Icon path={mdiCheck} />} value="0">
-                    Apple
-                </Tab>
-                <Tab icon={<Icon path={mdiClose} />} value="1">
-                    Banana
-                </Tab>
-                <Tab icon={<Icon path={mdiMagnify} />} value="2">
-                    Orange
-                </Tab>
+                <div>
+                    <Tab icon={<Icon path={mdiCheck} />} value="0">
+                        Apple
+                    </Tab>
+                    <Tab icon={<Icon path={mdiClose} />} value="1">
+                        Banana
+                    </Tab>
+                    <Tab icon={<Icon path={mdiMagnify} />} value="2">
+                        Orange
+                    </Tab>
+                </div>
 
-                <TabPanel value="0">Panel 0</TabPanel>
-                <TabPanel value="1">Panel 1</TabPanel>
-                <TabPanel value="2">Panel 2</TabPanel>
+                <div>
+                    <TabPanel value="0">Panel 0</TabPanel>
+                    <TabPanel value="1">Panel 1</TabPanel>
+                    <TabPanel value="2">Panel 2</TabPanel>
+                </div>
             </Tabs>
         )
     },

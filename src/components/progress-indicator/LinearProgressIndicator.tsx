@@ -13,7 +13,7 @@ export const LinearProgressIndicator = forwardRef<
     HTMLDivElement,
     ExtendProps<{
         /**
-         * Between 0 and 1, if is unset, act as undeterminate
+         * Between 0 and 1, if is unset, act as indeterminate
          */
         value?: number
     }>
@@ -24,7 +24,7 @@ export const LinearProgressIndicator = forwardRef<
             ref={ref}
             className={clsx('sd-linear_progress_indicator', className)}
             data-sd={
-                typeof value !== 'undefined' ? 'determinate' : 'undeterminate'
+                typeof value !== 'undefined' ? 'determinate' : 'indeterminate'
             }
         >
             <div

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 /**
- * For pratical, this hook only intend for one element
+ * For practical, this hook only intend for one element
  * @returns ResizeObserverEntry
  */
 export function useResizeObserver(

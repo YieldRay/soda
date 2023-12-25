@@ -10,7 +10,7 @@ export const CircularProgressIndicator = forwardRef<
     HTMLDivElement,
     ExtendProps<{
         /**
-         * Between 0 and 1, if is unset, act as undeterminate
+         * Between 0 and 1, if is unset, act as indeterminate
          */
         value?: number
         /**
@@ -39,7 +39,7 @@ export const CircularProgressIndicator = forwardRef<
             className={clsx('sd-circular_progress_indicator', className)}
             ref={eRef}
             data-sd={
-                typeof value !== 'undefined' ? 'determinate' : 'undeterminate'
+                typeof value !== 'undefined' ? 'determinate' : 'indeterminate'
             }
         ></div>
     )

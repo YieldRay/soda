@@ -63,7 +63,7 @@ export const Default: Story = {
         const [items, setItems] = useState(props.items)
         return (
             <>
-                <Button onClick={() => setFixed(!fixed)}>toogle fixed</Button>
+                <Button onClick={() => setFixed(!fixed)}>toggle fixed</Button>
                 <NavigationRail
                     fab={props.fab}
                     fixed={fixed}

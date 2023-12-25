@@ -2,7 +2,7 @@ import { ExtendProps } from '@/utils/type'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 
 /**
- * Low level component, use `<Details>` component if possiable
+ * Low level component, use `<Details>` component if possible
  */
 export const Collapsible = forwardRef<
     HTMLDivElement,

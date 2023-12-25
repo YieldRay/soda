@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Snakebar } from '.'
+import { Snackbar } from '.'
 
 const meta = {
-    title: 'Snakebar',
-    component: Snakebar,
+    title: 'Snackbar',
+    component: Snackbar,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof Snakebar>
+} satisfies Meta<typeof Snackbar>
 
 export default meta
 
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        children: 'snakebar!',
+        children: 'snackbar!',
         action: <>Dismiss</>,
         onActionClick: () => console.log('onActionClick'),
         onCloseClick: () => console.log('onCloseClick'),
@@ -32,7 +32,7 @@ export const Long: Story = {
     },
 }
 
-export const ThridLine: Story = {
+export const ThirdLine: Story = {
     args: {
         children:
             'Snackbars should be placed at the bottom of a UI, in front of the main content. In some cases, snackbars can be nudged upwards to avoid overlapping with other UI elements near the bottom, such as FABs or bottom app bars.',

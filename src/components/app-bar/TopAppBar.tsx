@@ -13,7 +13,7 @@ export const TopAppBar = forwardRef<
     ExtendProps<{
         children?: React.ReactNode
         /**
-         * This affect the hight, e.g.:
+         * This affect the height, e.g.:
          *
          * small/medium 64px  medium 112px  large 152px
          * @default small

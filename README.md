@@ -35,7 +35,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 ```
 
-# Documention
+# Documentation
 
 See: <https://yieldray.github.io/soda/>
 
@@ -72,7 +72,7 @@ A replacement is google fonts: <https://fonts.google.com/icons>
 
 ## Fonts
 
-It's highly recomended that you use a font that supports `font-weight: 500`,  
+It's highly recommended that you use a font that supports `font-weight: 500`,  
 as some component state requires it to behavior clear to user.
 
 The easiest way is to use the `Roboto` font, just simply add a few lines of css code as below!
@@ -143,5 +143,5 @@ npm run storybook
 Naming convention:
 
 -   a `.tsx` file with capitalized beginning is a react component (export a same name, no default export)
--   a `.scss` file will use strigula to seperate component name in file name
--   in any css code, use underscore to seperate component name, use strigula to seperate name segments
+-   a `.scss` file will use strigula to separate component name in file name
+-   in any css code, use underscore to separate component name, use strigula to separate name segments

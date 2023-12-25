@@ -28,7 +28,7 @@ export const Linear: Story = {
     ],
 }
 
-export const Cicular: Story = {
+export const Circular: Story = {
     args: {
         sd: 'circular',
     },
