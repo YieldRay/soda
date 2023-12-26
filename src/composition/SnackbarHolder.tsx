@@ -19,7 +19,7 @@ export function SnackbarHolder({
     return (
         <Portal container={teleportTo}>
             <style jsx global>{`
-                .sd-snakebar_holder {
+                .sd-snackbar_holder {
                     position: fixed;
                     bottom: 0;
                     left: 0;
@@ -29,42 +29,59 @@ export function SnackbarHolder({
                     overflow: hidden;
                 }
 
-                .sd-snakebar_holder-span {
+                .sd-snackbar_holder-span {
                     padding: 0;
                 }
-                .sd-snakebar_holder-span > .sd-snakebar {
+                .sd-snackbar_holder-span > .sd-snackbar {
                     border-radius: 0;
                 }
-                .sd-snakebar_holder .sd-snakebar {
+                .sd-snackbar_holder .sd-snackbar {
                     display: flex;
                 }
             `}</style>
             <div
                 className={clsx(
-                    'sd-snakebar_holder',
-                    span && 'sd-snakebar_holder-span'
+                    'sd-snackbar_holder',
+                    span && 'sd-snackbar_holder-span'
                 )}
                 ref={(el) => {
                     if (!el) return
-
-                    const { height } = el.getBoundingClientRect()
-                    el.onclick = () =>
-                        el.animate(
-                            {
-                                clipPath: [
-                                    `inset(${height * 0.75 + 'px'} 0 0 0)`,
-                                    `inset(0 0 0 0)`,
-                                ],
-                            },
-                            {
-                                duration: 9000,
-                                easing: 'cubic-bezier(0,1,0,1)',
-                            }
-                        )
+                    el.onclick = () => hide(el)
                 }}
             >
                 {children}
             </div>
         </Portal>
+    )
+}
+
+function show(el: HTMLElement) {
+    const { height } = el.getBoundingClientRect()
+    el.animate(
+        {
+            clipPath: [
+                `inset(${height * 0.666 + 'px'} 0 0 0)`,
+                `inset(0 0 0 0)`,
+            ],
+            translate: [`0 ${height * 0.333}px`, '0 0'],
+        },
+        {
+            duration: 900,
+            easing: 'cubic-bezier(0.2, 0, 0, 1)',
+        }
+    )
+}
+
+function hide(el: HTMLElement) {
+    const { height } = el.getBoundingClientRect()
+    el.animate(
+        {
+            translate: ['0 0', `0 ${height * 0.333}px`],
+            opacity: ['1', '0'],
+        },
+        {
+            duration: 400,
+            easing: 'cubic-bezier(0, 0, 0, 1)',
+        }
     )
 }

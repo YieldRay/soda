@@ -1,7 +1,7 @@
 .sd-details {
     border-radius: 28px;
     &-outlined {
-        border: solid 1px var(--md-sys-color-outline);
+        @include outline;
     }
     &-filled {
         background: var(--md-sys-color-surface-container-low);

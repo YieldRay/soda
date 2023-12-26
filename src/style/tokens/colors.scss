@@ -1,0 +1,114 @@
+@mixin primary {
+    color: var(--md-sys-color-on-primary);
+    background-color: var(--md-sys-color-primary);
+}
+@mixin on-primary {
+    color: var(--md-sys-color-primary);
+    background-color: var(--md-sys-color-on-primary);
+}
+@mixin primary-container {
+    color: var(--md-sys-color-on-primary-container);
+    background-color: var(--md-sys-color-primary-container);
+}
+@mixin on-primary-container {
+    color: var(--md-sys-color-primary-container);
+    background-color: var(--md-sys-color-on-primary-container);
+}
+@mixin secondary {
+    color: var(--md-sys-color-on-secondary);
+    background-color: var(--md-sys-color-secondary);
+}
+@mixin on-secondary {
+    color: var(--md-sys-color-secondary);
+    background-color: var(--md-sys-color-on-secondary);
+}
+@mixin secondary-container {
+    color: var(--md-sys-color-on-secondary-container);
+    background-color: var(--md-sys-color-secondary-container);
+}
+@mixin on-secondary-container {
+    color: var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-on-secondary-container);
+}
+@mixin tertiary {
+    color: var(--md-sys-color-on-tertiary);
+    background-color: var(--md-sys-color-tertiary);
+}
+@mixin on-tertiary {
+    color: var(--md-sys-color-tertiary);
+    background-color: var(--md-sys-color-on-tertiary);
+}
+@mixin tertiary-container {
+    color: var(--md-sys-color-on-tertiary-container);
+    background-color: var(--md-sys-color-tertiary-container);
+}
+@mixin on-tertiary-container {
+    color: var(--md-sys-color-tertiary-container);
+    background-color: var(--md-sys-color-on-tertiary-container);
+}
+@mixin background {
+    color: var(--md-sys-color-on-background);
+    background-color: var(--md-sys-color-background);
+}
+@mixin surface {
+    color: var(--md-sys-color-on-surface);
+    background-color: var(--md-sys-color-surface);
+}
+@mixin surface-variant {
+    color: var(--md-sys-color-on-surface-variant);
+    background-color: var(--md-sys-color-surface-variant);
+}
+@mixin on-surface-variant {
+    color: var(--md-sys-color-surface-variant);
+    background-color: var(--md-sys-color-on-surface-variant);
+}
+@mixin outline {
+    border: 1px solid var(--md-sys-color-outline);
+}
+@mixin inverse-surface {
+    color: var(--md-sys-color-on-inverse-surface);
+    background-color: var(--md-sys-color-inverse-surface);
+}
+@mixin on-inverse-surface {
+    color: var(--md-sys-color-inverse-surface);
+    background-color: var(--md-sys-color-on-inverse-surface);
+}
+@mixin inverse-primary {
+    color: var(--md-sys-color-on-inverse-primary);
+    background-color: var(--md-sys-color-inverse-primary);
+}
+@mixin on-inverse-primary {
+    color: var(--md-sys-color-inverse-primary);
+    background-color: var(--md-sys-color-on-inverse-primary);
+}
+@mixin surface-tint {
+    background-color: var(--md-sys-color-on-surface-tint);
+}
+@mixin error {
+    color: var(--md-sys-color-on-error);
+    background-color: var(--md-sys-color-error);
+}
+@mixin on-error {
+    color: var(--md-sys-color-error);
+    background-color: var(--md-sys-color-on-error);
+}
+@mixin error-container {
+    color: var(--md-sys-color-on-error-container);
+    background-color: var(--md-sys-color-error-container);
+}
+@mixin on-error-container {
+    color: var(--md-sys-color-error-container);
+    background-color: var(--md-sys-color-on-error-container);
+}
+@mixin black {
+    background-color: var(--md-ref-palette-black);
+}
+@mixin black-text {
+    color: var(--md-ref-palette-black);
+}
+@mixin white {
+    background-color: var(--md-ref-palette-white);
+}
+@mixin white-text {
+    color: var(--md-ref-palette-white);
+}

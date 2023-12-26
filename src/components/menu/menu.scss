@@ -47,7 +47,7 @@
         color: var(--md-sys-color-on-surface-variant);
         font-size: small;
     }
-    transition: all 200ms;
+    transition: background-color 200ms;
     @media (any-hover: hover) {
         &:hover {
             background: rgb(0 0 0 / 0.04);

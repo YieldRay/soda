@@ -10,18 +10,16 @@
         height: var(--height);
         padding: 0 12px;
         cursor: pointer;
-        $border: solid 1px var(--md-sys-color-outline);
-        border-right: $border;
-        border-top: $border;
-        border-bottom: $border;
+        @include outline;
+        border-left: none;
         user-select: none;
         &:first-child {
-            border-left: $border;
+            border-left: solid 1px var(--md-sys-color-outline);
             border-top-left-radius: var(--height);
             border-bottom-left-radius: var(--height);
         }
         &:last-child {
-            border-right: $border;
+            border-right: solid 1px var(--md-sys-color-outline);
             border-top-right-radius: var(--height);
             border-bottom-right-radius: var(--height);
         }
@@ -63,7 +61,7 @@
             opacity: 0.38;
             border-right: none;
             & ~ .sd-segmented_button-item {
-                border-left: $border;
+                border-left: solid 1px var(--md-sys-color-outline);
             }
         }
         .sd-segmented_button-label {

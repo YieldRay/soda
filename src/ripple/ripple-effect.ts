@@ -64,29 +64,41 @@ export function ripple(
                 fill: 'forwards',
             }
         )
+        scaleUpAnimation.id = 'scaleUpAnimation'
 
-        const removeRipple = (onFinish?: VoidFunction) => {
+        const startRemoveRipple = (onFinish?: VoidFunction) => {
             if (!ripple) return
+
+            // if the element already have fadeOutAnimation running, skip
+            if (ripple.getAnimations().find((a) => a.id === 'fadeOutAnimation'))
+                return
 
             const fadeOutAnimation = ripple.animate(
                 { opacity: ['1', '0'] },
                 {
                     duration,
+                    easing: 'linear',
                     fill: 'forwards',
                 }
             )
+            fadeOutAnimation.id = 'fadeOutAnimation'
 
-            fadeOutAnimation.oncancel = fadeOutAnimation.onfinish = () => {
+            fadeOutAnimation.onfinish = () => {
                 ripple.remove()
                 onFinish?.()
+            }
+
+            fadeOutAnimation.oncancel = () => {
+                fadeOutAnimation.finish()
             }
         }
 
         if (autoRemove) {
-            scaleUpAnimation.onfinish = () => removeRipple()
+            scaleUpAnimation.oncancel = () => startRemoveRipple()
+            scaleUpAnimation.onfinish = () => startRemoveRipple()
         }
 
-        return removeRipple
+        return startRemoveRipple
     }
 
     // handle pointer event
@@ -109,13 +121,14 @@ export function ripple(
         const { clientX: pointerX, clientY: pointerY } = event // pointer pos
         const { x: eleX, y: eleY } = ele.getBoundingClientRect() // ele pos
 
-        const removeRipple = rippleAt(pointerX - eleX, pointerY - eleY)
+        const startRemoveRipple = rippleAt(pointerX - eleX, pointerY - eleY)
 
-        const onPointerUp = () => {
-            removeRipple(() => {
-                ele.removeEventListener('pointercancel', onPointerUp)
-                window.removeEventListener('pointerup', onPointerUp)
-            })
+        const onPointerUp = (e: PointerEvent) => {
+            if (e.pointerId === event.pointerId)
+                startRemoveRipple(() => {
+                    ele.removeEventListener('pointercancel', onPointerUp)
+                    window.removeEventListener('pointerup', onPointerUp)
+                })
         }
 
         ele.addEventListener('pointercancel', onPointerUp)

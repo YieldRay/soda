@@ -148,7 +148,7 @@ export function drag(
             [{ transform: `translateY(${height}px)` }],
             {
                 duration: 200,
-                easing: 'ease-out',
+                easing: 'cubic-bezier(0.3, 0, 1, 1)',
             }
         )
         animation.onfinish = animation.oncancel = () => {
@@ -161,8 +161,8 @@ export function drag(
 
     const show = () => {
         const animation = sheet.animate([{ transform: `translateY(0)` }], {
-            duration: 200,
-            easing: 'ease-out',
+            duration: 300,
+            easing: 'cubic-bezier(0, 0, 0, 1)',
         })
         animation.onfinish = animation.oncancel = () => {
             sheet.style.transform = `translateY(0)`
@@ -204,11 +204,11 @@ export function drag(
 
         if (pointerMoveDuration <= 200 /** ms */) {
             // if fast drag to bottom, hide it
-            if (distanceY >= 32) {
+            if (distanceY >= 32 || (distanceY <= 0 && distanceY >= -32)) {
                 hide()
             }
             // if fast drag to top, show it entirely
-            else if (distanceY <= -32) {
+            else {
                 show()
             }
         } else {
@@ -223,8 +223,8 @@ export function drag(
 
     dragHandle.addEventListener('pointerdown', onPointerDown)
     dragHandle.addEventListener('pointermove', onPointerMove)
-    dragHandle.addEventListener('pointerup', onPointerUp)
     dragHandle.addEventListener('pointercancel', onPointerUp)
+    dragHandle.addEventListener('pointerup', onPointerUp)
 
     return {
         cleanup: () => {

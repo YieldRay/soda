@@ -111,7 +111,8 @@ $label_text_gap_size: 3.2px;
 
 //! outlined (default filled)
 .sd-text_field[data-sd='outlined'] {
-    border: 2px solid var(--md-sys-color-outline);
+    @include outline;
+    border-width: 2px;
     background: transparent;
     border-radius: 0.25rem;
 

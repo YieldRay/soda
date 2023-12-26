@@ -70,7 +70,7 @@
 
     &-period_selectors {
         display: inline-flex;
-        border: 1px solid var(--md-sys-color-outline);
+        @include outline;
         border-radius: 8px;
         box-sizing: border-box;
         overflow: hidden;

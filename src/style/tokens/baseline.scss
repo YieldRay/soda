@@ -1,0 +1,15 @@
+@import '@/style/tokens/palette';
+@import '@/style/tokens/colors';
+@import '@/style/tokens/motion';
+@import '@/style/tokens/theme/light';
+@import '@/style/tokens/theme/dark';
+
+:root {
+    @include light;
+    @media screen and (prefers-color-scheme: light) {
+        @include light;
+    }
+    @media screen and (prefers-color-scheme: dark) {
+        @include dark;
+    }
+}

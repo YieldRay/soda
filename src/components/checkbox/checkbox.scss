@@ -16,7 +16,8 @@ $error: var(--md-sys-color-error);
         width: 18px;
         height: 18px;
         border-radius: 2px;
-        border: 2px solid var(--md-sys-color-outline);
+        @include outline;
+        border-width: 2px;
         color: var(--md-sys-color-surface-container-highest);
     }
     &:active .sd-checkbox-icon {

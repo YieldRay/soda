@@ -87,7 +87,7 @@ button.sd-button {
     &-outlined {
         color: var(--md-sys-color-primary);
         background: var(--md-sys-color-surface);
-        outline: var(--md-sys-color-outline) 1px solid;
+        @include outline;
 
         @media (any-hover: hover) {
             &:hover {

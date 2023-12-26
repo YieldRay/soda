@@ -1,7 +1,8 @@
 // https://m3.material.io/components/switch/specs
 
 .sd-switch {
-    border: solid 2px var(--md-sys-color-outline);
+    @include outline;
+    border-width: 2px;
     padding: 0.25rem;
     box-sizing: content-box;
     width: 2rem;

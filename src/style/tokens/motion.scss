@@ -1,0 +1,15 @@
+@mixin easing-standard {
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+@mixin easing-linear {
+    transition-timing-function: cubic-bezier(0, 0, 1, 1);
+}
+@mixin easing-standard-accelerate {
+    transition-timing-function: cubic-bezier(0.3, 0, 1, 1);
+}
+@mixin easing-standard-decelerate {
+    transition-timing-function: cubic-bezier(0, 0, 0, 1);
+}
+@mixin easing-emphasized {
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}

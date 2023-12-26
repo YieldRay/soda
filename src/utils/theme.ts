@@ -39,8 +39,6 @@ export function applySurfaceStyles(
 ): void {
     if (dark) {
         const elevationProps = {
-            '--md-sys-color-surface-dim': theme.palettes.neutral.tone(6),
-            '--md-sys-color-surface-bright': theme.palettes.neutral.tone(24),
             '--md-sys-color-surface-container-lowest':
                 theme.palettes.neutral.tone(4),
             '--md-sys-color-surface-container-low':
@@ -57,8 +55,6 @@ export function applySurfaceStyles(
         }
     } else {
         const elevationProps = {
-            '--md-sys-color-surface-dim': theme.palettes.neutral.tone(87),
-            '--md-sys-color-surface-bright': theme.palettes.neutral.tone(98),
             '--md-sys-color-surface-container-lowest':
                 theme.palettes.neutral.tone(100),
             '--md-sys-color-surface-container-low':

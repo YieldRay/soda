@@ -59,7 +59,7 @@ button.sd-icon_button {
     // outlined
 
     &-outlined {
-        outline: var(--md-sys-color-outline) 1px solid;
+        @include outline;
         color: var(--md-sys-color-on-inverse-surface);
         background: inherit;
         &[data-sd-selected='false'] {

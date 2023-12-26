@@ -6,6 +6,7 @@
     border-radius: 0.5rem;
     cursor: pointer;
     overflow: hidden;
+    user-select: none;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
     &:has(&-leading_icon) {
@@ -34,7 +35,8 @@
     transition: all 200ms;
 
     &-outlined {
-        border: 1.25px solid var(--md-sys-color-outline);
+        @include outline;
+        border-width: 1.25px;
         &[data-sd-disabled='true'] {
             filter: grayscale(98%) opacity(40%);
         }
