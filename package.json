@@ -30,7 +30,7 @@
     "devDependencies": {
         "@floating-ui/react": "^0.25.4",
         "@material/material-color-utilities": "^0.2.7",
-        "@mdi/js": "^7.3.67",
+        "@mdi/js": "^7.4.47",
         "@mdi/react": "^1.6.1",
         "@storybook/addon-essentials": "^7.6.6",
         "@storybook/addon-interactions": "^7.6.6",
