@@ -46,6 +46,7 @@
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     transition: all 200ms;
     text-align: center;
+    user-select: none;
 
     .sd-navigation_helper-icon {
         display: inline-block;

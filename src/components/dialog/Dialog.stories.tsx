@@ -3,8 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Dialog } from '.'
 import { Button } from '../button'
 import { ModalHolder } from '@/composition/ModalHolder'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { FloatingOverlay } from '@floating-ui/react'
+import { Portal } from '@/utils/Portal'
+import { CSSTransition } from 'react-transition-group'
 
 const meta = {
     title: 'Dialog/Dialog',
@@ -54,7 +56,11 @@ export const UseModalHolder: Story = {
                     {`open dialog (use <ModalHolder> from soda)`}
                 </Button>
 
-                <ModalHolder open={open} onScrimClick={() => setOpen(false)}>
+                <ModalHolder
+                    open={open}
+                    onScrimClick={() => setOpen(false)}
+                    onEscape={() => setOpen(false)}
+                >
                     {dialog}
                 </ModalHolder>
             </>
@@ -65,45 +71,54 @@ export const UseModalHolder: Story = {
 export const UseFloatingUI: Story = {
     render: (props) => {
         const [open, setOpen] = useState(false)
+        const overlayRef = useRef<HTMLDivElement>(null)
         return (
             <>
                 <Button sd="text" onClick={() => setOpen(true)}>
                     {`open dialog (use <FloatingOverlay> from @floating-ui/react)`}
                 </Button>
 
-                {open && (
-                    <FloatingOverlay
-                        lockScroll
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            display: 'grid',
-                            placeItems: 'center',
-                            background: 'rgb(0 0 0 / 0.1)',
-                        }}
-                        onClick={() => setOpen(false)}
+                <Portal container={document.body}>
+                    <CSSTransition
+                        unmountOnExit
+                        classNames="sd-transition-fade"
+                        nodeRef={overlayRef}
+                        in={open}
+                        timeout={300}
                     >
-                        <Dialog
-                            {...props}
-                            buttons={
-                                <>
-                                    <Button
-                                        sd="text"
-                                        onClick={() => alert('wow!')}
-                                    >
-                                        wow!
-                                    </Button>
-                                    <Button
-                                        sd="text"
-                                        onClick={() => setOpen(false)}
-                                    >
-                                        close
-                                    </Button>
-                                </>
-                            }
-                        />
-                    </FloatingOverlay>
-                )}
+                        <FloatingOverlay
+                            lockScroll
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                display: 'grid',
+                                placeItems: 'center',
+                                background: 'rgb(0 0 0 / 0.1)',
+                            }}
+                            ref={overlayRef}
+                        >
+                            <Dialog
+                                {...props}
+                                buttons={
+                                    <>
+                                        <Button
+                                            sd="text"
+                                            onClick={() => alert('wow!')}
+                                        >
+                                            wow!
+                                        </Button>
+                                        <Button
+                                            sd="text"
+                                            onClick={() => setOpen(false)}
+                                        >
+                                            close
+                                        </Button>
+                                    </>
+                                }
+                            />
+                        </FloatingOverlay>
+                    </CSSTransition>
+                </Portal>
             </>
         )
     },

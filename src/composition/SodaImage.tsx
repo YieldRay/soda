@@ -11,10 +11,10 @@ import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
 import { CircularProgressIndicator } from '@/components/progress-indicator/CircularProgressIndicator'
 import { IconButton } from '@/components/icon-button'
-import { SimpleSodaTransition } from './SodaTransition'
 import { mdiImageBrokenVariant } from '@mdi/js'
 import isNumber from 'lodash-es/isNumber'
 import isFunction from 'lodash-es/isFunction'
+import { CSSTransition } from 'react-transition-group'
 
 /**
  * A high-level image component, supports loading progress (when `crossOrigin` is specified),
@@ -237,16 +237,23 @@ export const SodaImage = forwardRef<
     const isImgShow = state === 'loaded'
     const isErrorShow = state === 'error'
 
+    const placeholderRef = useRef<HTMLDivElement>(null)
+
     return (
         <div className={clsx('sd-image', className)} {...props}>
-            <SimpleSodaTransition
-                className="sd-image-placeholder"
-                state={isLoading}
+            <CSSTransition
+                unmountOnExit
+                classNames="sd-transition-fade"
+                nodeRef={placeholderRef}
+                in={isLoading}
+                timeout={300}
             >
-                {placeholder ?? (
-                    <CircularProgressIndicator value={loadPercentage} />
-                )}
-            </SimpleSodaTransition>
+                <div ref={placeholderRef} className="sd-image-placeholder">
+                    {placeholder ?? (
+                        <CircularProgressIndicator value={loadPercentage} />
+                    )}
+                </div>
+            </CSSTransition>
 
             <img
                 ref={eRef}

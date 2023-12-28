@@ -16,12 +16,16 @@ export const Button = forwardRef<
              */
             sd?: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
             disabled?: boolean
+            /**
+             * Delegate to both click and send enter key for convenience
+             */
+            onClick?: VoidFunction
             children?: React.ReactNode
         },
         HTMLButtonElement
     >
 >(function Button(
-    { sd: initSd, className, disabled, children, type, ...props },
+    { sd: initSd, className, disabled, onClick, children, type, ...props },
     ref
 ) {
     const sd = initSd || 'filled'
@@ -33,6 +37,8 @@ export const Button = forwardRef<
             ref={ref}
             type={type ?? 'button'}
             className={clsx('sd-button', `sd-button-${sd}`, className)}
+            onClick={() => onClick?.()}
+            onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
             data-sd-disabled={disabled}
         >
             {children}

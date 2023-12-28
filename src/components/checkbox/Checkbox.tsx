@@ -1,11 +1,11 @@
 import './checkbox.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/ripple/Ripple'
-import { forwardRef, useState } from 'react'
+import { forwardRef, useRef, useState } from 'react'
 import { ExtendProps } from '@/utils/type'
 import { Icon } from '@mdi/react'
 import { mdiCheck } from '@mdi/js'
-import { SimpleSodaTransition } from '@/composition/SodaTransition'
+import { CSSTransition } from 'react-transition-group'
 
 /**
  * According to the official implementation, the ripple effect should not occupy space.
@@ -44,6 +44,7 @@ export const Checkbox = forwardRef<
             setChecked$(!checked$)
         }
     }
+    const iconRef = useRef(null)
     const checkedIcon = children || <Icon path={mdiCheck} />
 
     return (
@@ -64,9 +65,15 @@ export const Checkbox = forwardRef<
             }}
         >
             <div className="sd-checkbox-icon">
-                <SimpleSodaTransition state={isChecked}>
-                    {checkedIcon}
-                </SimpleSodaTransition>
+                <CSSTransition
+                    unmountOnExit
+                    classNames="sd-transition-fade"
+                    nodeRef={iconRef}
+                    in={isChecked}
+                    timeout={300}
+                >
+                    <div ref={iconRef}>{checkedIcon}</div>
+                </CSSTransition>
             </div>
             <div className="sd-checkbox-ripple">
                 <Ripple />

@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import './ModalHolder.scss'
 import { Scrim } from './Scrim'
 import { Portal } from '@/utils/Portal'
+import { useEffect } from 'react'
 
 /**
  * Provide a clickable scrim to document.body and hold single child.
@@ -11,6 +12,7 @@ export function ModalHolder({
     open,
     children,
     onScrimClick,
+    onEscape,
     teleportTo,
     zIndex,
 }: {
@@ -24,11 +26,26 @@ export function ModalHolder({
      */
     onScrimClick?: VoidFunction
     /**
+     * Most of the case you want toggle `open` to false
+     */
+    onEscape?: VoidFunction
+    /**
      * @default document.body
      */
     teleportTo?: Element | DocumentFragment
     zIndex?: number
 }) {
+    useEffect(() => {
+        if (!onEscape) return
+        const onKeydown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                onEscape()
+            }
+        }
+        window.addEventListener('keydown', onKeydown)
+        return () => window.removeEventListener('keydown', onKeydown)
+    }, [onEscape])
+
     return (
         <Portal container={teleportTo ?? document.body}>
             <Scrim open={open} />

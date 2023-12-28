@@ -25,11 +25,19 @@ import {
     useListNavigation,
     useMergeRefs,
     useRole,
+    useTransitionStyles,
     useTypeahead,
 } from '@floating-ui/react'
-import * as React from 'react'
+import {
+    forwardRef,
+    createContext,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from 'react'
 
-const NestedMenuContext = React.createContext<{
+const NestedMenuContext = createContext<{
     getItemProps: (
         userProps?: React.HTMLProps<HTMLElement>
     ) => Record<string, unknown>
@@ -70,7 +78,7 @@ export interface NestedMenuProps extends Soda.Props {
 /**
  * for internal use
  */
-const NestedMenuComponent = React.forwardRef<
+const NestedMenuComponent = forwardRef<
     HTMLElement,
     ExtendProps<NestedMenuProps>
 >(
@@ -85,20 +93,21 @@ const NestedMenuComponent = React.forwardRef<
         },
         forwardedRef
     ) => {
-        const [isOpen, setIsOpen] = React.useState(defaultOpen ? true : false)
-        const [activeIndex, setActiveIndex] = React.useState<number | null>(
-            null
-        )
+        const [isOpen, setIsOpen] = useState(defaultOpen ? true : false)
+        const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
-        const elementsRef = React.useRef<Array<HTMLElement | null>>([])
-        const labelsRef = React.useRef<Array<string | null>>([])
-        const parent = React.useContext(NestedMenuContext)
+        const elementsRef = useRef<Array<HTMLElement | null>>([])
+        const labelsRef = useRef<Array<string | null>>([])
+        const parent = useContext(NestedMenuContext)
 
         const tree = useFloatingTree()
         const nodeId = useFloatingNodeId()
         const parentId = useFloatingParentNodeId()
         const item = useListItem()
 
+        /**
+         * check if the menu is a submenu
+         */
         const isNested = parentId != null
 
         const { floatingStyles, refs, context } =
@@ -142,6 +151,29 @@ const NestedMenuComponent = React.forwardRef<
             activeIndex,
         })
 
+        const { styles, isMounted } = useTransitionStyles(
+            context,
+            isNested || contextMenu
+                ? undefined
+                : {
+                      duration: {
+                          open: 300,
+                          close: 200,
+                      },
+                      initial: {
+                          opacity: 0,
+                          clipPath: 'inset(-4px -4px 100% -4px)',
+                      },
+                      open: {
+                          opacity: 1,
+                          clipPath: 'inset(-4px -4px -4px -4px)',
+                      },
+                      close: {
+                          opacity: 0,
+                      },
+                  }
+        )
+
         const { getReferenceProps, getFloatingProps, getItemProps } =
             useInteractions([
                 hover,
@@ -155,7 +187,7 @@ const NestedMenuComponent = React.forwardRef<
         // Event emitter allows you to communicate across tree components.
         // This effect closes all menus when an item gets clicked anywhere
         // in the tree.
-        React.useEffect(() => {
+        useEffect(() => {
             if (!tree) return
 
             function handleTreeClick() {
@@ -180,22 +212,19 @@ const NestedMenuComponent = React.forwardRef<
             }
         }, [tree, nodeId, parentId])
 
-        React.useEffect(() => {
+        useEffect(() => {
             if (isOpen && tree) {
                 tree.events.emit('menuopen', { parentId, nodeId })
             }
         }, [tree, isOpen, nodeId, parentId])
 
         // for context menu
-        const allowMouseUpCloseRef = React.useRef(false)
-        React.useEffect(() => {
+        const allowMouseUpCloseRef = useRef(false)
+        useEffect(() => {
             if (!contextMenu) return
-            const source = contextMenuSource // just an alias
             let timeout: number
-
             const onContextMenu = ((e: MouseEvent) => {
                 e.preventDefault()
-
                 refs.setPositionReference({
                     getBoundingClientRect() {
                         return {
@@ -226,11 +255,14 @@ const NestedMenuComponent = React.forwardRef<
             //     }
             // }
 
-            source.addEventListener('contextmenu', onContextMenu)
-            // source.addEventListener('mouseup', onMouseUp)
+            contextMenuSource.addEventListener('contextmenu', onContextMenu)
+            // contextMenuSource.addEventListener('mouseup', onMouseUp)
             return () => {
-                source.removeEventListener('contextmenu', onContextMenu)
-                // source.removeEventListener('mouseup', onMouseUp)
+                contextMenuSource.removeEventListener(
+                    'contextmenu',
+                    onContextMenu
+                )
+                // contextMenuSource.removeEventListener('mouseup', onMouseUp)
                 clearTimeout(timeout)
             }
         }, [refs, contextMenu, contextMenuSource])
@@ -273,7 +305,7 @@ const NestedMenuComponent = React.forwardRef<
                         elementsRef={elementsRef}
                         labelsRef={labelsRef}
                     >
-                        {isOpen && (
+                        {isMounted && (
                             <FloatingPortal>
                                 <FloatingFocusManager
                                     context={context}
@@ -283,7 +315,7 @@ const NestedMenuComponent = React.forwardRef<
                                 >
                                     <Soda.Menu
                                         ref={refs.setFloating}
-                                        style={floatingStyles}
+                                        style={{ ...floatingStyles, ...styles }}
                                         {...getFloatingProps()}
                                     >
                                         {children}
@@ -308,28 +340,27 @@ const NestedMenuComponent = React.forwardRef<
  *
  * Based on floating-ui, supports keyboard navigation.
  */
-export const NestedMenu = React.forwardRef<
-    HTMLElement,
-    ExtendProps<NestedMenuProps>
->((props, ref) => {
-    const parentId = useFloatingParentNodeId()
+export const NestedMenu = forwardRef<HTMLElement, ExtendProps<NestedMenuProps>>(
+    (props, ref) => {
+        const parentId = useFloatingParentNodeId()
 
-    if (parentId === null) {
-        return (
-            <FloatingTree>
-                <NestedMenuComponent {...props} ref={ref} />
-            </FloatingTree>
-        )
+        if (parentId === null) {
+            return (
+                <FloatingTree>
+                    <NestedMenuComponent {...props} ref={ref} />
+                </FloatingTree>
+            )
+        }
+
+        return <NestedMenuComponent {...props} ref={ref} />
     }
+)
 
-    return <NestedMenuComponent {...props} ref={ref} />
-})
-
-export const NestedMenuItem = React.forwardRef<
+export const NestedMenuItem = forwardRef<
     HTMLElement,
     Soda.Props & React.HTMLAttributes<HTMLElement>
 >(({ children, disabled, ...props }, forwardedRef) => {
-    const menu = React.useContext(NestedMenuContext)
+    const menu = useContext(NestedMenuContext)
     const item = useListItem()
     const tree = useFloatingTree()
     const isActive = item.index === menu.activeIndex

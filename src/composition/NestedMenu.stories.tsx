@@ -39,7 +39,7 @@ const submenus = (
 export const Default: Story = {
     args: {
         label: <IconButton path={mdiDotsVertical} />,
-        defaultOpen: true,
+        defaultOpen: false,
         children: submenus,
     },
     decorators: [

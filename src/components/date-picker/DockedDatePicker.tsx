@@ -1,5 +1,4 @@
 import './date-picker.scss'
-import '@/style/view-transition.scss'
 import { useRef, useState } from 'react'
 import { Button } from '../button'
 import { TextField } from '../text-field'

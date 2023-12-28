@@ -37,7 +37,7 @@ export function Snackbar({
     fixed?: boolean
     open?: boolean
     teleportTo?: Element | DocumentFragment
-    placement?: 'left' | 'center' | 'right'
+    // placement?: 'left' | 'center' | 'right'
     /**
      * Span the entire width of the screen
      */
@@ -143,7 +143,7 @@ function show(el: HTMLElement) {
             translate: [`0 ${height * 0.333}px`, '0 0'],
         },
         {
-            duration: 900,
+            duration: 600,
             easing: 'cubic-bezier(0.2, 0, 0, 1)',
         }
     )
@@ -159,7 +159,7 @@ function hide(el: HTMLElement) {
             opacity: ['1', '0'],
         },
         {
-            duration: 400,
+            duration: 300,
             easing: 'cubic-bezier(0, 0, 0, 1)',
         }
     )

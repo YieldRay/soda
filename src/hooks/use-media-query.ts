@@ -27,3 +27,7 @@ export function useWindowSizeType() {
     const isMedium = useMediaQuery('only screen and (max-width : 840px)')
     return isCompact ? 'compact' : isMedium ? 'medium' : 'expanded'
 }
+
+export function usePrefersDark() {
+    return useMediaQuery('(prefers-color-scheme: dark)')
+}

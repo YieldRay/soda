@@ -29,18 +29,37 @@
         }
     }
 
-    &[data-sd-inverse='true'] {
-        color: var(--md-sys-color-inverse-primary);
-        @media (any-hover: hover) {
-            &:hover {
-                background: rgb(255 255 255 / 0.04);
+    @media (not (prefers-color-scheme: dark)) {
+        &[data-sd-inverse='true'] {
+            color: var(--md-sys-color-inverse-primary);
+            @media (any-hover: hover) {
+                &:hover {
+                    background: rgb(255 255 255 / 0.04);
+                }
+            }
+            &:active {
+                background: rgb(255 255 255 / 0.08);
+            }
+            &:focus-visible {
+                background: rgb(255 255 255 / 0.12);
             }
         }
-        &:active {
-            background: rgb(255 255 255 / 0.08);
-        }
-        &:focus-visible {
-            background: rgb(255 255 255 / 0.12);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        &[data-sd-inverse='true'] {
+            color: var(--md-sys-color-primary);
+            @media (any-hover: hover) {
+                &:hover {
+                    background: rgb(0 0 0 / 0.04);
+                }
+            }
+            &:active {
+                background: rgb(0 0 0 / 0.08);
+            }
+            &:focus-visible {
+                background: rgb(0 0 0 / 0.12);
+            }
         }
     }
 

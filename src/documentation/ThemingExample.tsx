@@ -1,4 +1,4 @@
-import { useMediaQuery } from '@/hooks/use-media-query'
+import { usePrefersDark } from '@/hooks/use-media-query'
 import {
     applyThemeForSoda,
     themeFromImageOrFile,
@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react'
  * Just an example widget to show example of `@material/material-color-utilities`
  */
 export default function ThemingExample() {
-    const prefersDark = useMediaQuery('(prefers-color-scheme: dark)')
+    const prefersDark = usePrefersDark()
     const [sourceColor, setSourceColor] = useState(
         localStorage.getItem('sourceColor') || '#6750a4'
     )

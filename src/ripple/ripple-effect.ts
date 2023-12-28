@@ -1,20 +1,23 @@
 import { applyCSSStyleDeclaration } from '@/utils/style'
 
-const DatasetName = 'sdRipple' //? dataset name will automatically convert to underscore style
+const DATASET_NAME = 'sdRipple' //? dataset name will automatically convert to underscore style
 
 /**
  * warn: this is m2 ripple effect
  */
-export function ripple(
-    ele: HTMLElement,
-    duration = 400,
-    color = 'rgba(0, 0, 0, 0.1)'
-) {
-    if (ele.dataset[DatasetName] === 'true') {
+export function ripple(ele: HTMLElement, duration = 400, color?: string) {
+    if (ele.dataset[DATASET_NAME] === 'true') {
         // do not create ripple effect if effect has been attached
         return
     }
-    ele.dataset[DatasetName] = 'true'
+    ele.dataset[DATASET_NAME] = 'true'
+
+    // auto handle dark mode
+    color ||=
+        ele.dataset.sdDark === 'true' ||
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'rgb(255 255 255 / 0.1)'
+            : 'rgba(0, 0, 0, 0.1)'
 
     const rippleAt = (rippleX: number, rippleY: number, autoRemove = false) => {
         const { width, height } = ele.getBoundingClientRect() // ele pos
@@ -140,7 +143,7 @@ export function ripple(
 
     return {
         cleanup: () => {
-            ele.dataset[DatasetName] = 'false'
+            ele.dataset[DATASET_NAME] = 'false'
             ele.removeEventListener('pointerdown', onPointerDown)
         },
         rippleAt,
