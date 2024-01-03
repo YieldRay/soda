@@ -7,7 +7,7 @@ export const isViewTransitionSupported = !!document.startViewTransition
  * just do nothing in the browser that does not support this API,
  * but returns the same interface as it supports.
  * @example
- * // for react, use flushSync() to synchronously set state
+ * // For react, use `flushSync()` to synchronously set state
  * // (state changes is asynchronous by default)
  * startViewTransition(() => {
  *     flushSync(() => {
@@ -37,7 +37,7 @@ export function startViewTransition(
  * You can use the prepare & cleanup function to toggle className
  */
 export function startViewTransitionFlushSync(
-    callback: () => Promise<void> | void,
+    callback: VoidFunction,
     prepare?: VoidFunction,
     cleanup?: VoidFunction
 ) {
@@ -45,9 +45,9 @@ export function startViewTransitionFlushSync(
         prepare?.()
         startViewTransition(() => {
             flushSync(callback)
-        }).finished.then(cleanup)
+        }).finished.finally(cleanup)
     } else {
-        callback()
+        return callback()
     }
 }
 
