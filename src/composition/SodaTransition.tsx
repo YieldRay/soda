@@ -8,8 +8,8 @@ import { useState, useEffect, useLayoutEffect, useRef, forwardRef } from 'react'
 /**
  * A simple state based transition for element's enter and exit (to DOM)
  *
- * [warn]: transition property should set to beforeEnter/beforeLeave to activate css transition
- * or set transition to style property to manage them all
+ * [warn]: `transition` property should set to entering/exiting to activate css transition
+ * or set transition to `style` property to manage them all
  */
 export const SodaTransition = forwardRef<
     HTMLElement,
@@ -17,26 +17,29 @@ export const SodaTransition = forwardRef<
         as?: TagNameString
         style?: React.CSSProperties
         className?: string
-        beforeEnter?: React.CSSProperties
-        afterEnter?: React.CSSProperties
-        beforeLeave?: React.CSSProperties
-        afterLeave?: React.CSSProperties
+        entering?: React.CSSProperties
+        entered?: React.CSSProperties
+        exiting?: React.CSSProperties
+        exited?: React.CSSProperties
         /**
          * `true` for enter, `false` for leave
          */
-        state?: boolean
-        allowFirstRun?: boolean
+        in?: boolean
+        /**
+         * By default the component does not perform the enter transition when it first mounts, regardless of the value of `in`. If you want this behavior, set both `appear` and `in` to `true`.
+         */
+        appear?: boolean
         children?: React.ReactNode
     }>
 >(function SodaTransition(
     {
-        beforeEnter = {},
-        afterEnter = {},
-        beforeLeave = {},
-        afterLeave = {},
+        entering = {},
+        entered = {},
+        exiting = {},
+        exited = {},
         style,
-        state = false,
-        allowFirstRun = false,
+        in: isIn = false,
+        appear = false,
         children,
         as,
         ...props
@@ -45,53 +48,51 @@ export const SodaTransition = forwardRef<
 ) {
     const [show, setShow] = useState(false)
     const [transitionStyle, setTransitionStyle] = useState(
-        state ? beforeEnter : beforeLeave
+        isIn ? entering : exiting
     )
-    const isFirstRun = useRef(!allowFirstRun)
+    const isFirstMount = useRef(!appear)
 
     useLayoutEffect(() => {
-        if (isFirstRun.current) {
+        if (isFirstMount.current) {
             // do not transition if is first run
-            setTransitionStyle(state ? afterEnter : afterLeave)
-            setShow(state)
+            setTransitionStyle(isIn ? entered : exited)
+            setShow(isIn)
         } else {
-            setTransitionStyle(state ? beforeEnter : beforeLeave)
+            setTransitionStyle(isIn ? entering : exiting)
             setShow(true)
         }
-    }, [state, beforeEnter, beforeLeave, afterEnter, afterLeave])
+    }, [isIn, entering, exiting, entered, exited])
 
     useEffect(() => {
-        if (isFirstRun.current!) {
+        if (isFirstMount.current!) {
             // do not transition if is first run
-            isFirstRun.current = false
+            isFirstMount.current = false
             return
         }
 
         requestAnimationFrame(() => {
-            setTransitionStyle(state ? afterEnter : afterLeave)
+            setTransitionStyle(isIn ? entered : exited)
         })
-    }, [state, afterEnter, afterLeave])
+    }, [isIn, entered, exited])
 
     const onTransitionEnd = () => {
-        if (state === false) setShow(false)
+        if (isIn === false) setShow(false)
     }
 
     const As: any = as || 'div'
 
-    return (
-        <>
-            {show && (
-                <As
-                    {...props}
-                    ref={ref}
-                    style={{ ...style, ...transitionStyle }}
-                    onTransitionEnd={onTransitionEnd}
-                >
-                    {children}
-                </As>
-            )}
-        </>
+    const component = (
+        <As
+            {...props}
+            ref={ref}
+            style={{ ...style, ...transitionStyle }}
+            onTransitionEnd={onTransitionEnd}
+        >
+            {children}
+        </As>
     )
+
+    return show && component
 })
 
 /**
@@ -107,10 +108,10 @@ export const SimpleSodaTransition = forwardRef<
     {
         enter = { opacity: '1' },
         leave = { opacity: '0' },
-        beforeEnter,
-        afterEnter,
-        beforeLeave,
-        afterLeave,
+        entering,
+        entered,
+        exiting,
+        exited,
         style,
         ...props
     },
@@ -119,10 +120,10 @@ export const SimpleSodaTransition = forwardRef<
     return (
         <SodaTransition
             {...{
-                beforeEnter: { ...beforeEnter, ...leave },
-                afterEnter: { ...afterEnter, ...enter },
-                beforeLeave: { ...beforeLeave, ...enter },
-                afterLeave: { ...afterLeave, ...leave },
+                entering: { ...entering, ...leave },
+                entered: { ...entered, ...enter },
+                exiting: { ...exiting, ...enter },
+                exited: { ...exited, ...leave },
                 style: { transition: 'all 200ms', ...style },
                 ...props,
                 ref,

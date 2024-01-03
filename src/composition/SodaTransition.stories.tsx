@@ -21,18 +21,18 @@ export const Default: Story = {
             <>
                 <Button onClick={() => setShow(!show)}>toggle state</Button>
                 <SodaTransition
-                    state={show}
+                    in={show}
                     style={{ transition: 'all 200ms' }}
-                    beforeEnter={{
+                    entering={{
                         opacity: '0.2',
                         transform: 'translateY(-100%)',
                     }}
-                    afterEnter={{ opacity: '1', transform: 'translateY(0)' }}
-                    beforeLeave={{
+                    entered={{ opacity: '1', transform: 'translateY(0)' }}
+                    exiting={{
                         opacity: '1',
                         transform: 'translateY(0)',
                     }}
-                    afterLeave={{
+                    exited={{
                         opacity: '0.2',
                         transform: 'translateY(100%)',
                     }}
@@ -51,7 +51,7 @@ export const Simple: Story = {
             <>
                 <Button onClick={() => setShow(!show)}>toggle state</Button>
                 <SimpleSodaTransition
-                    state={show}
+                    in={show}
                     style={{
                         transformOrigin: 'center',
                         display: 'inline-block',

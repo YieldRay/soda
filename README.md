@@ -89,7 +89,7 @@ Chinese user may prefer:
 @import url('https://fonts.loli.net/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
 @import url('https://fonts.upset.dev/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
 @import url('https://fonts.font.im/css?family=Roboto:100,300,400,500,700,900');
-@import url(https://fonts.bunny.net/css?family=roboto:100,300,400,500,700,900);
+@import url('https://fonts.bunny.net/css?family=roboto:100,300,400,500,700,900');
 */
 
 /* using Google Sans */
@@ -104,15 +104,15 @@ Chinese user may prefer:
 This library use the official material design css variable (`--md-sys-color-<token>`, at `:root`) to theming.  
 So you can simply overwrite them or use the [@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript) package to apply theme.
 
-```ts
-import {
-    argbFromHex,
-    themeFromSourceColor,
-    applyTheme,
-} from '@material/material-color-utilities'
+```tsx
+// we also provide a series of wrapper function, making theming easier
+import { applyThemeForSoda } from 'soda/dist/utils/theme'
 
-const theme = themeFromSourceColor(argbFromHex('#f82506'), [
-    // Array of custom colors, optional
+// simply
+applyThemeForSoda('#f82506')
+
+// or
+applyThemeForSoda(themeFromHexString('#f82506'), [
     {
         name: 'custom-1',
         value: argbFromHex('#ff0000'),
@@ -120,11 +120,26 @@ const theme = themeFromSourceColor(argbFromHex('#f82506'), [
     },
 ])
 
-// Check if the user has dark mode turned on
-const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-// Apply the theme to the :root by updating custom properties for material tokens
-applyTheme(theme, { target: document.documentElement, dark: systemDark })
+// or
+function SelectThemeFromFileButton() {
+    const onClick = async () => {
+        const fileHandleArray = await window.showOpenFilePicker({
+            types: [
+                {
+                    description: 'please choose an image',
+                    accept: {
+                        'image/*': ['.png', '.gif', '.jpeg', '.jpg', '.webp'],
+                    },
+                },
+            ],
+            multiple: false,
+            excludeAcceptAllOption: true,
+        })
+        const file: File = await fileHandleArray[0].getFile()
+        applyThemeForSoda(await themeFromImageOrFile(file)) // *
+    }
+    return <button onClick={onClick}>Select An Image</button>
+}
 ```
 
 # TODO

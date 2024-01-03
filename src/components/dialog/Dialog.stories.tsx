@@ -6,7 +6,7 @@ import { ModalHolder } from '@/composition/ModalHolder'
 import { useRef, useState } from 'react'
 import { FloatingOverlay } from '@floating-ui/react'
 import { Portal } from '@/utils/Portal'
-import { CSSTransition } from 'react-transition-group'
+import { SimpleSodaTransition } from '@/composition'
 
 const meta = {
     title: 'Dialog/Dialog',
@@ -79,13 +79,7 @@ export const UseFloatingUI: Story = {
                 </Button>
 
                 <Portal container={document.body}>
-                    <CSSTransition
-                        unmountOnExit
-                        classNames="sd-transition-fade"
-                        nodeRef={overlayRef}
-                        in={open}
-                        timeout={300}
-                    >
+                    <SimpleSodaTransition in={open}>
                         <FloatingOverlay
                             lockScroll
                             style={{
@@ -117,7 +111,7 @@ export const UseFloatingUI: Story = {
                                 }
                             />
                         </FloatingOverlay>
-                    </CSSTransition>
+                    </SimpleSodaTransition>
                 </Portal>
             </>
         )
