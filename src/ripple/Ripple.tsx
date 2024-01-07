@@ -31,15 +31,11 @@ export type RippleHandle = HTMLElement & { rippleAt?: RippleAt }
  * Wrapper component for ripple-effect.ts
  */
 export const Ripple = forwardRef<RippleHandle, Props>(
-    ({ as, disabled, rippleColor, rippleDuration, ...props }, ref) => {
+    ({ as, disabled, rippleColor, ...props }, ref) => {
         const eRef = useRef<HTMLElement>(null)
         const rippleAtRef = useRef<RippleAt | undefined>(undefined)
         useEffect(() => {
-            const rippleResult = ripple(
-                eRef.current!,
-                rippleDuration,
-                rippleColor
-            )
+            const rippleResult = ripple(eRef.current!, rippleColor)
             rippleAtRef.current = rippleResult?.rippleAt
             return rippleResult?.cleanup
         })

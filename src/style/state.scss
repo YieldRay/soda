@@ -1,0 +1,48 @@
+:root {
+    /* Dragged state layer opacity */
+    --md-sys-state-dragged-state-layer-opacity: 0.1599999964237213;
+    /* Pressed state layer opacity */
+    --md-sys-state-pressed-state-layer-opacity: 0.11999999731779099;
+    /* Focus state layer opacity */
+    --md-sys-state-focus-state-layer-opacity: 0.11999999731779099;
+    /* Hover state layer opacity */
+    --md-sys-state-hover-state-layer-opacity: 0.07999999821186066;
+}
+
+// simulate the state layer
+
+@mixin background-dragged($base) {
+    background-color: rgb(0 0 0 / 0.12);
+    @supports (color: rgb(from white r g b)) {
+        background-color: rgb(
+            from $base r g b / var(--md-sys-state-dragged-state-layer-opacity)
+        );
+    }
+}
+
+@mixin background-pressed($base) {
+    background-color: rgb(0 0 0 / 0.08);
+    @supports (color: rgb(from white r g b)) {
+        background-color: rgb(
+            from $base r g b / var(--md-sys-state-pressed-state-layer-opacity)
+        );
+    }
+}
+
+@mixin background-focus($base) {
+    background-color: rgb(0 0 0 / 0.04);
+    @supports (color: rgb(from white r g b)) {
+        background-color: rgb(
+            from $base r g b / var(--md-sys-state-focus-state-layer-opacity)
+        );
+    }
+}
+
+@mixin background-hover($base) {
+    background-color: rgb(0 0 0 / 0.1);
+    @supports (color: rgb(from white r g b)) {
+        background-color: rgb(
+            from $base r g b / var(--md-sys-state-hover-state-layer-opacity)
+        );
+    }
+}

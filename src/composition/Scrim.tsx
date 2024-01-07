@@ -28,6 +28,7 @@ export const Scrim = forwardRef<
                 overflow: hidden;
                 overscroll-behavior: contain;
             }
+            
             .sd-scrim:not(.sd-scrim-open){
                 display: none;
                 opacity: 0;

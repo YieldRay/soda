@@ -22,18 +22,18 @@
         transition: all 200ms;
         @media (any-hover: hover) {
             &:hover {
-                background: rgb(0 0 0 / 0.04);
+                @include background-hover(var(--md-sys-color-primary));
             }
         }
         &:active {
-            background: rgb(0 0 0 / 0.08);
+            @include background-pressed(var(--md-sys-color-primary));
         }
     }
 
     &:focus-visible {
         outline: none;
         .sd-tab-helper {
-            background: rgb(0 0 0 / 0.06);
+            @include background-focus(var(--md-sys-color-primary));
         }
     }
 

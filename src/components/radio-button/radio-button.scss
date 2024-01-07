@@ -62,7 +62,7 @@ $borderWidth: 2px;
     @media (any-hover: hover) {
         &:hover {
             .sd-radio_button-ripple {
-                background: rgb(0 0 0 /0.1);
+                @include background-hover(var(--md-sys-color-primary));
             }
         }
     }
@@ -74,7 +74,7 @@ $borderWidth: 2px;
     &:focus-visible {
         outline: none;
         .sd-radio_button-ripple {
-            background: rgb(0 0 0 /0.12);
+            @include background-focus(var(--md-sys-color-primary));
         }
     }
 

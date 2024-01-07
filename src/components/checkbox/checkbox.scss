@@ -1,8 +1,5 @@
 // https://m3.material.io/components/checkbox/specs
 
-$primary: var(--md-sys-color-primary);
-$error: var(--md-sys-color-error);
-
 .sd-checkbox {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
@@ -21,7 +18,7 @@ $error: var(--md-sys-color-error);
         color: var(--md-sys-color-surface-container-highest);
     }
     &:active .sd-checkbox-icon {
-        border: 2px solid $primary;
+        border: 2px solid var(--md-sys-color-primary);
     }
 
     &-ripple {
@@ -35,7 +32,7 @@ $error: var(--md-sys-color-error);
         transition: all 200ms;
         @media (any-hover: hover) {
             &:hover {
-                background: rgb(0 0 0 / 0.1);
+                @include background-hover(var(--md-sys-color-primary));
             }
         }
         > * {
@@ -47,18 +44,18 @@ $error: var(--md-sys-color-error);
     &:focus-visible {
         outline: none;
         .sd-checkbox-ripple {
-            background: rgb(0 0 0 / 0.12);
+            @include background-focus(var(--md-sys-color-primary));
         }
     }
 
     &[data-sd-checked='true'] &-icon {
-        background: $primary;
-        border: 2px solid $primary;
+        background: var(--md-sys-color-primary);
+        border: 2px solid var(--md-sys-color-primary);
     }
 
     &[data-sd-checked='true'][data-sd-error='true'] &-icon {
-        background: $error;
-        border: 2px solid $error;
+        background: var(--md-sys-color-error);
+        border: 2px solid var(--md-sys-color-error);
     }
 
     &[data-sd-disabled='true'] {

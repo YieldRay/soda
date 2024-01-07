@@ -129,19 +129,17 @@ button.sd-button {
         color: var(--md-sys-color-primary);
         background-color: transparent;
 
-        // TODO: this should be primary color background with opacity layer
-        // here just simply use a grey color instead
         @media (any-hover: hover) {
             &:hover {
-                background: rgb(0 0 0 / 0.04);
+                @include background-hover(var(--md-sys-color-primary));
             }
         }
         &:active {
-            background: rgb(0 0 0 / 0.08);
+            @include background-pressed(var(--md-sys-color-primary));
         }
         &:focus-visible {
             outline: none;
-            background: rgb(0 0 0 / 0.12);
+            @include background-focus(var(--md-sys-color-primary));
         }
     }
 }

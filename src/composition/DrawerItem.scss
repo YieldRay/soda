@@ -17,11 +17,11 @@
 
     @media (any-hover: hover) {
         &:hover {
-            background: rgb(0 0 0 / 0.04);
+            @include background-hover(var(--md-sys-color-primary));
         }
     }
     &:active {
-        background: rgb(0 0 0 / 0.08);
+        @include background-pressed(var(--md-sys-color-primary));
     }
     &[data-sd-active='true'] {
         background: var(--md-sys-color-secondary-container);

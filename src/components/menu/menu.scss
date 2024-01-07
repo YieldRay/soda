@@ -50,15 +50,15 @@
     transition: background-color 200ms;
     @media (any-hover: hover) {
         &:hover {
-            background: rgb(0 0 0 / 0.04);
+            @include background-hover(var(--md-sys-color-primary));
         }
     }
     &:active {
-        background: rgb(0 0 0 / 0.08);
+        @include background-pressed(var(--md-sys-color-primary));
     }
     &:focus {
         outline: none;
-        background: rgb(0 0 0 / 0.12);
+        @include background-focus(var(--md-sys-color-primary));
     }
 
     &[data-sd-disabled='true'] {

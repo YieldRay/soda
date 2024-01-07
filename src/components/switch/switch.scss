@@ -52,7 +52,7 @@
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
-        background: rgb(0 0 0 / 0.1);
+        @include background-hover(var(--md-sys-color-primary));
         @include position-absolute(50%, 50%);
         transform: translate(-50%, -50%);
         transition: all 200ms;

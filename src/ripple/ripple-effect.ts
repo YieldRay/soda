@@ -2,25 +2,39 @@ import { applyCSSStyleDeclaration } from '@/utils/style'
 
 const DATASET_NAME = 'sdRipple' //? dataset name will automatically convert to underscore style
 
+export const DEFAULT_RIPPLE_COLOR = CSS.supports('color: rgb(from white r g b)')
+    ? 'rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity))'
+    : matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'rgb(255 255 255 / 0.06)'
+    : 'rgba(0 0 0 / 0.06)'
+
+// warn: this is m2 ripple effect
+
 /**
- * warn: this is m2 ripple effect
+ * Attach ripple effect to an element.
+ *
+ * @param el Element to attach ripple effect
+ * @param rippleColor Color of the ripple (in css color string)
+ * @returns An object, use `cleanup()` to remove attached event listener,
+ * use `rippleAt(x, y)` to manully invoke a ripple to create
+ *
+ * @example
+ * ```js
+ * const { cleanup, rippleAt } = ripple(
+ *     document.querySelector("#el"),
+ *     "rgb(from var(--md-sys-color-primary) r g b / 0.1)"
+ * )
+ * ```
  */
-export function ripple(ele: HTMLElement, duration = 400, color?: string) {
-    if (ele.dataset[DATASET_NAME] === 'true') {
+export function ripple(el: HTMLElement, rippleColor = DEFAULT_RIPPLE_COLOR) {
+    if (el.dataset[DATASET_NAME] === 'true') {
         // do not create ripple effect if effect has been attached
         return
     }
-    ele.dataset[DATASET_NAME] = 'true'
-
-    // auto handle dark mode
-    color ||=
-        ele.dataset.sdDark === 'true' ||
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? 'rgb(255 255 255 / 0.1)'
-            : 'rgba(0, 0, 0, 0.1)'
+    el.dataset[DATASET_NAME] = 'true'
 
     const rippleAt = (rippleX: number, rippleY: number, autoRemove = false) => {
-        const { width, height } = ele.getBoundingClientRect() // ele pos
+        const { width, height } = el.getBoundingClientRect() // ele pos
 
         if (rippleX < 0) rippleX = 0
         if (rippleY < 0) rippleY = 0
@@ -35,7 +49,7 @@ export function ripple(ele: HTMLElement, duration = 400, color?: string) {
         )
 
         // position:relative is a MUST for ripple
-        applyCSSStyleDeclaration(ele, {
+        applyCSSStyleDeclaration(el, {
             position: 'relative',
             ['-webkit-tap-highlight-color' as string]: 'transparent',
         })
@@ -51,18 +65,18 @@ export function ripple(ele: HTMLElement, duration = 400, color?: string) {
             height: radius * 2 + 'px',
             borderRadius: '50%',
             transformOrigin: '50% 50%',
-            backgroundColor: color,
+            backgroundColor: rippleColor,
             zIndex: 'auto',
             // the ripple element is absolute positioned to it's parent (the input element)
             // force z-index to auto, this prevent stacking context's creation
         })
 
-        ele.append(ripple)
+        el.append(ripple)
 
         const scaleUpAnimation = ripple.animate(
             { transform: ['scale(0%)', 'scale(101%)'] },
             {
-                duration,
+                duration: Math.max(radius * 1.6, 400),
                 easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
                 fill: 'forwards',
             }
@@ -79,7 +93,7 @@ export function ripple(ele: HTMLElement, duration = 400, color?: string) {
             const fadeOutAnimation = ripple.animate(
                 { opacity: ['1', '0'] },
                 {
-                    duration,
+                    duration: 400,
                     easing: 'linear',
                     fill: 'forwards',
                 }
@@ -111,9 +125,9 @@ export function ripple(ele: HTMLElement, duration = 400, color?: string) {
             return
         }
         if (
-            ele.hasAttribute('disabled') ||
-            Reflect.get(ele, 'disabled') === true ||
-            ele.dataset.sdDisabled === 'true'
+            el.hasAttribute('disabled') ||
+            Reflect.get(el, 'disabled') === true ||
+            el.dataset.sdDisabled === 'true'
         ) {
             // do not handle if is disabled
             return
@@ -122,29 +136,29 @@ export function ripple(ele: HTMLElement, duration = 400, color?: string) {
         // DO NOT setPointerCapture, this will cause any child element
         // within it not able to get pointed
         const { clientX: pointerX, clientY: pointerY } = event // pointer pos
-        const { x: eleX, y: eleY } = ele.getBoundingClientRect() // ele pos
+        const { x: eleX, y: eleY } = el.getBoundingClientRect() // ele pos
 
         const startRemoveRipple = rippleAt(pointerX - eleX, pointerY - eleY)
 
         const onPointerUp = (e: PointerEvent) => {
             if (e.pointerId === event.pointerId)
                 startRemoveRipple(() => {
-                    ele.removeEventListener('pointercancel', onPointerUp)
+                    el.removeEventListener('pointercancel', onPointerUp)
                     window.removeEventListener('pointerup', onPointerUp)
                 })
         }
 
-        ele.addEventListener('pointercancel', onPointerUp)
+        el.addEventListener('pointercancel', onPointerUp)
         window.addEventListener('pointerup', onPointerUp)
     }
 
     // listen pointer down
-    ele.addEventListener('pointerdown', onPointerDown)
+    el.addEventListener('pointerdown', onPointerDown)
 
     return {
         cleanup: () => {
-            ele.dataset[DATASET_NAME] = 'false'
-            ele.removeEventListener('pointerdown', onPointerDown)
+            el.dataset[DATASET_NAME] = 'false'
+            el.removeEventListener('pointerdown', onPointerDown)
         },
         rippleAt,
     }

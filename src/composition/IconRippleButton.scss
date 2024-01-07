@@ -31,6 +31,6 @@
 }
 @media (any-hover: hover) {
     .sd-icon_ripple_button-ripple:hover {
-        background: rgb(0 0 0 / 0.1);
+        @include background-hover(var(--md-sys-color-primary));
     }
 }

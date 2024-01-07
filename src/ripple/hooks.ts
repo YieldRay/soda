@@ -11,9 +11,7 @@ export function useRippleEffect<T extends HTMLElement>(
 ) {
     useEffect(
         () =>
-            eleRef.current
-                ? ripple(eleRef.current, duration, color)?.cleanup
-                : undefined,
+            eleRef.current ? ripple(eleRef.current, color)?.cleanup : undefined,
         [eleRef, duration, color]
     )
 }
@@ -25,13 +23,10 @@ export function useRippleEffect<T extends HTMLElement>(
  * <div ref={useMergeRefs([useRippleRef(), ...])}> Ripple </div>
  * ```
  */
-export function useRippleRef<T extends HTMLElement>(
-    duration?: number,
-    color?: string
-) {
+export function useRippleRef<T extends HTMLElement>(color?: string) {
     const refCallback: React.RefCallback<T> = (ele) => {
         if (!ele) return
-        ripple(ele, duration, color)
+        ripple(ele, color)
     }
     return refCallback
 }
