@@ -16,7 +16,7 @@ export const DEFAULT_RIPPLE_COLOR = CSS.supports('color: rgb(from white r g b)')
  * @param el Element to attach ripple effect
  * @param rippleColor Color of the ripple (in css color string)
  * @returns An object, use `cleanup()` to remove attached event listener,
- * use `rippleAt(x, y)` to manully invoke a ripple to create
+ * use `rippleAt(x, y)` to manually invoke a ripple to create
  *
  * @example
  * ```js

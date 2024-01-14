@@ -32,6 +32,7 @@ export const Scrim = forwardRef<
             .sd-scrim:not(.sd-scrim-open){
                 display: none;
                 opacity: 0;
+                pointer-events: none;
             }
             .sd-scrim-open {
                 display: block;

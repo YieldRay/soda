@@ -16,7 +16,7 @@ export default defineConfig({
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: `@import '@/style/index.scss';\n@import '@/style/tokens/baseline.scss';`,
+                additionalData: fs.readFileSync('./src/style/index.scss'),
             },
         },
     },
@@ -51,7 +51,7 @@ export default defineConfig({
 /**
  * Generate entry for vite to build
  */
-function inventory() {
+function inventory(): LibraryOptions['entry'] {
     const basename = (filename: string) =>
         path.basename(filename, path.extname(filename))
 

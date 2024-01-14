@@ -75,7 +75,7 @@ export const BottomSheet = forwardRef<
         if (!fixed) return
         const sheet = sheetRef.current!
         const handle = hideDragHandle ? sheet : handleRef.current!
-        const handler = drag(handle, sheet, {
+        const handler = drag(sheet, handle, {
             onShow() {
                 setVisible(true)
                 onChange?.(true)
@@ -123,8 +123,8 @@ export const BottomSheet = forwardRef<
 })
 
 export function drag(
-    dragHandle: HTMLDivElement,
     sheet: HTMLDivElement,
+    dragHandle: HTMLDivElement,
     options?: {
         onShow?(): void
         onHide?(): void
@@ -135,15 +135,19 @@ export function drag(
      * this is because the children of the sheet may want to capture the pointer,
      * for example, the <Ripple> element
      */
-    const isCapturePointer = dragHandle !== sheet
+    const hideDragHandle = sheet === dragHandle
     let isDragging = false
     let translateY = 0 // previous translateY in px
     let initY = 0
     let pointerDownTime: number
 
+    sheet.dataset.sdState = 'hide'
+
     const hide = () => {
+        if (hideDragHandle && sheet.dataset.sdState !== 'show') return
         const { height } = sheet.getBoundingClientRect() // the sheet height
 
+        sheet.dataset.sdState = 'hiding'
         const animation = sheet.animate(
             [{ transform: `translateY(${height}px)` }],
             {
@@ -151,8 +155,10 @@ export function drag(
                 easing: 'cubic-bezier(0.3, 0, 1, 1)',
             }
         )
+        animation.id = 'hide'
         animation.onfinish = animation.oncancel = () => {
             sheet.style.transform = `translateY(${height}px)`
+            sheet.dataset.sdState = 'hide'
         }
         translateY = height
 
@@ -160,12 +166,16 @@ export function drag(
     }
 
     const show = () => {
+        if (hideDragHandle && sheet.dataset.sdState !== 'hide') return
+        sheet.dataset.sdState = 'showing'
         const animation = sheet.animate([{ transform: `translateY(0)` }], {
             duration: 300,
             easing: 'cubic-bezier(0, 0, 0, 1)',
         })
+        animation.id = 'show'
         animation.onfinish = animation.oncancel = () => {
             sheet.style.transform = `translateY(0)`
+            sheet.dataset.sdState = 'show'
         }
         translateY = 0
 
@@ -173,7 +183,7 @@ export function drag(
     }
 
     const onPointerDown = (e: PointerEvent) => {
-        if (isCapturePointer) dragHandle.setPointerCapture(e.pointerId)
+        if (!hideDragHandle) dragHandle.setPointerCapture(e.pointerId)
         isDragging = true
         initY = e.clientY
         pointerDownTime = Date.now()
@@ -194,7 +204,7 @@ export function drag(
     }
 
     const onPointerUp = (e: PointerEvent) => {
-        if (isCapturePointer) dragHandle.releasePointerCapture(e.pointerId)
+        if (!hideDragHandle) dragHandle.releasePointerCapture(e.pointerId)
         isDragging = false
         const currY = e.clientY
         const distanceY = currY - initY
@@ -224,14 +234,14 @@ export function drag(
     dragHandle.addEventListener('pointerdown', onPointerDown)
     dragHandle.addEventListener('pointermove', onPointerMove)
     dragHandle.addEventListener('pointercancel', onPointerUp)
-    dragHandle.addEventListener('pointerup', onPointerUp)
+    window.addEventListener('pointerup', onPointerUp)
 
     return {
         cleanup: () => {
             dragHandle.removeEventListener('pointerdown', onPointerDown)
             dragHandle.removeEventListener('pointermove', onPointerMove)
-            dragHandle.removeEventListener('pointerup', onPointerUp)
             dragHandle.removeEventListener('pointercancel', onPointerUp)
+            window.removeEventListener('pointerup', onPointerUp)
         },
         show,
         hide,
