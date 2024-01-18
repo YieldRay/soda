@@ -14,18 +14,30 @@ import {
 } from '@floating-ui/react'
 import type { Placement } from '@floating-ui/react'
 import { useTransitionStylesProps } from '@/utils/floating-ui'
-import { useState } from 'react'
+import { forwardRef, useImperativeHandle, useState } from 'react'
 
 /**
- * Just a simple wrapper of `floating-ui` for convenience.
+ * This handle is always exists when component is mounted,
+ * so you can always use `ref.current!.open = false`
+ */
+export interface TooltipHolderHandle {
+    open: boolean
+}
+
+/**
+ * Just a simple wrapper of `floating-ui` for convenience,
+ * can use ref to manually toggle it.
  *
  * You may use `floating-ui` directly for better control.
  */
-export function TooltipHolder(props: {
-    content?: React.ReactNode
-    trigger?: React.ReactNode
-    placement?: Placement
-}) {
+export const TooltipHolder = forwardRef<
+    TooltipHolderHandle,
+    {
+        content?: React.ReactNode
+        trigger?: React.ReactNode
+        placement?: Placement
+    }
+>(function TooltipHolder(props, ref) {
     const [isOpen, setIsOpen] = useState(false)
 
     const { refs, floatingStyles, update, context } = useFloating({
@@ -56,6 +68,15 @@ export function TooltipHolder(props: {
         dismiss,
         role,
     ])
+
+    useImperativeHandle(ref, () => ({
+        get open() {
+            return isOpen
+        },
+        set open(v) {
+            setIsOpen(v)
+        },
+    }))
 
     return (
         <div className="container">
@@ -90,4 +111,4 @@ export function TooltipHolder(props: {
             `}</style>
         </div>
     )
-}
+})

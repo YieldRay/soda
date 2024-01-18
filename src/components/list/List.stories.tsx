@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { List } from '.'
+import Icon from '@mdi/react'
+import { mdiOpenInNew } from '@mdi/js'
 
 const meta = {
     title: 'List',
@@ -12,6 +14,7 @@ const meta = {
     args: {
         headline: 'headline',
         supportingText: 'supportingText',
+        as: 'a',
     },
 } satisfies Meta<typeof List>
 
@@ -20,7 +23,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-    args: {},
+    args: {
+        href: '/',
+    },
 }
 
 export const SingleLine: Story = {
@@ -59,7 +64,7 @@ export const LeadingAvatarLabelText: Story = {
 
 export const TrailingIcon: Story = {
     args: {
-        trailingIcon: '✨',
+        trailingIcon: <Icon path={mdiOpenInNew} size={1} />,
     },
 }
 

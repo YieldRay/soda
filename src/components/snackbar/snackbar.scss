@@ -6,6 +6,7 @@
     @include elevation-level3;
     display: inline-flex;
     align-items: center;
+    box-sizing: border-box;
     max-width: 100%;
     max-height: 100%;
     vertical-align: middle;
@@ -58,4 +59,46 @@
             display: none;
         }
     }
+}
+
+// the holder
+
+.sd-snackbar_holder {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 1.5rem;
+    overflow: hidden;
+
+    &-full {
+        padding: 0;
+    }
+
+    .sd-snackbar {
+        display: flex;
+    }
+
+    @media screen and (min-width: 600px) {
+        .sd-snackbar {
+            width: 400px;
+        }
+
+        &-placement {
+            &_left .sd-snackbar {
+                float: left;
+            }
+            &_right .sd-snackbar {
+                float: right;
+            }
+            &_center .sd-snackbar {
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+.sd-snackbar_holder .sd-snackbar_holder-full > .sd-snackbar {
+    border-radius: 0;
 }

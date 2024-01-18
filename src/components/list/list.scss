@@ -1,6 +1,7 @@
 // https://m3.material.io/components/lists/specs
 
 .sd-list {
+    all: unset;
     background: var(--md-sys-color-surface);
     display: flex;
     align-items: center;

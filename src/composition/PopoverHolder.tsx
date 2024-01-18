@@ -12,18 +12,30 @@ import {
 } from '@floating-ui/react'
 import type { Placement } from '@floating-ui/react'
 import { useTransitionStylesProps } from '@/utils/floating-ui'
-import { useState } from 'react'
+import { forwardRef, useImperativeHandle, useState } from 'react'
 
 /**
- * Just a simple wrapper of `floating-ui` for convenience.
+ * This handle is always exists when component is mounted,
+ * so you can always use `ref.current!.open = false`
+ */
+export interface PopoverHolderHandle {
+    open: boolean
+}
+
+/**
+ * Just a simple wrapper of `floating-ui` for convenience,
+ * can use ref to manually toggle it.
  *
  * You may use `floating-ui` directly for better control.
  */
-export function PopoverHolder(props: {
-    content?: React.ReactNode
-    trigger?: React.ReactNode
-    placement?: Placement
-}) {
+export const PopoverHolder = forwardRef<
+    PopoverHolderHandle,
+    {
+        content?: React.ReactNode
+        trigger?: React.ReactNode
+        placement?: Placement
+    }
+>(function PopoverHolder(props, ref) {
     const [isOpen, setIsOpen] = useState(false)
 
     const { refs, floatingStyles, update, context } = useFloating({
@@ -45,6 +57,15 @@ export function PopoverHolder(props: {
         dismiss,
         role,
     ])
+
+    useImperativeHandle(ref, () => ({
+        get open() {
+            return isOpen
+        },
+        set open(v) {
+            setIsOpen(v)
+        },
+    }))
 
     return (
         <div className="container">
@@ -79,4 +100,4 @@ export function PopoverHolder(props: {
             `}</style>
         </div>
     )
-}
+})

@@ -5,7 +5,7 @@ import { forwardRef, useState } from 'react'
 import { ExtendProps } from '@/utils/type'
 import { Icon } from '@mdi/react'
 import { mdiCheck } from '@mdi/js'
-import { SimpleSodaTransition } from '@/composition/SodaTransition'
+import { SodaSimpleTransition } from '@/composition/SodaTransition'
 
 /**
  * According to the official implementation, the ripple effect should not occupy space.
@@ -64,9 +64,13 @@ export const Checkbox = forwardRef<
             }}
         >
             <div className="sd-checkbox-icon">
-                <SimpleSodaTransition in={isChecked}>
+                <SodaSimpleTransition
+                    in={isChecked}
+                    enter={{ clipPath: `inset(0 0 0 0)` }}
+                    leave={{ clipPath: `inset(0 100% 0 0)` }}
+                >
                     {checkedIcon}
-                </SimpleSodaTransition>
+                </SodaSimpleTransition>
             </div>
             <div className="sd-checkbox-ripple">
                 <Ripple />

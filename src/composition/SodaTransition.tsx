@@ -98,13 +98,13 @@ export const SodaTransition = forwardRef<
 /**
  * A simple wrapper of `<SodaTransition>`, with default fade transition included.
  */
-export const SimpleSodaTransition = forwardRef<
+export const SodaSimpleTransition = forwardRef<
     HTMLElement,
     Parameters<typeof SodaTransition>[0] & {
         enter?: React.CSSProperties
         leave?: React.CSSProperties
     }
->(function SimpleFadeTransition(
+>(function SodaSimpleTransition(
     {
         enter = { opacity: '1' },
         leave = { opacity: '0' },

@@ -22,6 +22,7 @@ export function Snackbar({
     fixed,
     open,
     teleportTo,
+    placement = 'left',
     full,
     ...props
 }: ExtendProps<{
@@ -35,11 +36,17 @@ export function Snackbar({
      * open and hide the SideSheet without any help of other component
      */
     fixed?: boolean
+    /**
+     * See `fixed`
+     */
     open?: boolean
     teleportTo?: Element | DocumentFragment
-    // placement?: 'left' | 'center' | 'right'
     /**
-     * Span the entire width of the screen
+     * Position of the `fixed` snackbar, has no effect for compact screen (width<600px)
+     */
+    placement?: 'left' | 'center' | 'right'
+    /**
+     * Make the `fixed` snackbar spans full width of the screen
      */
     full?: boolean
 }>) {
@@ -94,31 +101,11 @@ export function Snackbar({
     if (fixed)
         return (
             <Portal container={teleportTo}>
-                <style jsx global>{`
-                    .sd-snackbar_holder {
-                        position: fixed;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        box-sizing: border-box;
-                        padding: 1rem 1.5rem;
-                        overflow: hidden;
-                    }
-
-                    .sd-snackbar_holder-full {
-                        padding: 0;
-                    }
-                    .sd-snackbar_holder-full > .sd-snackbar {
-                        border-radius: 0;
-                    }
-                    .sd-snackbar_holder .sd-snackbar {
-                        display: flex;
-                    }
-                `}</style>
                 <div
                     className={clsx(
                         'sd-snackbar_holder',
-                        full && 'sd-snackbar_holder-full'
+                        full && 'sd-snackbar_holder-full',
+                        `sd-snackbar_holder-placement_${placement}`
                     )}
                     ref={ref}
                 >

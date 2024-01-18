@@ -6,7 +6,7 @@ import { ModalHolder } from '@/composition/ModalHolder'
 import { useRef, useState } from 'react'
 import { FloatingOverlay } from '@floating-ui/react'
 import { Portal } from '@/utils/Portal'
-import { SimpleSodaTransition } from '@/composition'
+import { SodaSimpleTransition } from '@/composition'
 
 const meta = {
     title: 'Dialog/Dialog',
@@ -79,7 +79,7 @@ export const UseFloatingUI: Story = {
                 </Button>
 
                 <Portal container={document.body}>
-                    <SimpleSodaTransition in={open}>
+                    <SodaSimpleTransition in={open}>
                         <FloatingOverlay
                             lockScroll
                             style={{
@@ -111,7 +111,7 @@ export const UseFloatingUI: Story = {
                                 }
                             />
                         </FloatingOverlay>
-                    </SimpleSodaTransition>
+                    </SodaSimpleTransition>
                 </Portal>
             </>
         )

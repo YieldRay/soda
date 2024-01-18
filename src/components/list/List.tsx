@@ -1,6 +1,6 @@
 import './list.scss'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type.ts'
+import { ExtendProps, TagNameString } from '@/utils/type.ts'
 import { omit } from 'lodash-es'
 import { forwardRef } from 'react'
 import { useRippleRef } from '@/ripple/hooks'
@@ -19,13 +19,17 @@ export const List = forwardRef<
         leadingVideoThumbnail?: React.ReactNode
         trailingIcon?: React.ReactNode
         trailingSupportingText?: React.ReactNode
-        disabled?: boolean
         /**
          * 1 means only one line of headline and no supporting text
          * 2 means one lines of supporting text
          * 3 means two lines of supporting text
          */
         lines?: 1 | 2 | 3
+        disabled?: boolean
+        /**
+         * HTML tag name, div by default
+         */
+        as?: TagNameString
     }>
 >(function List(
     {
@@ -38,13 +42,15 @@ export const List = forwardRef<
         trailingIcon,
         trailingSupportingText,
         disabled,
+        as,
         lines,
         ...props
     },
     ref
 ) {
+    const As: any = as || 'div'
     return (
-        <li
+        <As
             {...omit(props, ['children'])}
             ref={useMergeRefs([ref, useRippleRef()])}
             className={clsx('sd-list', className)}
@@ -83,6 +89,6 @@ export const List = forwardRef<
             {trailingIcon && (
                 <div className="sd-list-trailing_icon">{trailingIcon}</div>
             )}
-        </li>
+        </As>
     )
 })

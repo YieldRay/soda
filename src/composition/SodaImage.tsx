@@ -14,7 +14,7 @@ import { IconButton } from '@/components/icon-button'
 import { mdiImageBrokenVariant } from '@mdi/js'
 import isNumber from 'lodash-es/isNumber'
 import isFunction from 'lodash-es/isFunction'
-import { SimpleSodaTransition } from '@/composition/SodaTransition'
+import { SodaSimpleTransition } from '@/composition/SodaTransition'
 
 /**
  * A high-level image component, supports loading progress (when `crossOrigin` is specified),
@@ -241,13 +241,13 @@ export const SodaImage = forwardRef<
 
     return (
         <div className={clsx('sd-image', className)} {...props}>
-            <SimpleSodaTransition in={isLoading}>
+            <SodaSimpleTransition in={isLoading}>
                 <div ref={placeholderRef} className="sd-image-placeholder">
                     {placeholder ?? (
                         <CircularProgressIndicator value={loadPercentage} />
                     )}
                 </div>
-            </SimpleSodaTransition>
+            </SodaSimpleTransition>
 
             <img
                 ref={eRef}

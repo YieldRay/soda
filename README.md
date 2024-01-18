@@ -13,8 +13,10 @@ Features:
 > Working in progress, API is unstable and can be changed in any time.  
 > For production, you may want use the official [material web](https://github.com/material-components/material-web) component library or the [MDUI](https://www.mdui.org/) library.
 
-This is an experimental project, browser support:  
-Chrome>=105, Safari>=15.4, Firefox (partial support for latest version)
+This is an experimental project, (best) browser support:  
+Chrome>=105, Safari>=15.4, Firefox>=121
+
+> The recommended browser is Chrome>=119
 
 # Installation
 
@@ -40,8 +42,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 See: <https://yieldray.github.io/soda/>
 
 > [!IMPORTANT]  
-> Components in `src/components` directory (exported directly) do NOT include heavy logic.  
-> Those logic helper components can be found in `src/composition` directory
+> Only components defined in the [Material Design Docs](https://m3.material.io/components) will be put into `src/components` directory, these components do NOT include heavy logic.  
+> Other necessary components or helpers can be found at `src/composition` directory.
 
 > [!NOTE]  
 > Most components in `src/components` forward `ref` attribute for library interactivity.  

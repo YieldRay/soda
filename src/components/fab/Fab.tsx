@@ -30,7 +30,7 @@ export const Fab = forwardRef<
         <Ripple
             {...props}
             ref={ref}
-            as={'button'}
+            as="button"
             className={clsx('sd-fab', className)}
             data-sd={sd || 'surface'}
             data-sd-size={size || 'default'}

@@ -1,15 +1,27 @@
-import type { UseTransitionStylesProps } from '@floating-ui/react'
+import type { UseTransitionStylesProps, Alignment } from '@floating-ui/react'
 
-export const common: UseTransitionStylesProps['common'] = ({ side }) => ({
-    transformOrigin: (
-        {
-            top: 'center 100%',
-            bottom: 'center 0',
-            left: '100% center',
-            right: '0 center',
-        } as const
-    )[side],
-})
+export const common: UseTransitionStylesProps['common'] = ({
+    side,
+    placement,
+}) => {
+    const alignment = placement.split('-')[1] as Alignment | undefined
+    const align = alignment
+        ? {
+              start: '0%',
+              end: '100%',
+          }[alignment]
+        : 'center'
+    return {
+        transformOrigin: (
+            {
+                top: `${align} 100%`,
+                bottom: `${align} 0`,
+                left: `100% ${align}`,
+                right: `0 ${align}`,
+            } as const
+        )[side],
+    }
+}
 
 // see https://floating-ui.com/docs/usetransition#usetransitionstyles
 export const useTransitionStylesProps = {
