@@ -6,7 +6,7 @@ import { mdiCheck, mdiClose, mdiMagnify } from '@mdi/js'
 import Icon from '@mdi/react'
 
 const meta = {
-    title: 'Menu',
+    title: 'components/Menu',
     component: Menu,
     parameters: {
         layout: 'centered',

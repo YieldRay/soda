@@ -15,7 +15,7 @@ import {
 } from '@mdi/js'
 
 const meta = {
-    title: 'Navigation/NavigationRail',
+    title: 'components/Navigation/NavigationRail',
     component: NavigationRail,
     tags: ['autodocs'],
 } satisfies Meta<typeof NavigationRail>

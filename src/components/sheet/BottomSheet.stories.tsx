@@ -6,7 +6,7 @@ import { useRef } from 'react'
 import { List } from '../list'
 
 const meta = {
-    title: 'Sheet/BottomSheet',
+    title: 'components/Sheet/BottomSheet',
     component: BottomSheet,
     tags: ['autodocs'],
 } satisfies Meta<typeof BottomSheet>

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Carousel } from '.'
 
 const meta = {
-    title: 'Carousel',
+    title: 'components/Carousel',
     component: Carousel,
     tags: ['autodocs'],
 } satisfies Meta<typeof Carousel>

@@ -1,0 +1,45 @@
+.sd-select {
+    // max-width: 280px;
+
+    &_options[class /* Just for raise the priority */] {
+        /* ul: container of option */
+        display: block;
+        box-sizing: border-box;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        // hide scrollbar
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    &_option {
+        /* li */
+        &-selected[class] {
+            background: var(--md-sys-color-tertiary-container);
+
+            @supports (color: hsl(from white h s l)) {
+                &:hover {
+                    background: hsl(
+                        from var(--md-sys-color-tertiary-container) h s
+                            calc(l - 0.02)
+                    );
+                }
+            }
+        }
+    }
+}
+
+.sd-select-vt {
+    view-transition-name: sd-select-vt;
+}
+
+::view-transition-old(sd-select-vt) {
+    animation: 200ms cubic-bezier(0.4, 0, 1, 1) both sd-kf-fade_out;
+}
+
+::view-transition-new(sd-select-vt) {
+    animation: none;
+    opacity: 0;
+}

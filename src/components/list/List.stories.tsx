@@ -5,7 +5,7 @@ import Icon from '@mdi/react'
 import { mdiOpenInNew } from '@mdi/js'
 
 const meta = {
-    title: 'List',
+    title: 'components/List',
     component: List,
     parameters: {
         layout: 'centered',

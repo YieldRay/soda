@@ -4,7 +4,7 @@ import { Badge } from '.'
 import { Button } from '../button'
 
 const meta = {
-    title: 'Badge',
+    title: 'components/Badge',
     component: Badge,
     parameters: {
         layout: 'centered',

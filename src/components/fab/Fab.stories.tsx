@@ -5,7 +5,7 @@ import Icon from '@mdi/react'
 import { mdiPencilOutline } from '@mdi/js'
 
 const meta = {
-    title: 'Button/Fab',
+    title: 'components/Button/Fab',
     component: Fab,
     parameters: {
         layout: 'centered',

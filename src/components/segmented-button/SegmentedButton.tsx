@@ -11,7 +11,7 @@ export const SegmentedButton = forwardRef<
         value?: string
         defaultValue?: string
         onChange?: (value: string) => void
-        items?: Array<{
+        items: Array<{
             value: string
             /**
              * You can omit the label, it will show the `value`
@@ -56,7 +56,7 @@ export const SegmentedButton = forwardRef<
             {items &&
                 items.map(({ label, disabled, value }, index) => (
                     <Ripple
-                        key={value ?? index}
+                        key={value}
                         tabIndex={index + 1}
                         className="sd-segmented_button-item"
                         data-sd-active={value === realValue}
@@ -68,7 +68,9 @@ export const SegmentedButton = forwardRef<
                             }
                         }}
                     >
-                        <div className="sd-segmented_button-label">{label}</div>
+                        <div className="sd-segmented_button-label">
+                            {label ?? value}
+                        </div>
                     </Ripple>
                 ))}
         </div>

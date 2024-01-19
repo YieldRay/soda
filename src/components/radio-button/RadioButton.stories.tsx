@@ -4,7 +4,7 @@ import { RadioButton, RadioGroup } from '.'
 import { useState } from 'react'
 
 const meta = {
-    title: 'RadioButton',
+    title: 'components/RadioButton',
     component: RadioButton,
     parameters: {
         layout: 'centered',

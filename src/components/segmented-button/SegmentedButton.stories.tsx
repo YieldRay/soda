@@ -33,7 +33,7 @@ const items = [
 ]
 
 const meta = {
-    title: 'Button/SegmentedButton',
+    title: 'components/Button/SegmentedButton',
     component: SegmentedButton,
     tags: ['autodocs'],
     parameters: {

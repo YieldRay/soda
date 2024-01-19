@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { ModalHolder } from '@/composition/ModalHolder'
 
 const meta = {
-    title: 'Dialog/FullScreenDialog',
+    title: 'components/Dialog/FullScreenDialog',
     component: FullScreenDialog,
     parameters: {
         layout: 'centered',

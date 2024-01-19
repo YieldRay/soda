@@ -6,7 +6,7 @@ import Icon from '@mdi/react'
 import { mdiCheck, mdiClose, mdiMagnify } from '@mdi/js'
 
 const meta = {
-    title: 'Tab',
+    title: 'components/Tab',
     component: Tabs,
     parameters: {
         layout: 'centered',

@@ -4,7 +4,7 @@ import { Slider } from '.'
 import { useState } from 'react'
 
 const meta = {
-    title: 'Slider',
+    title: 'components/Slider',
     component: Slider,
     tags: ['autodocs'],
     parameters: {

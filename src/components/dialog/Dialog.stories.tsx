@@ -9,7 +9,7 @@ import { Portal } from '@/utils/Portal'
 import { SodaSimpleTransition } from '@/composition'
 
 const meta = {
-    title: 'Dialog/Dialog',
+    title: 'components/Dialog/Dialog',
     component: Dialog,
     parameters: {
         layout: 'centered',

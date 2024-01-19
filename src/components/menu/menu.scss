@@ -4,9 +4,9 @@
     all: unset;
     background: var(--md-sys-color-surface-container);
     @include elevation-level2;
-    width: max-content;
     border-radius: 4px;
     box-sizing: border-box;
+    width: max-content;
     max-width: 280px;
     padding: 4px 0;
     display: inline-flex;

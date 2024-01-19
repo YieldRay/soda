@@ -7,7 +7,7 @@ import Icon from '@mdi/react'
 import { IconRippleButton } from '@/composition/IconRippleButton'
 
 const meta = {
-    title: 'TextField',
+    title: 'components/TextField',
     component: TextField,
     tags: ['autodocs'],
     parameters: {

@@ -5,7 +5,7 @@ import { IconButton } from '../icon-button'
 import { mdiDotsVertical, mdiMagnify, mdiMenu } from '@mdi/js'
 
 const meta = {
-    title: 'AppBar/TopAppBar',
+    title: 'components/AppBar/TopAppBar',
     component: TopAppBar,
     tags: ['autodocs'],
     args: {

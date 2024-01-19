@@ -9,7 +9,7 @@ import { DrawerItem } from '@/composition/DrawerItem'
 import { mdiMenu } from '@mdi/js'
 
 const meta = {
-    title: 'Sheet/SideSheet',
+    title: 'components/Sheet/SideSheet',
     component: SideSheet,
     tags: ['autodocs'],
 } satisfies Meta<typeof SideSheet>

@@ -5,7 +5,7 @@ import Icon from '@mdi/react'
 import { mdiCheck } from '@mdi/js'
 
 const meta = {
-    title: 'Button/Button',
+    title: 'components/Button/Button',
     component: Button,
     parameters: {
         layout: 'centered',

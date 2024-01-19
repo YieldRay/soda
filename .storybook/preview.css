@@ -15,3 +15,9 @@ pre {
         background: transparent;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    .docs-story > * {
+        background: Canvas !important;
+    }
+}

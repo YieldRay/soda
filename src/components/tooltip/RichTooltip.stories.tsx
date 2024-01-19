@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { RichTooltip } from '.'
 
 const meta = {
-    title: 'Tooltip/RichTooltip',
+    title: 'components/Tooltip/RichTooltip',
     component: RichTooltip,
     parameters: {
         layout: 'centered',

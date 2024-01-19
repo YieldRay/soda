@@ -15,7 +15,7 @@ import {
 import Icon from '@mdi/react'
 
 const meta = {
-    title: 'AppBar/BottomAppBar',
+    title: 'components/AppBar/BottomAppBar',
     component: BottomAppBar,
     tags: ['autodocs'],
 } satisfies Meta<typeof BottomAppBar>

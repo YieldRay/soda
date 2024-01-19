@@ -5,7 +5,7 @@ import { Button } from '../button'
 import { useState } from 'react'
 
 const meta = {
-    title: 'Snackbar',
+    title: 'components/Snackbar',
     component: Snackbar,
     parameters: {
         layout: 'centered',

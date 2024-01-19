@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { TimePicker } from '.'
 
 const meta = {
-    title: 'TimePicker',
+    title: 'components/TimePicker',
     component: TimePicker,
     tags: ['autodocs'],
     parameters: {

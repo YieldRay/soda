@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { mdiMagnify, mdiMenu } from '@mdi/js'
 
 const meta = {
-    title: 'Search',
+    title: 'components/Search',
     component: Search,
     parameters: {
         layout: 'centered',

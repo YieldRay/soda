@@ -4,7 +4,7 @@ import { Chip } from '.'
 import { useState } from 'react'
 
 const meta = {
-    title: 'Chip',
+    title: 'components/Chip',
     component: Chip,
     parameters: {
         layout: 'centered',

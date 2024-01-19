@@ -6,7 +6,7 @@ import Icon from '@mdi/react'
 import { mdiCheck, mdiClose } from '@mdi/js'
 
 const meta = {
-    title: 'Switch',
+    title: 'components/Switch',
     component: Switch,
     parameters: {
         layout: 'centered',
