@@ -5,16 +5,6 @@ import { List } from '..'
 import { mdiChevronRight } from '@mdi/js'
 import Icon from '@mdi/react'
 
-const meta = {
-    title: 'composition/Select',
-    component: Select,
-    tags: ['autodocs'],
-} satisfies Meta<typeof Select>
-
-export default meta
-
-type Story = StoryObj<typeof meta>
-
 const fruits = [
     '🍒 Cherry',
     '🍓 Strawberry',
@@ -35,7 +25,29 @@ const fruits = [
     '🥥 Coconut',
     '🍅 Tomato',
 ]
+
+const meta = {
+    title: 'composition/Select',
+    component: Select,
+    tags: ['autodocs'],
+    args: {
+        defaultValue: fruits[0],
+        options: fruits.map((fruit) => ({ value: fruit })),
+    },
+} satisfies Meta<typeof Select>
+
+export default meta
+
+type Story = StoryObj<typeof meta>
+
 export const Default: Story = {
+    decorators: (Story) => (
+        <div style={{ padding: '10rem 1rem' }}>{<Story />}</div>
+    ),
+    args: {},
+}
+
+export const Customized: Story = {
     decorators: (Story) => (
         <div style={{ padding: '10rem 1rem' }}>{<Story />}</div>
     ),

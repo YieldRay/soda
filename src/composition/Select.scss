@@ -7,10 +7,13 @@
         box-sizing: border-box;
         overflow-y: auto;
         overscroll-behavior: contain;
-        // hide scrollbar
-        scrollbar-width: none;
+        // scrollbar
+        scrollbar-width: thin;
         &::-webkit-scrollbar {
-            display: none;
+            width: 2px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: var(--md-sys-color-outline);
         }
     }
 
@@ -27,6 +30,27 @@
                     );
                 }
             }
+        }
+    }
+}
+
+.sd-menu_button {
+    overflow: hidden;
+    flex-shrink: 1;
+    display: inline-flex;
+    gap: 0.15rem;
+    padding: 0.5rem 0;
+    align-items: center;
+    cursor: pointer;
+    transition: all 200ms;
+    word-break: keep-all;
+    font-size: 14px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+
+    @media (any-hover: hover) {
+        &:hover {
+            background: rgb(0 0 0 / 0.04);
         }
     }
 }

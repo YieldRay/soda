@@ -1,13 +1,7 @@
 import './Select.scss'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
-import {
-    forwardRef,
-    useRef,
-    useEffect,
-    useState,
-    useDeferredValue,
-} from 'react'
+import { forwardRef, useRef, useState, useDeferredValue } from 'react'
 import { Menu, MenuItem } from '../components/menu'
 import {
     useFloating,
@@ -17,7 +11,6 @@ import {
     SideObject,
     useInteractions,
     inner,
-    useInnerOffset,
     useClick,
     useListNavigation,
     useDismiss,
@@ -29,9 +22,11 @@ import {
     shift,
     useTransitionStyles,
     Placement,
-    useTypeahead,
 } from '@floating-ui/react'
 import { isFunction } from 'lodash-es'
+import { Ripple } from '@/ripple/Ripple'
+import Icon from '@mdi/react'
+import { mdiMenuDown } from '@mdi/js'
 
 /**
  * `<Select>` is high level `<Menu>`
@@ -56,7 +51,10 @@ export const Select = forwardRef<
             label?: React.ReactNode
             disabled?: boolean
         }>
-        children: React.ReactNode | ((value: string) => React.ReactNode)
+        /**
+         * Customize select behavior
+         */
+        children?: React.ReactNode | ((value: string) => React.ReactNode)
         /**
          * The placement of the floating options
          */
@@ -93,21 +91,14 @@ export const Select = forwardRef<
 
         const realValueDeferred = useDeferredValue(realValue)
         const dispatchChangeDeferred = (v: string) => {
-            setTimeout(
-                () => requestAnimationFrame(() => dispatchChange(v)),
-                200
-            )
+            setTimeout(() => dispatchChange(v), 200)
         }
 
         // floating-ui
         // based on: https://codesandbox.io/p/sandbox/shy-snowflake-kp6479
 
         const listRef = useRef<Array<HTMLElement | null>>([])
-        const listContentRef = useRef<Array<string | null>>([])
         const overflowRef = useRef<SideObject>(null)
-        const allowSelectRef = useRef(false)
-        const allowMouseUpRef = useRef(true)
-        const selectTimeoutRef = useRef<any>()
         const scrollRef = useRef<HTMLUListElement>(null)
 
         const [open, setOpen] = useState(false)
@@ -115,16 +106,9 @@ export const Select = forwardRef<
             ({ value }) => value === realValue
         )
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
-        const [fallback, setFallback] = useState(false)
-        const [innerOffset, setInnerOffset] = useState(0)
-        const [touch, setTouch] = useState(false)
-        const [blockSelection, setBlockSelection] = useState(false)
-
-        if (!open) {
-            if (innerOffset !== 0) setInnerOffset(0)
-            if (fallback) setFallback(false)
-            if (blockSelection) setBlockSelection(false)
-        }
+        const fallbackRef = useRef(false)
+        if (!open) fallbackRef.current = false
+        const touch = 'ontouchstart' in document.documentElement
 
         const { refs, floatingStyles, context } = useFloating({
             placement,
@@ -132,7 +116,7 @@ export const Select = forwardRef<
             onOpenChange: setOpen,
             whileElementsMounted: autoUpdate,
             transform: false,
-            middleware: fallback
+            middleware: fallbackRef.current
                 ? [
                       offset(5),
                       touch
@@ -153,8 +137,9 @@ export const Select = forwardRef<
                           overflowRef,
                           scrollRef,
                           index: selectedIndex,
-                          offset: innerOffset,
-                          onFallbackChange: setFallback,
+                          offset: 0,
+                          onFallbackChange: (fallback) =>
+                              (fallbackRef.current = fallback),
                           padding: 10,
                           minItemsVisible: touch ? 8 : 4,
                           referenceOverflowThreshold: 20,
@@ -165,44 +150,16 @@ export const Select = forwardRef<
 
         const { getReferenceProps, getFloatingProps, getItemProps } =
             useInteractions([
-                useClick(context, { event: 'mousedown' }),
+                useClick(context),
                 useDismiss(context),
                 useRole(context, { role: 'listbox' }),
-                useInnerOffset(context, {
-                    enabled: !fallback,
-                    onChange: setInnerOffset,
-                    overflowRef,
-                    scrollRef,
-                }),
                 useListNavigation(context, {
                     listRef,
                     activeIndex,
                     selectedIndex,
                     onNavigate: setActiveIndex,
                 }),
-                useTypeahead(context, {
-                    listRef: listContentRef,
-                    activeIndex,
-                    onMatch: open
-                        ? setActiveIndex
-                        : (i) => dispatchChange(options[i].value),
-                }),
             ])
-
-        useEffect(() => {
-            if (open) {
-                selectTimeoutRef.current = setTimeout(() => {
-                    allowSelectRef.current = true
-                }, 300)
-
-                return () => {
-                    clearTimeout(selectTimeoutRef.current)
-                }
-            } else {
-                allowSelectRef.current = false
-                allowMouseUpRef.current = true
-            }
-        }, [open])
 
         const { styles, isMounted } = useTransitionStyles(context, {
             duration: {
@@ -240,46 +197,16 @@ export const Select = forwardRef<
                             'sd-select_option-selected'
                     )}
                     key={optionValue}
-                    // Prevent immediate selection on touch devices when
-                    // pressing the ScrollArrows
-                    disabled={blockSelection}
                     aria-selected={realValue === optionValue}
                     role="option"
                     tabIndex={activeIndex === i ? 0 : -1}
                     ref={(node) => {
                         listRef.current[i] = node
-                        listContentRef.current[i] = optionValue
                     }}
                     {...getItemProps({
-                        onTouchStart() {
-                            allowSelectRef.current = true
-                            allowMouseUpRef.current = false
-                        },
-                        onKeyDown() {
-                            allowSelectRef.current = true
-                        },
                         onClick() {
-                            if (allowSelectRef.current) {
-                                dispatchChangeDeferred(optionValue)
-                                setOpen(false)
-                            }
-                        },
-                        onMouseUp() {
-                            if (!allowMouseUpRef.current) {
-                                return
-                            }
-
-                            if (allowSelectRef.current) {
-                                dispatchChangeDeferred(optionValue)
-                                setOpen(false)
-                            }
-
-                            // On touch devices, prevent the element from
-                            // immediately closing `onClick` by deferring it
-                            clearTimeout(selectTimeoutRef.current)
-                            selectTimeoutRef.current = setTimeout(() => {
-                                allowSelectRef.current = true
-                            })
+                            dispatchChangeDeferred(optionValue)
+                            setOpen(false)
                         },
                     })}
                 >
@@ -320,22 +247,16 @@ export const Select = forwardRef<
 
         return (
             <div {...props} ref={ref} className={clsx('sd-select', className)}>
-                <div
-                    ref={refs.setReference}
-                    {...getReferenceProps({
-                        onTouchStart() {
-                            setTouch(true)
-                        },
-                        onPointerMove({ pointerType }) {
-                            if (pointerType !== 'touch') {
-                                setTouch(false)
-                            }
-                        },
-                    })}
-                >
-                    {isFunction(children) ? children(realValue!) : children}
+                <div ref={refs.setReference} {...getReferenceProps()}>
+                    {isFunction(children)
+                        ? children(realValue!)
+                        : children ?? (
+                              <Ripple className="sd-menu_button">
+                                  <span>{realValue}</span>
+                                  <Icon size={1} path={mdiMenuDown}></Icon>
+                              </Ripple>
+                          )}
                 </div>
-
                 {optionsNode}
             </div>
         )
