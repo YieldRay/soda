@@ -34,7 +34,6 @@ const fruits = [
     '🥭 Mango',
     '🥥 Coconut',
     '🍅 Tomato',
-    '🫐 Blueberry',
 ]
 export const Default: Story = {
     decorators: (Story) => (
