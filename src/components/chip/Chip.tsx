@@ -24,12 +24,12 @@ export const Chip = forwardRef<
 >(function Chip(
     {
         variant = 'outlined',
-        children,
         leadingIcon,
         trailingIcon,
         disabled,
         onClick,
         className,
+        children,
         ...props
     },
     ref

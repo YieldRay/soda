@@ -49,17 +49,17 @@ export const Slider = forwardRef<
     }>
 >(function Slider(
     {
-        onChange,
-        steps,
-        value: value$co,
         defaultValue,
+        value: value$co,
+        onChange,
         min: minValue = 0,
         max: maxValue = 100,
+        steps,
         direction = 'horizontal',
         disabled,
+        className,
         label,
         hideLabel,
-        className,
         ...props
     },
     ref

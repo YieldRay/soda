@@ -13,28 +13,29 @@ export const Divider = forwardRef<
         /**
          * @default full
          */
-        sd?: 'full' | 'inset'
+        variant?: 'full' | 'inset'
         /**
          * @default horizontal
          */
         direction?: 'horizontal' | 'vertical'
     }>
->(function Divider({ sd, direction, className, ...props }, ref) {
+>(function Divider(
+    { variant = 'full', direction = 'horizontal', className, ...props },
+    ref
+) {
     return (
         <div
             {...props}
             ref={ref}
             className={clsx(
+                'sd-divider',
                 {
-                    'sd-divider': true,
-                    'sd-divider-full': sd === 'full' || sd == undefined,
-                    'sd-divider-inset': sd === 'inset',
+                    'sd-divider-full': variant === 'full',
+                    'sd-divider-inset': variant === 'inset',
                 },
                 className
             )}
-            data-sd-direction={
-                direction === 'vertical' ? 'vertical' : 'horizontal'
-            }
-        ></div>
+            data-sd-direction={direction}
+        />
     )
 })

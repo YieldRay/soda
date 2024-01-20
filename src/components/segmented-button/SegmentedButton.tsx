@@ -27,9 +27,9 @@ export const SegmentedButton = forwardRef<
     }>
 >(function SegmentedButton(
     {
+        items,
         value: value$co,
         defaultValue,
-        items,
         onChange,
         density,
         className,

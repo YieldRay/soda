@@ -23,7 +23,7 @@ export const Card = forwardRef<
         children?: React.ReactNode
     }>
 >(function Card(
-    { variant = 'elevated', children, as, className, ...props },
+    { variant = 'elevated', as, className, children, ...props },
     ref
 ) {
     return (

@@ -10,11 +10,11 @@ import { useEffect } from 'react'
  */
 export function ModalHolder({
     open,
-    children,
     onScrimClick,
     onEscape,
-    teleportTo,
     zIndex,
+    teleportTo,
+    children,
 }: {
     open?: boolean
     /**

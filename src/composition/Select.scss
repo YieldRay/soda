@@ -34,11 +34,10 @@
     }
 }
 
-.sd-menu_button {
+// default children
+.sd-select-menu_button {
     overflow: hidden;
-    flex-shrink: 1;
-    display: inline-flex;
-    gap: 0.15rem;
+    display: inline-block;
     padding: 0.5rem 0;
     align-items: center;
     cursor: pointer;
@@ -52,5 +51,13 @@
         &:hover {
             background: rgb(0 0 0 / 0.04);
         }
+    }
+
+    &-label {
+        flex-shrink: 1;
+        display: inline-flex;
+        gap: 0.15rem;
+        color: var(--md-sys-color-on-surface-variant);
+        border-bottom: solid 1px var(--md-sys-color-outline);
     }
 }

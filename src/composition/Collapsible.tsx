@@ -1,5 +1,6 @@
 import { ExtendProps } from '@/utils/type'
-import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
+import { useMergeRefs } from '@floating-ui/react'
+import { forwardRef, useRef, useEffect } from 'react'
 
 /**
  * Low level component, use `<Details>` component if possible
@@ -12,7 +13,6 @@ export const Collapsible = forwardRef<
     }>
 >(function Collapsible({ expanded, children, style, ...props }, ref) {
     const eRef = useRef<HTMLDivElement>(null)
-    useImperativeHandle(ref, () => eRef.current!)
     useEffect(() => {
         const e = eRef.current!
         if (expanded) {
@@ -25,7 +25,7 @@ export const Collapsible = forwardRef<
     return (
         <div
             {...props}
-            ref={eRef}
+            ref={useMergeRefs([ref, eRef])}
             style={{
                 transition: 'all 200ms',
                 overflow: 'hidden',

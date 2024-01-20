@@ -19,7 +19,7 @@ export const CircularProgressIndicator = forwardRef<
         size?: string
     }>
 >(function CircularProgressIndicator(
-    { value, size, className, ...props },
+    { value, size = '36px', className, ...props },
     ref
 ) {
     const eRef = useRef<HTMLDivElement>(null)

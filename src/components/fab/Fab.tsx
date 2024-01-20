@@ -18,18 +18,18 @@ export const Fab = forwardRef<
          * @default default
          */
         size?: 'default' | 'small' | 'large'
-        children?: React.ReactNode
         extended?: boolean
         disabled?: boolean
+        children?: React.ReactNode
     }>
 >(function Fab(
     {
         variant = 'surface',
-        className,
-        size,
-        children,
-        extended,
+        size = 'default',
+        extended = false,
         disabled,
+        className,
+        children,
         ...props
     },
     ref
@@ -41,7 +41,7 @@ export const Fab = forwardRef<
             as="button"
             className={clsx('sd-fab', className)}
             data-sd={variant}
-            data-sd-size={size || 'default'}
+            data-sd-size={size}
             data-sd-extended={extended}
             data-sd-disabled={disabled}
         >

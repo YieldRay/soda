@@ -35,12 +35,12 @@ export const PopoverHolder = forwardRef<
         trigger?: React.ReactNode
         placement?: Placement
     }
->(function PopoverHolder(props, ref) {
+>(function PopoverHolder({ placement = 'top', ...props }, ref) {
     const [isOpen, setIsOpen] = useState(false)
 
     const { refs, floatingStyles, update, context } = useFloating({
         whileElementsMounted: autoUpdate,
-        placement: props.placement || 'top',
+        placement,
         middleware: [offset(4), flip(), shift()],
         open: isOpen,
         onOpenChange: setIsOpen,

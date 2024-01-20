@@ -29,12 +29,12 @@ export const RadioButton = forwardRef<
 >(function RadioButton(
     {
         checked: checked$init,
-        defaultChecked,
+        defaultChecked = false,
         value,
         onChange,
         disabled,
-        children,
         className,
+        children,
         ...props
     },
     ref
@@ -47,7 +47,7 @@ export const RadioButton = forwardRef<
     // so ignore the checked property
 
     const controlled = checked$co !== undefined
-    const [checked$un, setChecked$un] = useState(!!defaultChecked)
+    const [checked$un, setChecked$un] = useState(defaultChecked)
     const checked = controlled ? checked$co : checked$un
     const dispatchChange = () => {
         onChange?.(value)

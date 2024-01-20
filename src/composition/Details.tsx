@@ -10,12 +10,12 @@ import { useState } from 'react'
  * This component can be both controlled or uncontrolled depending on the open property.
  */
 export function Details({
+    variant = 'filled',
     summary,
-    children,
     expanded: expanded$co,
     defaultExpanded,
-    variant = 'filled',
     onChange,
+    children,
     ...props
 }: {
     summary: React.ReactNode

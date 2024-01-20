@@ -81,7 +81,7 @@
     }
 
     @media screen and (min-width: 600px) {
-        .sd-snackbar {
+        :not(.sd-snackbar_holder-full) .sd-snackbar {
             width: 400px;
         }
 

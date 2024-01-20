@@ -26,12 +26,12 @@ export const IconButton = forwardRef<
     }>
 >(function IconButton(
     {
-        children,
-        className,
-        disabled,
         variant = 'standard',
         selected: initSelected,
         path,
+        disabled,
+        className,
+        children,
         ...props
     },
     ref

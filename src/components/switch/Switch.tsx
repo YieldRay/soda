@@ -16,16 +16,23 @@ export const Switch = forwardRef<
         disabled?: boolean
     }>
 >(function Switch(
-    { checked, onChange, defaultChecked, children, disabled, ...props },
+    {
+        checked: checked$co,
+        defaultChecked = false,
+        onChange,
+        disabled,
+        children,
+        ...props
+    },
     ref
 ) {
-    const controlled = checked !== undefined
-    const [checked$, setChecked$] = useState(!!defaultChecked)
-    const isChecked = controlled ? checked : checked$
+    const controlled = checked$co !== undefined
+    const [checked$un, setChecked$un] = useState(defaultChecked)
+    const checked = controlled ? checked$co : checked$un
     const dispatchChange = () => {
         onChange?.(!checked)
         if (!controlled) {
-            setChecked$(!checked$)
+            setChecked$un(!checked$un)
         }
     }
     return (
@@ -36,8 +43,8 @@ export const Switch = forwardRef<
             role="switch"
             className={clsx('sd-switch', props.className)}
             data-sd-disabled={disabled}
-            data-sd-checked={isChecked}
-            aria-checked={isChecked}
+            data-sd-checked={checked}
+            aria-checked={checked}
             onClick={dispatchChange}
             onKeyDown={(e) => {
                 if (!disabled && e.key === 'Enter') {

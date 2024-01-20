@@ -6,9 +6,9 @@ import { forwardRef } from 'react'
 
 export interface Props {
     leadingIcon?: React.ReactNode
-    children?: React.ReactNode
     trailingIcon?: React.ReactNode
     trailingText?: React.ReactNode
+    children?: React.ReactNode
     disabled?: boolean
 }
 
@@ -18,12 +18,12 @@ export interface Props {
 export const MenuItem = forwardRef<HTMLElement, ExtendProps<Props>>(
     function MenuItem(
         {
-            className,
             leadingIcon,
-            children,
             trailingIcon,
             trailingText,
             disabled,
+            className,
+            children,
             ...props
         },
         ref

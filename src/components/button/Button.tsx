@@ -27,11 +27,11 @@ export const Button = forwardRef<
 >(function Button(
     {
         variant = 'filled',
-        className,
+        type,
         disabled,
         onClick,
+        className,
         children,
-        type,
         ...props
     },
     ref

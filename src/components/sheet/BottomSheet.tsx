@@ -50,14 +50,14 @@ export const BottomSheet = forwardRef<
     }>
 >(function BottomSheet(
     {
-        children,
         hideDragHandle,
-        fixed,
         onChange,
         onScrimClick,
-        className,
-        style,
+        fixed,
         teleportTo,
+        style,
+        className,
+        children,
         ...props
     },
     ref

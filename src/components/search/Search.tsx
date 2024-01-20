@@ -21,12 +21,12 @@ export const Search = forwardRef<
     }>
 >(function Search(
     {
-        placeholder,
-        leadingIcon,
-        trailingIcon,
         variant = 'bar',
         value,
         onChange,
+        placeholder,
+        leadingIcon,
+        trailingIcon,
         className,
         ...props
     },

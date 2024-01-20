@@ -9,7 +9,6 @@ import clsx from 'clsx'
 export const Dialog = forwardRef<
     HTMLDivElement,
     ExtendProps<{
-        open?: boolean
         headline?: React.ReactNode
         children?: React.ReactNode
         /**

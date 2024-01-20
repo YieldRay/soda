@@ -13,8 +13,8 @@ export const DrawerItem = forwardRef<
     ExtendProps<{
         icon?: React.ReactNode
         badge?: React.ReactNode
-        children?: React.ReactNode
         active?: boolean
+        children?: React.ReactNode
     }>
 >(({ icon, badge, children, className, active, ...props }, ref) => (
     <Ripple

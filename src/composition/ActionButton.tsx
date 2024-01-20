@@ -2,7 +2,7 @@ import './ActionButton.scss'
 import { Ripple } from '@/ripple/Ripple'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
-import { forwardRef, useEffect } from 'react'
+import { forwardRef } from 'react'
 import { usePrefersDark } from '@/hooks/use-media-query'
 
 /**
@@ -16,7 +16,7 @@ export const ActionButton = forwardRef<
         disabled?: boolean
         children?: React.ReactNode
     }>
->(({ className, inverse, disabled, children, ...props }, ref) => {
+>(({ inverse = false, disabled, className, children, ...props }, ref) => {
     const prefersDark = usePrefersDark()
 
     const rippleColor = prefersDark
@@ -27,8 +27,6 @@ export const ActionButton = forwardRef<
         ? 'rgb(255 255 255 / 0.1)'
         : 'rgb(0 0 0 / 0.1)'
 
-    useEffect(() => {}, [])
-
     return (
         <Ripple
             {...props}
@@ -36,8 +34,8 @@ export const ActionButton = forwardRef<
             as="button"
             className={clsx('sd-action_button', className)}
             rippleColor={rippleColor}
-            data-sd-inverse={!!inverse}
-            data-sd-disabled={!!disabled}
+            data-sd-inverse={inverse}
+            data-sd-disabled={disabled}
         >
             {children}
         </Ripple>

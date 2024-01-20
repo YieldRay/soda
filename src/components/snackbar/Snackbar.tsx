@@ -2,10 +2,11 @@ import './snackbar.scss'
 import clsx from 'clsx'
 import { ActionButton } from '@/composition/ActionButton'
 import { ExtendProps } from '@/utils/type'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { mdiClose } from '@mdi/js'
 import Icon from '@mdi/react'
 import { Portal } from '@/utils/Portal'
+import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 
 /**
  * This component DO NOT have ref forwarded
@@ -15,15 +16,15 @@ import { Portal } from '@/utils/Portal'
 export function Snackbar({
     action,
     onCloseClick,
-    className,
-    children,
     onActionClick,
     thirdLine,
-    fixed,
-    open,
-    teleportTo,
     placement = 'left',
-    full,
+    full = false,
+    open = false,
+    fixed = false,
+    teleportTo,
+    className,
+    children,
     ...props
 }: ExtendProps<{
     children?: React.ReactNode
@@ -42,7 +43,7 @@ export function Snackbar({
     open?: boolean
     teleportTo?: Element | DocumentFragment
     /**
-     * Position of the `fixed` snackbar, has no effect for compact screen (width<600px)
+     * Position of the `fixed` snackbar, has no effect for compact screen (width<600px) and `full`
      */
     placement?: 'left' | 'center' | 'right'
     /**
@@ -51,24 +52,38 @@ export function Snackbar({
     full?: boolean
 }>) {
     const ref = useRef<HTMLDivElement>(null)
-    const isFirstRun = useRef(true)
 
-    useEffect(() => {
-        const el = ref.current
-        if (!el) return
-
-        if (isFirstRun.current) {
-            isFirstRun.current = false
-            if (!open) el.style.display = 'none'
-            return
-        }
-
-        if (open) {
-            show(el)
-        } else {
-            hide(el)
-        }
-    }, [open])
+    useToggleAnimation(ref, open, {
+        show(el) {
+            const { height } = el.getBoundingClientRect()
+            return el.animate(
+                {
+                    clipPath: [
+                        `inset(${height * 0.666 + 'px'} 0 0 0)`,
+                        `inset(0 0 0 0)`,
+                    ],
+                    translate: [`0 ${height * 0.333}px`, '0 0'],
+                },
+                {
+                    duration: 600,
+                    easing: 'cubic-bezier(0.2, 0, 0, 1)',
+                }
+            )
+        },
+        hide(el) {
+            const { height } = el.getBoundingClientRect()
+            return el.animate(
+                {
+                    translate: ['0 0', `0 ${height * 0.333}px`],
+                    opacity: ['1', '0'],
+                },
+                {
+                    duration: 300,
+                    easing: 'cubic-bezier(0, 0, 0, 1)',
+                }
+            )
+        },
+    })
 
     const snackbar = (
         <div
@@ -104,8 +119,9 @@ export function Snackbar({
                 <div
                     className={clsx(
                         'sd-snackbar_holder',
-                        full && 'sd-snackbar_holder-full',
-                        `sd-snackbar_holder-placement_${placement}`
+                        full
+                            ? 'sd-snackbar_holder-full'
+                            : `sd-snackbar_holder-placement_${placement}`
                     )}
                     ref={ref}
                 >
@@ -115,40 +131,4 @@ export function Snackbar({
         )
 
     return snackbar
-}
-
-function show(el: HTMLElement) {
-    el.getAnimations().forEach((a) => a.cancel())
-    el.style.display = ''
-    const { height } = el.getBoundingClientRect()
-    const a = el.animate(
-        {
-            clipPath: [
-                `inset(${height * 0.666 + 'px'} 0 0 0)`,
-                `inset(0 0 0 0)`,
-            ],
-            translate: [`0 ${height * 0.333}px`, '0 0'],
-        },
-        {
-            duration: 600,
-            easing: 'cubic-bezier(0.2, 0, 0, 1)',
-        }
-    )
-    a.onfinish = () => (el.style.display = '')
-}
-
-function hide(el: HTMLElement) {
-    el.getAnimations().forEach((a) => a.cancel())
-    const { height } = el.getBoundingClientRect()
-    const a = el.animate(
-        {
-            translate: ['0 0', `0 ${height * 0.333}px`],
-            opacity: ['1', '0'],
-        },
-        {
-            duration: 300,
-            easing: 'cubic-bezier(0, 0, 0, 1)',
-        }
-    )
-    a.onfinish = () => (el.style.display = 'none')
 }

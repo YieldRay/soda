@@ -1,6 +1,9 @@
 import { flushSync } from 'react-dom'
 
-export const isViewTransitionSupported = !!document.startViewTransition
+export const isViewTransitionSupported = Reflect.has(
+    document,
+    'startViewTransition'
+)
 
 /**
  * Not a `document.startViewTransition()` polyfill,

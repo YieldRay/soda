@@ -21,7 +21,7 @@ export const IconRippleButton = forwardRef<
         size?: string
         children?: React.ReactNode
     }>
->(({ className, path, size, children, ...props }, ref) => {
+>(({ className, path, size = '24px', children, ...props }, ref) => {
     return (
         <div
             {...props}

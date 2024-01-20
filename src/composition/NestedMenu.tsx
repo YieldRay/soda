@@ -359,7 +359,7 @@ export const NestedMenu = forwardRef<HTMLElement, ExtendProps<NestedMenuProps>>(
 export const NestedMenuItem = forwardRef<
     HTMLElement,
     Soda.Props & React.HTMLAttributes<HTMLElement>
->(({ children, disabled, ...props }, forwardedRef) => {
+>(({ disabled, children, ...props }, forwardedRef) => {
     const menu = useContext(NestedMenuContext)
     const item = useListItem()
     const tree = useFloatingTree()

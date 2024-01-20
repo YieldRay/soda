@@ -43,6 +43,9 @@ export const Select = forwardRef<
          */
         defaultValue?: string
         onChange?: (value: string) => void
+        /**
+         * Make sure each value is UNIQUE
+         */
         options: Array<{
             value: string
             /**
@@ -103,7 +106,7 @@ export const Select = forwardRef<
 
         const [open, setOpen] = useState(false)
         const selectedIndex = options.findIndex(
-            ({ value: valueOption }) => valueOption === value
+            ({ value: optionValue }) => optionValue === value
         )
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
         const fallbackRef = useRef(false)
@@ -251,9 +254,14 @@ export const Select = forwardRef<
                     {isFunction(children)
                         ? children(value!)
                         : children ?? (
-                              <Ripple className="sd-menu_button">
-                                  <span>{value}</span>
-                                  <Icon size={1} path={mdiMenuDown}></Icon>
+                              <Ripple className="sd-select-menu_button">
+                                  <div className="sd-select-menu_button-label">
+                                      <span>
+                                          {options[selectedIndex].label ??
+                                              value}
+                                      </span>
+                                      <Icon size={1} path={mdiMenuDown}></Icon>
+                                  </div>
                               </Ripple>
                           )}
                 </div>
