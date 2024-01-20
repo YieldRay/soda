@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>
 
 export const Linear: Story = {
     args: {
-        sd: 'linear',
+        variant: 'linear',
     },
     decorators: [
         (Story) => (
@@ -30,6 +30,6 @@ export const Linear: Story = {
 
 export const Circular: Story = {
     args: {
-        sd: 'circular',
+        variant: 'circular',
     },
 }

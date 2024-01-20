@@ -14,7 +14,7 @@ export const Button = forwardRef<
             /**
              * @default filled
              */
-            sd?: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
+            variant?: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
             disabled?: boolean
             /**
              * Delegate to both click and send enter key for convenience
@@ -25,18 +25,24 @@ export const Button = forwardRef<
         HTMLButtonElement
     >
 >(function Button(
-    { sd: initSd, className, disabled, onClick, children, type, ...props },
+    {
+        variant = 'filled',
+        className,
+        disabled,
+        onClick,
+        children,
+        type,
+        ...props
+    },
     ref
 ) {
-    const sd = initSd || 'filled'
-
     return (
         <Ripple
             {...props}
             as="button"
             ref={ref}
             type={type ?? 'button'}
-            className={clsx('sd-button', `sd-button-${sd}`, className)}
+            className={clsx('sd-button', `sd-button-${variant}`, className)}
             onClick={() => onClick?.()}
             onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
             data-sd-disabled={disabled}

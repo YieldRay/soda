@@ -25,7 +25,7 @@ export const Default: Story = {
             footer={
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <Button>Save</Button>
-                    <Button sd="outlined">Close</Button>
+                    <Button variant="outlined">Close</Button>
                 </div>
             }
             style={{ minHeight: 'max(66.6vh, 400px)' }}
@@ -71,7 +71,7 @@ export const Fixed: Story = {
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                             <Button onClick={() => setOpen(false)}>Save</Button>
                             <Button
-                                sd="outlined"
+                                variant="outlined"
                                 onClick={() => setOpen(false)}
                             >
                                 Close

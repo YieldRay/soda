@@ -13,7 +13,7 @@ export const Chip = forwardRef<
         /**
          * @default outlined
          */
-        sd?: 'outlined' | 'tonal'
+        variant?: 'outlined' | 'tonal'
         children: React.ReactNode
         className?: string
         leadingIcon?: React.ReactNode
@@ -23,7 +23,7 @@ export const Chip = forwardRef<
     }>
 >(function Chip(
     {
-        sd: initSd,
+        variant = 'outlined',
         children,
         leadingIcon,
         trailingIcon,
@@ -34,12 +34,11 @@ export const Chip = forwardRef<
     },
     ref
 ) {
-    const sd = initSd || 'outlined'
     return (
         <Ripple
             {...props}
             ref={ref}
-            className={clsx('sd-chip', `sd-chip-${sd}`, className)}
+            className={clsx('sd-chip', `sd-chip-${variant}`, className)}
             onClick={onClick}
             data-sd-disabled={disabled}
         >

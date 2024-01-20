@@ -26,24 +26,24 @@ type Story = StoryObj<typeof meta>
 
 export const Small: Story = {
     args: {
-        sd: 'small',
+        variant: 'small',
     },
 }
 
 export const Center: Story = {
     args: {
-        sd: 'center',
+        variant: 'center',
     },
 }
 
 export const Medium: Story = {
     args: {
-        sd: 'medium',
+        variant: 'medium',
     },
 }
 
 export const Large: Story = {
     args: {
-        sd: 'large',
+        variant: 'large',
     },
 }

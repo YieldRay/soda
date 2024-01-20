@@ -23,7 +23,7 @@ export const Default: Story = {
         const [open, setOpen] = useState(false)
         return (
             <>
-                <Button sd="text" onClick={() => setOpen(true)}>
+                <Button variant="text" onClick={() => setOpen(true)}>
                     open fullscreen dialog
                 </Button>
 
@@ -31,7 +31,7 @@ export const Default: Story = {
                     <FullScreenDialog
                         onCloseClick={() => setOpen(false)}
                         headline="FullScreenDialog Title"
-                        button={<Button sd="text">Save</Button>}
+                        button={<Button variant="text">Save</Button>}
                         footer={
                             <div
                                 style={{
@@ -40,8 +40,8 @@ export const Default: Story = {
                                     gap: '0.5rem',
                                 }}
                             >
-                                <Button sd="text">Cancel</Button>
-                                <Button sd="text">OK</Button>
+                                <Button variant="text">Cancel</Button>
+                                <Button variant="text">OK</Button>
                             </div>
                         }
                     >

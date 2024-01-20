@@ -31,22 +31,22 @@ type Story = StoryObj<typeof meta>
 
 export const Standard: Story = {
     args: {
-        sd: 'standard',
+        variant: 'standard',
     },
 }
 export const Filled: Story = {
     args: {
-        sd: 'filled',
+        variant: 'filled',
     },
 }
 export const Outlined: Story = {
     args: {
-        sd: 'outlined',
+        variant: 'outlined',
     },
 }
 
 export const Tonal: Story = {
     args: {
-        sd: 'tonal',
+        variant: 'tonal',
     },
 }

@@ -28,7 +28,7 @@ export const RadioButton = forwardRef<
     }>
 >(function RadioButton(
     {
-        checked: initChecked,
+        checked: checked$init,
         defaultChecked,
         value,
         onChange,
@@ -40,18 +40,20 @@ export const RadioButton = forwardRef<
     ref
 ) {
     const groupContext = useContext(RadioGroupContext)
-    const checked = groupContext ? groupContext.value === value : initChecked
+    const checked$co = groupContext
+        ? groupContext.value === value
+        : checked$init
     // if groupContext provide a value, that's to say, current radio-button is in a group
     // so ignore the checked property
 
-    const controlled = checked !== undefined
-    const [checked$, setChecked$] = useState(!!defaultChecked)
-    const isChecked = controlled ? checked : checked$
+    const controlled = checked$co !== undefined
+    const [checked$un, setChecked$un] = useState(!!defaultChecked)
+    const checked = controlled ? checked$co : checked$un
     const dispatchChange = () => {
         onChange?.(value)
         groupContext?.onChange?.(value!)
         if (!controlled) {
-            setChecked$(!checked$)
+            setChecked$un(!checked$un)
         }
     }
 
@@ -63,10 +65,10 @@ export const RadioButton = forwardRef<
             {...props}
             ref={ref}
             tabIndex={disabled ? undefined : 0}
-            role="radio"
             className={clsx('sd-radio_button', className)}
-            data-sd-checked={isChecked}
-            aria-checked={isChecked}
+            role="radio"
+            aria-checked={checked}
+            data-sd-checked={checked}
             data-sd-disabled={disabled}
             onClick={dispatchChange}
             onKeyDown={(e) => {

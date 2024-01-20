@@ -19,15 +19,15 @@ type Story = StoryObj<typeof meta>
 
 export const Outlined: Story = {
     args: {
-        sd: 'outlined',
-        summary: 'outlined',
+        variant: 'outlined',
+        summary: 'outlined style',
     },
 }
 
 export const Filled: Story = {
     args: {
-        sd: 'filled',
-        summary: 'filled',
+        variant: 'filled',
+        summary: 'filled style',
     },
 }
 
@@ -36,8 +36,8 @@ export const Controlled: Story = {
         const [expanded, setExpanded] = useState(true)
         return (
             <Details
-                sd="filled"
-                summary="filled"
+                variant="filled"
+                summary="filled style"
                 expanded={expanded}
                 onChange={() => setExpanded(!expanded)}
             >

@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>
 
 export const Outlined: Story = {
     args: {
-        sd: 'outlined',
+        variant: 'outlined',
         children: 'outlined',
     },
     render: (props) => {
@@ -39,7 +39,7 @@ export const Outlined: Story = {
 
 export const Tonal: Story = {
     args: {
-        sd: 'tonal',
+        variant: 'tonal',
         children: 'tonal',
     },
     render: (props) => {

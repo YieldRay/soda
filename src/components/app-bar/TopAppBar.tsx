@@ -18,7 +18,7 @@ export const TopAppBar = forwardRef<
          * small/medium 64px  medium 112px  large 152px
          * @default small
          */
-        sd?: 'center' | 'small' | 'medium' | 'large'
+        variant?: 'center' | 'small' | 'medium' | 'large'
         leadingNavigationIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
         fixed?: boolean
@@ -34,15 +34,13 @@ export const TopAppBar = forwardRef<
         fixed,
         teleportTo,
         children,
-        sd: initSd,
+        variant = 'small',
         className,
         style,
         ...props
     },
     ref
 ) {
-    const sd = initSd || 'small'
-
     const topAppBar = (
         <div
             {...props}
@@ -52,20 +50,20 @@ export const TopAppBar = forwardRef<
                 position: fixed ? 'fixed' : undefined,
                 ...style,
             }}
-            data-sd={sd}
+            data-sd={variant}
         >
             <div className="sd-top_app_bar-helper">
                 <div className="sd-top_app_bar-leading_navigation_icon">
                     {leadingNavigationIcon}
                 </div>
-                {(sd === 'small' || sd === 'center') && (
+                {(variant === 'small' || variant === 'center') && (
                     <div className="sd-top_app_bar-headline">{children}</div>
                 )}
                 <div className="sd-top_app_bar-trailing_icon">
                     {trailingIcon}
                 </div>
             </div>
-            {(sd === 'medium' || sd === 'large') && (
+            {(variant === 'medium' || variant === 'large') && (
                 <div className="sd-top_app_bar-headline">{children}</div>
             )}
         </div>

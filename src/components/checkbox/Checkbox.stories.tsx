@@ -20,10 +20,7 @@ export const Default: Story = {
     render: () => {
         const [checked, setChecked] = useState(false)
         return (
-            <Checkbox
-                checked={checked}
-                onChange={() => setChecked(!checked)}
-            ></Checkbox>
+            <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
         )
     },
 }

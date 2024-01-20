@@ -13,7 +13,7 @@ export const Fab = forwardRef<
         /**
          * @default surface
          */
-        sd?: 'surface' | 'secondary' | 'tertiary'
+        variant?: 'surface' | 'secondary' | 'tertiary'
         /**
          * @default default
          */
@@ -23,7 +23,15 @@ export const Fab = forwardRef<
         disabled?: boolean
     }>
 >(function Fab(
-    { sd, className, size, children, extended, disabled, ...props },
+    {
+        variant = 'surface',
+        className,
+        size,
+        children,
+        extended,
+        disabled,
+        ...props
+    },
     ref
 ) {
     return (
@@ -32,7 +40,7 @@ export const Fab = forwardRef<
             ref={ref}
             as="button"
             className={clsx('sd-fab', className)}
-            data-sd={sd || 'surface'}
+            data-sd={variant}
             data-sd-size={size || 'default'}
             data-sd-extended={extended}
             data-sd-disabled={disabled}

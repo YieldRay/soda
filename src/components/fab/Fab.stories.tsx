@@ -15,7 +15,7 @@ const meta = {
         children: <Icon path={mdiPencilOutline} size={1} />,
     },
     argTypes: {
-        sd: {
+        variant: {
             options: ['surface', 'secondary', 'tertiary'],
             control: { type: 'radio' },
         },
@@ -32,13 +32,13 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        sd: 'surface',
+        variant: 'surface',
     },
 }
 
 export const Extended: Story = {
     args: {
-        sd: 'surface',
+        variant: 'surface',
         extended: true,
         children: (
             <>

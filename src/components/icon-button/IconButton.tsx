@@ -14,7 +14,7 @@ export const IconButton = forwardRef<
         /**
          * @default standard
          */
-        sd?: 'standard' | 'filled' | 'tonal' | 'outlined'
+        variant?: 'standard' | 'filled' | 'tonal' | 'outlined'
         children?: React.ReactNode
         disabled?: boolean
         /**
@@ -22,7 +22,6 @@ export const IconButton = forwardRef<
          * other button is selected by default.
          */
         selected?: boolean
-
         path?: string
     }>
 >(function IconButton(
@@ -30,18 +29,17 @@ export const IconButton = forwardRef<
         children,
         className,
         disabled,
-        sd: initSd,
+        variant = 'standard',
         selected: initSelected,
         path,
         ...props
     },
     ref
 ) {
-    const sd = initSd || 'standard'
     const selected =
         initSelected !== undefined
             ? initSelected!
-            : sd === 'standard'
+            : variant === 'standard'
             ? false
             : true
 
@@ -51,7 +49,7 @@ export const IconButton = forwardRef<
             ref={ref}
             className={clsx(
                 'sd-icon_button',
-                `sd-icon_button-${sd}`,
+                `sd-icon_button-${variant}`,
                 className
             )}
             as="button"

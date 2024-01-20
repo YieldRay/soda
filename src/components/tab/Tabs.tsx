@@ -25,23 +25,21 @@ export const Tabs = forwardRef<
         onChange?: (value: string) => void
     }>
 >(function Tab(
-    { className, children, value, onChange, defaultValue, ...props },
+    { value: value$co, onChange, defaultValue, className, children, ...props },
     ref
 ) {
-    const controlled = value !== undefined
-    const [value$, setValue$] = useState(defaultValue)
-    const realValue = controlled ? value : value$
+    const controlled = value$co !== undefined
+    const [value$un, setValue$un] = useState(defaultValue)
+    const value = controlled ? value$co : value$un
     const dispatchChange = (v: string) => {
         onChange?.(v)
         if (!controlled) {
-            setValue$(v)
+            setValue$un(v)
         }
     }
     return (
         <div {...props} ref={ref} className={clsx('sd-tabs', className)}>
-            <TabContext.Provider
-                value={{ value: realValue, onChange: dispatchChange }}
-            >
+            <TabContext.Provider value={{ value, onChange: dispatchChange }}>
                 {children}
             </TabContext.Provider>
         </div>

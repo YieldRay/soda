@@ -26,16 +26,24 @@ export const SegmentedButton = forwardRef<
         density?: 0 | -1 | -2 | -3
     }>
 >(function SegmentedButton(
-    { value, defaultValue, items, onChange, density, className, ...props },
+    {
+        value: value$co,
+        defaultValue,
+        items,
+        onChange,
+        density,
+        className,
+        ...props
+    },
     ref
 ) {
-    const controlled = value !== undefined
-    const [value$, setValue$] = useState(defaultValue)
-    const realValue = controlled ? value : value$
+    const controlled = value$co !== undefined
+    const [value$un, setValue$un] = useState(defaultValue)
+    const value = controlled ? value$co : value$un
     const dispatchChange = (v: string) => {
         onChange?.(v)
         if (!controlled) {
-            setValue$(v)
+            setValue$un(v)
         }
     }
 
@@ -54,22 +62,22 @@ export const SegmentedButton = forwardRef<
             ])}
         >
             {items &&
-                items.map(({ label, disabled, value }, index) => (
+                items.map(({ label, disabled, value: value$i }, index) => (
                     <Ripple
-                        key={value}
+                        key={value$i}
                         tabIndex={index + 1}
                         className="sd-segmented_button-item"
-                        data-sd-active={value === realValue}
+                        data-sd-active={value$i === value}
                         data-sd-disabled={disabled}
-                        onClick={() => dispatchChange(value)}
+                        onClick={() => dispatchChange(value$i)}
                         onKeyDown={(e) => {
                             if (onChange && e.key === 'Enter' && !disabled) {
-                                dispatchChange(value)
+                                dispatchChange(value$i)
                             }
                         }}
                     >
                         <div className="sd-segmented_button-label">
-                            {label ?? value}
+                            {label ?? value$i}
                         </div>
                     </Ripple>
                 ))}

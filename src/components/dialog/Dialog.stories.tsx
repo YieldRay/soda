@@ -39,10 +39,10 @@ export const UseModalHolder: Story = {
                 {...props}
                 buttons={
                     <>
-                        <Button sd="text" onClick={() => alert('wow!')}>
+                        <Button variant="text" onClick={() => alert('wow!')}>
                             wow!
                         </Button>
-                        <Button sd="text" onClick={() => setOpen(false)}>
+                        <Button variant="text" onClick={() => setOpen(false)}>
                             close
                         </Button>
                     </>
@@ -52,7 +52,7 @@ export const UseModalHolder: Story = {
 
         return (
             <>
-                <Button sd="text" onClick={() => setOpen(true)}>
+                <Button variant="text" onClick={() => setOpen(true)}>
                     {`open dialog (use <ModalHolder> from soda)`}
                 </Button>
 
@@ -74,7 +74,7 @@ export const UseFloatingUI: Story = {
         const overlayRef = useRef<HTMLDivElement>(null)
         return (
             <>
-                <Button sd="text" onClick={() => setOpen(true)}>
+                <Button variant="text" onClick={() => setOpen(true)}>
                     {`open dialog (use <FloatingOverlay> from @floating-ui/react)`}
                 </Button>
 
@@ -96,13 +96,13 @@ export const UseFloatingUI: Story = {
                                 buttons={
                                     <>
                                         <Button
-                                            sd="text"
+                                            variant="text"
                                             onClick={() => alert('wow!')}
                                         >
                                             wow!
                                         </Button>
                                         <Button
-                                            sd="text"
+                                            variant="text"
                                             onClick={() => setOpen(false)}
                                         >
                                             close

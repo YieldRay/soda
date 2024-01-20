@@ -32,16 +32,24 @@ export const Checkbox = forwardRef<
         error?: boolean
     }>
 >(function Checkbox(
-    { checked, onChange, defaultChecked, children, disabled, error, ...props },
+    {
+        checked: checked$co,
+        onChange,
+        defaultChecked,
+        children,
+        disabled,
+        error,
+        ...props
+    },
     ref
 ) {
-    const controlled = checked !== undefined
-    const [checked$, setChecked$] = useState(!!defaultChecked)
-    const isChecked = controlled ? checked : checked$
+    const controlled = checked$co !== undefined
+    const [checked$un, setChecked$un] = useState(!!defaultChecked)
+    const checked = controlled ? checked$co : checked$un
     const dispatchChange = () => {
-        onChange?.(!isChecked)
+        onChange?.(!checked)
         if (!controlled) {
-            setChecked$(!checked$)
+            setChecked$un(!checked$un)
         }
     }
     const checkedIcon = children || <Icon path={mdiCheck} />
@@ -54,8 +62,8 @@ export const Checkbox = forwardRef<
             role="checkbox"
             data-sd-disabled={disabled}
             data-sd-error={error}
-            data-sd-checked={isChecked}
-            aria-checked={isChecked}
+            data-sd-checked={checked}
+            aria-checked={checked}
             onClick={dispatchChange}
             onKeyDown={(e) => {
                 if (!disabled && e.key === 'Enter') {
@@ -65,7 +73,7 @@ export const Checkbox = forwardRef<
         >
             <div className="sd-checkbox-icon">
                 <SodaSimpleTransition
-                    in={isChecked}
+                    in={checked}
                     enter={{ clipPath: `inset(0 0 0 0)` }}
                     leave={{ clipPath: `inset(0 100% 0 0)` }}
                 >

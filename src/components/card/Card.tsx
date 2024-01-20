@@ -19,18 +19,19 @@ export const Card = forwardRef<
          * Variant
          * @default elevated
          */
-        sd?: 'outlined' | 'filled' | 'elevated'
+        variant?: 'outlined' | 'filled' | 'elevated'
         children?: React.ReactNode
     }>
->(function Card({ sd: initSd, children, as, className, ...props }, ref) {
-    const sd = initSd || 'elevated'
-
+>(function Card(
+    { variant = 'elevated', children, as, className, ...props },
+    ref
+) {
     return (
         <Ripple
             {...props}
             ref={ref}
             as={as || 'div'}
-            className={clsx('sd-card', `sd-card-${sd}`, className)}
+            className={clsx('sd-card', `sd-card-${variant}`, className)}
         >
             {children}
         </Ripple>

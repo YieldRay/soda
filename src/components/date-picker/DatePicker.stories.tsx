@@ -13,7 +13,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Docked: Story = {
-    args: { sd: 'docked' },
+    args: { variant: 'docked' },
     decorators: [
         (Story) => (
             <div style={{ minHeight: '50vh' }}>

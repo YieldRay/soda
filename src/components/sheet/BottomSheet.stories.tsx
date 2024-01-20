@@ -20,7 +20,7 @@ export const Default: Story = {
         const sheetRef = useRef<BottomSheetHandle>(null)
         return (
             <div style={{ willChange: 'transform', minHeight: '400px' }}>
-                <Button sd="text" onClick={() => sheetRef.current!.show()}>
+                <Button variant="text" onClick={() => sheetRef.current!.show()}>
                     open bottom sheet
                 </Button>
 
@@ -46,7 +46,7 @@ export const HideDragHandle: Story = {
         const sheetRef = useRef<BottomSheetHandle>(null)
         return (
             <div style={{ willChange: 'transform', minHeight: '400px' }}>
-                <Button sd="text" onClick={() => sheetRef.current!.show()}>
+                <Button variant="text" onClick={() => sheetRef.current!.show()}>
                     open bottom sheet
                 </Button>
 

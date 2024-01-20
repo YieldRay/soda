@@ -15,7 +15,7 @@ export const Search = forwardRef<
         /**
          * @default bar
          */
-        sd?: 'bar' | 'view'
+        variant?: 'bar' | 'view'
         value?: string
         onChange?: (value: string) => void
     }>
@@ -24,7 +24,7 @@ export const Search = forwardRef<
         placeholder,
         leadingIcon,
         trailingIcon,
-        sd: initSd,
+        variant = 'bar',
         value,
         onChange,
         className,
@@ -32,14 +32,12 @@ export const Search = forwardRef<
     },
     ref
 ) {
-    const sd = initSd === 'view' ? 'view' : 'bar'
-
     return (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-search', className)}
-            data-sd={sd}
+            data-sd={variant}
         >
             <div className="sd-search-leading_icon">{leadingIcon}</div>
             <input

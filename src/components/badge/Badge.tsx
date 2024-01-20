@@ -1,6 +1,6 @@
 import './badge.scss'
-import { forwardRef } from 'react'
 import clsx from 'clsx'
+import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
 
 /**
@@ -15,17 +15,20 @@ export const Badge = forwardRef<
          * Do not need to specify this property in most cases, as it will automatically
          * choose small for empty label and large for none-empty label
          */
-        sd?: 'none' | 'small' | 'large'
+        variant?: 'none' | 'small' | 'large'
     }>
->(function Badge({ label, children, sd: initSd, className, ...props }, ref) {
-    const sd = initSd || (label == undefined ? 'small' : 'large')
+>(function Badge(
+    { label, children, variant: initVariant, className, ...props },
+    ref
+) {
+    const variant = initVariant || (label == undefined ? 'small' : 'large')
 
     return (
         <div
             {...props}
             className={clsx('sd-badge', className)}
             ref={ref}
-            data-sd={sd}
+            data-sd={variant}
         >
             {children}
             <div className="sd-badge-label">{label}</div>

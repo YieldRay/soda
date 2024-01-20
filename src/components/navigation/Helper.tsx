@@ -51,7 +51,7 @@ export function Helper({
             <Badge
                 ref={useRippleRef()}
                 className="sd-navigation_helper-active_indicator"
-                sd={badge?.active ? badge?.sd : 'none'}
+                variant={badge?.active ? badge?.sd : 'none'}
                 label={buildReactNode(badge?.label, badge?.active)}
             >
                 <div className="sd-navigation_helper-icon">

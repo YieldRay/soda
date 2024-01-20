@@ -1,12 +1,5 @@
 import './slider.scss'
-import {
-    useEffect,
-    useRef,
-    useState,
-    forwardRef,
-    useImperativeHandle,
-    useCallback,
-} from 'react'
+import { useEffect, useRef, useState, forwardRef, useCallback } from 'react'
 import clamp from 'lodash-es/clamp'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
@@ -17,8 +10,8 @@ import {
     flip,
     shift,
     arrow,
-    useMergeRefs,
     FloatingArrow,
+    useMergeRefs,
 } from '@floating-ui/react'
 
 /**
@@ -58,7 +51,7 @@ export const Slider = forwardRef<
     {
         onChange,
         steps,
-        value,
+        value: value$co,
         defaultValue,
         min: minValue = 0,
         max: maxValue = 100,
@@ -74,14 +67,14 @@ export const Slider = forwardRef<
     const eRef = useRef<HTMLDivElement>(null)
     const thumbRef = useRef<HTMLDivElement>(null)
 
-    const controlled = value !== undefined
-    const [value$, setValue$] = useState(defaultValue ?? 0)
-    const realValue = controlled ? value : value$
+    const controlled = value$co !== undefined
+    const [value$un, setValue$un] = useState(defaultValue ?? 0)
+    const value = controlled ? value$co : value$un
     const dispatchChange = useCallback(
         (v: number) => {
             onChange?.(v)
             if (!controlled) {
-                setValue$(v)
+                setValue$un(v)
             }
         },
         [onChange, controlled]
@@ -111,17 +104,15 @@ export const Slider = forwardRef<
         const container = eRef.current!
         container.style.setProperty(
             '--percentage',
-            toPercentage((realValue - minValue) / (maxValue - minValue))
+            toPercentage((value - minValue) / (maxValue - minValue))
         )
-    }, [realValue, minValue, maxValue])
+    }, [value, minValue, maxValue])
 
     useEffect(() => {
         // fix the value to the limited value
-        const fixedValue = valueLimitRange(valueLimitStep(realValue))
-        if (realValue !== fixedValue) dispatchChange(fixedValue)
-    }, [realValue, dispatchChange, valueLimitRange, valueLimitStep])
-
-    useImperativeHandle(ref, () => eRef.current!)
+        const fixedValue = valueLimitRange(valueLimitStep(value))
+        if (value !== fixedValue) dispatchChange(fixedValue)
+    }, [value, dispatchChange, valueLimitRange, valueLimitStep])
 
     const [isPressing, setPressing] = useState(false)
     const [isHover, setHover] = useState(false)
@@ -188,26 +179,26 @@ export const Slider = forwardRef<
     return (
         <div
             {...props}
+            ref={useMergeRefs([ref, eRef])}
+            className={clsx('sd-slider', className)}
+            data-sd-disabled={disabled}
+            data-sd-direction={direction}
+            role="slider"
             tabIndex={disabled ? undefined : 0}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
-            data-sd-disabled={disabled}
             onKeyDown={(e) => {
                 if (!disabled) {
                     const step = (maxValue - minValue) / (steps ?? 10)
                     if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
                         e.preventDefault() // prevent scroll
-                        dispatchChange(realValue - step)
+                        dispatchChange(value - step)
                     } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
                         e.preventDefault() // prevent scroll
-                        dispatchChange(realValue + step)
+                        dispatchChange(value + step)
                     }
                 }
             }}
-            role="slider"
-            className={clsx('sd-slider', className)}
-            ref={eRef}
-            data-sd-direction={direction}
             onPointerDown={updatePercentage}
             onResize={update}
         >
@@ -251,7 +242,7 @@ export const Slider = forwardRef<
                         }}
                     >
                         <div style={{ overflow: 'hidden' }}>
-                            {label ?? realValue}
+                            {label ?? value}
                         </div>
                         <FloatingArrow
                             ref={arrowRef}

@@ -50,7 +50,7 @@ export const Default: Story = {
                         </>
                     }
                     fab={
-                        <Fab sd="secondary">
+                        <Fab variant="secondary">
                             <Icon path={mdiPlus} />
                         </Fab>
                     }

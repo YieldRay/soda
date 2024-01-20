@@ -19,19 +19,19 @@ type Story = StoryObj<typeof meta>
 
 export const Elevated: Story = {
     args: {
-        sd: 'elevated',
+        variant: 'elevated',
     },
 }
 
 export const Filled: Story = {
     args: {
-        sd: 'filled',
+        variant: 'filled',
     },
 }
 
 export const Outlined: Story = {
     args: {
-        sd: 'outlined',
+        variant: 'outlined',
     },
 }
 

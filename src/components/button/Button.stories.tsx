@@ -25,35 +25,35 @@ type Story = StoryObj<typeof meta>
 
 export const Outlined: Story = {
     args: {
-        sd: 'outlined',
+        variant: 'outlined',
         children: 'Button',
     },
 }
 
 export const Filled: Story = {
     args: {
-        sd: 'filled',
+        variant: 'filled',
         children: 'Button',
     },
 }
 
 export const Elevated: Story = {
     args: {
-        sd: 'elevated',
+        variant: 'elevated',
         children: 'Button',
     },
 }
 
 export const Tonal: Story = {
     args: {
-        sd: 'tonal',
+        variant: 'tonal',
         children: 'Button',
     },
 }
 
 export const Text: Story = {
     args: {
-        sd: 'text',
+        variant: 'text',
         children: 'Button',
     },
 }

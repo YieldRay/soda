@@ -25,7 +25,7 @@ export const TextField = forwardRef<
          * Textarea will ignore this and only show as filled style
          * @default filled
          */
-        sd?: 'filled' | 'outlined'
+        variant?: 'filled' | 'outlined'
         /**
          * Set to true to change the internal element to `<textarea>`
          */
@@ -63,7 +63,7 @@ export const TextField = forwardRef<
         readonly,
         disabled,
         error,
-        sd: initSd,
+        variant = 'filled',
         onChange: initOnChange,
         textarea,
         rows = 2,
@@ -101,11 +101,9 @@ export const TextField = forwardRef<
         }
     }, [textarea, textareaRef, inputRef])
 
-    const sd = initSd === 'outlined' ? 'outlined' : 'filled'
-
     const inputNode = (
         <>
-            <Helper sd={labelText ? sd : 'outlined'}>
+            <Helper sd={labelText ? variant : 'outlined'}>
                 {labelText && (
                     <div
                         key="sd-text_field-label_text"
@@ -153,7 +151,7 @@ export const TextField = forwardRef<
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
             tabIndex={-1}
-            data-sd={sd}
+            data-sd={variant}
             data-sd-label_text={populated ? 'populated' : 'empty'}
             data-sd-disabled={disabled}
             data-sd-error={error}
@@ -171,7 +169,7 @@ export const TextField = forwardRef<
                 </div>
             )}
 
-            {sd !== 'outlined' && (
+            {variant !== 'outlined' && (
                 <div className="sd-text_field-active_indicator"></div>
             )}
 

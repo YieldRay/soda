@@ -125,7 +125,7 @@ export function DockedDatePicker({
         >
             <TextField
                 style={{ width: '100%', padding: '0.5rem 0.75rem' }}
-                sd="outlined"
+                variant="outlined"
                 readonly
                 value={new Intl.DateTimeFormat().format(date)}
                 labelText="Date"
@@ -208,7 +208,7 @@ export function DockedDatePicker({
                     </div>
                     <footer className="sd-date_picker-docked_footer">
                         <Button
-                            sd="text"
+                            variant="text"
                             onClick={() => {
                                 setIsOpen(false)
                                 onCancel?.(date)
@@ -217,7 +217,7 @@ export function DockedDatePicker({
                             Cancel
                         </Button>
                         <Button
-                            sd="text"
+                            variant="text"
                             onClick={() => {
                                 setIsOpen(false)
                                 onOK?.(date)

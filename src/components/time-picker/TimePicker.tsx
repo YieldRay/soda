@@ -347,10 +347,10 @@ export const TimePicker = forwardRef<
                     onClick={() => setEnterOrSelect((x) => !x)}
                 />
                 <div className="sd-time_picker-buttons">
-                    <Button sd="text" onClick={onCancel}>
+                    <Button variant="text" onClick={onCancel}>
                         {i18n.cancel}
                     </Button>
-                    <Button sd="text" onClick={onOK}>
+                    <Button variant="text" onClick={onOK}>
                         {i18n.ok}
                     </Button>
                 </div>

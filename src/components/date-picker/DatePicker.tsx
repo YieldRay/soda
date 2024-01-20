@@ -7,7 +7,7 @@ export function DatePicker(props: {
     initDate?: Date
     onOK?: (value: Date) => void
     onCancel?: (value: Date) => void
-    sd?: 'docked'
+    variant?: 'docked'
 }) {
     return <DockedDatePicker {...props} />
 }

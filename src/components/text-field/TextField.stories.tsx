@@ -27,13 +27,13 @@ type Story = StoryObj<typeof meta>
 
 export const Filled: Story = {
     args: {
-        sd: 'filled',
+        variant: 'filled',
     },
 }
 
 export const Outlined: Story = {
     args: {
-        sd: 'outlined',
+        variant: 'outlined',
     },
 }
 
@@ -81,7 +81,7 @@ export const WithoutLabelText: Story = {
 
 export const TextareaFilled: Story = {
     args: {
-        sd: 'filled',
+        variant: 'filled',
         textarea: true,
         labelText: 'labelText',
         leadingIcon: undefined,
@@ -92,7 +92,7 @@ export const TextareaFilled: Story = {
 
 export const TextareaOutlined: Story = {
     args: {
-        sd: 'outlined',
+        variant: 'outlined',
         textarea: true,
         labelText: 'labelText',
         leadingIcon: undefined,

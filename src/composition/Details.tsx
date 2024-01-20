@@ -12,9 +12,9 @@ import { useState } from 'react'
 export function Details({
     summary,
     children,
-    expanded,
+    expanded: expanded$co,
     defaultExpanded,
-    sd: initSd,
+    variant = 'filled',
     onChange,
     ...props
 }: {
@@ -33,37 +33,36 @@ export function Details({
     /**
      * @default filled
      */
-    sd?: 'outlined' | 'filled'
+    variant?: 'outlined' | 'filled'
 }) {
-    const sd = initSd || 'filled'
-    // icon sd is corresponding to sd
-    const iconSd = (
+    // variant of icon is corresponding to variant
+    const iconVariant = (
         {
             outlined: 'standard',
             filled: 'tonal',
         } as const
-    )[sd]
+    )[variant]
 
-    const controlled = expanded !== undefined
-    const [expanded$, setExpanded$] = useState(!!defaultExpanded)
-    const isExpanded = controlled ? expanded : expanded$
+    const controlled = expanded$co !== undefined
+    const [expanded$un, setExpanded$un] = useState(!!defaultExpanded)
+    const expanded = controlled ? expanded$co : expanded$un
     const dispatchChange = () => {
         onChange?.(!expanded)
         if (!controlled) {
-            setExpanded$(!expanded$)
+            setExpanded$un(!expanded$un)
         }
     }
 
     return (
         <div
             {...props}
-            className={clsx('sd-details', `sd-details-${sd}`, sd)}
-            data-sd-expanded={isExpanded}
+            className={clsx('sd-details', `sd-details-${variant}`, variant)}
+            data-sd-expanded={expanded}
         >
             <div className="sd-details_summary" onClick={dispatchChange}>
                 <span>{summary}</span>
                 <IconButton
-                    sd={iconSd}
+                    variant={iconVariant}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') dispatchChange()
                     }}
@@ -72,13 +71,13 @@ export function Details({
                         path={mdiChevronDown}
                         size={1}
                         style={{
-                            transform: `rotate(${isExpanded ? '180deg' : '0'})`,
+                            transform: `rotate(${expanded ? '180deg' : '0'})`,
                             transition: 'all 200ms',
                         }}
                     />
                 </IconButton>
             </div>
-            <Collapsible expanded={isExpanded}>
+            <Collapsible expanded={expanded}>
                 <div style={{ padding: '16px' }}>{children}</div>
             </Collapsible>
         </div>

@@ -12,7 +12,7 @@ export const RadioGroupContext = createContext<
  * Container component for `<RadioButton>`
  */
 export function RadioGroup({
-    value,
+    value: value$co,
     defaultValue,
     onChange,
     children,
@@ -22,19 +22,17 @@ export function RadioGroup({
     onChange?: (value: string) => void
     children?: React.ReactNode
 }) {
-    const controlled = value !== undefined
-    const [value$, setValue$] = useState(defaultValue)
-    const realValue = controlled ? value : value$
+    const controlled = value$co !== undefined
+    const [value$un, setValue$un] = useState(defaultValue)
+    const value = controlled ? value$co : value$un
     const dispatchChange = (v: string) => {
         onChange?.(v)
         if (!controlled) {
-            setValue$(v)
+            setValue$un(v)
         }
     }
     return (
-        <RadioGroupContext.Provider
-            value={{ value: realValue, onChange: dispatchChange }}
-        >
+        <RadioGroupContext.Provider value={{ value, onChange: dispatchChange }}>
             {children}
         </RadioGroupContext.Provider>
     )

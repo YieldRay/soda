@@ -67,7 +67,7 @@ export const Select = forwardRef<
 >(
     (
         {
-            value,
+            value: value$co,
             defaultValue,
             onChange,
             options,
@@ -79,17 +79,17 @@ export const Select = forwardRef<
         },
         ref
     ) => {
-        const controlled = value !== undefined
-        const [value$, setValue$] = useState(defaultValue)
-        const realValue = controlled ? value : value$
+        const controlled = value$co !== undefined
+        const [value$un, setValue$un] = useState(defaultValue)
+        const value = controlled ? value$co : value$un
         const dispatchChange = (v: string) => {
             onChange?.(v)
             if (!controlled) {
-                setValue$(v)
+                setValue$un(v)
             }
         }
 
-        const realValueDeferred = useDeferredValue(realValue)
+        const valueDeferred = useDeferredValue(value)
         const dispatchChangeDeferred = (v: string) => {
             setTimeout(() => dispatchChange(v), 200)
         }
@@ -103,7 +103,7 @@ export const Select = forwardRef<
 
         const [open, setOpen] = useState(false)
         const selectedIndex = options.findIndex(
-            ({ value }) => value === realValue
+            ({ value: valueOption }) => valueOption === value
         )
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
         const fallbackRef = useRef(false)
@@ -193,11 +193,11 @@ export const Select = forwardRef<
                 <MenuItem
                     className={clsx(
                         'sd-select_option',
-                        realValueDeferred === optionValue &&
+                        valueDeferred === optionValue &&
                             'sd-select_option-selected'
                     )}
                     key={optionValue}
-                    aria-selected={realValue === optionValue}
+                    aria-selected={value === optionValue}
                     role="option"
                     tabIndex={activeIndex === i ? 0 : -1}
                     ref={(node) => {
@@ -222,10 +222,10 @@ export const Select = forwardRef<
                         <div
                             ref={refs.setFloating}
                             style={{
+                                outline: '0',
                                 ...floatingStyle,
                                 ...floatingStyles,
                                 ...styles,
-                                outline: '0',
                             }}
                         >
                             <Menu
@@ -249,10 +249,10 @@ export const Select = forwardRef<
             <div {...props} ref={ref} className={clsx('sd-select', className)}>
                 <div ref={refs.setReference} {...getReferenceProps()}>
                     {isFunction(children)
-                        ? children(realValue!)
+                        ? children(value!)
                         : children ?? (
                               <Ripple className="sd-menu_button">
-                                  <span>{realValue}</span>
+                                  <span>{value}</span>
                                   <Icon size={1} path={mdiMenuDown}></Icon>
                               </Ripple>
                           )}
