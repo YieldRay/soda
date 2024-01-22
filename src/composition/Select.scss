@@ -1,5 +1,7 @@
 .sd-select {
     // max-width: 280px;
+    display: inline-block;
+    vertical-align: middle;
 
     &_options[class /* Just for raise the priority */] {
         /* ul: container of option */

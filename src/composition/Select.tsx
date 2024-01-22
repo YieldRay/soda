@@ -29,6 +29,14 @@ import Icon from '@mdi/react'
 import { mdiMenuDown } from '@mdi/js'
 import { useAutoState } from '@/hooks/use-auto-state'
 
+const getOptionValue = <
+    T extends {
+        value: string
+    }
+>(
+    option: string | T
+) => (typeof option === 'object' ? option.value : option)
+
 /**
  * `<Select>` is high level `<Menu>`
  *
@@ -47,14 +55,17 @@ export const Select = forwardRef<
         /**
          * Make sure each value is UNIQUE
          */
-        options: Array<{
-            value: string
-            /**
-             * You can omit the label, it will show the `value`
-             */
-            label?: React.ReactNode
-            disabled?: boolean
-        }>
+        options: Array<
+            | string
+            | {
+                  value: string
+                  /**
+                   * You can omit the label, it will show the `value`
+                   */
+                  label?: React.ReactNode
+                  disabled?: boolean
+              }
+        >
         /**
          * Customize select behavior
          */
@@ -71,14 +82,14 @@ export const Select = forwardRef<
 >(
     (
         {
-            value: value$co,
-            defaultValue,
-            onChange,
             options,
-            className,
-            children,
+            value: value$co,
+            defaultValue = getOptionValue(options[0]),
+            onChange,
             placement = 'bottom-start',
             floatingStyle,
+            className,
+            children,
             ...props
         },
         ref
@@ -103,7 +114,8 @@ export const Select = forwardRef<
 
         const [open, setOpen] = useState(false)
         const selectedIndex = options.findIndex(
-            ({ value: optionValue }) => optionValue === value
+            (option) =>
+                (typeof option === 'object' ? option.value : option) === value
         )
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
         const fallbackRef = useRef(false)
@@ -188,7 +200,8 @@ export const Select = forwardRef<
 
         const optionMapper: Parameters<
             typeof options.map<React.ReactNode>
-        >[0] = ({ value: optionValue, label }, i) => {
+        >[0] = (option, i) => {
+            const optionValue = getOptionValue(option)
             return (
                 <MenuItem
                     className={clsx(
@@ -197,6 +210,9 @@ export const Select = forwardRef<
                             'sd-select_option-selected'
                     )}
                     key={optionValue}
+                    disabled={
+                        typeof option === 'object' ? option.disabled : false
+                    }
                     aria-selected={value === optionValue}
                     role="option"
                     tabIndex={activeIndex === i ? 0 : -1}
@@ -210,7 +226,9 @@ export const Select = forwardRef<
                         },
                     })}
                 >
-                    {label ?? optionValue}
+                    {typeof option === 'object'
+                        ? option.label ?? option.value
+                        : option}
                 </MenuItem>
             )
         }
@@ -254,10 +272,11 @@ export const Select = forwardRef<
                               <Ripple className="sd-select-menu_button">
                                   <div className="sd-select-menu_button-label">
                                       <span>
-                                          {options[selectedIndex].label ??
-                                              value}
+                                          {getOptionValue(
+                                              options[selectedIndex]
+                                          )}
                                       </span>
-                                      <Icon size={1} path={mdiMenuDown}></Icon>
+                                      <Icon size={1} path={mdiMenuDown} />
                                   </div>
                               </Ripple>
                           )}

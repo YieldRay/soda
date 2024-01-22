@@ -2,7 +2,6 @@ import ThemingExample from './ThemingExample'
 import { Meta, Canvas, Story } from '@storybook/blocks'
 import { mdiMagnify, mdiMenu, mdiDotsVertical } from '@mdi/js'
 import * as Soda from '@/index'
-import { Default as storySelect } from '@/composition/Select.stories'
 
 <Meta title="ThemingExample" />
 
@@ -43,13 +42,13 @@ import { Default as storySelect } from '@/composition/Select.stories'
 
 <Soda.Checkbox />
 
+<Soda.Select options={['One', 'Two', 'Three']} />
+
 <Soda.List
     headline="theming"
     leadingAvatarLabelText="M"
     supportingText="@material/material-color-utilities"
 />
-
-{storySelect.render()}
 
 <Soda.Tabs defaultValue="1">
     <Soda.Tab value="0">Apple</Soda.Tab>
