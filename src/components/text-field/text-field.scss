@@ -188,7 +188,9 @@ $label_text_gap_size: 3.2px;
             position: absolute;
         }
     }
-    textarea {
+
+    // add space for .sd-text_field-label_text
+    &:has(.sd-text_field-label_text) textarea {
         margin-top: 0.75rem;
     }
 }
