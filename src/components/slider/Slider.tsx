@@ -11,10 +11,13 @@ import {
     shift,
     arrow,
     FloatingArrow,
-    useMergeRefs,
 } from '@floating-ui/react'
+import { useAutoState } from '@/hooks/use-auto-state'
+import { useMergeRefs } from '@/hooks/use-merge'
 
 /**
+ * An slider component, note that you should set width or height (use `style` property) for this component!
+ *
  * TODO: Two handles is not implemented yet!
  * @specs https://m3.material.io/components/sliders/specs
  */
@@ -49,7 +52,7 @@ export const Slider = forwardRef<
     }>
 >(function Slider(
     {
-        defaultValue,
+        defaultValue = 0,
         value: value$co,
         onChange,
         min: minValue = 0,
@@ -67,18 +70,7 @@ export const Slider = forwardRef<
     const eRef = useRef<HTMLDivElement>(null)
     const thumbRef = useRef<HTMLDivElement>(null)
 
-    const controlled = value$co !== undefined
-    const [value$un, setValue$un] = useState(defaultValue ?? 0)
-    const value = controlled ? value$co : value$un
-    const dispatchChange = useCallback(
-        (v: number) => {
-            onChange?.(v)
-            if (!controlled) {
-                setValue$un(v)
-            }
-        },
-        [onChange, controlled]
-    )
+    const [value, setValue] = useAutoState(onChange, value$co, defaultValue)
 
     // just util function
     const valueLimitStep = useCallback(
@@ -111,8 +103,8 @@ export const Slider = forwardRef<
     useEffect(() => {
         // fix the value to the limited value
         const fixedValue = valueLimitRange(valueLimitStep(value))
-        if (value !== fixedValue) dispatchChange(fixedValue)
-    }, [value, dispatchChange, valueLimitRange, valueLimitStep])
+        if (value !== fixedValue) setValue(fixedValue)
+    }, [value, setValue, valueLimitRange, valueLimitStep])
 
     const [isPressing, setPressing] = useState(false)
     const [isHover, setHover] = useState(false)
@@ -133,7 +125,7 @@ export const Slider = forwardRef<
             percentage = (pX - cX) / cWidth
         }
 
-        dispatchChange(
+        setValue(
             valueLimitRange(
                 valueLimitStep(minValue + (maxValue - minValue) * percentage)
             )
@@ -179,7 +171,7 @@ export const Slider = forwardRef<
     return (
         <div
             {...props}
-            ref={useMergeRefs([ref, eRef])}
+            ref={useMergeRefs(ref, eRef)}
             className={clsx('sd-slider', className)}
             data-sd-disabled={disabled}
             data-sd-direction={direction}
@@ -192,10 +184,10 @@ export const Slider = forwardRef<
                     const step = (maxValue - minValue) / (steps ?? 10)
                     if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
                         e.preventDefault() // prevent scroll
-                        dispatchChange(value - step)
+                        setValue(value - step)
                     } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
                         e.preventDefault() // prevent scroll
-                        dispatchChange(value + step)
+                        setValue(value + step)
                     }
                 }
             }}
@@ -219,11 +211,9 @@ export const Slider = forwardRef<
             />
             <div
                 className="sd-slider-handle"
-                ref={useMergeRefs([thumbRef, refs.setReference])}
+                ref={useMergeRefs(thumbRef, refs.setReference)}
                 onResize={update}
-                style={{
-                    cursor: isPressing ? 'grabbing' : '',
-                }}
+                style={{ cursor: isPressing ? 'grabbing' : '' }}
                 onDragStart={(e) => e.preventDefault()}
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}

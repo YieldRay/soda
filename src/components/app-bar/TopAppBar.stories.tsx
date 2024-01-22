@@ -10,7 +10,7 @@ const meta = {
     tags: ['autodocs'],
     args: {
         children: <>TopAppBar</>,
-        leadingNavigationIcon: <IconButton path={mdiMenu}></IconButton>,
+        leadingNavigationIcon: <IconButton path={mdiMenu} />,
         trailingIcon: (
             <>
                 <IconButton path={mdiMagnify} />

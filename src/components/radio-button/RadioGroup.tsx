@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react'
+import { createContext } from 'react'
+import { useAutoState } from '@/hooks/use-auto-state'
 
 export const RadioGroupContext = createContext<
     | {
@@ -10,6 +11,8 @@ export const RadioGroupContext = createContext<
 
 /**
  * Container component for `<RadioButton>`
+ *
+ * Either `value` or `defaultValue` MUST be set
  */
 export function RadioGroup({
     value: value$co,
@@ -22,17 +25,14 @@ export function RadioGroup({
     onChange?: (value: string) => void
     children?: React.ReactNode
 }) {
-    const controlled = value$co !== undefined
-    const [value$un, setValue$un] = useState(defaultValue)
-    const value = controlled ? value$co : value$un
-    const dispatchChange = (v: string) => {
-        onChange?.(v)
-        if (!controlled) {
-            setValue$un(v)
-        }
-    }
+    const [value, setValue] = useAutoState<string>(
+        onChange,
+        value$co,
+        defaultValue!
+    )
+
     return (
-        <RadioGroupContext.Provider value={{ value, onChange: dispatchChange }}>
+        <RadioGroupContext.Provider value={{ value, onChange: setValue }}>
             {children}
         </RadioGroupContext.Provider>
     )

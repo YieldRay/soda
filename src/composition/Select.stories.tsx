@@ -31,8 +31,8 @@ const meta = {
     component: Select,
     tags: ['autodocs'],
     args: {
-        defaultValue: fruits[0],
         options: fruits.map((fruit) => ({ value: fruit })),
+        defaultValue: fruits[0],
     },
 } satisfies Meta<typeof Select>
 
@@ -44,7 +44,7 @@ export const Default: Story = {
     decorators: (Story) => (
         <div style={{ padding: '10rem 1rem' }}>{<Story />}</div>
     ),
-    args: {},
+    render: (props) => <Select {...props} />,
 }
 
 export const Customized: Story = {
@@ -52,8 +52,6 @@ export const Customized: Story = {
         <div style={{ padding: '10rem 1rem' }}>{<Story />}</div>
     ),
     args: {
-        defaultValue: fruits[0],
-        options: fruits.map((fruit) => ({ value: fruit })),
         placement: 'bottom-end',
         children: (value) => (
             <List

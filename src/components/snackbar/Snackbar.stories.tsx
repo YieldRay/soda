@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Snackbar } from '.'
-import { Button } from '../button'
 import { useState } from 'react'
+import { Switch } from '../switch'
 
 const meta = {
     title: 'components/Snackbar',
@@ -49,9 +49,10 @@ export const Fixed: Story = {
         const [open, setOpen] = useState(false)
         return (
             <>
-                <Button onClick={() => setOpen((x) => !x)}>toggle</Button>
-                open={String(open)}
-                <br />
+                <center>
+                    open
+                    <Switch checked={open} onChange={setOpen} />
+                </center>
                 <Snackbar
                     fixed
                     teleportTo={document.body}
@@ -72,9 +73,10 @@ export const Full: Story = {
         const [open, setOpen] = useState(false)
         return (
             <>
-                <Button onClick={() => setOpen((x) => !x)}>toggle</Button>
-                open={String(open)}
-                <br />
+                <center>
+                    open
+                    <Switch checked={open} onChange={setOpen} />
+                </center>
                 <Snackbar
                     fixed
                     full

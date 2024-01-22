@@ -1,7 +1,8 @@
 import './tab.scss'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
-import { forwardRef, createContext, useState } from 'react'
+import { forwardRef, createContext } from 'react'
+import { useAutoState } from '@/hooks/use-auto-state'
 
 export const TabContext = createContext<
     | {
@@ -14,6 +15,9 @@ export const TabContext = createContext<
 /**
  * You can set its width like `style={{width: "100vw"}}` to occupy more width.
  * Child elements (`<TabItem>`) will divide its width equally.
+ *
+ * Either `value` or `defaultValue` MUST be set
+ *
  * @specs https://m3.material.io/components/tabs/specs
  */
 export const Tabs = forwardRef<
@@ -28,18 +32,11 @@ export const Tabs = forwardRef<
     { value: value$co, onChange, defaultValue, className, children, ...props },
     ref
 ) {
-    const controlled = value$co !== undefined
-    const [value$un, setValue$un] = useState(defaultValue)
-    const value = controlled ? value$co : value$un
-    const dispatchChange = (v: string) => {
-        onChange?.(v)
-        if (!controlled) {
-            setValue$un(v)
-        }
-    }
+    const [value, setValue] = useAutoState(onChange, value$co, defaultValue!)
+
     return (
         <div {...props} ref={ref} className={clsx('sd-tabs', className)}>
-            <TabContext.Provider value={{ value, onChange: dispatchChange }}>
+            <TabContext.Provider value={{ value, onChange: setValue }}>
                 {children}
             </TabContext.Provider>
         </div>

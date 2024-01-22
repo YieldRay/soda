@@ -4,7 +4,7 @@ import { ExtendProps, TagNameString } from '@/utils/type.ts'
 import { omit } from 'lodash-es'
 import { forwardRef } from 'react'
 import { useRippleRef } from '@/ripple/hooks'
-import { useMergeRefs } from '@floating-ui/react'
+import { useMergeRefs } from '@/hooks/use-merge'
 
 /**
  * @specs https://m3.material.io/components/lists/specs
@@ -52,7 +52,7 @@ export const List = forwardRef<
     return (
         <As
             {...omit(props, ['children'])}
-            ref={useMergeRefs([ref, useRippleRef()])}
+            ref={useMergeRefs(ref, useRippleRef())}
             className={clsx('sd-list', className)}
             data-sd-lines={lines}
             data-sd-disabled={disabled}

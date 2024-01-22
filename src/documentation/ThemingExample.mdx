@@ -1,7 +1,8 @@
 import ThemingExample from './ThemingExample'
 import { Meta, Canvas, Story } from '@storybook/blocks'
-import { mdiMagnify, mdiMenu } from '@mdi/js'
+import { mdiMagnify, mdiMenu, mdiDotsVertical } from '@mdi/js'
 import * as Soda from '@/index'
+import { Default as storySelect } from '@/composition/Select.stories'
 
 <Meta title="ThemingExample" />
 
@@ -11,9 +12,16 @@ import * as Soda from '@/index'
 
 ## Preview
 
-<Soda.ProgressIndicator sd="linear" />
+<Soda.TopAppBar
+    leadingNavigationIcon={<Soda.IconButton path={mdiMenu} />}
+    trailingIcon={<Soda.IconButton path={mdiDotsVertical} />}
+>
+    React Component Library
+</Soda.TopAppBar>
 
-<Soda.ProgressIndicator sd="circular" />
+<Soda.ProgressIndicator variant="linear" />
+
+<Soda.ProgressIndicator variant="circular" />
 
 <Soda.Search
     leadingIcon={<Soda.IconButton path={mdiMenu} />}
@@ -21,9 +29,17 @@ import * as Soda from '@/index'
     trailingIcon={<Soda.IconButton path={mdiMagnify} />}
 />
 
+<Soda.TextField />
+
+<Soda.TextField variant="outlined" />
+
+<Soda.TextField textarea />
+
+<Soda.TextField variant="outlined" textarea />
+
 <Soda.Switch />
 
-<Soda.RadioButton defaultChecked></Soda.RadioButton>
+<Soda.RadioButton defaultChecked />
 
 <Soda.Checkbox />
 
@@ -32,6 +48,8 @@ import * as Soda from '@/index'
     leadingAvatarLabelText="M"
     supportingText="@material/material-color-utilities"
 />
+
+{storySelect.render()}
 
 <Soda.Tabs defaultValue="1">
     <Soda.Tab value="0">Apple</Soda.Tab>

@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import Icon from '@mdi/react'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
-import { useMergeRefs } from '@floating-ui/react'
+import { useMergeRefs } from '@/hooks/use-merge'
 
 /**
  * This component is a replacement for <IconButton> when you want the element
@@ -25,10 +25,10 @@ export const IconRippleButton = forwardRef<
     return (
         <div
             {...props}
-            ref={useMergeRefs([
+            ref={useMergeRefs(
                 ref,
-                (e) => size && e?.style.setProperty('--size', size),
-            ])}
+                (e) => size && e?.style.setProperty('--size', size)
+            )}
             className={clsx('sd-icon_ripple_button', className)}
         >
             {path ? <Icon path={path}></Icon> : children}

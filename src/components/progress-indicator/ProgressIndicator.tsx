@@ -11,7 +11,7 @@ export const ProgressIndicator = forwardRef<
          */
         value?: number
     }
->(function ProgressIndicator({ variant, value }, ref) {
+>(function ProgressIndicator({ variant = 'circular', value }, ref) {
     if (variant === 'linear')
         return <LinearProgressIndicator ref={ref} value={value} />
     else return <CircularProgressIndicator ref={ref} value={value} />

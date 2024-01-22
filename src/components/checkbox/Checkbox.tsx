@@ -1,11 +1,13 @@
 import './checkbox.scss'
 import clsx from 'clsx'
 import { Ripple } from '@/ripple/Ripple'
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
 import { Icon } from '@mdi/react'
 import { mdiCheck } from '@mdi/js'
 import { SodaSimpleTransition } from '@/composition/SodaTransition'
+import { useAutoState } from '@/hooks/use-auto-state'
+import { useMergeEventHandlers } from '@/hooks/use-merge'
 
 /**
  * According to the official implementation, the ripple effect should not occupy space.
@@ -19,23 +21,23 @@ export const Checkbox = forwardRef<
          * This components is controlled if checked !== undefined
          */
         checked?: boolean
-        onChange?: (checked: boolean) => void
         /**
          * For uncontrolled
          */
         defaultChecked?: boolean
-        children?: React.ReactNode
+        onChange?: (checked: boolean) => void
         disabled?: boolean
         /**
          * This do not have any functional effect, just change color to red
          */
         error?: boolean
+        children?: React.ReactNode
     }>
 >(function Checkbox(
     {
         checked: checked$co,
-        onChange,
         defaultChecked = false,
+        onChange,
         children,
         disabled,
         error,
@@ -43,15 +45,12 @@ export const Checkbox = forwardRef<
     },
     ref
 ) {
-    const controlled = checked$co !== undefined
-    const [checked$un, setChecked$un] = useState(defaultChecked)
-    const checked = controlled ? checked$co : checked$un
-    const dispatchChange = () => {
-        onChange?.(!checked)
-        if (!controlled) {
-            setChecked$un(!checked$un)
-        }
-    }
+    const [checked, setChecked] = useAutoState(
+        onChange,
+        checked$co,
+        defaultChecked
+    )
+
     const checkedIcon = children || <Icon path={mdiCheck} />
 
     return (
@@ -64,12 +63,14 @@ export const Checkbox = forwardRef<
             data-sd-error={error}
             data-sd-checked={checked}
             aria-checked={checked}
-            onClick={dispatchChange}
-            onKeyDown={(e) => {
+            onClick={useMergeEventHandlers(props.onClick, () => {
+                setChecked(!checked)
+            })}
+            onKeyDown={useMergeEventHandlers(props.onKeyDown, (e) => {
                 if (!disabled && e.key === 'Enter') {
-                    dispatchChange()
+                    setChecked(!checked)
                 }
-            }}
+            })}
         >
             <div className="sd-checkbox-icon">
                 <SodaSimpleTransition

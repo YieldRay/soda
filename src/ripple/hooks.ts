@@ -20,7 +20,7 @@ export function useRippleEffect<T extends HTMLElement>(
  * @example
  * ```jsx
  * <div ref={useRippleRef()}> Ripple </div>
- * <div ref={useMergeRefs([useRippleRef(), ...])}> Ripple </div>
+ * <div ref={useMergeRefs(useRippleRef(), ...)}> Ripple </div>
  * ```
  */
 export function useRippleRef<T extends HTMLElement>(color?: string) {

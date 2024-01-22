@@ -1,5 +1,5 @@
+import { useMergeRefs } from '@/hooks/use-merge'
 import { ExtendProps } from '@/utils/type'
-import { useMergeRefs } from '@floating-ui/react'
 import { forwardRef, useRef, useEffect } from 'react'
 
 /**
@@ -25,7 +25,7 @@ export const Collapsible = forwardRef<
     return (
         <div
             {...props}
-            ref={useMergeRefs([ref, eRef])}
+            ref={useMergeRefs(ref, eRef)}
             style={{
                 transition: 'all 200ms',
                 overflow: 'hidden',

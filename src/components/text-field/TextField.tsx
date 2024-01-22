@@ -3,10 +3,13 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { type ExtendProps } from '@/utils/type'
 import { type ReactRef, setReactRef } from '@/utils/react-ref'
+import { useMergeEventHandlers } from '@/hooks/use-merge'
 
 type InternalHTMLElement = HTMLInputElement | HTMLTextAreaElement
 
 /**
+ * Set `textarea` to `true` to enable textarea style
+ *
  * @specs https://m3.material.io/components/text-fields/specs
  */
 export const TextField = forwardRef<
@@ -143,13 +146,13 @@ export const TextField = forwardRef<
             ref={ref}
             className={clsx('sd-text_field', className)}
             style={style}
-            onClick={() => {
+            onClick={useMergeEventHandlers(props.onClick, () => {
                 innerRef.current?.focus() //? once the container is clicked, focus the input element
                 setFocus(true)
-            }}
+            })}
             // https://stackoverflow.com/questions/37609049/how-to-correctly-catch-change-focusout-event-on-text-input-in-react-js
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onFocus={useMergeEventHandlers(props.onFocus, () => setFocus(true))}
+            onBlur={useMergeEventHandlers(props.onBlur, () => setFocus(false))}
             tabIndex={-1}
             data-sd={variant}
             data-sd-label_text={populated ? 'populated' : 'empty'}

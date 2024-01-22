@@ -1,8 +1,8 @@
 import './Select.scss'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
+import { ExtendProps } from '@/utils/type'
 import { forwardRef, useRef, useState, useDeferredValue } from 'react'
-import { Menu, MenuItem } from '../components/menu'
+import { Menu, MenuItem } from '@/components/menu'
 import {
     useFloating,
     flip,
@@ -27,11 +27,12 @@ import { isFunction } from 'lodash-es'
 import { Ripple } from '@/ripple/Ripple'
 import Icon from '@mdi/react'
 import { mdiMenuDown } from '@mdi/js'
+import { useAutoState } from '@/hooks/use-auto-state'
 
 /**
  * `<Select>` is high level `<Menu>`
  *
- * You should always set `value` or `defaultValue` to an existing option's value,
+ * You MUST either set `value` or `defaultValue` to an existing `options`'s `value`,
  * otherwise it will lead to undefined behavior
  */
 export const Select = forwardRef<
@@ -82,19 +83,15 @@ export const Select = forwardRef<
         },
         ref
     ) => {
-        const controlled = value$co !== undefined
-        const [value$un, setValue$un] = useState(defaultValue)
-        const value = controlled ? value$co : value$un
-        const dispatchChange = (v: string) => {
-            onChange?.(v)
-            if (!controlled) {
-                setValue$un(v)
-            }
-        }
+        const [value, setValue] = useAutoState(
+            onChange,
+            value$co,
+            defaultValue!
+        )
 
         const valueDeferred = useDeferredValue(value)
         const dispatchChangeDeferred = (v: string) => {
-            setTimeout(() => dispatchChange(v), 200)
+            setTimeout(() => setValue(v), 200)
         }
 
         // floating-ui

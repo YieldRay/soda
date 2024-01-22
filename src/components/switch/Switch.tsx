@@ -1,7 +1,9 @@
 import { ExtendProps } from '@/utils/type'
 import './switch.scss'
 import clsx from 'clsx'
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAutoState } from '@/hooks/use-auto-state'
+import { useMergeEventHandlers } from '@/hooks/use-merge'
 
 /**
  * @specs https://m3.material.io/components/switch/specs
@@ -26,15 +28,12 @@ export const Switch = forwardRef<
     },
     ref
 ) {
-    const controlled = checked$co !== undefined
-    const [checked$un, setChecked$un] = useState(defaultChecked)
-    const checked = controlled ? checked$co : checked$un
-    const dispatchChange = () => {
-        onChange?.(!checked)
-        if (!controlled) {
-            setChecked$un(!checked$un)
-        }
-    }
+    const [checked, setChecked] = useAutoState(
+        onChange,
+        checked$co,
+        defaultChecked
+    )
+
     return (
         <div
             {...props}
@@ -45,12 +44,14 @@ export const Switch = forwardRef<
             data-sd-disabled={disabled}
             data-sd-checked={checked}
             aria-checked={checked}
-            onClick={dispatchChange}
-            onKeyDown={(e) => {
+            onClick={useMergeEventHandlers(props.onClick, () => {
+                setChecked(!checked)
+            })}
+            onKeyDown={useMergeEventHandlers(props.onKeyDown, (e) => {
                 if (!disabled && e.key === 'Enter') {
-                    dispatchChange()
+                    setChecked(!checked)
                 }
-            }}
+            })}
         >
             <div className="sd-switch-movable">
                 <div className="sd-switch-thumb"></div>

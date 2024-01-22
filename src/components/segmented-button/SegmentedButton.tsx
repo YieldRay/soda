@@ -1,10 +1,14 @@
 import './segmented-button.scss'
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
-import { useMergeRefs } from '@floating-ui/react'
+import { useAutoState } from '@/hooks/use-auto-state'
+import { useMergeRefs } from '@/hooks/use-merge'
 
+/**
+ * Either `value` or `defaultValue` MUST be set to corresponding `items`'`value`
+ */
 export const SegmentedButton = forwardRef<
     HTMLDivElement,
     ExtendProps<{
@@ -37,29 +41,21 @@ export const SegmentedButton = forwardRef<
     },
     ref
 ) {
-    const controlled = value$co !== undefined
-    const [value$un, setValue$un] = useState(defaultValue)
-    const value = controlled ? value$co : value$un
-    const dispatchChange = (v: string) => {
-        onChange?.(v)
-        if (!controlled) {
-            setValue$un(v)
-        }
-    }
+    const [value, setValue] = useAutoState(onChange, value$co, defaultValue!)
 
     return (
         <div
             {...props}
             className={clsx('sd-segmented_button', className)}
-            ref={useMergeRefs([
+            ref={useMergeRefs(
                 (e) =>
                     e &&
                     e.style.setProperty(
                         '--density',
                         density ? String(density) : '0'
                     ),
-                ref,
-            ])}
+                ref
+            )}
         >
             {items &&
                 items.map(({ label, disabled, value: value$i }, index) => (
@@ -69,10 +65,10 @@ export const SegmentedButton = forwardRef<
                         className="sd-segmented_button-item"
                         data-sd-active={value$i === value}
                         data-sd-disabled={disabled}
-                        onClick={() => dispatchChange(value$i)}
+                        onClick={() => setValue(value$i)}
                         onKeyDown={(e) => {
                             if (onChange && e.key === 'Enter' && !disabled) {
-                                dispatchChange(value$i)
+                                setValue(value$i)
                             }
                         }}
                     >

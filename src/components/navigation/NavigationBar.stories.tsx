@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { NavigationBar } from '.'
 import { useState } from 'react'
-import { Button } from '../button'
 import Icon from '@mdi/react'
 import {
     mdiHome,
@@ -12,6 +11,7 @@ import {
     mdiCog,
     mdiCogOutline,
 } from '@mdi/js'
+import { Switch } from '../switch'
 
 const meta = {
     title: 'components/Navigation/NavigationBar',
@@ -57,7 +57,10 @@ export const Default: Story = {
         const [items, setItems] = useState(props.items)
         return (
             <>
-                <Button onClick={() => setFixed(!fixed)}>toggle fixed</Button>
+                <center>
+                    fixed
+                    <Switch checked={fixed} onChange={setFixed} />
+                </center>
                 <NavigationBar
                     fixed={fixed}
                     items={items}
@@ -69,7 +72,7 @@ export const Default: Story = {
                             }))
                         )
                     }}
-                ></NavigationBar>
+                />
             </>
         )
     },

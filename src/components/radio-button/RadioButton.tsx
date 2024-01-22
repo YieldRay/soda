@@ -1,9 +1,10 @@
 import './radio-button.scss'
 import clsx from 'clsx'
-import { forwardRef, useContext, useRef, useState } from 'react'
+import { forwardRef, useContext, useRef } from 'react'
 import { ExtendProps } from '@/utils/type'
 import { RadioGroupContext } from '@/components/radio-button/RadioGroup'
 import { Ripple, type RippleHandle } from '@/ripple/Ripple'
+import { useAutoState } from '@/hooks/use-auto-state'
 
 /**
  * According to the official implementation, the ripple effect should not occupy space.
@@ -13,17 +14,17 @@ import { Ripple, type RippleHandle } from '@/ripple/Ripple'
 export const RadioButton = forwardRef<
     HTMLDivElement,
     ExtendProps<{
-        checked?: boolean
         /**
          * Must provide for grouped radio (`inside <RadioGroup>`)
          */
         value?: string
+        checked?: boolean
         /**
          * For uncontrolled
          */
         defaultChecked?: boolean
+        onChange?(checked: boolean): void
         disabled?: boolean
-        onChange?(value?: string): void
         children?: React.ReactNode
     }>
 >(function RadioButton(
@@ -46,16 +47,15 @@ export const RadioButton = forwardRef<
     // if groupContext provide a value, that's to say, current radio-button is in a group
     // so ignore the checked property
 
-    const controlled = checked$co !== undefined
-    const [checked$un, setChecked$un] = useState(defaultChecked)
-    const checked = controlled ? checked$co : checked$un
-    const dispatchChange = () => {
-        onChange?.(value)
-        groupContext?.onChange?.(value!)
-        if (!controlled) {
-            setChecked$un(!checked$un)
-        }
-    }
+    const [checked, setChecked] = useAutoState<boolean>(
+        (v) => {
+            onChange?.(v)
+            // notify context to change value if current one is checked
+            if (v) groupContext?.onChange?.(value!)
+        },
+        checked$co,
+        defaultChecked
+    )
 
     // for create ripple manually
     const rippleRef = useRef<RippleHandle>(null)
@@ -70,10 +70,10 @@ export const RadioButton = forwardRef<
             aria-checked={checked}
             data-sd-checked={checked}
             data-sd-disabled={disabled}
-            onClick={dispatchChange}
+            onClick={() => setChecked(!checked)}
             onKeyDown={(e) => {
                 if (!disabled && e.key === 'Enter') {
-                    dispatchChange()
+                    setChecked(!checked)
                 }
             }}
         >

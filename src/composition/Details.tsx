@@ -1,10 +1,10 @@
 import './Details.scss'
 import { IconButton } from '@/components/icon-button'
 import { Collapsible } from '@/composition/Collapsible'
+import { useAutoState } from '@/hooks/use-auto-state'
 import { mdiChevronDown } from '@mdi/js'
 import Icon from '@mdi/react'
 import clsx from 'clsx'
-import { useState } from 'react'
 
 /**
  * This component can be both controlled or uncontrolled depending on the open property.
@@ -13,7 +13,7 @@ export function Details({
     variant = 'filled',
     summary,
     expanded: expanded$co,
-    defaultExpanded,
+    defaultExpanded = false,
     onChange,
     children,
     ...props
@@ -43,15 +43,11 @@ export function Details({
         } as const
     )[variant]
 
-    const controlled = expanded$co !== undefined
-    const [expanded$un, setExpanded$un] = useState(!!defaultExpanded)
-    const expanded = controlled ? expanded$co : expanded$un
-    const dispatchChange = () => {
-        onChange?.(!expanded)
-        if (!controlled) {
-            setExpanded$un(!expanded$un)
-        }
-    }
+    const [expanded, setExpanded] = useAutoState(
+        onChange,
+        expanded$co,
+        defaultExpanded
+    )
 
     return (
         <div
@@ -59,12 +55,17 @@ export function Details({
             className={clsx('sd-details', `sd-details-${variant}`, variant)}
             data-sd-expanded={expanded}
         >
-            <div className="sd-details_summary" onClick={dispatchChange}>
+            <div
+                className="sd-details_summary"
+                onClick={() => setExpanded(!expanded)}
+            >
                 <span>{summary}</span>
                 <IconButton
                     variant={iconVariant}
                     onKeyDown={(e) => {
-                        if (e.key === 'Enter') dispatchChange()
+                        if (e.key === 'Enter') {
+                            setExpanded(!expanded)
+                        }
                     }}
                 >
                     <Icon
