@@ -57,7 +57,7 @@ export const IconButton = forwardRef<
             data-sd-disabled={disabled}
         >
             <div className="sd-icon_button-icon">
-                {path ? <Icon path={path}></Icon> : children}
+                {path ? <Icon path={path} /> : children}
             </div>
         </Ripple>
     )

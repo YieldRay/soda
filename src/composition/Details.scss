@@ -23,4 +23,9 @@
     &-outlined[data-sd-expanded='true'] &_summary {
         border-bottom: solid 1px var(--md-sys-color-outline);
     }
+
+    &_collapsible {
+        transition: all 200ms;
+        overflow: hidden;
+    }
 }

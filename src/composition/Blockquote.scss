@@ -1,0 +1,44 @@
+.sd-blockquote {
+    overflow: hidden;
+    transition: all 200ms;
+
+    &,
+    &_inner {
+        border-radius: 1rem;
+    }
+
+    &-tonal {
+        background-color: var(--md-sys-color-secondary-container);
+    }
+
+    &-filled {
+        background: var(--md-sys-color-primary);
+        color: var(--md-sys-color-on-primary);
+    }
+
+    &-outlined .sd-blockquote_inner {
+        @include outline;
+    }
+
+    &-error {
+        background-color: var(--md-sys-color-error);
+        color: var(--md-sys-color-on-error);
+    }
+
+    &_inner {
+        display: flex;
+        gap: 0.5rem;
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding: 1rem;
+
+        .sd-blockquote_content {
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .sd-blockquote_close {
+            margin-left: auto;
+        }
+    }
+}

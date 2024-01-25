@@ -9,12 +9,14 @@ import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import assign from 'lodash-es/assign'
+import { useEventListenerEffect } from '@/hooks/use-event-listener'
 
 type TimeValue = readonly [hour: number, minute: number]
 
 /**
  * [warn]: data itself always use 24 hours system,
  * but it's appearance varies by changing the `use24hourSystem` property
+ *
  * @specs https://m3.material.io/components/time-pickers/specs
  */
 export const TimePicker = forwardRef<
@@ -162,7 +164,7 @@ export const TimePicker = forwardRef<
     /**
      * compute new degree by adding delta degree
      */
-    const degreeSetState = (degree: number, delta: number) => {
+    const degreeAddDelta = (degree: number, delta: number) => {
         const nextDegree = normalizeDegree(degree + delta)
         const nextTime = (nextDegree / 360) * 12 + (period === 'PM' ? 12 : 0)
         const nextHour = Math.trunc(nextTime)
@@ -185,7 +187,7 @@ export const TimePicker = forwardRef<
             (Math.atan2(clientY - cY, clientX - cX) -
                 Math.atan2(initY - cY, initX - cX)) *
             (180 / Math.PI)
-        setDegree((degree) => degreeSetState(degree, deltaDegree))
+        setDegree((degree) => degreeAddDelta(degree, deltaDegree))
     }
 
     const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -195,17 +197,16 @@ export const TimePicker = forwardRef<
 
     const clockRef = useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
-        const clock = clockRef.current
-        if (!clock) return
-        const onWheel = (e: WheelEvent) => {
+    useEventListenerEffect(
+        clockRef,
+        'wheel',
+        (e) => {
             e.preventDefault()
             const delta = e.deltaY / 100
-            setDegree((degree) => degreeSetState(degree, delta * 3))
-        }
-        clock.addEventListener('wheel', onWheel, { passive: false })
-        return () => clock.removeEventListener('wheel', onWheel)
-    })
+            setDegree((degree) => degreeAddDelta(degree, delta * 3))
+        },
+        { passive: false }
+    )
 
     return (
         <div
@@ -288,14 +289,14 @@ export const TimePicker = forwardRef<
                                 ) {
                                     e.preventDefault() // prevent scroll
                                     setDegree((degree) =>
-                                        degreeSetState(degree, 10)
+                                        degreeAddDelta(degree, 10)
                                     )
                                 } else if (
                                     e.key === 'ArrowLeft' ||
                                     e.key === 'ArrowUp'
                                 ) {
                                     e.preventDefault() // prevent scroll
-                                    degreeSetState(degree, -10)
+                                    degreeAddDelta(degree, -10)
                                 }
                             }}
                             ref={clockRef}

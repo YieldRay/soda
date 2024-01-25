@@ -31,7 +31,7 @@ export const IconRippleButton = forwardRef<
             )}
             className={clsx('sd-icon_ripple_button', className)}
         >
-            {path ? <Icon path={path}></Icon> : children}
+            {path ? <Icon path={path} /> : children}
             <div className="sd-icon_ripple_button-ripple">
                 <Ripple />
             </div>

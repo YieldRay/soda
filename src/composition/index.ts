@@ -1,5 +1,5 @@
 export * from './ActionButton.tsx'
-export * from './Collapsible.tsx'
+export * from './Blockquote.tsx'
 export * from './Details.tsx'
 export * from './DrawerItem.tsx'
 export * from './IconRippleButton.tsx'

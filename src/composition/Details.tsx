@@ -1,10 +1,11 @@
 import './Details.scss'
+import clsx from 'clsx'
+import Icon from '@mdi/react'
+import { useRef } from 'react'
 import { IconButton } from '@/components/icon-button'
-import { Collapsible } from '@/composition/Collapsible'
 import { useAutoState } from '@/hooks/use-auto-state'
 import { mdiChevronDown } from '@mdi/js'
-import Icon from '@mdi/react'
-import clsx from 'clsx'
+import { useCollapsible } from '@/hooks/use-collapsible'
 
 /**
  * This component can be both controlled or uncontrolled depending on the open property.
@@ -49,6 +50,9 @@ export function Details({
         defaultExpanded
     )
 
+    const collapsibleRef = useRef<HTMLDivElement>(null)
+    useCollapsible(collapsibleRef, !expanded)
+
     return (
         <div
             {...props}
@@ -78,9 +82,10 @@ export function Details({
                     />
                 </IconButton>
             </div>
-            <Collapsible expanded={expanded}>
-                <div style={{ padding: '16px' }}>{children}</div>
-            </Collapsible>
+
+            <div className="sd-details_collapsible" ref={collapsibleRef}>
+                <div style={{ padding: '1rem' }}>{children}</div>
+            </div>
         </div>
     )
 }

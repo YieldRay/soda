@@ -11,7 +11,7 @@ import {
 } from 'react'
 import { Portal } from '@/utils/Portal'
 
-export type BottomSheetHandle = ReturnType<typeof drag>
+export type BottomSheetHandle = ReturnType<typeof attachDragEvent>
 
 /**
  * This component DO NOT have ref forwarded.
@@ -65,7 +65,9 @@ export const BottomSheet = forwardRef<
     const sheetRef = useRef<HTMLDivElement>(null)
     const handleRef = useRef<HTMLDivElement>(null)
 
-    const dragHandlerRef = useRef<ReturnType<typeof drag> | null>(null)
+    const dragHandlerRef = useRef<ReturnType<typeof attachDragEvent> | null>(
+        null
+    )
     const [visible, setVisible] = useState(false) // = isOpen
 
     // useLayoutEffect() rather than useEffect()
@@ -75,7 +77,7 @@ export const BottomSheet = forwardRef<
         if (!fixed) return
         const sheet = sheetRef.current!
         const handle = hideDragHandle ? sheet : handleRef.current!
-        const handler = drag(sheet, handle, {
+        const handler = attachDragEvent(sheet, handle, {
             onShow() {
                 setVisible(true)
                 onChange?.(true)
@@ -122,7 +124,7 @@ export const BottomSheet = forwardRef<
     return bottomSheet
 })
 
-export function drag(
+export function attachDragEvent(
     sheet: HTMLDivElement,
     dragHandle: HTMLDivElement,
     options?: {

@@ -173,7 +173,7 @@ export const TextField = forwardRef<
             )}
 
             {variant !== 'outlined' && (
-                <div className="sd-text_field-active_indicator"/>
+                <div className="sd-text_field-active_indicator" />
             )}
 
             {supportingText && (

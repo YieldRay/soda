@@ -6,14 +6,13 @@ const meta = {
     title: 'composition/IconRippleButton',
     component: IconRippleButton,
     tags: ['autodocs'],
+    args: {
+        path: mdiCheck,
+    },
 } satisfies Meta<typeof IconRippleButton>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-    args: {
-        path: mdiCheck,
-    },
-}
+export const Default: Story = {}

@@ -8,7 +8,7 @@
  * // Bivariance hack for consistent unsoundness with RefObject
  * type RefCallback<T> = { bivarianceHack(instance: T | null): void }["bivarianceHack"];
  * type Ref<T> = RefCallback<T> | RefObject<T> | null;
- * type LegacyRef<T> = string | Ref<T>;
+ * type LegacyRef<T> = string | Ref<T>; // element ref
  * ```
  */
 export type ReactRef<T> =
@@ -17,7 +17,7 @@ export type ReactRef<T> =
     | null
 
 /**
- * Support callback and object.current
+ * Support callback and ref.current
  */
 export function setReactRef<T>(ref: ReactRef<T> | undefined, value: T) {
     if (!ref) return

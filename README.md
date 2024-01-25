@@ -32,7 +32,7 @@ import { Button } from 'soda-material'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <Button sd="outlined">Button</Button>
+        <Button variant="outlined">Button</Button>
     </React.StrictMode>
 )
 ```

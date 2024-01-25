@@ -29,6 +29,7 @@
         }
     }
 }
+
 @media (any-hover: hover) {
     .sd-icon_ripple_button-ripple:hover {
         @include background-hover(var(--md-sys-color-primary));
