@@ -30,8 +30,10 @@ export const Default: Story = {
 
 export const SingleLine: Story = {
     args: {
+        lines: 1,
         leadingIcon: '✨',
         supportingText: '',
+        headline: 'headline',
     },
 }
 

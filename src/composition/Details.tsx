@@ -75,10 +75,8 @@ export function Details({
                     <Icon
                         path={mdiChevronDown}
                         size={1}
-                        style={{
-                            transform: `rotate(${expanded ? '180deg' : '0'})`,
-                            transition: 'all 200ms',
-                        }}
+                        style={{ transition: 'all 200ms' }}
+                        rotate={expanded ? 180 : undefined}
                     />
                 </IconButton>
             </div>

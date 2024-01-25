@@ -9,6 +9,22 @@
     overflow: hidden;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
+    &[data-sd-lines='1'] {
+        .sd-list-supporting_text {
+            display: none;
+        }
+    }
+
+    &[data-sd-lines='2'] {
+        .sd-list-supporting_text {
+            // max one line
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+        }
+    }
+
     &[data-sd-lines='3'] {
         align-items: flex-start;
     }
@@ -36,8 +52,13 @@
         flex-grow: 1;
         flex-direction: column;
         word-break: break-all;
+        overflow: hidden;
+
         .sd-list-headline {
             text-wrap: nowrap;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .sd-list-supporting_text {
             color: var(--md-sys-color-on-surface-variant);

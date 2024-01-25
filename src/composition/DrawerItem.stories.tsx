@@ -9,7 +9,7 @@ const meta = {
     component: DrawerItem,
     tags: ['autodocs'],
     args: {
-        icon: <Icon path={mdiCheck} />,
+        icon: <Icon size={1} path={mdiCheck} />,
         children: 'label text (soooooooooo looooooooooooong)',
         badge: '99+',
     },

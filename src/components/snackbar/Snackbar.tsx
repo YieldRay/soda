@@ -107,7 +107,7 @@ export function Snackbar({
                     className="sd-snackbar-icon"
                     onClick={() => onCloseClick()}
                 >
-                    <Icon path={mdiClose} />
+                    <Icon size={1} path={mdiClose} />
                 </ActionButton>
             )}
         </div>

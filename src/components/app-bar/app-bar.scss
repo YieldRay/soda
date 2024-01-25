@@ -17,8 +17,10 @@
     justify-content: space-between;
 
     &-buttons {
+        flex-grow: 1;
         display: flex;
         gap: 0.25rem;
+        overflow: hidden;
     }
 
     &-fab {
@@ -61,10 +63,14 @@
     }
 
     &-headline {
+        box-sizing: border-box;
         font-size: 22px;
         font-weight: 400;
         color: var(--md-sys-color-on-surface);
         flex-shrink: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     &[data-sd='small'] {

@@ -30,7 +30,7 @@ export const Default: Story = {
                 key: 'home',
                 label: 'home',
                 icon: (active) => (
-                    <Icon path={active ? mdiHome : mdiHomeOutline} />
+                    <Icon size={1} path={active ? mdiHome : mdiHomeOutline} />
                 ),
                 active: true,
             },
@@ -39,6 +39,7 @@ export const Default: Story = {
                 label: 'search',
                 icon: (active) => (
                     <Icon
+                        size={1}
                         path={active ? mdiCardSearch : mdiCardSearchOutline}
                     />
                 ),

@@ -43,15 +43,15 @@ export const Default: Story = {
                     teleportTo={document.body}
                     buttons={
                         <>
-                            <IconButton path={mdiCheckboxOutline} />
-                            <IconButton path={mdiGreasePencil} />
-                            <IconButton path={mdiMicrophone} />
-                            <IconButton path={mdiImageOutline} />
+                            <IconButton size={1} path={mdiCheckboxOutline} />
+                            <IconButton size={1} path={mdiGreasePencil} />
+                            <IconButton size={1} path={mdiMicrophone} />
+                            <IconButton size={1} path={mdiImageOutline} />
                         </>
                     }
                     fab={
                         <Fab variant="secondary">
-                            <Icon path={mdiPlus} />
+                            <Icon size={1} path={mdiPlus} />
                         </Fab>
                     }
                 />

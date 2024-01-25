@@ -22,26 +22,26 @@ export const Default: Story = {
         return (
             <Menu>
                 <MenuItem
-                    leadingIcon={<Icon path={mdiMagnify}></Icon>}
-                    trailingIcon={<Icon path={mdiMagnify}></Icon>}
+                    leadingIcon={<Icon size={1} path={mdiMagnify} />}
+                    trailingIcon={<Icon size={1} path={mdiMagnify} />}
                 >
                     Apple
                 </MenuItem>
                 <Divider />
                 <MenuItem
-                    leadingIcon={<Icon path={mdiCheck}></Icon>}
+                    leadingIcon={<Icon size={1} path={mdiCheck} />}
                     trailingText={'⌘C'}
                 >
                     Banana
                 </MenuItem>
                 <MenuItem
-                    leadingIcon={<Icon path={mdiClose}></Icon>}
+                    leadingIcon={<Icon size={1} path={mdiClose} />}
                     trailingText={'⌘V'}
                 >
                     Orange
                 </MenuItem>
                 <MenuItem
-                    leadingIcon={<Icon path={mdiClose}></Icon>}
+                    leadingIcon={<Icon size={1} path={mdiClose} />}
                     trailingText={'⌘V'}
                     disabled
                 >

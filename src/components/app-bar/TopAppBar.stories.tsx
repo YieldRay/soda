@@ -9,7 +9,7 @@ const meta = {
     component: TopAppBar,
     tags: ['autodocs'],
     args: {
-        children: <>TopAppBar</>,
+        children: 'TopAppBar '.repeat(10),
         leadingNavigationIcon: <IconButton path={mdiMenu} />,
         trailingIcon: (
             <>

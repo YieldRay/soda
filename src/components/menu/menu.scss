@@ -28,8 +28,13 @@
         width: 24px;
         color: var(--md-sys-color-on-surface-variant);
         @include display-inline-flex-center;
+        flex-shrink: 0;
     }
     &-supporting_text {
+        text-wrap: nowrap;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         flex-shrink: 1;
         color: var(--md-sys-color-on-surface);
         min-width: 112px;
@@ -41,11 +46,13 @@
         width: 24px;
         color: var(--md-sys-color-on-surface-variant);
         @include display-inline-flex-center;
+        flex-shrink: 0;
     }
     &-trailing_text {
         margin-left: auto;
         color: var(--md-sys-color-on-surface-variant);
         font-size: small;
+        flex-shrink: 0;
     }
     transition: background-color 200ms;
     @media (any-hover: hover) {

@@ -11,7 +11,7 @@ const meta = {
         layout: 'centered',
     },
     tags: ['autodocs'],
-    args: { children: <Icon path={mdiCheck}></Icon> },
+    args: { children: <Icon size={1} path={mdiCheck} /> },
     argTypes: {
         disabled: {
             type: 'boolean',

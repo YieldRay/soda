@@ -62,7 +62,7 @@ export const WithIcon: Story = {
     args: {
         children: (
             <>
-                <Icon path={mdiCheck} /> Button
+                <Icon size={1} path={mdiCheck} /> Button
             </>
         ),
     },
