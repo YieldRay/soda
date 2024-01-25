@@ -22,6 +22,8 @@
         line-height: 20px;
         font-size: 14px;
         font-weight: 400;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &:empty {
             height: 16px;

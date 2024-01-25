@@ -10,6 +10,7 @@
     justify-content: space-around;
     gap: 4px;
     background: var(--md-sys-color-surface-container);
+    overflow: hidden;
 }
 
 // https://m3.material.io/components/navigation-rail/
@@ -23,6 +24,7 @@
     align-items: center;
     gap: 12px;
     padding-top: 64px;
+    overflow: hidden;
     &-fab {
         flex-shrink: 0;
     }
@@ -61,6 +63,11 @@
         width: 100%;
         height: 100%;
         font-weight: 500;
+
+        max-width: 80px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &[data-sd-active='false'] {

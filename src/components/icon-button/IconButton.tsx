@@ -15,20 +15,22 @@ export const IconButton = forwardRef<
          * @default standard
          */
         variant?: 'standard' | 'filled' | 'tonal' | 'outlined'
-        children?: React.ReactNode
-        disabled?: boolean
         /**
          * Standard button is unselected by default,
          * other button is selected by default.
          */
         selected?: boolean
         path?: string
+        rotate?: number
+        disabled?: boolean
+        children?: React.ReactNode
     }>
 >(function IconButton(
     {
         variant = 'standard',
         selected: initSelected,
         path,
+        rotate,
         disabled,
         className,
         children,
@@ -57,7 +59,11 @@ export const IconButton = forwardRef<
             data-sd-disabled={disabled}
         >
             <div className="sd-icon_button-icon">
-                {path ? <Icon size={1} path={path} /> : children}
+                {path ? (
+                    <Icon size={1} rotate={rotate} path={path} />
+                ) : (
+                    children
+                )}
             </div>
         </Ripple>
     )

@@ -23,7 +23,7 @@ export const Default: Story = {
 
         return (
             <Tabs value={value} onChange={setValue}>
-                <div>
+                <div style={{ display: 'flex' }}>
                     <Tab icon={<Icon size={1} path={mdiCheck} />} value="0">
                         Apple
                     </Tab>

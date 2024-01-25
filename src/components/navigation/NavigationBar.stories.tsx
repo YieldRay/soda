@@ -48,7 +48,7 @@ export const Default: Story = {
                 key: 'settings',
                 label: 'settings',
                 icon: (active) => (
-                    <Icon path={active ? mdiCog : mdiCogOutline} />
+                    <Icon size={1} path={active ? mdiCog : mdiCogOutline} />
                 ),
             },
         ],

@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    user-select: none;
     overflow: hidden;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 

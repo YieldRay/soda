@@ -109,7 +109,7 @@ export const BottomSheet = forwardRef<
                     ref={fixed ? handleRef : null}
                 />
             )}
-            {children}
+            <div className="sd-bottom_sheet-content">{children}</div>
         </div>
     )
 
@@ -206,6 +206,7 @@ export function attachDragEvent(
     }
 
     const onPointerUp = (e: PointerEvent) => {
+        if (!isDragging) return
         if (!hideDragHandle) dragHandle.releasePointerCapture(e.pointerId)
         isDragging = false
         const currY = e.clientY

@@ -75,6 +75,13 @@ $label_text_gap_size: 3.2px;
         width: 100%;
     }
 
+    &-label_text {
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
     input {
         all: unset;
         max-width: 100%;
@@ -106,6 +113,9 @@ $label_text_gap_size: 3.2px;
         align-items: flex-start;
         // this make the textarea to place at the right bottom of the container without padding
         // allowing the resizer to place at the correct place
+        .sd-text_field-filled_helper[class] {
+            position: absolute;
+        }
     }
 }
 
