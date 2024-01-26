@@ -51,7 +51,7 @@ export const Checkbox = forwardRef<
         defaultChecked
     )
 
-    const checkedIcon = children || <Icon size={1} path={mdiCheck} />
+    const checkedIcon = children || <Icon size={0.6} path={mdiCheck} />
 
     return (
         <div

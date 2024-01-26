@@ -265,7 +265,11 @@ export const Select = forwardRef<
 
         return (
             <div {...props} ref={ref} className={clsx('sd-select', className)}>
-                <div ref={refs.setReference} {...getReferenceProps()}>
+                <div
+                    ref={refs.setReference}
+                    {...getReferenceProps()}
+                    aria-haspopup
+                >
                     {isFunction(children)
                         ? children(value!)
                         : children ?? (
@@ -276,7 +280,11 @@ export const Select = forwardRef<
                                               options[selectedIndex]
                                           )}
                                       </span>
-                                      <Icon size={1} path={mdiMenuDown} />
+                                      <Icon
+                                          size={1}
+                                          path={mdiMenuDown}
+                                          rotate={open ? 180 : 0}
+                                      />
                                   </div>
                               </Ripple>
                           )}

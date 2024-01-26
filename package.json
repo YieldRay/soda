@@ -1,6 +1,6 @@
 {
     "name": "soda-material",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "keywords": [
         "material design",
         "material you"
@@ -28,7 +28,7 @@
         "react-dom": ">=18"
     },
     "devDependencies": {
-        "@floating-ui/react": "^0.26.6",
+        "@floating-ui/react": "^0.26.7",
         "@material/material-color-utilities": "^0.2.7",
         "@mdi/js": "^7.4.47",
         "@mdi/react": "^1.6.1",

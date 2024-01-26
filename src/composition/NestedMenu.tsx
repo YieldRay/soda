@@ -190,14 +190,14 @@ const NestedMenuComponent = forwardRef<
         useEffect(() => {
             if (!tree) return
 
-            function handleTreeClick() {
+            const handleTreeClick = () => {
                 setIsOpen(false)
             }
 
-            function onSubMenuOpen(event: {
+            const onSubMenuOpen = (event: {
                 nodeId: string
                 parentId: string
-            }) {
+            }) => {
                 if (event.nodeId !== nodeId && event.parentId === parentId) {
                     setIsOpen(false)
                 }
