@@ -51,7 +51,7 @@ export const RadioButton = forwardRef<
         (v) => {
             onChange?.(v)
             // notify context to change value if current one is checked
-            if (v) groupContext?.onChange?.(value!)
+            if (v) groupContext?.setValue?.(value!)
         },
         checked$co,
         defaultChecked

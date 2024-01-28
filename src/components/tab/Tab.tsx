@@ -3,7 +3,8 @@ import clsx from 'clsx'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef, useContext } from 'react'
-import { TabContext } from '.'
+import { TabContext } from './Tabs'
+import { useMergeEventHandlers } from '@/hooks/use-merge'
 
 /**
  * Use `<Tab>` to wrap it
@@ -13,17 +14,23 @@ import { TabContext } from '.'
 export const Tab = forwardRef<
     HTMLElement,
     ExtendProps<{
-        value: string
+        index: number
         children?: React.ReactNode
         icon?: React.ReactNode
         active?: boolean
     }>
 >(function Tab(
-    { children, icon, value, active: initActive, className, onClick, ...props },
+    { children, icon, index, active: initActive = false, className, ...props },
     ref
 ) {
     const tabContext = useContext(TabContext)
-    const active = tabContext ? tabContext.value === value : initActive
+    const active = tabContext ? tabContext.index === index : initActive
+
+    const dispatchChange = () => {
+        if (active) return
+        if (!tabContext) return
+        tabContext.setIndex?.(index)
+    }
 
     return (
         <Ripple
@@ -32,15 +39,12 @@ export const Tab = forwardRef<
             tabIndex={0}
             className={clsx('sd-tab', className)}
             data-sd-active={active}
-            onClick={(e) => {
-                onClick?.(e)
-                tabContext?.onChange?.(value)
-            }}
-            onKeyDown={(e) => {
+            onClick={useMergeEventHandlers(props.onClick, dispatchChange)}
+            onKeyDown={useMergeEventHandlers(props.onKeyDown, (e) => {
                 if (e.key === 'Enter') {
-                    tabContext?.onChange?.(value)
+                    dispatchChange()
                 }
-            }}
+            })}
         >
             <div className="sd-tab-helper">
                 {icon && <div className="sd-tab-icon">{icon}</div>}

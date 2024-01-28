@@ -84,3 +84,31 @@
         }
     }
 }
+
+// view-transition
+
+.sd-vt-tab_slide_right_to_left {
+    view-transition-name: sd-vt-tab_slide_right_to_left;
+}
+
+::view-transition-old(sd-vt-tab_slide_right_to_left) {
+    display: none;
+}
+
+::view-transition-new(sd-vt-tab_slide_right_to_left) {
+    animation: 420ms cubic-bezier(0, 0, 0.2, 1) 180ms both sd-kf-fade_in,
+        600ms cubic-bezier(0.4, 0, 0.2, 1) both sd-kf-slide_from_right;
+}
+
+.sd-vt-tab_slide_left_to_right {
+    view-transition-name: sd-vt-tab_slide_left_to_right;
+}
+
+::view-transition-old(sd-vt-tab_slide_left_to_right) {
+    display: none;
+}
+
+::view-transition-new(sd-vt-tab_slide_left_to_right) {
+    animation: 420ms cubic-bezier(0, 0, 0.2, 1) 180ms both sd-kf-fade_in,
+        600ms cubic-bezier(0.4, 0, 0.2, 1) both sd-kf-slide_from_left;
+}

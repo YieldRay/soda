@@ -4,7 +4,7 @@ import { useAutoState } from '@/hooks/use-auto-state'
 export const RadioGroupContext = createContext<
     | {
           value?: string
-          onChange?: (value: string) => void
+          setValue?: (value: string) => void
       }
     | undefined
 >(undefined)
@@ -32,7 +32,7 @@ export function RadioGroup({
     )
 
     return (
-        <RadioGroupContext.Provider value={{ value, onChange: setValue }}>
+        <RadioGroupContext.Provider value={{ value, setValue }}>
             {children}
         </RadioGroupContext.Provider>
     )
