@@ -1,17 +1,15 @@
 // https://m3.material.io/components/buttons/specs
 
-// reset
-button.sd-button {
-    border: none;
-}
-
 // common
 
 .sd-button {
+    border: none;
+    > * {
+        vertical-align: middle;
+    }
     svg {
+        width: 20px;
         height: 20px;
-        display: inline;
-        vertical-align: text-bottom;
     }
     display: inline-block;
     overflow: hidden;

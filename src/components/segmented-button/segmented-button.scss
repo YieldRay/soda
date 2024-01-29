@@ -30,10 +30,7 @@
         align-items: center;
         -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
         transition: all 200ms;
-        svg {
-            width: 16px;
-            vertical-align: text-bottom;
-        }
+
         &[data-sd-active='true'] {
             color: var(--md-sys-color-on-secondary-container);
             background: var(--md-sys-color-secondary-container);
@@ -66,6 +63,11 @@
         }
         .sd-segmented_button-label {
             font-weight: bold;
+            > svg {
+                height: 20px;
+                width: 20px;
+                vertical-align: middle;
+            }
         }
     }
 }

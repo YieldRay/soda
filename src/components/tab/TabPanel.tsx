@@ -39,17 +39,17 @@ export function TabPanel({
     useEffect(() => {
         if (!active) return
         if (!tabContext?.allowTransitionRef?.current) return
+        const el = ref.current
+        if (!el) return
 
         const l2r = [
-            () => ref.current?.classList.add('sd-vt-tab_slide_left_to_right'),
-            () =>
-                ref.current?.classList.remove('sd-vt-tab_slide_left_to_right'),
+            () => el.classList.add('sd-vt-tab_slide_left_to_right'),
+            () => el.classList.remove('sd-vt-tab_slide_left_to_right'),
         ]
 
         const r2l = [
-            () => ref.current?.classList.add('sd-vt-tab_slide_right_to_left'),
-            () =>
-                ref.current?.classList.remove('sd-vt-tab_slide_right_to_left'),
+            () => el.classList.add('sd-vt-tab_slide_right_to_left'),
+            () => el.classList.remove('sd-vt-tab_slide_right_to_left'),
         ]
 
         startViewTransitionFlushSync(() => {

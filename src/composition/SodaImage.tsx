@@ -9,12 +9,11 @@ import {
 } from 'react'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
-import { CircularProgressIndicator } from '@/components/progress-indicator/CircularProgressIndicator'
-import { IconButton } from '@/components/icon-button'
 import { mdiImageBrokenVariant } from '@mdi/js'
-import isNumber from 'lodash-es/isNumber'
-import isFunction from 'lodash-es/isFunction'
+import { IconButton } from '@/components/icon-button'
+import { CircularProgressIndicator } from '@/components/progress-indicator/CircularProgressIndicator'
 import { SodaSimpleTransition } from '@/composition/SodaTransition'
+import isNumber from 'lodash-es/isNumber'
 
 /**
  * A high-level image component, supports loading progress (when `crossOrigin` is specified),
@@ -44,12 +43,6 @@ export const SodaImage = forwardRef<
              */
             description?: React.ReactNode
             /**
-             * Customize behavior
-             */
-            customize?: (
-                state: 'lazy' | 'loading' | 'error' | 'loaded'
-            ) => React.ReactNode | undefined
-            /**
              * Adjust the image's object-fit
              */
             objectFit?: React.CSSProperties['objectFit']
@@ -75,6 +68,14 @@ export const SodaImage = forwardRef<
             height?: string | number
             minWidth?: string | number
             minHeight?: string | number
+            /**
+             * Can be used to customize behavior based on state
+             */
+            children?:
+                | ((
+                      state: 'lazy' | 'loading' | 'error' | 'loaded'
+                  ) => React.ReactNode)
+                | React.ReactNode
         },
         HTMLDivElement
     >
@@ -91,12 +92,12 @@ export const SodaImage = forwardRef<
         objectFit = 'contain',
         aspectRatio,
         description,
-        customize,
         lazy = false,
         alt,
         crossOrigin,
         referrerPolicy,
         cache,
+        children,
         ...props
     },
     ref
@@ -282,8 +283,10 @@ export const SodaImage = forwardRef<
                 </div>
             )}
 
-            {isFunction(customize) && (
-                <div className="sd-image-customize">{customize(state)}</div>
+            {typeof children === 'function' ? (
+                <div className="sd-image-customize">{children(state)}</div>
+            ) : (
+                children && <div className="sd-image-customize">{children}</div>
             )}
         </div>
     )

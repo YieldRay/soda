@@ -35,12 +35,7 @@ export const WithDescription: Story = {
             <>
                 <Button onClick={gen}>Next</Button>
                 <br />
-                <SodaImage
-                    {...{
-                        src,
-                        description,
-                    }}
-                />
+                <SodaImage src={src} description={description} />
             </>
         )
     },
@@ -64,12 +59,10 @@ export const FixedSize: Story = {
                 <Button onClick={gen}>Next</Button>
                 <br />
                 <SodaImage
-                    {...{
-                        src,
-                        description,
-                        width: '300',
-                        height: '300',
-                    }}
+                    src={src}
+                    description={description}
+                    width={300}
+                    height={300}
                 />
             </>
         )

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from '.'
 import Icon from '@mdi/react'
-import { mdiCheck } from '@mdi/js'
+import { mdiAccount } from '@mdi/js'
 
 const meta = {
     title: 'components/Button/Button',
@@ -62,7 +62,7 @@ export const WithIcon: Story = {
     args: {
         children: (
             <>
-                <Icon size={1} path={mdiCheck} /> Button
+                <Icon size="20px" path={mdiAccount} /> Button
             </>
         ),
     },

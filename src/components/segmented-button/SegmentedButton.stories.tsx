@@ -9,7 +9,7 @@ const items = [
         value: 'enabled',
         label: (
             <>
-                <Icon size={1} path={mdiStarOutline} /> Enabled
+                <Icon size="20px" path={mdiStarOutline} /> Enabled
             </>
         ),
     },
@@ -17,7 +17,7 @@ const items = [
         value: 'unknown',
         label: (
             <>
-                <Icon size={1} path={mdiCheck} /> Selected
+                <Icon size="20px" path={mdiCheck} /> Selected
             </>
         ),
         disabled: true,
@@ -26,7 +26,7 @@ const items = [
         value: 'disabled',
         label: (
             <>
-                <Icon size={1} path={mdiTriangleOutline} /> Unknown
+                <Icon size="20px" path={mdiTriangleOutline} /> Unknown
             </>
         ),
     },

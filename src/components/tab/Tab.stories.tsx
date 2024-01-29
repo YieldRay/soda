@@ -36,9 +36,9 @@ export const Default: Story = {
                 </div>
 
                 <div>
-                    <TabPanel index={0}>Panel 0</TabPanel>
-                    <TabPanel index={1}>Panel 1</TabPanel>
-                    <TabPanel index={2}>Panel 2</TabPanel>
+                    <TabPanel index={0}>{'Panel 0 '.repeat(5)}</TabPanel>
+                    <TabPanel index={1}>{'Panel 1 '.repeat(5)}</TabPanel>
+                    <TabPanel index={2}>{'Panel 2 '.repeat(5)}</TabPanel>
                 </div>
             </Tabs>
         )

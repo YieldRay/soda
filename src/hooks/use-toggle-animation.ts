@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 
 export function useToggleAnimation<T extends HTMLElement>(
     elRef: React.RefObject<T>,
@@ -10,7 +10,7 @@ export function useToggleAnimation<T extends HTMLElement>(
 ) {
     const isFirstRun = useRef(true)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const el = elRef.current
         if (!el) return
 

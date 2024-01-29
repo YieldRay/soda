@@ -1,12 +1,8 @@
 // https://m3.material.io/components/icon-buttons/specs
 
-// reset
-button.sd-icon_button {
+.sd-icon_button {
     border: none;
     outline: none;
-}
-
-.sd-icon_button {
     @include display-inline-flex-center;
     vertical-align: middle;
     width: 40px;

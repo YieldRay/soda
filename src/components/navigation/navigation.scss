@@ -116,14 +116,15 @@
     &[data-sd-active='true'] {
         .sd-navigation_helper-active_indicator {
             background: var(--md-sys-color-secondary-container);
-            animation: sd-navigation_helper-active_indicator 100ms ease-out;
+            animation: sd-navigation_helper-active_indicator 400ms
+                cubic-bezier(0.2, 0, 0, 1);
         }
     }
 }
 
 @keyframes sd-navigation_helper-active_indicator {
     from {
-        clip-path: circle(16px);
+        clip-path: circle(12px);
     }
     to {
         clip-path: circle(32px);
