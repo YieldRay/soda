@@ -5,7 +5,9 @@
         "material design",
         "material you"
     ],
-    "author": "YieldRay",
+    "author": {
+        "name": "YieldRay"
+    },
     "bugs": {
         "url": "https://github.com/YieldRay/soda/issues"
     },
@@ -21,7 +23,8 @@
         "build-storybook": "storybook build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "format": "prettier --write ./src",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "chromatic": "chromatic --exit-zero-on-changes"
     },
     "peerDependencies": {
         "react": ">=18",
@@ -42,9 +45,10 @@
         "@types/lodash-es": "^4.17.12",
         "@types/react": "^18.2.48",
         "@types/react-dom": "^18.2.18",
-        "@typescript-eslint/eslint-plugin": "^6.19.1",
-        "@typescript-eslint/parser": "^6.19.1",
+        "@typescript-eslint/eslint-plugin": "^6.20.0",
+        "@typescript-eslint/parser": "^6.20.0",
         "@vitejs/plugin-react": "^4.2.1",
+        "chromatic": "^10.6.1",
         "clsx": "^2.1.0",
         "eslint": "^8.56.0",
         "eslint-plugin-react-hooks": "^4.6.0",
