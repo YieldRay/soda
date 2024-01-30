@@ -16,18 +16,25 @@ export const Search = forwardRef<
          * @default bar
          */
         variant?: 'bar' | 'view'
+        full?: boolean
+        inputProps?: React.ComponentProps<'input'>
         value?: string
+        defaultValue?: string
         onChange?: (value: string) => void
     }>
 >(function Search(
     {
         variant = 'bar',
-        value,
-        onChange,
         placeholder,
         leadingIcon,
         trailingIcon,
+        full = false,
+        defaultValue,
+        value,
+        onChange,
+        inputProps,
         className,
+        style,
         ...props
     },
     ref
@@ -37,13 +44,19 @@ export const Search = forwardRef<
             {...props}
             ref={ref}
             className={clsx('sd-search', className)}
+            style={{ ...style, width: full ? '100%' : '' }}
             data-sd={variant}
         >
             <div className="sd-search-leading_icon">{leadingIcon}</div>
             <input
                 type="text"
-                className="sd-search-supporting_text"
+                {...inputProps}
+                className={clsx(
+                    'sd-search-supporting_text',
+                    inputProps?.className
+                )}
                 placeholder={placeholder}
+                defaultValue={defaultValue}
                 value={value}
                 onChange={(e) => onChange?.(e.target.value)}
             />

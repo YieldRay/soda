@@ -3,70 +3,114 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { SideSheet } from '.'
 import { useState } from 'react'
 import { Button } from '../button'
-import { TopAppBar } from '../app-bar'
 import { IconButton } from '../icon-button'
-import { DrawerItem } from '@/composition/DrawerItem'
-import { mdiMenu } from '@mdi/js'
+import { mdiArrowLeft, mdiClose } from '@mdi/js'
+import { Switch } from '../switch/Switch'
 
 const meta = {
     title: 'components/Sheet/SideSheet',
     component: SideSheet,
     tags: ['autodocs'],
+    parameters: {
+        layout: 'fullscreen',
+    },
 } satisfies Meta<typeof SideSheet>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-    render: () => (
-        <SideSheet
-            header="headline"
-            footer={
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <Button>Save</Button>
-                    <Button variant="outlined">Close</Button>
+export const Standard: Story = {
+    render: () => {
+        {
+            const [open, setOpen] = useState(true)
+            const [isRight, setRight] = useState(true)
+
+            return (
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: isRight ? undefined : 'row-reverse',
+                        height: '100vh',
+                        background: 'var(--md-sys-color-surface)',
+                    }}
+                >
+                    <div
+                        style={{
+                            flex: '1',
+                            // here we use flex layout
+                            // it's important to set flex-grow: 1
+                        }}
+                    >
+                        <div>
+                            open
+                            <Switch checked={open} onChange={setOpen} />
+                        </div>
+                        <div>
+                            position
+                            <Switch checked={isRight} onChange={setRight} />
+                        </div>
+                    </div>
+                    <SideSheet
+                        open={open}
+                        position={isRight ? 'right' : 'left'}
+                        header={
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                }}
+                            >
+                                <span>Title</span>
+                                <IconButton
+                                    path={mdiClose}
+                                    onClick={() => setOpen(false)}
+                                />
+                            </div>
+                        }
+                    >
+                        Standard side sheet
+                    </SideSheet>
                 </div>
-            }
-            style={{ minHeight: 'max(66.6vh, 400px)' }}
-        >
-            <DrawerItem active>Home</DrawerItem>
-            <DrawerItem>Search</DrawerItem>
-            <DrawerItem>Settings</DrawerItem>
-        </SideSheet>
-    ),
+            )
+        }
+    },
 }
 
-export const Fixed: Story = {
+export const Modal: Story = {
     render: () => {
-        const [open, setOpen] = useState(false)
+        const [open, setOpen] = useState(true)
+        const [isRight, setRight] = useState(true)
+
         return (
-            <div
-                style={{
-                    willChange: 'transform',
-                    minHeight: 'max(66.6vh, 400px)',
-                }}
-            >
-                <TopAppBar
-                    leadingNavigationIcon={
-                        <IconButton
-                            onClick={() => setOpen(true)}
-                            path={mdiMenu}
-                        />
-                    }
-                >
-                    TopAppBar
-                </TopAppBar>
-
-                <p>Click the menu icon to open.</p>
-                <p>Set the fixed property to true for convenience!</p>
-
+            <div style={{ willChange: 'transform', height: '100vh' }}>
+                <div>
+                    open
+                    <Switch checked={open} onChange={setOpen} />
+                </div>
+                <div>
+                    position
+                    <Switch checked={isRight} onChange={setRight} />
+                </div>
                 <SideSheet
-                    fixed
+                    modal
                     open={open}
-                    header="headline"
-                    position="left"
+                    position={isRight ? 'right' : 'left'}
                     onScrimClick={() => setOpen(false)}
+                    header={
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                            <IconButton
+                                path={mdiArrowLeft}
+                                onClick={() => setOpen(false)}
+                            />
+                            <span>Title</span>
+                            <IconButton
+                                path={mdiClose}
+                                style={{ marginLeft: 'auto' }}
+                                onClick={() => setOpen(false)}
+                            />
+                        </div>
+                    }
                     footer={
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                             <Button onClick={() => setOpen(false)}>Save</Button>
@@ -74,14 +118,12 @@ export const Fixed: Story = {
                                 variant="outlined"
                                 onClick={() => setOpen(false)}
                             >
-                                Close
+                                Cancel
                             </Button>
                         </div>
                     }
                 >
-                    <DrawerItem active>Home</DrawerItem>
-                    <DrawerItem>Search</DrawerItem>
-                    <DrawerItem>Settings</DrawerItem>
+                    Modal side sheet
                 </SideSheet>
             </div>
         )

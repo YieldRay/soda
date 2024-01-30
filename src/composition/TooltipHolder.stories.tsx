@@ -12,6 +12,9 @@ const meta = {
     title: 'composition/TooltipHolder',
     component: TooltipHolder,
     tags: ['autodocs'],
+    parameters: {
+        layout: 'fullscreen',
+    },
 } satisfies Meta<typeof TooltipHolder>
 
 export default meta

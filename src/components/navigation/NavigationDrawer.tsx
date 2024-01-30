@@ -1,45 +1,49 @@
-import './sheet.scss'
+import './navigation.scss'
 import clsx from 'clsx'
-import { Divider } from '../divider'
 import { Scrim } from '@/composition/Scrim'
 import { ExtendProps } from '@/utils/type'
 import { Portal } from '@/utils/Portal'
 import { useToggleAnimation } from '@/hooks/use-toggle-animation'
-import { useRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
+import { Ripple } from '@/ripple/Ripple'
+import Icon from '@mdi/react'
 
 /**
+ * It's common that you decide wether this component is modaled by
+ * the screen width, example code:
+ *
+ * ```jsx
+ * const isCompact = useWindowSizeType() === "compact"
+ * return <NavigationDrawer modal={isCompact} />
+ * ```
  * This component DO NOT have ref forwarded.
  *
- * Note that the standard SideSheet requires additional css to make things work (see example),
- * while the modal one does not. Simply toggle the `open` property to show and hide (default is hide).
- *
- * @specs https://m3.material.io/components/side-sheets/specs
+ * @specs https://m3.material.io/components/navigation-drawer/specs
  */
-export function SideSheet({
-    header,
-    footer,
-    children,
-    position = 'right',
+export function NavigationDrawer({
     open = false,
-    modal,
     onScrimClick,
     teleportTo,
+    modal,
+    headline,
     className,
+    children,
     ...props
 }: ExtendProps<{
     open?: boolean
-    header?: React.ReactNode
+    /**
+     * Headline text, can be omitted
+     */
+    headline?: React.ReactNode
+    /**
+     * Usually you'd like to put `<NavigationDrawerItem>` component here
+     */
     children?: React.ReactNode
-    footer?: React.ReactNode
     /**
      * When enable `modal`, you can toggle `open` property to
      * open and hide the SideSheet without any help of other component
      */
     modal?: boolean
-    /**
-     * Position of the sheet, default `right`
-     */
-    position?: 'left' | 'right'
     /**
      * Only works if `modal` set to true
      *
@@ -63,10 +67,7 @@ export function SideSheet({
             if (modal)
                 return el.animate(
                     {
-                        translate: [
-                            `${position === 'left' ? '-100%' : '100%'} 0`,
-                            '0 0',
-                        ],
+                        translate: ['-100% 0', '0 0'],
                     },
                     {
                         duration: 400,
@@ -77,12 +78,7 @@ export function SideSheet({
             // standard
             return el.animate(
                 {
-                    clipPath: [
-                        position === 'left'
-                            ? 'inset(0 100% 0 0)'
-                            : 'inset(0 0 0 100%)',
-                        'inset(0 0 0 0)',
-                    ],
+                    clipPath: ['inset(0 100% 0 0)', 'inset(0 0 0 0)'],
                 },
                 {
                     duration: 200,
@@ -94,10 +90,7 @@ export function SideSheet({
             if (modal)
                 return el.animate(
                     {
-                        translate: [
-                            '0 0',
-                            `${position === 'left' ? '-100%' : '100%'} 0`,
-                        ],
+                        translate: ['0 0', '-100% 0'],
                     },
                     {
                         duration: 250,
@@ -108,12 +101,7 @@ export function SideSheet({
             // standard
             return el.animate(
                 {
-                    clipPath: [
-                        'inset(0 0 0 0)',
-                        position === 'left'
-                            ? 'inset(0 100% 0 0)'
-                            : 'inset(0 0 0 100%)',
-                    ],
+                    clipPath: ['inset(0 0 0 0)', 'inset(0 100% 0 0)'],
                 },
                 {
                     duration: 200,
@@ -123,25 +111,22 @@ export function SideSheet({
         },
     })
 
-    const sheet = (
+    const drawer = (
         <div
             {...props}
             ref={ref}
             className={clsx(
-                'sd-side_sheet',
-                modal ? 'sd-side_sheet_modal' : 'sd-side_sheet_standard',
+                'sd-navigation_drawer',
+                modal
+                    ? 'sd-navigation_drawer_modal'
+                    : 'sd-navigation_drawer_standard',
                 className
             )}
-            data-sd-position={position}
         >
-            {header && <div className="sd-side_sheet-header">{header}</div>}
-            <div className="sd-side_sheet-body">{children}</div>
-            {footer && (
-                <div className="sd-side_sheet-footer">
-                    <Divider />
-                    <div className="sd-side_sheet-footer_content">{footer}</div>
-                </div>
+            {headline && (
+                <div className="sd-navigation_drawer-headline">{headline}</div>
             )}
+            <div className="sd-navigation_drawer-body">{children}</div>
         </div>
     )
 
@@ -149,9 +134,35 @@ export function SideSheet({
         return (
             <Portal container={teleportTo}>
                 <Scrim open={open} onClick={() => onScrimClick?.()} />
-                <div className="sd-side_sheet-scrim">{sheet}</div>
+                <div className="sd-navigation_drawer-scrim">{drawer}</div>
             </Portal>
         )
 
-    return sheet
+    return drawer
 }
+
+/**
+ * This component has ref forwarded.
+ */
+export const NavigationDrawerItem = forwardRef<
+    HTMLDivElement,
+    ExtendProps<{
+        icon?: string | React.ReactNode
+        badge?: React.ReactNode
+        active?: boolean
+        children?: React.ReactNode
+    }>
+>(({ icon, badge, children, className, active, ...props }, ref) => (
+    <Ripple
+        {...props}
+        ref={ref}
+        data-sd-active={active}
+        className={clsx('sd-navigation_drawer_item', className)}
+    >
+        <div className="sd-navigation_drawer_item-icon">
+            {typeof icon === 'string' ? <Icon path={icon} /> : icon}
+        </div>
+        <div className="sd-navigation_drawer_item-label">{children}</div>
+        <div className="sd-navigation_drawer_item-badge">{badge}</div>
+    </Ripple>
+))

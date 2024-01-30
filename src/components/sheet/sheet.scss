@@ -1,22 +1,22 @@
 // https://m3.material.io/components/bottom-sheets/specs
 
-.sd-bottom_sheet-scrim {
-    // this scrim is entirely transparent, its only responsibility is
-    // to hold the sheet and place it to correct position
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    overflow: hidden;
-    pointer-events: none;
-}
-
 .sd-bottom_sheet {
+    &-scrim {
+        // this scrim is entirely transparent, its only responsibility is
+        // to hold the sheet and place it to correct position
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
     pointer-events: auto;
     touch-action: none;
     background: var(--md-sys-color-surface-container-low);
@@ -66,49 +66,63 @@
 
 // https://m3.material.io/components/side-sheets/specs
 
-//! we only implement: Modal side sheet
-
-.sd-side_sheet-scrim {
-    pointer-events: none;
-    position: fixed;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    overflow: hidden;
-
-    &:has(.sd-side_sheet[data-sd-position='right']) {
-        justify-content: flex-end;
-    }
-}
-
 .sd-side_sheet {
+    &-scrim {
+        pointer-events: none;
+        position: fixed;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        overflow: hidden;
+
+        &:has(.sd-side_sheet[data-sd-position='right']) {
+            justify-content: flex-end;
+        }
+    }
+
+    &_standard {
+        background: var(--md-sys-color-surface);
+        &[data-sd-position='left'] {
+            border-right: solid 1px var(--md-sys-color-outline-variant);
+        }
+        &[data-sd-position='right'] {
+            border-left: solid 1px var(--md-sys-color-outline-variant);
+        }
+    }
+
+    &_modal {
+        background: var(--md-sys-color-surface-container-low);
+        @include elevation-level1;
+        &[data-sd-position='left'] {
+            border-top-right-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+        }
+        &[data-sd-position='right'] {
+            border-top-left-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+        }
+    }
+
     pointer-events: auto;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
-    transition: transform 200ms;
-    background: var(--md-sys-color-surface-container-low);
     color: var(--md-sys-color-on-surface-variant);
     display: inline-block;
     box-sizing: border-box;
     width: 256px + 16px + 24px;
-    @include elevation-level1;
     overflow: hidden;
-    &[data-sd-position='left'] {
-        border-top-right-radius: 1rem;
-        border-bottom-right-radius: 1rem;
-    }
-    &[data-sd-position='right'] {
-        border-top-left-radius: 1rem;
-        border-bottom-left-radius: 1rem;
-    }
+
     display: flex;
     flex-direction: column;
-
     &-header {
         padding: 24px 24px 16px 16px;
         font-size: x-large;
+        > * {
+            vertical-align: middle;
+            align-items: center;
+        }
     }
     &-body {
         padding: 0 24px 0 16px;

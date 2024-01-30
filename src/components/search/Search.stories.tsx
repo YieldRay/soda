@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Search } from '.'
 import { IconButton } from '../icon-button'
-import { useState } from 'react'
 import { mdiMagnify, mdiMenu } from '@mdi/js'
 
 const meta = {
@@ -14,6 +13,8 @@ const meta = {
     tags: ['autodocs'],
     args: {
         placeholder: 'placeholder',
+        leadingIcon: <IconButton path={mdiMenu} />,
+        trailingIcon: <IconButton path={mdiMagnify} />,
     },
 } satisfies Meta<typeof Search>
 
@@ -22,36 +23,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Bar: Story = {
-    render: (props) => {
-        const [value, setValue] = useState('')
-        return (
-            <Search
-                {...props}
-                variant="bar"
-                value={value}
-                onChange={setValue}
-            />
-        )
+    args: {
+        variant: 'bar',
     },
 }
 
 export const View: Story = {
-    render: (props) => {
-        const [value, setValue] = useState('')
-        return (
-            <Search
-                {...props}
-                variant="view"
-                value={value}
-                onChange={setValue}
-            />
-        )
-    },
-}
-
-export const WithIcon: Story = {
     args: {
-        leadingIcon: <IconButton path={mdiMenu} />,
-        trailingIcon: <IconButton path={mdiMagnify} />,
+        variant: 'view',
     },
 }

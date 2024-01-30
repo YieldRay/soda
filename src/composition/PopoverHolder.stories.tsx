@@ -12,6 +12,9 @@ const meta = {
     title: 'composition/PopoverHolder',
     component: PopoverHolder,
     tags: ['autodocs'],
+    parameters: {
+        layout: 'fullscreen',
+    },
 } satisfies Meta<typeof PopoverHolder>
 
 export default meta
