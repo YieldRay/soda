@@ -24,9 +24,10 @@ export function useMediaQuery(query: string) {
  */
 export function useWindowSizeType(): 'compact' | 'medium' | 'expanded' {
     const isCompact = useMediaQuery('only screen and (max-width : 600px)')
-    if (isCompact) return 'compact'
     const isMedium = useMediaQuery('only screen and (max-width : 840px)')
-    return isMedium ? 'medium' : 'expanded'
+    if (isCompact) return 'compact'
+    if (isMedium) return 'medium'
+    return 'expanded'
 }
 
 export function usePrefersDark() {

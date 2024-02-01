@@ -1,4 +1,4 @@
-import ThemingExample from './ThemingExample'
+import { ThemingExample, Preview } from './ThemingExample'
 import { Meta, Canvas, Story } from '@storybook/blocks'
 import { mdiMagnify, mdiMenu, mdiDotsVertical } from '@mdi/js'
 import * as Soda from '@/index'
@@ -11,51 +11,4 @@ import * as Soda from '@/index'
 
 ## Preview
 
-<Soda.TopAppBar
-    leadingNavigationIcon={<Soda.IconButton path={mdiMenu} />}
-    trailingIcon={<Soda.IconButton path={mdiDotsVertical} />}
->
-    React Component Library
-</Soda.TopAppBar>
-
-<Soda.ProgressIndicator variant="linear" />
-
-<Soda.ProgressIndicator variant="circular" />
-
-<Soda.Search
-    leadingIcon={<Soda.IconButton path={mdiMenu} />}
-    placeholder="placeholder"
-    trailingIcon={<Soda.IconButton path={mdiMagnify} />}
-/>
-
-<Soda.TextField />
-
-<Soda.TextField variant="outlined" />
-
-<Soda.TextField textarea />
-
-<Soda.TextField variant="outlined" textarea />
-
-<Soda.Switch />
-
-<Soda.RadioButton defaultChecked />
-
-<Soda.Checkbox />
-
-<Soda.Select options={['One', 'Two', 'Three']} />
-
-<Soda.List
-    headline="theming"
-    leadingAvatarLabelText="M"
-    supportingText="@material/material-color-utilities"
-/>
-
-<Soda.Tabs defaultValue="1">
-    <Soda.Tab value="0">Apple</Soda.Tab>
-    <Soda.Tab value="1">Banana</Soda.Tab>
-    <Soda.Tab value="2">Orange</Soda.Tab>
-</Soda.Tabs>
-
-<Soda.DatePicker />
-
-<Soda.TimePicker />
+<Preview />

@@ -8,6 +8,7 @@ $label_text_gap_size: 3.2px;
     box-sizing: border-box;
     min-width: 200px; // follow webkit input default min-width
     display: inline-flex;
+    vertical-align: middle;
     align-items: center;
     background: var(--md-sys-color-surface-container-highest);
     cursor: text;
@@ -143,6 +144,16 @@ $label_text_gap_size: 3.2px;
         @include position-absolute(8px, 16px);
         transition: all 200ms;
         color: var(--md-sys-color-on-surface-variant);
+    }
+
+    // fix position when no icon
+    &:not(
+            :has(.sd-text_field-leading_icon),
+            :has(.sd-text_field-trailing_icon)
+        ) {
+        .sd-text_field-label_text {
+            @include position-absolute(12px, 12px);
+        }
     }
 
     &[data-sd-label_text='populated'] .sd-text_field-label_text {

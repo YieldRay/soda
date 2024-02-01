@@ -1,5 +1,8 @@
-import { useMergeRefs as useMergeRefsFU } from '@floating-ui/react'
+import { useMergeRefs as useMergeRefs_FU } from '@floating-ui/react'
 
+/**
+ * Run event handlers in sequence, break if event is already prevented
+ */
 export function useMergeEventHandlers<
     Event extends { preventDefault(): void; isDefaultPrevented(): boolean }
 >(...eventHandlers: Array<((e: Event) => void) | undefined>) {
@@ -11,8 +14,11 @@ export function useMergeEventHandlers<
     }
 }
 
+/**
+ * Just forward `useMergeRefs` from floating-ui
+ */
 export function useMergeRefs<Instance>(
     ...refs: Array<React.Ref<Instance>>
 ): React.RefCallback<Instance> | null {
-    return useMergeRefsFU(refs)
+    return useMergeRefs_FU(refs)
 }

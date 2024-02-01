@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Select } from './Select'
-import { List } from '..'
+import { List } from '../components/list'
 import { mdiChevronRight } from '@mdi/js'
 import Icon from '@mdi/react'
 
@@ -30,9 +30,12 @@ const meta = {
     title: 'composition/Select',
     component: Select,
     tags: ['autodocs'],
+    parameters: {
+        layout: 'centered',
+    },
     args: {
         options: fruits.map((fruit) => ({ value: fruit })),
-        defaultValue: fruits[0],
+        defaultValue: fruits[3],
     },
 } satisfies Meta<typeof Select>
 
@@ -49,12 +52,16 @@ export const Default: Story = {
 
 export const Customized: Story = {
     decorators: (Story) => (
-        <div style={{ padding: '10rem 1rem' }}>{<Story />}</div>
+        <div style={{ padding: '10rem 1rem', minWidth: '50vw' }}>
+            {<Story />}
+        </div>
     ),
     args: {
         placement: 'bottom-end',
+        full: true,
         children: (value) => (
             <List
+                full
                 headline={value}
                 trailingIcon={<Icon path={mdiChevronRight} size={1} />}
             />

@@ -24,7 +24,9 @@ export const Tab = forwardRef<
     ref
 ) {
     const tabContext = useContext(TabContext)
-    const active = tabContext ? tabContext.index === index : initActive
+    const active =
+        index != undefined &&
+        (tabContext ? tabContext.index === index : initActive)
 
     const dispatchChange = () => {
         if (active) return

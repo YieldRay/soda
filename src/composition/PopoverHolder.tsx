@@ -34,6 +34,7 @@ export const PopoverHolder = forwardRef<
         content?: React.ReactNode
         trigger?: React.ReactNode
         placement?: Placement
+        zIndex?: number
     }
 >(function PopoverHolder({ placement = 'top', ...props }, ref) {
     const [isOpen, setIsOpen] = useState(false)
@@ -81,7 +82,7 @@ export const PopoverHolder = forwardRef<
             <div
                 className="floating"
                 ref={refs.setFloating}
-                style={floatingStyles}
+                style={{ ...floatingStyles, zIndex: props.zIndex }}
                 {...getFloatingProps()}
             >
                 <div style={styles}>{props.content}</div>
@@ -96,6 +97,7 @@ export const PopoverHolder = forwardRef<
                 .floating {
                     width: max-content;
                     transition: opacity 200ms;
+                    z-index: 1;
                 }
             `}</style>
         </div>

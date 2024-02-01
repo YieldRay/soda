@@ -11,10 +11,17 @@ import Icon from '@mdi/react'
 /**
  * It's common that you decide wether this component is modaled by
  * the screen width, example code:
+ * Note that you will always want to set `onScrimClick` to close the
+ * drawer when scrim is clicked
  *
  * ```jsx
- * const isCompact = useWindowSizeType() === "compact"
- * return <NavigationDrawer modal={isCompact} />
+ * const [open, setOpen] = useState(false)
+ * const isScreenExpanded = useWindowSizeType() === 'expanded'
+ * return <NavigationDrawer
+ *            modal={!isScreenExpanded}
+ *            open={open}
+ *            onScrimClick={() => setOpen(false)}
+ *        />
  * ```
  * This component DO NOT have ref forwarded.
  *
@@ -26,6 +33,7 @@ export function NavigationDrawer({
     teleportTo,
     modal,
     headline,
+    zIndex,
     className,
     children,
     ...props
@@ -60,6 +68,7 @@ export function NavigationDrawer({
      * to `document.body`
      */
     teleportTo?: Element | DocumentFragment
+    zIndex?: number
 }>) {
     const ref = useRef<HTMLDivElement>(null)
     useToggleAnimation(ref, open, {
@@ -76,9 +85,11 @@ export function NavigationDrawer({
                 )
 
             // standard
+            const { width } = el.getBoundingClientRect()
             return el.animate(
                 {
                     clipPath: ['inset(0 100% 0 0)', 'inset(0 0 0 0)'],
+                    width: [0, width],
                 },
                 {
                     duration: 200,
@@ -99,9 +110,11 @@ export function NavigationDrawer({
                 )
 
             // standard
+            const { width } = el.getBoundingClientRect()
             return el.animate(
                 {
                     clipPath: ['inset(0 0 0 0)', 'inset(0 100% 0 0)'],
+                    width: [width, 0],
                 },
                 {
                     duration: 200,
@@ -133,8 +146,14 @@ export function NavigationDrawer({
     if (modal)
         return (
             <Portal container={teleportTo}>
-                <Scrim open={open} onClick={() => onScrimClick?.()} />
-                <div className="sd-navigation_drawer-scrim">{drawer}</div>
+                <Scrim
+                    open={open}
+                    onClick={() => onScrimClick?.()}
+                    style={{ zIndex }}
+                />
+                <div className="sd-navigation_drawer-scrim" style={{ zIndex }}>
+                    {drawer}
+                </div>
             </Portal>
         )
 

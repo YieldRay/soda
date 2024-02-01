@@ -36,6 +36,7 @@ export const TooltipHolder = forwardRef<
         content?: React.ReactNode
         trigger?: React.ReactNode
         placement?: Placement
+        zIndex?: number
     }
 >(function TooltipHolder({ placement = 'top', ...props }, ref) {
     const [isOpen, setIsOpen] = useState(false)
@@ -91,7 +92,7 @@ export const TooltipHolder = forwardRef<
 
             <div
                 className="floating"
-                style={floatingStyles}
+                style={{ ...floatingStyles, zIndex: props.zIndex }}
                 ref={refs.setFloating}
                 {...getFloatingProps()}
             >
@@ -107,6 +108,7 @@ export const TooltipHolder = forwardRef<
                 .floating {
                     width: max-content;
                     transition: opacity 200ms;
+                    z-index: 1;
                 }
             `}</style>
         </div>

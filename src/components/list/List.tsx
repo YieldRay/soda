@@ -25,6 +25,10 @@ export const List = forwardRef<
          * 3 means two lines of supporting text
          */
         lines?: 1 | 2 | 3
+        /**
+         * Shortcut for `style={{ width: "100%" }}`, as `<List>` is inline-block
+         */
+        full?: boolean
         disabled?: boolean
         /**
          * HTML tag name, div by default
@@ -42,6 +46,7 @@ export const List = forwardRef<
         trailingIcon,
         trailingSupportingText,
         disabled,
+        full,
         as,
         lines,
         ...props
@@ -53,6 +58,7 @@ export const List = forwardRef<
         <As
             {...omit(props, ['children'])}
             ref={useMergeRefs(ref, useRippleRef())}
+            style={{ ...props.style, width: full ? '100%' : undefined }}
             className={clsx('sd-list', className)}
             data-sd-lines={lines}
             data-sd-disabled={disabled}

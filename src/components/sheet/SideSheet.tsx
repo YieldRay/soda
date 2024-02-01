@@ -24,6 +24,7 @@ export function SideSheet({
     modal,
     onScrimClick,
     teleportTo,
+    zIndex,
     className,
     ...props
 }: ExtendProps<{
@@ -56,6 +57,7 @@ export function SideSheet({
      * to `document.body`
      */
     teleportTo?: Element | DocumentFragment
+    zIndex?: number
 }>) {
     const ref = useRef<HTMLDivElement>(null)
     useToggleAnimation(ref, open, {
@@ -75,6 +77,7 @@ export function SideSheet({
                 )
 
             // standard
+            const { width } = el.getBoundingClientRect()
             return el.animate(
                 {
                     clipPath: [
@@ -83,6 +86,7 @@ export function SideSheet({
                             : 'inset(0 0 0 100%)',
                         'inset(0 0 0 0)',
                     ],
+                    width: [0, width],
                 },
                 {
                     duration: 200,
@@ -106,6 +110,7 @@ export function SideSheet({
                 )
 
             // standard
+            const { width } = el.getBoundingClientRect()
             return el.animate(
                 {
                     clipPath: [
@@ -114,6 +119,7 @@ export function SideSheet({
                             ? 'inset(0 100% 0 0)'
                             : 'inset(0 0 0 100%)',
                     ],
+                    width: [width, 0],
                 },
                 {
                     duration: 200,
@@ -149,7 +155,9 @@ export function SideSheet({
         return (
             <Portal container={teleportTo}>
                 <Scrim open={open} onClick={() => onScrimClick?.()} />
-                <div className="sd-side_sheet-scrim">{sheet}</div>
+                <div className="sd-side_sheet-scrim" style={{ zIndex }}>
+                    {sheet}
+                </div>
             </Portal>
         )
 

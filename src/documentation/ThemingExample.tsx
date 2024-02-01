@@ -1,4 +1,4 @@
-import { usePrefersDark } from '@/hooks/use-media-query'
+import { usePrefersDark, useWindowSizeType } from '@/hooks/use-media-query'
 import {
     applyThemeForSoda,
     themeFromImageOrFile,
@@ -9,11 +9,45 @@ import { Card } from '@/components/card'
 import { Button } from '@/components/button'
 import { Badge } from '@/components/badge'
 import { useEffect, useState } from 'react'
+import {
+    Checkbox,
+    DatePicker,
+    Divider,
+    IconButton,
+    List,
+    Menu,
+    MenuItem,
+    NavigationDrawer,
+    NavigationDrawerItem,
+    PlainTooltip,
+    ProgressIndicator,
+    RadioButton,
+    Search,
+    Switch,
+    Tab,
+    Tabs,
+    TextField,
+    TimePicker,
+    TopAppBar,
+} from '@/components'
+import { Select, TooltipHolder, PopoverHolder } from '@/composition'
+import {
+    mdiDeleteOutline,
+    mdiDotsVertical,
+    mdiHeartOutline,
+    mdiInbox,
+    mdiMagnify,
+    mdiMenu,
+    mdiRefresh,
+    mdiSendVariantOutline,
+    mdiShare,
+} from '@mdi/js'
+import Icon from '@mdi/react'
 
 /**
  * Just an example widget to show example of `@material/material-color-utilities`
  */
-export default function ThemingExample() {
+export function ThemingExample() {
     const prefersDark = usePrefersDark()
     const [sourceColor, setSourceColor] = useState(
         localStorage.getItem('sourceColor') || '#6750a4'
@@ -29,16 +63,6 @@ export default function ThemingExample() {
     useEffect(() => {
         localStorage.setItem('sourceColor', sourceColor)
     }, [sourceColor])
-
-    useEffect(() => {
-        // this make our element not be affected by sb's style
-        const divs = document.querySelectorAll('.sbdocs-content *')
-        divs.forEach((div) => {
-            if (!(div instanceof HTMLElement)) return
-            if (!div.className.includes('sd-')) return
-            div.classList.add('sb-unstyled')
-        })
-    }, [])
 
     useEffect(() => {
         // eslint-disable-next-line no-extra-semi
@@ -133,5 +157,137 @@ export default function ThemingExample() {
                 </Button>
             </section>
         </Card>
+    )
+}
+
+export function Preview() {
+    const [open, setOpen] = useState(false)
+    const isScreenExpanded = useWindowSizeType() === 'expanded'
+
+    useEffect(() => {
+        // this make our element not be affected by sb's style
+        const divs = document.querySelectorAll('.sbdocs-content *')
+        divs.forEach((div) => {
+            if (!(div instanceof HTMLElement)) return
+            if (!div.className.includes('sd-')) return
+            div.classList.add('sb-unstyled')
+        })
+    }, [isScreenExpanded])
+
+    return (
+        <div
+            style={{
+                display: 'flex',
+                minHeight: '100vh',
+                background: 'var(--md-sys-color-surface)',
+                willChange: 'transform',
+            }}
+        >
+            <NavigationDrawer
+                open={open}
+                headline="Mail"
+                modal={!isScreenExpanded}
+                onScrimClick={() => setOpen(false)}
+            >
+                <NavigationDrawerItem icon={mdiInbox} badge="24">
+                    Inbox
+                </NavigationDrawerItem>
+                <NavigationDrawerItem icon={mdiSendVariantOutline} badge="99+">
+                    Outbox
+                </NavigationDrawerItem>
+                <NavigationDrawerItem icon={mdiHeartOutline}>
+                    Favorites
+                </NavigationDrawerItem>
+                <NavigationDrawerItem icon={mdiDeleteOutline}>
+                    Trash
+                </NavigationDrawerItem>
+                <Divider />
+            </NavigationDrawer>
+
+            <div>
+                <TopAppBar
+                    leadingNavigationIcon={
+                        <TooltipHolder
+                            trigger={
+                                <IconButton
+                                    path={mdiMenu}
+                                    onClick={() => setOpen(!open)}
+                                />
+                            }
+                            content={<PlainTooltip>Menu</PlainTooltip>}
+                        />
+                    }
+                    trailingIcon={
+                        <PopoverHolder
+                            trigger={<IconButton path={mdiDotsVertical} />}
+                            placement="bottom-end"
+                            content={
+                                <Menu>
+                                    <MenuItem
+                                        leadingIcon={<Icon path={mdiRefresh} />}
+                                    >
+                                        Refresh
+                                    </MenuItem>
+                                    <MenuItem
+                                        leadingIcon={<Icon path={mdiShare} />}
+                                    >
+                                        Share
+                                    </MenuItem>
+                                </Menu>
+                            }
+                        />
+                    }
+                >
+                    React Component Library
+                </TopAppBar>
+                <ProgressIndicator variant="linear" />
+                <ProgressIndicator variant="circular" />
+                <Search
+                    leadingIcon={<IconButton path={mdiMenu} />}
+                    placeholder="placeholder"
+                    trailingIcon={<IconButton path={mdiMagnify} />}
+                />
+
+                <Card disabled style={{ padding: '1rem' }}>
+                    <h2>Login</h2>
+                    <TextField labelText="Username" variant="outlined" />
+                    <br />
+                    <TextField labelText="Password" />
+                    <br />
+                    <h4 style={{ display: 'inline' }}>Mode: </h4>
+                    <Select
+                        options={['Development', 'Production', 'Preview']}
+                    />
+                    <br />
+                    <Button>OK</Button>
+                    <Button variant="elevated">Cancel</Button>
+                </Card>
+                <TextField labelText="TextField" textarea />
+                <TextField labelText="TextField" variant="outlined" textarea />
+
+                <RadioButton defaultChecked>RadioButton</RadioButton>
+
+                <List
+                    headline="theming"
+                    leadingAvatarLabelText="M"
+                    supportingText="@material/material-color-utilities"
+                    trailingIcon={<Switch />}
+                />
+                <List
+                    headline="theming"
+                    leadingAvatarLabelText="S"
+                    supportingText="soda/theme"
+                    trailingIcon={<Checkbox />}
+                />
+                <Tabs defaultIndex={1}>
+                    <Tab index={0}>Apple</Tab>
+                    <Tab index={1}>Banana</Tab>
+                    <Tab index={2}>Orange</Tab>
+                </Tabs>
+
+                <DatePicker />
+                <TimePicker use24hourSystem />
+            </div>
+        </div>
     )
 }

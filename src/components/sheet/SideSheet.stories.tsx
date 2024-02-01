@@ -2,10 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { SideSheet } from '.'
 import { useState } from 'react'
+import { mdiArrowLeft, mdiClose } from '@mdi/js'
 import { Button } from '../button'
 import { IconButton } from '../icon-button'
-import { mdiArrowLeft, mdiClose } from '@mdi/js'
-import { Switch } from '../switch/Switch'
+import { Switch } from '../switch'
+import { List } from '../list'
 
 const meta = {
     title: 'components/Sheet/SideSheet',
@@ -42,14 +43,16 @@ export const Standard: Story = {
                             // it's important to set flex-grow: 1
                         }}
                     >
-                        <div>
-                            open
-                            <Switch checked={open} onChange={setOpen} />
-                        </div>
-                        <div>
-                            position
-                            <Switch checked={isRight} onChange={setRight} />
-                        </div>
+                        <List
+                            headline="open"
+                            onClick={() => setOpen(!open)}
+                            trailingIcon={<Switch checked={open} />}
+                        />
+                        <List
+                            headline="position"
+                            onClick={() => setRight(!isRight)}
+                            trailingIcon={<Switch checked={isRight} />}
+                        />
                     </div>
                     <SideSheet
                         open={open}
@@ -84,14 +87,16 @@ export const Modal: Story = {
 
         return (
             <div style={{ willChange: 'transform', height: '100vh' }}>
-                <div>
-                    open
-                    <Switch checked={open} onChange={setOpen} />
-                </div>
-                <div>
-                    position
-                    <Switch checked={isRight} onChange={setRight} />
-                </div>
+                <List
+                    headline="open"
+                    onClick={() => setOpen(!open)}
+                    trailingIcon={<Switch checked={open} />}
+                />
+                <List
+                    headline="position"
+                    onClick={() => setRight(!isRight)}
+                    trailingIcon={<Switch checked={isRight} />}
+                />
                 <SideSheet
                     modal
                     open={open}

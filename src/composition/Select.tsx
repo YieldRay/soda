@@ -78,6 +78,10 @@ export const Select = forwardRef<
          * Can be used to adjust the position of the floating options
          */
         floatingStyle?: React.CSSProperties
+        /**
+         * Shortcut for `style={{ width: "100%" }}`, as `<Select>` is inline-block
+         */
+        full?: boolean
     }>
 >(
     (
@@ -88,6 +92,7 @@ export const Select = forwardRef<
             onChange,
             placement = 'bottom-start',
             floatingStyle,
+            full,
             className,
             children,
             ...props
@@ -264,7 +269,12 @@ export const Select = forwardRef<
         )
 
         return (
-            <div {...props} ref={ref} className={clsx('sd-select', className)}>
+            <div
+                {...props}
+                ref={ref}
+                style={{ ...props.style, width: full ? '100%' : undefined }}
+                className={clsx('sd-select', className)}
+            >
                 <div
                     ref={refs.setReference}
                     {...getReferenceProps()}
@@ -281,7 +291,7 @@ export const Select = forwardRef<
                                           )}
                                       </span>
                                       <Icon
-                                          size={1}
+                                          size="22px"
                                           path={mdiMenuDown}
                                           rotate={open ? 180 : 0}
                                       />

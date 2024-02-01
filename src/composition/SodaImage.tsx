@@ -18,6 +18,7 @@ import isNumber from 'lodash-es/isNumber'
 /**
  * A high-level image component, supports loading progress (when `crossOrigin` is specified),
  * timeout with default reload button, lazy load, and so on.
+ *
  * When use this component, explicit set the width and height (or min-height/min-width) is recommended,
  * otherwise the loading placeholder cannot be rendered as width and height is zero by default.
  */

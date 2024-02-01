@@ -6,6 +6,9 @@ const meta = {
     title: 'composition/IconRippleButton',
     component: IconRippleButton,
     tags: ['autodocs'],
+    parameters: {
+        layout: 'centered',
+    },
     args: {
         path: mdiCheck,
     },

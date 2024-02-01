@@ -21,7 +21,7 @@ export const Badge = forwardRef<
     { label, variant: initVariant, className, children, ...props },
     ref
 ) {
-    const variant = initVariant || (label ? 'large' : 'small')
+    const variant = initVariant || (label || label === 0 ? 'large' : 'small')
 
     return (
         <div
