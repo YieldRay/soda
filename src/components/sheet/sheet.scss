@@ -54,6 +54,7 @@
     &-content {
         overflow: auto;
         overscroll-behavior: contain;
+        height: 100%;
         // scrollbar
         scrollbar-width: thin;
         &::-webkit-scrollbar {

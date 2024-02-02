@@ -29,9 +29,18 @@ export const Tabs = forwardRef<
         index?: number
         defaultIndex?: number
         onChange?: (index: number) => void
+        noTransition?: boolean
     }>
 >(function Tab(
-    { index: index$co, onChange, defaultIndex, className, children, ...props },
+    {
+        index: index$co,
+        onChange,
+        defaultIndex,
+        noTransition,
+        className,
+        children,
+        ...props
+    },
     ref
 ) {
     const [index, setIndex] = useAutoState(onChange, index$co, defaultIndex!)
@@ -46,7 +55,7 @@ export const Tabs = forwardRef<
                     setIndex: (i) => {
                         lastIndexRef.current = index
                         setIndex(i)
-                        allowTransitionRef.current = true
+                        if (!noTransition) allowTransitionRef.current = true
                     },
                     lastIndex: lastIndexRef.current,
                     allowTransitionRef,

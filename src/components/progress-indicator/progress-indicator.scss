@@ -9,7 +9,7 @@
     background: var(--md-sys-color-surface-container-highest);
 
     &-track {
-        height: 4px;
+        height: 100%;
         background: var(--md-sys-color-primary);
     }
     &[data-sd='determinate'] .sd-linear_progress_indicator-track {

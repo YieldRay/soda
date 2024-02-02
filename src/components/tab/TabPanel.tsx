@@ -1,7 +1,7 @@
 import './tab.scss'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { TabContext } from './Tabs'
 import {
     startViewTransitionFlushSync,
@@ -36,7 +36,7 @@ export function TabPanel({
             : false
     )
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!active) return
         if (!tabContext?.allowTransitionRef?.current) return
         const el = ref.current

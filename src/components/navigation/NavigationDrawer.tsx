@@ -6,7 +6,6 @@ import { Portal } from '@/utils/Portal'
 import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 import React, { forwardRef, useRef } from 'react'
 import { Ripple } from '@/ripple/Ripple'
-import Icon from '@mdi/react'
 
 /**
  * It's common that you decide wether this component is modaled by
@@ -166,7 +165,7 @@ export function NavigationDrawer({
 export const NavigationDrawerItem = forwardRef<
     HTMLDivElement,
     ExtendProps<{
-        icon?: string | React.ReactNode
+        icon?: React.ReactNode
         badge?: React.ReactNode
         active?: boolean
         children?: React.ReactNode
@@ -178,9 +177,7 @@ export const NavigationDrawerItem = forwardRef<
         data-sd-active={active}
         className={clsx('sd-navigation_drawer_item', className)}
     >
-        <div className="sd-navigation_drawer_item-icon">
-            {typeof icon === 'string' ? <Icon path={icon} /> : icon}
-        </div>
+        <div className="sd-navigation_drawer_item-icon">{icon}</div>
         <div className="sd-navigation_drawer_item-label">{children}</div>
         <div className="sd-navigation_drawer_item-badge">{badge}</div>
     </Ripple>

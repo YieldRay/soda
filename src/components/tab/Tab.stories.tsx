@@ -23,7 +23,7 @@ export const Default: Story = {
 
         return (
             <Tabs index={index} onChange={setIndex}>
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', overflowX: 'auto' }}>
                     <Tab icon={<Icon size={1} path={mdiCheck} />} index={0}>
                         Apple
                     </Tab>
@@ -35,10 +35,10 @@ export const Default: Story = {
                     </Tab>
                 </div>
 
-                <div>
-                    <TabPanel index={0}>{'Panel 0 '.repeat(5)}</TabPanel>
-                    <TabPanel index={1}>{'Panel 1 '.repeat(5)}</TabPanel>
-                    <TabPanel index={2}>{'Panel 2 '.repeat(5)}</TabPanel>
+                <div style={{ overflow: 'hidden' }}>
+                    <TabPanel index={0}>{'Panel 0 '.repeat(4)}</TabPanel>
+                    <TabPanel index={1}>{'Panel 1 '.repeat(4)}</TabPanel>
+                    <TabPanel index={2}>{'Panel 2 '.repeat(4)}</TabPanel>
                 </div>
             </Tabs>
         )

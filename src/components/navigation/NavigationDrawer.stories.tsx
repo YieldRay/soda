@@ -15,6 +15,7 @@ import { Switch } from '../switch/Switch'
 import { Divider } from '../divider/Divider'
 import { IconButton, TopAppBar } from '..'
 import { Search } from '../search/Search'
+import Icon from '@mdi/react'
 
 const meta = {
     title: 'components/Navigation/NavigationDrawer',
@@ -47,15 +48,19 @@ export const Standard: Story = {
                             Inbox
                         </NavigationDrawerItem>
                         <NavigationDrawerItem
-                            icon={mdiSendVariantOutline}
+                            icon={<Icon path={mdiSendVariantOutline} />}
                             badge="99+"
                         >
                             Outbox
                         </NavigationDrawerItem>
-                        <NavigationDrawerItem icon={mdiHeartOutline}>
+                        <NavigationDrawerItem
+                            icon={<Icon path={mdiHeartOutline} />}
+                        >
                             Favorites
                         </NavigationDrawerItem>
-                        <NavigationDrawerItem icon={mdiDeleteOutline}>
+                        <NavigationDrawerItem
+                            icon={<Icon path={mdiDeleteOutline} />}
+                        >
                             Trash
                         </NavigationDrawerItem>
                         <Divider />

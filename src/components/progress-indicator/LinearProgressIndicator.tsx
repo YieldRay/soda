@@ -16,13 +16,21 @@ export const LinearProgressIndicator = forwardRef<
          * Between 0 and 1, if is unset, act as indeterminate
          */
         value?: number
+        /**
+         * Default is 4px
+         */
+        thickness?: string
     }>
->(function LinearProgressIndicator({ value, className, ...props }, ref) {
+>(function LinearProgressIndicator(
+    { value, thickness, className, ...props },
+    ref
+) {
     return (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-linear_progress_indicator', className)}
+            style={{ ...props.style, height: thickness }}
             data-sd={
                 typeof value !== 'undefined' ? 'determinate' : 'indeterminate'
             }
