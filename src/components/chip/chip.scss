@@ -10,11 +10,11 @@
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
     &:has(&-leading_icon) {
-        padding-left: 0.25rem;
-        padding-right: 0.5rem;
+        padding-inline-start: 0.25rem;
+        padding-inline-end: 0.5rem;
     }
     &:has(&-trailing_icon) {
-        padding-right: 0.5rem;
+        padding-inline-start: 0.5rem;
     }
 
     .sd-chip-label_text {

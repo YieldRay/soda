@@ -32,21 +32,31 @@ import {
     TopAppBar,
     BottomSheet,
     BottomSheetHandle,
+    BottomAppBar,
+    Fab,
 } from '@/components'
 import { Select, TooltipHolder, PopoverHolder } from '@/composition'
 import {
+    mdiCheckboxOutline,
     mdiDeleteOutline,
     mdiDotsVertical,
+    mdiFullscreen,
+    mdiFullscreenExit,
+    mdiGreasePencil,
     mdiHeartOutline,
+    mdiImageOutline,
     mdiInbox,
     mdiMagnify,
     mdiMenu,
+    mdiMicrophone,
+    mdiPlus,
     mdiRefresh,
     mdiSendVariantOutline,
     mdiShare,
 } from '@mdi/js'
 import Icon from '@mdi/react'
 import { TabPanel } from '../components/tab/TabPanel'
+import { useFullscreen } from '@/hooks/use-fullscreen'
 
 /**
  * Just an example widget to show example of `@material/material-color-utilities`
@@ -180,9 +190,12 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
         const sbdocs = document.querySelector('.sbdocs') as HTMLElement
         sbdocs.style.all = 'unset'
     }, [isScreenExpanded])
+    const containerRef = useRef<HTMLDivElement>(null)
+    const [fullscreen, setFullscreen] = useFullscreen(containerRef)
 
     return (
         <div
+            ref={containerRef}
             style={{
                 display: 'flex',
                 height: '100vh',
@@ -218,8 +231,12 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                 <Divider />
             </NavigationDrawer>
 
-            <div style={{ width: '100%', overflowY: 'auto' }}>
+            <div
+                className="sd-scrollbar"
+                style={{ width: '100%', overflowY: 'auto' }}
+            >
                 <TopAppBar
+                    fixed
                     leadingNavigationIcon={
                         <TooltipHolder
                             trigger={
@@ -234,9 +251,13 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                     trailingIcon={
                         <>
                             <IconButton
-                                path={mdiMagnify}
+                                path={
+                                    fullscreen
+                                        ? mdiFullscreenExit
+                                        : mdiFullscreen
+                                }
                                 onClick={() => {
-                                    bottomSheetRef.current?.show()
+                                    setFullscreen(!fullscreen)
                                 }}
                             />
                             <PopoverHolder
@@ -266,7 +287,28 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                 >
                     Soda
                 </TopAppBar>
-                {children}
+                <div style={{ padding: '100px 0' }}>{children}</div>
+                <BottomAppBar
+                    fixed
+                    buttons={
+                        <>
+                            <IconButton size={1} path={mdiCheckboxOutline} />
+                            <IconButton size={1} path={mdiGreasePencil} />
+                            <IconButton size={1} path={mdiMicrophone} />
+                            <IconButton size={1} path={mdiImageOutline} />
+                        </>
+                    }
+                    fab={
+                        <Fab
+                            variant="secondary"
+                            onClick={() => {
+                                bottomSheetRef.current?.show()
+                            }}
+                        >
+                            <Icon size={1} path={mdiPlus} />
+                        </Fab>
+                    }
+                />
                 <BottomSheet
                     fixed
                     ref={bottomSheetRef}
@@ -354,8 +396,8 @@ export function Preview() {
                         <h1>3.5</h1>
                     </div>
                     <div style={{ flex: '1' }}>
-                        {[0.5, 0.4, 0.3, 0.2, 0.1].map((value, index) => (
-                            <Flex gap="4px">
+                        {[undefined, 0.4, 0.3, 0.2, 0.1].map((value, index) => (
+                            <Flex gap="4px" key={index}>
                                 <span>{5 - index}</span>
                                 <LinearProgressIndicator
                                     thickness="6px"

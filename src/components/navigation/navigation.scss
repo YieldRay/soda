@@ -3,8 +3,8 @@
 
 // https://m3.material.io/components/navigation-bar/specs
 .sd-navigation_bar {
-    padding-top: 12px;
-    padding-bottom: 16px;
+    padding-block-start: 12px;
+    padding-block-end: 16px;
     display: flex;
     align-items: flex-start;
     justify-content: space-around;
@@ -23,7 +23,7 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    padding-top: 64px;
+    padding-block-start: 64px;
     overflow: hidden;
     &-fab {
         flex-shrink: 0;
@@ -188,8 +188,8 @@
     user-select: none;
     box-sizing: border-box;
     height: 56px;
-    padding-left: 16px;
-    padding-right: 24px;
+    padding-inline-start: 16px;
+    padding-inline-end: 24px;
     transition: all 200ms;
     display: flex;
     align-items: center;
@@ -221,11 +221,11 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-left: 16px;
-        margin-right: 12px;
+        margin-inline-start: 16px;
+        margin-inline-end: 12px;
     }
     &-badge {
         flex-shrink: 0;
-        margin-left: auto;
+        margin-inline-start: auto;
     }
 }

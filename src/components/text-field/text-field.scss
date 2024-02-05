@@ -35,10 +35,10 @@ $label_text_gap_size: 3.2px;
         }
     }
     &-leading_icon {
-        margin-right: 0.5rem;
+        margin-inline-end: 0.5rem;
     }
     &-trailing_icon {
-        margin-left: 0.5rem;
+        margin-inline-start: 0.5rem;
     }
 
     position: relative;
@@ -60,7 +60,7 @@ $label_text_gap_size: 3.2px;
     }
 
     &:has(&-supporting_text) {
-        margin-bottom: 18px;
+        margin-block-end: 18px;
     }
 
     &-supporting_text {
@@ -132,7 +132,7 @@ $label_text_gap_size: 3.2px;
     //? the leading_icon's width, so we can just place the label_text
     //? easily and correctly when the input value is empty
     .sd-text_field-leading_icon {
-        margin-right: 1rem;
+        margin-inline-end: 1rem;
         width: 1rem;
     }
     &:has(.sd-text_field-leading_icon) {
@@ -209,7 +209,7 @@ $label_text_gap_size: 3.2px;
 
     // add space for .sd-text_field-label_text
     &:has(.sd-text_field-label_text) textarea {
-        margin-top: 0.75rem;
+        margin-block-start: 0.75rem;
     }
 }
 

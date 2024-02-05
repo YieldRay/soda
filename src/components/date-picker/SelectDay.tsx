@@ -60,12 +60,12 @@ export function SelectDay({
                     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
                 }
                 .select-day-header {
-                    margin-top: 30px;
-                    margin-bottom: 16px;
+                    margin-block-start: 30px;
+                    margin-block-end: 16px;
                 }
 
                 .select-day-row {
-                    margin-top: 6px;
+                    margin-block-start: 6px;
                 }
 
                 .select-day-header,

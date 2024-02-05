@@ -21,7 +21,7 @@
         left: 0.25rem;
         transition: all 200ms;
         @include position-absolute(
-            0.25rem /* space for the padding-left width */,
+            0.25rem /* space for the padding-inline-start width */,
             50%
         );
         transform: translateY(-50%);

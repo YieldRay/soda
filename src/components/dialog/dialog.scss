@@ -51,7 +51,7 @@
         margin: 0 1rem;
         line-height: 28px;
         font-size: 22px;
-        margin-right: auto;
+        margin-inline-end: auto;
         text-wrap: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -62,7 +62,7 @@
         overflow-y: auto;
     }
     &-footer {
-        margin-top: auto;
+        margin-block-start: auto;
         &_content {
             margin: 4px 12px 10px;
         }

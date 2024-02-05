@@ -23,9 +23,9 @@
     background: var(--md-sys-color-surface-container-low);
     color: var(--md-sys-color-on-surface-variant); // optional
     @include elevation-level1;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    margin-top: 4px;
+    border-start-start-radius: 1rem;
+    border-start-end-radius: 1rem;
+    margin-block-start: 4px;
     overflow: hidden;
     width: 640px;
     max-width: 100%;
@@ -56,13 +56,7 @@
         overscroll-behavior: contain;
         height: 100%;
         // scrollbar
-        scrollbar-width: thin;
-        &::-webkit-scrollbar {
-            width: 4px;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: var(--md-sys-color-outline);
-        }
+        @include scrollbar(4px);
     }
 }
 
@@ -131,7 +125,7 @@
         flex: 1;
     }
     &-footer {
-        margin-top: auto;
+        margin-block-start: auto;
         &_content {
             margin: 4px 12px 12px;
         }

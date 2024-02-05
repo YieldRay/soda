@@ -11,7 +11,7 @@
     color: var(--md-sys-color-on-surface-variant);
     &-headline {
         font-size: 14px;
-        margin-bottom: 20px;
+        margin-block-end: 20px;
     }
 
     &-selectors {
@@ -131,11 +131,11 @@
     &-footer {
         display: flex;
         align-items: center;
-        margin-top: 20px;
+        margin-block-start: 20px;
     }
 
     &-buttons {
-        margin-left: auto;
+        margin-inline-start: auto;
     }
 }
 
@@ -150,19 +150,19 @@
             display: flex;
         }
         .sd-time_picker-clock_right {
-            padding-left: 52px;
+            padding-inline-start: 52px;
         }
     }
     &[data-sd-direction='horizontal']:has(.sd-time_picker-clock) {
         .sd-time_picker-headline {
-            margin-bottom: 72px-20px;
+            margin-block-end: 72px-20px;
             // Hour/Minute label takes 20px space
             // however this label is not specified in the specs
         }
     }
     &[data-sd-direction='vertical'] {
         .sd-time_picker-clock_right {
-            padding-top: 36px;
+            padding-block-start: 36px;
         }
     }
 

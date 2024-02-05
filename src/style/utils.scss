@@ -16,3 +16,22 @@
     left: $left;
     top: $top;
 }
+
+@mixin scrollbar($width: 4px, $color: var(--md-sys-color-outline)) {
+    &::-webkit-scrollbar {
+        width: $width;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: $width * 2;
+        background: $color;
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+        scrollbar-width: thin;
+        scrollbar-color: $color transparent;
+    }
+}
+
+.sd-scrollbar {
+    @include scrollbar;
+}

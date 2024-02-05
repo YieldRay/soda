@@ -11,17 +11,17 @@
         padding: 0 12px;
         cursor: pointer;
         @include outline;
-        border-left: none;
+        border-inline-start: none;
         user-select: none;
         &:first-child {
-            border-left: solid 1px var(--md-sys-color-outline);
-            border-top-left-radius: var(--height);
-            border-bottom-left-radius: var(--height);
+            border-inline-start: solid 1px var(--md-sys-color-outline);
+            border-start-start-radius: var(--height);
+            border-end-start-radius: var(--height);
         }
         &:last-child {
-            border-right: solid 1px var(--md-sys-color-outline);
-            border-top-right-radius: var(--height);
-            border-bottom-right-radius: var(--height);
+            border-inline-end: solid 1px var(--md-sys-color-outline);
+            border-end-end-radius: var(--height);
+            border-start-end-radius: var(--height);
         }
         font-size: 13px;
         line-height: 18px;
@@ -56,9 +56,9 @@
         &[data-sd-disabled='true'] {
             pointer-events: none;
             opacity: 0.38;
-            border-right: none;
+            border-inline-end: none;
             & ~ .sd-segmented_button-item {
-                border-left: solid 1px var(--md-sys-color-outline);
+                border-inline-start: solid 1px var(--md-sys-color-outline);
             }
         }
         .sd-segmented_button-label {

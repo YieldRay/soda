@@ -24,7 +24,7 @@
         font-size: 14px;
         font-weight: 500;
         color: var(--md-sys-color-on-surface-variant);
-        margin-bottom: 4px;
+        margin-block-end: 4px;
     }
 
     &-body {
@@ -35,7 +35,7 @@
     }
 
     &-action {
-        margin-top: 12px;
+        margin-block-start: 12px;
     }
 
     display: flex;

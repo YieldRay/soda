@@ -9,14 +9,7 @@
         box-sizing: border-box;
         overflow-y: auto;
         overscroll-behavior: contain;
-        // scrollbar
-        scrollbar-width: thin;
-        &::-webkit-scrollbar {
-            width: 2px;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: var(--md-sys-color-outline);
-        }
+        @include scrollbar(4px);
     }
 
     &_option {

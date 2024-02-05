@@ -42,14 +42,14 @@
         font-weight: 500;
     }
     &-trailing_icon {
-        margin-left: auto;
+        margin-inline-start: auto;
         width: 24px;
         color: var(--md-sys-color-on-surface-variant);
         @include display-inline-flex-center;
         flex-shrink: 0;
     }
     &-trailing_text {
-        margin-left: auto;
+        margin-inline-start: auto;
         color: var(--md-sys-color-on-surface-variant);
         font-size: small;
         flex-shrink: 0;

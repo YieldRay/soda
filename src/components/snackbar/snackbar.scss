@@ -53,7 +53,7 @@
 
     &[data-sd-third_line] {
         flex-direction: column;
-        padding-bottom: 8px;
+        padding-block-end: 8px;
         .sd-snackbar-action {
             align-self: flex-end;
         }

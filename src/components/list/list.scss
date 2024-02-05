@@ -74,11 +74,11 @@
 
     &:has(&-leading_avatar_label_text),
     &:has(&-leading_icon) {
-        padding-left: 1rem;
+        padding-inline-start: 1rem;
     }
     &:has(&-trailing_icon),
     &:has(&-trailing_supporting_text) {
-        padding-right: 1.5rem;
+        padding-inline-end: 1.5rem;
     }
 
     &-trailing_supporting_text {
