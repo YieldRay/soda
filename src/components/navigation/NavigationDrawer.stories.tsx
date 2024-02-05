@@ -44,7 +44,10 @@ export const Standard: Story = {
                     }}
                 >
                     <NavigationDrawer open={open} headline="Mail">
-                        <NavigationDrawerItem icon={mdiInbox} badge="24">
+                        <NavigationDrawerItem
+                            icon={<Icon path={mdiInbox} />}
+                            badge="24"
+                        >
                             Inbox
                         </NavigationDrawerItem>
                         <NavigationDrawerItem
@@ -140,19 +143,26 @@ export const Modal: Story = {
                     onScrimClick={() => setOpen(false)}
                     headline="Mail"
                 >
-                    <NavigationDrawerItem icon={mdiInbox} badge="24">
+                    <NavigationDrawerItem
+                        icon={<Icon path={mdiInbox} />}
+                        badge="24"
+                    >
                         Inbox
                     </NavigationDrawerItem>
                     <NavigationDrawerItem
-                        icon={mdiSendVariantOutline}
+                        icon={<Icon path={mdiSendVariantOutline} />}
                         badge="99+"
                     >
                         Outbox
                     </NavigationDrawerItem>
-                    <NavigationDrawerItem icon={mdiHeartOutline}>
+                    <NavigationDrawerItem
+                        icon={<Icon path={mdiHeartOutline} />}
+                    >
                         Favorites
                     </NavigationDrawerItem>
-                    <NavigationDrawerItem icon={mdiDeleteOutline}>
+                    <NavigationDrawerItem
+                        icon={<Icon path={mdiDeleteOutline} />}
+                    >
                         Trash
                     </NavigationDrawerItem>
                 </NavigationDrawer>

@@ -2,11 +2,19 @@ import { applyCSSStyleDeclaration } from '@/utils/style'
 
 const DATASET_NAME = 'sdRipple' //? dataset name will automatically convert to underscore style
 
-export const DEFAULT_RIPPLE_COLOR = CSS.supports('color: rgb(from white r g b)')
-    ? 'rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity))'
-    : matchMedia('(prefers-color-scheme: dark)').matches
+export const DEFAULT_RIPPLE_COLOR = matchMedia('(prefers-color-scheme: dark)')
+    .matches
     ? 'rgb(255 255 255 / 0.06)'
     : 'rgba(0 0 0 / 0.06)'
+
+export const REVERSE_RIPPLE_COLOR = matchMedia('(prefers-color-scheme: dark)')
+    .matches
+    ? 'rgba(0 0 0 / 0.06)'
+    : 'rgb(255 255 255 / 0.06)'
+
+export const AUTO_RIPPLE_COLOR = CSS.supports('color: rgb(from white r g b)')
+    ? 'rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity))'
+    : DEFAULT_RIPPLE_COLOR
 
 // warn: this is m2 ripple effect
 
@@ -26,7 +34,7 @@ export const DEFAULT_RIPPLE_COLOR = CSS.supports('color: rgb(from white r g b)')
  * )
  * ```
  */
-export function ripple(el: HTMLElement, rippleColor = DEFAULT_RIPPLE_COLOR) {
+export function ripple(el: HTMLElement, rippleColor = AUTO_RIPPLE_COLOR) {
     if (el.dataset[DATASET_NAME] === 'true') {
         // do not create ripple effect if effect has been attached
         return

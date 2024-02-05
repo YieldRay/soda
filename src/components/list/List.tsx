@@ -4,7 +4,6 @@ import { ExtendProps, TagNameString } from '@/utils/type.ts'
 import { forwardRef } from 'react'
 import { useRippleRef } from '@/ripple/hooks'
 import { useMergeRefs } from '@/hooks/use-merge'
-import { omit } from '@/utils/misc'
 
 /**
  * @specs https://m3.material.io/components/lists/specs
@@ -49,6 +48,8 @@ export const List = forwardRef<
         full,
         as,
         lines,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        children: _,
         ...props
     },
     ref
@@ -56,7 +57,7 @@ export const List = forwardRef<
     const As: any = as || 'div'
     return (
         <As
-            {...omit(props, ['children'])}
+            {...props}
             ref={useMergeRefs(ref, useRippleRef())}
             style={{ ...props.style, width: full ? '100%' : undefined }}
             className={clsx('sd-list', className)}

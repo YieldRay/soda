@@ -4,7 +4,6 @@ import { Badge } from '../badge'
 import { ExtendProps } from '@/utils/type'
 import { useRippleRef } from '@/ripple/hooks'
 import { useState } from 'react'
-import { omit } from '@/utils/misc'
 
 type ReactNodeBuilder = React.ReactNode | ((active: boolean) => React.ReactNode)
 
@@ -34,13 +33,15 @@ export function Helper({
     icon,
     label,
     badge,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    children: _,
     ...props
 }: ExtendProps<HelperItem>) {
     const [hover, setHover] = useState(false)
 
     return (
         <div
-            {...omit(props, ['children'])}
+            {...props}
             className={clsx('sd-navigation_helper', className)}
             data-sd-active={active}
             data-sd-hover={hover}

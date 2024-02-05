@@ -1,18 +1,6 @@
 {
     "name": "soda-material",
     "version": "0.0.18",
-    "keywords": [
-        "material design",
-        "material you"
-    ],
-    "author": {
-        "name": "YieldRay"
-    },
-    "bugs": {
-        "url": "https://github.com/YieldRay/soda/issues"
-    },
-    "homepage": "https://github.com/YieldRay/soda#readme",
-    "license": "MIT",
     "type": "module",
     "types": "dist",
     "main": "dist/index.js",
@@ -60,5 +48,17 @@
         "typescript": "^5.3.3",
         "vite": "^5.0.12",
         "vite-plugin-chunk-split": "^0.5.0"
-    }
+    },
+    "keywords": [
+        "material design",
+        "material you"
+    ],
+    "author": {
+        "name": "YieldRay"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/YieldRay/soda/issues"
+    },
+    "homepage": "https://github.com/YieldRay/soda#readme"
 }
