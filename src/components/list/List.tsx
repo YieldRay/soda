@@ -1,10 +1,10 @@
 import './list.scss'
 import clsx from 'clsx'
 import { ExtendProps, TagNameString } from '@/utils/type.ts'
-import { omit } from 'lodash-es'
 import { forwardRef } from 'react'
 import { useRippleRef } from '@/ripple/hooks'
 import { useMergeRefs } from '@/hooks/use-merge'
+import { omit } from '@/utils/misc'
 
 /**
  * @specs https://m3.material.io/components/lists/specs

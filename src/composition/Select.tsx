@@ -23,7 +23,6 @@ import {
     useTransitionStyles,
     Placement,
 } from '@floating-ui/react'
-import { isFunction } from 'lodash-es'
 import { Ripple } from '@/ripple/Ripple'
 import Icon from '@mdi/react'
 import { mdiMenuDown } from '@mdi/js'
@@ -124,7 +123,7 @@ export const Select = forwardRef<
         )
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
         const fallbackRef = useRef(false)
-        if (!open) fallbackRef.current = false
+        // if (!open) fallbackRef.current = false
         const touch = 'ontouchstart' in document.documentElement
 
         const { refs, floatingStyles, context } = useFloating({
@@ -280,7 +279,7 @@ export const Select = forwardRef<
                     {...getReferenceProps()}
                     aria-haspopup
                 >
-                    {isFunction(children)
+                    {typeof children === 'function'
                         ? children(value!)
                         : children ?? (
                               <Ripple className="sd-select-menu_button">

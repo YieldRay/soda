@@ -8,7 +8,6 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
-import assign from 'lodash-es/assign'
 import { useEventListenerEffect } from '@/hooks/use-event-listener'
 
 type TimeValue = readonly [hour: number, minute: number]
@@ -57,7 +56,7 @@ export const TimePicker = forwardRef<
 
     const isCompact = useMediaQuery('only screen and (max-width : 600px)')
     const direction = initDirection ?? (isCompact ? 'vertical' : 'horizontal')
-    const i18n = assign(
+    const i18n = Object.assign(
         navigator.language === 'zh-CN' ? i18n_chinese : i18n_english,
         initI18n
     )

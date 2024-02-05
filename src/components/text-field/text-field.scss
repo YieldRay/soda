@@ -159,10 +159,7 @@ $label_text_gap_size: 3.2px;
     &[data-sd-label_text='populated'] .sd-text_field-label_text {
         left: 8px;
         top: -8px;
-        background: var(--md-ref-palette-white);
-        @media (prefers-color-scheme: dark) {
-            background: var(--md-ref-palette-black);
-        }
+        background: var(--md-sys-color-surface);
         font-size: $label_text_populated_size;
         padding: 0 4px;
     }

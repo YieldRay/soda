@@ -1,17 +1,16 @@
 import './navigation.scss'
 import clsx from 'clsx'
-import omit from 'lodash-es/omit'
-import isFunction from 'lodash-es/isFunction'
 import { Badge } from '../badge'
 import { ExtendProps } from '@/utils/type'
 import { useRippleRef } from '@/ripple/hooks'
 import { useState } from 'react'
+import { omit } from '@/utils/misc'
 
 type ReactNodeBuilder = React.ReactNode | ((active: boolean) => React.ReactNode)
 
 function buildReactNode(builder?: ReactNodeBuilder, active: boolean = false) {
     if (!builder) return null
-    if (isFunction(builder)) return builder(active)
+    if (typeof builder === 'function') return builder(active)
     return builder
 }
 

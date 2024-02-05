@@ -1,8 +1,8 @@
 import './progress-indicator.scss'
 import { forwardRef } from 'react'
-import isNumber from 'lodash-es/isNumber'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
+import { isNumber } from '@/utils/misc'
 
 /**
  * [notice]: This component has default `min-width: 5rem` and `width: 100%` for convenience.

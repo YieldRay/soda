@@ -13,7 +13,7 @@ import { mdiImageBrokenVariant } from '@mdi/js'
 import { IconButton } from '@/components/icon-button'
 import { CircularProgressIndicator } from '@/components/progress-indicator/CircularProgressIndicator'
 import { SodaSimpleTransition } from '@/composition/SodaTransition'
-import isNumber from 'lodash-es/isNumber'
+import { isNumber } from '@/utils/misc'
 
 /**
  * A high-level image component, supports loading progress (when `crossOrigin` is specified),

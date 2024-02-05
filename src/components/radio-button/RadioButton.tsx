@@ -83,7 +83,7 @@ export const RadioButton = forwardRef<
                     <Ripple ref={rippleRef} />
                 </div>
             </div>
-            <div
+            <span
                 className="sd-radio_button-label"
                 ref={(el) => {
                     if (el) {
@@ -103,7 +103,7 @@ export const RadioButton = forwardRef<
                 }}
             >
                 {children}
-            </div>
+            </span>
         </div>
     )
 })

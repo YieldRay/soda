@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite'
+import type { LibraryOptions } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 import fs from 'node:fs'
-import path from 'node:path'
-import type { LibraryOptions } from 'vite'
-import { chunkSplitPlugin } from 'vite-plugin-chunk-split'
+import { globSync } from 'glob'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -30,19 +29,29 @@ export default defineConfig({
         },
         rollupOptions: {
             external: ['react', 'react-dom'],
+            output: {
+                banner: `"use client";`,
+                manualChunks(id, { getModuleInfo }) {
+                    if (id.includes('node_modules')) {
+                        return // id.match(/\/node_modules\/(.[^/]+)\//)[1]
+                    }
+                    if (id.endsWith('.scss') || id.endsWith('.css')) {
+                        return 'style.css'
+                    }
+                    /**
+                     * Seems that vite ignore our options for rollupOptions.treeshake
+                     * so we have to set it here
+                     */
+                    const info = getModuleInfo(id)
+                    info.moduleSideEffects = false
+                },
+            },
         },
     },
     plugins: [
         react({
             babel: {
                 plugins: [['styled-jsx/babel', { optimizeForSpeed: true }]],
-            },
-        }),
-        // https://github.com/sanyuan0704/vite-plugin-chunk-split
-        chunkSplitPlugin({
-            strategy: 'all-in-one',
-            customSplitting: {
-                shared: [/src\//],
             },
         }),
     ],
@@ -52,52 +61,17 @@ export default defineConfig({
  * Generate entry for vite to build
  */
 function inventory(): LibraryOptions['entry'] {
-    const basename = (filename: string) =>
-        path.basename(filename, path.extname(filename))
-
-    const entriesFromDir = (dir: string) =>
-        Object.fromEntries(
-            fs
-                .readdirSync(`src/${dir}`)
-                .map((filename) => [
-                    `${dir}/${basename(filename)}`,
-                    `src/${dir}/${filename}`,
-                ])
-        )
-
-    const entriesForComponents = Object.fromEntries(
-        fs
-            .readdirSync('src/components')
-            .filter((name) =>
-                fs.statSync(`src/components/${name}`).isDirectory()
-            )
-            .map((name) => [
-                `components/${name}/index`,
-                `src/components/${name}/index.ts`,
-            ])
+    const entry: LibraryOptions['entry'] = Object.fromEntries(
+        globSync('src/**/*.{ts,tsx}', {
+            nodir: true,
+            ignore: ['**/*.stories.*', '**/*.d.ts', '*/documentation/**/*'],
+        }).map((name) => {
+            return [
+                name.replace(/^src(\/|\\)/, '').replace(/\.(ts|tsx)$/, ''),
+                name,
+            ]
+        })
     )
 
-    const entriesForComposition = Object.fromEntries(
-        fs
-            .readdirSync('src/composition')
-            .filter(
-                (name) => name.endsWith('.tsx') && !name.includes('.stories.')
-            )
-            .map((name) => [
-                `composition/${basename(name)}`,
-                `src/composition/${name}`,
-            ])
-    )
-
-    const entry: LibraryOptions['entry'] = {
-        index: 'src/index.ts',
-        'components/index': 'src/components/index.ts',
-        'composition/index': 'src/composition/index.ts',
-        ...entriesFromDir('hooks'),
-        ...entriesFromDir('ripple'),
-        ...entriesFromDir('utils'),
-        ...entriesForComponents,
-        ...entriesForComposition,
-    }
     return entry
 }

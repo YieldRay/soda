@@ -27,7 +27,7 @@ npm install soda-material
 ```tsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import 'soda-material/dist/style.css'
+import 'soda-material/dist/style.css' // Note that you MUST import the style
 import { Button } from 'soda-material'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -37,9 +37,28 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 ```
 
+If bundle size is your concern, it's possible to import only the specific component.
+
+```tsx
+import 'soda-material/dist/style.css' // Still need to import the style in some where
+import { Button } from 'soda-material/dist/components/button'
+import { Select } from 'soda-material/dist/composition/Select'
+
+export default function App() {
+    return (
+        <>
+            <Button variant="text">Button</Button>
+            <Select options={['one', 'two', 'three']}></Select>
+        </>
+    )
+}
+```
+
+Next.js is also supported out of the box.
+
 # Documentation
 
-See: <https://yieldray.github.io/soda/>
+See: <https://soda.js.org>
 
 > [!IMPORTANT]  
 > Only components defined in the [Material Design Docs](https://m3.material.io/components) will be put into `src/components` directory, these components do NOT include heavy logic.  

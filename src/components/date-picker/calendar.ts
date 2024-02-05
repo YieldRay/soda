@@ -1,4 +1,4 @@
-import chunk from 'lodash-es/chunk'
+import { chunk } from '@/utils/misc'
 
 function getDaysInMonth(year: number, month: number) {
     const firstDay = new Date(year, month - 1, 1)

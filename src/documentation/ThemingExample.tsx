@@ -164,7 +164,7 @@ export function ThemingExample() {
     )
 }
 
-function LayoutNaviagtionDrawer({ children }: { children?: React.ReactNode }) {
+function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
     const [open, setOpen] = useState(false)
     const isScreenExpanded = useWindowSizeType() === 'expanded'
     const bottomSheetRef = useRef<BottomSheetHandle>(null)
@@ -310,7 +310,7 @@ function Flex({
 
 export function Preview() {
     return (
-        <LayoutNaviagtionDrawer>
+        <LayoutNavigationDrawer>
             <Card disabled style={{ padding: '1rem', display: 'inline-block' }}>
                 <h2>Login</h2>
                 <TextField labelText="Username" variant="outlined" />
@@ -344,8 +344,10 @@ export function Preview() {
                             service.
                         </RadioButton>
                     </p>
-                    <Button variant="text">Cancel</Button>
-                    <Button>Submit</Button>
+                    <Button style={{ flexShrink: '0' }} variant="text">
+                        Cancel
+                    </Button>
+                    <Button style={{ flexShrink: '0' }}>Submit</Button>
                 </Flex>
                 <Flex gap="2rem">
                     <div>
@@ -403,6 +405,6 @@ export function Preview() {
 
             <DatePicker />
             <TimePicker use24hourSystem />
-        </LayoutNaviagtionDrawer>
+        </LayoutNavigationDrawer>
     )
 }

@@ -1,4 +1,4 @@
-import pick from 'lodash-es/pick'
+import { pick } from './misc'
 
 export function insertStyle(css: string, styleSheet = document.styleSheets[0]) {
     styleSheet.insertRule(css, styleSheet.cssRules.length)
@@ -22,7 +22,9 @@ export function withCSSStyleDeclaration(
 ): VoidFunction {
     const oldCSSStyleDeclaration = pick(
         ele.style,
-        Object.keys(cssStyleDeclaration)
+        Object.keys(cssStyleDeclaration) as Array<
+            keyof typeof cssStyleDeclaration
+        >
     )
     applyCSSStyleDeclaration(ele, cssStyleDeclaration)
     return () => applyCSSStyleDeclaration(ele, oldCSSStyleDeclaration)

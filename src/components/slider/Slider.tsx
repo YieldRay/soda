@@ -1,6 +1,6 @@
 import './slider.scss'
 import { useEffect, useRef, useState, forwardRef, useCallback } from 'react'
-import clamp from 'lodash-es/clamp'
+import { clamp } from '@/utils/misc'
 import clsx from 'clsx'
 import { ExtendProps } from '@/utils/type'
 import {
