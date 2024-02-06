@@ -14,7 +14,7 @@
     flex-direction: column;
 
     &-headline {
-        margin: 1.5rem 1.5rem 1rem;
+        margin: 1.5rem 1.5rem 0;
         // default style
         font-size: x-large;
     }
@@ -22,7 +22,7 @@
         color: var(--md-sys-color-on-surface-variant);
     }
     &-buttons {
-        margin: 1.5rem;
+        margin: 0 1.5rem 1.5rem;
         text-align: right;
     }
 }

@@ -38,7 +38,10 @@ export const TooltipHolder = forwardRef<
         placement?: Placement
         zIndex?: number
     }
->(function TooltipHolder({ placement = 'top', ...props }, ref) {
+>(function TooltipHolder(
+    { placement = 'top', zIndex = 2, trigger, content },
+    ref
+) {
     const [isOpen, setIsOpen] = useState(false)
 
     const { refs, floatingStyles, update, context } = useFloating({
@@ -87,16 +90,16 @@ export const TooltipHolder = forwardRef<
                 onResize={update}
                 {...getReferenceProps()}
             >
-                {props.trigger}
+                {trigger}
             </div>
 
             <div
                 className="floating"
-                style={{ ...floatingStyles, zIndex: props.zIndex }}
+                style={{ ...floatingStyles, zIndex }}
                 ref={refs.setFloating}
                 {...getFloatingProps()}
             >
-                <div style={styles}>{props.content}</div>
+                <div style={styles}>{content}</div>
             </div>
 
             <style jsx>{`
@@ -108,7 +111,6 @@ export const TooltipHolder = forwardRef<
                 .floating {
                     width: max-content;
                     transition: opacity 200ms;
-                    z-index: 1;
                 }
             `}</style>
         </div>

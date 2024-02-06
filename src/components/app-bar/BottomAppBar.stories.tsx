@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { BottomAppBar } from '.'
 import { Fab } from '../fab'
 import { IconButton } from '../icon-button'
-import { Button } from '../button'
 import { useState } from 'react'
 import {
     mdiCheckboxOutline,
@@ -13,6 +12,8 @@ import {
     mdiPlus,
 } from '@mdi/js'
 import Icon from '@mdi/react'
+import { Portal } from '@/utils/Portal'
+import { Switch } from '..'
 
 const meta = {
     title: 'components/AppBar/BottomAppBar',
@@ -29,32 +30,35 @@ export const Default: Story = {
         const [fixed, setFixed] = useState(false)
         return (
             <div style={{ minWidth: '400px', paddingBottom: '80px' }}>
-                <Button onClick={() => setFixed(!fixed)}>toggle fixed</Button>
-
+                <Switch onClick={() => setFixed(!fixed)} />
+                toggle fixed
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Velit quos error explicabo nobis numquam, fuga laborum
                     adipisci molestias reiciendis tenetur rem esse maxime ullam
                     facere consectetur, obcaecati sunt delectus necessitatibus.
                 </p>
-
-                <BottomAppBar
-                    fixed={fixed}
-                    teleportTo={document.body}
-                    buttons={
-                        <>
-                            <IconButton size={1} path={mdiCheckboxOutline} />
-                            <IconButton size={1} path={mdiGreasePencil} />
-                            <IconButton size={1} path={mdiMicrophone} />
-                            <IconButton size={1} path={mdiImageOutline} />
-                        </>
-                    }
-                    fab={
-                        <Fab variant="secondary">
-                            <Icon size={1} path={mdiPlus} />
-                        </Fab>
-                    }
-                />
+                <Portal container={fixed ? document.body : undefined}>
+                    <BottomAppBar
+                        fixed={fixed}
+                        buttons={
+                            <>
+                                <IconButton
+                                    size={1}
+                                    path={mdiCheckboxOutline}
+                                />
+                                <IconButton size={1} path={mdiGreasePencil} />
+                                <IconButton size={1} path={mdiMicrophone} />
+                                <IconButton size={1} path={mdiImageOutline} />
+                            </>
+                        }
+                        fab={
+                            <Fab variant="secondary">
+                                <Icon size={1} path={mdiPlus} />
+                            </Fab>
+                        }
+                    />
+                </Portal>
             </div>
         )
     },

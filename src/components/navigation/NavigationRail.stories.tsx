@@ -13,6 +13,7 @@ import {
 } from '@mdi/js'
 import { Fab } from '../fab'
 import { Switch } from '../switch'
+import { Portal } from '@/utils/Portal'
 
 const meta = {
     title: 'components/Navigation/NavigationRail',
@@ -68,19 +69,21 @@ export const Default: Story = {
                     fixed
                     <Switch checked={fixed} onChange={setFixed} />
                 </center>
-                <NavigationRail
-                    fab={props.fab}
-                    fixed={fixed}
-                    items={items}
-                    onChange={({ key }) => {
-                        setItems(
-                            items.map((item) => ({
-                                ...item,
-                                active: item.key === key,
-                            }))
-                        )
-                    }}
-                />
+                <Portal container={fixed ? document.body : undefined}>
+                    <NavigationRail
+                        fab={props.fab}
+                        fixed={fixed}
+                        items={items}
+                        onChange={({ key }) => {
+                            setItems(
+                                items.map((item) => ({
+                                    ...item,
+                                    active: item.key === key,
+                                }))
+                            )
+                        }}
+                    />
+                </Portal>
             </>
         )
     },

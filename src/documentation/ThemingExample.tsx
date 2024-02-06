@@ -34,8 +34,10 @@ import {
     BottomSheetHandle,
     BottomAppBar,
     Fab,
+    Snackbar,
+    Dialog,
 } from '@/components'
-import { Select, TooltipHolder, PopoverHolder } from '@/composition'
+import { Select, TooltipHolder, PopoverHolder, Scrim } from '@/composition'
 import {
     mdiCheckboxOutline,
     mdiDeleteOutline,
@@ -57,6 +59,7 @@ import {
 import Icon from '@mdi/react'
 import { TabPanel } from '../components/tab/TabPanel'
 import { useFullscreen } from '@/hooks/use-fullscreen'
+import { Portal } from '@/utils/Portal'
 
 /**
  * Just an example widget to show example of `@material/material-color-utilities`
@@ -192,6 +195,8 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
     }, [isScreenExpanded])
     const containerRef = useRef<HTMLDivElement>(null)
     const [fullscreen, setFullscreen] = useFullscreen(containerRef)
+    const [snackbarOpen, setSnackbarOpen] = useState(false)
+    const [dialogOpen, setDialogOpen] = useState(false)
 
     return (
         <div
@@ -245,21 +250,29 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                                     onClick={() => setOpen(!open)}
                                 />
                             }
-                            content={<PlainTooltip>Menu</PlainTooltip>}
+                            content={<PlainTooltip>menu</PlainTooltip>}
                         />
                     }
                     trailingIcon={
                         <>
-                            <IconButton
-                                path={
-                                    fullscreen
-                                        ? mdiFullscreenExit
-                                        : mdiFullscreen
+                            <TooltipHolder
+                                trigger={
+                                    <IconButton
+                                        path={
+                                            fullscreen
+                                                ? mdiFullscreenExit
+                                                : mdiFullscreen
+                                        }
+                                        onClick={() => {
+                                            setFullscreen(!fullscreen)
+                                        }}
+                                    />
                                 }
-                                onClick={() => {
-                                    setFullscreen(!fullscreen)
-                                }}
+                                content={
+                                    <PlainTooltip>fullscreen</PlainTooltip>
+                                }
                             />
+
                             <PopoverHolder
                                 trigger={<IconButton path={mdiDotsVertical} />}
                                 placement="bottom-end"
@@ -269,16 +282,63 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                                             leadingIcon={
                                                 <Icon path={mdiRefresh} />
                                             }
+                                            onClick={() => setDialogOpen(true)}
                                         >
                                             Refresh
                                         </MenuItem>
+                                        <Portal container={document.body}>
+                                            <Scrim
+                                                center
+                                                open={dialogOpen}
+                                                onScrimClick={() =>
+                                                    setDialogOpen(false)
+                                                }
+                                            >
+                                                <Dialog
+                                                    headline="Refresh"
+                                                    buttons={
+                                                        <Button
+                                                            variant="text"
+                                                            onClick={() =>
+                                                                setDialogOpen(
+                                                                    false
+                                                                )
+                                                            }
+                                                        >
+                                                            Close
+                                                        </Button>
+                                                    }
+                                                >
+                                                    Not allowed to refresh!
+                                                </Dialog>
+                                            </Scrim>
+                                        </Portal>
                                         <MenuItem
                                             leadingIcon={
                                                 <Icon path={mdiShare} />
                                             }
+                                            onClick={() => {
+                                                setSnackbarOpen(true)
+                                            }}
                                         >
                                             Share
                                         </MenuItem>
+                                        <Portal container={document.body}>
+                                            <Snackbar
+                                                fixed
+                                                full
+                                                open={snackbarOpen}
+                                                action="Close"
+                                                onActionClick={() =>
+                                                    setSnackbarOpen(false)
+                                                }
+                                                onCloseClick={() =>
+                                                    setSnackbarOpen(false)
+                                                }
+                                            >
+                                                Noting to share!
+                                            </Snackbar>
+                                        </Portal>
                                     </Menu>
                                 }
                             />
@@ -350,6 +410,28 @@ function Flex({
     )
 }
 
+function ListSwitch(props: React.ComponentProps<typeof List>) {
+    const [checked, setChecked] = useState(false)
+    return (
+        <List
+            {...props}
+            onClick={() => setChecked(!checked)}
+            trailingIcon={<Switch checked={checked} />}
+        />
+    )
+}
+
+function ListCheckbox(props: React.ComponentProps<typeof List>) {
+    const [checked, setChecked] = useState(false)
+    return (
+        <List
+            {...props}
+            onClick={() => setChecked(!checked)}
+            trailingIcon={<Checkbox checked={checked} />}
+        />
+    )
+}
+
 export function Preview() {
     return (
         <LayoutNavigationDrawer>
@@ -380,12 +462,12 @@ export function Preview() {
                     style={{ width: '100%' }}
                 />
                 <Flex alignItems="center" justifyContent="space-between">
-                    <p>
+                    <div style={{ margin: '2rem 0.5rem' }}>
                         <RadioButton defaultChecked>
                             By making comments, you must accept our terms of
                             service.
                         </RadioButton>
-                    </p>
+                    </div>
                     <Button style={{ flexShrink: '0' }} variant="text">
                         Cancel
                     </Button>
@@ -415,17 +497,15 @@ export function Preview() {
 
                 <div>
                     <TabPanel index={0}>
-                        <List
+                        <ListSwitch
                             headline="theming"
                             leadingAvatarLabelText="M"
                             supportingText="@material/material-color-utilities"
-                            trailingIcon={<Switch />}
                         />
-                        <List
+                        <ListCheckbox
                             headline="theming"
                             leadingAvatarLabelText="S"
                             supportingText="soda/theme"
-                            trailingIcon={<Checkbox />}
                         />
                     </TabPanel>
                     <TabPanel index={1}>

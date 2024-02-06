@@ -1,0 +1,30 @@
+.sd-scrim {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgb(0 0 0 / 0.1);
+    transition-property: opacity, display;
+    transition-duration: 200ms;
+    transition-behavior: allow-discrete;
+    overflow: hidden;
+    overscroll-behavior: contain;
+
+    &:not(.sd-scrim-open) {
+        display: none;
+        opacity: 0;
+    }
+}
+
+.sd-scrim-open {
+    opacity: 1;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.sd-scrim-center {
+    display: grid;
+    place-items: center;
+}

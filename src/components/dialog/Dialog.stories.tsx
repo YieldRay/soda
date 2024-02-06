@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Dialog } from '.'
 import { Button } from '../button'
-import { ModalHolder } from '@/composition/ModalHolder'
 import { useRef, useState } from 'react'
+import { Scrim } from '@/composition/Scrim'
 import { FloatingOverlay } from '@floating-ui/react'
 import { Portal } from '@/utils/Portal'
 import { SodaSimpleTransition } from '@/composition'
@@ -30,7 +30,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const UseModalHolder: Story = {
+export const WithSoda: Story = {
     render: (props) => {
         const [open, setOpen] = useState(false)
 
@@ -53,22 +53,24 @@ export const UseModalHolder: Story = {
         return (
             <>
                 <Button variant="text" onClick={() => setOpen(true)}>
-                    {`open dialog (use <ModalHolder> from soda)`}
+                    {`open dialog (use <Scrim> from soda)`}
                 </Button>
 
-                <ModalHolder
-                    open={open}
-                    onScrimClick={() => setOpen(false)}
-                    onEscape={() => setOpen(false)}
-                >
-                    {dialog}
-                </ModalHolder>
+                <Portal container={document.body}>
+                    <Scrim
+                        center
+                        open={open}
+                        onScrimClick={() => setOpen(false)}
+                    >
+                        {dialog}
+                    </Scrim>
+                </Portal>
             </>
         )
     },
 }
 
-export const UseFloatingUI: Story = {
+export const WithFloatingUI: Story = {
     render: (props) => {
         const [open, setOpen] = useState(false)
         const overlayRef = useRef<HTMLDivElement>(null)

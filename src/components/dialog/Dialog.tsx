@@ -31,7 +31,7 @@ export const Dialog = forwardRef<
             {headline && <div className="sd-dialog-headline">{headline}</div>}
             <div
                 className="sd-dialog-body"
-                style={{ padding: noPadding ? '' : '0 1.5rem' }}
+                style={{ padding: noPadding ? '' : '1.5rem 1.5rem' }}
             >
                 {children}
             </div>

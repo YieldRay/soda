@@ -2,7 +2,6 @@ import './app-bar.scss'
 import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
-import { Portal } from '@/utils/Portal'
 
 /**
  * `<BottomAppBar>` has fixed style `height: 80px`
@@ -19,23 +18,31 @@ export const BottomAppBar = forwardRef<
          * Place `<Fab>` here
          */
         fab?: React.ReactNode
-        fixed?: boolean
         /**
-         * Only works if `fixed` set to true
+         * Fix the component to the bottom side,
+         * if set to a number, it also become the zIndex
          */
-        teleportTo?: Element | DocumentFragment
+        fixed?: boolean | number
     }>
 >(function BottomAppBar(
-    { buttons, fab, fixed, teleportTo, className, style, ...props },
+    { buttons, fab, fixed, className, style, ...props },
     ref
 ) {
-    const bottomAppBar = (
+    return (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-bottom_app_bar', className)}
             style={{
-                position: fixed ? 'fixed' : undefined,
+                ...(fixed === true
+                    ? {
+                          position: 'fixed',
+                          bottom: '0',
+                          zIndex: typeof fixed === 'boolean' ? 1 : fixed,
+                          width: '100%',
+                          boxSizing: 'border-box',
+                      }
+                    : undefined),
                 ...style,
             }}
         >
@@ -43,7 +50,4 @@ export const BottomAppBar = forwardRef<
             <div className="sd-bottom_app_bar-fab">{fab}</div>
         </div>
     )
-
-    if (fixed) return <Portal container={teleportTo}>{bottomAppBar}</Portal>
-    return bottomAppBar
 })

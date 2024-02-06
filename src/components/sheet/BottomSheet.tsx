@@ -9,7 +9,6 @@ import {
     useRef,
     useState,
 } from 'react'
-import { Portal } from '@/utils/Portal'
 
 export type BottomSheetHandle = ReturnType<typeof attachDragEvent>
 
@@ -33,6 +32,7 @@ export const BottomSheet = forwardRef<
          * Set fixed to true allow you toggle show and hide via ref
          */
         fixed?: boolean
+        zIndex?: number
         /**
          * Only works if `fixed` set to true
          */
@@ -43,10 +43,6 @@ export const BottomSheet = forwardRef<
          * Most of the case you want call `ref.current.close()`
          */
         onScrimClick?(): void
-        /**
-         * Only works if `fixed` set to true
-         */
-        teleportTo?: Element | DocumentFragment
     }>
 >(function BottomSheet(
     {
@@ -54,7 +50,7 @@ export const BottomSheet = forwardRef<
         onChange,
         onScrimClick,
         fixed,
-        teleportTo,
+        zIndex = 3,
         style,
         className,
         children,
@@ -115,10 +111,14 @@ export const BottomSheet = forwardRef<
 
     if (fixed)
         return (
-            <Portal container={teleportTo}>
-                <Scrim open={visible} onClick={() => onScrimClick?.()} />
-                <div className="sd-bottom_sheet-scrim">{bottomSheet}</div>
-            </Portal>
+            <Scrim
+                open={visible}
+                zIndex={zIndex}
+                onScrimClick={onScrimClick}
+                className="sd-bottom_sheet-scrim"
+            >
+                {bottomSheet}
+            </Scrim>
         )
 
     return bottomSheet
@@ -226,7 +226,7 @@ export function attachDragEvent(
             }
         } else {
             // not fast drag
-            if (nextTranslateY / height > 0.5) {
+            if (distanceY >= 64 || nextTranslateY / height > 0.5) {
                 hide()
             } else {
                 show()

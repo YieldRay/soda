@@ -16,6 +16,7 @@ import { Divider } from '../divider/Divider'
 import { IconButton, TopAppBar } from '..'
 import { Search } from '../search/Search'
 import Icon from '@mdi/react'
+import { List } from '../list/List'
 
 const meta = {
     title: 'components/Navigation/NavigationDrawer',
@@ -76,8 +77,11 @@ export const Standard: Story = {
                             // it's important to set flex-grow: 1
                         }}
                     >
-                        open
-                        <Switch checked={open} onChange={setOpen} />
+                        <List
+                            headline="open"
+                            onClick={() => setOpen(!open)}
+                            trailingIcon={<Switch checked={open} />}
+                        />
                     </div>
                 </div>
             )

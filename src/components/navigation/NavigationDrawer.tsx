@@ -2,7 +2,6 @@ import './navigation.scss'
 import clsx from 'clsx'
 import { Scrim } from '@/composition/Scrim'
 import { ExtendProps } from '@/utils/type'
-import { Portal } from '@/utils/Portal'
 import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 import React, { forwardRef, useRef } from 'react'
 import { Ripple } from '@/ripple/Ripple'
@@ -29,10 +28,10 @@ import { Ripple } from '@/ripple/Ripple'
 export function NavigationDrawer({
     open = false,
     onScrimClick,
-    teleportTo,
+
     modal,
     headline,
-    zIndex,
+    zIndex = 3,
     className,
     children,
     ...props
@@ -57,16 +56,6 @@ export function NavigationDrawer({
      * Most of the case you want toggle `open` to false
      */
     onScrimClick?(): void
-    /**
-     * Only works if `fixed` set to true
-     *
-     * Element that has `position:fixed` will positioned relative
-     * to it's containing block (will be viewport if no containing block)
-     *
-     * To force the position relative to viewport you can set teleportTo
-     * to `document.body`
-     */
-    teleportTo?: Element | DocumentFragment
     zIndex?: number
 }>) {
     const ref = useRef<HTMLDivElement>(null)
@@ -84,11 +73,10 @@ export function NavigationDrawer({
                 )
 
             // standard
-            const { width } = el.getBoundingClientRect()
             return el.animate(
                 {
                     clipPath: ['inset(0 100% 0 0)', 'inset(0 0 0 0)'],
-                    width: [0, width],
+                    width: ['0', ''],
                 },
                 {
                     duration: 200,
@@ -109,11 +97,10 @@ export function NavigationDrawer({
                 )
 
             // standard
-            const { width } = el.getBoundingClientRect()
             return el.animate(
                 {
                     clipPath: ['inset(0 0 0 0)', 'inset(0 100% 0 0)'],
-                    width: [width, 0],
+                    width: ['', '0'],
                 },
                 {
                     duration: 200,
@@ -144,16 +131,14 @@ export function NavigationDrawer({
 
     if (modal)
         return (
-            <Portal container={teleportTo}>
-                <Scrim
-                    open={open}
-                    onClick={() => onScrimClick?.()}
-                    style={{ zIndex }}
-                />
-                <div className="sd-navigation_drawer-scrim" style={{ zIndex }}>
-                    {drawer}
-                </div>
-            </Portal>
+            <Scrim
+                open={open}
+                onScrimClick={onScrimClick}
+                className="sd-navigation_drawer-scrim"
+                zIndex={zIndex}
+            >
+                {drawer}
+            </Scrim>
         )
 
     return drawer

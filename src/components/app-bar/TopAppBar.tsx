@@ -2,7 +2,6 @@ import './app-bar.scss'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
-import { Portal } from '@/utils/Portal'
 
 /**
  *
@@ -21,18 +20,17 @@ export const TopAppBar = forwardRef<
         variant?: 'center' | 'small' | 'medium' | 'large'
         leadingNavigationIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
-        fixed?: boolean
         /**
-         * Only works if `fixed` set to true
+         * Fix the component to the top side,
+         * if set to a number, it also become the zIndex
          */
-        teleportTo?: Element | DocumentFragment
+        fixed?: boolean | number
     }>
 >(function TopAppBar(
     {
         leadingNavigationIcon,
         trailingIcon,
         fixed,
-        teleportTo,
         children,
         variant = 'small',
         className,
@@ -41,13 +39,21 @@ export const TopAppBar = forwardRef<
     },
     ref
 ) {
-    const topAppBar = (
+    return (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-top_app_bar', className)}
             style={{
-                position: fixed ? 'fixed' : undefined,
+                ...(fixed === true
+                    ? {
+                          position: 'fixed',
+                          top: '0',
+                          zIndex: typeof fixed === 'boolean' ? 1 : fixed,
+                          width: '100%',
+                          boxSizing: 'border-box',
+                      }
+                    : undefined),
                 ...style,
             }}
             data-sd={variant}
@@ -68,7 +74,4 @@ export const TopAppBar = forwardRef<
             )}
         </div>
     )
-
-    if (fixed) return <Portal container={teleportTo}>{topAppBar}</Portal>
-    return topAppBar
 })

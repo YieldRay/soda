@@ -36,7 +36,10 @@ export const PopoverHolder = forwardRef<
         placement?: Placement
         zIndex?: number
     }
->(function PopoverHolder({ placement = 'top', ...props }, ref) {
+>(function PopoverHolder(
+    { placement = 'top', zIndex = 2, trigger, content },
+    ref
+) {
     const [isOpen, setIsOpen] = useState(false)
 
     const { refs, floatingStyles, update, context } = useFloating({
@@ -76,16 +79,16 @@ export const PopoverHolder = forwardRef<
                 onResize={update}
                 {...getReferenceProps()}
             >
-                {props.trigger}
+                {trigger}
             </div>
 
             <div
                 className="floating"
                 ref={refs.setFloating}
-                style={{ ...floatingStyles, zIndex: props.zIndex }}
+                style={{ ...floatingStyles, zIndex }}
                 {...getFloatingProps()}
             >
-                <div style={styles}>{props.content}</div>
+                <div style={styles}>{content}</div>
             </div>
 
             <style jsx>{`
@@ -97,7 +100,6 @@ export const PopoverHolder = forwardRef<
                 .floating {
                     width: max-content;
                     transition: opacity 200ms;
-                    z-index: 1;
                 }
             `}</style>
         </div>

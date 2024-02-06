@@ -17,7 +17,6 @@ import {
     useRole,
     FloatingFocusManager,
     FloatingOverlay,
-    FloatingPortal,
     offset,
     shift,
     useTransitionStyles,
@@ -76,6 +75,7 @@ export const Select = forwardRef<
         /**
          * Can be used to adjust the position of the floating options
          */
+        zIndex?: number
         floatingStyle?: React.CSSProperties
         /**
          * Shortcut for `style={{ width: "100%" }}`, as `<Select>` is inline-block
@@ -91,6 +91,7 @@ export const Select = forwardRef<
             onChange,
             placement = 'bottom-start',
             floatingStyle,
+            zIndex = 1,
             full,
             className,
             children,
@@ -106,7 +107,7 @@ export const Select = forwardRef<
 
         const valueDeferred = useDeferredValue(value)
         const dispatchChangeDeferred = (v: string) => {
-            setTimeout(() => setValue(v), 200)
+            setTimeout(() => setValue(v), 220)
         }
 
         // floating-ui
@@ -122,14 +123,17 @@ export const Select = forwardRef<
                 (typeof option === 'object' ? option.value : option) === value
         )
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
+        /** Cannot determinate position */
         const fallbackRef = useRef(false)
-        // if (!open) fallbackRef.current = false
         const touch = 'ontouchstart' in document.documentElement
 
         const { refs, floatingStyles, context } = useFloating({
             placement,
             open,
-            onOpenChange: setOpen,
+            onOpenChange: (open) => {
+                setOpen(open)
+                if (!open) fallbackRef.current = false
+            },
             whileElementsMounted: autoUpdate,
             transform: false,
             middleware: fallbackRef.current
@@ -154,8 +158,9 @@ export const Select = forwardRef<
                           scrollRef,
                           index: selectedIndex,
                           offset: 0,
-                          onFallbackChange: (fallback) =>
-                              (fallbackRef.current = fallback),
+                          onFallbackChange: (fallback) => {
+                              fallbackRef.current = fallback
+                          },
                           padding: 10,
                           minItemsVisible: touch ? 8 : 4,
                           referenceOverflowThreshold: 20,
@@ -185,13 +190,18 @@ export const Select = forwardRef<
             common: {
                 transitionTimingFunction: 'cubic-bezier(0.2, 0, 0, 1)',
             },
-            initial: {
-                opacity: 0.5,
-                clipPath: `inset(${
-                    ((selectedIndex + 1) / options.length) * 50
-                }% -4px ${
-                    ((options.length - selectedIndex - 1) / options.length) * 50
-                }% -4px)`,
+            initial: () => {
+                if (fallbackRef.current) return { opacity: 0 }
+                return {
+                    opacity: 0.5,
+                    clipPath: `inset(${
+                        ((selectedIndex + 1) / options.length) * 50
+                    }% -4px ${
+                        ((options.length - selectedIndex - 1) /
+                            options.length) *
+                        50
+                    }% -4px)`,
+                }
             },
             open: {
                 opacity: 1,
@@ -237,34 +247,33 @@ export const Select = forwardRef<
             )
         }
 
+        // add `FloatingPortal` to avoid clipping
         const optionsNode = isMounted && (
-            <FloatingPortal>
-                <FloatingOverlay lockScroll={!touch} style={{ zIndex: 1 }}>
-                    <FloatingFocusManager context={context} modal={false}>
-                        <div
-                            ref={refs.setFloating}
-                            style={{
-                                outline: '0',
-                                ...floatingStyle,
-                                ...floatingStyles,
-                                ...styles,
-                            }}
+            <FloatingOverlay lockScroll={!touch} style={{ zIndex }}>
+                <FloatingFocusManager context={context} modal={false}>
+                    <div
+                        ref={refs.setFloating}
+                        style={{
+                            outline: '0',
+                            ...floatingStyle,
+                            ...floatingStyles,
+                            ...styles,
+                        }}
+                    >
+                        <Menu
+                            className="sd-select_options"
+                            ref={scrollRef}
+                            {...getFloatingProps({
+                                onContextMenu(e) {
+                                    e.preventDefault()
+                                },
+                            })}
                         >
-                            <Menu
-                                className="sd-select_options"
-                                ref={scrollRef}
-                                {...getFloatingProps({
-                                    onContextMenu(e) {
-                                        e.preventDefault()
-                                    },
-                                })}
-                            >
-                                {options.map(optionMapper)}
-                            </Menu>
-                        </div>
-                    </FloatingFocusManager>
-                </FloatingOverlay>
-            </FloatingPortal>
+                            {options.map(optionMapper)}
+                        </Menu>
+                    </div>
+                </FloatingFocusManager>
+            </FloatingOverlay>
         )
 
         return (

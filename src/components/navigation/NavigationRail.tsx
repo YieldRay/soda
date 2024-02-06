@@ -1,7 +1,6 @@
 import './navigation.scss'
 import { Helper, HelperItem } from './Helper'
 import clsx from 'clsx'
-import { createPortal } from 'react-dom'
 import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
 
@@ -15,23 +14,25 @@ export const NavigationRail = forwardRef<
         items: Array<HelperItem & { key: React.Key }>
         onChange?(item: HelperItem & { key: React.Key }): void
         /**
-         * Fix the component to the left of the window
+         * Fix the component to the left side,
+         * if set to a number, it also become the zIndex
          */
-        fixed?: boolean
+        fixed?: boolean | number
     }>
 >(function NavigationRail(
     { fab, items, fixed, onChange, className, style, ...props },
     ref
 ) {
-    const ele = (
+    return (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-navigation_rail', className)}
             style={{
-                ...(fixed
+                ...(fixed === true
                     ? {
                           position: 'fixed',
+                          zIndex: typeof fixed === 'boolean' ? 2 : fixed,
                           top: '0',
                           left: '0',
                           height: '100%',
@@ -49,7 +50,4 @@ export const NavigationRail = forwardRef<
             </div>
         </div>
     )
-
-    if (fixed) return createPortal(ele, document.body)
-    return ele
 })

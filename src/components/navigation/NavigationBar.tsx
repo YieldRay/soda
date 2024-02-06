@@ -1,5 +1,4 @@
 import './navigation.scss'
-import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 import { Helper, HelperItem } from './Helper'
 import { ExtendProps } from '@/utils/type'
@@ -14,24 +13,26 @@ export const NavigationBar = forwardRef<
         items: Array<HelperItem & { key: React.Key }>
         onChange?(item: HelperItem & { key: React.Key }): void
         /**
-         * Fix the component to the bottom of the window
+         * Fix the component to the bottom side,
+         * if set to a number, it also become the zIndex
          */
-        fixed?: boolean
+        fixed?: boolean | number
     }>
 >(function NavigationBar(
     { items, fixed, onChange, className, style, ...props },
     ref
 ) {
-    const ele = (
+    return (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-navigation_bar', className)}
             style={{
-                ...(fixed
+                ...(fixed === true
                     ? {
                           position: 'fixed',
                           bottom: '0',
+                          zIndex: typeof fixed === 'boolean' ? 2 : fixed,
                           width: '100%',
                           boxSizing: 'border-box',
                       }
@@ -44,7 +45,4 @@ export const NavigationBar = forwardRef<
             ))}
         </div>
     )
-
-    if (fixed) return createPortal(ele, document.body)
-    return ele
 })

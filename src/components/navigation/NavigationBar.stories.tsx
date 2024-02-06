@@ -12,6 +12,7 @@ import {
     mdiCogOutline,
 } from '@mdi/js'
 import { Switch } from '../switch'
+import { Portal } from '@/utils/Portal'
 
 const meta = {
     title: 'components/Navigation/NavigationBar',
@@ -62,18 +63,20 @@ export const Default: Story = {
                     fixed
                     <Switch checked={fixed} onChange={setFixed} />
                 </center>
-                <NavigationBar
-                    fixed={fixed}
-                    items={items}
-                    onChange={({ key }) => {
-                        setItems(
-                            items.map((item) => ({
-                                ...item,
-                                active: item.key === key,
-                            }))
-                        )
-                    }}
-                />
+                <Portal container={fixed ? document.body : undefined}>
+                    <NavigationBar
+                        fixed={fixed}
+                        items={items}
+                        onChange={({ key }) => {
+                            setItems(
+                                items.map((item) => ({
+                                    ...item,
+                                    active: item.key === key,
+                                }))
+                            )
+                        }}
+                    />
+                </Portal>
             </>
         )
     },

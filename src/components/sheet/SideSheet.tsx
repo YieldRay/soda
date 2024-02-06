@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import { Divider } from '../divider'
 import { Scrim } from '@/composition/Scrim'
 import { ExtendProps } from '@/utils/type'
-import { Portal } from '@/utils/Portal'
 import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 import { useRef } from 'react'
 
@@ -23,8 +22,7 @@ export function SideSheet({
     open = false,
     modal,
     onScrimClick,
-    teleportTo,
-    zIndex,
+    zIndex = 3,
     className,
     ...props
 }: ExtendProps<{
@@ -47,16 +45,6 @@ export function SideSheet({
      * Most of the case you want toggle `open` to false
      */
     onScrimClick?(): void
-    /**
-     * Only works if `fixed` set to true
-     *
-     * Element that has `position:fixed` will positioned relative
-     * to it's containing block (will be viewport if no containing block)
-     *
-     * To force the position relative to viewport you can set teleportTo
-     * to `document.body`
-     */
-    teleportTo?: Element | DocumentFragment
     zIndex?: number
 }>) {
     const ref = useRef<HTMLDivElement>(null)
@@ -153,12 +141,14 @@ export function SideSheet({
 
     if (modal)
         return (
-            <Portal container={teleportTo}>
-                <Scrim open={open} onClick={() => onScrimClick?.()} />
-                <div className="sd-side_sheet-scrim" style={{ zIndex }}>
-                    {sheet}
-                </div>
-            </Portal>
+            <Scrim
+                open={open}
+                zIndex={zIndex}
+                onScrimClick={onScrimClick}
+                className="sd-side_sheet-scrim"
+            >
+                {sheet}
+            </Scrim>
         )
 
     return sheet

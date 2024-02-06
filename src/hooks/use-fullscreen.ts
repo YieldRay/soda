@@ -10,7 +10,9 @@ export function useFullscreen(
     options?: FullscreenOptions
 ) {
     const [isFullscreen, setIsFullscreen] = useState<boolean>(
-        elementRef?.current === document.fullscreenElement
+        document.fullscreenEnabled &&
+            !!elementRef.current &&
+            elementRef.current === document.fullscreenElement
     )
 
     useEffect(() => {

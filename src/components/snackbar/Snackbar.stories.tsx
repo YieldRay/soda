@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Snackbar } from '.'
 import { useState } from 'react'
 import { Switch } from '../switch'
+import { Portal } from '@/utils/Portal'
 
 const meta = {
     title: 'components/Snackbar',
@@ -53,16 +54,17 @@ export const Fixed: Story = {
                     open
                     <Switch checked={open} onChange={setOpen} />
                 </center>
-                <Snackbar
-                    fixed
-                    teleportTo={document.body}
-                    open={open}
-                    action="Close"
-                    onActionClick={() => setOpen(false)}
-                    onCloseClick={() => setOpen(false)}
-                >
-                    Snackbar
-                </Snackbar>
+                <Portal container={document.body}>
+                    <Snackbar
+                        fixed
+                        open={open}
+                        action="Close"
+                        onActionClick={() => setOpen(false)}
+                        onCloseClick={() => setOpen(false)}
+                    >
+                        Snackbar
+                    </Snackbar>
+                </Portal>
             </>
         )
     },
@@ -77,18 +79,19 @@ export const Full: Story = {
                     open
                     <Switch checked={open} onChange={setOpen} />
                 </center>
-                <Snackbar
-                    fixed
-                    full
-                    thirdLine
-                    teleportTo={document.body}
-                    open={open}
-                    action="Close"
-                    onActionClick={() => setOpen(false)}
-                    onCloseClick={() => setOpen(false)}
-                >
-                    {msg}
-                </Snackbar>
+                <Portal container={document.body}>
+                    <Snackbar
+                        fixed
+                        full
+                        thirdLine
+                        open={open}
+                        action="Close"
+                        onActionClick={() => setOpen(false)}
+                        onCloseClick={() => setOpen(false)}
+                    >
+                        {msg}
+                    </Snackbar>
+                </Portal>
             </>
         )
     },

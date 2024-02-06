@@ -5,7 +5,6 @@ import { ExtendProps } from '@/utils/type'
 import { useRef } from 'react'
 import { mdiClose } from '@mdi/js'
 import Icon from '@mdi/react'
-import { Portal } from '@/utils/Portal'
 import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 
 /**
@@ -22,7 +21,6 @@ export function Snackbar({
     full = false,
     open = false,
     fixed = false,
-    teleportTo,
     className,
     children,
     ...props
@@ -41,7 +39,6 @@ export function Snackbar({
      * See `fixed`
      */
     open?: boolean
-    teleportTo?: Element | DocumentFragment
     /**
      * Position of the `fixed` snackbar, has no effect for compact screen (width<600px) and `full`
      */
@@ -115,19 +112,17 @@ export function Snackbar({
 
     if (fixed)
         return (
-            <Portal container={teleportTo}>
-                <div
-                    className={clsx(
-                        'sd-snackbar_holder',
-                        full
-                            ? 'sd-snackbar_holder-full'
-                            : `sd-snackbar_holder-placement_${placement}`
-                    )}
-                    ref={ref}
-                >
-                    {snackbar}
-                </div>
-            </Portal>
+            <div
+                className={clsx(
+                    'sd-snackbar_holder',
+                    full
+                        ? 'sd-snackbar_holder-full'
+                        : `sd-snackbar_holder-placement_${placement}`
+                )}
+                ref={ref}
+            >
+                {snackbar}
+            </div>
         )
 
     return snackbar
