@@ -7,7 +7,7 @@ import React, { forwardRef, useRef } from 'react'
 import { Ripple } from '@/ripple/Ripple'
 
 /**
- * It's common that you decide wether this component is modaled by
+ * It's common that you decide whether this component is modaled by
  * the screen width, example code:
  * Note that you will always want to set `onScrimClick` to close the
  * drawer when scrim is clicked

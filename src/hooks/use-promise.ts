@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 
 /**
+ * Prefer [`use()`](https://react.dev/reference/react/use) than this
+ *
  * @example
  * ```ts
  * function App() {

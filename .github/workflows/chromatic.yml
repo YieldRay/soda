@@ -1,7 +1,11 @@
 name: Chromatic
 # https://www.chromatic.com/docs/github-actions/
 
-on: push
+on:
+    workflow_dispatch:
+    push:
+        paths:
+            - 'src/**'
 
 jobs:
     chromatic:

@@ -1,10 +1,10 @@
 name: Deploy storybook to Pages
 
 on:
-    push:
-        branches: ['main']
-
     workflow_dispatch:
+    push:
+        branches:
+            - main
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

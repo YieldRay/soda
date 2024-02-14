@@ -1,11 +1,16 @@
 # Soda
 
+[![soda-material](https://img.shields.io/badge/-soda--material-grey?logo=npm)](https://npm.im/soda-material)
+[![npm](https://img.shields.io/npm/v/soda-material)](https://www.npmjs.com/package/soda-material)
+[![install size](https://packagephobia.com/badge?p=soda-material)](https://packagephobia.com/result?p=soda-material)
+
 A React(>=18) component library that may follow [Material Design 3](https://m3.material.io/components) (a.k.a. Material You)
 
 Features:
 
+-   Less dependencies (bundled in npm package)
 -   Follow the Material You design
--   More complete implementation of Material You components (than any other library)
+-   Complete implementation of Material You components (than any other library)
 -   Keyboard accessibility
 -   Support both controlled and uncontrolled
 
@@ -37,7 +42,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 ```
 
-If bundle size is your concern, it's possible to import only the specific component.
+If bundle size is your concern, it's also possible to import only the specific component.
 
 ```tsx
 import 'soda-material/dist/style.css' // Still need to import the style in some where
