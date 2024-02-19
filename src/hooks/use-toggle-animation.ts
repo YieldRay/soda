@@ -3,10 +3,8 @@ import { useLayoutEffect, useRef } from 'react'
 export function useToggleAnimation<T extends HTMLElement>(
     elRef: React.RefObject<T>,
     open: boolean,
-    options: {
-        show(el: T): Animation
-        hide(el: T): Animation
-    },
+    show: (el: T) => Animation,
+    hide: (el: T) => Animation,
 ) {
     const isFirstRun = useRef(true)
 
@@ -25,12 +23,12 @@ export function useToggleAnimation<T extends HTMLElement>(
         if (open) {
             // to show
             el.style.display = ''
-            const a = options.show(el)
+            const a = show(el)
             a.onfinish = () => (el.style.display = '')
         } else {
             // to hide
-            const a = options.hide(el)
+            const a = hide(el)
             a.onfinish = () => (el.style.display = 'none')
         }
-    }, [elRef, open, options])
+    }, [elRef, open, show, hide])
 }

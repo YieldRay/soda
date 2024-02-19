@@ -1,6 +1,6 @@
 import './snackbar.scss'
 import clsx from 'clsx'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { mdiClose } from '@mdi/js'
 import Icon from '@mdi/react'
 import { ActionButton } from '@/composition/ActionButton'
@@ -64,8 +64,10 @@ export function Snackbar({
 }>) {
     const ref = useRef<HTMLDivElement>(null)
 
-    useToggleAnimation(ref, open, {
-        show(el) {
+    useToggleAnimation(
+        ref,
+        open,
+        useCallback((el) => {
             const { height } = el.getBoundingClientRect()
             return el.animate(
                 {
@@ -80,8 +82,8 @@ export function Snackbar({
                     easing: 'cubic-bezier(0.2, 0, 0, 1)',
                 },
             )
-        },
-        hide(el) {
+        }, []),
+        useCallback((el) => {
             const { height } = el.getBoundingClientRect()
             return el.animate(
                 {
@@ -93,8 +95,8 @@ export function Snackbar({
                     easing: 'cubic-bezier(0, 0, 0, 1)',
                 },
             )
-        },
-    })
+        }, []),
+    )
 
     const snackbar = (
         <div

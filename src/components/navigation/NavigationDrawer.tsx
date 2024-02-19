@@ -1,6 +1,6 @@
 import './navigation.scss'
 import clsx from 'clsx'
-import React, { forwardRef, useRef } from 'react'
+import React, { forwardRef, useCallback, useRef } from 'react'
 import { Scrim } from '@/composition/Scrim'
 import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 import { Ripple } from '@/ripple/Ripple'
@@ -70,56 +70,64 @@ export function NavigationDrawer({
     zIndex?: number
 }>) {
     const ref = useRef<HTMLDivElement>(null)
-    useToggleAnimation(ref, open, {
-        show(el) {
-            if (modal)
+    useToggleAnimation(
+        ref,
+        open,
+        useCallback(
+            (el) => {
+                if (modal)
+                    return el.animate(
+                        {
+                            translate: ['-100% 0', '0 0'],
+                        },
+                        {
+                            duration: 400,
+                            easing: 'cubic-bezier(0.2, 0, 0, 1)',
+                        },
+                    )
+
+                // standard
                 return el.animate(
                     {
-                        translate: ['-100% 0', '0 0'],
+                        clipPath: ['inset(0 100% 0 0)', 'inset(0 0 0 0)'],
+                        width: ['0', ''],
                     },
                     {
-                        duration: 400,
+                        duration: 200,
                         easing: 'cubic-bezier(0.2, 0, 0, 1)',
                     },
                 )
+            },
+            [modal],
+        ),
+        useCallback(
+            (el) => {
+                if (modal)
+                    return el.animate(
+                        {
+                            translate: ['0 0', '-100% 0'],
+                        },
+                        {
+                            duration: 250,
+                            easing: 'cubic-bezier(0.2, 0, 0, 1)',
+                        },
+                    )
 
-            // standard
-            return el.animate(
-                {
-                    clipPath: ['inset(0 100% 0 0)', 'inset(0 0 0 0)'],
-                    width: ['0', ''],
-                },
-                {
-                    duration: 200,
-                    easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                },
-            )
-        },
-        hide(el) {
-            if (modal)
+                // standard
                 return el.animate(
                     {
-                        translate: ['0 0', '-100% 0'],
+                        clipPath: ['inset(0 0 0 0)', 'inset(0 100% 0 0)'],
+                        width: ['', '0'],
                     },
                     {
-                        duration: 250,
+                        duration: 200,
                         easing: 'cubic-bezier(0.2, 0, 0, 1)',
                     },
                 )
-
-            // standard
-            return el.animate(
-                {
-                    clipPath: ['inset(0 0 0 0)', 'inset(0 100% 0 0)'],
-                    width: ['', '0'],
-                },
-                {
-                    duration: 200,
-                    easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                },
-            )
-        },
-    })
+            },
+            [modal],
+        ),
+    )
 
     const drawer = (
         <div
