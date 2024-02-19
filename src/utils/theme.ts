@@ -1,18 +1,18 @@
+import {
+    applyTheme,
+    argbFromHex,
+    CustomColor,
+    hexFromArgb,
+    themeFromImage,
+    themeFromSourceColor,
+    type Theme,
+} from '@material/material-color-utilities'
+
 /**
  * Re-export @material/material-color-utilities with extra utilities
  */
 
 export * from '@material/material-color-utilities'
-
-import {
-    applyTheme,
-    hexFromArgb,
-    themeFromSourceColor,
-    type Theme,
-    argbFromHex,
-    themeFromImage,
-    CustomColor,
-} from '@material/material-color-utilities'
 
 /**
  * Wrapper function of `applyTheme()`
@@ -25,8 +25,8 @@ export function applyThemeForSoda(theme: Theme | string, dark?: boolean) {
             typeof theme === 'string'
                 ? themeFromSourceColor(argbFromHex(theme))
                 : theme,
-            options
-        )
+            options,
+        ),
     )
 }
 
@@ -35,7 +35,7 @@ export function applyThemeForSoda(theme: Theme | string, dark?: boolean) {
  */
 export function applySurfaceStyles(
     theme: Theme,
-    { dark, target }: { dark?: boolean; target: HTMLElement }
+    { dark, target }: { dark?: boolean; target: HTMLElement },
 ): void {
     if (dark) {
         const elevationProps = {
@@ -77,7 +77,7 @@ export function applySurfaceStyles(
  */
 export async function themeFromImageOrFile(
     img: HTMLImageElement | File,
-    customColors?: CustomColor[]
+    customColors?: CustomColor[],
 ) {
     let image: HTMLImageElement
     if (img instanceof File) {
@@ -102,7 +102,7 @@ export async function themeFromImageOrFile(
  */
 export function themeFromHexString(
     hexColor: string,
-    customColors?: CustomColor[]
+    customColors?: CustomColor[],
 ) {
     return themeFromSourceColor(argbFromHex(hexColor), customColors)
 }

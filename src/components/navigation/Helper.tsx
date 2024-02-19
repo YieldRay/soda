@@ -1,9 +1,9 @@
 import './navigation.scss'
 import clsx from 'clsx'
-import { Badge } from '../badge'
-import { ExtendProps } from '@/utils/type'
-import { useRippleRef } from '@/ripple/hooks'
 import { useState } from 'react'
+import { useRippleRef } from '@/ripple/hooks'
+import { ExtendProps } from '@/utils/type'
+import { Badge } from '../badge'
 
 type ReactNodeBuilder = React.ReactNode | ((active: boolean) => React.ReactNode)
 

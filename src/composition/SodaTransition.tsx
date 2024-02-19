@@ -1,5 +1,6 @@
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ExtendProps, TagNameString } from '@/utils/type'
-import { useState, useEffect, useLayoutEffect, useRef, forwardRef } from 'react'
+
 // Vue CSS-Based Transitions: https://vuejs.org/guide/built-ins/transition.html#css-based-transitions
 // enter-from enter-active enter-to
 // leave-from leave-active leave-to
@@ -44,11 +45,11 @@ export const SodaTransition = forwardRef<
         as,
         ...props
     },
-    ref
+    ref,
 ) {
     const [show, setShow] = useState(false)
     const [transitionStyle, setTransitionStyle] = useState(
-        isIn ? entering : exiting
+        isIn ? entering : exiting,
     )
     const isFirstMount = useRef(!appear)
 
@@ -115,7 +116,7 @@ export const SodaSimpleTransition = forwardRef<
         style,
         ...props
     },
-    ref
+    ref,
 ) {
     return (
         <SodaTransition

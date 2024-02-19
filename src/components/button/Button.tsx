@@ -1,9 +1,9 @@
 import './button.scss'
 import clsx from 'clsx'
-import { REVERSE_RIPPLE_COLOR } from '@/ripple/ripple-effect'
-import { Ripple } from '@/ripple/Ripple'
-import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
+import { Ripple } from '@/ripple/Ripple'
+import { REVERSE_RIPPLE_COLOR } from '@/ripple/ripple-effect'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * @specs https://m3.material.io/components/buttons/specs
@@ -35,7 +35,7 @@ export const Button = forwardRef<
         children,
         ...props
     },
-    ref
+    ref,
 ) {
     return (
         <Ripple

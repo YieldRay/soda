@@ -1,8 +1,8 @@
 import './tab.scss'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
-import { forwardRef, createContext, useRef } from 'react'
+import { createContext, forwardRef, useRef } from 'react'
 import { useAutoState } from '@/hooks/use-auto-state'
+import { ExtendProps } from '@/utils/type'
 
 export const TabContext = createContext<
     | {
@@ -41,7 +41,7 @@ export const Tabs = forwardRef<
         children,
         ...props
     },
-    ref
+    ref,
 ) {
     const [index, setIndex] = useAutoState(onChange, index$co, defaultIndex!)
     const lastIndexRef = useRef(-1)

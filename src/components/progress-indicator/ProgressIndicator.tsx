@@ -1,6 +1,6 @@
-import { LinearProgressIndicator } from './LinearProgressIndicator'
-import { CircularProgressIndicator } from './CircularProgressIndicator'
 import { forwardRef } from 'react'
+import { CircularProgressIndicator } from './CircularProgressIndicator'
+import { LinearProgressIndicator } from './LinearProgressIndicator'
 
 export const ProgressIndicator = forwardRef<
     HTMLDivElement,

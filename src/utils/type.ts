@@ -3,7 +3,7 @@
  */
 export type ExtendProps<
     Props extends object = object,
-    As extends HTMLElement = HTMLElement
+    As extends HTMLElement = HTMLElement,
 > = Props & Omit<React.HTMLProps<As>, 'as' | 'ref' | keyof Props>
 
 export type TagNameString = keyof JSX.IntrinsicElements

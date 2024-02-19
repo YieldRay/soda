@@ -1,14 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
 import './time-picker.scss'
-import { useState, useEffect, useRef, forwardRef } from 'react'
-import { Button } from '../button'
-import { IconButton } from '../icon-button'
+import clsx from 'clsx'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import { mdiClockOutline } from '@mdi/js'
+import { useEventListenerEffect } from '@/hooks/use-event-listener'
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
-import clsx from 'clsx'
-import { useEventListenerEffect } from '@/hooks/use-event-listener'
+import { Button } from '../button'
+import { IconButton } from '../icon-button'
 
 type TimeValue = readonly [hour: number, minute: number]
 
@@ -50,7 +50,7 @@ export const TimePicker = forwardRef<
         className,
         ...props
     },
-    ref
+    ref,
 ) {
     // init state
 
@@ -58,7 +58,7 @@ export const TimePicker = forwardRef<
     const direction = initDirection ?? (isCompact ? 'vertical' : 'horizontal')
     const i18n = Object.assign(
         navigator.language === 'zh-CN' ? i18n_chinese : i18n_english,
-        initI18n
+        initI18n,
     )
 
     // state
@@ -90,7 +90,7 @@ export const TimePicker = forwardRef<
     // handle period
 
     const [period, setPeriod] = useState<'AM' | 'PM'>(
-        initValue[0] >= 12 ? 'PM' : 'AM'
+        initValue[0] >= 12 ? 'PM' : 'AM',
     )
 
     useEffect(() => {
@@ -142,7 +142,7 @@ export const TimePicker = forwardRef<
 
     const onClockClick = (
         h: number,
-        ev: React.PointerEvent<HTMLTimeElement>
+        ev: React.PointerEvent<HTMLTimeElement>,
     ) => {
         if (ev.type === 'touch') return
         setHour(normalizeTime(h + (period === 'PM' ? 12 : 0)))
@@ -176,7 +176,7 @@ export const TimePicker = forwardRef<
     const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
         if (!isMoving.current) return
         const clock = (e.target as HTMLElement).closest(
-            '.sd-time_picker-clock'
+            '.sd-time_picker-clock',
         ) as HTMLElement
         const [cX, cY] = centerOfElement(clock)
         const { clientX, clientY } = e
@@ -204,7 +204,7 @@ export const TimePicker = forwardRef<
             const delta = e.deltaY / 100
             setDegree((degree) => degreeAddDelta(degree, delta * 3))
         },
-        { passive: false }
+        { passive: false },
     )
 
     return (
@@ -288,7 +288,7 @@ export const TimePicker = forwardRef<
                                 ) {
                                     e.preventDefault() // prevent scroll
                                     setDegree((degree) =>
-                                        degreeAddDelta(degree, 10)
+                                        degreeAddDelta(degree, 10),
                                     )
                                 } else if (
                                     e.key === 'ArrowLeft' ||
@@ -306,7 +306,7 @@ export const TimePicker = forwardRef<
                                 ref={(e) => {
                                     e?.style.setProperty(
                                         '--degree',
-                                        `${degree}deg`
+                                        `${degree}deg`,
                                     )
                                 }}
                             />
@@ -326,7 +326,7 @@ export const TimePicker = forwardRef<
                                                         ? 12
                                                         : 0),
                                                 hourNumber,
-                                                minuteNumber
+                                                minuteNumber,
                                             )
                                                 ? 'var(--md-sys-color-on-primary)'
                                                 : undefined,
@@ -334,7 +334,7 @@ export const TimePicker = forwardRef<
                                     >
                                         {h}
                                     </time>
-                                )
+                                ),
                             )}
                         </div>
                     </div>

@@ -19,7 +19,7 @@ export const Badge = forwardRef<
     }>
 >(function Badge(
     { label, variant: initVariant, className, children, ...props },
-    ref
+    ref,
 ) {
     const variant = initVariant || (label || label === 0 ? 'large' : 'small')
 

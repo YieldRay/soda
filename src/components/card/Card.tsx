@@ -1,8 +1,8 @@
 import './card.scss'
-import { Ripple } from '@/ripple/Ripple'
-import { ExtendProps, TagNameString } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
+import { Ripple } from '@/ripple/Ripple'
+import { ExtendProps, TagNameString } from '@/utils/type'
 
 /**
  * You can set the `disabled` property to disable ripple
@@ -24,7 +24,7 @@ export const Card = forwardRef<
     }>
 >(function Card(
     { variant = 'elevated', as, className, children, ...props },
-    ref
+    ref,
 ) {
     return (
         <Ripple

@@ -1,10 +1,10 @@
 import './segmented-button.scss'
-import { forwardRef } from 'react'
-import { Ripple } from '@/ripple/Ripple'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
+import { forwardRef } from 'react'
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeRefs } from '@/hooks/use-merge'
+import { Ripple } from '@/ripple/Ripple'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * Either `value` or `defaultValue` MUST be set to corresponding `items`'`value`
@@ -39,7 +39,7 @@ export const SegmentedButton = forwardRef<
         className,
         ...props
     },
-    ref
+    ref,
 ) {
     const [value, setValue] = useAutoState(onChange, value$co, defaultValue!)
 
@@ -52,9 +52,9 @@ export const SegmentedButton = forwardRef<
                     e &&
                     e.style.setProperty(
                         '--density',
-                        density ? String(density) : '0'
+                        density ? String(density) : '0',
                     ),
-                ref
+                ref,
             )}
         >
             {items &&

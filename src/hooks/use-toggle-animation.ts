@@ -6,7 +6,7 @@ export function useToggleAnimation<T extends HTMLElement>(
     options: {
         show(el: T): Animation
         hide(el: T): Animation
-    }
+    },
 ) {
     const isFirstRun = useRef(true)
 

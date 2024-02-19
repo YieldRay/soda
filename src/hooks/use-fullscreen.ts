@@ -7,12 +7,12 @@ import { useCallback, useEffect, useState } from 'react'
  */
 export function useFullscreen(
     elementRef: React.RefObject<HTMLElement>,
-    options?: FullscreenOptions
+    options?: FullscreenOptions,
 ) {
     const [isFullscreen, setIsFullscreen] = useState<boolean>(
         document.fullscreenEnabled &&
             !!elementRef.current &&
-            elementRef.current === document.fullscreenElement
+            elementRef.current === document.fullscreenElement,
     )
 
     useEffect(() => {

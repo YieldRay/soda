@@ -1,10 +1,10 @@
 import './Details.scss'
 import clsx from 'clsx'
-import Icon from '@mdi/react'
 import { useRef } from 'react'
+import { mdiChevronDown } from '@mdi/js'
+import Icon from '@mdi/react'
 import { IconButton } from '@/components/icon-button'
 import { useAutoState } from '@/hooks/use-auto-state'
-import { mdiChevronDown } from '@mdi/js'
 import { useCollapsible } from '@/hooks/use-collapsible'
 
 /**
@@ -47,7 +47,7 @@ export function Details({
     const [expanded, setExpanded] = useAutoState(
         onChange,
         expanded$co,
-        defaultExpanded
+        defaultExpanded,
     )
 
     const collapsibleRef = useRef<HTMLDivElement>(null)

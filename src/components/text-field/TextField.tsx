@@ -1,9 +1,9 @@
 import './text-field.scss'
-import { forwardRef, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import { type ExtendProps } from '@/utils/type'
-import { type ReactRef, setReactRef } from '@/utils/react-ref'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import { useMergeEventHandlers } from '@/hooks/use-merge'
+import { setReactRef, type ReactRef } from '@/utils/react-ref'
+import { type ExtendProps } from '@/utils/type'
 
 type InternalHTMLElement = HTMLInputElement | HTMLTextAreaElement
 
@@ -78,7 +78,7 @@ export const TextField = forwardRef<
         'data-sd-focus': dataSdFocus,
         ...props
     },
-    ref
+    ref,
 ) {
     const stringValue = String(value || '')
     const [focus, setFocus] = useState(false)

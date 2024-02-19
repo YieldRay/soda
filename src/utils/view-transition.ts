@@ -2,7 +2,7 @@ import { flushSync } from 'react-dom'
 
 export const isViewTransitionSupported = Reflect.has(
     document,
-    'startViewTransition'
+    'startViewTransition',
 )
 
 /**
@@ -20,7 +20,7 @@ export const isViewTransitionSupported = Reflect.has(
  *
  */
 export function startViewTransition(
-    updateDOM: () => Promise<void> | void
+    updateDOM: () => Promise<void> | void,
 ): ViewTransition {
     if (isViewTransitionSupported) {
         return document.startViewTransition(updateDOM)
@@ -42,7 +42,7 @@ export function startViewTransition(
 export function startViewTransitionFlushSync(
     callback: VoidFunction,
     prepare?: VoidFunction,
-    cleanup?: VoidFunction
+    cleanup?: VoidFunction,
 ) {
     if (isViewTransitionSupported) {
         prepare?.()
@@ -62,7 +62,7 @@ declare global {
          * @returns A ViewTransition object instance.
          */
         startViewTransition(
-            callback: () => Promise<void> | void
+            callback: () => Promise<void> | void,
         ): ViewTransition
     }
 

@@ -7,7 +7,7 @@ export function useMediaQuery(query: string) {
             matchMedia.addEventListener('change', callback)
             return () => matchMedia.removeEventListener('change', callback)
         },
-        [query]
+        [query],
     )
 
     const getSnapshot = () => window.matchMedia(query).matches

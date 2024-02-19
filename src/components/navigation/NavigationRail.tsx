@@ -1,8 +1,9 @@
 import './navigation.scss'
-import { Helper, HelperItem } from './Helper'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
+import { mergeStyles } from '@/utils/style'
+import { ExtendProps } from '@/utils/type'
+import { Helper, HelperItem } from './Helper'
 
 /**
  * @specs https://m3.material.io/components/navigation-rail/specs
@@ -14,33 +15,49 @@ export const NavigationRail = forwardRef<
         items: Array<HelperItem & { key: React.Key }>
         onChange?(item: HelperItem & { key: React.Key }): void
         /**
-         * Fix the component to the left side,
-         * if set to a number, it also become the zIndex
+         * Fix the component to the left side
+         *
+         * See also `zIndex` `inset`
          */
-        fixed?: boolean | number
+        fixed?: boolean
+        /**
+         * CSS `z-index`, if `fixed` set to `true`
+         *
+         * @default 2
+         */
+        zIndex?: number
+        /**
+         * CSS `inset`, if `fixed` set to `true`
+         */
+        inset?: string
     }>
 >(function NavigationRail(
-    { fab, items, fixed, onChange, className, style, ...props },
-    ref
+    {
+        fab,
+        items,
+        fixed,
+        zIndex = 2,
+        inset = '0 auto 0 0',
+        onChange,
+        className,
+        style,
+        ...props
+    },
+    ref,
 ) {
     return (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-navigation_rail', className)}
-            style={{
-                ...(fixed === true
-                    ? {
-                          position: 'fixed',
-                          zIndex: typeof fixed === 'boolean' ? 2 : fixed,
-                          top: '0',
-                          left: '0',
-                          height: '100%',
-                          boxSizing: 'border-box',
-                      }
-                    : undefined),
-                ...style,
-            }}
+            style={mergeStyles(
+                fixed && {
+                    position: 'fixed',
+                    zIndex,
+                    inset,
+                },
+                style,
+            )}
         >
             <div className="sd-navigation_rail-fab">{fab}</div>
             <div className="sd-navigation_rail-items">

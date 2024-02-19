@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react'
  */
 export function usePromise<T>(
     promiseFactory: Promise<T> | (() => Promise<T>),
-    deps: React.DependencyList = []
+    deps: React.DependencyList = [],
 ) {
     const [value, setValue] = useState<
         PromiseSettledResult<T> | { status: 'pending' }
@@ -38,7 +38,7 @@ export function usePromise<T>(
             },
             (reason: unknown) => {
                 setValue({ status: 'rejected', reason })
-            }
+            },
         )
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, deps)

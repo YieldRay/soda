@@ -7,7 +7,7 @@ import { useEffect } from 'react'
  */
 export function useCollapsible(
     elementRef: React.RefObject<HTMLElement>,
-    collapsed: boolean
+    collapsed: boolean,
 ) {
     useEffect(() => {
         const el = elementRef.current

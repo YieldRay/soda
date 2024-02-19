@@ -1,18 +1,18 @@
+import { forwardRef, useImperativeHandle, useState } from 'react'
 import {
-    useFloating,
     autoUpdate,
-    offset,
     flip,
+    offset,
     shift,
-    useInteractions,
-    useDismiss,
-    useRole,
     useClick,
+    useDismiss,
+    useFloating,
+    useInteractions,
+    useRole,
     useTransitionStyles,
 } from '@floating-ui/react'
 import type { Placement } from '@floating-ui/react'
 import { useTransitionStylesProps } from '@/utils/floating-ui'
-import { forwardRef, useImperativeHandle, useState } from 'react'
 
 /**
  * This handle is always exists when component is mounted,
@@ -38,7 +38,7 @@ export const PopoverHolder = forwardRef<
     }
 >(function PopoverHolder(
     { placement = 'top', zIndex = 2, trigger, content },
-    ref
+    ref,
 ) {
     const [isOpen, setIsOpen] = useState(false)
 

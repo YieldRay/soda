@@ -1,10 +1,10 @@
 import './dialog.scss'
-import { forwardRef } from 'react'
 import clsx from 'clsx'
+import { forwardRef } from 'react'
+import { mdiClose } from '@mdi/js'
 import { ExtendProps } from '@/utils/type'
 import { Divider } from '../divider/Divider'
 import { IconButton } from '../icon-button'
-import { mdiClose } from '@mdi/js'
 
 /**
  * @specs https://m3.material.io/components/dialogs/specs#bbf1acde-f8d2-4ae1-9d51-343e96c4ac20
@@ -26,7 +26,7 @@ export const FullScreenDialog = forwardRef<
     }>
 >(function FullScreenDialog(
     { headline, button, onCloseClick, children, footer, ...props },
-    ref
+    ref,
 ) {
     return (
         <div

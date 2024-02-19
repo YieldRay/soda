@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
+import { mdiDotsVertical, mdiMagnify, mdiMenu } from '@mdi/js'
 import { TopAppBar } from '.'
 import { IconButton } from '../icon-button'
-import { mdiDotsVertical, mdiMagnify, mdiMenu } from '@mdi/js'
 
 const meta = {
     title: 'components/AppBar/TopAppBar',

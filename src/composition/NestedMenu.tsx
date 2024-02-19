@@ -1,7 +1,11 @@
-import * as Soda from '@/components/menu'
-import { ExtendProps } from '@/utils/type'
-import Icon from '@mdi/react'
-import { mdiMenuRight } from '@mdi/js'
+import {
+    createContext,
+    forwardRef,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from 'react'
 import {
     autoUpdate,
     flip,
@@ -28,18 +32,14 @@ import {
     useTransitionStyles,
     useTypeahead,
 } from '@floating-ui/react'
-import {
-    forwardRef,
-    createContext,
-    useContext,
-    useEffect,
-    useRef,
-    useState,
-} from 'react'
+import { mdiMenuRight } from '@mdi/js'
+import Icon from '@mdi/react'
+import * as Soda from '@/components/menu'
+import { ExtendProps } from '@/utils/type'
 
 const NestedMenuContext = createContext<{
     getItemProps: (
-        userProps?: React.HTMLProps<HTMLElement>
+        userProps?: React.HTMLProps<HTMLElement>,
     ) => Record<string, unknown>
     activeIndex: number | null
     setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>
@@ -91,7 +91,7 @@ const NestedMenuComponent = forwardRef<
             contextMenuSource = document,
             ...props
         },
-        forwardedRef
+        forwardedRef,
     ) => {
         const [isOpen, setIsOpen] = useState(defaultOpen ? true : false)
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
@@ -171,7 +171,7 @@ const NestedMenuComponent = forwardRef<
                       close: {
                           opacity: 0,
                       },
-                  }
+                  },
         )
 
         const { getReferenceProps, getFloatingProps, getItemProps } =
@@ -260,7 +260,7 @@ const NestedMenuComponent = forwardRef<
             return () => {
                 contextMenuSource.removeEventListener(
                     'contextmenu',
-                    onContextMenu
+                    onContextMenu,
                 )
                 // contextMenuSource.removeEventListener('mouseup', onMouseUp)
                 clearTimeout(timeout)
@@ -327,7 +327,7 @@ const NestedMenuComponent = forwardRef<
                 </NestedMenuContext.Provider>
             </FloatingNode>
         )
-    }
+    },
 )
 
 /**
@@ -353,7 +353,7 @@ export const NestedMenu = forwardRef<HTMLElement, ExtendProps<NestedMenuProps>>(
         }
 
         return <NestedMenuComponent {...props} ref={ref} />
-    }
+    },
 )
 
 export const NestedMenuItem = forwardRef<

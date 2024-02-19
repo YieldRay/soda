@@ -1,7 +1,7 @@
-import { Ripple } from '@/ripple/Ripple'
 import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js'
-import { IconButton } from '../icon-button/IconButton'
 import Icon from '@mdi/react'
+import { Ripple } from '@/ripple/Ripple'
+import { IconButton } from '../icon-button/IconButton'
 
 export function MenuButton({
     children,

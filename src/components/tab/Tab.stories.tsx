@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Tabs, Tab, TabPanel } from '.'
 import { useState } from 'react'
-import Icon from '@mdi/react'
 import { mdiCheck, mdiClose, mdiMagnify } from '@mdi/js'
+import Icon from '@mdi/react'
+import { Tab, TabPanel, Tabs } from '.'
 
 const meta = {
     title: 'components/Tab',

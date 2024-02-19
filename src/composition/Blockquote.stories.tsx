@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Blockquote } from './Blockquote'
 import { mdiBookmarkOutline } from '@mdi/js'
+import { Blockquote } from './Blockquote'
 
 const meta = {
     title: 'composition/Blockquote',

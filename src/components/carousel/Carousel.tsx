@@ -1,7 +1,7 @@
 import './carousel.scss'
-import { ExtendProps } from '@/utils/type'
-import { useRef, useState, forwardRef, useImperativeHandle } from 'react'
 import clsx from 'clsx'
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import { ExtendProps } from '@/utils/type'
 
 export interface Item {
     key?: React.Key
@@ -33,7 +33,7 @@ export const Carousel = forwardRef<
     }>
 >(function Carousel(
     { items: initItems, height, className, style, ...props },
-    ref
+    ref,
 ) {
     if (initItems.length % 3 !== 0)
         throw new Error('the item array length must be a multiple of 3')
@@ -112,7 +112,7 @@ function initFlex(items: Item[]) {
 
 function updateFlex(
     prev: ItemWithFlex[],
-    gesture: 'rr' | 'r' | 'l' | 'll'
+    gesture: 'rr' | 'r' | 'l' | 'll',
 ): ItemWithFlex[] {
     const firstVisibleIndex = prev.findIndex(({ flex }) => flex > 0)!
     let virtualItems = prev.slice(0)

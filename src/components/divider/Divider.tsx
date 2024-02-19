@@ -1,7 +1,7 @@
 import './divider.scss'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * The divider has margin included by default, you can remove it by adding `style={{margin:"0"}}`
@@ -21,7 +21,7 @@ export const Divider = forwardRef<
     }>
 >(function Divider(
     { variant = 'full', direction = 'horizontal', className, ...props },
-    ref
+    ref,
 ) {
     return (
         <div
@@ -33,7 +33,7 @@ export const Divider = forwardRef<
                     'sd-divider-full': variant === 'full',
                     'sd-divider-inset': variant === 'inset',
                 },
-                className
+                className,
             )}
             data-sd-direction={direction}
         />

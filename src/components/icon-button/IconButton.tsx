@@ -1,9 +1,9 @@
 import './icon-button.scss'
-import { Ripple } from '@/ripple/Ripple'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { Icon } from '@mdi/react'
+import { Ripple } from '@/ripple/Ripple'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * @specs https://m3.material.io/components/icon-buttons/specs
@@ -36,14 +36,14 @@ export const IconButton = forwardRef<
         children,
         ...props
     },
-    ref
+    ref,
 ) {
     const selected =
         initSelected !== undefined
             ? initSelected!
             : variant === 'standard'
-            ? false
-            : true
+              ? false
+              : true
 
     return (
         <Ripple
@@ -52,7 +52,7 @@ export const IconButton = forwardRef<
             className={clsx(
                 'sd-icon_button',
                 `sd-icon_button-${variant}`,
-                className
+                className,
             )}
             as="button"
             data-sd-selected={selected}

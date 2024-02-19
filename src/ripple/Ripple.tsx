@@ -1,6 +1,6 @@
-import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
-import { ripple } from './ripple-effect'
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 import { ExtendProps, TagNameString } from '@/utils/type'
+import { ripple } from './ripple-effect'
 
 type Props = ExtendProps<{
     /**
@@ -22,7 +22,7 @@ type Props = ExtendProps<{
 type RippleAt = (
     rippleX: number,
     rippleY: number,
-    autoRemove?: boolean
+    autoRemove?: boolean,
 ) => (onFinish?: VoidFunction | undefined) => void
 
 export type RippleHandle = HTMLElement & { rippleAt?: RippleAt }
@@ -52,5 +52,5 @@ export const Ripple = forwardRef<RippleHandle, Props>(
                 {props.children}
             </As>
         )
-    }
+    },
 )

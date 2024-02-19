@@ -69,7 +69,7 @@ export function getFormatCalendar(year: number, month: number) {
                 isThisMonth: isSameMonth(thisMonth, date),
             }
         }),
-        7
+        7,
     )
 }
 

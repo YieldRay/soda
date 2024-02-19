@@ -2,7 +2,13 @@
 .docs-story,
 .docs-story *,
 .sb-unstyled {
-    font-family: 'Google Sans', Roboto, system-ui, -apple-system, Tahoma, Arial,
+    font-family:
+        'Google Sans',
+        Roboto,
+        system-ui,
+        -apple-system,
+        Tahoma,
+        Arial,
         sans-serif;
 }
 
@@ -10,7 +16,11 @@ pre {
     &,
     * {
         font-size: 15px;
-        font-family: Consolas, Courier, Courier New, monospace !important;
+        font-family:
+            Consolas,
+            Courier,
+            Courier New,
+            monospace !important;
     }
     .token.operator {
         background: transparent;

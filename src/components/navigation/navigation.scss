@@ -3,6 +3,8 @@
 
 // https://m3.material.io/components/navigation-bar/specs
 .sd-navigation_bar {
+    box-sizing: border-box;
+    width: 100%;
     padding-block-start: 12px;
     padding-block-end: 16px;
     display: flex;
@@ -151,6 +153,8 @@
         background: var(--md-sys-color-surface-container-low);
         border-top-right-radius: 16px;
         border-bottom-right-radius: 16px;
+        box-sizing: border-box;
+        height: 100%;
     }
 
     pointer-events: auto;

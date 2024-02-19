@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { IconRippleButton } from './IconRippleButton'
 import { mdiCheck } from '@mdi/js'
+import { IconRippleButton } from './IconRippleButton'
 
 const meta = {
     title: 'composition/IconRippleButton',

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Button } from '.'
-import Icon from '@mdi/react'
 import { mdiAccount } from '@mdi/js'
+import Icon from '@mdi/react'
+import { Button } from '.'
 
 const meta = {
     title: 'components/Button/Button',

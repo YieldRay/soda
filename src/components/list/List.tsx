@@ -1,9 +1,9 @@
 import './list.scss'
 import clsx from 'clsx'
-import { ExtendProps, TagNameString } from '@/utils/type.ts'
 import { forwardRef } from 'react'
-import { useRippleRef } from '@/ripple/hooks'
 import { useMergeRefs } from '@/hooks/use-merge'
+import { useRippleRef } from '@/ripple/hooks'
+import { ExtendProps, TagNameString } from '@/utils/type.ts'
 
 /**
  * @specs https://m3.material.io/components/lists/specs
@@ -52,7 +52,7 @@ export const List = forwardRef<
         children: _,
         ...props
     },
-    ref
+    ref,
 ) {
     const As: any = as || 'div'
     return (

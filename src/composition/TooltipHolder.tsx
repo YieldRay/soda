@@ -1,20 +1,20 @@
+import { forwardRef, useImperativeHandle, useState } from 'react'
 import {
-    useFloating,
     autoUpdate,
-    offset,
     flip,
+    offset,
+    safePolygon,
     shift,
+    useDismiss,
+    useFloating,
+    useFocus,
     useHover,
     useInteractions,
-    useFocus,
-    useDismiss,
     useRole,
-    safePolygon,
     useTransitionStyles,
 } from '@floating-ui/react'
 import type { Placement } from '@floating-ui/react'
 import { useTransitionStylesProps } from '@/utils/floating-ui'
-import { forwardRef, useImperativeHandle, useState } from 'react'
 
 /**
  * This handle is always exists when component is mounted,
@@ -40,7 +40,7 @@ export const TooltipHolder = forwardRef<
     }
 >(function TooltipHolder(
     { placement = 'top', zIndex = 2, trigger, content },
-    ref
+    ref,
 ) {
     const [isOpen, setIsOpen] = useState(false)
 

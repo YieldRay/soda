@@ -1,8 +1,8 @@
 import './menu.scss'
 import clsx from 'clsx'
+import { forwardRef } from 'react'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
-import { forwardRef } from 'react'
 
 export interface Props {
     leadingIcon?: React.ReactNode
@@ -26,7 +26,7 @@ export const MenuItem = forwardRef<HTMLElement, ExtendProps<Props>>(
             children,
             ...props
         },
-        ref
+        ref,
     ) {
         return (
             <Ripple
@@ -56,5 +56,5 @@ export const MenuItem = forwardRef<HTMLElement, ExtendProps<Props>>(
                 )}
             </Ripple>
         )
-    }
+    },
 )

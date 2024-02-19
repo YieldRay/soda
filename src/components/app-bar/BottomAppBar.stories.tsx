@@ -1,8 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { BottomAppBar } from '.'
-import { Fab } from '../fab'
-import { IconButton } from '../icon-button'
 import { useState } from 'react'
 import {
     mdiCheckboxOutline,
@@ -13,7 +9,10 @@ import {
 } from '@mdi/js'
 import Icon from '@mdi/react'
 import { Portal } from '@/utils/Portal'
+import { BottomAppBar } from '.'
 import { Switch } from '..'
+import { Fab } from '../fab'
+import { IconButton } from '../icon-button'
 
 const meta = {
     title: 'components/AppBar/BottomAppBar',

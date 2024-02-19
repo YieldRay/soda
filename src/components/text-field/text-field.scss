@@ -15,7 +15,9 @@ $label_text_gap_size: 3.2px;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     padding: 0.75rem;
-    transition: filter 200ms, border 200ms;
+    transition:
+        filter 200ms,
+        border 200ms;
 
     &:hover {
         filter: brightness(96%);

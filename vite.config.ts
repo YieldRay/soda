@@ -1,9 +1,9 @@
+import fs from 'node:fs'
+import { fileURLToPath, URL } from 'node:url'
+import react from '@vitejs/plugin-react'
+import { globSync } from 'glob'
 import { defineConfig } from 'vite'
 import type { LibraryOptions } from 'vite'
-import react from '@vitejs/plugin-react'
-import { fileURLToPath, URL } from 'node:url'
-import fs from 'node:fs'
-import { globSync } from 'glob'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -70,7 +70,7 @@ function inventory(): LibraryOptions['entry'] {
                 name.replace(/^src(\/|\\)/, '').replace(/\.(ts|tsx)$/, ''),
                 name,
             ]
-        })
+        }),
     )
 
     return entry

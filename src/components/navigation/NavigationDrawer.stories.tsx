@@ -1,6 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { NavigationDrawer, NavigationDrawerItem } from '.'
 import { useState } from 'react'
 import {
     mdiClose,
@@ -11,12 +9,13 @@ import {
     mdiMenu,
     mdiSendVariantOutline,
 } from '@mdi/js'
-import { Switch } from '../switch/Switch'
-import { Divider } from '../divider/Divider'
-import { IconButton, TopAppBar } from '..'
-import { Search } from '../search/Search'
 import Icon from '@mdi/react'
+import { NavigationDrawer, NavigationDrawerItem } from '.'
+import { IconButton, TopAppBar } from '..'
+import { Divider } from '../divider/Divider'
 import { List } from '../list/List'
+import { Search } from '../search/Search'
+import { Switch } from '../switch/Switch'
 
 const meta = {
     title: 'components/Navigation/NavigationDrawer',

@@ -1,13 +1,13 @@
 import './checkbox.scss'
 import clsx from 'clsx'
-import { Ripple } from '@/ripple/Ripple'
 import { forwardRef } from 'react'
-import { ExtendProps } from '@/utils/type'
-import { Icon } from '@mdi/react'
 import { mdiCheck } from '@mdi/js'
+import { Icon } from '@mdi/react'
 import { SodaSimpleTransition } from '@/composition/SodaTransition'
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeEventHandlers } from '@/hooks/use-merge'
+import { Ripple } from '@/ripple/Ripple'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * According to the official implementation, the ripple effect should not occupy space.
@@ -43,12 +43,12 @@ export const Checkbox = forwardRef<
         error,
         ...props
     },
-    ref
+    ref,
 ) {
     const [checked, setChecked] = useAutoState(
         onChange,
         checked$co,
-        defaultChecked
+        defaultChecked,
     )
 
     const checkedIcon = children || <Icon size={0.6} path={mdiCheck} />

@@ -1,38 +1,38 @@
 import './Select.scss'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
-import { forwardRef, useRef, useState, useDeferredValue } from 'react'
-import { Menu, MenuItem } from '@/components/menu'
+import { forwardRef, useDeferredValue, useRef, useState } from 'react'
 import {
-    useFloating,
-    flip,
-    size,
     autoUpdate,
-    SideObject,
-    useInteractions,
-    inner,
-    useClick,
-    useListNavigation,
-    useDismiss,
-    useRole,
+    flip,
     FloatingFocusManager,
     FloatingOverlay,
+    inner,
     offset,
-    shift,
-    useTransitionStyles,
     Placement,
+    shift,
+    SideObject,
+    size,
+    useClick,
+    useDismiss,
+    useFloating,
+    useInteractions,
+    useListNavigation,
+    useRole,
+    useTransitionStyles,
 } from '@floating-ui/react'
-import { Ripple } from '@/ripple/Ripple'
-import Icon from '@mdi/react'
 import { mdiMenuDown } from '@mdi/js'
+import Icon from '@mdi/react'
+import { Menu, MenuItem } from '@/components/menu'
 import { useAutoState } from '@/hooks/use-auto-state'
+import { Ripple } from '@/ripple/Ripple'
+import { ExtendProps } from '@/utils/type'
 
 const getOptionValue = <
     T extends {
         value: string
-    }
+    },
 >(
-    option: string | T
+    option: string | T,
 ) => (typeof option === 'object' ? option.value : option)
 
 /**
@@ -97,12 +97,12 @@ export const Select = forwardRef<
             children,
             ...props
         },
-        ref
+        ref,
     ) => {
         const [value, setValue] = useAutoState(
             onChange,
             value$co,
-            defaultValue!
+            defaultValue!,
         )
 
         const valueDeferred = useDeferredValue(value)
@@ -120,7 +120,7 @@ export const Select = forwardRef<
         const [open, setOpen] = useState(false)
         const selectedIndex = options.findIndex(
             (option) =>
-                (typeof option === 'object' ? option.value : option) === value
+                (typeof option === 'object' ? option.value : option) === value,
         )
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
         /** Cannot determinate position */
@@ -221,7 +221,7 @@ export const Select = forwardRef<
                     className={clsx(
                         'sd-select_option',
                         valueDeferred === optionValue &&
-                            'sd-select_option-selected'
+                            'sd-select_option-selected',
                     )}
                     key={optionValue}
                     disabled={
@@ -295,7 +295,7 @@ export const Select = forwardRef<
                                   <div className="sd-select-menu_button-label">
                                       <span>
                                           {getOptionValue(
-                                              options[selectedIndex]
+                                              options[selectedIndex],
                                           )}
                                       </span>
                                       <Icon
@@ -310,5 +310,5 @@ export const Select = forwardRef<
                 {optionsNode}
             </div>
         )
-    }
+    },
 )

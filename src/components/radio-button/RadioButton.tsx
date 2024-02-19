@@ -1,10 +1,10 @@
 import './radio-button.scss'
 import clsx from 'clsx'
 import { forwardRef, useContext, useRef } from 'react'
-import { ExtendProps } from '@/utils/type'
 import { RadioGroupContext } from '@/components/radio-button/RadioGroup'
-import { Ripple, type RippleHandle } from '@/ripple/Ripple'
 import { useAutoState } from '@/hooks/use-auto-state'
+import { Ripple, type RippleHandle } from '@/ripple/Ripple'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * According to the official implementation, the ripple effect should not occupy space.
@@ -38,7 +38,7 @@ export const RadioButton = forwardRef<
         children,
         ...props
     },
-    ref
+    ref,
 ) {
     const groupContext = useContext(RadioGroupContext)
     const checked$co = groupContext
@@ -54,7 +54,7 @@ export const RadioButton = forwardRef<
             if (v) groupContext?.setValue?.(value!)
         },
         checked$co,
-        defaultChecked
+        defaultChecked,
     )
 
     // for create ripple manually
@@ -92,7 +92,7 @@ export const RadioButton = forwardRef<
                             el.setPointerCapture(e.pointerId)
                             const removeRipple = rippleRef.current?.rippleAt?.(
                                 Infinity,
-                                16
+                                16,
                             )
                             el.onpointerup = el.onpointercancel = () => {
                                 el.releasePointerCapture(e.pointerId)

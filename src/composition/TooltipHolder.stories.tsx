@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { TooltipHolder, TooltipHolderHandle } from './TooltipHolder'
+import { useRef } from 'react'
+import { mdiAccount, mdiDotsVertical, mdiMenu } from '@mdi/js'
 import { TopAppBar } from '../components/app-bar'
 import { IconButton } from '../components/icon-button'
-import { PlainTooltip, RichTooltip } from '../components/tooltip'
-import { mdiAccount, mdiDotsVertical, mdiMenu } from '@mdi/js'
 import { Default as menuDefaultStory } from '../components/menu/Menu.stories'
-import { useRef } from 'react'
+import { PlainTooltip, RichTooltip } from '../components/tooltip'
+import { TooltipHolder, TooltipHolderHandle } from './TooltipHolder'
 
 const meta = {
     title: 'composition/TooltipHolder',
@@ -59,7 +58,7 @@ export const Default: Story = {
                                             {},
                                             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                                             //@ts-ignore
-                                            {}
+                                            {},
                                         )}
                                     </div>
                                 }

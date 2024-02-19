@@ -1,4 +1,5 @@
 import './SodaImage.scss'
+import clsx from 'clsx'
 import {
     forwardRef,
     useCallback,
@@ -7,13 +8,12 @@ import {
     useRef,
     useState,
 } from 'react'
-import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
 import { mdiImageBrokenVariant } from '@mdi/js'
 import { IconButton } from '@/components/icon-button'
 import { CircularProgressIndicator } from '@/components/progress-indicator/CircularProgressIndicator'
 import { SodaSimpleTransition } from '@/composition/SodaTransition'
 import { isNumber } from '@/utils/misc'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * A high-level image component, supports loading progress (when `crossOrigin` is specified),
@@ -74,7 +74,7 @@ export const SodaImage = forwardRef<
              */
             children?:
                 | ((
-                      state: 'lazy' | 'loading' | 'error' | 'loaded'
+                      state: 'lazy' | 'loading' | 'error' | 'loaded',
                   ) => React.ReactNode)
                 | React.ReactNode
         },
@@ -101,15 +101,15 @@ export const SodaImage = forwardRef<
         children,
         ...props
     },
-    ref
+    ref,
 ) {
     const [state, setState] = useState<'lazy' | 'loading' | 'error' | 'loaded'>(
-        'loading'
+        'loading',
     )
     const eRef = useRef<HTMLImageElement>(null)
     const timeoutRef = useRef<number | undefined>(undefined)
     const [loadPercentage, setLoadPercentage] = useState<number | undefined>(
-        undefined
+        undefined,
     )
     const hasIntoView = useRef(false)
 
@@ -144,7 +144,7 @@ export const SodaImage = forwardRef<
                     return
                 }
                 const contentLength = Number.parseInt(
-                    res.headers.get('content-length')!
+                    res.headers.get('content-length')!,
                 )
                 if (contentLength) {
                     // content-length is provided

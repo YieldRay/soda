@@ -1,8 +1,8 @@
 import './tooltip.scss'
-import { ActionButton } from '@/composition/ActionButton'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
+import { ActionButton } from '@/composition/ActionButton'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * [tips]: You may consider manually add `<br />`
@@ -18,7 +18,7 @@ export const RichTooltip = forwardRef<
     }>
 >(function RichTooltip(
     { className, subhead, children, action, onActionClick, ...props },
-    ref
+    ref,
 ) {
     return (
         <div

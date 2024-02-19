@@ -1,10 +1,10 @@
 import './tab.scss'
 import clsx from 'clsx'
+import { forwardRef, useContext } from 'react'
+import { useMergeEventHandlers } from '@/hooks/use-merge'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
-import { forwardRef, useContext } from 'react'
 import { TabContext } from './Tabs'
-import { useMergeEventHandlers } from '@/hooks/use-merge'
 
 /**
  * Use `<Tab>` to wrap it
@@ -21,7 +21,7 @@ export const Tab = forwardRef<
     }>
 >(function Tab(
     { children, icon, index, active: initActive = false, className, ...props },
-    ref
+    ref,
 ) {
     const tabContext = useContext(TabContext)
     const active =

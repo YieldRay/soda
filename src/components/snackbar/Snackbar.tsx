@@ -1,11 +1,11 @@
 import './snackbar.scss'
 import clsx from 'clsx'
-import { ActionButton } from '@/composition/ActionButton'
-import { ExtendProps } from '@/utils/type'
 import { useRef } from 'react'
 import { mdiClose } from '@mdi/js'
 import Icon from '@mdi/react'
+import { ActionButton } from '@/composition/ActionButton'
 import { useToggleAnimation } from '@/hooks/use-toggle-animation'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * This component DO NOT have ref forwarded
@@ -21,6 +21,8 @@ export function Snackbar({
     full = false,
     open = false,
     fixed = false,
+    zIndex = 1,
+    inset = 'auto 0 0',
     className,
     children,
     ...props
@@ -32,9 +34,21 @@ export function Snackbar({
     thirdLine?: boolean
     /**
      * When enable `fixed`, you can toggle `open` property to
-     * open and hide the SideSheet without any help of other component
+     * open and hide the Snackbar without any help of other component
+     *
+     * See also `open` `zIndex` `inset`
      */
     fixed?: boolean
+    /**
+     * CSS `z-index`, if `fixed` set to `true`
+     *
+     * @default 2
+     */
+    zIndex?: number
+    /**
+     * CSS `inset`, if `fixed` set to `true`
+     */
+    inset?: string
     /**
      * See `fixed`
      */
@@ -64,7 +78,7 @@ export function Snackbar({
                 {
                     duration: 600,
                     easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                }
+                },
             )
         },
         hide(el) {
@@ -77,7 +91,7 @@ export function Snackbar({
                 {
                     duration: 300,
                     easing: 'cubic-bezier(0, 0, 0, 1)',
-                }
+                },
             )
         },
     })
@@ -113,13 +127,14 @@ export function Snackbar({
     if (fixed)
         return (
             <div
+                ref={ref}
                 className={clsx(
                     'sd-snackbar_holder',
                     full
                         ? 'sd-snackbar_holder-full'
-                        : `sd-snackbar_holder-placement_${placement}`
+                        : `sd-snackbar_holder-placement_${placement}`,
                 )}
-                ref={ref}
+                style={{ position: 'fixed', zIndex, inset }}
             >
                 {snackbar}
             </div>

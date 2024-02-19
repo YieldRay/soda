@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Fab } from '.'
-import Icon from '@mdi/react'
 import { mdiPencilOutline } from '@mdi/js'
+import Icon from '@mdi/react'
+import { Fab } from '.'
 
 const meta = {
     title: 'components/Button/Fab',

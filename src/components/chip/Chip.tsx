@@ -1,7 +1,7 @@
 import './chip.scss'
 import clsx from 'clsx'
-import { Ripple } from '@/ripple/Ripple'
 import { forwardRef } from 'react'
+import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type.ts'
 
 /**
@@ -32,7 +32,7 @@ export const Chip = forwardRef<
         children,
         ...props
     },
-    ref
+    ref,
 ) {
     return (
         <Ripple

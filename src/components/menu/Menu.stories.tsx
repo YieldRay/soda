@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { MenuItem, Menu } from '.'
-import { Divider } from '../divider'
 import { mdiCheck, mdiClose, mdiMagnify } from '@mdi/js'
 import Icon from '@mdi/react'
+import { Menu, MenuItem } from '.'
+import { Divider } from '../divider'
 
 const meta = {
     title: 'components/Menu',

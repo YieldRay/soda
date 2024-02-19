@@ -1,7 +1,8 @@
+import { mergeStyles } from '@/utils/style'
 import './app-bar.scss'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * `<BottomAppBar>` has fixed style `height: 80px`
@@ -19,32 +20,48 @@ export const BottomAppBar = forwardRef<
          */
         fab?: React.ReactNode
         /**
-         * Fix the component to the bottom side,
-         * if set to a number, it also become the zIndex
+         * Fix the component to the top side,
+         *
+         * See also `zIndex` `inset`
          */
-        fixed?: boolean | number
+        fixed?: boolean
+        /**
+         * CSS `z-index`, if `fixed` set to `true`
+         *
+         * @default 1
+         */
+        zIndex?: number
+        /**
+         * CSS `inset`, if `fixed` set to `true`
+         */
+        inset?: string
     }>
 >(function BottomAppBar(
-    { buttons, fab, fixed, className, style, ...props },
-    ref
+    {
+        buttons,
+        fab,
+        fixed,
+        zIndex = 1,
+        inset = 'auto 0 0',
+        className,
+        style,
+        ...props
+    },
+    ref,
 ) {
     return (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-bottom_app_bar', className)}
-            style={{
-                ...(fixed === true
-                    ? {
-                          position: 'fixed',
-                          bottom: '0',
-                          zIndex: typeof fixed === 'boolean' ? 1 : fixed,
-                          width: '100%',
-                          boxSizing: 'border-box',
-                      }
-                    : undefined),
-                ...style,
-            }}
+            style={mergeStyles(
+                fixed && {
+                    position: 'fixed',
+                    zIndex,
+                    inset,
+                },
+                style,
+            )}
         >
             <div className="sd-bottom_app_bar-buttons">{buttons}</div>
             <div className="sd-bottom_app_bar-fab">{fab}</div>

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { SodaImage } from './SodaImage'
 import { useRef, useState } from 'react'
 import { Button } from '..'
+import { SodaImage } from './SodaImage'
 
 const meta = {
     title: 'composition/SodaImage',

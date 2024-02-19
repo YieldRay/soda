@@ -7,12 +7,12 @@ import { ripple } from './ripple-effect'
 export function useRippleEffect<T extends HTMLElement>(
     eleRef: React.RefObject<T>,
     duration?: number,
-    color?: string
+    color?: string,
 ) {
     useEffect(
         () =>
             eleRef.current ? ripple(eleRef.current, color)?.cleanup : undefined,
-        [eleRef, duration, color]
+        [eleRef, duration, color],
     )
 }
 

@@ -1,8 +1,8 @@
 import './progress-indicator.scss'
-import { forwardRef } from 'react'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
+import { forwardRef } from 'react'
 import { isNumber } from '@/utils/misc'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * [notice]: This component has default `min-width: 5rem` and `width: 100%` for convenience.
@@ -23,7 +23,7 @@ export const LinearProgressIndicator = forwardRef<
     }>
 >(function LinearProgressIndicator(
     { value, thickness, className, ...props },
-    ref
+    ref,
 ) {
     return (
         <div

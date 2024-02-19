@@ -2,12 +2,12 @@ import { useEffect } from 'react'
 
 export function useEventListener<
     T extends HTMLElement,
-    K extends keyof HTMLElementEventMap
+    K extends keyof HTMLElementEventMap,
 >(
     elementRef: React.RefObject<T> | T,
     type: K,
     listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => unknown,
-    options?: boolean | AddEventListenerOptions
+    options?: boolean | AddEventListenerOptions,
 ) {
     const el =
         elementRef instanceof HTMLElement ? elementRef : elementRef.current
@@ -19,15 +19,15 @@ export function useEventListener<
 
 export function useEventListenerEffect<
     T extends HTMLElement,
-    K extends keyof HTMLElementEventMap
+    K extends keyof HTMLElementEventMap,
 >(
     elementRef: React.RefObject<T>,
     type: K,
     listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => unknown,
-    options?: boolean | AddEventListenerOptions
+    options?: boolean | AddEventListenerOptions,
 ) {
     useEffect(
         () => useEventListener(elementRef, type, listener, options),
-        [elementRef, type, listener, options]
+        [elementRef, type, listener, options],
     )
 }

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { List } from '.'
-import Icon from '@mdi/react'
 import { mdiOpenInNew } from '@mdi/js'
+import Icon from '@mdi/react'
+import { List } from '.'
 
 const meta = {
     title: 'components/List',

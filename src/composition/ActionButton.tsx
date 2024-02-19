@@ -1,9 +1,9 @@
 import './ActionButton.scss'
-import { Ripple } from '@/ripple/Ripple'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
 import { usePrefersDark } from '@/hooks/use-media-query'
+import { Ripple } from '@/ripple/Ripple'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * This component is primary for internal use.
@@ -24,8 +24,8 @@ export const ActionButton = forwardRef<
             ? 'rgb(0 0 0 / 0.1)'
             : 'rgb(255 255 255 / 0.1)'
         : inverse
-        ? 'rgb(255 255 255 / 0.1)'
-        : 'rgb(0 0 0 / 0.1)'
+          ? 'rgb(255 255 255 / 0.1)'
+          : 'rgb(0 0 0 / 0.1)'
 
     return (
         <Ripple

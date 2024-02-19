@@ -28,7 +28,7 @@ export function RadioGroup({
     const [value, setValue] = useAutoState<string>(
         onChange,
         value$co,
-        defaultValue!
+        defaultValue!,
     )
 
     return (

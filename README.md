@@ -1,22 +1,25 @@
 # Soda
 
-[![soda-material](https://img.shields.io/badge/-soda--material-grey?logo=npm)](https://npm.im/soda-material)
-[![npm](https://img.shields.io/npm/v/soda-material)](https://www.npmjs.com/package/soda-material)
-[![install size](https://packagephobia.com/badge?p=soda-material)](https://packagephobia.com/result?p=soda-material)
+<a href="https://npm.im/soda-material" target="_blank"><img src="https://img.shields.io/badge/-soda--material-grey?logo=npm" alt="soda-material" /></a>&nbsp;
+<a href="https://www.npmjs.com/package/soda-material" target="_blank"><img src="https://img.shields.io/npm/v/soda-material" alt="npm" /></a>&nbsp;
+<a href="https://packagephobia.com/result?p=soda-material" target="_blank"><img src="https://packagephobia.com/badge?p=soda-material" alt="install size" /></a>&nbsp;
 
-A React(>=18) component library that may follow [Material Design 3](https://m3.material.io/components) (a.k.a. Material You)
+A React(>=18) component library that may follow
+[Material Design 3](https://m3.material.io/components) (a.k.a. Material You)
 
 Features:
 
 -   Less dependencies (bundled in npm package)
 -   Follow the Material You design
--   Complete implementation of Material You components (than any other library)
+-   Complete implementation of Material You components
 -   Keyboard accessibility
 -   Support both controlled and uncontrolled
 
 > [!WARNING]  
 > Working in progress, API is unstable and can be changed in any time.  
-> For production, you may want use the official [material web](https://github.com/material-components/material-web) component library or the [MDUI](https://www.mdui.org/) library.
+> For production, you may want use the official
+> [material web](https://github.com/material-components/material-web) component
+> library or the [MDUI](https://www.mdui.org/) library.
 
 This is an experimental project, (best) browser support:  
 Chrome>=105, Safari>=15.4, Firefox>=121
@@ -38,11 +41,12 @@ import { Button } from 'soda-material'
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Button variant="outlined">Button</Button>
-    </React.StrictMode>
+    </React.StrictMode>,
 )
 ```
 
-If bundle size is your concern, it's also possible to import only the specific component.
+If bundle size is your concern, it's also possible to import only the specific
+component.
 
 ```tsx
 import 'soda-material/dist/style.css' // Still need to import the style in some where
@@ -66,11 +70,15 @@ Next.js is also supported out of the box.
 See: <https://soda.js.org>
 
 > [!IMPORTANT]  
-> Only components defined in the [Material Design Docs](https://m3.material.io/components) will be put into `src/components` directory, these components do NOT include heavy logic.  
-> Other necessary components or helpers can be found at `src/composition` directory.
+> Only components defined in the
+> [Material Design Docs](https://m3.material.io/components) will be put into
+> `src/components` directory, these components do NOT include heavy logic.  
+> Other necessary components or helpers can be found at `src/composition`
+> directory.
 
 > [!NOTE]  
-> Most components in `src/components` forward `ref` attribute for library interactivity.  
+> Most components in `src/components` forward `ref` attribute for library
+> interactivity.  
 > If has, it will be the root DOM node of the entire component.  
 > If not, it will be documented and will be checked if you use typescript.
 
@@ -101,7 +109,8 @@ A replacement is google fonts: <https://fonts.google.com/icons>
 It's highly recommended that you use a font that supports `font-weight: 500`,  
 as some component state requires it to behavior clear to user.
 
-The easiest way is to use the `Roboto` font, just simply add a few lines of css code as below!
+The easiest way is to use the `Roboto` font, just simply add a few lines of css
+code as below!
 
 ```css
 /* using Roboto */
@@ -127,8 +136,11 @@ Chinese user may prefer:
 
 ## Theming
 
-This library use the official material design css variable (`--md-sys-color-<token>`, at `:root`) to theming.  
-So you can simply overwrite them or use the [@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript) package to apply theme.
+This library use the official material design css variable
+(`--md-sys-color-<token>`, at `:root`) to theming.  
+So you can simply overwrite them or use the
+[@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript)
+package to apply theme.
 
 ```tsx
 // we also provide a series of wrapper function, making theming easier
@@ -168,6 +180,29 @@ function SelectThemeFromFileButton() {
 }
 ```
 
+## zIndex
+
+Some components have `fixed` boolean property, it's useful to set it to true.  
+When enabled, the component will become `position: fixed`.  
+Also, components have default `zIndex` value, but you can also set the `zIndex`  
+property to overwrite it, it also expose an `inset` property, which can be used  
+for controlling the position.
+
+```tsx
+<Snackbar fixed open={true} zIndex={999} inset="auto 0 5rem">
+    Fixed Snackbar
+</Snackbar>
+```
+
+Currently, the default `zIndex` is:
+
+| Component  | zIndex |
+| ---------- | ------ |
+| snackbar   | 1      |
+| app-bar    | 1      |
+| navigation | 2      |
+| sheet      | 3      |
+
 # TODO
 
 -   [ ] ARIA support
@@ -183,6 +218,8 @@ npm run storybook
 
 Naming convention:
 
--   a `.tsx` file with capitalized beginning is a react component (export a same name, no default export)
--   a `.scss` file will use strigula to separate component name in file name
--   in any css code, use underscore to separate component name, use strigula to separate name segments
+-   a `.tsx` file with capitalized beginning is a react component (exports the same
+    name, no default export)
+-   a `.scss` file will use _hyphen_ to separate component name in file name
+-   in any css code, use _underscore_ to separate component name, use _hyphen_ to
+    separate name segments

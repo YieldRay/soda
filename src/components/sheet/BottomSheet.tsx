@@ -1,7 +1,5 @@
 import './sheet.scss'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
-import { Scrim } from '@/composition/Scrim'
 import {
     forwardRef,
     useImperativeHandle,
@@ -9,6 +7,8 @@ import {
     useRef,
     useState,
 } from 'react'
+import { Scrim } from '@/composition/Scrim'
+import { ExtendProps } from '@/utils/type'
 
 export type BottomSheetHandle = ReturnType<typeof attachDragEvent>
 
@@ -30,8 +30,15 @@ export const BottomSheet = forwardRef<
         hideDragHandle?: boolean
         /**
          * Set fixed to true allow you toggle show and hide via ref
+         *
+         * See also `onScrimClick` `zIndex`
          */
         fixed?: boolean
+        /**
+         * CSS `z-index`, if `fixed` set to `true`
+         *
+         * @default 3
+         */
         zIndex?: number
         /**
          * Only works if `fixed` set to true
@@ -56,13 +63,13 @@ export const BottomSheet = forwardRef<
         children,
         ...props
     },
-    ref
+    ref,
 ) {
     const sheetRef = useRef<HTMLDivElement>(null)
     const handleRef = useRef<HTMLDivElement>(null)
 
     const dragHandlerRef = useRef<ReturnType<typeof attachDragEvent> | null>(
-        null
+        null,
     )
     const [visible, setVisible] = useState(false) // = isOpen
 
@@ -130,7 +137,7 @@ export function attachDragEvent(
     options?: {
         onShow?(): void
         onHide?(): void
-    }
+    },
 ) {
     /**
      * do not capture pointer when the dragHandle is the entire sheet (when `hideDragHandle` set to true),
@@ -155,7 +162,7 @@ export function attachDragEvent(
             {
                 duration: 200,
                 easing: 'cubic-bezier(0.3, 0, 1, 1)',
-            }
+            },
         )
         animation.id = 'hide'
         animation.onfinish = animation.oncancel = () => {

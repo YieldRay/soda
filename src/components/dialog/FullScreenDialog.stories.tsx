@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { FullScreenDialog } from '.'
-import { Button } from '../button'
 import { useState } from 'react'
 import { Scrim } from '@/composition/Scrim'
 import { Portal } from '@/utils/Portal'
+import { FullScreenDialog } from '.'
+import { Button } from '../button'
 
 const meta = {
     title: 'components/Dialog/FullScreenDialog',

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
+import { mdiMagnify, mdiMenu } from '@mdi/js'
 import { Search } from '.'
 import { IconButton } from '../icon-button'
-import { mdiMagnify, mdiMenu } from '@mdi/js'
 
 const meta = {
     title: 'components/Search',

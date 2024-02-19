@@ -1,3 +1,4 @@
+import './tooltip.scss'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 

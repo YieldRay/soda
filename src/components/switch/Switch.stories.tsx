@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Switch } from '.'
 import { useState } from 'react'
-import Icon from '@mdi/react'
 import { mdiCheck, mdiClose } from '@mdi/js'
+import Icon from '@mdi/react'
+import { Switch } from '.'
 
 const meta = {
     title: 'components/Switch',

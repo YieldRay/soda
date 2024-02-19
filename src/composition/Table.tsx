@@ -1,7 +1,7 @@
 import './Table.scss'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * Just a wrapper of `<table class="sd-table">`

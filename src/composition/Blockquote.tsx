@@ -1,12 +1,12 @@
 import './Blockquote.scss'
 import clsx from 'clsx'
 import { forwardRef, useRef, useState } from 'react'
-import { Icon } from '@mdi/react'
-import { ExtendProps } from '@/utils/type'
-import { IconRippleButton } from './IconRippleButton'
 import { mdiClose } from '@mdi/js'
+import { Icon } from '@mdi/react'
 import { useCollapsible } from '@/hooks/use-collapsible'
 import { useMergeRefs } from '@/hooks/use-merge'
+import { ExtendProps } from '@/utils/type'
+import { IconRippleButton } from './IconRippleButton'
 
 export const Blockquote = forwardRef<
     HTMLQuoteElement,
@@ -34,7 +34,7 @@ export const Blockquote = forwardRef<
             children,
             ...props
         },
-        ref
+        ref,
     ) => {
         const [isClosed, setClosed] = useState(false)
 
@@ -48,7 +48,7 @@ export const Blockquote = forwardRef<
                 className={clsx(
                     'sd-blockquote',
                     variant && `sd-blockquote-${variant}`,
-                    className
+                    className,
                 )}
             >
                 <div className="sd-blockquote_inner">
@@ -70,5 +70,5 @@ export const Blockquote = forwardRef<
                 </div>
             </blockquote>
         )
-    }
+    },
 )

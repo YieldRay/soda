@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import { Scrim } from './Scrim'
-import { Portal } from '@/utils/Portal'
-import { Card } from '@/components/card'
 import { Button } from '@/components/button'
+import { Card } from '@/components/card'
 import { LinearProgressIndicator } from '@/components/progress-indicator'
+import { Portal } from '@/utils/Portal'
+import { Scrim } from './Scrim'
 
 const meta = {
     title: 'composition/Scrim',

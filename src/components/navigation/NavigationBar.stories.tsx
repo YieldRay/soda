@@ -1,18 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { NavigationBar } from '.'
 import { useState } from 'react'
-import Icon from '@mdi/react'
 import {
-    mdiHome,
-    mdiHomeOutline,
     mdiCardSearch,
     mdiCardSearchOutline,
     mdiCog,
     mdiCogOutline,
+    mdiHome,
+    mdiHomeOutline,
 } from '@mdi/js'
-import { Switch } from '../switch'
+import Icon from '@mdi/react'
 import { Portal } from '@/utils/Portal'
+import { NavigationBar } from '.'
+import { Switch } from '../switch'
 
 const meta = {
     title: 'components/Navigation/NavigationBar',
@@ -72,7 +71,7 @@ export const Default: Story = {
                                 items.map((item) => ({
                                     ...item,
                                     active: item.key === key,
-                                }))
+                                })),
                             )
                         }}
                     />

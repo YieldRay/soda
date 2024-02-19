@@ -9,7 +9,7 @@ export const clamp = (number: number, lower: number, upper: number) =>
 
 export const chunk = <T>(
     array: Array<T> | null | undefined,
-    size = 1
+    size = 1,
 ): T[][] => {
     if (!array) return []
     const result: T[][] = []

@@ -1,8 +1,8 @@
 import './fab.scss'
-import { Ripple } from '@/ripple/Ripple'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type.ts'
 import { forwardRef } from 'react'
+import { Ripple } from '@/ripple/Ripple'
+import { ExtendProps } from '@/utils/type.ts'
 
 /**
  * @specs https://m3.material.io/components/floating-action-button/specs
@@ -32,7 +32,7 @@ export const Fab = forwardRef<
         children,
         ...props
     },
-    ref
+    ref,
 ) {
     return (
         <Ripple

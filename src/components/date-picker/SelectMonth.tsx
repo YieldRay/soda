@@ -1,6 +1,6 @@
+import { mdiCheck } from '@mdi/js'
 import Icon from '@mdi/react'
 import { MenuItem } from '@/components/menu/MenuItem'
-import { mdiCheck } from '@mdi/js'
 
 export function SelectMonth({
     current,

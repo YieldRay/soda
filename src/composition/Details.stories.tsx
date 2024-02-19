@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Details } from './Details'
 import { useState } from 'react'
+import { Details } from './Details'
 
 const meta = {
     title: 'composition/Details',

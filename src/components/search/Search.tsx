@@ -1,7 +1,7 @@
 import './search.scss'
-import { ExtendProps } from '@/utils/type'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * @specs https://m3.material.io/components/search/specs
@@ -37,7 +37,7 @@ export const Search = forwardRef<
         style,
         ...props
     },
-    ref
+    ref,
 ) {
     return (
         <div
@@ -53,7 +53,7 @@ export const Search = forwardRef<
                 {...inputProps}
                 className={clsx(
                     'sd-search-supporting_text',
-                    inputProps?.className
+                    inputProps?.className,
                 )}
                 placeholder={placeholder}
                 defaultValue={defaultValue}

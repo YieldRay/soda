@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { NestedMenu as Menu, NestedMenuItem as MenuItem } from './NestedMenu'
-import { IconButton } from '..'
 import { mdiDotsVertical } from '@mdi/js'
+import { IconButton } from '..'
+import { NestedMenu as Menu, NestedMenuItem as MenuItem } from './NestedMenu'
 
 const meta = {
     title: 'composition/NestedMenu',

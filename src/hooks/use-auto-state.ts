@@ -13,17 +13,17 @@ import { useState } from 'react'
 export function useAutoState<T>(
     onChange: ((value: T) => void) | undefined,
     value$co: T,
-    defaultValue?: T
+    defaultValue?: T,
 ): [T, (value: T) => void]
 export function useAutoState<T>(
     onChange: ((value: T) => void) | undefined,
     value$co: T | undefined,
-    defaultValue: T
+    defaultValue: T,
 ): [T, (value: T) => void]
 export function useAutoState<T>(
     onChange: ((value: T) => void) | undefined,
     value$co?: T,
-    defaultValue?: T
+    defaultValue?: T,
 ): [T, (value: T) => void] {
     const isControlled = value$co !== undefined
     const [value$un, setValue$un] = useState(defaultValue)

@@ -26,12 +26,12 @@ export const Switch = forwardRef<
         children,
         ...props
     },
-    ref
+    ref,
 ) {
     const [checked, setChecked] = useAutoState(
         onChange,
         checked$co,
-        defaultChecked
+        defaultChecked,
     )
 
     return (

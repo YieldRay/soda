@@ -4,13 +4,13 @@ const DATASET_NAME = 'sdRipple' //? dataset name will automatically convert to u
 
 export const DEFAULT_RIPPLE_COLOR = matchMedia('(prefers-color-scheme: dark)')
     .matches
-    ? 'rgb(255 255 255 / 0.06)'
-    : 'rgba(0 0 0 / 0.06)'
+    ? 'rgb(255 255 255 / 0.2)'
+    : 'rgba(0 0 0 / 0.2)'
 
 export const REVERSE_RIPPLE_COLOR = matchMedia('(prefers-color-scheme: dark)')
     .matches
-    ? 'rgba(0 0 0 / 0.06)'
-    : 'rgb(255 255 255 / 0.06)'
+    ? 'rgba(0 0 0 / 0.2)'
+    : 'rgb(255 255 255 / 0.2)'
 
 export const AUTO_RIPPLE_COLOR = CSS.supports('color: rgb(from white r g b)')
     ? 'rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity))'
@@ -53,7 +53,7 @@ export function ripple(el: HTMLElement, rippleColor = AUTO_RIPPLE_COLOR) {
             Math.hypot(rippleX, rippleY),
             Math.hypot(rippleX, height - rippleY),
             Math.hypot(width - rippleX, rippleY),
-            Math.hypot(width - rippleX, height - rippleY)
+            Math.hypot(width - rippleX, height - rippleY),
         )
 
         // position:relative is a MUST for ripple
@@ -87,7 +87,7 @@ export function ripple(el: HTMLElement, rippleColor = AUTO_RIPPLE_COLOR) {
                 duration: Math.max(radius * 1.6, 400),
                 easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
                 fill: 'forwards',
-            }
+            },
         )
         scaleUpAnimation.id = 'scaleUpAnimation'
 
@@ -104,7 +104,7 @@ export function ripple(el: HTMLElement, rippleColor = AUTO_RIPPLE_COLOR) {
                     duration: 400,
                     easing: 'linear',
                     fill: 'forwards',
-                }
+                },
             )
             fadeOutAnimation.id = 'fadeOutAnimation'
 

@@ -1,25 +1,25 @@
 import './date-picker.scss'
 import { useRef, useState } from 'react'
-import { Button } from '../button'
-import { TextField } from '../text-field'
-import { MenuButton } from './MenuButton'
-import { IconRippleButton } from '@/composition/IconRippleButton'
-import { mdiCalendarBlank } from '@mdi/js'
 import {
-    useFloating,
     autoUpdate,
-    offset,
     flip,
+    offset,
     shift,
+    useFloating,
     useInteractions,
     useRole,
     useTransitionStyles,
 } from '@floating-ui/react'
+import { mdiCalendarBlank } from '@mdi/js'
+import { IconRippleButton } from '@/composition/IconRippleButton'
 import { common } from '@/utils/floating-ui'
 import { startViewTransitionFlushSync } from '@/utils/view-transition'
-import { SelectYear } from './SelectYear'
-import { SelectMonth } from './SelectMonth'
+import { Button } from '../button'
+import { TextField } from '../text-field'
+import { MenuButton } from './MenuButton'
 import { SelectDay } from './SelectDay'
+import { SelectMonth } from './SelectMonth'
+import { SelectYear } from './SelectYear'
 
 /**
  * @specs https://m3.material.io/components/date-pickers/specs
@@ -76,7 +76,7 @@ export function DockedDatePicker({
         () => bodyRef.current?.classList.remove('sd-vt-slide_right_to_left'),
     ]
     const [state, setState] = useState<'calendar' | 'year' | 'month'>(
-        'calendar'
+        'calendar',
     )
 
     // the state result
@@ -151,21 +151,23 @@ export function DockedDatePicker({
                                 state === 'calendar' &&
                                 startViewTransitionFlushSync(
                                     () => setMonth((m) => m - 1),
-                                    ...slideLeftToRight
+                                    ...slideLeftToRight,
                                 )
                             }
                             onRight={() =>
                                 state === 'calendar' &&
                                 startViewTransitionFlushSync(
                                     () => setMonth((m) => m + 1),
-                                    ...slideRightToLeft
+                                    ...slideRightToLeft,
                                 )
                             }
                             onClick={() =>
                                 startViewTransitionFlushSync(() =>
                                     setState((state) =>
-                                        state === 'month' ? 'calendar' : 'month'
-                                    )
+                                        state === 'month'
+                                            ? 'calendar'
+                                            : 'month',
+                                    ),
                                 )
                             }
                         >
@@ -179,20 +181,20 @@ export function DockedDatePicker({
                             onLeft={() =>
                                 state === 'calendar' &&
                                 startViewTransitionFlushSync(() =>
-                                    setYear((y) => y - 1)
+                                    setYear((y) => y - 1),
                                 )
                             }
                             onRight={() =>
                                 state === 'calendar' &&
                                 startViewTransitionFlushSync(() =>
-                                    setYear((y) => y + 1)
+                                    setYear((y) => y + 1),
                                 )
                             }
                             onClick={() =>
                                 startViewTransitionFlushSync(() =>
                                     setState((state) =>
-                                        state === 'year' ? 'calendar' : 'year'
-                                    )
+                                        state === 'year' ? 'calendar' : 'year',
+                                    ),
                                 )
                             }
                         >

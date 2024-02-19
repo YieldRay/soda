@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { SegmentedButton } from '.'
 import { mdiCheck, mdiStarOutline, mdiTriangleOutline } from '@mdi/js'
 import Icon from '@mdi/react'
+import { SegmentedButton } from '.'
 
 const items = [
     {

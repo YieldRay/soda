@@ -1,4 +1,4 @@
-import type { UseTransitionStylesProps, Alignment } from '@floating-ui/react'
+import type { Alignment, UseTransitionStylesProps } from '@floating-ui/react'
 
 export const common: UseTransitionStylesProps['common'] = ({
     side,

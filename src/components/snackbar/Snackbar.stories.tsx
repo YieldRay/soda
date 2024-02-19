@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Snackbar } from '.'
 import { useState } from 'react'
-import { Switch } from '../switch'
 import { Portal } from '@/utils/Portal'
+import { Snackbar } from '.'
+import { Switch } from '../switch'
 
 const meta = {
     title: 'components/Snackbar',

@@ -1,10 +1,10 @@
 import './sheet.scss'
 import clsx from 'clsx'
-import { Divider } from '../divider'
-import { Scrim } from '@/composition/Scrim'
-import { ExtendProps } from '@/utils/type'
-import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 import { useRef } from 'react'
+import { Scrim } from '@/composition/Scrim'
+import { useToggleAnimation } from '@/hooks/use-toggle-animation'
+import { ExtendProps } from '@/utils/type'
+import { Divider } from '../divider'
 
 /**
  * This component DO NOT have ref forwarded.
@@ -31,21 +31,28 @@ export function SideSheet({
     children?: React.ReactNode
     footer?: React.ReactNode
     /**
-     * When enable `modal`, you can toggle `open` property to
-     * open and hide the SideSheet without any help of other component
-     */
-    modal?: boolean
-    /**
      * Position of the sheet, default `right`
      */
     position?: 'left' | 'right'
+    /**
+     * When enable `modal`, you can toggle `open` property to
+     * open and hide the SideSheet without help of any other component
+     *
+     * See also `onScrimClick` `zIndex`
+     */
+    modal?: boolean
+    /**
+     * CSS `z-index`, if `fixed` set to `true`
+     *
+     * @default 3
+     */
+    zIndex?: number
     /**
      * Only works if `modal` set to true
      *
      * Most of the case you want toggle `open` to false
      */
     onScrimClick?(): void
-    zIndex?: number
 }>) {
     const ref = useRef<HTMLDivElement>(null)
     useToggleAnimation(ref, open, {
@@ -61,7 +68,7 @@ export function SideSheet({
                     {
                         duration: 400,
                         easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                    }
+                    },
                 )
 
             // standard
@@ -79,7 +86,7 @@ export function SideSheet({
                 {
                     duration: 200,
                     easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                }
+                },
             )
         },
         hide(el) {
@@ -94,7 +101,7 @@ export function SideSheet({
                     {
                         duration: 250,
                         easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                    }
+                    },
                 )
 
             // standard
@@ -112,7 +119,7 @@ export function SideSheet({
                 {
                     duration: 200,
                     easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                }
+                },
             )
         },
     })
@@ -124,7 +131,7 @@ export function SideSheet({
             className={clsx(
                 'sd-side_sheet',
                 modal ? 'sd-side_sheet_modal' : 'sd-side_sheet_standard',
-                className
+                className,
             )}
             data-sd-position={position}
         >

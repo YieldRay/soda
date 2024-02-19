@@ -1,10 +1,10 @@
 import './IconRippleButton.scss'
-import { forwardRef } from 'react'
 import clsx from 'clsx'
+import { forwardRef } from 'react'
 import Icon from '@mdi/react'
+import { useMergeRefs } from '@/hooks/use-merge'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
-import { useMergeRefs } from '@/hooks/use-merge'
 
 /**
  * This component is a replacement for <IconButton> when you want the element
@@ -27,7 +27,7 @@ export const IconRippleButton = forwardRef<
             {...props}
             ref={useMergeRefs(
                 ref,
-                (e) => size && e?.style.setProperty('--size', size)
+                (e) => size && e?.style.setProperty('--size', size),
             )}
             className={clsx('sd-icon_ripple_button', className)}
         >

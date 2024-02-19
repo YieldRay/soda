@@ -1,7 +1,7 @@
 import './dialog.scss'
+import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
-import clsx from 'clsx'
 
 /**
  * @specs https://m3.material.io/components/dialogs/specs

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import { getFormatCalendar, isSameDay } from './calendar'
 import { useRippleRef } from '@/ripple/hooks'
+import { getFormatCalendar, isSameDay } from './calendar'
 
 export function SelectDay({
     year,
@@ -22,7 +22,7 @@ export function SelectDay({
                         <div key={day}>
                             <time>{day}</time>
                         </div>
-                    )
+                    ),
                 )}
             </header>
             <div className="select-day-body">
@@ -36,7 +36,7 @@ export function SelectDay({
                                     'day',
                                     isSameDay(col.date, current) && 'selected',
                                     col.isToday && 'today',
-                                    !col.isThisMonth && 'disabled'
+                                    !col.isThisMonth && 'disabled',
                                 )}
                                 data-sd-disabled={!col.isThisMonth}
                                 dateTime={`${year}-${month}-${col.day}`}

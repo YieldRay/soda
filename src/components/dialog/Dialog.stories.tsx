@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
+import { useRef, useState } from 'react'
+import { FloatingOverlay } from '@floating-ui/react'
+import { SodaSimpleTransition } from '@/composition'
+import { Scrim } from '@/composition/Scrim'
+import { Portal } from '@/utils/Portal'
 import { Dialog } from '.'
 import { Button } from '../button'
-import { useRef, useState } from 'react'
-import { Scrim } from '@/composition/Scrim'
-import { FloatingOverlay } from '@floating-ui/react'
-import { Portal } from '@/utils/Portal'
-import { SodaSimpleTransition } from '@/composition'
 
 const meta = {
     title: 'components/Dialog/Dialog',

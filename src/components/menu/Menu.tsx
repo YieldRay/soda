@@ -1,7 +1,7 @@
 import './menu.scss'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
 import { forwardRef } from 'react'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * The `<Menu>` container, will contain `<MenuItem>` and `<Divider>` components

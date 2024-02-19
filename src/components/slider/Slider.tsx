@@ -1,19 +1,19 @@
 import './slider.scss'
-import { useEffect, useRef, useState, forwardRef, useCallback } from 'react'
-import { clamp } from '@/utils/misc'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import {
-    autoUpdate,
-    useFloating,
-    offset,
-    flip,
-    shift,
     arrow,
+    autoUpdate,
+    flip,
     FloatingArrow,
+    offset,
+    shift,
+    useFloating,
 } from '@floating-ui/react'
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeRefs } from '@/hooks/use-merge'
+import { clamp } from '@/utils/misc'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * An slider component, note that you should set width or height (use `style` property) for this component!
@@ -65,7 +65,7 @@ export const Slider = forwardRef<
         hideLabel,
         ...props
     },
-    ref
+    ref,
 ) {
     const eRef = useRef<HTMLDivElement>(null)
     const thumbRef = useRef<HTMLDivElement>(null)
@@ -83,20 +83,20 @@ export const Slider = forwardRef<
             if (left >= unit / 2) segments++
             return segments * unit
         },
-        [steps, minValue, maxValue]
+        [steps, minValue, maxValue],
     )
 
     // just util function
     const valueLimitRange = useCallback(
         (value: number) => clamp(value, minValue, maxValue),
-        [minValue, maxValue]
+        [minValue, maxValue],
     )
 
     useEffect(() => {
         const container = eRef.current!
         container.style.setProperty(
             '--percentage',
-            toPercentage((value - minValue) / (maxValue - minValue))
+            toPercentage((value - minValue) / (maxValue - minValue)),
         )
     }, [value, minValue, maxValue])
 
@@ -127,8 +127,8 @@ export const Slider = forwardRef<
 
         setValue(
             valueLimitRange(
-                valueLimitStep(minValue + (maxValue - minValue) * percentage)
-            )
+                valueLimitStep(minValue + (maxValue - minValue) * percentage),
+            ),
         )
     }
 

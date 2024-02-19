@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
  */
 export function useResizeObserver(
     elementRef: React.RefObject<HTMLElement>,
-    options?: ResizeObserverOptions
+    options?: ResizeObserverOptions,
 ) {
     const [entry, setEntry] = useState<ResizeObserverEntry>()
 

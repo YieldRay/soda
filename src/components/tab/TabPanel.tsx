@@ -1,12 +1,12 @@
 import './tab.scss'
 import clsx from 'clsx'
-import { ExtendProps } from '@/utils/type'
 import { useContext, useLayoutEffect, useRef, useState } from 'react'
-import { TabContext } from './Tabs'
+import { ExtendProps } from '@/utils/type'
 import {
-    startViewTransitionFlushSync,
     isViewTransitionSupported,
+    startViewTransitionFlushSync,
 } from '@/utils/view-transition'
+import { TabContext } from './Tabs'
 
 /**
  * Use `<Tab>` to wrap it
@@ -33,7 +33,7 @@ export function TabPanel({
             ? tabContext?.allowTransitionRef?.current
                 ? false
                 : true
-            : false
+            : false,
     )
 
     useLayoutEffect(() => {
@@ -52,9 +52,12 @@ export function TabPanel({
             () => el.classList.remove('sd-vt-tab_slide_right_to_left'),
         ]
 
-        startViewTransitionFlushSync(() => {
-            setShow(true)
-        }, ...(index > (tabContext?.lastIndex || -1) ? r2l : l2r))
+        startViewTransitionFlushSync(
+            () => {
+                setShow(true)
+            },
+            ...(index > (tabContext?.lastIndex || -1) ? r2l : l2r),
+        )
     }, [active, index, tabContext])
 
     if (!active) return <></>

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { SodaTransition, SodaSimpleTransition } from './SodaTransition'
-import { Button } from '..'
 import { useState } from 'react'
+import { Button } from '..'
+import { SodaSimpleTransition, SodaTransition } from './SodaTransition'
 
 const meta = {
     title: 'composition/SodaTransition',

@@ -1,13 +1,9 @@
 // https://m3.material.io/components/bottom-app-bar/specs
 
 .sd-bottom_app_bar {
-    left: 0;
-    bottom: 0;
-    z-index: 2;
-
+    box-sizing: border-box;
     width: 100%;
     height: 80px;
-    box-sizing: border-box;
     padding: 12px 16px 12px 4px;
     overflow: hidden;
     background: var(--md-sys-color-surface-container);
@@ -32,12 +28,8 @@
 // https://m3.material.io/components/top-app-bar/specs
 
 .sd-top_app_bar {
-    left: 0;
-    top: 0;
-    z-index: 2;
-
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
     padding: 0 8px;
     background: var(--md-sys-color-surface);
     display: flex;

@@ -1,19 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { NavigationRail } from '.'
 import { useState } from 'react'
-import Icon from '@mdi/react'
 import {
-    mdiHome,
-    mdiHomeOutline,
     mdiCardSearch,
     mdiCardSearchOutline,
     mdiCog,
     mdiCogOutline,
+    mdiHome,
+    mdiHomeOutline,
 } from '@mdi/js'
+import Icon from '@mdi/react'
+import { Portal } from '@/utils/Portal'
+import { NavigationRail } from '.'
 import { Fab } from '../fab'
 import { Switch } from '../switch'
-import { Portal } from '@/utils/Portal'
 
 const meta = {
     title: 'components/Navigation/NavigationRail',
@@ -79,7 +78,7 @@ export const Default: Story = {
                                 items.map((item) => ({
                                     ...item,
                                     active: item.key === key,
-                                }))
+                                })),
                             )
                         }}
                     />

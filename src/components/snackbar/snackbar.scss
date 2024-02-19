@@ -66,11 +66,8 @@
 // the holder
 
 .sd-snackbar_holder {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
     padding: 1rem 1.5rem;
 
     &-full {

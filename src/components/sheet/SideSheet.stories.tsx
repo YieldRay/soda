@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { SideSheet } from '.'
 import { useState } from 'react'
 import { mdiArrowLeft, mdiClose } from '@mdi/js'
+import { SideSheet } from '.'
 import { Button } from '../button'
 import { IconButton } from '../icon-button'
-import { Switch } from '../switch'
 import { List } from '../list'
+import { Switch } from '../switch'
 
 const meta = {
     title: 'components/Sheet/SideSheet',

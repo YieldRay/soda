@@ -10,16 +10,19 @@
 }
 
 @mixin elevation-level1 {
-    box-shadow: 1px 1px var(--md-sys-elevation-level1) rgba(0 0 0 / 0.1),
+    box-shadow:
+        1px 1px var(--md-sys-elevation-level1) rgba(0 0 0 / 0.1),
         -1px 1px var(--md-sys-elevation-level1) rgba(0 0 0 / 0.1);
 }
 
 @mixin elevation-level2 {
-    box-shadow: 1px 1px var(--md-sys-elevation-level2) rgba(0 0 0 / 0.2),
+    box-shadow:
+        1px 1px var(--md-sys-elevation-level2) rgba(0 0 0 / 0.2),
         -1px 1px var(--md-sys-elevation-level2) rgba(0 0 0 / 0.2);
 }
 
 @mixin elevation-level3 {
-    box-shadow: 1px 1px var(--md-sys-elevation-level3) rgba(0 0 0 / 0.2),
+    box-shadow:
+        1px 1px var(--md-sys-elevation-level3) rgba(0 0 0 / 0.2),
         -1px 1px var(--md-sys-elevation-level3) rgba(0 0 0 / 0.2);
 }

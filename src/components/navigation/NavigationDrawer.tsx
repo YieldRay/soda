@@ -1,10 +1,10 @@
 import './navigation.scss'
 import clsx from 'clsx'
-import { Scrim } from '@/composition/Scrim'
-import { ExtendProps } from '@/utils/type'
-import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 import React, { forwardRef, useRef } from 'react'
+import { Scrim } from '@/composition/Scrim'
+import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 import { Ripple } from '@/ripple/Ripple'
+import { ExtendProps } from '@/utils/type'
 
 /**
  * It's common that you decide whether this component is modaled by
@@ -28,14 +28,16 @@ import { Ripple } from '@/ripple/Ripple'
 export function NavigationDrawer({
     open = false,
     onScrimClick,
-
     modal,
     headline,
-    zIndex = 3,
+    zIndex = 2,
     className,
     children,
     ...props
 }: ExtendProps<{
+    /**
+     * See `modal`
+     */
     open?: boolean
     /**
      * Headline text, can be omitted
@@ -48,14 +50,23 @@ export function NavigationDrawer({
     /**
      * When enable `modal`, you can toggle `open` property to
      * open and hide the SideSheet without any help of other component
+     *
+     * See also `open` `onScrimClick` `zIndex`
      */
     modal?: boolean
     /**
      * Only works if `modal` set to true
      *
      * Most of the case you want toggle `open` to false
+     *
+     * See also `zIndex`
      */
     onScrimClick?(): void
+    /**
+     * CSS `z-index`, if `modal` set to `true`
+     *
+     * @default 2
+     */
     zIndex?: number
 }>) {
     const ref = useRef<HTMLDivElement>(null)
@@ -69,7 +80,7 @@ export function NavigationDrawer({
                     {
                         duration: 400,
                         easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                    }
+                    },
                 )
 
             // standard
@@ -81,7 +92,7 @@ export function NavigationDrawer({
                 {
                     duration: 200,
                     easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                }
+                },
             )
         },
         hide(el) {
@@ -93,7 +104,7 @@ export function NavigationDrawer({
                     {
                         duration: 250,
                         easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                    }
+                    },
                 )
 
             // standard
@@ -105,7 +116,7 @@ export function NavigationDrawer({
                 {
                     duration: 200,
                     easing: 'cubic-bezier(0.2, 0, 0, 1)',
-                }
+                },
             )
         },
     })
@@ -119,7 +130,7 @@ export function NavigationDrawer({
                 modal
                     ? 'sd-navigation_drawer_modal'
                     : 'sd-navigation_drawer_standard',
-                className
+                className,
             )}
         >
             {headline && (

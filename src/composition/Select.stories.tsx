@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Select } from './Select'
-import { List } from '../components/list'
 import { mdiChevronRight } from '@mdi/js'
 import Icon from '@mdi/react'
+import { List } from '../components/list'
+import { Select } from './Select'
 
 const fruits = [
     '🍒 Cherry',

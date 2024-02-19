@@ -1,43 +1,4 @@
-import { usePrefersDark, useWindowSizeType } from '@/hooks/use-media-query'
-import {
-    applyThemeForSoda,
-    themeFromImageOrFile,
-    themeFromHexString,
-    argbFromHex,
-} from '@/utils/theme'
-import { Card } from '@/components/card'
-import { Button } from '@/components/button'
-import { Badge } from '@/components/badge'
 import { useEffect, useRef, useState } from 'react'
-import {
-    Checkbox,
-    DatePicker,
-    Divider,
-    IconButton,
-    List,
-    Menu,
-    MenuItem,
-    NavigationDrawer,
-    NavigationDrawerItem,
-    PlainTooltip,
-    LinearProgressIndicator,
-    CircularProgressIndicator,
-    RadioButton,
-    Search,
-    Switch,
-    Tab,
-    Tabs,
-    TextField,
-    TimePicker,
-    TopAppBar,
-    BottomSheet,
-    BottomSheetHandle,
-    BottomAppBar,
-    Fab,
-    Snackbar,
-    Dialog,
-} from '@/components'
-import { Select, TooltipHolder, PopoverHolder, Scrim } from '@/composition'
 import {
     mdiCheckboxOutline,
     mdiDeleteOutline,
@@ -57,9 +18,47 @@ import {
     mdiShare,
 } from '@mdi/js'
 import Icon from '@mdi/react'
-import { TabPanel } from '../components/tab/TabPanel'
+import {
+    Badge,
+    BottomAppBar,
+    BottomSheet,
+    BottomSheetHandle,
+    Button,
+    Card,
+    Checkbox,
+    CircularProgressIndicator,
+    DatePicker,
+    Dialog,
+    Divider,
+    Fab,
+    IconButton,
+    LinearProgressIndicator,
+    List,
+    Menu,
+    MenuItem,
+    NavigationDrawer,
+    NavigationDrawerItem,
+    PlainTooltip,
+    RadioButton,
+    Search,
+    Snackbar,
+    Switch,
+    Tab,
+    TabPanel,
+    Tabs,
+    TextField,
+    TimePicker,
+    TopAppBar,
+} from '@/components'
+import { PopoverHolder, Scrim, Select, TooltipHolder } from '@/composition'
 import { useFullscreen } from '@/hooks/use-fullscreen'
-import { Portal } from '@/utils/Portal'
+import { usePrefersDark, useWindowSizeType } from '@/hooks/use-media-query'
+import {
+    applyThemeForSoda,
+    argbFromHex,
+    themeFromHexString,
+    themeFromImageOrFile,
+} from '@/utils/theme'
 
 /**
  * Just an example widget to show example of `@material/material-color-utilities`
@@ -67,7 +66,7 @@ import { Portal } from '@/utils/Portal'
 export function ThemingExample() {
     const prefersDark = usePrefersDark()
     const [sourceColor, setSourceColor] = useState(
-        localStorage.getItem('sourceColor') || '#6750a4'
+        localStorage.getItem('sourceColor') || '#6750a4',
     )
     const [customColors, setCustomColors] = useState<string[]>([])
     const [file, setFile] = useState<File | null>(null)
@@ -146,8 +145,8 @@ export function ThemingExample() {
                                     customColors.toSpliced(
                                         index,
                                         1,
-                                        e.target.value
-                                    )
+                                        e.target.value,
+                                    ),
                                 )
                             }}
                         />
@@ -155,7 +154,7 @@ export function ThemingExample() {
                             <Button
                                 onClick={() => {
                                     setCustomColors(
-                                        customColors.toSpliced(index, 1)
+                                        customColors.toSpliced(index, 1),
                                     )
                                 }}
                             >
@@ -286,33 +285,6 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                                         >
                                             Refresh
                                         </MenuItem>
-                                        <Portal container={document.body}>
-                                            <Scrim
-                                                center
-                                                open={dialogOpen}
-                                                onScrimClick={() =>
-                                                    setDialogOpen(false)
-                                                }
-                                            >
-                                                <Dialog
-                                                    headline="Refresh"
-                                                    buttons={
-                                                        <Button
-                                                            variant="text"
-                                                            onClick={() =>
-                                                                setDialogOpen(
-                                                                    false
-                                                                )
-                                                            }
-                                                        >
-                                                            Close
-                                                        </Button>
-                                                    }
-                                                >
-                                                    Not allowed to refresh!
-                                                </Dialog>
-                                            </Scrim>
-                                        </Portal>
                                         <MenuItem
                                             leadingIcon={
                                                 <Icon path={mdiShare} />
@@ -323,22 +295,6 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                                         >
                                             Share
                                         </MenuItem>
-                                        <Portal container={document.body}>
-                                            <Snackbar
-                                                fixed
-                                                full
-                                                open={snackbarOpen}
-                                                action="Close"
-                                                onActionClick={() =>
-                                                    setSnackbarOpen(false)
-                                                }
-                                                onCloseClick={() =>
-                                                    setSnackbarOpen(false)
-                                                }
-                                            >
-                                                Noting to share!
-                                            </Snackbar>
-                                        </Portal>
                                     </Menu>
                                 }
                             />
@@ -348,6 +304,17 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                     Soda
                 </TopAppBar>
                 <div style={{ padding: '100px 0' }}>{children}</div>
+                <Snackbar
+                    fixed
+                    full
+                    inset="auto 0 5rem"
+                    open={snackbarOpen}
+                    action="Close"
+                    onActionClick={() => setSnackbarOpen(false)}
+                    onCloseClick={() => setSnackbarOpen(false)}
+                >
+                    Noting to share!
+                </Snackbar>
                 <BottomAppBar
                     fixed
                     buttons={
@@ -387,6 +354,26 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                         <CircularProgressIndicator />
                     </Flex>
                 </BottomSheet>
+                <Scrim
+                    center
+                    zIndex={999}
+                    open={dialogOpen}
+                    onScrimClick={() => setDialogOpen(false)}
+                >
+                    <Dialog
+                        headline="Refresh"
+                        buttons={
+                            <Button
+                                variant="text"
+                                onClick={() => setDialogOpen(false)}
+                            >
+                                Close
+                            </Button>
+                        }
+                    >
+                        Not allowed to refresh!
+                    </Dialog>
+                </Scrim>
             </div>
         </div>
     )
