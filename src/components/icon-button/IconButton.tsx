@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { Icon } from '@mdi/react'
 import { Ripple } from '@/ripple/Ripple'
+import { REVERSE_RIPPLE_COLOR } from '@/ripple/ripple-effect'
 import { ExtendProps } from '@/utils/type'
 
 /**
@@ -49,12 +50,15 @@ export const IconButton = forwardRef<
         <Ripple
             {...props}
             ref={ref}
+            as="button"
             className={clsx(
                 'sd-icon_button',
                 `sd-icon_button-${variant}`,
                 className,
             )}
-            as="button"
+            rippleColor={
+                variant === 'filled' ? REVERSE_RIPPLE_COLOR : undefined
+            }
             data-sd-selected={selected}
             data-sd-disabled={disabled}
         >

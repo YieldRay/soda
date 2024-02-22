@@ -131,7 +131,7 @@ export const BottomSheet = forwardRef<
     return bottomSheet
 })
 
-export function attachDragEvent(
+function attachDragEvent(
     sheet: HTMLDivElement,
     dragHandle: HTMLDivElement,
     options?: {
