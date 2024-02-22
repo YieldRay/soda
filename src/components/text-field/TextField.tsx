@@ -1,6 +1,7 @@
 import './text-field.scss'
 import clsx from 'clsx'
 import { forwardRef, useEffect, useRef, useState } from 'react'
+import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeEventHandlers } from '@/hooks/use-merge'
 import { setReactRef, type ReactRef } from '@/utils/react-ref'
 import { type ExtendProps } from '@/utils/type'
@@ -19,7 +20,8 @@ export const TextField = forwardRef<
         trailingIcon?: React.ReactNode
         labelText?: React.ReactNode
         supportingText?: React.ReactNode
-        value?: string | number
+        value?: string
+        defaultValue?: string
         onChange?: (text: string) => void
         readonly?: boolean
         disabled?: boolean
@@ -62,12 +64,13 @@ export const TextField = forwardRef<
         trailingIcon,
         labelText,
         supportingText,
-        value,
+        value: value$co,
+        defaultValue = '',
         readonly,
         disabled,
         error,
         variant = 'filled',
-        onChange: initOnChange,
+        onChange,
         textarea,
         rows = 2,
         placeholder: initPlaceholder,
@@ -80,19 +83,23 @@ export const TextField = forwardRef<
     },
     ref,
 ) {
-    const stringValue = String(value || '')
+    const [value, setValue] = useAutoState<string>(
+        onChange,
+        value$co,
+        defaultValue,
+    )
+
     const [focus, setFocus] = useState(false)
-    const [length, setLength] = useState(stringValue.length)
+    const { length } = String(value || '')
     const populated = length > 0 || focus
     // use css `:placeholder-shown` requires `placeholder` attribute (even empty) present
     // but we use js here so we can bypass that limitation
     const placeholder = populated || !labelText ? initPlaceholder : undefined
     const innerRef = useRef<InternalHTMLElement>(null)
 
-    const onChange = (e: React.FormEvent<InternalHTMLElement>) => {
+    const handleChange = (e: React.FormEvent<InternalHTMLElement>) => {
         const value = (e.target as InternalHTMLElement).value
-        setLength(String(value).length)
-        initOnChange?.(value)
+        setValue(value)
     }
 
     useEffect(() => {
@@ -118,7 +125,7 @@ export const TextField = forwardRef<
                 {!textarea && (
                     <input
                         ref={innerRef as React.ForwardedRef<HTMLInputElement>}
-                        onChange={onChange}
+                        onChange={handleChange}
                         value={value}
                         readOnly={readonly}
                         disabled={disabled}
@@ -129,7 +136,7 @@ export const TextField = forwardRef<
             {textarea && (
                 <textarea
                     ref={innerRef as React.ForwardedRef<HTMLTextAreaElement>}
-                    onChange={onChange}
+                    onChange={handleChange}
                     value={value}
                     readOnly={readonly}
                     disabled={disabled}
