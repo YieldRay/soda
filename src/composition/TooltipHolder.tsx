@@ -95,7 +95,11 @@ export const TooltipHolder = forwardRef<
 
             <div
                 className="floating"
-                style={{ ...floatingStyles, zIndex }}
+                style={{
+                    ...floatingStyles,
+                    zIndex,
+                    pointerEvents: isOpen ? undefined : 'none',
+                }}
                 ref={refs.setFloating}
                 {...getFloatingProps()}
             >

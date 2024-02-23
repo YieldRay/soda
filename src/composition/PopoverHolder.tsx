@@ -85,7 +85,11 @@ export const PopoverHolder = forwardRef<
             <div
                 className="floating"
                 ref={refs.setFloating}
-                style={{ ...floatingStyles, zIndex }}
+                style={{
+                    ...floatingStyles,
+                    zIndex,
+                    pointerEvents: isOpen ? undefined : 'none',
+                }}
                 {...getFloatingProps()}
             >
                 <div style={styles}>{content}</div>

@@ -17,13 +17,17 @@
         margin: 1.5rem 1.5rem 0;
         // default style
         font-size: x-large;
+        flex-shrink: 0;
     }
     &-body {
+        flex: 1;
         color: var(--md-sys-color-on-surface-variant);
+        overflow: auto;
     }
     &-buttons {
         margin: 0 1.5rem 1.5rem;
         text-align: right;
+        flex-shrink: 0;
     }
 }
 
