@@ -29,11 +29,7 @@ export function TabPanel({
 
     const ref = useRef<HTMLDivElement>(null)
     const [show, setShow] = useState(
-        isViewTransitionSupported
-            ? tabContext?.allowTransitionRef?.current
-                ? false
-                : true
-            : false,
+        tabContext?.allowTransitionRef?.current ? false : true,
     )
 
     useLayoutEffect(() => {
@@ -63,7 +59,7 @@ export function TabPanel({
     if (!active) return <></>
 
     return (
-        show && (
+        (!isViewTransitionSupported || show) && (
             <div
                 {...props}
                 ref={ref}

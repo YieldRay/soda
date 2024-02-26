@@ -1,8 +1,6 @@
 # Soda
 
-<a href="https://npm.im/soda-material" target="_blank"><img src="https://img.shields.io/badge/-soda--material-grey?logo=npm" alt="soda-material" /></a>&nbsp;
-<a href="https://www.npmjs.com/package/soda-material" target="_blank"><img src="https://img.shields.io/npm/v/soda-material" alt="npm" /></a>&nbsp;
-<a href="https://packagephobia.com/result?p=soda-material" target="_blank"><img src="https://packagephobia.com/badge?p=soda-material" alt="install size" /></a>&nbsp;
+[![soda-material](https://img.shields.io/badge/-soda--material-grey?logo=npm)](https://npm.im/soda-material)  [![npm](https://img.shields.io/npm/v/soda-material)](https://www.npmjs.com/package/soda-material)  [![install size](https://packagephobia.com/badge?p=soda-material)](https://packagephobia.com/result?p=soda-material)
 
 A React(>=18) component library that may follow
 [Material Design 3](https://m3.material.io/components) (a.k.a. Material You)

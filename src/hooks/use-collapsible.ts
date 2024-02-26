@@ -8,15 +8,25 @@ import { useEffect } from 'react'
 export function useCollapsible(
     elementRef: React.RefObject<HTMLElement>,
     collapsed: boolean,
+    direction: 'vertical' | 'horizontal' = 'vertical',
 ) {
     useEffect(() => {
         const el = elementRef.current
         if (!el) return
 
-        if (collapsed) {
-            el.style.maxHeight = 0 + 'px'
-        } else {
-            el.style.maxHeight = el.scrollHeight + 'px'
-        }
-    }, [elementRef, collapsed])
+        el.style[
+            ({ vertical: 'maxHeight', horizontal: 'maxWidth' } as const)[
+                direction
+            ]
+        ] = collapsed
+            ? '0px'
+            : el[
+                  (
+                      {
+                          vertical: 'scrollHeight',
+                          horizontal: 'scrollWidth',
+                      } as const
+                  )[direction]
+              ] + 'px'
+    }, [elementRef, collapsed, direction])
 }
