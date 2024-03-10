@@ -1,6 +1,6 @@
 {
     "name": "soda-material",
-    "version": "0.0.25",
+    "version": "0.0.26",
     "type": "module",
     "types": "dist",
     "main": "dist/index.js",
@@ -32,12 +32,12 @@
         "@storybook/react": "^7.6.17",
         "@storybook/react-vite": "^7.6.17",
         "@storybook/testing-library": "^0.2.2",
-        "@types/react": "^18.2.58",
-        "@types/react-dom": "^18.2.19",
-        "@typescript-eslint/eslint-plugin": "^7.0.2",
-        "@typescript-eslint/parser": "^7.0.2",
+        "@types/react": "^18.2.64",
+        "@types/react-dom": "^18.2.21",
+        "@typescript-eslint/eslint-plugin": "^7.1.1",
+        "@typescript-eslint/parser": "^7.1.1",
         "@vitejs/plugin-react": "^4.2.1",
-        "chromatic": "^11.0.0",
+        "chromatic": "^11.0.7",
         "clsx": "^2.1.0",
         "eslint": "^8.57.0",
         "eslint-plugin-react-hooks": "^4.6.0",
@@ -48,13 +48,13 @@
         "sass": "^1.71.1",
         "storybook": "^7.6.17",
         "styled-jsx": "^5.1.2",
-        "typescript": "^5.3.3",
-        "vite": "^5.1.4"
+        "typescript": "^5.4.2",
+        "vite": "^5.1.5"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
     },
-    "description": "A React Component Library",
+    "description": "Modern lightweight React Component Library",
     "keywords": [
         "material design",
         "material you"
