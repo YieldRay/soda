@@ -1,74 +1,76 @@
 {
-    "name": "soda-material",
-    "version": "0.0.26",
-    "type": "module",
-    "types": "dist",
-    "main": "dist/index.js",
-    "style": "dist/style.css",
-    "sideEffects": false,
-    "scripts": {
-        "build": "vite build && tsc",
-        "storybook": "storybook dev -p 6006",
-        "build-storybook": "storybook build",
-        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "format": "prettier --write ./src",
-        "preview": "vite preview",
-        "chromatic": "chromatic --exit-zero-on-changes"
-    },
-    "peerDependencies": {
-        "react": ">=18",
-        "react-dom": ">=18"
-    },
-    "devDependencies": {
-        "@floating-ui/react": "^0.26.9",
-        "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
-        "@material/material-color-utilities": "^0.2.7",
-        "@mdi/js": "^7.4.47",
-        "@mdi/react": "^1.6.1",
-        "@storybook/addon-essentials": "^7.6.17",
-        "@storybook/addon-interactions": "^7.6.17",
-        "@storybook/addon-links": "^7.6.17",
-        "@storybook/blocks": "^7.6.17",
-        "@storybook/react": "^7.6.17",
-        "@storybook/react-vite": "^7.6.17",
-        "@storybook/testing-library": "^0.2.2",
-        "@types/react": "^18.2.64",
-        "@types/react-dom": "^18.2.21",
-        "@typescript-eslint/eslint-plugin": "^7.1.1",
-        "@typescript-eslint/parser": "^7.1.1",
-        "@vitejs/plugin-react": "^4.2.1",
-        "chromatic": "^11.0.7",
-        "clsx": "^2.1.0",
-        "eslint": "^8.57.0",
-        "eslint-plugin-react-hooks": "^4.6.0",
-        "eslint-plugin-react-refresh": "^0.4.5",
-        "eslint-plugin-storybook": "^0.8.0",
-        "glob": "^10.3.10",
-        "prettier": "^3.2.5",
-        "sass": "^1.71.1",
-        "storybook": "^7.6.17",
-        "styled-jsx": "^5.1.2",
-        "typescript": "^5.4.2",
-        "vite": "^5.1.5"
-    },
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org"
-    },
-    "description": "Modern lightweight React Component Library",
-    "keywords": [
-        "material design",
-        "material you"
-    ],
-    "author": {
-        "name": "YieldRay"
-    },
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/YieldRay/soda.git"
-    },
-    "bugs": {
-        "url": "https://github.com/YieldRay/soda/issues"
-    },
-    "homepage": "https://github.com/YieldRay/soda#readme"
+  "name": "soda-material",
+  "version": "0.0.26",
+  "type": "module",
+  "types": "dist",
+  "main": "dist/index.js",
+  "style": "dist/style.css",
+  "sideEffects": false,
+  "scripts": {
+    "build": "vite build && tsc",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write ./src",
+    "preview": "vite preview",
+    "chromatic": "chromatic --exit-zero-on-changes"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@floating-ui/react": "^0.26.10",
+    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+    "@material/material-color-utilities": "^0.2.7",
+    "@mdi/js": "^7.4.47",
+    "@mdi/react": "^1.6.1",
+    "@storybook/addon-essentials": "^8.0.5",
+    "@storybook/addon-interactions": "^8.0.5",
+    "@storybook/addon-links": "^8.0.5",
+    "@storybook/blocks": "^8.0.5",
+    "@storybook/react": "^8.0.5",
+    "@storybook/react-vite": "^8.0.5",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.23",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "chromatic": "^11.3.0",
+    "clsx": "^2.1.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "eslint-plugin-storybook": "^0.8.0",
+    "glob": "^10.3.12",
+    "prettier": "^3.2.5",
+    "sass": "^1.72.0",
+    "storybook": "^8.0.5",
+    "styled-jsx": "^5.1.2",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.7"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "description": "Modern lightweight React Component Library",
+  "keywords": [
+    "material design",
+    "material you"
+  ],
+  "author": {
+    "name": "YieldRay"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YieldRay/soda.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YieldRay/soda/issues"
+  },
+  "homepage": "https://github.com/YieldRay/soda#readme",
+  "dependencies": {
+    "@storybook/test": "8.0.5"
+  }
 }
