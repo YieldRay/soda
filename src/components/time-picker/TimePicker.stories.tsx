@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { TimePicker } from '.'
 
-const meta = {
+const meta: Meta<typeof TimePicker> = {
     title: 'components/TimePicker',
     component: TimePicker,
     tags: ['autodocs'],
@@ -11,7 +11,7 @@ const meta = {
     args: {
         onOK: alert,
     },
-} satisfies Meta<typeof TimePicker>
+}
 
 export default meta
 

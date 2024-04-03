@@ -17,14 +17,14 @@ import { List } from '../list/List'
 import { Search } from '../search/Search'
 import { Switch } from '../switch/Switch'
 
-const meta = {
+const meta: Meta<typeof NavigationDrawer> = {
     title: 'components/Navigation/NavigationDrawer',
     component: NavigationDrawer,
     tags: ['autodocs'],
     parameters: {
         layout: 'fullscreen',
     },
-} satisfies Meta<typeof NavigationDrawer>
+}
 
 export default meta
 

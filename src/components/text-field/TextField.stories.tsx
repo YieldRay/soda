@@ -5,7 +5,7 @@ import Icon from '@mdi/react'
 import { IconRippleButton } from '@/composition/IconRippleButton'
 import { TextField } from '.'
 
-const meta = {
+const meta: Meta<typeof TextField> = {
     title: 'components/TextField',
     component: TextField,
     tags: ['autodocs'],
@@ -18,7 +18,7 @@ const meta = {
         trailingIcon: <IconRippleButton path={mdiClose} />,
         placeholder: 'placeholder',
     },
-} satisfies Meta<typeof TextField>
+}
 
 export default meta
 

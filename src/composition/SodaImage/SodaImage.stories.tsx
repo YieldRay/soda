@@ -2,9 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useRef, useState } from 'react'
 import { Button } from '@/components/button'
 import { SodaImage } from './SodaImage'
-import 'csstype'
 
-const meta = {
+const meta: Meta<typeof SodaImage> = {
     title: 'composition/SodaImage',
     component: SodaImage,
     tags: ['autodocs'],
@@ -12,7 +11,7 @@ const meta = {
         minWidth: 100,
         minHeight: 100,
     },
-} satisfies Meta<typeof SodaImage> as any
+}
 
 export default meta
 

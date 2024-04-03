@@ -4,14 +4,14 @@ import { mdiCheck, mdiClose } from '@mdi/js'
 import Icon from '@mdi/react'
 import { Switch } from '.'
 
-const meta = {
+const meta: Meta<typeof Switch> = {
     title: 'components/Switch',
     component: Switch,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof Switch>
+}
 
 export default meta
 

@@ -7,14 +7,14 @@ import { IconButton } from '../icon-button'
 import { List } from '../list'
 import { Switch } from '../switch'
 
-const meta = {
+const meta: Meta<typeof SideSheet> = {
     title: 'components/Sheet/SideSheet',
     component: SideSheet,
     tags: ['autodocs'],
     parameters: {
         layout: 'fullscreen',
     },
-} satisfies Meta<typeof SideSheet>
+}
 
 export default meta
 

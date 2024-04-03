@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { Details } from './Details'
 
-const meta = {
+const meta: Meta<typeof Details> = {
     title: 'composition/Details',
     component: Details,
     tags: ['autodocs'],
@@ -10,7 +10,7 @@ const meta = {
         summary: <>summary</>,
         children: <>details</>,
     },
-} satisfies Meta<typeof Details>
+}
 
 export default meta
 

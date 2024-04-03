@@ -7,7 +7,7 @@ import { Portal } from '@/utils/Portal'
 import { Dialog } from '.'
 import { Button } from '../button'
 
-const meta = {
+const meta: Meta<typeof Dialog> = {
     title: 'components/Dialog/Dialog',
     component: Dialog,
     parameters: {
@@ -23,7 +23,7 @@ const meta = {
             </>
         ),
     },
-} satisfies Meta<typeof Dialog>
+}
 
 export default meta
 

@@ -5,14 +5,14 @@ import { Portal } from '@/utils/Portal'
 import { FullScreenDialog } from '.'
 import { Button } from '../button'
 
-const meta = {
+const meta: Meta<typeof FullScreenDialog> = {
     title: 'components/Dialog/FullScreenDialog',
     component: FullScreenDialog,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof FullScreenDialog>
+}
 
 export default meta
 

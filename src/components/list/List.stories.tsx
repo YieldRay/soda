@@ -3,7 +3,7 @@ import { mdiOpenInNew } from '@mdi/js'
 import Icon from '@mdi/react'
 import { List } from '.'
 
-const meta = {
+const meta: Meta<typeof List> = {
     title: 'components/List',
     component: List,
     parameters: {
@@ -15,7 +15,7 @@ const meta = {
         supportingText: 'supportingText',
         as: 'a',
     },
-} satisfies Meta<typeof List>
+}
 
 export default meta
 

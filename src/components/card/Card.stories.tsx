@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Card } from '.'
 
-const meta = {
+const meta: Meta<typeof Card> = {
     title: 'components/Card',
     component: Card,
     parameters: {
@@ -11,7 +11,7 @@ const meta = {
     args: {
         children: <CardDemoChild />,
     },
-} satisfies Meta<typeof Card>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>

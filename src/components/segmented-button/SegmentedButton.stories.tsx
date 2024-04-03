@@ -31,7 +31,7 @@ const items = [
     },
 ]
 
-const meta = {
+const meta: Meta<typeof SegmentedButton> = {
     title: 'components/Button/SegmentedButton',
     component: SegmentedButton,
     tags: ['autodocs'],
@@ -42,7 +42,7 @@ const meta = {
         items,
         onChange: console.log,
     },
-} satisfies Meta<typeof SegmentedButton>
+}
 
 export default meta
 

@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { RadioButton, RadioGroup } from '.'
 
-const meta = {
+const meta: Meta<typeof RadioButton> = {
     title: 'components/RadioButton',
     component: RadioButton,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof RadioButton>
+}
 
 export default meta
 

@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { ProgressIndicator } from '.'
 
-const meta = {
+const meta: Meta<typeof ProgressIndicator> = {
     title: 'components/ProgressIndicator',
     component: ProgressIndicator,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof ProgressIndicator>
+}
 
 export default meta
 

@@ -4,11 +4,11 @@ import { BottomSheet, BottomSheetHandle } from '.'
 import { Button } from '../button'
 import { List } from '../list'
 
-const meta = {
+const meta: Meta<typeof BottomSheet> = {
     title: 'components/Sheet/BottomSheet',
     component: BottomSheet,
     tags: ['autodocs'],
-} satisfies Meta<typeof BottomSheet>
+}
 
 export default meta
 

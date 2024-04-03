@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { ActionButton } from './ActionButton'
 
-const meta = {
+const meta: Meta<typeof ActionButton> = {
     title: 'composition/ActionButton',
     component: ActionButton,
     tags: ['autodocs'],
@@ -11,7 +11,7 @@ const meta = {
     args: {
         children: <>ActionButton</>,
     },
-} satisfies Meta<typeof ActionButton>
+}
 
 export default meta
 

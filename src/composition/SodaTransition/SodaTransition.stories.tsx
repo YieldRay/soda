@@ -3,11 +3,11 @@ import { useState } from 'react'
 import { Button } from '@/components/button'
 import { SodaSimpleTransition, SodaTransition } from './SodaTransition'
 
-const meta = {
+const meta: Meta<typeof SodaTransition> = {
     title: 'composition/SodaTransition',
     component: SodaTransition,
     tags: ['autodocs'],
-} satisfies Meta<typeof SodaTransition>
+}
 
 export default meta
 

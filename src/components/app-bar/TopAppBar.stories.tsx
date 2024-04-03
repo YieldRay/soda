@@ -3,7 +3,7 @@ import { mdiDotsVertical, mdiMagnify, mdiMenu } from '@mdi/js'
 import { TopAppBar } from '.'
 import { IconButton } from '../icon-button'
 
-const meta = {
+const meta: Meta<typeof TopAppBar> = {
     title: 'components/AppBar/TopAppBar',
     component: TopAppBar,
     tags: ['autodocs'],
@@ -17,7 +17,7 @@ const meta = {
             </>
         ),
     },
-} satisfies Meta<typeof TopAppBar>
+}
 
 export default meta
 

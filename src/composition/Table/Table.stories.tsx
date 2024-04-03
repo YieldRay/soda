@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Table } from './Table'
 
-const meta = {
+const meta: Meta<typeof Table> = {
     title: 'composition/Table',
     component: Table,
     tags: ['autodocs'],
     parameters: {
         layout: 'centered',
     },
-} satisfies Meta<typeof Table>
+}
 
 export default meta
 

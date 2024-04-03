@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { mdiBookmarkOutline } from '@mdi/js'
 import { Blockquote } from './Blockquote'
 
-const meta = {
+const meta: Meta<typeof Blockquote> = {
     title: 'composition/Blockquote',
     component: Blockquote,
     tags: ['autodocs'],
@@ -11,7 +11,7 @@ const meta = {
         children: 'Blockquote'.repeat(20),
         close: true,
     },
-} satisfies Meta<typeof Blockquote>
+}
 
 export default meta
 

@@ -7,14 +7,14 @@ import { Default as menuDefaultStory } from '@/components/menu/Menu.stories'
 import { PlainTooltip, RichTooltip } from '@/components/tooltip'
 import { TooltipHolder, TooltipHolderHandle } from './TooltipHolder'
 
-const meta = {
+const meta: Meta<typeof TooltipHolder> = {
     title: 'composition/TooltipHolder',
     component: TooltipHolder,
     tags: ['autodocs'],
     parameters: {
         layout: 'fullscreen',
     },
-} satisfies Meta<typeof TooltipHolder>
+}
 
 export default meta
 

@@ -4,14 +4,14 @@ import { mdiCheck, mdiClose, mdiMagnify } from '@mdi/js'
 import Icon from '@mdi/react'
 import { Tab, TabPanel, Tabs } from '.'
 
-const meta = {
+const meta: Meta<typeof Tabs> = {
     title: 'components/Tab',
     component: Tabs,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof Tabs>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>

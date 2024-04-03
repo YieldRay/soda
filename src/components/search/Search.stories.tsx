@@ -3,7 +3,7 @@ import { mdiMagnify, mdiMenu } from '@mdi/js'
 import { Search } from '.'
 import { IconButton } from '../icon-button'
 
-const meta = {
+const meta: Meta<typeof Search> = {
     title: 'components/Search',
     component: Search,
     parameters: {
@@ -15,7 +15,7 @@ const meta = {
         leadingIcon: <IconButton path={mdiMenu} />,
         trailingIcon: <IconButton path={mdiMagnify} />,
     },
-} satisfies Meta<typeof Search>
+}
 
 export default meta
 

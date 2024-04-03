@@ -25,7 +25,7 @@ const fruits = [
     '🍅 Tomato',
 ]
 
-const meta = {
+const meta: Meta<typeof Select> = {
     title: 'composition/Select',
     component: Select,
     tags: ['autodocs'],
@@ -36,7 +36,7 @@ const meta = {
         options: fruits.map((fruit) => ({ value: fruit })),
         defaultValue: fruits[3],
     },
-} satisfies Meta<typeof Select>
+}
 
 export default meta
 

@@ -3,7 +3,7 @@ import { mdiPencilOutline } from '@mdi/js'
 import Icon from '@mdi/react'
 import { Fab } from '.'
 
-const meta = {
+const meta: Meta<typeof Fab> = {
     title: 'components/Button/Fab',
     component: Fab,
     parameters: {
@@ -23,7 +23,7 @@ const meta = {
             control: { type: 'radio' },
         },
     },
-} satisfies Meta<typeof Fab>
+}
 
 export default meta
 

@@ -3,11 +3,11 @@ import { mdiDotsVertical } from '@mdi/js'
 import { IconButton } from '../..'
 import { NestedMenu as Menu, NestedMenuItem as MenuItem } from './NestedMenu'
 
-const meta = {
+const meta: Meta<typeof Menu> = {
     title: 'composition/NestedMenu',
     component: Menu,
     tags: ['autodocs'],
-} satisfies Meta<typeof Menu>
+}
 
 export default meta
 

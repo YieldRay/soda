@@ -14,11 +14,11 @@ import { Switch } from '..'
 import { Fab } from '../fab'
 import { IconButton } from '../icon-button'
 
-const meta = {
+const meta: Meta<typeof BottomAppBar> = {
     title: 'components/AppBar/BottomAppBar',
     component: BottomAppBar,
     tags: ['autodocs'],
-} satisfies Meta<typeof BottomAppBar>
+}
 
 export default meta
 

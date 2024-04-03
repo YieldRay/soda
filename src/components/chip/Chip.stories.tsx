@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { Chip } from '.'
 
-const meta = {
+const meta: Meta<typeof Chip> = {
     title: 'components/Chip',
     component: Chip,
     parameters: {
@@ -13,7 +13,7 @@ const meta = {
         leadingIcon: '✨',
         trailingIcon: '×',
     },
-} satisfies Meta<typeof Chip>
+}
 
 export default meta
 

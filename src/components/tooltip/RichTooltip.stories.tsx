@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { RichTooltip } from '.'
 
-const meta = {
+const meta: Meta<typeof RichTooltip> = {
     title: 'components/Tooltip/RichTooltip',
     component: RichTooltip,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof RichTooltip>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>

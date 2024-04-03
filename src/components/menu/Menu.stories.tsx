@@ -4,14 +4,14 @@ import Icon from '@mdi/react'
 import { Menu, MenuItem } from '.'
 import { Divider } from '../divider'
 
-const meta = {
+const meta: Meta<typeof Menu> = {
     title: 'components/Menu',
     component: Menu,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof Menu>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>

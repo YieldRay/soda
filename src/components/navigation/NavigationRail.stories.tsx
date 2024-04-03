@@ -14,11 +14,11 @@ import { NavigationRail } from '.'
 import { Fab } from '../fab'
 import { Switch } from '../switch'
 
-const meta = {
+const meta: Meta<typeof NavigationRail> = {
     title: 'components/Navigation/NavigationRail',
     component: NavigationRail,
     tags: ['autodocs'],
-} satisfies Meta<typeof NavigationRail>
+}
 
 export default meta
 

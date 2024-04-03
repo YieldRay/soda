@@ -7,14 +7,14 @@ import { Default as menuDefaultStory } from '@/components/menu/Menu.stories'
 import { PlainTooltip, RichTooltip } from '@/components/tooltip'
 import { PopoverHolder, PopoverHolderHandle } from './PopoverHolder'
 
-const meta = {
+const meta: Meta<typeof PopoverHolder> = {
     title: 'composition/PopoverHolder',
     component: PopoverHolder,
     tags: ['autodocs'],
     parameters: {
         layout: 'fullscreen',
     },
-} satisfies Meta<typeof PopoverHolder>
+}
 
 export default meta
 

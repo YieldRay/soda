@@ -3,7 +3,7 @@ import { mdiCheck } from '@mdi/js'
 import Icon from '@mdi/react'
 import { IconButton } from '.'
 
-const meta = {
+const meta: Meta<typeof IconButton> = {
     title: 'components/Button/IconButton',
     component: IconButton,
     parameters: {
@@ -23,7 +23,7 @@ const meta = {
             control: { type: 'radio' },
         },
     },
-} satisfies Meta<typeof IconButton>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>

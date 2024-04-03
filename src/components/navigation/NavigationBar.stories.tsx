@@ -13,11 +13,11 @@ import { Portal } from '@/utils/Portal'
 import { NavigationBar } from '.'
 import { Switch } from '../switch'
 
-const meta = {
+const meta: Meta<typeof NavigationBar> = {
     title: 'components/Navigation/NavigationBar',
     component: NavigationBar,
     tags: ['autodocs'],
-} satisfies Meta<typeof NavigationBar>
+}
 
 export default meta
 

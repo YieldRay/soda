@@ -4,14 +4,14 @@ import { Portal } from '@/utils/Portal'
 import { Snackbar } from '.'
 import { Switch } from '../switch'
 
-const meta = {
+const meta: Meta<typeof Snackbar> = {
     title: 'components/Snackbar',
     component: Snackbar,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
-} satisfies Meta<typeof Snackbar>
+}
 
 export default meta
 

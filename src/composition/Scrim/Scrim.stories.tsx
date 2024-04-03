@@ -6,11 +6,11 @@ import { LinearProgressIndicator } from '@/components/progress-indicator'
 import { Portal } from '@/utils/Portal'
 import { Scrim } from './Scrim'
 
-const meta = {
+const meta: Meta<typeof Scrim> = {
     title: 'composition/Scrim',
     component: Scrim,
     tags: ['autodocs'],
-} satisfies Meta<typeof Scrim>
+}
 
 export default meta
 
