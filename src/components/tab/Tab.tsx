@@ -38,6 +38,7 @@ export const Tab = forwardRef<
         <Ripple
             {...props}
             ref={ref}
+            as="div"
             tabIndex={0}
             className={clsx('sd-tab', className)}
             data-sd-active={active}

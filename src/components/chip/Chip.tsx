@@ -38,6 +38,7 @@ export const Chip = forwardRef<
         <Ripple
             {...props}
             ref={ref}
+            as="div"
             className={clsx('sd-chip', `sd-chip-${variant}`, className)}
             onClick={onClick}
             data-sd-disabled={disabled}

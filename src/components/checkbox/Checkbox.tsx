@@ -82,7 +82,7 @@ export const Checkbox = forwardRef<
                 </SodaSimpleTransition>
             </div>
             <div className="sd-checkbox-ripple">
-                <Ripple />
+                <Ripple as="div" />
             </div>
         </div>
     )

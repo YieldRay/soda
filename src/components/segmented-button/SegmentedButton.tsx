@@ -60,6 +60,7 @@ export const SegmentedButton = forwardRef<
             {items &&
                 items.map(({ label, disabled, value: value$i }, index) => (
                     <Ripple
+                        as="div"
                         key={value$i}
                         tabIndex={index + 1}
                         className="sd-segmented_button-item"

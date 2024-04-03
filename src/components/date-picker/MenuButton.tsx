@@ -18,7 +18,7 @@ export function MenuButton({
         <div className="sd-menu_button-outer">
             <IconButton path={mdiChevronLeft} onClick={onLeft} />
             {children && (
-                <Ripple className="sd-menu_button" onClick={onClick}>
+                <Ripple as="div" className="sd-menu_button" onClick={onClick}>
                     <span>{children}</span>
                     <Icon size={1} path={mdiMenuDown} />
                 </Ripple>

@@ -2,12 +2,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 import { ExtendProps, TagNameString } from '@/utils/type'
 import { ripple } from './ripple-effect'
 
-type Props = ExtendProps<{
-    /**
-     * HTML tag name, div by default
-     */
-    as?: TagNameString
-    children?: React.ReactNode
+interface RippleProps {
     disabled?: boolean
     /**
      * In ms
@@ -17,7 +12,22 @@ type Props = ExtendProps<{
      * Any css color string
      */
     rippleColor?: string
-}>
+}
+
+interface RippleRefProps extends RippleProps {
+    /**
+     * HTML tag name, div by default
+     */
+    as: TagNameString
+    children?: React.ReactNode
+}
+
+interface RippleFnProps extends RippleProps {
+    as?: undefined
+    children: (ref: React.Ref<HTMLElement>) => React.ReactNode
+}
+
+type Props = ExtendProps<RippleRefProps | RippleFnProps>
 
 type RippleAt = (
     rippleX: number,
@@ -31,7 +41,7 @@ export type RippleHandle = HTMLElement & { rippleAt?: RippleAt }
  * Wrapper component for ripple-effect.ts
  */
 export const Ripple = forwardRef<RippleHandle, Props>(
-    ({ as, disabled, rippleColor, ...props }, ref) => {
+    ({ as, disabled, rippleColor, children, ...props }, ref) => {
         const eRef = useRef<HTMLElement>(null)
         const rippleAtRef = useRef<RippleAt | undefined>(undefined)
         useEffect(() => {
@@ -45,12 +55,15 @@ export const Ripple = forwardRef<RippleHandle, Props>(
             return e
         })
 
-        const As: any = as || 'div'
+        if (as) {
+            const As = as as any
+            return (
+                <As {...props} ref={eRef} disabled={disabled}>
+                    {children}
+                </As>
+            )
+        }
 
-        return (
-            <As {...props} ref={eRef} disabled={disabled}>
-                {props.children}
-            </As>
-        )
+        return children(eRef)
     },
 )

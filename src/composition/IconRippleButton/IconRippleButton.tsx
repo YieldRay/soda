@@ -33,7 +33,7 @@ export const IconRippleButton = forwardRef<
         >
             {path ? <Icon path={path} /> : children}
             <div className="sd-icon_ripple_button-ripple">
-                <Ripple />
+                <Ripple as="div" />
             </div>
         </div>
     )

@@ -178,6 +178,7 @@ export const NavigationDrawerItem = forwardRef<
     <Ripple
         {...props}
         ref={ref}
+        as="div"
         data-sd-active={active}
         className={clsx('sd-navigation_drawer_item', className)}
     >

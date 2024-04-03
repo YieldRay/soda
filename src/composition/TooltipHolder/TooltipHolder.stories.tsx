@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useRef } from 'react'
 import { mdiAccount, mdiDotsVertical, mdiMenu } from '@mdi/js'
-import { TopAppBar } from '../components/app-bar'
-import { IconButton } from '../components/icon-button'
-import { Default as menuDefaultStory } from '../components/menu/Menu.stories'
-import { PlainTooltip, RichTooltip } from '../components/tooltip'
-import { PopoverHolder, PopoverHolderHandle } from './PopoverHolder'
+import { TopAppBar } from '@/components/app-bar'
+import { IconButton } from '@/components/icon-button'
+import { Default as menuDefaultStory } from '@/components/menu/Menu.stories'
+import { PlainTooltip, RichTooltip } from '@/components/tooltip'
+import { TooltipHolder, TooltipHolderHandle } from './TooltipHolder'
 
 const meta = {
-    title: 'composition/PopoverHolder',
-    component: PopoverHolder,
+    title: 'composition/TooltipHolder',
+    component: TooltipHolder,
     tags: ['autodocs'],
     parameters: {
         layout: 'fullscreen',
     },
-} satisfies Meta<typeof PopoverHolder>
+} satisfies Meta<typeof TooltipHolder>
 
 export default meta
 
@@ -22,20 +22,20 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     render: () => {
-        const popoverHolderHandleRef = useRef<PopoverHolderHandle>(null)
+        const tooltipHolderHandleRef = useRef<TooltipHolderHandle>(null)
         return (
             <>
                 <TopAppBar
                     fixed
                     leadingNavigationIcon={
-                        <PopoverHolder
+                        <TooltipHolder
                             trigger={<IconButton path={mdiMenu} />}
                             content={<PlainTooltip>menu</PlainTooltip>}
                         />
                     }
                     trailingIcon={
                         <>
-                            <PopoverHolder
+                            <TooltipHolder
                                 trigger={<IconButton path={mdiAccount} />}
                                 content={
                                     <PlainTooltip>
@@ -43,14 +43,14 @@ export const Default: Story = {
                                     </PlainTooltip>
                                 }
                             />
-                            <PopoverHolder
-                                ref={popoverHolderHandleRef}
+                            <TooltipHolder
+                                ref={tooltipHolderHandleRef}
                                 placement="bottom-start"
                                 trigger={<IconButton path={mdiDotsVertical} />}
                                 content={
                                     <div
                                         onClick={() =>
-                                            (popoverHolderHandleRef.current!.open =
+                                            (tooltipHolderHandleRef.current!.open =
                                                 false)
                                         }
                                     >
@@ -71,7 +71,7 @@ export const Default: Story = {
 
                 <div style={{ height: '64px' }} />
 
-                <PopoverHolder
+                <TooltipHolder
                     placement="right"
                     trigger={<IconButton>❤</IconButton>}
                     content={

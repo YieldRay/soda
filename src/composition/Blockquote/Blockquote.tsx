@@ -6,7 +6,7 @@ import { Icon } from '@mdi/react'
 import { useCollapsible } from '@/hooks/use-collapsible'
 import { useMergeRefs } from '@/hooks/use-merge'
 import { ExtendProps } from '@/utils/type'
-import { IconRippleButton } from './IconRippleButton'
+import { IconRippleButton } from '../IconRippleButton'
 
 export const Blockquote = forwardRef<
     HTMLQuoteElement,

@@ -291,7 +291,10 @@ export const Select = forwardRef<
                     {typeof children === 'function'
                         ? children(value!)
                         : children ?? (
-                              <Ripple className="sd-select-menu_button">
+                              <Ripple
+                                  as="div"
+                                  className="sd-select-menu_button"
+                              >
                                   <div className="sd-select-menu_button-label">
                                       <span>
                                           {getOptionValue(

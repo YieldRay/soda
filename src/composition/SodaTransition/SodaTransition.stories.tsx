@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import { Button } from '..'
+import { Button } from '@/components/button'
 import { SodaSimpleTransition, SodaTransition } from './SodaTransition'
 
 const meta = {
