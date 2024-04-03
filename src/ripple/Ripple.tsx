@@ -1,33 +1,20 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
-import { ExtendProps, TagNameString } from '@/utils/type'
+import { AsOrChildrenProps, ExtendProps } from '@/utils/type'
 import { ripple } from './ripple-effect'
 
-interface RippleProps {
-    disabled?: boolean
-    /**
-     * In ms
-     */
-    rippleDuration?: number
-    /**
-     * Any css color string
-     */
-    rippleColor?: string
-}
-
-interface RippleRefProps extends RippleProps {
-    /**
-     * HTML tag name, div by default
-     */
-    as: TagNameString
-    children?: React.ReactNode
-}
-
-interface RippleFnProps extends RippleProps {
-    as?: undefined
-    children: (ref: React.Ref<HTMLElement>) => React.ReactNode
-}
-
-type Props = ExtendProps<RippleRefProps | RippleFnProps>
+type Props = ExtendProps<
+    {
+        disabled?: boolean
+        /**
+         * In ms
+         */
+        rippleDuration?: number
+        /**
+         * Any css color string
+         */
+        rippleColor?: string
+    } & AsOrChildrenProps
+>
 
 type RippleAt = (
     rippleX: number,
@@ -56,6 +43,7 @@ export const Ripple = forwardRef<RippleHandle, Props>(
         })
 
         if (as) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const As = as as any
             return (
                 <As {...props} ref={eRef} disabled={disabled}>

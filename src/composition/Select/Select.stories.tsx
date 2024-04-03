@@ -29,9 +29,6 @@ const meta: Meta<typeof Select> = {
     title: 'composition/Select',
     component: Select,
     tags: ['autodocs'],
-    parameters: {
-        layout: 'centered',
-    },
     args: {
         options: fruits.map((fruit) => ({ value: fruit })),
         defaultValue: fruits[3],

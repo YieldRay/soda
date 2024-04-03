@@ -54,6 +54,7 @@ export const List = forwardRef<
     },
     ref,
 ) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const As: any = as || 'div'
     return (
         <As

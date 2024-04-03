@@ -80,20 +80,21 @@ export const SodaTransition = forwardRef<
         if (isIn === false) setShow(false)
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const As: any = as || 'div'
 
-    const component = (
-        <As
-            {...props}
-            ref={ref}
-            style={{ ...style, ...transitionStyle }}
-            onTransitionEnd={onTransitionEnd}
-        >
-            {children}
-        </As>
+    return (
+        show && (
+            <As
+                {...props}
+                ref={ref}
+                style={{ ...style, ...transitionStyle }}
+                onTransitionEnd={onTransitionEnd}
+            >
+                {children}
+            </As>
+        )
     )
-
-    return show && component
 })
 
 /**
