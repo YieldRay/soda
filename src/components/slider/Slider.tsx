@@ -19,6 +19,7 @@ import { ExtendProps } from '@/utils/type'
  * An slider component, note that you should set width or height (use `style` property) for this component!
  *
  * TODO: Two handles is not implemented yet!
+ *
  * @specs https://m3.material.io/components/sliders/specs
  */
 export const Slider = forwardRef<

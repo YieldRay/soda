@@ -5,7 +5,6 @@ import { mergeStyles } from '@/utils/style'
 import { ExtendProps } from '@/utils/type'
 
 /**
- *
  * @specs https://m3.material.io/components/top-app-bar/specs
  */
 export const TopAppBar = forwardRef<

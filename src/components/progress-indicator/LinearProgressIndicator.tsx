@@ -7,6 +7,7 @@ import { ExtendProps } from '@/utils/type'
 /**
  * [notice]: This component has default `min-width: 5rem` and `width: 100%` for convenience.
  * You can manually set style property to override it if needed.
+ *
  * @specs https://m3.material.io/components/progress-indicators/specs#efada034-defe-401e-803a-e6ea2833a396
  */
 export const LinearProgressIndicator = forwardRef<

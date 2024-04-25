@@ -17,6 +17,7 @@ export type BottomSheetHandle = ReturnType<typeof attachDragEvent>
  *
  * This component use ref to control show and hide,
  * you can call `ref.current.show()` to show and `ref.current.hide()` to hide
+ *
  * @specs https://m3.material.io/components/bottom-sheets/specs
  */
 export const BottomSheet = forwardRef<

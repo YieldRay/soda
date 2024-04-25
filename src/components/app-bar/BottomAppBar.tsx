@@ -6,6 +6,7 @@ import { ExtendProps } from '@/utils/type'
 
 /**
  * `<BottomAppBar>` has fixed style `height: 80px`
+ *
  * @specs https://m3.material.io/components/bottom-app-bar/specs
  */
 export const BottomAppBar = forwardRef<

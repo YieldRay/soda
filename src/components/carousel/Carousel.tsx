@@ -15,7 +15,8 @@ interface ItemWithFlex extends Item {
 
 /**
  * [warn]: Incomplete implementation, and only three visible items is implemented,
- * make sure the array length is multiple of 3, or it will throw error
+ * make sure the array length is multiple of 3
+ *
  * @specs https://m3.material.io/components/carousel/specs
  */
 export const Carousel = forwardRef<
@@ -35,8 +36,7 @@ export const Carousel = forwardRef<
     { items: initItems, height, className, style, ...props },
     ref,
 ) {
-    if (initItems.length % 3 !== 0)
-        throw new Error('the item array length must be a multiple of 3')
+    initItems.slice(0, initItems.length - (initItems.length % 3)) // make sure the array length is multiple of 3
     const [items, setItems] = useState(initFlex(initItems))
     const containerRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => containerRef.current!)

@@ -5,6 +5,7 @@ import { ExtendProps } from '@/utils/type'
 
 /**
  * The `<Menu>` container, will contain `<MenuItem>` and `<Divider>` components
+ *
  * @specs https://m3.material.io/components/menus/specs
  */
 export const Menu = forwardRef<

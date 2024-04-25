@@ -6,6 +6,7 @@ import { ExtendProps, TagNameString } from '@/utils/type'
 
 /**
  * You can set the `disabled` property to disable ripple
+ *
  * @specs https://m3.material.io/components/cards/specs
  */
 export const Card = forwardRef<

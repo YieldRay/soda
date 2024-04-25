@@ -9,6 +9,7 @@ import { ExtendProps } from '@/utils/type'
 /**
  * According to the official implementation, the ripple effect should not occupy space.
  * Therefore, if the parent container has `overflow: hidden`, make sure that there is enough area to show the ripple effect.
+ *
  * @specs https://m3.material.io/components/radio-button/specs
  */
 export const RadioButton = forwardRef<

@@ -14,7 +14,7 @@ export const Default: Story = {
     args: {
         items: new Array(6).fill(0).map((_, i) => ({
             value: (
-                <img src={`https://placekitten.com/200/${(i + 2) * 50}`}></img>
+                <img src={`https://picsum.photos/200/300?random=${i}`}></img>
             ),
             label: `Cat ${i + 1}`,
         })),

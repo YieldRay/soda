@@ -5,6 +5,7 @@ import { ExtendProps } from '@/utils/type'
 
 /**
  * The divider has margin included by default, you can remove it by adding `style={{margin:"0"}}`
+ *
  * @specs https://m3.material.io/components/divider/specs
  */
 export const Divider = forwardRef<
