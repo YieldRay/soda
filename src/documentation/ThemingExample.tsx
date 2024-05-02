@@ -43,8 +43,6 @@ import {
     Search,
     Snackbar,
     Switch,
-    Tab,
-    TabPanel,
     Tabs,
     TextField,
     TimePicker,
@@ -478,42 +476,76 @@ export function Preview() {
                 </Flex>
             </Card>
 
-            <Tabs defaultIndex={0}>
-                <Tab index={0}>Tab1</Tab>
-                <Tab index={1}>Tab2</Tab>
-
-                <div>
-                    <TabPanel index={0}>
-                        <ListSwitch
-                            headline="theming"
-                            leadingAvatarLabelText="M"
-                            supportingText="@material/material-color-utilities"
-                        />
-                        <ListCheckbox
-                            headline="theming"
-                            leadingAvatarLabelText="S"
-                            supportingText="soda/theme"
-                        />
-                    </TabPanel>
-                    <TabPanel index={1}>
-                        <List
-                            headline="theming"
-                            leadingAvatarLabelText="S"
-                            supportingText="soda/theme"
-                            trailingIcon={<Checkbox />}
-                        />
-                        <List
-                            headline="theming"
-                            leadingAvatarLabelText="M"
-                            supportingText="@material/material-color-utilities"
-                            trailingIcon={<Switch />}
-                        />
-                    </TabPanel>
-                </div>
-            </Tabs>
+            <WithTabs>
+                {[
+                    {
+                        value: 'Tab 1',
+                        children: (
+                            <>
+                                <ListSwitch
+                                    headline="theming"
+                                    leadingAvatarLabelText="M"
+                                    supportingText="@material/material-color-utilities"
+                                />
+                                <ListCheckbox
+                                    headline="theming"
+                                    leadingAvatarLabelText="S"
+                                    supportingText="soda/theme"
+                                />
+                            </>
+                        ),
+                    },
+                    {
+                        value: 'Tab 2',
+                        children: (
+                            <>
+                                {' '}
+                                <List
+                                    headline="theming"
+                                    leadingAvatarLabelText="S"
+                                    supportingText="soda/theme"
+                                    trailingIcon={<Checkbox />}
+                                />
+                                <List
+                                    headline="theming"
+                                    leadingAvatarLabelText="M"
+                                    supportingText="@material/material-color-utilities"
+                                    trailingIcon={<Switch />}
+                                />
+                            </>
+                        ),
+                    },
+                ]}
+            </WithTabs>
 
             <DatePicker />
             <TimePicker use24hourSystem />
         </LayoutNavigationDrawer>
+    )
+}
+
+function WithTabs({
+    children: tabs,
+}: {
+    children: Array<{
+        children?: React.ReactNode
+        label?: React.ReactNode
+        value: string
+    }>
+}) {
+    const [value, setValue] = useState(tabs[0].value)
+    return (
+        <>
+            <Tabs
+                value={value}
+                onChange={setValue}
+                items={tabs}
+                full
+                variant="secondary"
+            />
+            {tabs.map(
+                ({ children, ...item }) => item.value === value && children,
+            )}
+        </>
     )
 }

@@ -65,13 +65,13 @@ export const RadioButton = forwardRef<
         <div
             {...props}
             ref={ref}
-            tabIndex={disabled ? undefined : 0}
             className={clsx('sd-radio_button', className)}
-            role="radio"
             aria-checked={checked}
             data-sd-checked={checked}
             data-sd-disabled={disabled}
+            role="radio"
             onClick={() => setChecked(!checked)}
+            tabIndex={disabled ? undefined : 0}
             onKeyDown={(e) => {
                 if (!disabled && e.key === 'Enter') {
                     setChecked(!checked)

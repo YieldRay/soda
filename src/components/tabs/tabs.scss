@@ -1,0 +1,97 @@
+// https://m3.material.io/components/tabs/specs
+
+.sd-tabs {
+    display: inline-flex;
+    width: max-content;
+    max-width: 100%;
+    background: var(--md-sys-color-surface);
+    overflow-x: auto;
+    // hide the scrollbar
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+
+    &-item {
+        flex-shrink: 0;
+        background: var(--md-sys-color-surface);
+        user-select: none;
+        cursor: pointer;
+        overflow: hidden;
+
+        padding: 0.5rem 1rem 0.8rem 1rem;
+        display: inline-flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 4px;
+
+        transition: all 200ms;
+
+        @media (any-hover: hover) {
+            &:hover {
+                @include background-hover(var(--md-sys-color-primary));
+            }
+        }
+        &:active {
+            @include background-pressed(var(--md-sys-color-primary));
+        }
+
+        &:focus-visible {
+            outline: none;
+            @include background-focus(var(--md-sys-color-primary));
+        }
+
+        &-icon {
+            transition: all 200ms;
+            svg {
+                height: 20px;
+                display: grid;
+                place-items: center;
+            }
+        }
+
+        &-label_text {
+            transition: all 200ms;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 500;
+            -webkit-text-stroke: 0.1px currentColor;
+        }
+
+        &[data-sd-active='true'] {
+            // selected
+            * {
+                color: var(--md-sys-color-primary);
+            }
+        }
+
+        &[disabled],
+        &[data-sd-disabled='true'] {
+            color: var(--md-sys-color-on-surface);
+            opacity: 0.38;
+            pointer-events: none;
+        }
+    }
+
+    position: relative;
+    &-active_indicator {
+        transition: left 200ms;
+        position: absolute;
+        height: 6px; // height 6px, we hide 3px, leaving 3px to display
+        width: 36px;
+        border-radius: 12px;
+        background: var(--md-sys-color-primary);
+        bottom: -3px;
+        // left: calc in js
+    }
+    &[data-sd-variant='secondary'] {
+        .sd-tabs-active_indicator {
+            // width: calc in js
+            border-radius: 0;
+            height: 2.5px;
+            bottom: 0;
+        }
+    }
+}
