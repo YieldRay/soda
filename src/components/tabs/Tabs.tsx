@@ -1,6 +1,6 @@
 import './tabs.scss'
 import clsx from 'clsx'
-import { forwardRef, useEffect, useRef, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeRefs } from '@/hooks/use-merge'
 import { Ripple } from '@/ripple/Ripple'
@@ -59,7 +59,7 @@ export const Tabs = forwardRef<
     const [left, setLeft] = useState('0')
     const [width, setWidth] = useState('36px')
 
-    useEffect(() => {
+    const correctlyPlaceIndicator = useCallback(() => {
         const tabs = ref.current
         if (!tabs) return
         const item = tabs.querySelectorAll('.sd-tabs-item')[
@@ -95,6 +95,14 @@ export const Tabs = forwardRef<
             tabs.scrollBy(item.clientWidth, 0)
         }
     }, [index, variant])
+
+    useEffect(correctlyPlaceIndicator, [correctlyPlaceIndicator])
+
+    useEffect(() => {
+        window.addEventListener('resize', correctlyPlaceIndicator)
+        return () =>
+            window.removeEventListener('resize', correctlyPlaceIndicator)
+    }, [correctlyPlaceIndicator])
 
     return (
         <div

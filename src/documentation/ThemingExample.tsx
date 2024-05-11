@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import {
     mdiCheckboxOutline,
     mdiDeleteOutline,
@@ -19,7 +19,6 @@ import {
 } from '@mdi/js'
 import Icon from '@mdi/react'
 import {
-    Badge,
     BottomAppBar,
     BottomSheet,
     BottomSheetHandle,
@@ -53,7 +52,6 @@ import { useFullscreen } from '@/hooks/use-fullscreen'
 import { usePrefersDark, useWindowSizeType } from '@/hooks/use-media-query'
 import {
     applyThemeForSoda,
-    argbFromHex,
     themeFromHexString,
     themeFromImageOrFile,
 } from '@/utils/theme'
@@ -66,13 +64,8 @@ export function ThemingExample() {
     const [sourceColor, setSourceColor] = useState(
         localStorage.getItem('sourceColor') || '#6750a4',
     )
-    const [customColors, setCustomColors] = useState<string[]>([])
+
     const [file, setFile] = useState<File | null>(null)
-    const customColorArray = customColors.map((color, index) => ({
-        name: `custom-${index}`,
-        value: argbFromHex(color),
-        blend: true,
-    }))
 
     useEffect(() => {
         localStorage.setItem('sourceColor', sourceColor)
@@ -82,25 +75,26 @@ export function ThemingExample() {
         // eslint-disable-next-line no-extra-semi
         ;(async () => {
             const theme = file
-                ? await themeFromImageOrFile(file, customColorArray)
-                : themeFromHexString(sourceColor, customColorArray)
+                ? await themeFromImageOrFile(file)
+                : themeFromHexString(sourceColor)
 
             applyThemeForSoda(theme, prefersDark)
         })()
-    }, [customColorArray, prefersDark, sourceColor, file])
+    }, [prefersDark, sourceColor, file])
 
     return (
         <Card
             style={{
                 padding: '1rem',
                 margin: '2.5rem 0 5rem',
-                maxWidth: '350px',
+                maxWidth: '400px',
             }}
             disabled
         >
-            <section>
-                <h3>SourceColor</h3>
-
+            <h1>Change Theme</h1>
+            <p>
+                <strong>Manually select a color:</strong>
+                <br />
                 <input
                     type="color"
                     value={sourceColor}
@@ -109,7 +103,11 @@ export function ThemingExample() {
                         setSourceColor(e.target.value)
                     }}
                 />
+            </p>
 
+            <p>
+                <strong>Dynamic color from image:</strong>
+                <br />
                 <input
                     type="file"
                     accept="image/*"
@@ -119,57 +117,7 @@ export function ThemingExample() {
                         setFile(file)
                     }}
                 />
-            </section>
-
-            <section>
-                <h3>CustomColors</h3>
-
-                {customColors.map((customColor, index) => (
-                    <div
-                        key={index}
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '1rem',
-                            margin: '.5rem 0',
-                        }}
-                    >
-                        <input
-                            key={index}
-                            type="color"
-                            value={customColor}
-                            onChange={(e) => {
-                                setCustomColors(
-                                    customColors.toSpliced(
-                                        index,
-                                        1,
-                                        e.target.value,
-                                    ),
-                                )
-                            }}
-                        />
-                        <Badge label={index}>
-                            <Button
-                                onClick={() => {
-                                    setCustomColors(
-                                        customColors.toSpliced(index, 1),
-                                    )
-                                }}
-                            >
-                                Delete This
-                            </Button>
-                        </Badge>
-                    </div>
-                ))}
-
-                <Button
-                    onClick={() =>
-                        setCustomColors([...customColors, '#ffffff'])
-                    }
-                >
-                    Add One
-                </Button>
-            </section>
+            </p>
         </Card>
     )
 }
@@ -544,7 +492,10 @@ function WithTabs({
                 variant="secondary"
             />
             {tabs.map(
-                ({ children, ...item }) => item.value === value && children,
+                ({ children, ...item }) =>
+                    item.value === value && (
+                        <Fragment key={item.value}>{children}</Fragment>
+                    ),
             )}
         </>
     )
