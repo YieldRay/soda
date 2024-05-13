@@ -86,8 +86,8 @@ See: <https://soda.js.org>
 
 ## Icons
 
-This library use the [MDI Icon Library](https://pictogrammers.com/library/mdi/)  
-You can refer it at <https://materialdesignicons.com/>
+This library uses the [MDI Icon Library](https://pictogrammers.com/library/mdi/)  
+You can refer to it at <https://materialdesignicons.com/>
 
 ```tsx
 import { mdiMagnify } from '@mdi/js'
@@ -102,12 +102,12 @@ const App = () => (
 )
 ```
 
-A replacement is google fonts: <https://fonts.google.com/icons>
+A replacement is Google fonts: <https://fonts.google.com/icons>
 
 ## Fonts
 
 It's highly recommended that you use a font that supports `font-weight: 500`,  
-as some component state requires it to behavior clear to user.
+as some component states require it to behavior clear to the user.
 
 The easiest way is to use the `Roboto` font, just simply add a few lines of css
 code as below!
@@ -136,14 +136,14 @@ Chinese user may prefer:
 
 ## Theming
 
-This library use the official material design css variable
+This library uses the official material design css variable
 (`--md-sys-color-<token>`, at `:root`) to theming.  
 So you can simply overwrite them or use the
 [@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript)
-package to apply theme.
+package to apply the theme.
 
 ```tsx
-// we also provide a series of wrapper function, making theming easier
+// we also provide a series of wrapper functions, making theming easier
 import { applyThemeForSoda } from 'soda/dist/utils/theme'
 
 // simply
@@ -182,10 +182,10 @@ function SelectThemeFromFileButton() {
 
 ## zIndex
 
-Some components have `fixed` boolean property, it's useful to set it to true.  
+Some components have a `fixed` boolean property, it's useful to set it to `true`.  
 When enabled, the component will become `position: fixed`.  
-Also, components have default `zIndex` value, but you can also set the `zIndex`  
-property to overwrite it, it also expose an `inset` property, which can be used  
+Also, components have a default `zIndex` value, but you can also set the `zIndex`  
+property to overwrite it, it also exposes an `inset` property, which can be used  
 for controlling the position.
 
 ```tsx
@@ -220,8 +220,8 @@ npm run storybook
 
 Naming convention:
 
--   a `.tsx` file with capitalized beginning is a react component (exports the same
+-   A `.tsx` file with a capitalized beginning is a react component (exports the same
     name, no default export)
--   a `.scss` file will use _hyphen_ to separate component name in file name
--   in any css code, use _underscore_ to separate component name, use _hyphen_ to
+-   A `.scss` file will use _hyphen_ to separate component name in the file name
+-   In any css code, use _underscore_ to separate component name, use _hyphen_ to
     separate name segments
