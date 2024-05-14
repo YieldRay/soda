@@ -49,78 +49,8 @@ import {
 } from '@/components'
 import { PopoverHolder, Scrim, Select, TooltipHolder } from '@/composition'
 import { useFullscreen } from '@/hooks/use-fullscreen'
-import { usePrefersDark, useWindowSizeType } from '@/hooks/use-media-query'
-import {
-    applyThemeForSoda,
-    themeFromHexString,
-    themeFromImageOrFile,
-} from '@/utils/theme'
-
-/**
- * Just an example widget to show example of `@material/material-color-utilities`
- */
-export function ThemingExample() {
-    const prefersDark = usePrefersDark()
-    const [sourceColor, setSourceColor] = useState(
-        localStorage.getItem('sourceColor') || '#6750a4',
-    )
-
-    const [file, setFile] = useState<File | null>(null)
-
-    useEffect(() => {
-        localStorage.setItem('sourceColor', sourceColor)
-    }, [sourceColor])
-
-    useEffect(() => {
-        // eslint-disable-next-line no-extra-semi
-        ;(async () => {
-            const theme = file
-                ? await themeFromImageOrFile(file)
-                : themeFromHexString(sourceColor)
-
-            applyThemeForSoda(theme, prefersDark)
-        })()
-    }, [prefersDark, sourceColor, file])
-
-    return (
-        <Card
-            style={{
-                padding: '1rem',
-                margin: '2.5rem 0 5rem',
-                maxWidth: '400px',
-            }}
-            disabled
-        >
-            <h1>Change Theme</h1>
-            <p>
-                <strong>Manually select a color:</strong>
-                <br />
-                <input
-                    type="color"
-                    value={sourceColor}
-                    onChange={(e) => {
-                        setFile(null)
-                        setSourceColor(e.target.value)
-                    }}
-                />
-            </p>
-
-            <p>
-                <strong>Dynamic color from image:</strong>
-                <br />
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                        const file = e.target.files?.[0]
-                        if (!file) return
-                        setFile(file)
-                    }}
-                />
-            </p>
-        </Card>
-    )
-}
+import { useWindowSizeType } from '@/hooks/use-media-query'
+import { Flex } from './ChangeTheme'
 
 function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
     const [open, setOpen] = useState(false)
@@ -325,24 +255,6 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
     )
 }
 
-function Flex({
-    children,
-    ...style
-}: React.CSSProperties & { children?: React.ReactNode }) {
-    return (
-        <div
-            style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                ...style,
-            }}
-        >
-            {children}
-        </div>
-    )
-}
-
 function ListSwitch(props: React.ComponentProps<typeof List>) {
     const [checked, setChecked] = useState(false)
     return (
@@ -365,110 +277,140 @@ function ListCheckbox(props: React.ComponentProps<typeof List>) {
     )
 }
 
-export function Preview() {
+export function Example() {
     return (
         <LayoutNavigationDrawer>
-            <Card disabled style={{ padding: '1rem', display: 'inline-block' }}>
-                <h2>Login</h2>
-                <TextField labelText="Username" variant="outlined" />
-                <br />
-                <TextField labelText="Password" />
-                <br />
-                <h4 style={{ display: 'inline' }}>Mode: </h4>
-                <Select options={['Development', 'Production', 'Preview']} />
-                <br />
-                <Button>OK</Button>
-                <Button variant="elevated">Cancel</Button>
-            </Card>
-
-            <Card disabled style={{ padding: '1rem', display: 'inline-block' }}>
-                <h2>Comments Area</h2>
-                <TextField
-                    labelText="Comment"
-                    textarea
-                    style={{ width: '100%' }}
-                />
-                <TextField
-                    labelText="Comment"
-                    variant="outlined"
-                    textarea
-                    style={{ width: '100%' }}
-                />
-                <Flex alignItems="center" justifyContent="space-between">
-                    <div style={{ margin: '2rem 0.5rem' }}>
-                        <RadioButton defaultChecked>
-                            By making comments, you must accept our terms of
-                            service.
-                        </RadioButton>
-                    </div>
-                    <Button style={{ flexShrink: '0' }} variant="text">
-                        Cancel
-                    </Button>
-                    <Button style={{ flexShrink: '0' }}>Submit</Button>
-                </Flex>
-                <Flex gap="2rem">
-                    <div>
-                        <h1>3.5</h1>
-                    </div>
-                    <div style={{ flex: '1' }}>
-                        {[undefined, 0.4, 0.3, 0.2, 0.1].map((value, index) => (
-                            <Flex gap="4px" key={index}>
-                                <span>{5 - index}</span>
-                                <LinearProgressIndicator
-                                    thickness="6px"
-                                    value={value}
-                                />
-                            </Flex>
-                        ))}
-                    </div>
-                </Flex>
-            </Card>
-
-            <WithTabs>
-                {[
-                    {
-                        value: 'Tab 1',
-                        children: (
-                            <>
-                                <ListSwitch
-                                    headline="theming"
-                                    leadingAvatarLabelText="M"
-                                    supportingText="@material/material-color-utilities"
-                                />
-                                <ListCheckbox
-                                    headline="theming"
-                                    leadingAvatarLabelText="S"
-                                    supportingText="soda/theme"
-                                />
-                            </>
-                        ),
-                    },
-                    {
-                        value: 'Tab 2',
-                        children: (
-                            <>
-                                {' '}
-                                <List
-                                    headline="theming"
-                                    leadingAvatarLabelText="S"
-                                    supportingText="soda/theme"
-                                    trailingIcon={<Checkbox />}
-                                />
-                                <List
-                                    headline="theming"
-                                    leadingAvatarLabelText="M"
-                                    supportingText="@material/material-color-utilities"
-                                    trailingIcon={<Switch />}
-                                />
-                            </>
-                        ),
-                    },
-                ]}
-            </WithTabs>
-
-            <DatePicker />
-            <TimePicker use24hourSystem />
+            <Flex padding="0.5rem">
+                <Section1 />
+            </Flex>
+            <Section2 />
         </LayoutNavigationDrawer>
+    )
+}
+
+function Section1() {
+    return (
+        <Card disabled style={{ padding: '1rem', display: 'inline-block' }}>
+            <h2>Comments Area</h2>
+            <Flex flexDirection="column" gap=".5rem">
+                <Flex gap="2rem" justifyContent="space-between">
+                    <TextField labelText="Username" variant="outlined" />
+                    <TextField labelText="Comment" textarea />
+                </Flex>
+                <Flex gap="2rem" justifyContent="space-between">
+                    <TextField labelText="Password" />
+                    <TextField
+                        labelText="Comment"
+                        variant="outlined"
+                        textarea
+                    />
+                </Flex>
+            </Flex>
+            <div style={{ float: 'right', margin: '1rem' }}>
+                <span>Mode: </span>
+                <Select options={['Development', 'Production', 'Preview']} />
+            </div>
+            <Flex
+                clear="both"
+                alignItems="center"
+                justifyContent="space-between"
+            >
+                <div style={{ margin: '1rem 0.5rem' }}>
+                    <RadioButton defaultChecked>
+                        By making comments, you must accept our terms of
+                        service.
+                    </RadioButton>
+                </div>
+                <Button style={{ flexShrink: '0' }} variant="text">
+                    Cancel
+                </Button>
+                <Button style={{ flexShrink: '0' }}>Submit</Button>
+            </Flex>
+            <Flex gap="2rem">
+                <div>
+                    <h1>3.5</h1>
+                </div>
+                <div style={{ flex: '1' }}>
+                    {[undefined, 0.4, 0.3, 0.2, 0.1].map((value, index) => (
+                        <Flex gap="4px" key={index}>
+                            <span>{5 - index}</span>
+                            <LinearProgressIndicator
+                                thickness="6px"
+                                value={value}
+                            />
+                        </Flex>
+                    ))}
+                </div>
+            </Flex>
+        </Card>
+    )
+}
+
+function Section2() {
+    const type = useWindowSizeType()
+    const tabs = (
+        <WithTabs>
+            {[
+                {
+                    value: 'Tab 1',
+                    children: (
+                        <>
+                            <ListSwitch
+                                headline="theming"
+                                leadingAvatarLabelText="M"
+                                supportingText="@material/material-color-utilities"
+                            />
+                            <ListCheckbox
+                                headline="theming"
+                                leadingAvatarLabelText="S"
+                                supportingText="soda/theme"
+                            />
+                        </>
+                    ),
+                },
+                {
+                    value: 'Tab 2',
+                    children: (
+                        <>
+                            <List
+                                headline="theming"
+                                leadingAvatarLabelText="S"
+                                supportingText="soda/theme"
+                                trailingIcon={<Checkbox />}
+                            />
+                            <List
+                                headline="theming"
+                                leadingAvatarLabelText="M"
+                                supportingText="@material/material-color-utilities"
+                                trailingIcon={<Switch />}
+                            />
+                        </>
+                    ),
+                },
+            ]}
+        </WithTabs>
+    )
+
+    if (type === 'compact')
+        return (
+            <Flex flexDirection="column">
+                <div style={{ width: '100%', margin: '1rem 0' }}>{tabs}</div>
+                <DatePicker />
+                <TimePicker use24hourSystem />
+            </Flex>
+        )
+
+    return (
+        <Flex gap="2rem" margin="1rem" justifyContent="space-evenly">
+            <div>
+                <DatePicker />
+                <br />
+                {tabs}
+            </div>
+            <div>
+                <TimePicker use24hourSystem />
+            </div>
+        </Flex>
     )
 }
 

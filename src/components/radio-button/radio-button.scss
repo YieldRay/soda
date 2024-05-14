@@ -34,14 +34,16 @@ $borderWidth: 2px;
         vertical-align: middle;
         transition: all 200ms;
 
+        // outer circle
         &::before {
             transition: all 200ms;
             @include center();
             @include circle(18px);
             box-sizing: border-box;
         }
+        // inner circle
         &::after {
-            transition: all 200ms;
+            transition: all 200ms linear;
             @include center();
             @include circle(10px);
         }
@@ -82,12 +84,19 @@ $borderWidth: 2px;
         border: $borderWidth solid var(--md-sys-color-on-surface-variant);
     }
 
+    &[data-sd-checked='false'] .sd-radio_button-circle {
+        &::after {
+            clip-path: circle(0% at center);
+        }
+    }
+
     &[data-sd-checked='true'] .sd-radio_button-circle {
         &::before {
             border: $borderWidth solid var(--md-sys-color-primary);
         }
         &::after {
             background: var(--md-sys-color-primary);
+            clip-path: circle(100% at center);
         }
     }
 

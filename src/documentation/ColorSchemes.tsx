@@ -1,16 +1,13 @@
 const COLOR_TOKEN_MAP = {
-    'surface-tint': ['', 'color'],
-    'on-error': ['', 'container'],
-    error: ['', 'container'],
-    'on-tertiary': ['', 'container'],
+    primary: ['', 'container'],
+    'inverse-primary': [''],
+    'on-primary': ['', 'container'],
+    secondary: ['', 'container'],
+    'on-secondary': ['', 'container'],
     tertiary: ['', 'container'],
-    shadow: [''],
-    outline: ['', 'variant'],
-    'on-background': [''],
-    background: [''],
-    'inverse-on-surface': [''],
-    'inverse-surface': [''],
-    'on-surface': ['', 'variant'],
+    'on-tertiary': ['', 'container'],
+    error: ['', 'container'],
+    'on-error': ['', 'container'],
     surface: [
         '',
         'variant',
@@ -20,11 +17,14 @@ const COLOR_TOKEN_MAP = {
         'container-high',
         'container-highest',
     ],
-    'on-secondary': ['', 'container'],
-    secondary: ['', 'container'],
-    'inverse-primary': [''],
-    'on-primary': ['', 'container'],
-    primary: ['', 'container'],
+    'on-surface': ['', 'variant'],
+    'inverse-surface': [''],
+    'inverse-on-surface': [''],
+    'surface-tint': ['', 'color'],
+    background: [''],
+    'on-background': [''],
+    outline: ['', 'variant'],
+    shadow: [''],
 }
 
 export function ColorStatic() {
@@ -36,7 +36,7 @@ export function ColorStatic() {
                     listStyle: 'none',
                     display: 'grid',
                     gridTemplateColumns:
-                        'repeat(auto-fill, minmax(360px, 1fr))',
+                        'repeat(auto-fill, minmax(250px, 1fr))',
                     gap: '.3rem',
                 }}
             >
@@ -45,6 +45,7 @@ export function ColorStatic() {
                     const color = `var(--md-sys-color-${name})`
                     return (
                         <li
+                            key={name}
                             style={{
                                 background: color,
                                 margin: '0',
@@ -54,15 +55,16 @@ export function ColorStatic() {
                                 border: 'solid 1px var(--md-sys-color-outline)',
                             }}
                         >
-                            <span
+                            <small
                                 style={{
                                     color,
                                     filter: 'grayscale(1) contrast(999) invert(1)',
                                     userSelect: 'all',
+                                    fontWeight: 'bold',
                                 }}
                             >
                                 {color}
-                            </span>
+                            </small>
                         </li>
                     )
                 })}
