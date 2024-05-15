@@ -1,26 +1,9 @@
-import { Canvas, Meta, Story } from '@storybook/blocks'
-import { ChangeTheme } from './ChangeTheme'
-import { ColorStatic } from './ColorSchemes'
+import { ChangeTheme } from './components/ChangeTheme'
+import { ColorStatic } from './components/ColorSchemes'
 
-<Meta title="ColorSchemes" />
-
-# Dynamic Color
-
-```ts
-// provide some helper function
-import { type Theme, themeFromHexString, themeFromImageOrFile } from "soda-material/dist/utils/theme"
-const theme: Theme = themeFromHexString('#6750a4')
-const theme: Theme = await themeFromImageOrFile(/* accept HTMLImageElement or File object */)
-
-// apply theme
-import { applyThemeForSoda } from 'soda-material/dist/utils/theme'
-applyThemeForSoda('#6750a4')
-applyThemeForSoda(theme)
-```
-
-It's actually a module that provides some helper function and re-export the [@material/material-color-utilities](https://npm.im/@material/material-color-utilities) package.
 
 <ChangeTheme />
+<br />
 
 # Color Schemes
 

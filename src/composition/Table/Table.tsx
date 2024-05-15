@@ -4,9 +4,9 @@ import { forwardRef } from 'react'
 import { ExtendProps } from '@/utils/type'
 
 /**
- * Just a wrapper of `<table class="sd-table">`
+ * This is simply a wrapper for `<table class="sd-table">`.
  *
- * You may use directly className `sd-table` instead
+ * Alternatively, you can directly use the `sd-table` class name.
  */
 export const Table = forwardRef<
     HTMLTableElement,

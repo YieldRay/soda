@@ -65,8 +65,7 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
             if (!div.className.includes('sd-')) return
             div.classList.add('sb-unstyled')
         })
-        const sbdocs = document.querySelector('.sbdocs') as HTMLElement
-        sbdocs.style.all = 'unset'
+      
     }, [isScreenExpanded])
     const containerRef = useRef<HTMLDivElement>(null)
     const [fullscreen, setFullscreen] = useFullscreen(containerRef)
@@ -277,7 +276,7 @@ function ListCheckbox(props: React.ComponentProps<typeof List>) {
     )
 }
 
-export function Example() {
+export function Demo() {
     return (
         <LayoutNavigationDrawer>
             <Flex padding="0.5rem">

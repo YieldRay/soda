@@ -65,6 +65,10 @@ export default function App() {
 
 Next.js is also supported out of the box.
 
+> [!TIP]
+> This library is designed to maintain a small footprint, making it easy to integrate with other libraries in the ecosystem.
+> For instance, it pairs well with Tailwind CSS, although this does not depend on it.
+
 # Documentation
 
 See: <https://soda.js.org>
@@ -81,127 +85,6 @@ See: <https://soda.js.org>
 > interactivity.  
 > If has, it will be the root DOM node of the entire component.  
 > If not, it will be documented and will be checked if you use typescript.
-
-# Resources
-
-## Icons
-
-This library uses the [MDI Icon Library](https://pictogrammers.com/library/mdi/)  
-You can refer to it at <https://materialdesignicons.com/>
-
-```tsx
-import { mdiMagnify } from '@mdi/js'
-import Icon from '@mdi/react'
-import { IconButton } from 'soda-material'
-
-const App = () => (
-    <>
-        <Icon path={mdiMagnify} size={1} />
-        <IconButton path={mdiMagnify} />
-    </>
-)
-```
-
-A replacement is Google fonts: <https://fonts.google.com/icons>
-
-## Fonts
-
-It's highly recommended that you use a font that supports `font-weight: 500`,  
-as some component states require it to behavior clear to the user.
-
-The easiest way is to use the `Roboto` font, just simply add a few lines of css
-code as below!
-
-```css
-/* using Roboto */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
-* {
-    font-family: 'Roboto', sans-serif;
-}
-/*
-Tips:
-Chinese user may prefer:
-@import url('https://fonts.loli.net/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
-@import url('https://fonts.upset.dev/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap');
-@import url('https://fonts.font.im/css?family=Roboto:100,300,400,500,700,900');
-@import url('https://fonts.bunny.net/css?family=roboto:100,300,400,500,700,900');
-*/
-
-/* using Google Sans */
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@100;200;300;400;500;700;900&display=swap');
-* {
-    font-family: 'Google Sans', sans-serif;
-}
-```
-
-## Theming
-
-This library uses the official material design css variable
-(`--md-sys-color-<token>`, at `:root`) to theming.  
-So you can simply overwrite them or use the
-[@material/material-color-utilities](https://github.com/material-foundation/material-color-utilities/tree/main/typescript)
-package to apply the theme.
-
-```tsx
-// we also provide a series of wrapper functions, making theming easier
-import { applyThemeForSoda } from 'soda/dist/utils/theme'
-
-// simply
-applyThemeForSoda('#f82506')
-
-// or
-applyThemeForSoda(themeFromHexString('#f82506'), [
-    {
-        name: 'custom-1',
-        value: argbFromHex('#ff0000'),
-        blend: true,
-    },
-])
-
-// or
-function SelectThemeFromFileButton() {
-    const onClick = async () => {
-        const fileHandleArray = await window.showOpenFilePicker({
-            types: [
-                {
-                    description: 'please choose an image',
-                    accept: {
-                        'image/*': ['.png', '.gif', '.jpeg', '.jpg', '.webp'],
-                    },
-                },
-            ],
-            multiple: false,
-            excludeAcceptAllOption: true,
-        })
-        const file: File = await fileHandleArray[0].getFile()
-        applyThemeForSoda(await themeFromImageOrFile(file)) // *
-    }
-    return <button onClick={onClick}>Select An Image</button>
-}
-```
-
-## zIndex
-
-Some components have a `fixed` boolean property, it's useful to set it to `true`.  
-When enabled, the component will become `position: fixed`.  
-Also, components have a default `zIndex` value, but you can also set the `zIndex`  
-property to overwrite it, it also exposes an `inset` property, which can be used  
-for controlling the position.
-
-```tsx
-<Snackbar fixed open={true} zIndex={999} inset="auto 0 5rem">
-    Fixed Snackbar
-</Snackbar>
-```
-
-Currently, the default `zIndex` is:
-
-| Component  | zIndex |
-| ---------- | ------ |
-| snackbar   | 1      |
-| app-bar    | 1      |
-| navigation | 2      |
-| sheet      | 3      |
 
 # TODO
 

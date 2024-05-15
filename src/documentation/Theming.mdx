@@ -1,0 +1,56 @@
+# Theming
+
+This library uses the official material design css variables (`--md-sys-color-<token>`, at `:root`) to theming.  
+
+```ts
+// create theme
+import { type Theme, themeFromHexString, themeFromImageOrFile } from "soda-material/dist/utils/theme"
+const theme: Theme = themeFromHexString('#6750a4')
+const theme: Theme = await themeFromImageOrFile(/* accept HTMLImageElement or File object */)
+
+// apply theme
+import { applyThemeForSoda } from 'soda-material/dist/utils/theme'
+applyThemeForSoda('#6750a4')
+applyThemeForSoda(theme)
+```
+
+It's actually a module that provides some helper function and re-export the [@material/material-color-utilities](https://npm.im/@material/material-color-utilities) package.
+
+Here is a demo showing these wrapper functions, which can make theming easier.
+
+```tsx
+import { applyThemeForSoda, themeFromHexString, themeFromImageOrFile } from 'soda/dist/utils/theme'
+
+// simply
+applyThemeForSoda('#f82506')
+
+// or
+applyThemeForSoda(themeFromHexString('#f82506'), [
+    {
+        name: 'custom-1',
+        value: argbFromHex('#ff0000'),
+        blend: true,
+    },
+])
+
+// or
+function SelectThemeFromFileButton() {
+    const onClick = async () => {
+        const fileHandleArray = await window.showOpenFilePicker({
+            types: [
+                {
+                    description: 'please choose an image',
+                    accept: {
+                        'image/*': ['.png', '.gif', '.jpeg', '.jpg', '.webp'],
+                    },
+                },
+            ],
+            multiple: false,
+            excludeAcceptAllOption: true,
+        })
+        const file: File = await fileHandleArray[0].getFile()
+        applyThemeForSoda(await themeFromImageOrFile(file)) // *
+    }
+    return <button onClick={onClick}>Select An Image</button>
+}
+```

@@ -9,7 +9,7 @@ import {
     themeFromHexString,
     themeFromImageOrFile,
 } from '@/utils/theme'
-import { IconButton } from '..'
+import { IconButton } from '../..'
 
 export function ChangeTheme() {
     const prefersDark = usePrefersDark()

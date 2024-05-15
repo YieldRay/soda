@@ -7,10 +7,15 @@ import { ExtendProps, TagNameString } from '@/utils/type'
 // React react-transition-group: https://reactcommunity.org/react-transition-group/switch-transition
 
 /**
- * A simple state based transition for element's enter and exit (to DOM)
+ * This component provide a very simple state-based mechanism for handling element transitions on enter and exit.
  *
- * [warn]: `transition` property should set to entering/exiting to activate css transition
- * or set transition to `style` property to manage them all
+ * For more robust and feature-rich animation components, consider using libraries such as:
+ * - [framer-motion](https://npm.im/framer-motion)
+ * - [react-transition-group](https://npm.im/react-transition-group)
+ *
+ * If you prefer an imperative approach to animate DOM elements, this library uses the [Web Animations API](https://developer.mozilla.org/docs/Web/API/Web_Animations_API) internally to minimize dependencies. However, you might find [Motion One](https://npm.im/motion) to be a better fit for such needs.
+ *
+ * [warn]: To activate CSS transitions, the `transition` property should be set to `entering` or `exiting`. Alternatively, manage all transitions by setting the `transition` property in the `style` attribute.
  */
 export const SodaTransition = forwardRef<
     HTMLElement,

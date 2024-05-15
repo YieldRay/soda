@@ -16,11 +16,14 @@ import { isNumber } from '@/utils/misc'
 import { ExtendProps } from '@/utils/type'
 
 /**
- * A high-level image component, supports loading progress (when `crossOrigin` is specified),
- * timeout with default reload button, lazy load, and so on.
+ * This is a high-level image component that offers several features including:
+ * - Loading progress tracking when `crossOrigin` is specified.
+ * - A default reload button in case of timeout.
+ * - Support for lazy loading, among other functionalities.
  *
- * When use this component, explicit set the width and height (or min-height/min-width) is recommended,
- * otherwise the loading placeholder cannot be rendered as width and height is zero by default.
+ * It is recommended to explicitly set the width and height (or min-width/min-height) properties
+ * when using this component. Without these specifications, the loading placeholder
+ * may not render correctly as the default width and height are set to zero.
  */
 export const SodaImage = forwardRef<
     { reload(): void },
@@ -40,7 +43,7 @@ export const SodaImage = forwardRef<
              */
             placeholder?: React.ReactNode
             /**
-             * Description string
+             * Optional description string
              */
             description?: React.ReactNode
             /**
@@ -56,13 +59,13 @@ export const SodaImage = forwardRef<
              */
             alt?: HTMLImageElement['alt']
             /**
-             * Send CORS request to fetch the image, this allow us to known how much we have downloaded
-             * so we can display a concrete value in the placeholder of `<CircularProgressIndicator/>`
+             * Sends a CORS request to fetch the image, enabling tracking of the download progress.
+             * This allows for displaying an accurate progress value in the `<CircularProgressIndicator/>` placeholder
              */
             crossOrigin?: React.ImgHTMLAttributes<HTMLImageElement>['crossOrigin']
             referrerPolicy?: React.ImgHTMLAttributes<HTMLImageElement>['referrerPolicy']
             /**
-             * Cache property for fetch, works when `crossOrigin` is specified
+             * Cache property for fetch, only works when `crossOrigin` is specified
              */
             cache?: RequestCache
             width?: string | number
