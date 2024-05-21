@@ -103,6 +103,7 @@ export function Snackbar({
             {...props}
             className={clsx('sd-snackbar', className)}
             data-sd-third_line={thirdLine}
+            role="alert"
         >
             <div className="sd-snackbar-supporting_text">{children}</div>
             {action && (

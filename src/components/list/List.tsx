@@ -64,6 +64,7 @@ export const List = forwardRef<
             className={clsx('sd-list', className)}
             data-sd-lines={lines}
             data-sd-disabled={disabled}
+            role="listitem"
         >
             {leadingVideoThumbnail && (
                 <div className="sd-list-leading_video_thumbnail">

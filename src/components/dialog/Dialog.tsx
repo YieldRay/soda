@@ -27,6 +27,7 @@ const _Dialog = forwardRef<
             {...props}
             ref={ref}
             className={clsx('sd-dialog', props.className)}
+            role="dialog"
         >
             {headline && <div className="sd-dialog-headline">{headline}</div>}
             <div

@@ -26,6 +26,7 @@ export const RichTooltip = forwardRef<
             {...props}
             ref={ref}
             className={clsx('sd-rich_tooltip', className)}
+            role="tooltip"
         >
             {subhead && (
                 <div className="sd-rich_tooltip-subhead">{subhead}</div>

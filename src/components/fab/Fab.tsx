@@ -44,6 +44,8 @@ export const Fab = forwardRef<
             data-sd-size={size}
             data-sd-extended={extended}
             data-sd-disabled={disabled}
+            aria-disabled={disabled}
+            role="button"
         >
             <div className="sd-fab-icon">{children}</div>
         </Ripple>

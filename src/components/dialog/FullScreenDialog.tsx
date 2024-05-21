@@ -33,6 +33,7 @@ export const FullScreenDialog = forwardRef<
             {...props}
             ref={ref}
             className={clsx('sd-dialog-fullscreen', props.className)}
+            role="dialog"
         >
             <div className="sd-dialog-fullscreen-header">
                 <IconButton

@@ -35,6 +35,8 @@ export const MenuItem = forwardRef<HTMLElement, ExtendProps<Props>>(
                 as="li"
                 className={clsx('sd-menu_item', className)}
                 data-sd-disabled={disabled}
+                aria-disabled={disabled}
+                role="menuitem"
             >
                 {leadingIcon && (
                     <div className="sd-menu_item-leading_icon">

@@ -14,6 +14,7 @@ export const PlainTooltip = forwardRef<
             {...props}
             ref={ref}
             className={clsx('sd-plain_tooltip', className)}
+            role="tooltip"
         >
             {children}
         </div>

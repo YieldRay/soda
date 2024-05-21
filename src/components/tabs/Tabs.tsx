@@ -140,6 +140,7 @@ export const Tabs = forwardRef<
                         style={{ flexDirection }}
                         key={item.value}
                         onClick={() => setValue(item.value)}
+                        aria-selected={value === item.value}
                         data-sd-active={value === item.value}
                         data-sd-disabled={disabled}
                         role="tab"

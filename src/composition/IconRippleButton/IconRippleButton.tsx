@@ -30,6 +30,7 @@ export const IconRippleButton = forwardRef<
                 (e) => size && e?.style.setProperty('--size', size),
             )}
             className={clsx('sd-icon_ripple_button', className)}
+            role="button"
         >
             {path ? <Icon path={path} /> : children}
             <div className="sd-icon_ripple_button-ripple">

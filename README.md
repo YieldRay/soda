@@ -88,11 +88,9 @@ See: <https://soda.js.org>
 
 # TODO
 
--   [ ] ARIA support
+-   [ ] More ARIA support
 
 -   [ ] More customizable CSS vars
-
--   [ ] Better React API & Better component abstraction
 
 # Development
 

@@ -13,7 +13,12 @@ export const Menu = forwardRef<
     ExtendProps<{ children?: React.ReactNode }>
 >(function Menu({ className, children, ...props }, ref) {
     return (
-        <ul {...props} ref={ref} className={clsx('sd-menu', className)}>
+        <ul
+            {...props}
+            ref={ref}
+            className={clsx('sd-menu', className)}
+            role="menu"
+        >
             {children}
         </ul>
     )

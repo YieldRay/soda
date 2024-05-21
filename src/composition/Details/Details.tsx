@@ -58,6 +58,7 @@ export function Details({
             {...props}
             className={clsx('sd-details', `sd-details-${variant}`, variant)}
             data-sd-expanded={expanded}
+            aria-expanded={expanded}
         >
             <div
                 className="sd-details_summary"

@@ -36,6 +36,7 @@ export const ActionButton = forwardRef<
             rippleColor={rippleColor}
             data-sd-inverse={inverse}
             data-sd-disabled={disabled}
+            role="button"
         >
             {children}
         </Ripple>

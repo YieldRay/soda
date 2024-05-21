@@ -41,7 +41,9 @@ export const Chip = forwardRef<
             as="div"
             className={clsx('sd-chip', `sd-chip-${variant}`, className)}
             onClick={onClick}
+            role="button"
             data-sd-disabled={disabled}
+            aria-disabled={disabled}
         >
             {leadingIcon && (
                 <div className="sd-chip-leading_icon">{leadingIcon}</div>
