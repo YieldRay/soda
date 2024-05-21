@@ -36,7 +36,7 @@ export const Tabs = forwardRef<
         /**
          * @default "primary"
          */
-        variant?: 'primary' | 'secondary'
+        variant?: 'primary' | 'secondary' | 'block'
         full?: boolean
     }>
 >(function Tab(
@@ -68,7 +68,10 @@ export const Tabs = forwardRef<
 
         if (!item) return
 
-        const indicatorWidth = variant === 'secondary' ? item.clientWidth : 36
+        const indicatorWidth =
+            variant === 'secondary' || variant === 'block'
+                ? item.clientWidth
+                : 36
         setWidth(`${indicatorWidth}px`)
         const left = item.offsetLeft + (item.clientWidth - indicatorWidth) / 2
         setLeft(`${left}px`)
@@ -131,6 +134,9 @@ export const Tabs = forwardRef<
                     <Ripple
                         as="div"
                         className="sd-tabs-item"
+                        rippleColor={
+                            variant === 'block' ? 'transparent' : undefined
+                        }
                         style={{ flexDirection }}
                         key={item.value}
                         onClick={() => setValue(item.value)}

@@ -65,7 +65,6 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
             if (!div.className.includes('sd-')) return
             div.classList.add('sb-unstyled')
         })
-      
     }, [isScreenExpanded])
     const containerRef = useRef<HTMLDivElement>(null)
     const [fullscreen, setFullscreen] = useFullscreen(containerRef)

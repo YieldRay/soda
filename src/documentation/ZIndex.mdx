@@ -1,9 +1,9 @@
-import { Table } from "../composition/Table"
+import { Table } from '../composition/Table'
 
 # zIndex
 
 Some components feature a `fixed` boolean property, which, when set to `true`, changes the component's position to `position: fixed`.  
-Additionally, while components come with a default `zIndex` value, this can be overridden by setting the `zIndex` property.   
+Additionally, while components come with a default `zIndex` value, this can be overridden by setting the `zIndex` property.  
 The components also expose an `inset` property, allowing for precise control over their positioning.
 
 ```tsx
@@ -16,13 +16,27 @@ Currently, the default `zIndex` is:
 
 <Table>
     <thead>
-        <tr><th>Component</th><th>zIndex</th></tr>
+        <tr>
+            <th>Component</th>
+            <th>zIndex</th>
+        </tr>
     </thead>
     <tbody>
-        <tr><td>snackbar</td><td>1</td></tr>
-        <tr><td>app-bar</td><td>1</td></tr>
-        <tr><td>navigation</td><td>2</td></tr>
-        <tr><td>sheet</td><td>3</td></tr>
+        <tr>
+            <td>snackbar</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>app-bar</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>navigation</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>sheet</td>
+            <td>3</td>
+        </tr>
     </tbody>
 </Table>
- 

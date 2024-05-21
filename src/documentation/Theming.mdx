@@ -1,6 +1,6 @@
 # Theming
 
-This library uses the official material design css variables (`--md-sys-color-<token>`, at `:root`) to theming.  
+This library uses the official material design css variables (`--md-sys-color-<token>`, at `:root`) to theming.
 
 ```ts
 // create theme
@@ -19,7 +19,11 @@ It's actually a module that provides some helper function and re-export the [@ma
 Here is a demo showing these wrapper functions, which can make theming easier.
 
 ```tsx
-import { applyThemeForSoda, themeFromHexString, themeFromImageOrFile } from 'soda/dist/utils/theme'
+import {
+    applyThemeForSoda,
+    themeFromHexString,
+    themeFromImageOrFile,
+} from 'soda/dist/utils/theme'
 
 // simply
 applyThemeForSoda('#f82506')

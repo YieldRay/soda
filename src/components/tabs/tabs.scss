@@ -20,8 +20,8 @@
         user-select: none;
         cursor: pointer;
         overflow: hidden;
-
-        padding: 0.5rem 1rem 0.8rem 1rem;
+        padding: 0.5rem 1rem;
+        padding-bottom: 0.8rem; // for indicator
         display: inline-flex;
         align-items: center;
         flex-direction: column;
@@ -86,12 +86,34 @@
         bottom: -3px;
         // left: calc in js
     }
+    &[data-sd-variant='primary'] {
+        .sd-tabs-active_indicator {
+            clip-path: inset(0 0 50% 0);
+        }
+    }
     &[data-sd-variant='secondary'] {
         .sd-tabs-active_indicator {
             // width: calc in js
             border-radius: 0;
             height: 2.5px;
             bottom: 0;
+        }
+    }
+    &[data-sd-variant='block'] {
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: var(--md-sys-color-surface-container-highest);
+        .sd-tabs-item {
+            background-color: transparent;
+            z-index: 1;
+            padding-bottom: 0.5rem; // reset
+        }
+        .sd-tabs-active_indicator {
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            background-color: var(--md-sys-color-background);
+            clip-path: inset(2px round 4px);
         }
     }
 }
