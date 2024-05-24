@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import { globSync } from 'glob'
 import { defineConfig } from 'vite'
 import type { LibraryOptions } from 'vite'
+import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,6 +22,7 @@ export default defineConfig({
     },
     build: {
         target: 'es2021',
+        sourcemap: true,
         lib: {
             name: 'soda',
             formats: ['es'],
@@ -53,6 +55,13 @@ export default defineConfig({
             babel: {
                 plugins: [['styled-jsx/babel', { optimizeForSpeed: true }]],
             },
+        }),
+        dts({
+            exclude: [
+                'node_modules/**',
+                '**/*.stories.*',
+                '*/documentation/**/*',
+            ],
         }),
     ],
 })
