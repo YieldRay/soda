@@ -8,9 +8,11 @@
     overflow-x: auto;
     // hide the scrollbar
     scrollbar-width: none;
+
     &::-webkit-scrollbar {
         display: none;
     }
+
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
@@ -34,6 +36,7 @@
                 @include background-hover(var(--md-sys-color-primary));
             }
         }
+
         &:active {
             @include background-pressed(var(--md-sys-color-primary));
         }
@@ -45,6 +48,7 @@
 
         &-icon {
             transition: all 200ms;
+
             svg {
                 height: 20px;
                 display: grid;
@@ -76,6 +80,7 @@
     }
 
     position: relative;
+
     &-active_indicator {
         transition: left 200ms;
         position: absolute;
@@ -86,11 +91,13 @@
         bottom: -3px;
         // left: calc in js
     }
+
     &[data-sd-variant='primary'] {
         .sd-tabs-active_indicator {
             clip-path: inset(0 0 50% 0);
         }
     }
+
     &[data-sd-variant='secondary'] {
         .sd-tabs-active_indicator {
             // width: calc in js
@@ -99,11 +106,13 @@
             bottom: 0;
         }
     }
+
     &[data-sd-variant='block'] {
         --radius: 8px;
         border-radius: var(--radius);
         overflow: hidden;
         background-color: var(--md-sys-color-surface-container-highest);
+
         .sd-tabs-item {
             background-color: transparent;
             z-index: 1;
@@ -114,6 +123,7 @@
                 @include background-focus(var(--md-sys-color-primary));
             }
         }
+
         .sd-tabs-active_indicator {
             inset: 0;
             transform: scale(0.95, 0.9);
@@ -124,6 +134,63 @@
             box-shadow:
                 1px 1px rgba(0 0 0 / 0.08),
                 -1px -1px rgba(0 0 0 / 0.04);
+        }
+    }
+
+    &[data-sd-variant='text'] {
+        --radius: 8px;
+        overflow: hidden;
+        background-color: unset;
+
+        .sd-tabs-item {
+            border-radius: var(--radius);
+            background-color: transparent;
+            padding-bottom: 0.5rem; // reset
+
+            &[data-sd-active='false'] > .sd-tabs-item-label_text {
+                color: var(--md-sys-color-outline);
+            }
+            &:focus-visible {
+                outline: none;
+                @include background-focus(var(--md-sys-color-primary));
+            }
+        }
+        .sd-tabs-active_indicator {
+            display: none;
+        }
+    }
+
+    &[data-sd-variant='rounded'] {
+        --radius: 16px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        background-color: unset;
+
+        .sd-tabs-item {
+            .sd-tabs-item-label_text {
+                font-weight: 400;
+                color: var(--md-sys-color-on-secondary-container);
+            }
+            &[data-sd-active='false'] > .sd-tabs-item-label_text {
+                color: var(--md-sys-color-outline);
+            }
+            background-color: transparent;
+            z-index: 1;
+            padding-bottom: 0.5rem; // reset
+
+            &:focus-visible {
+                outline: none;
+                @include background-focus(var(--md-sys-color-primary));
+            }
+        }
+
+        .sd-tabs-active_indicator {
+            inset: 0;
+            transform: scale(0.95, 0.9);
+            height: 100%;
+            width: 100%;
+            border-radius: var(--radius);
+            background: var(--md-sys-color-secondary-container);
         }
     }
 }

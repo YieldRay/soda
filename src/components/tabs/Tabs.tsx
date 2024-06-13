@@ -36,7 +36,7 @@ export const Tabs = forwardRef<
         /**
          * @default "primary"
          */
-        variant?: 'primary' | 'secondary' | 'block'
+        variant?: 'primary' | 'secondary' | 'block' | 'text' | 'rounded'
         full?: boolean
     }>
 >(function Tab(
@@ -69,7 +69,9 @@ export const Tabs = forwardRef<
         if (!item) return
 
         const indicatorWidth =
-            variant === 'secondary' || variant === 'block'
+            variant === 'secondary' ||
+            variant === 'block' ||
+            variant === 'rounded'
                 ? item.clientWidth
                 : 36
         setWidth(`${indicatorWidth}px`)
@@ -80,8 +82,7 @@ export const Tabs = forwardRef<
             left -
                 tabs.scrollLeft -
                 /** previous */ (item.previousElementSibling?.clientWidth ||
-                    0) /
-                    2 /** make sure the previous item is able to click */ <=
+                    0) /** make sure the previous item is able to click */ <=
             0
         ) {
             // scroll to left
@@ -90,8 +91,8 @@ export const Tabs = forwardRef<
             left +
                 item.clientWidth -
                 tabs.scrollLeft +
-                /** next */ (item.nextElementSibling?.clientWidth || 0) /
-                    2 /** make sure the next item is able to click */ >=
+                /** next */ (item.nextElementSibling?.clientWidth ||
+                    0) /** make sure the next item is able to click */ >=
             tabs.clientWidth
         ) {
             // scroll to right
@@ -135,7 +136,9 @@ export const Tabs = forwardRef<
                         as="div"
                         className="sd-tabs-item"
                         rippleColor={
-                            variant === 'block' ? 'transparent' : undefined
+                            variant === 'block' || variant === 'rounded'
+                                ? 'transparent'
+                                : undefined
                         }
                         style={{ flexDirection }}
                         key={item.value}

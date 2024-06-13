@@ -129,3 +129,39 @@ export const Block: Story = {
         ],
     },
 }
+
+export const Text: Story = {
+    args: {
+        variant: 'text',
+        defaultValue: 'Tab 1',
+        items: [
+            {
+                value: 'Tab 1',
+            },
+            {
+                value: 'Tab 2',
+            },
+            {
+                value: 'Tab 3',
+            },
+        ],
+    },
+}
+
+export const Rounded: Story = {
+    args: {
+        variant: 'rounded',
+        defaultValue: 'Tab 1',
+        items: [
+            {
+                value: 'Tab 1',
+            },
+            {
+                value: 'Tab 2',
+            },
+            {
+                value: 'Tab 3',
+            },
+        ],
+    },
+}
