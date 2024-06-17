@@ -6,7 +6,7 @@ import { ExtendProps } from '@/utils/type'
 /**
  * @specs https://m3.material.io/components/dialogs/specs
  */
-const _Dialog = forwardRef<
+export const Dialog = forwardRef<
     HTMLDivElement,
     ExtendProps<{
         headline?: React.ReactNode
@@ -40,10 +40,3 @@ const _Dialog = forwardRef<
         </div>
     )
 })
-
-const methods = {}
-
-export const Dialog: typeof _Dialog & typeof methods = Object.assign(
-    _Dialog,
-    methods,
-)

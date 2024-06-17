@@ -3,9 +3,11 @@ import { useRef, useState } from 'react'
 import { FloatingOverlay } from '@floating-ui/react'
 import { SodaSimpleTransition } from '@/composition'
 import { Scrim } from '@/composition/Scrim'
+import { useToggleAnimation } from '@/hooks/use-toggle-animation'
 import { Portal } from '@/utils/Portal'
 import { Dialog } from '.'
 import { Button } from '../button'
+import { alert, confirm, prompt } from './functions'
 
 const meta: Meta<typeof Dialog> = {
     title: 'components/Dialog/Dialog',
@@ -31,14 +33,51 @@ type Story = StoryObj<typeof meta>
 
 export const WithSoda: Story = {
     render: (props) => {
+        const ref = useRef<HTMLDivElement>(null)
         const [open, setOpen] = useState(false)
+        useToggleAnimation(
+            ref,
+            open,
+            (el) =>
+                el.animate(
+                    { scale: ['0.9', '1'] },
+                    {
+                        duration: 250,
+                        easing: 'cubic-bezier(0.2, 0, 0, 1)',
+                    },
+                ),
+            (el) =>
+                el.animate(
+                    { scale: ['1', '0.9'], opacity: ['1', '0'] },
+                    {
+                        duration: 250,
+                        easing: 'cubic-bezier(0.2, 0, 0, 1)',
+                    },
+                ),
+        )
 
         const dialog = (
             <Dialog
                 {...props}
+                ref={ref}
                 buttons={
                     <>
-                        <Button variant="text" onClick={() => alert('wow!')}>
+                        <Button
+                            variant="text"
+                            onClick={async () => {
+                                const answer = await prompt(
+                                    'Are you OK?',
+                                    'default',
+                                    'Prompt',
+                                )
+                                confirm(
+                                    answer
+                                        ? `You entered: ${answer}`
+                                        : `Canceled`,
+                                    'Result',
+                                )
+                            }}
+                        >
                             wow!
                         </Button>
                         <Button variant="text" onClick={() => setOpen(false)}>

@@ -1,4 +1,8 @@
-import { useMergeEventHandlers } from '@/hooks/use-merge'
+import {
+    useCSSProperty,
+    useMergeEventHandlers,
+    useMergeRefs,
+} from '@/hooks/use-merge'
 import './Scrim.scss'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
@@ -11,6 +15,8 @@ export const Scrim = forwardRef<
     HTMLDivElement,
     ExtendProps<{
         open?: boolean
+        /** css string value for transition-duration, by default 250ms */
+        duration?: string | number
         onScrimClick?(e: React.MouseEvent<HTMLElement, MouseEvent>): void
         inset?: string
         zIndex?: number
@@ -27,6 +33,7 @@ export const Scrim = forwardRef<
             onScrimClick,
             zIndex,
             inset = '0',
+            duration,
             children,
             style,
             className,
@@ -36,7 +43,13 @@ export const Scrim = forwardRef<
     ) => (
         <div
             {...props}
-            ref={ref}
+            ref={useMergeRefs(
+                ref,
+                useCSSProperty(
+                    '--duration',
+                    typeof duration === 'number' ? `${duration}ms` : duration,
+                ),
+            )}
             className={clsx(
                 'sd-scrim',
                 center && 'sd-scrim-center',

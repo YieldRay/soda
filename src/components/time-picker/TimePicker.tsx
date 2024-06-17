@@ -5,6 +5,7 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 import { mdiClockOutline } from '@mdi/js'
 import { useEventListenerEffect } from '@/hooks/use-event-listener'
 import { useMediaQuery } from '@/hooks/use-media-query'
+import { useCSSProperty } from '@/hooks/use-merge'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 import { Button } from '../button'
@@ -303,12 +304,7 @@ export const TimePicker = forwardRef<
                             <div className="sd-time_picker-clock_center" />
                             <div
                                 className="sd-time_picker-clock_arm"
-                                ref={(e) => {
-                                    e?.style.setProperty(
-                                        '--degree',
-                                        `${degree}deg`,
-                                    )
-                                }}
+                                ref={useCSSProperty('--degree', `${degree}deg`)}
                             />
                             {[12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
                                 (h) => (

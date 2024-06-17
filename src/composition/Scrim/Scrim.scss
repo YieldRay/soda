@@ -1,4 +1,5 @@
 .sd-scrim {
+    --duration: 250ms;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -10,7 +11,7 @@
     overscroll-behavior: contain;
 
     &:not(.sd-scrim-open) {
-        transition-duration: 250ms;
+        transition-duration: var(--duration);
         transition-timing-function: ease-in;
         display: none;
         opacity: 0;
@@ -18,7 +19,7 @@
 }
 
 .sd-scrim-open {
-    transition-duration: 200ms;
+    transition-duration: var(--duration);
     transition-timing-function: ease-out;
     opacity: 1;
     @starting-style {

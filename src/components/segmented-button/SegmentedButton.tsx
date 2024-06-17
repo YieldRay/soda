@@ -2,7 +2,7 @@ import './segmented-button.scss'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { useAutoState } from '@/hooks/use-auto-state'
-import { useMergeRefs } from '@/hooks/use-merge'
+import { useCSSProperty, useMergeRefs } from '@/hooks/use-merge'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 
@@ -48,13 +48,8 @@ export const SegmentedButton = forwardRef<
             {...props}
             className={clsx('sd-segmented_button', className)}
             ref={useMergeRefs(
-                (e) =>
-                    e &&
-                    e.style.setProperty(
-                        '--density',
-                        density ? String(density) : '0',
-                    ),
                 ref,
+                useCSSProperty('--density', density ? String(density) : '0'),
             )}
         >
             {items &&

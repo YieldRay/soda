@@ -28,7 +28,7 @@ export function useFullscreen(
         return () => el.removeEventListener('fullscreenchange', onChange)
     }, [elementRef])
 
-    const dispatch = async (isFullscreen: boolean) => {
+    const dispatch = async (isFullscreen: boolean): Promise<void> => {
         const el = elementRef.current
         if (!el) return
 
