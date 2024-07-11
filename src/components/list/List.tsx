@@ -56,10 +56,12 @@ export const List = forwardRef<
 ) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const As: any = as || 'div'
+    const mergedRef = useMergeRefs(ref, useRippleRef())
+
     return (
         <As
             {...props}
-            ref={useMergeRefs(ref, useRippleRef())}
+            ref={mergedRef}
             style={{ ...props.style, width: full ? '100%' : undefined }}
             className={clsx('sd-list', className)}
             data-sd-lines={lines}

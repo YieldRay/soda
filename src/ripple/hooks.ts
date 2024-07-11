@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { ripple } from './ripple-effect'
 
 /**
@@ -19,8 +19,11 @@ export function useRippleEffect<T extends HTMLElement>(
 /**
  * @example
  * ```jsx
- * <div ref={useRippleRef()}> Ripple </div>
- * <div ref={useMergeRefs(useRippleRef(), ...)}> Ripple </div>
+ * const rippleRef = useRippleRef()
+ * <div ref={rippleRef}> Ripple </div>
+ *
+ * const mergedRef = useMergeRefs(rippleRef, ...)
+ * <div ref={mergedRef}> Ripple </div>
  * ```
  */
 export function useRippleRef<T extends HTMLElement>(color?: string) {
@@ -28,5 +31,5 @@ export function useRippleRef<T extends HTMLElement>(color?: string) {
         if (!ele) return
         ripple(ele, color)
     }
-    return refCallback
+    return useCallback(refCallback, [color])
 }

@@ -10,6 +10,13 @@
     overflow: hidden;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
+    transition: all 200ms;
+    @media (any-hover: hover) {
+        &:hover {
+            filter: brightness(96%);
+        }
+    }
+
     &[data-sd-lines='1'] {
         .sd-list-supporting_text {
             display: none;
@@ -30,15 +37,10 @@
         align-items: flex-start;
     }
 
-    transition: all 200ms;
-    @media (any-hover: hover) {
-        &:hover {
-            filter: brightness(96%);
-        }
-    }
     &:active {
         filter: brightness(92%);
     }
+
     &[disabled] {
         color: var(--md-sys-color-on-surface);
         opacity: 0.38;
@@ -61,6 +63,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .sd-list-supporting_text {
             color: var(--md-sys-color-on-surface-variant);
             font-size: smaller;

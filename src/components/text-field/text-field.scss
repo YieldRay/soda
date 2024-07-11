@@ -15,9 +15,12 @@ $label_text_gap_size: 3.2px;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     padding: 0.75rem;
+
     transition:
         filter 200ms,
         border 200ms;
+
+    position: relative;
 
     &:hover {
         filter: brightness(96%);
@@ -42,8 +45,6 @@ $label_text_gap_size: 3.2px;
     &-trailing_icon {
         margin-inline-start: 0.5rem;
     }
-
-    position: relative;
 
     &-active_indicator {
         position: absolute;

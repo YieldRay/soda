@@ -108,10 +108,12 @@ export const Tabs = forwardRef<
             window.removeEventListener('resize', correctlyPlaceIndicator)
     }, [correctlyPlaceIndicator])
 
+    const mergedRef = useMergeRefs(ref, eRef)
+
     return (
         <div
             {...props}
-            ref={useMergeRefs(ref, eRef)}
+            ref={mergedRef}
             className={clsx('sd-tabs', className)}
             style={{
                 width: full ? '100%' : undefined,

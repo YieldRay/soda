@@ -22,13 +22,15 @@ export const IconRippleButton = forwardRef<
         children?: React.ReactNode
     }>
 >(({ className, path, size = '24px', children, ...props }, ref) => {
+    const mergedRef = useMergeRefs(
+        ref,
+        (e) => size && e?.style.setProperty('--size', size),
+    )
+
     return (
         <div
             {...props}
-            ref={useMergeRefs(
-                ref,
-                (e) => size && e?.style.setProperty('--size', size),
-            )}
+            ref={mergedRef}
             className={clsx('sd-icon_ripple_button', className)}
             role="button"
         >

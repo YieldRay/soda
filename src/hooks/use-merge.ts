@@ -1,18 +1,5 @@
+import { useCallback } from 'react'
 import { useMergeRefs as useMergeRefs_FloatingUI } from '@floating-ui/react'
-
-/**
- * Run event handlers in sequence, break if event is already prevented
- */
-export function useMergeEventHandlers<
-    Event extends { preventDefault(): void; isDefaultPrevented(): boolean },
->(...eventHandlers: Array<((e: Event) => void) | undefined>) {
-    return (e: Event) => {
-        for (const handler of eventHandlers) {
-            handler?.(e)
-            if (e.isDefaultPrevented()) break
-        }
-    }
-}
 
 /**
  * Just forward `useMergeRefs` from floating-ui
@@ -24,9 +11,30 @@ export function useMergeRefs<Instance>(
 }
 
 /**
+ * Run event handlers in sequence, break if event is already prevented
+ */
+export function useMergeEventHandlers<
+    Event extends { preventDefault(): void; isDefaultPrevented(): boolean },
+>(...eventHandlers: Array<((e: Event) => void) | undefined>) {
+    return useCallback(
+        (e: Event) => {
+            for (const handler of eventHandlers) {
+                handler?.(e)
+                if (e.isDefaultPrevented()) break
+            }
+        },
+        [eventHandlers],
+    )
+}
+
+// TODO:
+// functions below are not hooks
+// so they are pending for moving to other module
+
+/**
  * This helps because the react style property cannot set custom css property
  */
-export function useCSSProperty(
+export function refCSSProperty(
     property: string,
     value?: string | null,
     priority?: '' | 'important',
@@ -40,7 +48,7 @@ export function useCSSProperty(
 /**
  * This helps because the react style property cannot set custom css property
  */
-export function useCSSProperties(
+export function refCSSProperties(
     properties: Record<
         string,
         string | null | undefined | [string, 'important' | '']

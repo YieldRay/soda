@@ -3,7 +3,6 @@
 .sd-menu {
     all: unset;
     background: var(--md-sys-color-surface-container);
-    @include elevation-level2;
     border-radius: 4px;
     box-sizing: border-box;
     width: max-content;
@@ -11,6 +10,7 @@
     padding: 4px 0;
     display: inline-flex;
     flex-direction: column;
+    @include elevation-level2;
 }
 
 .sd-menu_item {
@@ -24,11 +24,13 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    transition: background-color 200ms;
+
     &-leading_icon {
         width: 24px;
         color: var(--md-sys-color-on-surface-variant);
-        @include display-inline-flex-center;
         flex-shrink: 0;
+        @include display-inline-flex-center;
     }
     &-supporting_text {
         text-wrap: nowrap;
@@ -45,8 +47,8 @@
         margin-inline-start: auto;
         width: 24px;
         color: var(--md-sys-color-on-surface-variant);
-        @include display-inline-flex-center;
         flex-shrink: 0;
+        @include display-inline-flex-center;
     }
     &-trailing_text {
         margin-inline-start: auto;
@@ -54,7 +56,6 @@
         font-size: small;
         flex-shrink: 0;
     }
-    transition: background-color 200ms;
     @media (any-hover: hover) {
         &:hover {
             @include background-hover(var(--md-sys-color-primary));

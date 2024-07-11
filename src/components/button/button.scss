@@ -3,14 +3,6 @@
 // common
 
 .sd-button {
-    border: none;
-    > * {
-        vertical-align: middle;
-    }
-    svg {
-        width: 20px;
-        height: 20px;
-    }
     display: inline-block;
     overflow: hidden;
     vertical-align: middle;
@@ -27,6 +19,16 @@
     transition: all 0.2s;
     user-select: none;
     -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+
+    // reset the <button> style
+    border: none;
+    > * {
+        vertical-align: middle;
+    }
+    & svg {
+        width: 20px;
+        height: 20px;
+    }
 
     &[disabled],
     &[data-sd-disabled='true'] {

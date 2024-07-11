@@ -13,6 +13,14 @@
         @include outline;
         border-inline-start: none;
         user-select: none;
+        font-size: 13px;
+        line-height: 18px;
+        color: var(--md-sys-color-on-surface);
+        display: inline-flex;
+        align-items: center;
+        -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+        transition: all 200ms;
+
         &:first-child {
             border-inline-start: solid 1px var(--md-sys-color-outline);
             border-start-start-radius: var(--height);
@@ -23,13 +31,6 @@
             border-end-end-radius: var(--height);
             border-start-end-radius: var(--height);
         }
-        font-size: 13px;
-        line-height: 18px;
-        color: var(--md-sys-color-on-surface);
-        display: inline-flex;
-        align-items: center;
-        -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
-        transition: all 200ms;
 
         &[data-sd-active='true'] {
             color: var(--md-sys-color-on-secondary-container);

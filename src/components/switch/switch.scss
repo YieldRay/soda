@@ -20,11 +20,11 @@
         // movable is an element that just can hold the thumb
         left: 0.25rem;
         transition: all 200ms;
+        transform: translateY(-50%);
         @include position-absolute(
             0.25rem /* space for the padding-inline-start width */,
             50%
         );
-        transform: translateY(-50%);
     }
 
     &-movable,
@@ -41,8 +41,8 @@
             display: inline-block;
             border-radius: 50%;
             background: var(--md-sys-color-outline);
-            @include position-absolute(0, 0);
             transition: all 200ms;
+            @include position-absolute(0, 0);
         }
     }
 
@@ -52,11 +52,11 @@
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
-        @include background-hover(var(--md-sys-color-primary));
-        @include position-absolute(50%, 50%);
         transform: translate(-50%, -50%);
         transition: all 200ms;
         opacity: 0;
+        @include background-hover(var(--md-sys-color-primary));
+        @include position-absolute(50%, 50%);
     }
 
     &:hover,
@@ -90,10 +90,11 @@
         height: 1rem;
         line-height: 1rem;
         text-align: center;
-        @include position-absolute(50%, 50%);
-        transform: translate(-50%, -50%);
         user-select: none;
+        transform: translate(-50%, -50%);
+        @include position-absolute(50%, 50%);
     }
+
     &[data-sd-checked='true'] &-icon {
         color: var(--md-sys-color-on-surface);
     }

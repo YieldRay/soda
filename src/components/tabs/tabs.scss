@@ -6,15 +6,17 @@
     max-width: 100%;
     background: var(--md-sys-color-surface);
     overflow-x: auto;
+
+    position: relative; // for &-active_indicator
+    transition: all 200ms;
+
     // hide the scrollbar
     scrollbar-width: none;
-
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
     &::-webkit-scrollbar {
         display: none;
     }
-
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
 
     &-item {
         flex-shrink: 0;
@@ -28,8 +30,6 @@
         align-items: center;
         flex-direction: column;
         gap: 4px;
-
-        transition: all 200ms;
 
         @media (any-hover: hover) {
             &:hover {
@@ -79,8 +79,6 @@
         }
     }
 
-    position: relative;
-
     &-active_indicator {
         transition: left 200ms;
         position: absolute;
@@ -114,8 +112,8 @@
         background-color: var(--md-sys-color-surface-container-highest);
 
         .sd-tabs-item {
-            background-color: transparent;
             z-index: 1;
+            background-color: transparent;
             padding-bottom: 0.5rem; // reset
 
             &:focus-visible {
@@ -167,6 +165,10 @@
         background-color: unset;
 
         .sd-tabs-item {
+            background-color: transparent;
+            z-index: 1;
+            padding-bottom: 0.5rem; // reset
+
             .sd-tabs-item-label_text {
                 font-weight: 400;
                 color: var(--md-sys-color-on-secondary-container);
@@ -174,9 +176,6 @@
             &[data-sd-active='false'] > .sd-tabs-item-label_text {
                 color: var(--md-sys-color-outline);
             }
-            background-color: transparent;
-            z-index: 1;
-            padding-bottom: 0.5rem; // reset
 
             &:focus-visible {
                 outline: none;

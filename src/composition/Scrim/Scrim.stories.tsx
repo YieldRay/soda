@@ -38,3 +38,27 @@ export const Default: Story = {
         )
     },
 }
+
+export const UnmountOnClose: Story = {
+    render: () => {
+        const [open, setOpen] = useState(false)
+        return (
+            <>
+                <Button onClick={() => setOpen(true)}>start loading...</Button>
+                <Portal container={document.body}>
+                    <Scrim
+                        center
+                        open={open}
+                        onScrimClick={() => setOpen(false)}
+                        unmountOnClose
+                    >
+                        <Card style={{ padding: '0.5rem' }}>
+                            <div>Still Loading...</div>
+                            <LinearProgressIndicator />
+                        </Card>
+                    </Scrim>
+                </Portal>
+            </>
+        )
+    },
+}

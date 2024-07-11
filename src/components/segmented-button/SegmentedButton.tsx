@@ -2,7 +2,7 @@ import './segmented-button.scss'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { useAutoState } from '@/hooks/use-auto-state'
-import { useCSSProperty, useMergeRefs } from '@/hooks/use-merge'
+import { refCSSProperty, useMergeRefs } from '@/hooks/use-merge'
 import { Ripple } from '@/ripple/Ripple'
 import { ExtendProps } from '@/utils/type'
 
@@ -43,14 +43,16 @@ export const SegmentedButton = forwardRef<
 ) {
     const [value, setValue] = useAutoState(onChange, value$co, defaultValue!)
 
+    const mergedRef = useMergeRefs(
+        ref,
+        refCSSProperty('--density', density ? String(density) : '0'),
+    )
+
     return (
         <div
             {...props}
             className={clsx('sd-segmented_button', className)}
-            ref={useMergeRefs(
-                ref,
-                useCSSProperty('--density', density ? String(density) : '0'),
-            )}
+            ref={mergedRef}
         >
             {items &&
                 items.map(({ label, disabled, value: value$i }, index) => (

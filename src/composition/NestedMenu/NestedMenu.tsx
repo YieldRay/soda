@@ -267,9 +267,14 @@ const NestedMenuComponent = forwardRef<
             }
         }, [refs, contextMenu, contextMenuSource])
 
+        const nestedRef = useMergeRefs([
+            refs.setReference,
+            item.ref,
+            forwardedRef,
+        ])
         const nested = (
             <Soda.MenuItem
-                ref={useMergeRefs([refs.setReference, item.ref, forwardedRef])}
+                ref={nestedRef}
                 tabIndex={parent.activeIndex === item.index ? 0 : -1}
                 {...getReferenceProps(parent.getItemProps({ ...props }))}
                 trailingIcon={<Icon path={mdiMenuRight}></Icon>}
@@ -278,10 +283,15 @@ const NestedMenuComponent = forwardRef<
             </Soda.MenuItem>
         )
 
+        const notNestedRef = useMergeRefs([
+            refs.setReference,
+            item.ref,
+            forwardedRef,
+        ])
         const notNested = (
             <div
                 aria-haspopup
-                ref={useMergeRefs([refs.setReference, item.ref, forwardedRef])}
+                ref={notNestedRef}
                 {...getReferenceProps(parent.getItemProps({ ...props }))}
                 style={{ display: 'inline-block', ...props.style }}
             >
@@ -365,10 +375,11 @@ export const NestedMenuItem = forwardRef<
     const tree = useFloatingTree()
     const isActive = item.index === menu.activeIndex
 
+    const mergedRef = useMergeRefs([item.ref, forwardedRef])
     return (
         <Soda.MenuItem
             {...props}
-            ref={useMergeRefs([item.ref, forwardedRef])}
+            ref={mergedRef}
             type="button"
             role="menuitem"
             tabIndex={isActive ? 0 : -1}

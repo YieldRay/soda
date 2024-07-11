@@ -1,15 +1,6 @@
 // https://m3.material.io/components/bottom-sheets/specs
 
 .sd-bottom_sheet {
-    &-scrim {
-        // this scrim is entirely transparent, its only responsibility is
-        // to hold the sheet and place it to correct position
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-    }
-
     pointer-events: auto;
     touch-action: none;
     background: var(--md-sys-color-surface-container-low);
@@ -25,6 +16,15 @@
     max-height: 100%;
     display: flex;
     flex-direction: column;
+
+    &-scrim {
+        // this scrim is entirely transparent, its only responsibility is
+        // to hold the sheet and place it to correct position
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+    }
 
     &-drag_handle {
         cursor: grab;
@@ -55,6 +55,36 @@
 // https://m3.material.io/components/side-sheets/specs
 
 .sd-side_sheet {
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+    color: var(--md-sys-color-on-surface-variant);
+    display: inline-block;
+    box-sizing: border-box;
+    width: 256px + 16px + 24px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    &-header {
+        padding: 24px 24px 16px 16px;
+        font-size: x-large;
+        > * {
+            vertical-align: middle;
+            align-items: center;
+        }
+    }
+    &-body {
+        padding: 0 24px 0 16px;
+        flex: 1;
+    }
+    &-footer {
+        margin-block-start: auto;
+        &_content {
+            margin: 4px 12px 12px;
+        }
+    }
+
+    // scrim
     &-scrim {
         display: flex;
 
@@ -83,35 +113,6 @@
         &[data-sd-position='right'] {
             border-top-left-radius: 1rem;
             border-bottom-left-radius: 1rem;
-        }
-    }
-
-    pointer-events: auto;
-    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
-    color: var(--md-sys-color-on-surface-variant);
-    display: inline-block;
-    box-sizing: border-box;
-    width: 256px + 16px + 24px;
-    overflow: hidden;
-
-    display: flex;
-    flex-direction: column;
-    &-header {
-        padding: 24px 24px 16px 16px;
-        font-size: x-large;
-        > * {
-            vertical-align: middle;
-            align-items: center;
-        }
-    }
-    &-body {
-        padding: 0 24px 0 16px;
-        flex: 1;
-    }
-    &-footer {
-        margin-block-start: auto;
-        &_content {
-            margin: 4px 12px 12px;
         }
     }
 }

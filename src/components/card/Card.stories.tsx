@@ -4,9 +4,7 @@ import { Card } from '.'
 const meta: Meta<typeof Card> = {
     title: 'components/Card',
     component: Card,
-    parameters: {
-        layout: 'centered',
-    },
+    parameters: { layout: 'centered' },
     tags: ['autodocs'],
     args: {
         children: <CardDemoChild />,

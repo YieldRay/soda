@@ -41,9 +41,11 @@ export const Blockquote = forwardRef<
         const collapsibleRef = useRef<HTMLQuoteElement>(null)
         useCollapsible(collapsibleRef, isClosed)
 
+        const mergedRef = useMergeRefs(ref, collapsibleRef)
+
         return (
             <blockquote
-                ref={useMergeRefs(ref, collapsibleRef)}
+                ref={mergedRef}
                 {...props}
                 className={clsx(
                     'sd-blockquote',

@@ -36,11 +36,11 @@ function getCalendarOfMonth(year: number, month: number) {
     const calendar: Date[] = [firstDay]
 
     for (let i = 0; i < appendDays + (days - 1); i++) {
-        calendar.push(getNextDay(calendar.at(-1)!))
+        calendar.push(getNextDay(calendar[calendar.length - 1] /* at(-1) */))
     }
 
     for (let i = 0; i < prependDays - 1; i++) {
-        calendar.unshift(getLastDay(calendar.at(0)!))
+        calendar.unshift(getLastDay(calendar[0] /* at(0) */))
     }
 
     console.assert(calendar.length % 7 === 0)

@@ -169,10 +169,13 @@ export const Slider = forwardRef<
         transform: false,
     })
 
+    const mergedRef = useMergeRefs(ref, eRef)
+    const mergedThumbRef = useMergeRefs(thumbRef, refs.setReference)
+
     return (
         <div
             {...props}
-            ref={useMergeRefs(ref, eRef)}
+            ref={mergedRef}
             className={clsx('sd-slider', className)}
             data-sd-disabled={disabled}
             data-sd-direction={direction}
@@ -212,7 +215,7 @@ export const Slider = forwardRef<
             />
             <div
                 className="sd-slider-handle"
-                ref={useMergeRefs(thumbRef, refs.setReference)}
+                ref={mergedThumbRef}
                 onResize={update}
                 style={{ cursor: isPressing ? 'grabbing' : '' }}
                 onDragStart={(e) => e.preventDefault()}

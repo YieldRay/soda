@@ -136,6 +136,15 @@
 // NavigationDrawer
 
 .sd-navigation_drawer {
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+    color: var(--md-sys-color-on-surface-variant);
+    display: inline-block;
+    box-sizing: border-box;
+    width: 360px;
+    max-width: 90dvw;
+    overflow: hidden;
+
     &-scrim {
         display: flex;
         overflow: hidden;
@@ -156,15 +165,6 @@
         box-sizing: border-box;
         height: 100%;
     }
-
-    pointer-events: auto;
-    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
-    color: var(--md-sys-color-on-surface-variant);
-    display: inline-block;
-    box-sizing: border-box;
-    width: 360px;
-    max-width: 90dvw;
-    overflow: hidden;
 
     &-headline {
         user-select: none;
