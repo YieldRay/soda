@@ -178,7 +178,7 @@ export const SodaImage = forwardRef<
                     setState('loaded')
                     img.src = URL.createObjectURL(blob)
                 }
-            } catch (e) {
+            } catch {
                 // fail to load or timeout
                 setState('error')
                 img.src = ''

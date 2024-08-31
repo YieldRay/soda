@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export function useEventListener<
+export function refEventListener<
     T extends HTMLElement,
     K extends keyof HTMLElementEventMap,
 >(
@@ -27,7 +27,7 @@ export function useEventListenerEffect<
     options?: boolean | AddEventListenerOptions,
 ) {
     useEffect(
-        () => useEventListener(elementRef, type, listener, options),
+        () => refEventListener(elementRef, type, listener, options),
         [elementRef, type, listener, options],
     )
 }

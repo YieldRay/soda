@@ -3,6 +3,7 @@ semi: false
 printWidth: 80
 tabWidth: 4
 singleQuote: true
+endOfLine: lf
 plugins:
     - '@ianvs/prettier-plugin-sort-imports'
 importOrder:

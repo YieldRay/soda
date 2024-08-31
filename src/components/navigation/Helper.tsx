@@ -38,6 +38,7 @@ export function Helper({
     ...props
 }: ExtendProps<HelperItem>) {
     const [hover, setHover] = useState(false)
+    const ref = useRippleRef()
 
     return (
         <div
@@ -49,7 +50,7 @@ export function Helper({
             onPointerLeave={() => setHover(false)}
         >
             <Badge
-                ref={useRippleRef()}
+                ref={ref}
                 className="sd-navigation_helper-active_indicator"
                 variant={badge?.active ? badge?.sd : 'none'}
                 label={buildReactNode(badge?.label, badge?.active)}

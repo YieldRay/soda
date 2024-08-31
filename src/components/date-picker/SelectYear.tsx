@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useRippleRef } from '@/ripple/hooks'
+import { ripple } from '@/ripple/ripple-effect'
 
 export function SelectYear({
     current,
@@ -15,7 +15,7 @@ export function SelectYear({
                     className={clsx(current === year && 'active')}
                     onClick={() => onChange?.(year)}
                     key={year}
-                    ref={useRippleRef()}
+                    ref={(el) => el && ripple(el)}
                 >
                     <div className="cell">
                         {

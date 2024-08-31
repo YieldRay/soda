@@ -24,7 +24,6 @@ export function ChangeTheme() {
     }, [sourceColor])
 
     useEffect(() => {
-        // eslint-disable-next-line no-extra-semi
         ;(async () => {
             const theme = file
                 ? await themeFromImageOrFile(file)

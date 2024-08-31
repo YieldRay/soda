@@ -241,7 +241,7 @@ export const Select = forwardRef<
                     })}
                 >
                     {typeof option === 'object'
-                        ? option.label ?? option.value
+                        ? (option.label ?? option.value)
                         : option}
                 </MenuItem>
             )
@@ -290,7 +290,7 @@ export const Select = forwardRef<
                 >
                     {typeof children === 'function'
                         ? children(value!)
-                        : children ?? (
+                        : (children ?? (
                               <Ripple
                                   as="div"
                                   className="sd-select-menu_button"
@@ -308,7 +308,7 @@ export const Select = forwardRef<
                                       />
                                   </div>
                               </Ripple>
-                          )}
+                          ))}
                 </div>
                 {optionsNode}
             </div>

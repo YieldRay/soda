@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useRippleRef } from '@/ripple/hooks'
+import { ripple } from '@/ripple/ripple-effect'
 import { getFormatCalendar, isSameDay } from './calendar'
 
 export function SelectDay({
@@ -44,7 +44,7 @@ export function SelectDay({
                                     if (col.isThisMonth && onChange)
                                         onChange(col.date)
                                 }}
-                                ref={useRippleRef()}
+                                ref={(el) => el && ripple(el)}
                             >
                                 {col.day}
                             </time>
