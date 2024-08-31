@@ -36,10 +36,25 @@ export const TooltipHolder = forwardRef<
         content?: React.ReactNode
         trigger?: React.ReactNode
         placement?: Placement
+        delay?:
+            | number
+            | {
+                  open?: number
+                  close?: number
+              }
         zIndex?: number
     }
 >(function TooltipHolder(
-    { placement = 'top', zIndex = 2, trigger, content },
+    {
+        placement = 'top',
+        zIndex = 2,
+        trigger,
+        content,
+        delay = {
+            open: 150,
+            close: 0,
+        },
+    },
     ref,
 ) {
     const [isOpen, setIsOpen] = useState(false)
@@ -57,10 +72,7 @@ export const TooltipHolder = forwardRef<
     const hover = useHover(context, {
         move: false,
         handleClose: safePolygon({ blockPointerEvents: true }),
-        delay: {
-            open: 150,
-            close: 0,
-        },
+        delay,
     })
     const focus = useFocus(context)
     const dismiss = useDismiss(context)
