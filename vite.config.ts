@@ -17,6 +17,7 @@ export default defineConfig({
         preprocessorOptions: {
             scss: {
                 additionalData: fs.readFileSync('./src/style/index.scss'),
+                api: 'modern-compiler',
             },
         },
     },
