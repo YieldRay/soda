@@ -6,14 +6,14 @@ import { Button } from '../button/Button'
 import { TextField } from '../text-field'
 import { Dialog } from './Dialog'
 
-type MaybePromiseLike<T> = T | PromiseLike<T>
+type Awaitable<T> = T | PromiseLike<T>
 
 export async function dialog<T>(
     control: (
-        close: (value: MaybePromiseLike<T> | MaybePromiseLike<null>) => void,
+        close: (value: Awaitable<T> | Awaitable<null>) => void,
     ) => React.ComponentPropsWithoutRef<typeof Dialog>,
 ): Promise<T | null> {
-    type CloseFn = (value: MaybePromiseLike<T> | MaybePromiseLike<null>) => void
+    type CloseFn = (value: Awaitable<T> | Awaitable<null>) => void
     let closeRef: CloseFn = () => null // we need ref to close, as close() is created in the component
     const callClose: CloseFn = (...args) => closeRef(...args)
     const props = control(callClose)
@@ -24,9 +24,7 @@ export async function dialog<T>(
     const root = createRoot(container)
     const duration = 250
 
-    const { promise, resolve } = Promise.withResolvers<
-        MaybePromiseLike<T> | MaybePromiseLike<null>
-    >()
+    const { promise, resolve } = Promise.withResolvers<T | null>()
 
     const Component = () => {
         const ref = useRef<HTMLDivElement>(null)

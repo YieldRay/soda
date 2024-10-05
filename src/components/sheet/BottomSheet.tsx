@@ -224,17 +224,17 @@ function attachDragEvent(
         const { height } = sheet.getBoundingClientRect() // the sheet height
 
         if (pointerMoveDuration <= 200 /** ms */) {
-            // if fast drag to bottom, hide it
+            // if quickly drag it to the bottom, hide it
             if (distanceY >= 32 || (distanceY <= 0 && distanceY >= -32)) {
                 hide()
             }
-            // if fast drag to top, show it entirely
+            // if quickly drag it to the top, show it in its entirely
             else {
                 show()
             }
         } else {
-            // not fast drag
-            if (distanceY >= 64 || nextTranslateY / height > 0.5) {
+            // not quickly drag
+            if (/* distanceY >= 64 || */ nextTranslateY / height > 0.5) {
                 hide()
             } else {
                 show()

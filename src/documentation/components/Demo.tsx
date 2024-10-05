@@ -175,7 +175,16 @@ function LayoutNavigationDrawer({ children }: { children?: React.ReactNode }) {
                         </>
                     }
                 >
-                    Soda
+                    <span
+                        style={{ cursor: 'pointer' }}
+                        onClick={() =>
+                            containerRef?.current?.scrollIntoView({
+                                behavior: 'smooth',
+                            })
+                        }
+                    >
+                        Soda
+                    </span>
                 </TopAppBar>
                 <div style={{ padding: '100px 0' }}>{children}</div>
                 <Snackbar
