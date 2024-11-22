@@ -18,6 +18,7 @@ export default defineConfig({
             scss: {
                 additionalData: fs.readFileSync('./src/style/index.scss'),
                 api: 'modern-compiler',
+                silenceDeprecations: ['mixed-decls', 'import'],
             },
         },
     },
