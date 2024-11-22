@@ -1,0 +1,68 @@
+.sd-scrollarea-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    max-height: 100%;
+    position: relative;
+
+    [data-scroll-thumb] {
+        transition: opacity 200ms;
+    }
+
+    // This bit shows the thumb when you hover the wrapper
+    &:hover {
+        [data-scroll-thumb] {
+            opacity: 1;
+        }
+    }
+
+    &.soda-is-dragging {
+        // Need to keep pointer events when scrolling so thumb isn't hidden immediately after scroll
+        pointer-events: auto;
+
+        // But still remove pointer events from content
+        [data-scroll-content] {
+            pointer-events: none;
+        }
+
+        // Need to always keep the thumb visible when scrolling, even if the mouse leaves the wrapper
+        [data-scroll-thumb] {
+            opacity: 1;
+        }
+    }
+}
+
+.sd-scrollarea-content {
+    position: relative;
+    overflow: scroll;
+    scrollbar-width: none;
+    z-index: 1;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.sd-scrollarea-thumb {
+    opacity: 0;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+
+    // Fill in the thumb color
+    &::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: calc(100% - 4px);
+        height: calc(100% - 4px);
+        // Match Radix hue on grays
+        background-color: var(--color, var(--md-sys-color-outline));
+        border-radius: 9999px;
+    }
+}
