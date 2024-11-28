@@ -1,6 +1,9 @@
 import { forwardRef } from 'react'
 import './Skeleton.scss'
 
+/**
+ * Highly experimental!
+ */
 export const Skeleton = forwardRef<
     HTMLDivElement,
     Partial<React.CSSProperties>

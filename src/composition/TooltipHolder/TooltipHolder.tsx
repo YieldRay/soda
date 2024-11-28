@@ -24,27 +24,26 @@ export interface TooltipHolderHandle {
     open: boolean
 }
 
+export interface TooltipProps {
+    content?: React.ReactNode
+    trigger?: React.ReactNode
+    placement?: Placement
+    delay?:
+        | number
+        | {
+              open?: number
+              close?: number
+          }
+    zIndex?: number
+}
+
 /**
  * Just a simple wrapper of `floating-ui` for convenience,
  * can use ref to manually toggle it.
  *
  * You may use `floating-ui` directly for better control.
  */
-export const TooltipHolder = forwardRef<
-    TooltipHolderHandle,
-    {
-        content?: React.ReactNode
-        trigger?: React.ReactNode
-        placement?: Placement
-        delay?:
-            | number
-            | {
-                  open?: number
-                  close?: number
-              }
-        zIndex?: number
-    }
->(function TooltipHolder(
+export const TooltipHolder = forwardRef(function TooltipHolder(
     {
         placement = 'top',
         zIndex = 2,
@@ -54,8 +53,8 @@ export const TooltipHolder = forwardRef<
             open: 150,
             close: 0,
         },
-    },
-    ref,
+    }: TooltipProps,
+    ref: React.ForwardedRef<TooltipHolderHandle>,
 ) {
     const [isOpen, setIsOpen] = useState(false)
 

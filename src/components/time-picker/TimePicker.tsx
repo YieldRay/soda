@@ -14,7 +14,7 @@ import { IconButton } from '../icon-button'
 type TimeValue = readonly [hour: number, minute: number]
 
 /**
- * [warn]: data itself always use 24 hours system,
+ * ![WARNING]: data itself always use 24 hours system,
  * but it's appearance varies by changing the `use24hourSystem` property
  *
  * @specs https://m3.material.io/components/time-pickers/specs

@@ -44,13 +44,13 @@ export const TextField = forwardRef<
         /**
          * For access the internal input element
          *
-         * [warn]: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
+         * ![WARNING]: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
          */
         inputRef?: ReactRef<HTMLInputElement | undefined>
         /**
          * For access the internal textarea element
          *
-         * [warn]: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
+         * ![WARNING]: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
          */
         textareaRef?: ReactRef<HTMLTextAreaElement | undefined>
         /**

@@ -2,6 +2,9 @@ import './ScrollArea.scss'
 import { useLayoutEffect, useRef } from 'react'
 import { refCSSProperties, useMergeRefs } from '@/hooks/use-merge'
 
+/**
+ * Highly experimental!
+ */
 export const ScrollArea = ({
     color,
     children,
