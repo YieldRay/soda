@@ -15,7 +15,7 @@ export const CircularProgressIndicator = forwardRef<
          */
         value?: number
         /**
-         * @default 36px
+         * @default "36px"
          */
         size?: string
     }>

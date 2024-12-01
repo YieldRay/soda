@@ -13,7 +13,7 @@ export const Search = forwardRef<
         leadingIcon?: React.ReactNode
         trailingIcon?: React.ReactNode
         /**
-         * @default bar
+         * @default "bar"
          */
         variant?: 'bar' | 'view'
         full?: boolean

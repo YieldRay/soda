@@ -2,6 +2,7 @@ import { forwardRef } from 'react'
 import './Skeleton.scss'
 
 /**
+ * @experimental
  * Highly experimental!
  */
 export const Skeleton = forwardRef<

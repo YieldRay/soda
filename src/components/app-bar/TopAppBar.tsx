@@ -15,7 +15,7 @@ export const TopAppBar = forwardRef<
          * This affect the height, e.g.:
          *
          * small/medium 64px  medium 112px  large 152px
-         * @default small
+         * @default "small"
          */
         variant?: 'center' | 'small' | 'medium' | 'large'
         leadingNavigationIcon?: React.ReactNode

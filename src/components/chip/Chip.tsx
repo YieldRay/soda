@@ -11,7 +11,7 @@ export const Chip = forwardRef<
     HTMLElement,
     ExtendProps<{
         /**
-         * @default outlined
+         * @default "outlined"
          */
         variant?: 'outlined' | 'tonal'
         children: React.ReactNode

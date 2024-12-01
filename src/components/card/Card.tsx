@@ -18,7 +18,7 @@ export const Card = forwardRef<
         as?: TagNameString
         /**
          * Variant
-         * @default elevated
+         * @default "elevated"
          */
         variant?: 'outlined' | 'filled' | 'elevated'
         children?: React.ReactNode

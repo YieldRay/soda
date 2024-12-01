@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 /**
- * ![WARNING]: also need to set `overflow:hidden` and optional set `transition:all 200ms`
+ * !WARNING: Also need to set `overflow:hidden` and optional set `transition:all 200ms`
  *
  * No padding and margin should be set
  */

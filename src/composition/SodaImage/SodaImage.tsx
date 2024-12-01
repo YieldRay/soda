@@ -202,7 +202,7 @@ export const SodaImage = forwardRef<
                 }
             }, timeout)
         }
-        // ![WARNING]: only changes of `src` trigger this function to re-cache
+        // !WARNING: only changes of `src` trigger this function to re-cache
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [src])
 

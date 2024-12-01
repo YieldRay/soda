@@ -22,6 +22,7 @@ export interface RecycleScrollerHandle {
 }
 
 /**
+ * @experimental
  * Highly experimental!
  */
 export const RecycleScroller = forwardRef(function RecycleScroller<T>(

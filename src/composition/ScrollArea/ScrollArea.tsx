@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { refCSSProperties, useMergeRefs } from '@/hooks/use-merge'
 
 /**
+ * @experimental
  * Highly experimental!
  */
 export const ScrollArea = ({

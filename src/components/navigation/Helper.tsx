@@ -25,7 +25,7 @@ export interface HelperItem {
 }
 
 /**
- * @warn For internal use only!
+ * @internal For internal use only!
  */
 export function Helper({
     className,

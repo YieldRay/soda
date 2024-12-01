@@ -28,7 +28,7 @@ export const TextField = forwardRef<
         error?: boolean
         /**
          * Textarea will ignore this and only show as filled style
-         * @default filled
+         * @default "filled"
          */
         variant?: 'filled' | 'outlined'
         /**
@@ -44,13 +44,13 @@ export const TextField = forwardRef<
         /**
          * For access the internal input element
          *
-         * ![WARNING]: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
+         * !WARNING: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
          */
         inputRef?: ReactRef<HTMLInputElement | undefined>
         /**
          * For access the internal textarea element
          *
-         * ![WARNING]: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
+         * !WARNING: (for typescript user) use `const ref = useRef<HTMLInputElement | undefined>()` to create a MutableRefObject
          */
         textareaRef?: ReactRef<HTMLTextAreaElement | undefined>
         /**

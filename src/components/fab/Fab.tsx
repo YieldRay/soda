@@ -11,11 +11,11 @@ export const Fab = forwardRef<
     HTMLElement,
     ExtendProps<{
         /**
-         * @default surface
+         * @default "surface"
          */
         variant?: 'surface' | 'secondary' | 'tertiary'
         /**
-         * @default default
+         * @default "default"
          */
         size?: 'default' | 'small' | 'large'
         extended?: boolean

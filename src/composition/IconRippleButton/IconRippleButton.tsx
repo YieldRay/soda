@@ -16,7 +16,7 @@ export const IconRippleButton = forwardRef<
     ExtendProps<{
         path?: string
         /**
-         * @default 24px
+         * @default "24px"
          */
         size?: string
         children?: React.ReactNode

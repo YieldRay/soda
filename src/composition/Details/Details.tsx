@@ -32,7 +32,7 @@ export function Details({
     defaultExpanded?: boolean
     onChange?: (expanded: boolean) => void
     /**
-     * @default filled
+     * @default "filled"
      */
     variant?: 'outlined' | 'filled'
 }) {

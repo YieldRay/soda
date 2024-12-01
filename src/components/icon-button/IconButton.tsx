@@ -13,7 +13,7 @@ export const IconButton = forwardRef<
     HTMLElement,
     ExtendProps<{
         /**
-         * @default standard
+         * @default "standard"
          */
         variant?: 'standard' | 'filled' | 'tonal' | 'outlined'
         /**

@@ -13,7 +13,7 @@ export const Button = forwardRef<
     ExtendProps<
         {
             /**
-             * @default filled
+             * @default "filled"
              */
             variant?: 'outlined' | 'filled' | 'elevated' | 'tonal' | 'text'
             disabled?: boolean

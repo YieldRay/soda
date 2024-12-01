@@ -15,7 +15,7 @@ import { ExtendProps, TagNameString } from '@/utils/type'
  *
  * If you prefer an imperative approach to animate DOM elements, this library uses the [Web Animations API](https://developer.mozilla.org/docs/Web/API/Web_Animations_API) internally to minimize dependencies. However, you might find [Motion One](https://npm.im/motion) to be a better fit for such needs.
  *
- * ![WARNING]: To activate CSS transitions, the `transition` property should be set to `entering` or `exiting`.
+ * !WARNING: To activate CSS transitions, the `transition` property should be set to `entering` or `exiting`.
  * Alternatively, manage all transitions by setting the `transition` property in the `style` attribute.
  */
 export const SodaTransition = forwardRef<

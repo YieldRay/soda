@@ -12,11 +12,11 @@ export const Divider = forwardRef<
     HTMLHRElement,
     ExtendProps<{
         /**
-         * @default full
+         * @default "full"
          */
         variant?: 'full' | 'inset'
         /**
-         * @default horizontal
+         * @default "horizontal"
          */
         direction?: 'horizontal' | 'vertical'
     }>
