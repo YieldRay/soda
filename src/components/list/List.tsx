@@ -48,7 +48,6 @@ export const List = forwardRef<
         full,
         as,
         lines,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         children: _,
         ...props
     },

@@ -24,7 +24,19 @@ export default tseslint.config(
                 { allowConstantExport: true },
             ],
             'react-hooks/rules-of-hooks': ['error'],
-            'no-unused-vars': ['error', { varsIgnorePattern: '^_' }],
+            'no-unused-vars': ['off'],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                {
+                    args: 'all',
+                    argsIgnorePattern: '^_',
+                    caughtErrors: 'all',
+                    caughtErrorsIgnorePattern: '^_',
+                    destructuredArrayIgnorePattern: '^_',
+                    varsIgnorePattern: '^_',
+                    ignoreRestSiblings: true,
+                },
+            ],
         },
     },
 )

@@ -1,6 +1,10 @@
 import { createContext } from 'react'
 import { useAutoState } from '@/hooks/use-auto-state'
 
+/**
+ * @internal
+ */
+// eslint-disable-next-line react-refresh/only-export-components
 export const RadioGroupContext = createContext<
     | {
           value?: string

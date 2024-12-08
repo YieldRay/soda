@@ -33,7 +33,6 @@ export function Helper({
     icon,
     label,
     badge,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     children: _,
     ...props
 }: ExtendProps<HelperItem>) {
