@@ -1,5 +1,57 @@
-import clsx from 'clsx'
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import { ripple } from '@/ripple/ripple-effect'
+
+const Ul = styled.ul`
+    all: unset;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-items: center;
+    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
+`
+
+const Cell = styled.div`
+    display: inline-block;
+    width: 76px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 2rem;
+    color: var(--md-sys-color-on-surface-variant);
+    overflow: hidden;
+    transition: all 200ms;
+    user-select: none;
+`
+
+const Li = styled.li<{ active: boolean }>`
+    all: unset;
+    display: grid;
+    width: 100%;
+    place-items: center;
+    padding: 6px 0;
+    cursor: pointer;
+    overflow: hidden;
+
+    @media (any-hover: hover) {
+        &:hover {
+            background: rgba(0 0 0 / 0.04);
+        }
+    }
+
+    &:active {
+        background: rgba(0 0 0 / 0.08);
+    }
+
+    ${(props) =>
+        props.active &&
+        css`
+            & > ${Cell} {
+                background: var(--md-sys-color-primary);
+                color: var(--md-sys-color-on-primary);
+            }
+        `}
+`
 
 export function SelectYear({
     current,
@@ -9,67 +61,24 @@ export function SelectYear({
     onChange?: (year: number) => void
 }) {
     return (
-        <ul>
+        <Ul>
             {getClosest15Years(current).map((year) => (
-                <li
-                    className={clsx(current === year && 'active')}
+                <Li
+                    active={current === year}
                     onClick={() => onChange?.(year)}
                     key={year}
                     ref={(el) => el && ripple(el)}
                 >
-                    <div className="cell">
+                    <Cell>
                         {
                             new Intl.DateTimeFormat(undefined, {
                                 year: 'numeric',
                             }).formatToParts(new Date(year, 1, 1))[0].value
                         }
-                    </div>
-                </li>
+                    </Cell>
+                </Li>
             ))}
-            <style jsx>{`
-                ul {
-                    all: unset;
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    align-items: center;
-                    justify-items: center;
-                    -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
-                }
-                li {
-                    all: unset;
-                    display: grid;
-                    width: 100%;
-                    place-items: center;
-                    padding: 6px 0;
-                    cursor: pointer;
-                    overflow: hidden;
-                }
-                .cell {
-                    display: inline-block;
-                    width: 76px;
-                    height: 36px;
-                    line-height: 36px;
-                    text-align: center;
-                    border-radius: 2rem;
-                    color: var(--md-sys-color-on-surface-variant);
-                    overflow: hidden;
-                    transition: all 200ms;
-                    user-select: none;
-                }
-                @media (any-hover: hover) {
-                    li:hover {
-                        background: rgba(0 0 0 / 0.04);
-                    }
-                }
-                li:active {
-                    background: rgba(0 0 0 / 0.08);
-                }
-                li.active > .cell {
-                    background: var(--md-sys-color-primary);
-                    color: var(--md-sys-color-on-primary);
-                }
-            `}</style>
-        </ul>
+        </Ul>
     )
 }
 
