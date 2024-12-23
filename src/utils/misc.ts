@@ -4,8 +4,8 @@ export const isNumber = (x: unknown): x is number =>
 /**
  * Clamps number within the inclusive lower and upper bounds.
  */
-export const clamp = (number: number, lower: number, upper: number) =>
-    Math.min(Math.max(number, lower), upper)
+export const clamp = (lower: number, value: number, upper: number) =>
+    Math.min(Math.max(value, lower), upper)
 
 export const chunk = <T>(
     array: Array<T> | null | undefined,

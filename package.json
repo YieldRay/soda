@@ -36,7 +36,7 @@
         "@storybook/blocks": "^8.4.7",
         "@storybook/react": "^8.4.7",
         "@storybook/react-vite": "^8.4.7",
-        "@types/react": "^18.3.16",
+        "@types/react": "^18.3.18",
         "@types/react-dom": "^18.3.5",
         "@vitejs/plugin-react": "^4.3.4",
         "chromatic": "^11.20.2",
@@ -45,14 +45,14 @@
         "eslint-plugin-react-hooks": "^5.1.0",
         "eslint-plugin-react-refresh": "^0.4.16",
         "glob": "^10.4.5",
-        "globals": "^15.13.0",
+        "globals": "^15.14.0",
         "prettier": "^3.4.2",
         "sass": "^1.83.0",
         "storybook": "^8.4.7",
         "typescript": "^5.7.2",
-        "typescript-eslint": "^8.18.0",
+        "typescript-eslint": "^8.18.1",
         "vite": "^5.4.11",
-        "vite-plugin-dts": "^4.3.0"
+        "vite-plugin-dts": "^4.4.0"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
@@ -74,5 +74,5 @@
         "url": "https://github.com/YieldRay/soda/issues"
     },
     "homepage": "https://github.com/YieldRay/soda#readme",
-    "packageManager": "pnpm@9.15.0"
+    "packageManager": "pnpm@9.15.1"
 }

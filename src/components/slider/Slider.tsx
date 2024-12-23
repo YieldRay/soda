@@ -89,7 +89,7 @@ export const Slider = forwardRef<
 
     // just util function
     const valueLimitRange = useCallback(
-        (value: number) => clamp(value, minValue, maxValue),
+        (value: number) => clamp(minValue, value, maxValue),
         [minValue, maxValue],
     )
 
