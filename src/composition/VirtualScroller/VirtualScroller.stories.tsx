@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { RecycleScroller } from './RecycleScroller'
+import { VirtualScroller } from './VirtualScroller'
 
-const meta: Meta<typeof RecycleScroller> = {
-    title: 'composition/RecycleScroller',
-    component: RecycleScroller,
+const meta: Meta<typeof VirtualScroller> = {
+    title: 'composition/VirtualScroller',
+    component: VirtualScroller,
     tags: ['autodocs'],
 }
 

@@ -8,7 +8,7 @@ import {
     useState,
 } from 'react'
 
-interface RecycleScrollerProps<T> {
+interface VirtualScrollerProps<T> {
     data: T[]
     itemHeight: number
     windowHeight: number
@@ -17,15 +17,15 @@ interface RecycleScrollerProps<T> {
     defaultRevealedIndex?: number
 }
 
-export interface RecycleScrollerHandle {
+export interface VirtualScrollerHandle {
     scrollToIndex: (index: number) => void
 }
 
 /**
  * @experimental
- * Highly experimental!
+ * Working in progress, DO NOT USE
  */
-export const RecycleScroller = forwardRef(function RecycleScroller<T>(
+export const VirtualScroller = forwardRef(function VirtualScroller<T>(
     {
         data,
         itemHeight,
@@ -33,8 +33,8 @@ export const RecycleScroller = forwardRef(function RecycleScroller<T>(
         children,
         bufferSize = 3,
         defaultRevealedIndex = 0,
-    }: RecycleScrollerProps<T>,
-    ref: React.ForwardedRef<RecycleScrollerHandle>,
+    }: VirtualScrollerProps<T>,
+    ref: React.ForwardedRef<VirtualScrollerHandle>,
 ) {
     const containerRef = useRef<HTMLDivElement>(null)
     const [isScrolling, setIsScrolling] = useState(false)
@@ -80,7 +80,7 @@ export const RecycleScroller = forwardRef(function RecycleScroller<T>(
 
             scrollingTimeoutRef.current = setTimeout(() => {
                 setIsScrolling(false)
-            }, 150)
+            }, 33.333)
         },
         [],
     )
