@@ -1,6 +1,13 @@
 import './Select.scss'
 import clsx from 'clsx'
-import { forwardRef, useDeferredValue, useRef, useState } from 'react'
+import {
+    forwardRef,
+    useCallback,
+    useDeferredValue,
+    useMemo,
+    useRef,
+    useState,
+} from 'react'
 import {
     autoUpdate,
     flip,
@@ -106,9 +113,12 @@ export const Select = forwardRef<
         )
 
         const valueDeferred = useDeferredValue(value)
-        const dispatchChangeDeferred = (v: string) => {
-            setTimeout(() => setValue(v), 220)
-        }
+        const dispatchChangeDeferred = useCallback(
+            (v: string) => {
+                setTimeout(() => setValue(v), 220)
+            },
+            [setValue],
+        )
 
         // floating-ui
         // based on: https://codesandbox.io/p/sandbox/shy-snowflake-kp6479
@@ -118,9 +128,14 @@ export const Select = forwardRef<
         const scrollRef = useRef<HTMLUListElement>(null)
 
         const [open, setOpen] = useState(false)
-        const selectedIndex = options.findIndex(
-            (option) =>
-                (typeof option === 'object' ? option.value : option) === value,
+        const selectedIndex = useMemo(
+            () =>
+                options.findIndex(
+                    (option) =>
+                        (typeof option === 'object' ? option.value : option) ===
+                        value,
+                ),
+            [options, value],
         )
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
         /** Cannot determinate position */
@@ -212,40 +227,55 @@ export const Select = forwardRef<
             },
         })
 
-        const optionMapper: Parameters<
-            typeof options.map<React.ReactNode>
-        >[0] = (option, i) => {
-            const optionValue = getOptionValue(option)
-            return (
-                <MenuItem
-                    className={clsx(
-                        'sd-select_option',
-                        valueDeferred === optionValue &&
-                            'sd-select_option-selected',
-                    )}
-                    key={optionValue}
-                    disabled={
-                        typeof option === 'object' ? option.disabled : false
-                    }
-                    aria-selected={value === optionValue}
-                    role="option"
-                    tabIndex={activeIndex === i ? 0 : -1}
-                    ref={(node) => {
-                        listRef.current[i] = node
-                    }}
-                    {...getItemProps({
-                        onClick() {
-                            dispatchChangeDeferred(optionValue)
-                            setOpen(false)
-                        },
-                    })}
-                >
-                    {typeof option === 'object'
-                        ? (option.label ?? option.value)
-                        : option}
-                </MenuItem>
+        const optionMapper: Parameters<typeof options.map<React.ReactNode>>[0] =
+            useCallback(
+                (option, i) => {
+                    const optionValue = getOptionValue(option)
+                    return (
+                        <MenuItem
+                            className={clsx(
+                                'sd-select_option',
+                                valueDeferred === optionValue &&
+                                    'sd-select_option-selected',
+                            )}
+                            key={optionValue}
+                            disabled={
+                                typeof option === 'object'
+                                    ? option.disabled
+                                    : false
+                            }
+                            aria-selected={value === optionValue}
+                            role="option"
+                            tabIndex={activeIndex === i ? 0 : -1}
+                            ref={(node) => {
+                                listRef.current[i] = node
+                            }}
+                            {...getItemProps({
+                                onClick() {
+                                    dispatchChangeDeferred(optionValue)
+                                    setOpen(false)
+                                },
+                                onKeyDown(e) {
+                                    if (e.key !== 'Enter') return
+                                    dispatchChangeDeferred(optionValue)
+                                    setOpen(false)
+                                },
+                            })}
+                        >
+                            {typeof option === 'object'
+                                ? (option.label ?? option.value)
+                                : option}
+                        </MenuItem>
+                    )
+                },
+                [
+                    activeIndex,
+                    dispatchChangeDeferred,
+                    getItemProps,
+                    value,
+                    valueDeferred,
+                ],
             )
-        }
 
         // add `FloatingPortal` to avoid clipping
         const optionsNode = isMounted && (
@@ -287,6 +317,10 @@ export const Select = forwardRef<
                     ref={refs.setReference}
                     {...getReferenceProps()}
                     aria-haspopup
+                    tabIndex={0}
+                    onKeyDown={(e) =>
+                        e.key === 'Enter' && !open && setOpen(true)
+                    }
                 >
                     {typeof children === 'function'
                         ? children(value!)

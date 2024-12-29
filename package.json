@@ -25,7 +25,7 @@
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
         "@eslint/js": "^9.17.0",
-        "@floating-ui/react": "^0.26.28",
+        "@floating-ui/react": "^0.27.2",
         "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
         "@material/material-color-utilities": "^0.3.0",
         "@mdi/js": "^7.4.47",
@@ -50,8 +50,8 @@
         "sass": "^1.83.0",
         "storybook": "^8.4.7",
         "typescript": "^5.7.2",
-        "typescript-eslint": "^8.18.1",
-        "vite": "^5.4.11",
+        "typescript-eslint": "^8.18.2",
+        "vite": "^6.0.6",
         "vite-plugin-dts": "^4.4.0"
     },
     "publishConfig": {
@@ -74,5 +74,5 @@
         "url": "https://github.com/YieldRay/soda/issues"
     },
     "homepage": "https://github.com/YieldRay/soda#readme",
-    "packageManager": "pnpm@9.15.1"
+    "packageManager": "pnpm@9.15.2"
 }

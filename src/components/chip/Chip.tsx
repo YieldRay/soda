@@ -41,6 +41,8 @@ export const Chip = forwardRef<
             as="div"
             className={clsx('sd-chip', `sd-chip-${variant}`, className)}
             onClick={onClick}
+            onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
+            tabIndex={0}
             role="button"
             data-sd-disabled={disabled}
             aria-disabled={disabled}
