@@ -173,14 +173,18 @@ export const NavigationDrawerItem = forwardRef<
         badge?: React.ReactNode
         active?: boolean
         children?: React.ReactNode
+        onClick?: VoidFunction
     }>
->(({ icon, badge, children, className, active, ...props }, ref) => (
+>(({ icon, badge, children, className, active, onClick, ...props }, ref) => (
     <Ripple
         {...props}
         ref={ref}
         as="div"
         data-sd-active={active}
         className={clsx('sd-navigation_drawer_item', className)}
+        tabIndex={0}
+        onClick={onClick}
+        onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
     >
         <div className="sd-navigation_drawer_item-icon">{icon}</div>
         <div className="sd-navigation_drawer_item-label">{children}</div>

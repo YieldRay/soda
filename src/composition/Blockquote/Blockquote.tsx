@@ -65,6 +65,9 @@ export const Blockquote = forwardRef<
                             <IconRippleButton
                                 path={mdiClose}
                                 onClick={() => setClosed(true)}
+                                onKeyDown={(e) =>
+                                    e.key === 'Enter' && setClosed(true)
+                                }
                                 size="21px"
                             />
                         </div>

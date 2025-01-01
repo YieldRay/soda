@@ -122,6 +122,8 @@ export const BottomSheet = forwardRef<
             <Scrim
                 open={visible}
                 zIndex={zIndex}
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Escape' && onScrimClick?.()}
                 onScrimClick={onScrimClick}
                 className="sd-bottom_sheet-scrim"
             >

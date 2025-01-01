@@ -34,8 +34,9 @@ export function Helper({
     label,
     badge,
     children: _,
+    onKeyDownEnter,
     ...props
-}: ExtendProps<HelperItem>) {
+}: ExtendProps<HelperItem & { onKeyDownEnter?: VoidFunction }>) {
     const [hover, setHover] = useState(false)
     const ref = useRippleRef()
 
@@ -53,6 +54,8 @@ export function Helper({
                 className="sd-navigation_helper-active_indicator"
                 variant={badge?.active ? badge?.sd : 'none'}
                 label={buildReactNode(badge?.label, badge?.active)}
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && onKeyDownEnter?.()}
             >
                 <div className="sd-navigation_helper-icon">
                     {buildReactNode(icon, active)}

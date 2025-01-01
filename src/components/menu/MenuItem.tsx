@@ -37,6 +37,7 @@ export const MenuItem = forwardRef<HTMLElement, ExtendProps<Props>>(
                 data-sd-disabled={disabled}
                 aria-disabled={disabled}
                 role="menuitem"
+                tabIndex={disabled ? undefined : 0}
             >
                 {leadingIcon && (
                     <div className="sd-menu_item-leading_icon">

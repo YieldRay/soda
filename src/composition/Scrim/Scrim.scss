@@ -9,6 +9,7 @@
     transition-behavior: allow-discrete;
     overflow: hidden;
     overscroll-behavior: contain;
+    outline: none;
 
     &:not(.sd-scrim-open) {
         transition-duration: var(--duration);

@@ -204,6 +204,10 @@
     &:active {
         @include background-pressed(var(--md-sys-color-primary));
     }
+    &:focus-visible {
+        outline: none;
+        @include background-focus(var(--md-sys-color-primary));
+    }
     &[data-sd-active='true'] {
         background: var(--md-sys-color-secondary-container);
     }

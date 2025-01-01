@@ -5,7 +5,7 @@ import {
 } from '@/hooks/use-merge'
 import './Scrim.scss'
 import clsx from 'clsx'
-import { forwardRef, useEffect, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import { ExtendProps } from '@/utils/type'
 
 /**
@@ -62,9 +62,15 @@ export const Scrim = forwardRef<
             }
         }, [open, unmountOnClose, duration])
 
+        const eRef = useRef<HTMLDivElement>()
+        useEffect(() => {
+            if (open) eRef.current?.focus()
+        }, [open])
+
         const mergedRef = useMergeRefs(
             ref,
             refCSSProperty('--duration', `${duration}ms`),
+            eRef,
         )
         const handleClick = useMergeEventHandlers(props.onClick, (e) => {
             const el = e.target as HTMLElement

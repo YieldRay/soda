@@ -33,6 +33,7 @@ export const IconRippleButton = forwardRef<
             ref={mergedRef}
             className={clsx('sd-icon_ripple_button', className)}
             role="button"
+            tabIndex={0}
         >
             {path ? <Icon path={path} /> : children}
             <div className="sd-icon_ripple_button-ripple">

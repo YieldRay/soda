@@ -12,6 +12,13 @@
     justify-content: center;
     position: relative;
 
+    &:focus {
+        outline: none;
+        .sd-icon_ripple_button-ripple {
+            @include background-focus(var(--md-sys-color-primary));
+        }
+    }
+
     &-ripple {
         position: absolute;
         overflow: hidden;
