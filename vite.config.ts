@@ -16,7 +16,10 @@ export default defineConfig({
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: fs.readFileSync('./src/style/index.scss'),
+                additionalData: fs.readFileSync(
+                    './src/style/index.scss',
+                    'utf-8',
+                ),
                 api: 'modern-compiler',
                 silenceDeprecations: ['mixed-decls', 'import'],
             },
@@ -30,9 +33,10 @@ export default defineConfig({
             formats: ['es'],
             fileName: (_format, entryName) => `${entryName}.js`,
             entry: inventory(),
+            cssFileName: 'style',
         },
         rollupOptions: {
-            external: ['react', 'react-dom'],
+            external: ['react', 'react-dom', 'react/jsx-runtime'],
             output: {
                 banner: `"use client";`,
                 manualChunks(id, { getModuleInfo }) {

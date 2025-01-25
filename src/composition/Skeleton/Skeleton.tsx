@@ -8,6 +8,6 @@ import './Skeleton.scss'
 export const Skeleton = forwardRef<
     HTMLDivElement,
     Partial<React.CSSProperties>
->(({ ...style }) => {
-    return <div className="sd-skeleton" style={style} />
+>(({ ...style }, ref) => {
+    return <div ref={ref} className="sd-skeleton" style={style} />
 })
