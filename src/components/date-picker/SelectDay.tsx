@@ -19,6 +19,10 @@ const Day = styled.time<{
     transition: all 200ms;
     margin: 2px 0;
 
+    & > * {
+        flex: 0 0 auto;
+    }
+
     &:active {
         background: rgba(0 0 0 / 0.08);
     }

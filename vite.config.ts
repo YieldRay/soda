@@ -36,7 +36,7 @@ export default defineConfig({
             cssFileName: 'style',
         },
         rollupOptions: {
-            external: ['react', 'react-dom', 'react/jsx-runtime'],
+            external: ['react', 'react-dom', 'react/jsx-runtime','scheduler'],
             output: {
                 banner: `"use client";`,
                 manualChunks(id, { getModuleInfo }) {

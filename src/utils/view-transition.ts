@@ -1,6 +1,8 @@
 import { flushSync } from 'react-dom'
 
-export const isViewTransitionSupported = 'startViewTransition' in document
+export const isViewTransitionSupported =
+    typeof document !== 'undefined' && 'startViewTransition' in document
+
 /**
  * Not a `document.startViewTransition()` polyfill,
  * just do nothing in the browser that does not support this API,

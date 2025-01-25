@@ -2,7 +2,7 @@ import './button.scss'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { Ripple } from '@/ripple/Ripple'
-import { REVERSE_RIPPLE_COLOR } from '@/ripple/ripple-effect'
+import { getReversedRippleColor } from '@/ripple/ripple-color'
 import { ExtendProps } from '@/utils/type'
 
 /**
@@ -45,7 +45,7 @@ export const Button = forwardRef<
             type={type ?? 'button'}
             className={clsx('sd-button', `sd-button-${variant}`, className)}
             rippleColor={
-                variant === 'filled' ? REVERSE_RIPPLE_COLOR : undefined
+                variant === 'filled' ? getReversedRippleColor() : undefined
             }
             onClick={() => onClick?.()}
             onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
