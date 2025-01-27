@@ -20,7 +20,7 @@ const config: StorybookConfig = {
     },
 
     docs: {
-        defaultName: 'soda-material',
+        // defaultName: 'soda-material',
     },
 
     typescript: {

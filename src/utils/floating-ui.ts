@@ -25,8 +25,8 @@ export const common: UseTransitionStylesProps['common'] = ({
 
 // see https://floating-ui.com/docs/usetransition#usetransitionstyles
 export const useTransitionStylesProps = {
-    initial: { transform: 'scale(0)' },
-    open: { transform: 'scale(1)', opacity: '1' },
+    initial: { visibility: 'hidden', transform: 'scale(0.5)' },
+    open: { visibility: 'visible', transform: 'scale(1)', opacity: '1' },
     close: { opacity: '0' },
     common,
     duration: { open: 150, close: 300 },
