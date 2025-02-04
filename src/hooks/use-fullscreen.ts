@@ -6,13 +6,15 @@ import { useCallback, useEffect, useState } from 'react'
  * Given an element ref, return something similar to `useState()`
  */
 export function useFullscreen(
-    elementRef: React.RefObject<HTMLElement | void>,
+    elementRef: React.RefObject<HTMLElement | undefined | null>,
     options?: FullscreenOptions,
 ) {
     const [isFullscreen, setIsFullscreen] = useState<boolean>(
-        document.fullscreenEnabled &&
-            !!elementRef.current &&
-            elementRef.current === document.fullscreenElement,
+        typeof document === 'undefined'
+            ? false
+            : document.fullscreenEnabled &&
+                  !!elementRef.current &&
+                  elementRef.current === document.fullscreenElement,
     )
 
     useEffect(() => {
