@@ -12,12 +12,16 @@ import { ExtendProps } from '@/utils/type'
  * The Scrim component serves as a background layer, designed to hold and enhance the visibility of its child components.
  *
  * Transition works for chrome>=117
+ *
+ * You may want try [react-external-renderer](https://npm.im/react-external-renderer) or [overlay-kit](https://npm.im/overlay-kit),
+ * which allow you to render this component in a declarative way.
+ *
  */
 export const Scrim = forwardRef<
     HTMLDivElement,
     ExtendProps<{
         open?: boolean
-        /** set the transition-duration value in ms, by default is 250 */
+        /** Set the transition-duration value in ms, by default is 250 */
         duration?: number
         onScrimClick?(e: React.MouseEvent<HTMLElement, MouseEvent>): void
         inset?: string
@@ -26,6 +30,8 @@ export const Scrim = forwardRef<
         center?: boolean
         /** If true, unmount the component when it is closed */
         unmountOnClose?: boolean
+        /** Emit after the scrim is closed, useful when you want to track the animation end  */
+        onClose?: VoidFunction
     }>
 >(
     (
@@ -33,6 +39,7 @@ export const Scrim = forwardRef<
             open,
             center,
             onScrimClick,
+            onClose,
             zIndex,
             inset = '0',
             duration = 250,
@@ -47,20 +54,28 @@ export const Scrim = forwardRef<
         const [shouldRender, setShouldRender] = useState(open)
 
         useEffect(() => {
-            let timeoutId: ReturnType<typeof setTimeout>
+            let timeoutId1: ReturnType<typeof setTimeout>
+            let timeoutId2: ReturnType<typeof setTimeout>
 
             if (open) {
                 setShouldRender(true)
-            } else if (unmountOnClose) {
-                timeoutId = setTimeout(() => setShouldRender(false), duration)
+            } else {
+                if (unmountOnClose) {
+                    timeoutId1 = setTimeout(() => {
+                        setShouldRender(false)
+                    }, duration)
+                }
+                // Emit onClose after the animation ends
+                timeoutId2 = setTimeout(() => {
+                    onClose?.()
+                }, duration)
             }
 
             return () => {
-                if (timeoutId) {
-                    clearTimeout(timeoutId)
-                }
+                clearTimeout(timeoutId1)
+                clearTimeout(timeoutId2)
             }
-        }, [open, unmountOnClose, duration])
+        }, [open, unmountOnClose, duration, onClose])
 
         const eRef = useRef<HTMLDivElement>()
         useEffect(() => {
