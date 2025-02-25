@@ -3,6 +3,9 @@ export const isNumber = (x: unknown): x is number =>
 
 /**
  * Clamps number within the inclusive lower and upper bounds.
+ *
+ * This is like css [clamp(MIN, VAL, MAX)](https://developer.mozilla.org/docs/Web/CSS/clamp).
+ * Waiting for the [proposal](https://github.com/tc39/proposal-math-clamp) to be implemented.
  */
 export const clamp = (lower: number, value: number, upper: number) =>
     Math.min(Math.max(value, lower), upper)

@@ -5,16 +5,17 @@ export function refEventListener<
     K extends keyof HTMLElementEventMap,
 >(
     elementRef: React.RefObject<T> | T,
-    type: K,
+    type: K | K[],
     listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => unknown,
     options?: boolean | AddEventListenerOptions,
 ) {
     const el =
         elementRef instanceof HTMLElement ? elementRef : elementRef.current
     if (!el) return () => {}
-
-    el.addEventListener(type, listener, options)
-    return () => el.removeEventListener(type, listener, options)
+    const types = Array.isArray(type) ? type : [type]
+    types.forEach((type) => el.addEventListener(type, listener, options))
+    return () =>
+        types.forEach((type) => el.removeEventListener(type, listener, options))
 }
 
 export function useEventListenerEffect<
@@ -22,7 +23,7 @@ export function useEventListenerEffect<
     K extends keyof HTMLElementEventMap,
 >(
     elementRef: React.RefObject<T>,
-    type: K,
+    type: K | K[],
     listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => unknown,
     options?: boolean | AddEventListenerOptions,
 ) {

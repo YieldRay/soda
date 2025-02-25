@@ -1,0 +1,23 @@
+.sd-refresh_indicator {
+    position: relative;
+
+    &-spinner {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
+        background: var(--md-sys-color-surface);
+        border-radius: 50%;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        color: var(--md-sys-color-primary);
+    }
+
+    &-rotate {
+        animation: sd-circular_progress_indicator-indeterminate 1.05s
+            cubic-bezier(0.65, 0.815, 0.735, 0.395) 0s infinite;
+    }
+}
