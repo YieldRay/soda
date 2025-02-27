@@ -17,6 +17,25 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+export const Default: Story = {
+    render: () => {
+        const [src, setSrc] = useState('https://temp.im/123x456')
+        const reload = () =>
+            setSrc(
+                `https://temp.im/${Math.random().toString().slice(2, 5)}x${Math.random().toString().slice(2, 5)}`,
+            )
+        return (
+            <>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                    <SodaImage src={src} description={src} />
+                    <SodaImage src={src} description={src} />
+                </div>
+                <Button onClick={reload}>Reload</Button>
+            </>
+        )
+    },
+}
+
 export const WithDescription: Story = {
     render: () => {
         const [src, setSrc] = useState('https://temp.im/123x456')

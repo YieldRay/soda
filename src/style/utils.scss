@@ -17,6 +17,20 @@
     top: $top;
 }
 
+@mixin disable-browser-drag {
+    // just use `user-select: none;` for normal cases
+    touch-action: none;
+    user-select: none;
+
+    -webkit-user-drag: none; /* Safari */
+    -khtml-user-drag: none; /* Konqueror HTML */
+    -moz-user-drag: none; /* Firefox */
+    -o-user-drag: none; /* Opera */
+    user-drag: none; /* Standard syntax */
+
+    -webkit-touch-callout: none; /* iOS Safari */
+}
+
 @mixin scrollbar($width: 4px, $color: var(--md-sys-color-outline)) {
     &::-webkit-scrollbar {
         width: $width;

@@ -1,6 +1,6 @@
 {
     "name": "soda-material",
-    "version": "0.0.33",
+    "version": "0.0.34",
     "type": "module",
     "types": "dist/index.d.ts",
     "main": "dist/index.js",
@@ -41,7 +41,7 @@
         "@types/react": "^18.3.18",
         "@types/react-dom": "^18.3.5",
         "@vitejs/plugin-react": "^4.3.4",
-        "chromatic": "^11.25.2",
+        "chromatic": "^11.26.1",
         "clsx": "^2.1.1",
         "eslint": "^9.21.0",
         "eslint-plugin-react-hooks": "^5.1.0",
@@ -76,5 +76,5 @@
         "url": "https://github.com/YieldRay/soda/issues"
     },
     "homepage": "https://github.com/YieldRay/soda#readme",
-    "packageManager": "pnpm@10.5.0"
+    "packageManager": "pnpm@10.5.2"
 }

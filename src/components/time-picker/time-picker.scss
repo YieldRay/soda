@@ -178,8 +178,7 @@
         background: var(--md-sys-color-surface-container-highest);
         margin: auto;
         position: relative;
-        user-select: none;
-        touch-action: none;
+        @include disable-browser-drag;
 
         time {
             position: absolute;

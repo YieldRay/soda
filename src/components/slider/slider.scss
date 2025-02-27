@@ -115,7 +115,7 @@
         height: 20px;
         width: 20px;
         background: var(--md-sys-color-primary);
-        touch-action: none;
+        @include disable-browser-drag;
     }
     &-state_layer {
         height: 40px;

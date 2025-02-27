@@ -1,8 +1,10 @@
 .sd-refresh_indicator {
     position: relative;
+    @include disable-browser-drag;
 
     &-spinner {
         position: absolute;
+        z-index: 1;
         left: 50%;
         transform: translateX(-50%);
         pointer-events: none;

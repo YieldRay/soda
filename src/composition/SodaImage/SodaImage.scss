@@ -47,9 +47,13 @@
     }
     .sd-image-description {
         position: absolute;
-        bottom: clamp(5%, 1rem, 15%);
         left: 50%;
         transform: translate(-50%);
+        bottom: clamp(0.5rem, 3%, 1rem);
+        width: 100%;
+        word-break: break-all;
+        line-height: 1;
+        text-align: center;
     }
     .sd-image-error {
         position: absolute;

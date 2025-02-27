@@ -41,11 +41,11 @@ export const Default: Story = {
                     overflow: 'auto',
                 }}
             >
-                {list.map((src) => (
-                    <div key={src}>
-                        <SodaImage src={src} width={w} height={h} />
-                    </div>
-                ))}
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {list.map((src) => (
+                        <SodaImage key={src} src={src} width={w} height={h} />
+                    ))}
+                </div>
             </RefreshIndicator>
         )
     },
