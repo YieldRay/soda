@@ -31,6 +31,7 @@ export function startViewTransition(
             updateCallbackDone,
             finished: updateCallbackDone,
             skipTransition: () => {},
+            types: new Set(),
         }
     }
 }

@@ -1,0 +1,137 @@
+@import '../src/style/index.scss';
+
+.docs-story,
+.docs-story *,
+.sb-unstyled {
+    font-family:
+        'Google Sans',
+        Roboto,
+        'Nunito Sans',
+        -apple-system,
+        '.SFNSText-Regular',
+        'San Francisco',
+        BlinkMacSystemFont,
+        'Segoe UI',
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+code,
+pre,
+pre *,
+table,
+table * {
+    font-family:
+        'Google Sans Mono',
+        Consolas,
+        Courier,
+        Courier New,
+        monospace !important;
+}
+
+pre .token.operator {
+    background: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+    .docs-story > * {
+        background: Canvas !important;
+    }
+}
+
+.prismjs {
+    background: var(--md-sys-color-surface-container) !important;
+}
+
+.sbdocs {
+    background: var(--md-sys-color-surface) !important;
+}
+
+.sbdocs-a {
+    color: var(--md-sys-color-tertiary) !important;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.docblock-argstable.docblock-argstable {
+    border-collapse: separate;
+    box-sizing: border-box;
+    max-width: max-content;
+    border-spacing: 0;
+
+    @include scrollbar(4px, var(--md-sys-color-primary));
+    --radius: 8px;
+
+    caption {
+        color: var(--md-sys-color-on-surface);
+    }
+
+    td,
+    th {
+        border-block-start: 1px solid var(--md-sys-color-outline-variant) !important;
+        border-inline-start: 1px solid var(--md-sys-color-outline-variant) !important;
+        padding: 8px 16px;
+    }
+
+    tr:last-of-type td,
+    tr:last-of-type th {
+        border-block-end: 1px solid var(--md-sys-color-outline-variant) !important;
+    }
+
+    tr td:last-of-type,
+    tr th:last-of-type {
+        border-inline-end: 1px solid var(--md-sys-color-outline-variant) !important;
+    }
+
+    th {
+        background-color: var(--md-sys-color-surface-container);
+        text-shadow: 0 1px 1px var(--md-sys-color-surface-container-lowest);
+        color: var(--md-sys-color-on-surface);
+        font-size: 1.25em;
+    }
+
+    :not(pre) > code {
+        display: inline-flex;
+        background-color: var(--md-sys-color-surface-variant);
+        text-shadow: 0 1px 1px var(--md-sys-color-surface-variant);
+        color: var(--md-sys-color-on-surface);
+        padding: 4px;
+        border-radius: 8px;
+        font-family:
+            'Google Sans Mono', Consolas, Menlo, Monaco, 'Courier New',
+            monospace;
+    }
+
+    tr th:first-of-type {
+        border-start-start-radius: var(--radius) !important;
+    }
+
+    tr th:last-of-type {
+        border-start-end-radius: var(--radius) !important;
+    }
+
+    &:not(:has(tfoot)) {
+        tr:last-of-type td:first-of-type {
+            border-end-start-radius: var(--radius) !important;
+        }
+
+        tr:last-of-type td:last-of-type {
+            border-end-end-radius: var(--radius) !important;
+        }
+    }
+
+    tfoot {
+        tr th:first-of-type {
+            border-start-start-radius: 0 !important;
+            border-end-start-radius: var(--radius) !important;
+        }
+
+        tr th:last-of-type {
+            border-start-end-radius: 0 !important;
+            border-end-end-radius: var(--radius) !important;
+        }
+    }
+}
