@@ -24,14 +24,14 @@ export const Card = forwardRef<
         children?: React.ReactNode
     }>
 >(function Card(
-    { variant = 'elevated', as, className, children, ...props },
+    { variant = 'elevated', as = 'div', className, children, ...props },
     ref,
 ) {
     return (
         <Ripple
             {...props}
             ref={ref}
-            as={as || 'div'}
+            as={as}
             className={clsx('sd-card', `sd-card-${variant}`, className)}
         >
             {children}

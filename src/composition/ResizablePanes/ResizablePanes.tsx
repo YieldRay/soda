@@ -83,12 +83,12 @@ function InternalResizablePanes({
     firstPaneProps,
     secondPane,
     secondPaneProps,
-    resizerSize,
+    resizerSize = '4px',
     resizerProps,
     style,
     ...props
 }: ExtendProps<
-    Omit<ResizablePanesProps, 'onSizeChange' | 'direction'> & {
+    Omit<ResizablePanesProps, 'onSizeChange' | 'direction' | 'size'> & {
         direction: 'horizontal' | 'vertical'
         gridTemplate: string
         onSizeDelta: (delta: number) => void
@@ -109,7 +109,7 @@ function InternalResizablePanes({
             <div {...firstPaneProps}>{firstPane}</div>
             <Divider
                 direction={direction}
-                size={resizerSize || '4px'}
+                size={resizerSize}
                 onSizeDelta={onSizeDelta}
                 {...resizerProps}
             />
@@ -161,7 +161,6 @@ export function ResizablePanes({
     return (
         <InternalResizablePanes
             direction={innerDirection}
-            size={size}
             onSizeDelta={handleResizeDelta}
             gridTemplate={gridTemplate}
             {...props}
