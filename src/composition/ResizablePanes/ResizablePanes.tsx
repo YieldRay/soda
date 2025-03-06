@@ -121,14 +121,14 @@ function InternalResizablePanes({
 export interface ResizablePanesProps {
     size: number
     firstPane: React.ReactNode
-    firstPaneProps: React.HTMLAttributes<HTMLDivElement>
+    firstPaneProps?: React.HTMLAttributes<HTMLDivElement>
     secondPane: React.ReactNode
-    secondPaneProps: React.HTMLAttributes<HTMLDivElement>
+    secondPaneProps?: React.HTMLAttributes<HTMLDivElement>
     /**
      * @default "4px"
      */
     resizerSize?: string
-    resizerProps: React.HTMLAttributes<HTMLDivElement>
+    resizerProps?: React.HTMLAttributes<HTMLDivElement>
     onSizeChange: (size: number) => void
     /**
      * @default "left"
@@ -139,14 +139,15 @@ export interface ResizablePanesProps {
 export function ResizablePanes({
     size,
     onSizeChange,
-    direction: _direction,
+    direction = 'left',
     ...props
 }: ResizablePanesProps) {
+    const reversed = direction === 'right' || direction === 'bottom'
     const handleResizeDelta = useCallback(
-        (delta: number) => onSizeChange(size + delta),
-        [size, onSizeChange],
+        (delta: number) => onSizeChange(size + delta * (reversed ? -1 : 1)),
+        [size, onSizeChange, reversed],
     )
-    const direction = _direction || 'left'
+
     const innerDirection =
         direction === 'left' || direction === 'right'
             ? 'horizontal'
