@@ -143,26 +143,26 @@ export function ResizablePanes({
     ...props
 }: ResizablePanesProps) {
     const reversed = direction === 'right' || direction === 'bottom'
-    const handleResizeDelta = useCallback(
-        (delta: number) => onSizeChange(size + delta * (reversed ? -1 : 1)),
-        [size, onSizeChange, reversed],
-    )
 
     const innerDirection =
         direction === 'left' || direction === 'right'
             ? 'horizontal'
             : 'vertical'
 
+    // `minmax(0, 1fr)` is the magic: it allows the pane to shrink,
+    // while `1fr` will look up the remaining space, so it cannot shrink in some cases
     const gridTemplate =
         direction === 'left' || direction === 'top'
-            ? `${size}px auto 1fr`
-            : `1fr auto ${size}px`
+            ? `${size}px auto minmax(0, 1fr)`
+            : `minmax(0, 1fr) auto ${size}px`
 
     return (
         <InternalResizablePanes
             direction={innerDirection}
-            onSizeDelta={handleResizeDelta}
             gridTemplate={gridTemplate}
+            onSizeDelta={(delta: number) =>
+                onSizeChange(size + delta * (reversed ? -1 : 1))
+            }
             {...props}
         />
     )

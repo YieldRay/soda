@@ -41,8 +41,14 @@ pre .token.operator {
     }
 }
 
+// for Show Code
 .prismjs {
-    background: var(--md-sys-color-surface-container) !important;
+    background: var(--md-sys-color-inverse-surface) !important;
+}
+
+// for markdown code blocks
+pre > .docblock-source.sb-unstyled .prismjs {
+    background: var(--md-sys-color-surface-container-lowest) !important;
 }
 
 .sbdocs {
