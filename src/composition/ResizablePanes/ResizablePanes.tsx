@@ -94,6 +94,13 @@ function InternalResizablePanes({
         onSizeDelta: (delta: number) => void
     }
 >) {
+    const DIRECTIONS = [
+        'gridTemplateColumns' as const,
+        'gridTemplateRows' as const,
+    ]
+    if (direction === 'vertical') DIRECTIONS.reverse()
+    const [gridTemplateDirection, girdTemplateCrossDirection] = DIRECTIONS
+
     return (
         <div
             {...props}
@@ -101,9 +108,8 @@ function InternalResizablePanes({
                 overflow: 'hidden',
                 ...style,
                 display: 'grid',
-                [direction === 'horizontal'
-                    ? 'gridTemplateColumns'
-                    : 'gridTemplateRows']: gridTemplate,
+                [gridTemplateDirection]: gridTemplate,
+                [girdTemplateCrossDirection]: 'minmax(0, 1fr)', // allow the pane to shrink
             }}
         >
             <div {...firstPaneProps}>{firstPane}</div>
