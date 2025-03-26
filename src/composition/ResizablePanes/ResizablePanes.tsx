@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useRef } from 'react'
+import { isTouchSupported } from '@/utils/detection'
 import { mergeStyles } from '@/utils/style'
 import { ExtendProps } from '@/utils/type'
 
@@ -83,7 +84,7 @@ function InternalResizablePanes({
     firstPaneProps,
     secondPane,
     secondPaneProps,
-    resizerSize = '4px',
+    resizerSize = isTouchSupported ? '8px' : '4px',
     resizerProps,
     style,
     ...props
@@ -131,7 +132,8 @@ export interface ResizablePanesProps {
     secondPane: React.ReactNode
     secondPaneProps?: React.HTMLAttributes<HTMLDivElement>
     /**
-     * @default "4px"
+     * Default value is "4px", or "8px" for touchable screen.
+     * Strongly recommend you to set a larger value for touchable devices.
      */
     resizerSize?: string
     resizerProps?: React.HTMLAttributes<HTMLDivElement>

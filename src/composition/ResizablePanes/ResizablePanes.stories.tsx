@@ -27,7 +27,6 @@ export const Default: Story = {
                 background: 'var(--md-sys-color-inverse-primary)',
             },
         },
-        resizerSize: '4px',
         resizerProps: {
             style: {
                 background: '#eee',
