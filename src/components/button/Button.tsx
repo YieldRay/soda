@@ -22,6 +22,10 @@ export const Button = forwardRef<
              */
             onClick?: VoidFunction
             children?: React.ReactNode
+            /**
+             * Accessible label for the button. Required when button contains only icons.
+             */
+            'aria-label'?: string
         },
         HTMLButtonElement
     >
@@ -33,6 +37,7 @@ export const Button = forwardRef<
         onClick,
         className,
         children,
+        'aria-label': ariaLabel,
         ...props
     },
     ref,
@@ -50,6 +55,8 @@ export const Button = forwardRef<
             onClick={() => onClick?.()}
             onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
             data-sd-disabled={disabled}
+            aria-disabled={disabled}
+            aria-label={ariaLabel}
         >
             {children}
         </Ripple>

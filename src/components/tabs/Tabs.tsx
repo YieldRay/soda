@@ -1,6 +1,6 @@
 import './tabs.scss'
 import clsx from 'clsx'
-import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useId, useRef, useState } from 'react'
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeRefs } from '@/hooks/use-merge'
 import { Ripple } from '@/ripple/Ripple'
@@ -53,6 +53,7 @@ export const Tabs = forwardRef<
     },
     eRef,
 ) {
+    const tabsId = useId()
     const [value, setValue] = useAutoState(onChange, value$co, defaultValue!)
     const index = items.findIndex((i) => i.value === value)
     const ref = useRef<HTMLDivElement>(null)
@@ -146,6 +147,8 @@ export const Tabs = forwardRef<
                         key={item.value}
                         onClick={() => setValue(item.value)}
                         aria-selected={value === item.value}
+                        aria-controls={`${tabsId}-panel-${item.value}`}
+                        id={`${tabsId}-tab-${item.value}`}
                         data-sd-active={value === item.value}
                         data-sd-disabled={disabled}
                         role="tab"

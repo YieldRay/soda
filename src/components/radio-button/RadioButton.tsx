@@ -67,13 +67,15 @@ export const RadioButton = forwardRef<
             ref={ref}
             className={clsx('sd-radio_button', className)}
             aria-checked={checked}
+            aria-disabled={disabled}
             data-sd-checked={checked}
             data-sd-disabled={disabled}
             role="radio"
             onClick={() => setChecked(!checked)}
             tabIndex={disabled ? undefined : 0}
             onKeyDown={(e) => {
-                if (!disabled && e.key === 'Enter') {
+                if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
+                    e.preventDefault() // Prevent page scroll for space
                     setChecked(!checked)
                 }
             }}

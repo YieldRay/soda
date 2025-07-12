@@ -46,6 +46,10 @@ export const Slider = forwardRef<
          */
         direction?: 'horizontal' | 'vertical'
         /**
+         * Accessible label for the slider
+         */
+        'aria-label'?: string
+        /**
          * Customize the label, by default show the value
          */
         label?: React.ReactNode
@@ -64,6 +68,7 @@ export const Slider = forwardRef<
         className,
         label,
         hideLabel,
+        'aria-label': ariaLabel,
         ...props
     },
     ref,
@@ -181,6 +186,12 @@ export const Slider = forwardRef<
             data-sd-direction={direction}
             role="slider"
             tabIndex={disabled ? undefined : 0}
+            aria-label={ariaLabel}
+            aria-valuemin={minValue}
+            aria-valuemax={maxValue}
+            aria-valuenow={value}
+            aria-orientation={direction}
+            aria-disabled={disabled}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
             onKeyDown={(e) => {

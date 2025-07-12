@@ -38,17 +38,19 @@ export const Switch = forwardRef<
         <div
             {...props}
             ref={ref}
-            tabIndex={0}
+            tabIndex={disabled ? undefined : 0}
             role="switch"
             className={clsx('sd-switch', props.className)}
             data-sd-disabled={disabled}
             data-sd-checked={checked}
             aria-checked={checked}
+            aria-disabled={disabled}
             onClick={useMergeEventHandlers(props.onClick, () => {
                 setChecked(!checked)
             })}
             onKeyDown={useMergeEventHandlers(props.onKeyDown, (e) => {
-                if (!disabled && e.key === 'Enter') {
+                if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
+                    e.preventDefault() // Prevent page scroll for space
                     setChecked(!checked)
                 }
             })}

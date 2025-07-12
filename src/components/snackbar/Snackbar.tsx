@@ -23,6 +23,7 @@ export function Snackbar({
     fixed = false,
     zIndex = 1,
     inset = 'auto 0 0',
+    'aria-live': ariaLive = 'polite',
     className,
     children,
     ...props
@@ -57,6 +58,11 @@ export function Snackbar({
      * Position of the `fixed` snackbar, has no effect for compact screen (width<600px) and `full`
      */
     placement?: 'left' | 'center' | 'right'
+    /**
+     * ARIA live region behavior for announcements
+     * @default "polite"
+     */
+    'aria-live'?: 'polite' | 'assertive' | 'off'
     /**
      * Make the `fixed` snackbar spans full width of the screen
      */
@@ -104,6 +110,7 @@ export function Snackbar({
             className={clsx('sd-snackbar', className)}
             data-sd-third_line={thirdLine}
             role="alert"
+            aria-live={ariaLive}
         >
             <div className="sd-snackbar-supporting_text">{children}</div>
             {action && (
