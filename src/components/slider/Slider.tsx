@@ -227,7 +227,7 @@ export const Slider = forwardRef<
     // floating-ui
     const arrowRef = useRef(null)
     const arrowRef2 = useRef(null)
-    const { refs, floatingStyles, update, context } = useFloating({
+    const { refs, floatingStyles, context } = useFloating({
         whileElementsMounted: autoUpdate,
         placement: direction === 'vertical' ? 'left' : 'top',
         middleware: [
@@ -242,7 +242,7 @@ export const Slider = forwardRef<
         transform: false,
     })
 
-    const { refs: refs2, floatingStyles: floatingStyles2, update: update2, context: context2 } = useFloating({
+    const { refs: refs2, floatingStyles: floatingStyles2, context: context2 } = useFloating({
         whileElementsMounted: autoUpdate,
         placement: direction === 'vertical' ? 'left' : 'top',
         middleware: [
@@ -311,7 +311,6 @@ export const Slider = forwardRef<
                 }
             }}
             onPointerDown={updatePercentage}
-            onResize={update}
         >
             <div
                 className="sd-slider-inactive_track"
@@ -346,7 +345,6 @@ export const Slider = forwardRef<
                 className="sd-slider-handle"
                 data-handle="min"
                 ref={mergedThumbRef}
-                onResize={update}
                 style={{ cursor: isPressing ? 'grabbing' : '' }}
                 onDragStart={(e) => e.preventDefault()}
                 onPointerDown={(e) => onPointerDown(e, isRangeMode ? 'min' : undefined)}
@@ -384,7 +382,6 @@ export const Slider = forwardRef<
                     className="sd-slider-handle"
                     data-handle="max"
                     ref={mergedThumbRef2}
-                    onResize={update2}
                     style={{ cursor: isPressing ? 'grabbing' : '' }}
                     onDragStart={(e) => e.preventDefault()}
                     onPointerDown={(e) => onPointerDown(e, 'max')}

@@ -59,7 +59,7 @@ export const TooltipHolder = forwardRef(function TooltipHolder(
 ) {
     const [isOpen, setIsOpen] = useState(false)
 
-    const { refs, floatingStyles, update, context } = useFloating({
+    const { refs, floatingStyles, context } = useFloating({
         whileElementsMounted: autoUpdate,
         placement,
         middleware: [offset(4), flip(), shift()],
@@ -104,7 +104,6 @@ export const TooltipHolder = forwardRef(function TooltipHolder(
         >
             <div
                 ref={refs.setReference}
-                onResize={update}
                 {...getReferenceProps()}
             >
                 {trigger}

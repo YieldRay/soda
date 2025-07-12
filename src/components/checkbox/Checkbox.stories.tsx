@@ -34,7 +34,7 @@ export const Disabled: Story = {
 export const Uncontrolled: Story = {
     args: {
         defaultChecked: true,
-        onChange(v) {
+        onChange(v: boolean) {
             console.log(`Uncontrolled set to ${v}`)
         },
     },

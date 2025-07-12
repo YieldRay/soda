@@ -35,7 +35,7 @@ export const Default: Story = {
             {
                 key: 'home',
                 label: 'home',
-                icon: (active) => (
+                icon: (active: boolean) => (
                     <Icon size={1} path={active ? mdiHome : mdiHomeOutline} />
                 ),
                 active: true,
@@ -43,7 +43,7 @@ export const Default: Story = {
             {
                 key: 'search',
                 label: 'search',
-                icon: (active) => (
+                icon: (active: boolean) => (
                     <Icon
                         size={1}
                         path={active ? mdiCardSearch : mdiCardSearchOutline}
@@ -53,7 +53,7 @@ export const Default: Story = {
             {
                 key: 'settings',
                 label: 'settings',
-                icon: (active) => (
+                icon: (active: boolean) => (
                     <Icon size={1} path={active ? mdiCog : mdiCogOutline} />
                 ),
             },
@@ -75,7 +75,7 @@ export const Default: Story = {
                         items={items}
                         onChange={({ key }) => {
                             setItems(
-                                items.map((item) => ({
+                                items.map((item: any) => ({
                                     ...item,
                                     active: item.key === key,
                                 })),

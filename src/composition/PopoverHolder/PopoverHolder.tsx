@@ -43,7 +43,7 @@ export const PopoverHolder = forwardRef<
 ) {
     const [isOpen, setIsOpen] = useState(false)
 
-    const { refs, floatingStyles, update, context } = useFloating({
+    const { refs, floatingStyles, context } = useFloating({
         whileElementsMounted: autoUpdate,
         placement,
         middleware: [offset(4), flip(), shift()],
@@ -82,7 +82,6 @@ export const PopoverHolder = forwardRef<
         >
             <div
                 ref={refs.setReference}
-                onResize={update}
                 {...getReferenceProps()}
             >
                 {trigger}

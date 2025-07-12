@@ -43,7 +43,7 @@ export const Default: Story = {
     decorators: (Story) => (
         <div style={{ padding: '10rem 1rem' }}>{<Story />}</div>
     ),
-    render: (props) => <Select {...props} />,
+    render: (props) => <Select {...props} options={props.options || ['Option 1', 'Option 2', 'Option 3']} />,
 }
 
 export const Customized: Story = {
@@ -55,7 +55,7 @@ export const Customized: Story = {
     args: {
         placement: 'bottom-end',
         full: true,
-        children: (value) => (
+        children: (value: string) => (
             <List
                 full
                 headline={value}

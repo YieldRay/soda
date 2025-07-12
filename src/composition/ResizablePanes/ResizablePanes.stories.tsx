@@ -42,6 +42,8 @@ export const Default: Story = {
                 {...props}
                 size={size}
                 onSizeChange={onSizeChange}
+                firstPane={<div>First Pane</div>}
+                secondPane={<div>Second Pane</div>}
             />
         )
     },
