@@ -21,10 +21,6 @@ export const Fab = forwardRef<
         extended?: boolean
         disabled?: boolean
         children?: React.ReactNode
-        /**
-         * Accessible label for the FAB. Highly recommended for accessibility.
-         */
-        'aria-label'?: string
     }>
 >(function Fab(
     {
@@ -34,7 +30,6 @@ export const Fab = forwardRef<
         disabled,
         className,
         children,
-        'aria-label': ariaLabel,
         ...props
     },
     ref,
@@ -50,7 +45,6 @@ export const Fab = forwardRef<
             data-sd-extended={extended}
             data-sd-disabled={disabled}
             aria-disabled={disabled}
-            aria-label={ariaLabel}
             role="button"
         >
             <div className="sd-fab-icon">{children}</div>

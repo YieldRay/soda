@@ -25,11 +25,6 @@ export const IconButton = forwardRef<
         rotate?: number
         disabled?: boolean
         children?: React.ReactNode
-        /**
-         * Accessible label for the icon button. Highly recommended for accessibility.
-         * Required when the button has no text content.
-         */
-        'aria-label'?: string
     }>
 >(function IconButton(
     {
@@ -40,7 +35,6 @@ export const IconButton = forwardRef<
         disabled,
         className,
         children,
-        'aria-label': ariaLabel,
         ...props
     },
     ref,
@@ -69,7 +63,6 @@ export const IconButton = forwardRef<
             data-sd-disabled={disabled}
             aria-disabled={disabled}
             aria-pressed={selected}
-            aria-label={ariaLabel}
             role="button"
         >
             <div className="sd-icon_button-icon">

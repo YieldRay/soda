@@ -16,16 +16,12 @@ export const Dialog = forwardRef<
          */
         buttons?: React.ReactNode
         /**
-         * Accessible label for the dialog. If headline is provided, it will be used automatically.
-         */
-        'aria-label'?: string
-        /**
          * If you do not need any pre-defined slots, set noPadding to true and
          * do not use headline and buttons, as they contains default css style
          */
         noPadding?: boolean
     }>
->(function Dialog({ headline, children, buttons, noPadding, 'aria-label': ariaLabel, ...props }, ref) {
+>(function Dialog({ headline, children, buttons, noPadding, ...props }, ref) {
     const headlineId = useId()
     const bodyId = useId()
     
@@ -37,7 +33,6 @@ export const Dialog = forwardRef<
             role="dialog"
             aria-modal="true"
             aria-labelledby={headline ? headlineId : undefined}
-            aria-label={!headline ? ariaLabel : undefined}
             aria-describedby={bodyId}
         >
             {headline && (
