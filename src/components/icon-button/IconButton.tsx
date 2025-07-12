@@ -62,6 +62,7 @@ export const IconButton = forwardRef<
             data-sd-selected={selected}
             data-sd-disabled={disabled}
             aria-disabled={disabled}
+            aria-pressed={selected}
             role="button"
         >
             <div className="sd-icon_button-icon">

@@ -104,6 +104,7 @@ export function Snackbar({
             className={clsx('sd-snackbar', className)}
             data-sd-third_line={thirdLine}
             role="alert"
+            aria-live="polite"
         >
             <div className="sd-snackbar-supporting_text">{children}</div>
             {action && (

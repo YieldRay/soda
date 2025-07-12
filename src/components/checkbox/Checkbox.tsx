@@ -68,7 +68,8 @@ export const Checkbox = forwardRef<
                 setChecked(!checked)
             })}
             onKeyDown={useMergeEventHandlers(props.onKeyDown, (e) => {
-                if (!disabled && e.key === 'Enter') {
+                if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
+                    e.preventDefault() // Prevent page scroll for space
                     setChecked(!checked)
                 }
             })}

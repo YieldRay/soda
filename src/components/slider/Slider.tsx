@@ -181,6 +181,11 @@ export const Slider = forwardRef<
             data-sd-direction={direction}
             role="slider"
             tabIndex={disabled ? undefined : 0}
+            aria-valuemin={minValue}
+            aria-valuemax={maxValue}
+            aria-valuenow={value}
+            aria-orientation={direction}
+            aria-disabled={disabled}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
             onKeyDown={(e) => {

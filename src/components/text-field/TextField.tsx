@@ -1,6 +1,6 @@
 import './text-field.scss'
 import clsx from 'clsx'
-import { forwardRef, useEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeEventHandlers } from '@/hooks/use-merge'
 import { setReactRef, type ReactRef } from '@/utils/react-ref'
@@ -83,6 +83,9 @@ export const TextField = forwardRef<
     },
     ref,
 ) {
+    const labelId = useId()
+    const supportingTextId = useId()
+    
     const [value, setValue] = useAutoState<string>(
         onChange,
         value$co,
@@ -118,6 +121,7 @@ export const TextField = forwardRef<
                     <div
                         key="sd-text_field-label_text"
                         className="sd-text_field-label_text"
+                        id={labelId}
                     >
                         {labelText}
                     </div>
@@ -130,6 +134,9 @@ export const TextField = forwardRef<
                         readOnly={readonly}
                         disabled={disabled}
                         placeholder={placeholder}
+                        aria-labelledby={labelText ? labelId : undefined}
+                        aria-describedby={supportingText ? supportingTextId : undefined}
+                        aria-invalid={error}
                     />
                 )}
             </Helper>
@@ -142,6 +149,9 @@ export const TextField = forwardRef<
                     disabled={disabled}
                     placeholder={placeholder}
                     rows={rows}
+                    aria-labelledby={labelText ? labelId : undefined}
+                    aria-describedby={supportingText ? supportingTextId : undefined}
+                    aria-invalid={error}
                 />
             )}
         </>
@@ -184,7 +194,11 @@ export const TextField = forwardRef<
             )}
 
             {supportingText && (
-                <div className="sd-text_field-supporting_text">
+                <div 
+                    className="sd-text_field-supporting_text"
+                    id={supportingTextId}
+                    aria-live={error ? 'polite' : undefined}
+                >
                     {supportingText}
                 </div>
             )}

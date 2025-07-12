@@ -1,6 +1,6 @@
 import './dialog.scss'
 import clsx from 'clsx'
-import { forwardRef } from 'react'
+import { forwardRef, useId } from 'react'
 import { ExtendProps } from '@/utils/type'
 
 /**
@@ -22,16 +22,27 @@ export const Dialog = forwardRef<
         noPadding?: boolean
     }>
 >(function Dialog({ headline, children, buttons, noPadding, ...props }, ref) {
+    const headlineId = useId()
+    const bodyId = useId()
+    
     return (
         <div
             {...props}
             ref={ref}
             className={clsx('sd-dialog', props.className)}
             role="dialog"
+            aria-modal="true"
+            aria-labelledby={headline ? headlineId : undefined}
+            aria-describedby={bodyId}
         >
-            {headline && <div className="sd-dialog-headline">{headline}</div>}
+            {headline && (
+                <div className="sd-dialog-headline" id={headlineId}>
+                    {headline}
+                </div>
+            )}
             <div
                 className="sd-dialog-body"
+                id={bodyId}
                 style={{ padding: noPadding ? '' : '1.5rem 1.5rem' }}
             >
                 {children}
