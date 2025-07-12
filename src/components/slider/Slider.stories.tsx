@@ -73,3 +73,63 @@ export const Uncontrolled: Story = {
         onChange: console.log,
     },
 }
+
+export const Range: Story = {
+    render: () => {
+        const [rangeValue, setRangeValue] = useState<[number, number]>([20, 80])
+        return (
+            <div style={{ minWidth: '20rem' }}>
+                <p>{rangeValue[0]} - {rangeValue[1]}</p>
+                <Slider 
+                    range
+                    rangeValue={rangeValue} 
+                    onRangeChange={setRangeValue} 
+                />
+            </div>
+        )
+    },
+}
+
+export const RangeWithSteps: Story = {
+    render: () => {
+        const [rangeValue, setRangeValue] = useState<[number, number]>([1, 4])
+        return (
+            <div style={{ minWidth: '20rem' }}>
+                <p>{rangeValue[0]} - {rangeValue[1]}</p>
+                <Slider 
+                    range
+                    rangeValue={rangeValue} 
+                    onRangeChange={setRangeValue}
+                    steps={5}
+                    min={0}
+                    max={5}
+                />
+            </div>
+        )
+    },
+}
+
+export const RangeVertical: Story = {
+    render: () => {
+        const [rangeValue, setRangeValue] = useState<[number, number]>([30, 70])
+        return (
+            <div style={{ minHeight: '20rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <p>{rangeValue[0]} - {rangeValue[1]}</p>
+                <Slider 
+                    range
+                    rangeValue={rangeValue} 
+                    onRangeChange={setRangeValue}
+                    direction="vertical"
+                />
+            </div>
+        )
+    },
+}
+
+export const RangeUncontrolled: Story = {
+    args: {
+        range: true,
+        defaultRangeValue: [25, 75],
+        onRangeChange: console.log,
+    },
+}
