@@ -31,7 +31,9 @@ export const Outlined: Story = {
                 {...props}
                 disabled={!enabled}
                 onClick={() => setEnabled(!enabled)}
-            />
+            >
+                {props.children}
+            </Chip>
         )
     },
 }
@@ -48,7 +50,9 @@ export const Tonal: Story = {
                 {...props}
                 disabled={!enabled}
                 onClick={() => setEnabled(!enabled)}
-            />
+            >
+                {props.children}
+            </Chip>
         )
     },
 }

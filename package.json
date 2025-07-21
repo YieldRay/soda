@@ -12,7 +12,7 @@
         "build": "vite build",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
-        "lint": "eslint .",
+        "lint": "tsc --noEmit && eslint .",
         "format": "prettier --write ./src",
         "preview": "vite preview",
         "chromatic": "chromatic --exit-zero-on-changes"
@@ -40,10 +40,10 @@
         "@storybook/react": "^8.6.14",
         "@storybook/react-vite": "^8.6.14",
         "@storybook/theming": "^8.6.14",
-        "@types/node": "^22.16.3",
+        "@types/node": "^22.16.5",
         "@types/react": "^18.3.23",
         "@types/react-dom": "^18.3.7",
-        "@vitejs/plugin-react": "^4.6.0",
+        "@vitejs/plugin-react": "^4.7.0",
         "chromatic": "^11.29.0",
         "clsx": "^2.1.1",
         "eslint": "^9.31.0",
@@ -55,7 +55,7 @@
         "sass": "^1.89.2",
         "storybook": "^8.6.14",
         "typescript": "^5.8.3",
-        "typescript-eslint": "^8.36.0",
+        "typescript-eslint": "^8.37.0",
         "vite": "^6.3.5",
         "vite-plugin-dts": "^4.5.4"
     },
@@ -79,5 +79,5 @@
         "url": "https://github.com/YieldRay/soda/issues"
     },
     "homepage": "https://github.com/YieldRay/soda#readme",
-    "packageManager": "pnpm@10.13.0"
+    "packageManager": "pnpm@10.13.1"
 }

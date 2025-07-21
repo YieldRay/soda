@@ -73,3 +73,15 @@ export const Uncontrolled: Story = {
         onChange: console.log,
     },
 }
+
+export const Disabled: Story = {
+    render: () => {
+        const [value, setValue] = useState(25)
+        return (
+            <div style={{ minWidth: '20rem' }}>
+                <p>{value}</p>
+                <Slider value={value} onChange={setValue} disabled />
+            </div>
+        )
+    },
+}

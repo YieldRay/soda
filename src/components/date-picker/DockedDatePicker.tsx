@@ -48,7 +48,7 @@ export function DockedDatePicker({
     // floating-ui
     const [isOpen, setIsOpen] = useState(false)
 
-    const { refs, floatingStyles, update, context } = useFloating({
+    const { refs, floatingStyles, context } = useFloating({
         whileElementsMounted: autoUpdate,
         placement: 'bottom',
         middleware: [offset(4), flip(), shift()],
@@ -121,7 +121,6 @@ export function DockedDatePicker({
             data-sd="docked"
             {...getReferenceProps()}
             ref={refs.setReference}
-            onResize={update}
         >
             <TextField
                 style={{ width: '100%', padding: '0.5rem 0.75rem' }}

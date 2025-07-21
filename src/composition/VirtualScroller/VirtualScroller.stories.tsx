@@ -16,7 +16,7 @@ export const Default: Story = {
         itemHeight: 20,
         windowHeight: 400,
         bufferSize: 50,
-        children(_, index) {
+        children(_: any, index: number) {
             return (
                 <div
                     style={{

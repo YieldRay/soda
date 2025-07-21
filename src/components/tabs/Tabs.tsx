@@ -1,6 +1,13 @@
 import './tabs.scss'
 import clsx from 'clsx'
-import { forwardRef, useCallback, useEffect, useId, useRef, useState } from 'react'
+import {
+    forwardRef,
+    useCallback,
+    useEffect,
+    useId,
+    useRef,
+    useState,
+} from 'react'
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeRefs } from '@/hooks/use-merge'
 import { Ripple } from '@/ripple/Ripple'

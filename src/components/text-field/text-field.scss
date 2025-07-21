@@ -151,9 +151,9 @@ $label_text_gap_size: 3.2px;
 
     // fix position when no icon
     &:not(
-            :has(.sd-text_field-leading_icon),
-            :has(.sd-text_field-trailing_icon)
-        ) {
+        :has(.sd-text_field-leading_icon),
+        :has(.sd-text_field-trailing_icon)
+    ) {
         .sd-text_field-label_text {
             @include position-absolute(12px, 12px);
         }

@@ -1,6 +1,6 @@
 import './slider.scss'
 import clsx from 'clsx'
-import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import {
     arrow,
     autoUpdate,
@@ -12,13 +12,18 @@ import {
 } from '@floating-ui/react'
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeRefs } from '@/hooks/use-merge'
-import { clamp } from '@/utils/misc'
 import { ExtendProps } from '@/utils/type'
+import {
+    calculatePercentage,
+    formatValue,
+    toPercentage,
+    useSliderUtils,
+} from './slider-utils'
 
 /**
- * An slider component, note that you should set width or height (use `style` property) for this component!
+ * A single-value slider component. Note that you should set width or height (use `style` property) for this component!
  *
- * TODO: Two handles is not implemented yet!
+ * For range sliders with two handles, use the RangeSlider component instead.
  *
  * @specs https://m3.material.io/components/sliders/specs
  */
@@ -38,15 +43,15 @@ export const Slider = forwardRef<
          */
         min?: number
         /**
-         * @default 1
+         * @default 100
          */
         max?: number
         /**
-         * @default horizon
+         * @default horizontal
          */
         direction?: 'horizontal' | 'vertical'
         /**
-         * Customize the label, by default show the value
+         * Customize the label, by default show the value with .toFixed(1)
          */
         label?: React.ReactNode
         hideLabel?: boolean
@@ -72,25 +77,10 @@ export const Slider = forwardRef<
     const thumbRef = useRef<HTMLDivElement>(null)
 
     const [value, setValue] = useAutoState(onChange, value$co, defaultValue)
-
-    // just util function
-    const valueLimitStep = useCallback(
-        (value: number) => {
-            if (!steps || steps === Infinity) return value
-
-            const unit = (maxValue - minValue) / steps
-            let segments = Math.floor(value / unit)
-            const left = value % unit
-            if (left >= unit / 2) segments++
-            return segments * unit
-        },
-        [steps, minValue, maxValue],
-    )
-
-    // just util function
-    const valueLimitRange = useCallback(
-        (value: number) => clamp(minValue, value, maxValue),
-        [minValue, maxValue],
+    const { valueLimitStep, valueLimitRange } = useSliderUtils(
+        steps,
+        minValue,
+        maxValue,
     )
 
     useEffect(() => {
@@ -113,24 +103,13 @@ export const Slider = forwardRef<
 
     const updatePercentage = (e: React.PointerEvent<HTMLDivElement>) => {
         const container = eRef.current!
-        let percentage: number
-        if (direction === 'vertical') {
-            const { height: cHeight, top: cY } =
-                container.getBoundingClientRect()
-            const pY = e.clientY
-            percentage = 1 - (pY - cY) / cHeight
-        } else {
-            const { width: cWidth, left: cX } =
-                container.getBoundingClientRect()
-            const pX = e.clientX
-            percentage = (pX - cX) / cWidth
-        }
+        const percentage = calculatePercentage(e, container, direction)
 
-        setValue(
-            valueLimitRange(
-                valueLimitStep(minValue + (maxValue - minValue) * percentage),
-            ),
+        const newValue = valueLimitRange(
+            valueLimitStep(minValue + (maxValue - minValue) * percentage),
         )
+
+        setValue(newValue)
     }
 
     const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -152,9 +131,8 @@ export const Slider = forwardRef<
     }
 
     // floating-ui
-
     const arrowRef = useRef(null)
-    const { refs, floatingStyles, update, context } = useFloating({
+    const { refs, floatingStyles, context } = useFloating({
         whileElementsMounted: autoUpdate,
         placement: direction === 'vertical' ? 'left' : 'top',
         middleware: [
@@ -186,6 +164,7 @@ export const Slider = forwardRef<
             aria-valuenow={value}
             aria-orientation={direction}
             aria-disabled={disabled}
+            aria-label="Slider"
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
             onKeyDown={(e) => {
@@ -201,7 +180,6 @@ export const Slider = forwardRef<
                 }
             }}
             onPointerDown={updatePercentage}
-            onResize={update}
         >
             <div
                 className="sd-slider-inactive_track"
@@ -211,6 +189,7 @@ export const Slider = forwardRef<
                 className="sd-slider-active_track"
                 onDragStart={(e) => e.preventDefault()}
             />
+            {/* State layer */}
             <div
                 className="sd-slider-state_layer"
                 onDragStart={(e) => e.preventDefault()}
@@ -218,10 +197,11 @@ export const Slider = forwardRef<
                     opacity: isPressing ? 1 : isHover || isFocus ? 0.6 : 0,
                 }}
             />
+
+            {/* Handle */}
             <div
                 className="sd-slider-handle"
                 ref={mergedThumbRef}
-                onResize={update}
                 style={{ cursor: isPressing ? 'grabbing' : '' }}
                 onDragStart={(e) => e.preventDefault()}
                 onPointerDown={onPointerDown}
@@ -241,7 +221,7 @@ export const Slider = forwardRef<
                         }}
                     >
                         <div style={{ overflow: 'hidden' }}>
-                            {label ?? value}
+                            {label ?? formatValue(value)}
                         </div>
                         <FloatingArrow
                             ref={arrowRef}
@@ -255,7 +235,3 @@ export const Slider = forwardRef<
         </div>
     )
 })
-
-function toPercentage(value: number) {
-    return value * 100 + '%'
-}
