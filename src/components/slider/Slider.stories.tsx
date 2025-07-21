@@ -80,11 +80,7 @@ export const Disabled: Story = {
         return (
             <div style={{ minWidth: '20rem' }}>
                 <p>{value}</p>
-                <Slider 
-                    value={value} 
-                    onChange={setValue}
-                    disabled
-                />
+                <Slider value={value} onChange={setValue} disabled />
             </div>
         )
     },

@@ -13,7 +13,12 @@ import {
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeRefs } from '@/hooks/use-merge'
 import { ExtendProps } from '@/utils/type'
-import { calculatePercentage, toPercentage, useSliderUtils } from './slider-utils'
+import {
+    calculatePercentage,
+    formatValue,
+    toPercentage,
+    useSliderUtils,
+} from './slider-utils'
 
 /**
  * A range slider component with two handles for selecting a range of values.
@@ -45,9 +50,9 @@ export const RangeSlider = forwardRef<
          */
         direction?: 'horizontal' | 'vertical'
         /**
-         * Customize the label, by default show the value
+         * Customize the labels, by default show the value with .toFixed(1)
          */
-        label?: React.ReactNode
+        labels?: [React.ReactNode, React.ReactNode]
         hideLabel?: boolean
     }>
 >(function RangeSlider(
@@ -61,7 +66,7 @@ export const RangeSlider = forwardRef<
         direction = 'horizontal',
         disabled,
         className,
-        label,
+        labels,
         hideLabel,
         ...props
     },
@@ -72,22 +77,38 @@ export const RangeSlider = forwardRef<
     const thumbRef2 = useRef<HTMLDivElement>(null)
 
     const [value, setValue] = useAutoState(onChange, value$co, defaultValue)
-    const { valueLimitStep, valueLimitRange } = useSliderUtils(steps, minValue, maxValue)
+    const { valueLimitStep, valueLimitRange } = useSliderUtils(
+        steps,
+        minValue,
+        maxValue,
+    )
 
     useEffect(() => {
         const container = eRef.current!
         const startPercentage = (value[0] - minValue) / (maxValue - minValue)
         const endPercentage = (value[1] - minValue) / (maxValue - minValue)
-        container.style.setProperty('--start-percentage', toPercentage(startPercentage))
-        container.style.setProperty('--end-percentage', toPercentage(endPercentage))
-        container.style.setProperty('--percentage', toPercentage(endPercentage - startPercentage))
+        container.style.setProperty(
+            '--start-percentage',
+            toPercentage(startPercentage),
+        )
+        container.style.setProperty(
+            '--end-percentage',
+            toPercentage(endPercentage),
+        )
+        container.style.setProperty(
+            '--percentage',
+            toPercentage(endPercentage - startPercentage),
+        )
     }, [value, minValue, maxValue])
 
     useEffect(() => {
         // fix the value to the limited value
         const fixedMin = valueLimitRange(valueLimitStep(value[0]))
         const fixedMax = valueLimitRange(valueLimitStep(value[1]))
-        const fixedRange: [number, number] = [Math.min(fixedMin, fixedMax), Math.max(fixedMin, fixedMax)]
+        const fixedRange: [number, number] = [
+            Math.min(fixedMin, fixedMax),
+            Math.max(fixedMin, fixedMax),
+        ]
         if (value[0] !== fixedRange[0] || value[1] !== fixedRange[1]) {
             setValue(fixedRange)
         }
@@ -98,7 +119,10 @@ export const RangeSlider = forwardRef<
     const [isFocus, setFocus] = useState(false)
     const [activeHandle, setActiveHandle] = useState<'min' | 'max' | null>(null)
 
-    const updatePercentage = (e: React.PointerEvent<HTMLDivElement>, handleType?: 'min' | 'max') => {
+    const updatePercentage = (
+        e: React.PointerEvent<HTMLDivElement>,
+        handleType?: 'min' | 'max',
+    ) => {
         const container = eRef.current!
         const percentage = calculatePercentage(e, container, direction)
 
@@ -108,33 +132,49 @@ export const RangeSlider = forwardRef<
 
         const currentRange = value
         let newRange: [number, number]
-        
+
         if (handleType) {
             // Specific handle is being moved
             if (handleType === 'min') {
-                newRange = [Math.min(newValue, currentRange[1]), currentRange[1]]
+                newRange = [
+                    Math.min(newValue, currentRange[1]),
+                    currentRange[1],
+                ]
             } else {
-                newRange = [currentRange[0], Math.max(newValue, currentRange[0])]
+                newRange = [
+                    currentRange[0],
+                    Math.max(newValue, currentRange[0]),
+                ]
             }
         } else {
             // Click on track - move nearest handle
             const distToMin = Math.abs(newValue - currentRange[0])
             const distToMax = Math.abs(newValue - currentRange[1])
-            
+
             if (distToMin <= distToMax) {
-                newRange = [Math.min(newValue, currentRange[1]), currentRange[1]]
+                newRange = [
+                    Math.min(newValue, currentRange[1]),
+                    currentRange[1],
+                ]
                 setActiveHandle('min')
             } else {
-                newRange = [currentRange[0], Math.max(newValue, currentRange[0])]
+                newRange = [
+                    currentRange[0],
+                    Math.max(newValue, currentRange[0]),
+                ]
                 setActiveHandle('max')
             }
         }
-        
+
         setValue(newRange)
     }
 
-    const onPointerDown = (e: React.PointerEvent<HTMLDivElement>, handleType?: 'min' | 'max') => {
-        const thumb = handleType === 'max' ? thumbRef2.current! : thumbRef.current!
+    const onPointerDown = (
+        e: React.PointerEvent<HTMLDivElement>,
+        handleType?: 'min' | 'max',
+    ) => {
+        const thumb =
+            handleType === 'max' ? thumbRef2.current! : thumbRef.current!
         thumb.setPointerCapture(e.pointerId)
         setPressing(true)
         if (handleType) {
@@ -176,7 +216,11 @@ export const RangeSlider = forwardRef<
 
     // floating-ui for max handle
     const arrowRef2 = useRef(null)
-    const { refs: refs2, floatingStyles: floatingStyles2, context: context2 } = useFloating({
+    const {
+        refs: refs2,
+        floatingStyles: floatingStyles2,
+        context: context2,
+    } = useFloating({
         whileElementsMounted: autoUpdate,
         placement: direction === 'vertical' ? 'left' : 'top',
         middleware: [
@@ -221,7 +265,7 @@ export const RangeSlider = forwardRef<
                         // Move the min handle
                         const newRange: [number, number] = [
                             Math.max(minValue, value[0] - step),
-                            value[1]
+                            value[1],
                         ]
                         setValue(newRange)
                     } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
@@ -229,7 +273,7 @@ export const RangeSlider = forwardRef<
                         // Move the max handle
                         const newRange: [number, number] = [
                             value[0],
-                            Math.min(maxValue, value[1] + step)
+                            Math.min(maxValue, value[1] + step),
                         ]
                         setValue(newRange)
                     }
@@ -248,7 +292,7 @@ export const RangeSlider = forwardRef<
             {/* State layers for each handle */}
             <div
                 className="sd-slider-state_layer"
-                data-handle="min"
+                data-sd-handle="min"
                 onDragStart={(e) => e.preventDefault()}
                 style={{
                     opacity: isPressing ? 1 : isHover || isFocus ? 0.6 : 0,
@@ -256,17 +300,17 @@ export const RangeSlider = forwardRef<
             />
             <div
                 className="sd-slider-state_layer"
-                data-handle="max"
+                data-sd-handle="max"
                 onDragStart={(e) => e.preventDefault()}
                 style={{
                     opacity: isPressing ? 1 : isHover || isFocus ? 0.6 : 0,
                 }}
             />
-            
+
             {/* Min handle */}
             <div
                 className="sd-slider-handle"
-                data-handle="min"
+                data-sd-handle="min"
                 ref={mergedThumbRef}
                 style={{ cursor: isPressing ? 'grabbing' : '' }}
                 onDragStart={(e) => e.preventDefault()}
@@ -287,7 +331,7 @@ export const RangeSlider = forwardRef<
                         }}
                     >
                         <div style={{ overflow: 'hidden' }}>
-                            {label ?? value[0]}
+                            {labels ? labels[0] : formatValue(value[0])}
                         </div>
                         <FloatingArrow
                             ref={arrowRef}
@@ -298,11 +342,11 @@ export const RangeSlider = forwardRef<
                     </div>
                 )}
             </div>
-            
+
             {/* Max handle */}
             <div
                 className="sd-slider-handle"
-                data-handle="max"
+                data-sd-handle="max"
                 ref={mergedThumbRef2}
                 style={{ cursor: isPressing ? 'grabbing' : '' }}
                 onDragStart={(e) => e.preventDefault()}
@@ -323,7 +367,7 @@ export const RangeSlider = forwardRef<
                         }}
                     >
                         <div style={{ overflow: 'hidden' }}>
-                            {value[1]}
+                            {labels ? labels[1] : formatValue(value[1])}
                         </div>
                         <FloatingArrow
                             ref={arrowRef2}

@@ -50,8 +50,7 @@ export const Default: Story = {
                                 content={
                                     <div
                                         onClick={() =>
-                                            (tooltipHolderHandleRef.current!.open =
-                                                false)
+                                            (tooltipHolderHandleRef.current!.open = false)
                                         }
                                     >
                                         {menuDefaultStory.render?.(

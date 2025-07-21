@@ -13,7 +13,12 @@ import {
 import { useAutoState } from '@/hooks/use-auto-state'
 import { useMergeRefs } from '@/hooks/use-merge'
 import { ExtendProps } from '@/utils/type'
-import { calculatePercentage, toPercentage, useSliderUtils } from './slider-utils'
+import {
+    calculatePercentage,
+    formatValue,
+    toPercentage,
+    useSliderUtils,
+} from './slider-utils'
 
 /**
  * A single-value slider component. Note that you should set width or height (use `style` property) for this component!
@@ -46,7 +51,7 @@ export const Slider = forwardRef<
          */
         direction?: 'horizontal' | 'vertical'
         /**
-         * Customize the label, by default show the value
+         * Customize the label, by default show the value with .toFixed(1)
          */
         label?: React.ReactNode
         hideLabel?: boolean
@@ -72,7 +77,11 @@ export const Slider = forwardRef<
     const thumbRef = useRef<HTMLDivElement>(null)
 
     const [value, setValue] = useAutoState(onChange, value$co, defaultValue)
-    const { valueLimitStep, valueLimitRange } = useSliderUtils(steps, minValue, maxValue)
+    const { valueLimitStep, valueLimitRange } = useSliderUtils(
+        steps,
+        minValue,
+        maxValue,
+    )
 
     useEffect(() => {
         const container = eRef.current!
@@ -188,7 +197,7 @@ export const Slider = forwardRef<
                     opacity: isPressing ? 1 : isHover || isFocus ? 0.6 : 0,
                 }}
             />
-            
+
             {/* Handle */}
             <div
                 className="sd-slider-handle"
@@ -212,7 +221,7 @@ export const Slider = forwardRef<
                         }}
                     >
                         <div style={{ overflow: 'hidden' }}>
-                            {label ?? value}
+                            {label ?? formatValue(value)}
                         </div>
                         <FloatingArrow
                             ref={arrowRef}

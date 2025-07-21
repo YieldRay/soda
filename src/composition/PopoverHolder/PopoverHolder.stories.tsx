@@ -50,8 +50,7 @@ export const Default: Story = {
                                 content={
                                     <div
                                         onClick={() =>
-                                            (popoverHolderHandleRef.current!.open =
-                                                false)
+                                            (popoverHolderHandleRef.current!.open = false)
                                         }
                                     >
                                         {menuDefaultStory.render?.(

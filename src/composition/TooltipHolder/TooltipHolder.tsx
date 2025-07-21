@@ -102,10 +102,7 @@ export const TooltipHolder = forwardRef(function TooltipHolder(
                 vertical-align: middle;
             `}
         >
-            <div
-                ref={refs.setReference}
-                {...getReferenceProps()}
-            >
+            <div ref={refs.setReference} {...getReferenceProps()}>
                 {trigger}
             </div>
 

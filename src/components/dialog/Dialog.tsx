@@ -24,7 +24,7 @@ export const Dialog = forwardRef<
 >(function Dialog({ headline, children, buttons, noPadding, ...props }, ref) {
     const headlineId = useId()
     const bodyId = useId()
-    
+
     return (
         <div
             {...props}

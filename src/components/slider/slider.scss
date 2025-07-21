@@ -51,14 +51,14 @@
         .sd-slider-inactive_track {
             width: 100%;
         }
-        
+
         // Single handle mode
         &:not([data-sd-range='true']) .sd-slider-active_track {
             width: var(--percentage);
             border-top-left-radius: 8px;
             border-bottom-left-radius: 8px;
         }
-        
+
         // Range mode
         &[data-sd-range='true'] .sd-slider-active_track {
             left: var(--start-percentage);
@@ -71,7 +71,7 @@
             top: 50%;
             transform: translateY(-50%);
         }
-        
+
         // Single handle positioning
         &:not([data-sd-range='true']) .sd-slider-handle {
             left: calc(var(--percentage) - 10px);
@@ -79,18 +79,18 @@
         &:not([data-sd-range='true']) .sd-slider-state_layer {
             left: calc(var(--percentage) - 20px);
         }
-        
+
         // Range mode positioning
-        &[data-sd-range='true'] .sd-slider-handle[data-handle='min'] {
+        &[data-sd-range='true'] .sd-slider-handle[data-sd-handle='min'] {
             left: calc(var(--start-percentage) - 10px);
         }
-        &[data-sd-range='true'] .sd-slider-handle[data-handle='max'] {
+        &[data-sd-range='true'] .sd-slider-handle[data-sd-handle='max'] {
             left: calc(var(--end-percentage) - 10px);
         }
-        &[data-sd-range='true'] .sd-slider-state_layer[data-handle='min'] {
+        &[data-sd-range='true'] .sd-slider-state_layer[data-sd-handle='min'] {
             left: calc(var(--start-percentage) - 20px);
         }
-        &[data-sd-range='true'] .sd-slider-state_layer[data-handle='max'] {
+        &[data-sd-range='true'] .sd-slider-state_layer[data-sd-handle='max'] {
             left: calc(var(--end-percentage) - 20px);
         }
     }
@@ -110,14 +110,14 @@
         .sd-slider-inactive_track {
             height: 100%;
         }
-        
+
         // Single handle mode
         &:not([data-sd-range='true']) .sd-slider-active_track {
             height: var(--percentage);
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
         }
-        
+
         // Range mode
         &[data-sd-range='true'] .sd-slider-active_track {
             bottom: var(--start-percentage);
@@ -130,7 +130,7 @@
             left: 50%;
             transform: translateX(-50%);
         }
-        
+
         // Single handle positioning
         &:not([data-sd-range='true']) .sd-slider-handle {
             bottom: calc(var(--percentage) - 10px);
@@ -138,18 +138,18 @@
         &:not([data-sd-range='true']) .sd-slider-state_layer {
             bottom: calc(var(--percentage) - 20px);
         }
-        
+
         // Range mode positioning
-        &[data-sd-range='true'] .sd-slider-handle[data-handle='min'] {
+        &[data-sd-range='true'] .sd-slider-handle[data-sd-handle='min'] {
             bottom: calc(var(--start-percentage) - 10px);
         }
-        &[data-sd-range='true'] .sd-slider-handle[data-handle='max'] {
+        &[data-sd-range='true'] .sd-slider-handle[data-sd-handle='max'] {
             bottom: calc(var(--end-percentage) - 10px);
         }
-        &[data-sd-range='true'] .sd-slider-state_layer[data-handle='min'] {
+        &[data-sd-range='true'] .sd-slider-state_layer[data-sd-handle='min'] {
             bottom: calc(var(--start-percentage) - 20px);
         }
-        &[data-sd-range='true'] .sd-slider-state_layer[data-handle='max'] {
+        &[data-sd-range='true'] .sd-slider-state_layer[data-sd-handle='max'] {
             bottom: calc(var(--end-percentage) - 20px);
         }
     }
@@ -183,9 +183,9 @@
         color: var(--md-sys-color-on-primary);
         display: inline-block;
         box-sizing: border-box;
-        width: 28px;
         height: 28px;
-        border-radius: 100%;
+        min-width: 28px; // use min-width instead of width to allow for text overflow
+        border-radius: 100vmax;
         line-height: 28px;
         text-align: center;
         pointer-events: none;

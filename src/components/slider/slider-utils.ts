@@ -8,7 +8,11 @@ export function toPercentage(value: number) {
     return value * 100 + '%'
 }
 
-export function useSliderUtils(steps: number | undefined, minValue: number, maxValue: number) {
+export function useSliderUtils(
+    steps: number | undefined,
+    minValue: number,
+    maxValue: number,
+) {
     // Limit value to steps
     const valueLimitStep = useCallback(
         (value: number) => {
@@ -35,7 +39,7 @@ export function useSliderUtils(steps: number | undefined, minValue: number, maxV
 export function calculatePercentage(
     e: React.PointerEvent<HTMLDivElement>,
     container: HTMLDivElement,
-    direction: 'horizontal' | 'vertical'
+    direction: 'horizontal' | 'vertical',
 ): number {
     if (direction === 'vertical') {
         const { height: cHeight, top: cY } = container.getBoundingClientRect()
@@ -45,5 +49,13 @@ export function calculatePercentage(
         const { width: cWidth, left: cX } = container.getBoundingClientRect()
         const pX = e.clientX
         return (pX - cX) / cWidth
+    }
+}
+
+export function formatValue(value: number, fractionDigits = 1): string {
+    if (Number.isInteger(value)) {
+        return value.toString()
+    } else {
+        return value.toFixed(fractionDigits)
     }
 }

@@ -85,7 +85,7 @@ export const TextField = forwardRef<
 ) {
     const labelId = useId()
     const supportingTextId = useId()
-    
+
     const [value, setValue] = useAutoState<string>(
         onChange,
         value$co,
@@ -135,7 +135,9 @@ export const TextField = forwardRef<
                         disabled={disabled}
                         placeholder={placeholder}
                         aria-labelledby={labelText ? labelId : undefined}
-                        aria-describedby={supportingText ? supportingTextId : undefined}
+                        aria-describedby={
+                            supportingText ? supportingTextId : undefined
+                        }
                         aria-invalid={error}
                     />
                 )}
@@ -150,7 +152,9 @@ export const TextField = forwardRef<
                     placeholder={placeholder}
                     rows={rows}
                     aria-labelledby={labelText ? labelId : undefined}
-                    aria-describedby={supportingText ? supportingTextId : undefined}
+                    aria-describedby={
+                        supportingText ? supportingTextId : undefined
+                    }
                     aria-invalid={error}
                 />
             )}
@@ -194,7 +198,7 @@ export const TextField = forwardRef<
             )}
 
             {supportingText && (
-                <div 
+                <div
                     className="sd-text_field-supporting_text"
                     id={supportingTextId}
                     aria-live={error ? 'polite' : undefined}

@@ -20,11 +20,10 @@ export const Default: Story = {
         const [rangeValue, setRangeValue] = useState<[number, number]>([20, 80])
         return (
             <div style={{ minWidth: '20rem' }}>
-                <p>{rangeValue[0]} - {rangeValue[1]}</p>
-                <RangeSlider 
-                    value={rangeValue} 
-                    onChange={setRangeValue} 
-                />
+                <p>
+                    {rangeValue[0]} - {rangeValue[1]}
+                </p>
+                <RangeSlider value={rangeValue} onChange={setRangeValue} />
             </div>
         )
     },
@@ -35,9 +34,11 @@ export const WithSteps: Story = {
         const [rangeValue, setRangeValue] = useState<[number, number]>([1, 4])
         return (
             <div style={{ minWidth: '20rem' }}>
-                <p>{rangeValue[0]} - {rangeValue[1]}</p>
-                <RangeSlider 
-                    value={rangeValue} 
+                <p>
+                    {rangeValue[0]} - {rangeValue[1]}
+                </p>
+                <RangeSlider
+                    value={rangeValue}
                     onChange={setRangeValue}
                     steps={5}
                     min={0}
@@ -52,10 +53,12 @@ export const Vertical: Story = {
     render: () => {
         const [rangeValue, setRangeValue] = useState<[number, number]>([30, 70])
         return (
-            <div style={{ minHeight: '20rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <p>{rangeValue[0]} - {rangeValue[1]}</p>
-                <RangeSlider 
-                    value={rangeValue} 
+            <div style={{ minHeight: '20rem' }}>
+                <p>
+                    {rangeValue[0].toFixed(2)} - {rangeValue[1].toFixed(2)}
+                </p>
+                <RangeSlider
+                    value={rangeValue}
                     onChange={setRangeValue}
                     direction="vertical"
                 />
@@ -73,12 +76,16 @@ export const Uncontrolled: Story = {
 
 export const CustomRange: Story = {
     render: () => {
-        const [rangeValue, setRangeValue] = useState<[number, number]>([150, 350])
+        const [rangeValue, setRangeValue] = useState<[number, number]>([
+            150, 350,
+        ])
         return (
             <div style={{ minWidth: '20rem' }}>
-                <p>{rangeValue[0]} - {rangeValue[1]}</p>
-                <RangeSlider 
-                    value={rangeValue} 
+                <p>
+                    {rangeValue[0].toFixed(2)} - {rangeValue[1].toFixed(2)}
+                </p>
+                <RangeSlider
+                    value={rangeValue}
                     onChange={setRangeValue}
                     min={100}
                     max={500}
@@ -93,9 +100,11 @@ export const Disabled: Story = {
         const [rangeValue, setRangeValue] = useState<[number, number]>([40, 60])
         return (
             <div style={{ minWidth: '20rem' }}>
-                <p>{rangeValue[0]} - {rangeValue[1]}</p>
-                <RangeSlider 
-                    value={rangeValue} 
+                <p>
+                    {rangeValue[0]} - {rangeValue[1]}
+                </p>
+                <RangeSlider
+                    value={rangeValue}
                     onChange={setRangeValue}
                     disabled
                 />
