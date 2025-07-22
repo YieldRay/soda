@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Scrim } from '@/composition/Scrim'
 import { Portal } from '@/utils/Portal'
 import { FullScreenDialog } from '.'

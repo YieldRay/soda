@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { mdiMagnify, mdiMenu } from '@mdi/js'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Search } from '.'
 import { IconButton } from '../icon-button'
 

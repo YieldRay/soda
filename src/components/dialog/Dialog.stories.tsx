@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useEffect, useRef, useState } from 'react'
 import { FloatingOverlay } from '@floating-ui/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { createRoot } from 'react-dom/client'
 import { SodaSimpleTransition } from '@/composition'
 import { Scrim } from '@/composition/Scrim'

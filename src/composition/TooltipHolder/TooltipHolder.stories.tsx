@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useRef } from 'react'
 import { mdiAccount, mdiDotsVertical, mdiMenu } from '@mdi/js'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { TopAppBar } from '@/components/app-bar'
 import { IconButton } from '@/components/icon-button'
 import { Default as menuDefaultStory } from '@/components/menu/Menu.stories'

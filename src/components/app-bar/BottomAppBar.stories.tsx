@@ -1,4 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import {
     mdiCheckboxOutline,
@@ -8,6 +7,7 @@ import {
     mdiPlus,
 } from '@mdi/js'
 import Icon from '@mdi/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Portal } from '@/utils/Portal'
 import { BottomAppBar } from '.'
 import { Switch } from '..'

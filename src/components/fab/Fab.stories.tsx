@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { mdiPencilOutline } from '@mdi/js'
 import Icon from '@mdi/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Fab } from '.'
 
 const meta: Meta<typeof Fab> = {

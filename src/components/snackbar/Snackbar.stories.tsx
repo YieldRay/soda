@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Portal } from '@/utils/Portal'
 import { Snackbar } from '.'
 import { Switch } from '../switch'

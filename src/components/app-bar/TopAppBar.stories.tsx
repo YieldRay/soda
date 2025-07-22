@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { mdiDotsVertical, mdiMagnify, mdiMenu } from '@mdi/js'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { TopAppBar } from '.'
 import { IconButton } from '../icon-button'
 

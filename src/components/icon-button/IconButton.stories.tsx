@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { mdiCheck } from '@mdi/js'
 import Icon from '@mdi/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { IconButton } from '.'
 
 const meta: Meta<typeof IconButton> = {

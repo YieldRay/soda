@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Details } from './Details'
 
 const meta: Meta<typeof Details> = {

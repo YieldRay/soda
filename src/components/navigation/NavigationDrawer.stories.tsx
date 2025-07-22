@@ -1,4 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import {
     mdiClose,
@@ -10,6 +9,7 @@ import {
     mdiSendVariantOutline,
 } from '@mdi/js'
 import Icon from '@mdi/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { NavigationDrawer, NavigationDrawerItem } from '.'
 import { IconButton, TopAppBar } from '..'
 import { Divider } from '../divider/Divider'

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { mdiCheck, mdiClose, mdiMagnify } from '@mdi/js'
 import Icon from '@mdi/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Tabs } from '.'
 
 const meta: Meta<typeof Tabs> = {

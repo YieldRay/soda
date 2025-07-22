@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { mdiClose, mdiMagnify } from '@mdi/js'
 import Icon from '@mdi/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { IconRippleButton } from '@/composition/IconRippleButton'
 import { TextField } from '.'
 

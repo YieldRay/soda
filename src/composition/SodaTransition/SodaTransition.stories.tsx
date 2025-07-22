@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Button } from '@/components/button'
 import { SodaSimpleTransition, SodaTransition } from './SodaTransition'
 

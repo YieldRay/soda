@@ -1,4 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import {
     mdiCardSearch,
@@ -9,6 +8,7 @@ import {
     mdiHomeOutline,
 } from '@mdi/js'
 import Icon from '@mdi/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Portal } from '@/utils/Portal'
 import { NavigationBar } from '.'
 import { Switch } from '../switch'

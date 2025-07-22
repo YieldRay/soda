@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useRef, useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Button } from '@/components/button'
 import { SodaImage } from './SodaImage'
 

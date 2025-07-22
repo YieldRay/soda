@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { mdiBookmarkOutline } from '@mdi/js'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Blockquote } from './Blockquote'
 
 const meta: Meta<typeof Blockquote> = {

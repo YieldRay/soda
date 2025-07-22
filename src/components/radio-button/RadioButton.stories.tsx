@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RadioButton, RadioGroup } from '.'
 
 const meta: Meta<typeof RadioButton> = {
