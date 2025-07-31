@@ -97,45 +97,14 @@ button.sd-fab {
 
 // FAB Menu styles
 .sd-fab-menu {
-    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     z-index: 1000;
-    pointer-events: none;
     
-    // Animation and visibility
-    opacity: 0;
-    transform: scale(0);
-    transform-origin: bottom right;
-    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    
-    &[data-sd-open='true'] {
-        opacity: 1;
-        transform: scale(1);
-        pointer-events: auto;
-    }
-    
-    // Anchor positioning
-    &[data-sd-anchor='bottom-right'] {
-        bottom: 16px;
-        right: 16px;
-        transform-origin: bottom right;
-    }
-    
-    &[data-sd-anchor='bottom-left'] {
-        bottom: 16px;
-        left: 16px;
-        transform-origin: bottom left;
-    }
-    
-    &[data-sd-anchor='top-right'] {
-        top: 16px;
-        right: 16px;
-        transform-origin: top right;
-    }
-    
-    &[data-sd-anchor='top-left'] {
-        top: 16px;
-        left: 16px;
-        transform-origin: top left;
+    // Close button positioning - always at bottom of menu stack
+    .sd-fab-menu-close {
+        order: 999; // Ensure close button is always last
     }
 }
 
@@ -186,21 +155,6 @@ button.sd-fab {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    position: absolute;
-    
-    // Position items above close button for bottom anchors
-    .sd-fab-menu[data-sd-anchor='bottom-right'] &,
-    .sd-fab-menu[data-sd-anchor='bottom-left'] & {
-        bottom: 64px; // 56px close button + 8px gap
-        right: 0;
-    }
-    
-    // Position items below close button for top anchors
-    .sd-fab-menu[data-sd-anchor='top-right'] &,
-    .sd-fab-menu[data-sd-anchor='top-left'] & {
-        top: 64px; // 56px close button + 8px gap
-        right: 0;
-    }
     
     // Stagger animation for menu items
     .sd-fab-menu-item {
@@ -215,7 +169,7 @@ button.sd-fab {
         }
     }
     
-    .sd-fab-menu[data-sd-open='true'] & .sd-fab-menu-item {
+    .sd-fab-menu & .sd-fab-menu-item {
         opacity: 1;
         transform: scale(1);
     }

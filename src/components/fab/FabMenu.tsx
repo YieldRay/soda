@@ -1,6 +1,15 @@
 import './fab.scss'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
+import {
+    autoUpdate,
+    flip,
+    offset,
+    shift,
+    useFloating,
+    useTransitionStyles,
+} from '@floating-ui/react'
+import { useTransitionStylesProps } from '@/utils/floating-ui'
 import { ExtendProps } from '@/utils/type'
 
 /**
@@ -22,10 +31,9 @@ export const FabMenu = forwardRef<
          */
         variant?: 'primary' | 'secondary' | 'tertiary'
         /**
-         * Position anchor for the menu animation
-         * @default "bottom-right"
+         * Reference element (trigger FAB) to position relative to
          */
-        anchor?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left'
+        reference?: Element | null
         /**
          * Menu items (should be FabMenuItem components)
          */
@@ -39,24 +47,50 @@ export const FabMenu = forwardRef<
     {
         open = false,
         variant = 'primary',
-        anchor = 'bottom-right',
+        reference,
         children,
         onClose,
         className,
         ...props
     },
-    ref,
+    _ref,
 ) {
+    const { refs, floatingStyles, context } = useFloating({
+        whileElementsMounted: autoUpdate,
+        placement: 'top-end', // Position above and aligned to trailing edge
+        middleware: [
+            offset(8), // 8px gap between FAB and menu
+            flip(),
+            shift({ padding: 16 }), // Respect 16dp margins
+        ],
+        open,
+        elements: {
+            reference,
+        },
+    })
+
+    const { styles } = useTransitionStyles(context, {
+        ...useTransitionStylesProps,
+        common: () => ({
+            transformOrigin: 'bottom right', // Always animate from bottom-right corner
+        }),
+    })
+
+    if (!open) return null
+
     return (
         <div
             {...props}
-            ref={ref}
+            ref={refs.setFloating}
             className={clsx('sd-fab-menu', className)}
             data-sd={variant}
-            data-sd-anchor={anchor}
-            data-sd-open={open}
             role="menu"
             aria-hidden={!open}
+            style={{
+                ...floatingStyles,
+                ...styles,
+                zIndex: 1000,
+            }}
         >
             {/* Close button */}
             <button

@@ -1,7 +1,7 @@
 import { mdiAccountPlus, mdiEmailOutline, mdiPencilOutline, mdiPhone, mdiVideoOutline } from '@mdi/js'
 import Icon from '@mdi/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Fab, FabMenu, FabMenuItem } from '.'
 
 const meta: Meta<typeof FabMenu> = {
@@ -16,10 +16,6 @@ const meta: Meta<typeof FabMenu> = {
             options: ['primary', 'secondary', 'tertiary'],
             control: { type: 'radio' },
         },
-        anchor: {
-            options: ['bottom-right', 'bottom-left', 'top-right', 'top-left'],
-            control: { type: 'radio' },
-        },
     },
 }
 
@@ -28,22 +24,17 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 // Helper component to demonstrate the FAB menu with a trigger
-function FabMenuDemo({ variant = 'primary', anchor = 'bottom-right' }: { variant?: 'primary' | 'secondary' | 'tertiary', anchor?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' }) {
+function FabMenuDemo({ variant = 'primary' }: { variant?: 'primary' | 'secondary' | 'tertiary' }) {
     const [open, setOpen] = useState(false)
+    const fabRef = useRef<HTMLButtonElement>(null)
 
     return (
-        <div style={{ position: 'relative', width: '300px', height: '200px', background: '#f5f5f5', borderRadius: '8px' }}>
+        <div style={{ position: 'relative', width: '300px', height: '200px', background: '#f5f5f5', borderRadius: '8px', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', padding: '16px' }}>
             {/* Trigger FAB */}
             <Fab
+                ref={fabRef}
                 variant={variant === 'primary' ? 'surface' : variant}
                 onClick={() => setOpen(!open)}
-                style={{
-                    position: 'absolute',
-                    bottom: '16px',
-                    right: anchor.includes('right') ? '16px' : undefined,
-                    left: anchor.includes('left') ? '16px' : undefined,
-                    top: anchor.includes('top') ? '16px' : undefined,
-                }}
             >
                 <Icon path={mdiPencilOutline} size={1} />
             </Fab>
@@ -52,7 +43,7 @@ function FabMenuDemo({ variant = 'primary', anchor = 'bottom-right' }: { variant
             <FabMenu
                 open={open}
                 variant={variant}
-                anchor={anchor}
+                reference={fabRef.current}
                 onClose={() => setOpen(false)}
             >
                 <FabMenuItem
@@ -109,22 +100,15 @@ export const Tertiary: Story = {
 }
 
 export const BottomLeft: Story = {
-    render: () => <FabMenuDemo variant="primary" anchor="bottom-left" />,
-}
-
-export const TopRight: Story = {
-    render: () => <FabMenuDemo variant="primary" anchor="top-right" />,
-}
-
-export const TwoItems: Story = {
     render: () => {
         const [open, setOpen] = useState(false)
+        const fabRef = useRef<HTMLButtonElement>(null)
         
         return (
-            <div style={{ position: 'relative', width: '300px', height: '200px', background: '#f5f5f5', borderRadius: '8px' }}>
+            <div style={{ position: 'relative', width: '300px', height: '200px', background: '#f5f5f5', borderRadius: '8px', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-start', padding: '16px' }}>
                 <Fab
+                    ref={fabRef}
                     onClick={() => setOpen(!open)}
-                    style={{ position: 'absolute', bottom: '16px', right: '16px' }}
                 >
                     <Icon path={mdiPencilOutline} size={1} />
                 </Fab>
@@ -132,6 +116,65 @@ export const TwoItems: Story = {
                 <FabMenu
                     open={open}
                     variant="primary"
+                    reference={fabRef.current}
+                    onClose={() => setOpen(false)}
+                >
+                    <FabMenuItem icon={<Icon path={mdiEmailOutline} size={1} />} onClick={() => setOpen(false)}>Email</FabMenuItem>
+                    <FabMenuItem icon={<Icon path={mdiPhone} size={1} />} onClick={() => setOpen(false)}>Call</FabMenuItem>
+                    <FabMenuItem icon={<Icon path={mdiVideoOutline} size={1} />} onClick={() => setOpen(false)}>Video</FabMenuItem>
+                </FabMenu>
+            </div>
+        )
+    }
+}
+
+export const TopRight: Story = {
+    render: () => {
+        const [open, setOpen] = useState(false)
+        const fabRef = useRef<HTMLButtonElement>(null)
+        
+        return (
+            <div style={{ position: 'relative', width: '300px', height: '200px', background: '#f5f5f5', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', padding: '16px' }}>
+                <Fab
+                    ref={fabRef}
+                    onClick={() => setOpen(!open)}
+                >
+                    <Icon path={mdiPencilOutline} size={1} />
+                </Fab>
+
+                <FabMenu
+                    open={open}
+                    variant="primary"
+                    reference={fabRef.current}
+                    onClose={() => setOpen(false)}
+                >
+                    <FabMenuItem icon={<Icon path={mdiEmailOutline} size={1} />} onClick={() => setOpen(false)}>Email</FabMenuItem>
+                    <FabMenuItem icon={<Icon path={mdiPhone} size={1} />} onClick={() => setOpen(false)}>Call</FabMenuItem>
+                    <FabMenuItem icon={<Icon path={mdiVideoOutline} size={1} />} onClick={() => setOpen(false)}>Video</FabMenuItem>
+                </FabMenu>
+            </div>
+        )
+    }
+}
+
+export const TwoItems: Story = {
+    render: () => {
+        const [open, setOpen] = useState(false)
+        const fabRef = useRef<HTMLButtonElement>(null)
+        
+        return (
+            <div style={{ position: 'relative', width: '300px', height: '200px', background: '#f5f5f5', borderRadius: '8px', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', padding: '16px' }}>
+                <Fab
+                    ref={fabRef}
+                    onClick={() => setOpen(!open)}
+                >
+                    <Icon path={mdiPencilOutline} size={1} />
+                </Fab>
+
+                <FabMenu
+                    open={open}
+                    variant="primary"
+                    reference={fabRef.current}
                     onClose={() => setOpen(false)}
                 >
                     <FabMenuItem
@@ -151,12 +194,13 @@ export const TwoItems: Story = {
 export const SixItems: Story = {
     render: () => {
         const [open, setOpen] = useState(false)
+        const fabRef = useRef<HTMLButtonElement>(null)
         
         return (
-            <div style={{ position: 'relative', width: '300px', height: '300px', background: '#f5f5f5', borderRadius: '8px' }}>
+            <div style={{ position: 'relative', width: '300px', height: '300px', background: '#f5f5f5', borderRadius: '8px', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', padding: '16px' }}>
                 <Fab
+                    ref={fabRef}
                     onClick={() => setOpen(!open)}
-                    style={{ position: 'absolute', bottom: '16px', right: '16px' }}
                 >
                     <Icon path={mdiPencilOutline} size={1} />
                 </Fab>
@@ -164,6 +208,7 @@ export const SixItems: Story = {
                 <FabMenu
                     open={open}
                     variant="primary"
+                    reference={fabRef.current}
                     onClose={() => setOpen(false)}
                 >
                     <FabMenuItem icon={<Icon path={mdiEmailOutline} size={1} />} onClick={() => setOpen(false)}>Email</FabMenuItem>
