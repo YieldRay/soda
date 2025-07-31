@@ -34,13 +34,15 @@ import {
 applyThemeForSoda('#f82506')
 
 // or
-applyThemeForSoda(themeFromHexString('#f82506'), [
-    {
-        name: 'custom-1',
-        value: argbFromHex('#ff0000'),
-        blend: true,
-    },
-])
+applyThemeForSoda(
+    themeFromHexString('#f82506', [
+        {
+            name: 'custom-1',
+            value: argbFromHex('#ff0000'),
+            blend: true,
+        },
+    ]),
+)
 
 // or
 function SelectThemeFromFileButton() {
