@@ -1,0 +1,152 @@
+// https://m3.material.io/components/floating-action-button/specs
+
+@import '@/style/utils';
+@import '@/style/elevation';
+
+.sd-fab-menu-trigger {
+    display: inline-block;
+    position: relative;
+}
+
+.sd-fab-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; // FAB menu close button between space
+    min-width: max-content;
+    z-index: 1000;
+
+    // Close button styles
+    .sd-fab-menu-close {
+        @include display-inline-flex-center;
+        width: 56px; // FAB menu close button container width
+        height: 56px; // FAB menu close button container height
+        border: none;
+        border-radius: var(--md-sys-shape-corner-full); // FAB menu close button container shape
+        cursor: pointer;
+        font-size: 0; // Hide any text content
+        overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+        transition: all 200ms;
+        @include elevation-level3; // FAB menu close button container elevation
+
+        // Icon size is 20dp as specified
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                filter: brightness(96%);
+            }
+        }
+        &:active {
+            filter: brightness(92%);
+        }
+        &:focus-visible {
+            outline: none;
+            filter: brightness(88%);
+        }
+    }
+
+    // Menu items container
+    .sd-fab-menu-items {
+        display: flex;
+        flex-direction: column;
+        gap: 4px; // FAB menu - menu item between space
+    }
+
+    // Individual menu item styles
+    .sd-fab-menu-item {
+        @include display-inline-flex-center;
+        height: 56px; // FAB menu - menu item container height
+        border: none;
+        border-radius: var(--md-sys-shape-corner-full); // FAB menu - menu item container shape
+        padding: 0 24px 0 24px; // FAB menu - menu item leading space and trailing space
+        cursor: pointer;
+        font-size: inherit;
+        overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+        transition: all 200ms;
+        gap: 8px; // FAB menu - menu item icon label space
+        min-width: max-content;
+        // elevation-level0 means no elevation/shadow
+
+        &-icon {
+            @include display-inline-flex-center;
+            width: 24px; // FAB menu - menu item icon size
+            height: 24px;
+            flex-shrink: 0;
+            color: currentColor;
+
+            svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        &-label {
+            // FAB menu - menu item label text - using font from design tokens
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            white-space: nowrap;
+            color: currentColor;
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                filter: brightness(96%);
+            }
+        }
+        &:active {
+            filter: brightness(92%);
+        }
+        &:focus-visible {
+            outline: none;
+            filter: brightness(88%);
+        }
+
+        &[data-sd-disabled='true'] {
+            pointer-events: none;
+            filter: grayscale(98%) opacity(40%);
+        }
+    }
+
+    // Color variants for close button and menu items
+    &--primary {
+        .sd-fab-menu-close {
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        .sd-fab-menu-item[data-sd-variant='primary'] {
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+    }
+
+    &--secondary {
+        .sd-fab-menu-close {
+            background: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+        }
+
+        .sd-fab-menu-item[data-sd-variant='secondary'] {
+            background: var(--md-sys-color-secondary);
+            color: var(--md-sys-color-on-secondary);
+        }
+    }
+
+    &--tertiary {
+        .sd-fab-menu-close {
+            background: var(--md-sys-color-tertiary-container);
+            color: var(--md-sys-color-on-tertiary-container);
+        }
+
+        .sd-fab-menu-item[data-sd-variant='tertiary'] {
+            background: var(--md-sys-color-tertiary);
+            color: var(--md-sys-color-on-tertiary);
+        }
+    }
+}
