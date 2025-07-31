@@ -70,13 +70,13 @@
         .sd-split-button__leading {
             padding-left: 0.5rem;
             padding-right: 0.375rem;
-            border-radius: 12px 10px 10px 12px;
+            border-radius: 12px 4px 4px 12px; // Inner corners: 4dp as per M3 spec
         }
 
         .sd-split-button__trailing {
             padding-left: 0.25rem;
             padding-right: 0.5rem;
-            border-radius: 10px 12px 12px 10px;
+            border-radius: 4px 12px 12px 4px; // Inner corners: 4dp as per M3 spec
         }
 
         // Menu icon offset: -1dp from center
@@ -94,13 +94,13 @@
         .sd-split-button__leading {
             padding-left: 0.75rem;
             padding-right: 0.625rem;
-            border-radius: 16px 12px 12px 16px;
+            border-radius: 16px 4px 4px 16px; // Inner corners: 4dp as per M3 spec
         }
 
         .sd-split-button__trailing {
             padding-left: 0.375rem;
             padding-right: 0.75rem;
-            border-radius: 12px 16px 16px 12px;
+            border-radius: 4px 16px 16px 4px; // Inner corners: 4dp as per M3 spec
         }
 
         // Menu icon offset: -1dp from center
@@ -118,13 +118,13 @@
         .sd-split-button__leading {
             padding-left: 1.25rem;
             padding-right: 1rem;
-            border-radius: 20px 16px 16px 20px;
+            border-radius: 20px 4px 4px 20px; // Inner corners: 4dp as per M3 spec
         }
 
         .sd-split-button__trailing {
             padding-left: 0.5rem;
             padding-right: 1rem;
-            border-radius: 16px 20px 20px 16px;
+            border-radius: 4px 20px 20px 4px; // Inner corners: 4dp as per M3 spec
         }
 
         // Menu icon offset: -2dp from center
@@ -142,13 +142,13 @@
         .sd-split-button__leading {
             padding-left: 1.5rem;
             padding-right: 1.25rem;
-            border-radius: 24px 16px 16px 24px;
+            border-radius: 24px 8px 8px 24px; // Inner corners: 8dp as per M3 spec
         }
 
         .sd-split-button__trailing {
             padding-left: 0.75rem;
             padding-right: 1.25rem;
-            border-radius: 16px 24px 24px 16px;
+            border-radius: 8px 24px 24px 8px; // Inner corners: 8dp as per M3 spec
         }
 
         // Menu icon offset: -3dp from center
@@ -166,13 +166,13 @@
         .sd-split-button__leading {
             padding-left: 1.75rem;
             padding-right: 1.5rem;
-            border-radius: 28px 16px 16px 28px;
+            border-radius: 28px 12px 12px 28px; // Inner corners: 12dp as per M3 spec
         }
 
         .sd-split-button__trailing {
             padding-left: 1rem;
             padding-right: 1.5rem;
-            border-radius: 16px 28px 28px 16px;
+            border-radius: 12px 28px 28px 12px; // Inner corners: 12dp as per M3 spec
         }
 
         // Menu icon offset: -6dp from center
