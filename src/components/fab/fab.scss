@@ -94,3 +94,191 @@ button.sd-fab {
         filter: grayscale(98%) opacity(40%);
     }
 }
+
+// FAB Menu styles
+.sd-fab-menu {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    
+    // Animation and visibility
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: bottom right;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &[data-sd-open='true'] {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+    }
+    
+    // Anchor positioning
+    &[data-sd-anchor='bottom-right'] {
+        bottom: 16px;
+        right: 16px;
+        transform-origin: bottom right;
+    }
+    
+    &[data-sd-anchor='bottom-left'] {
+        bottom: 16px;
+        left: 16px;
+        transform-origin: bottom left;
+    }
+    
+    &[data-sd-anchor='top-right'] {
+        top: 16px;
+        right: 16px;
+        transform-origin: top right;
+    }
+    
+    &[data-sd-anchor='top-left'] {
+        top: 16px;
+        left: 16px;
+        transform-origin: top left;
+    }
+}
+
+// Close button (always 56dp as per spec)
+.sd-fab-menu-close {
+    @include square(56px, 16px);
+    @include display-inline-flex-center;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 200ms;
+    position: relative;
+    z-index: 1;
+    
+    // Color variants for close button
+    .sd-fab-menu[data-sd='primary'] & {
+        background: var(--md-sys-color-primary-container);
+        color: var(--md-sys-color-on-primary-container);
+    }
+    
+    .sd-fab-menu[data-sd='secondary'] & {
+        background: var(--md-sys-color-secondary-container);
+        color: var(--md-sys-color-on-secondary-container);
+    }
+    
+    .sd-fab-menu[data-sd='tertiary'] & {
+        background: var(--md-sys-color-tertiary-container);
+        color: var(--md-sys-color-on-tertiary-container);
+    }
+    
+    @media (any-hover: hover) {
+        &:hover {
+            filter: brightness(96%);
+        }
+    }
+    &:active {
+        filter: brightness(92%);
+    }
+    &:focus-visible {
+        outline: none;
+        filter: brightness(88%);
+    }
+}
+
+// Menu items container
+.sd-fab-menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    
+    // Position items above close button for bottom anchors
+    .sd-fab-menu[data-sd-anchor='bottom-right'] &,
+    .sd-fab-menu[data-sd-anchor='bottom-left'] & {
+        bottom: 64px; // 56px close button + 8px gap
+        right: 0;
+    }
+    
+    // Position items below close button for top anchors
+    .sd-fab-menu[data-sd-anchor='top-right'] &,
+    .sd-fab-menu[data-sd-anchor='top-left'] & {
+        top: 64px; // 56px close button + 8px gap
+        right: 0;
+    }
+    
+    // Stagger animation for menu items
+    .sd-fab-menu-item {
+        opacity: 0;
+        transform: scale(0);
+        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        
+        @for $i from 1 through 6 {
+            &:nth-child(#{$i}) {
+                transition-delay: #{$i * 50}ms;
+            }
+        }
+    }
+    
+    .sd-fab-menu[data-sd-open='true'] & .sd-fab-menu-item {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+// Individual menu item (medium button size as per spec)
+.sd-fab-menu-item {
+    @include square(40px, 20px); // Medium button size
+    @include display-inline-flex-center;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 200ms;
+    gap: 8px;
+    padding: 0 12px;
+    width: auto;
+    min-width: 40px;
+    
+    // Color variants for menu items
+    .sd-fab-menu[data-sd='primary'] & {
+        background: var(--md-sys-color-primary);
+        color: var(--md-sys-color-on-primary);
+    }
+    
+    .sd-fab-menu[data-sd='secondary'] & {
+        background: var(--md-sys-color-secondary);
+        color: var(--md-sys-color-on-secondary);
+    }
+    
+    .sd-fab-menu[data-sd='tertiary'] & {
+        background: var(--md-sys-color-tertiary);
+        color: var(--md-sys-color-on-tertiary);
+    }
+    
+    @media (any-hover: hover) {
+        &:hover {
+            filter: brightness(96%);
+        }
+    }
+    &:active {
+        filter: brightness(92%);
+    }
+    &:focus-visible {
+        outline: none;
+        filter: brightness(88%);
+    }
+    
+    &[data-sd-disabled='true'] {
+        pointer-events: none;
+        filter: grayscale(98%) opacity(40%);
+    }
+    
+    &-icon {
+        @include square-icon(24px);
+        color: currentColor;
+        flex-shrink: 0;
+    }
+    
+    &-label {
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        color: currentColor;
+    }
+}
