@@ -56,7 +56,7 @@ export default defineConfig({
                     './src/style/index.scss',
                     'utf-8',
                 ),
-                api: 'modern-compiler',
+                // api: 'modern-compiler',
                 silenceDeprecations: ['mixed-decls', 'import'],
             },
         },

@@ -18,7 +18,7 @@ export * from '@material/material-color-utilities'
  * Wrapper function of `applyTheme()`
  */
 export function applyThemeForSoda(theme: Theme | string, dark?: boolean) {
-    dark ||= window.matchMedia('(prefers-color-scheme: dark)').matches
+    dark ??= window.matchMedia('(prefers-color-scheme: dark)').matches
     const options = { target: document.documentElement, dark }
     ;[applyTheme, applySurfaceStyles].forEach((fn) =>
         fn(
