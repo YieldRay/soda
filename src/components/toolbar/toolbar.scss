@@ -1,0 +1,253 @@
+// https://m3.material.io/components/toolbars
+
+.sd-toolbar {
+    box-sizing: border-box;
+    width: 100%;
+    height: 64px;
+    padding: 16px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        gap: 8px;
+    }
+
+    &-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    &-fab {
+        user-select: none;
+        margin-left: 8px;
+    }
+
+    // Docked Toolbar
+    &--docked {
+        width: 100%;
+        
+        &.sd-toolbar--standard {
+            background: var(--md-sys-color-surface-container);
+            @include elevation-level2;
+        }
+
+        &.sd-toolbar--vibrant {
+            background: var(--md-sys-color-primary-container);
+            @include elevation-level2;
+        }
+
+        .sd-toolbar-content {
+            justify-content: space-between;
+            padding: 0 16px;
+            min-height: 32px;
+        }
+
+        .sd-toolbar-actions {
+            flex-grow: 1;
+            justify-content: flex-start;
+        }
+    }
+
+    // Floating Toolbar
+    &--floating {
+        width: auto;
+        border-radius: var(--md-sys-shape-corner-full);
+        min-width: 64px;
+        
+        &.sd-toolbar--standard {
+            background: var(--md-sys-color-surface-container);
+            @include elevation-level3;
+        }
+
+        &.sd-toolbar--vibrant {
+            background: var(--md-sys-color-primary-container);
+            @include elevation-level3;
+        }
+
+        .sd-toolbar-content {
+            padding: 0 8px;
+            min-height: 32px;
+        }
+
+        .sd-toolbar-actions {
+            justify-content: center;
+        }
+
+        // Vertical floating toolbar
+        &.sd-toolbar--vertical {
+            width: 64px;
+            height: auto;
+            min-height: 64px;
+
+            .sd-toolbar-content {
+                flex-direction: column;
+                padding: 8px 0;
+            }
+
+            .sd-toolbar-actions {
+                flex-direction: column;
+            }
+
+            .sd-toolbar-fab {
+                margin-left: 0;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    // Toolbar button containers and states
+    // These styles work with the existing button and icon-button components
+    .sd-button,
+    .sd-icon_button {
+        // Standard color scheme states
+        .sd-toolbar--standard & {
+            // Default state
+            background: var(--md-sys-color-surface-container);
+            color: var(--md-sys-color-on-surface-variant);
+
+            // Selected state
+            &[data-selected="true"],
+            &.selected {
+                background: var(--md-sys-color-secondary-container);
+                color: var(--md-sys-color-on-secondary-container);
+            }
+
+            // Disabled state
+            &:disabled {
+                color: var(--md-sys-color-on-surface);
+                opacity: 0.38;
+            }
+
+            // Hover state
+            &:hover:not(:disabled) {
+                &::before {
+                    background: var(--md-sys-color-on-surface-variant);
+                    opacity: var(--md-sys-state-hover-state-layer-opacity);
+                }
+
+                &[data-selected="true"]::before,
+                &.selected::before {
+                    background: var(--md-sys-color-on-secondary-container);
+                }
+            }
+
+            // Focus state
+            &:focus-visible:not(:disabled) {
+                &::before {
+                    background: var(--md-sys-color-on-surface-variant);
+                    opacity: var(--md-sys-state-focus-state-layer-opacity);
+                }
+
+                &[data-selected="true"]::before,
+                &.selected::before {
+                    background: var(--md-sys-color-on-secondary-container);
+                }
+            }
+
+            // Pressed state
+            &:active:not(:disabled) {
+                &::before {
+                    background: var(--md-sys-color-on-surface-variant);
+                    opacity: var(--md-sys-state-pressed-state-layer-opacity);
+                }
+
+                &[data-selected="true"]::before,
+                &.selected::before {
+                    background: var(--md-sys-color-on-secondary-container);
+                }
+            }
+        }
+
+        // Vibrant color scheme states
+        .sd-toolbar--vibrant & {
+            // Default state
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+
+            // Selected state
+            &[data-selected="true"],
+            &.selected {
+                background: var(--md-sys-color-surface-container);
+                color: var(--md-sys-color-on-surface);
+            }
+
+            // Disabled state
+            &:disabled {
+                color: var(--md-sys-color-on-surface);
+                opacity: 0.38;
+            }
+
+            // Hover state
+            &:hover:not(:disabled) {
+                &::before {
+                    background: var(--md-sys-color-on-primary-container);
+                    opacity: var(--md-sys-state-hover-state-layer-opacity);
+                }
+
+                &[data-selected="true"]::before,
+                &.selected::before {
+                    background: var(--md-sys-color-on-surface);
+                }
+            }
+
+            // Focus state
+            &:focus-visible:not(:disabled) {
+                &::before {
+                    background: var(--md-sys-color-on-primary-container);
+                    opacity: var(--md-sys-state-focus-state-layer-opacity);
+                }
+
+                &[data-selected="true"]::before,
+                &.selected::before {
+                    background: var(--md-sys-color-on-surface);
+                }
+            }
+
+            // Pressed state
+            &:active:not(:disabled) {
+                &::before {
+                    background: var(--md-sys-color-on-primary-container);
+                    opacity: var(--md-sys-state-pressed-state-layer-opacity);
+                }
+
+                &[data-selected="true"]::before,
+                &.selected::before {
+                    background: var(--md-sys-color-on-surface);
+                }
+            }
+        }
+    }
+
+    // Responsive design for smaller screens
+    @media (max-width: 600px) {
+        &--docked {
+            .sd-toolbar-actions {
+                overflow-x: auto;
+                scrollbar-width: none;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+
+        &--floating {
+            .sd-toolbar-actions {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+    }
+}
