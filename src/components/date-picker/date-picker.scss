@@ -35,4 +35,23 @@
             margin-block-end: 12px;
         }
     }
+
+    &-modal {
+        width: min(360px, 90vw);
+        overflow: hidden;
+
+        &_header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            padding: 20px 20px 0;
+        }
+
+        &_body {
+            margin-block-start: 10px;
+            overflow: hidden;
+            padding: 0 20px 20px;
+        }
+    }
 }

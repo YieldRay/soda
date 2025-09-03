@@ -21,3 +21,14 @@ export const Docked: Story = {
         ),
     ],
 }
+
+export const Modal: Story = {
+    args: { variant: 'modal' },
+    decorators: [
+        (Story) => (
+            <div style={{ minHeight: '20vh' }}>
+                <Story />
+            </div>
+        ),
+    ],
+}

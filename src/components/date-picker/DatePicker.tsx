@@ -1,13 +1,24 @@
 import { DockedDatePicker } from './DockedDatePicker'
+import { ModalDatePicker } from './ModalDatePicker'
 
 /**
- * TODO: not fully implemented yet!
+ * Material Design 3 Date Picker component.
+ * 
+ * @specs https://m3.material.io/components/date-pickers/specs
  */
 export function DatePicker(props: {
     initDate?: Date
+    format?: (value: Date) => string
+    supportingText?: string
     onOK?: (value: Date) => void
     onCancel?: (value: Date) => void
-    variant?: 'docked'
+    variant?: 'docked' | 'modal'
 }) {
-    return <DockedDatePicker {...props} />
+    const { variant = 'docked', ...otherProps } = props
+    
+    if (variant === 'modal') {
+        return <ModalDatePicker {...otherProps} />
+    }
+    
+    return <DockedDatePicker {...otherProps} />
 }
