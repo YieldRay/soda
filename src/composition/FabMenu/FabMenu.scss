@@ -1,0 +1,82 @@
+.sd-fab-menu {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sd-fab-menu_trigger {
+    position: relative;
+    z-index: 1000;
+}
+
+.sd-fab-menu_actions {
+    position: absolute;
+    display: flex;
+    z-index: 999;
+    
+    &--top {
+        flex-direction: column-reverse;
+        bottom: 100%;
+        margin-bottom: 8px;
+        align-items: center;
+    }
+    
+    &--bottom {
+        flex-direction: column;
+        top: 100%;
+        margin-top: 8px;
+        align-items: center;
+    }
+    
+    &--left {
+        flex-direction: row-reverse;
+        right: 100%;
+        margin-right: 8px;
+        align-items: center;
+    }
+    
+    &--right {
+        flex-direction: row;
+        left: 100%;
+        margin-left: 8px;
+        align-items: center;
+    }
+}
+
+.sd-fab-menu_action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+    
+    .sd-fab-menu_actions--left & {
+        flex-direction: row-reverse;
+        margin: 0 4px;
+    }
+    
+    .sd-fab-menu_actions--right & {
+        margin: 0 4px;
+    }
+}
+
+.sd-fab-menu_label {
+    background: var(--md-sys-color-inverse-surface);
+    color: var(--md-sys-color-inverse-on-surface);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 
+        0px 1px 2px 0px rgba(0, 0, 0, 0.3),
+        0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+// Animation styles for transitions
+.sd-fab-menu_action {
+    transition: 
+        opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}

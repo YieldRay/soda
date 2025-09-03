@@ -1,6 +1,7 @@
 export * from './ActionButton'
 export * from './Blockquote'
 export * from './Details'
+export * from './FabMenu'
 export * from './IconRippleButton'
 export * from './NestedMenu'
 export * from './PopoverHolder'
