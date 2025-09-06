@@ -1,0 +1,195 @@
+$fab-size: 56px;
+$fab-icon-size: 24px;
+$fab-border-radius: 16px;
+$menu-item-height: 56px;
+$menu-item-min-width: 56px;
+$menu-item-border-radius: 48px;
+$menu-spacing: 4px;
+$menu-margin: 16px;
+
+.sd-fab-menu {
+    position: fixed;
+    right: $menu-margin;
+    bottom: $menu-margin;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    &-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: $menu-spacing;
+    }
+
+    &-close-button {
+        @include display-inline-flex-center;
+        width: $fab-size;
+        height: $fab-size;
+        border-radius: 50%;
+        cursor: pointer;
+        overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+        transition: all 200ms cubic-bezier(0.2, 0, 0, 1);
+        position: relative;
+        z-index: 2;
+        animation: sd-fab_menu_close_button_appear 150ms
+            cubic-bezier(0.2, 0, 0, 1) both;
+
+        &[data-sd='primary'] {
+            @include primary;
+        }
+
+        &[data-sd='secondary'] {
+            @include secondary;
+        }
+
+        &[data-sd='tertiary'] {
+            @include tertiary;
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                filter: brightness(96%);
+                transform: scale(1.05);
+            }
+        }
+
+        &:active {
+            filter: brightness(92%);
+            transform: scale(0.95);
+        }
+
+        &:focus-visible {
+            outline: none;
+            filter: brightness(88%);
+            box-shadow: 0 0 0 2px var(--md-sys-color-outline);
+        }
+    }
+}
+
+// Menu Items Container
+.sd-fab-menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: $menu-spacing;
+    position: absolute;
+    right: 0;
+    bottom: calc($fab-size + $menu-spacing) + $menu-spacing; // stack above the FAB
+    z-index: 2;
+    align-items: flex-end;
+}
+
+// Individual Menu Item Wrapper
+.sd-fab-menu-item-wrapper {
+    width: max-content;
+    animation: sd-fab_menu_item_slide_in 200ms cubic-bezier(0.2, 0, 0, 1) both;
+    display: flex;
+    justify-content: flex-end;
+
+    // Stagger animation for multiple items
+    @for $i from 1 through 6 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{($i - 1) * 30ms};
+        }
+    }
+}
+
+.sd-fab-menu-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: $menu-item-height;
+    &:has(&-label) {
+        min-width: $menu-item-min-width;
+    }
+    padding: 0 24px;
+    border-radius: $menu-item-border-radius; // Rounded rectangle, not circle
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 150ms cubic-bezier(0.2, 0, 0, 1);
+    gap: 8px;
+    white-space: nowrap;
+
+    // Colors inherit from parent fab menu variant
+    .sd-fab-menu[data-sd='primary'] & {
+        @include primary-container;
+    }
+
+    .sd-fab-menu[data-sd='secondary'] & {
+        @include secondary-container;
+    }
+
+    .sd-fab-menu[data-sd='tertiary'] & {
+        @include tertiary-container;
+    }
+
+    &-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: $fab-icon-size;
+        height: $fab-icon-size;
+        font-size: $fab-icon-size;
+        line-height: 1;
+        color: var(--md-sys-color-on-primary-container);
+        flex-shrink: 0;
+    }
+
+    &-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--md-sys-color-on-primary-container);
+        line-height: 1.4;
+    }
+
+    @media (any-hover: hover) {
+        &:hover {
+            filter: brightness(96%);
+            transform: translateX(-4px);
+        }
+    }
+
+    &:active {
+        filter: brightness(92%);
+        transform: translateX(-2px) scale(0.98);
+    }
+
+    &:focus-visible {
+        outline: none;
+        filter: brightness(88%);
+        box-shadow: 0 0 0 2px var(--md-sys-color-outline);
+    }
+
+    &[data-sd-disabled='true'] {
+        pointer-events: none;
+        opacity: 0.38;
+        filter: grayscale(100%);
+    }
+}
+
+@keyframes sd-fab_menu_item_slide_in {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    77% {
+        opacity: 1;
+        transform: translateX(-2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes sd-fab_menu_close_button_appear {
+    from {
+        transform: rotate(-90deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
