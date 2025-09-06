@@ -4,17 +4,18 @@ This library uses the official material design css variables (`--md-sys-color-<t
 
 ```ts
 // create theme
+// apply theme
 import {
-    type Theme,
+    applyThemeForSoda,
     themeFromHexString,
     themeFromImageOrFile,
+    type Theme,
 } from 'soda-material/dist/utils/theme'
+
 const theme: Theme = themeFromHexString('#6750a4')
 const theme: Theme =
     await themeFromImageOrFile(/* accept HTMLImageElement or File object */)
 
-// apply theme
-import { applyThemeForSoda } from 'soda-material/dist/utils/theme'
 applyThemeForSoda('#6750a4')
 applyThemeForSoda(theme)
 ```

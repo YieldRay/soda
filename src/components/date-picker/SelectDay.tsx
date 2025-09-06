@@ -23,9 +23,13 @@ const Day = styled.time<{
         flex: 0 0 auto;
     }
 
-    &:active {
-        background: rgba(0 0 0 / 0.08);
-    }
+    ${(props) =>
+        !props.selected &&
+        css`
+            &:active {
+                background: rgba(0 0 0 / 0.08);
+            }
+        `}
 
     ${(props) =>
         props.isToday &&

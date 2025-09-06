@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { DatePicker } from '.'
+import { DatePicker, ModalDatePicker } from '.'
+import { Switch } from '../switch'
 
 const meta: Meta<typeof DatePicker> = {
     title: 'components/DatePicker',
@@ -20,4 +22,25 @@ export const Docked: Story = {
             </div>
         ),
     ],
+}
+
+export const Modal: Story = {
+    render: (args) => {
+        const [open, setOpen] = useState(false)
+        return (
+            <>
+                <ModalDatePicker
+                    open={open}
+                    onScrimClick={() => setOpen(false)}
+                    onCancel={() => setOpen(false)}
+                    onOK={(value) => {
+                        setOpen(false)
+                        alert(value.toDateString())
+                    }}
+                    {...args}
+                />
+                <Switch checked={open} onChange={setOpen} />
+            </>
+        )
+    },
 }
