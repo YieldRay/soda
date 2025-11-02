@@ -113,7 +113,11 @@ export const SplitButton = forwardRef<
                 className="sd-split_button-leading"
                 rippleColor={rippleColor}
                 onClick={() => !disabled && onAction?.()}
-                onKeyDown={(e) => !disabled && e.key === 'Enter' && onAction?.()}
+                onKeyDown={(e) =>
+                    !disabled &&
+                    (e.key === 'Enter' || e.key === ' ') &&
+                    onAction?.()
+                }
                 data-sd-disabled={disabled}
                 aria-disabled={disabled}
                 aria-label={ariaLabel}
@@ -135,7 +139,9 @@ export const SplitButton = forwardRef<
                 rippleColor={rippleColor}
                 onClick={() => !disabled && handleMenuToggle()}
                 onKeyDown={(e) =>
-                    !disabled && e.key === 'Enter' && handleMenuToggle()
+                    !disabled &&
+                    (e.key === 'Enter' || e.key === ' ') &&
+                    handleMenuToggle()
                 }
                 data-sd-disabled={disabled}
                 data-sd-selected={selected}
