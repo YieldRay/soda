@@ -1,0 +1,462 @@
+// https://m3.material.io/components/split-button/specs
+
+.sd-split_button {
+    display: inline-flex;
+    vertical-align: middle;
+    position: relative;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    &[data-sd-disabled='true'] {
+        opacity: 0.38;
+        pointer-events: none;
+    }
+
+    // Common button styles
+    button {
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        &[data-sd-disabled='true'] {
+            pointer-events: none;
+        }
+    }
+
+    // Leading button
+    &-leading {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border-top-left-radius: inherit;
+        border-bottom-left-radius: inherit;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        min-width: 48px;
+    }
+
+    // Trailing button
+    &-trailing {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: inherit;
+        border-bottom-right-radius: inherit;
+        min-width: 40px;
+    }
+
+    // Divider between buttons
+    &-divider {
+        width: 2px;
+        align-self: stretch;
+        background-color: transparent;
+    }
+
+    // Icon and label
+    &-icon {
+        display: inline-flex;
+        vertical-align: middle;
+        margin-right: 0.5rem;
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    &-label {
+        display: inline-flex;
+        vertical-align: middle;
+        line-height: 100%;
+    }
+
+    &-menu_icon {
+        display: inline-flex;
+        vertical-align: middle;
+        
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    // Size configurations
+    &-size-xs {
+        height: 24px;
+        border-radius: 12px;
+
+        button {
+            font-size: 11px;
+            line-height: 16px;
+        }
+
+        .sd-split_button-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .sd-split_button-menu_icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sd-split_button-leading {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .sd-split_button-trailing {
+            padding-left: 0.25rem;
+            padding-right: 0.25rem;
+        }
+
+        // Inner corner radius for XS
+        .sd-split_button-leading {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .sd-split_button-trailing {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        // Menu icon offset when unselected: -1dp from center
+        .sd-split_button-trailing:not([data-sd-selected='true']) .sd-split_button-menu_icon {
+            transform: translateX(-1px);
+        }
+    }
+
+    &-size-s {
+        height: 32px;
+        border-radius: 16px;
+
+        button {
+            font-size: 12px;
+            line-height: 18px;
+        }
+
+        .sd-split_button-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .sd-split_button-menu_icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .sd-split_button-leading {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        .sd-split_button-trailing {
+            padding-left: 0.375rem;
+            padding-right: 0.375rem;
+        }
+
+        // Inner corner radius for S
+        .sd-split_button-leading {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .sd-split_button-trailing {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        // Menu icon offset when unselected: -1dp from center
+        .sd-split_button-trailing:not([data-sd-selected='true']) .sd-split_button-menu_icon {
+            transform: translateX(-1px);
+        }
+    }
+
+    &-size-m {
+        height: 40px;
+        border-radius: 20px;
+
+        button {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .sd-split_button-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .sd-split_button-menu_icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        // Inner corner radius for M
+        .sd-split_button-leading {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .sd-split_button-trailing {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        // Menu icon offset when unselected: -2dp from center
+        .sd-split_button-trailing:not([data-sd-selected='true']) .sd-split_button-menu_icon {
+            transform: translateX(-2px);
+        }
+    }
+
+    &-size-l {
+        height: 48px;
+        border-radius: 24px;
+
+        button {
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .sd-split_button-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sd-split_button-menu_icon svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .sd-split_button-leading {
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+        }
+
+        .sd-split_button-trailing {
+            padding-left: 0.625rem;
+            padding-right: 0.625rem;
+        }
+
+        // Inner corner radius for L
+        .sd-split_button-leading {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .sd-split_button-trailing {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        // Menu icon offset when unselected: -3dp from center
+        .sd-split_button-trailing:not([data-sd-selected='true']) .sd-split_button-menu_icon {
+            transform: translateX(-3px);
+        }
+    }
+
+    &-size-xl {
+        height: 56px;
+        border-radius: 28px;
+
+        button {
+            font-size: 18px;
+            line-height: 24px;
+        }
+
+        .sd-split_button-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .sd-split_button-menu_icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .sd-split_button-leading {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .sd-split_button-trailing {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        // Inner corner radius for XL
+        .sd-split_button-leading {
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .sd-split_button-trailing {
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }
+
+        // Menu icon offset when unselected: -6dp from center
+        .sd-split_button-trailing:not([data-sd-selected='true']) .sd-split_button-menu_icon {
+            transform: translateX(-6px);
+        }
+    }
+
+    // Elevated variant
+    &-elevated {
+        background: var(--md-sys-color-surface-container-low);
+        color: var(--md-sys-color-primary);
+        @include elevation-level1;
+
+        .sd-split_button-divider {
+            background-color: color-mix(
+                in srgb,
+                var(--md-sys-color-primary) 12%,
+                transparent
+            );
+        }
+
+        button {
+            background: transparent;
+            color: inherit;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    opacity: 0.8;
+                    @include elevation-level2;
+                }
+            }
+
+            &:active {
+                opacity: unset;
+                filter: brightness(95%);
+            }
+
+            &:focus-visible {
+                outline: none;
+                opacity: unset;
+                filter: brightness(90%);
+            }
+        }
+    }
+
+    // Filled variant
+    &-filled {
+        background: var(--md-sys-color-primary);
+        color: var(--md-sys-color-on-primary);
+
+        .sd-split_button-divider {
+            background-color: color-mix(
+                in srgb,
+                var(--md-sys-color-on-primary) 12%,
+                transparent
+            );
+        }
+
+        button {
+            background: transparent;
+            color: inherit;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    @include elevation-level1;
+                }
+            }
+
+            &:active {
+                box-shadow: unset;
+                filter: contrast(120%);
+            }
+
+            &:focus-visible {
+                outline: none;
+                box-shadow: unset;
+                filter: contrast(110%);
+            }
+        }
+    }
+
+    // Tonal variant
+    &-tonal {
+        background: var(--md-sys-color-secondary-container);
+        color: var(--md-sys-color-on-secondary-container);
+
+        .sd-split_button-divider {
+            background-color: color-mix(
+                in srgb,
+                var(--md-sys-color-on-secondary-container) 12%,
+                transparent
+            );
+        }
+
+        button {
+            background: transparent;
+            color: inherit;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    @include elevation-level1;
+                    filter: brightness(96%);
+                }
+            }
+
+            &:active {
+                filter: brightness(92%);
+            }
+
+            &:focus-visible {
+                outline: none;
+                filter: brightness(88%);
+            }
+        }
+    }
+
+    // Outlined variant
+    &-outlined {
+        background: var(--md-sys-color-surface);
+        color: var(--md-sys-color-primary);
+        @include outline;
+
+        .sd-split_button-divider {
+            background-color: color-mix(
+                in srgb,
+                var(--md-sys-color-primary) 12%,
+                transparent
+            );
+        }
+
+        button {
+            background: transparent;
+            color: inherit;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    filter: brightness(96%);
+                }
+            }
+
+            &:active {
+                filter: brightness(92%);
+            }
+
+            &:focus-visible {
+                outline: none;
+                filter: brightness(88%);
+            }
+        }
+    }
+
+    // Menu positioning
+    &-menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        z-index: 1000;
+    }
+}
