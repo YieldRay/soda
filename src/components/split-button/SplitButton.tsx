@@ -103,10 +103,7 @@ export const SplitButton = forwardRef<
             <Ripple
                 as="button"
                 type="button"
-                className={clsx(
-                    'sd-split_button-leading',
-                    `sd-split_button-leading-${variant}`,
-                )}
+                className="sd-split_button-leading"
                 rippleColor={
                     variant === 'filled' ? getReversedRippleColor() : undefined
                 }
@@ -129,10 +126,7 @@ export const SplitButton = forwardRef<
             <Ripple
                 as="button"
                 type="button"
-                className={clsx(
-                    'sd-split_button-trailing',
-                    `sd-split_button-trailing-${variant}`,
-                )}
+                className="sd-split_button-trailing"
                 rippleColor={
                     variant === 'filled' ? getReversedRippleColor() : undefined
                 }

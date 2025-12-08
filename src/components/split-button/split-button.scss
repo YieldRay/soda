@@ -95,7 +95,7 @@
             
             // Menu icon offset when unselected: -1dp from center
             &:not([data-sd-selected='true']) .sd-split_button-menu-icon {
-                transform: translateX(-0.5px);
+                transform: translateX(-1px);
             }
         }
 
@@ -139,7 +139,7 @@
             
             // Menu icon offset when unselected: -1dp from center
             &:not([data-sd-selected='true']) .sd-split_button-menu-icon {
-                transform: translateX(-0.5px);
+                transform: translateX(-1px);
             }
         }
 
@@ -227,7 +227,7 @@
             
             // Menu icon offset when unselected: -3dp from center
             &:not([data-sd-selected='true']) .sd-split_button-menu-icon {
-                transform: translateX(-1.5px);
+                transform: translateX(-3px);
             }
         }
 
@@ -271,7 +271,7 @@
             
             // Menu icon offset when unselected: -6dp from center
             &:not([data-sd-selected='true']) .sd-split_button-menu-icon {
-                transform: translateX(-3px);
+                transform: translateX(-6px);
             }
         }
 
