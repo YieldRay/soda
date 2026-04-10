@@ -18,16 +18,16 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
 
             - name: Setup Node.js
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v6
               with:
-                  node-version: 22
+                  node-version: 24
                   registry-url: 'https://registry.npmjs.org'
 
             - name: Install pnpm
-              uses: pnpm/action-setup@v4
+              uses: pnpm/action-setup@v5
 
             - name: Build package
               run: |
@@ -35,7 +35,7 @@ jobs:
                   pnpm run build
 
             - name: Publishing on NPM
-              uses: JS-DevTools/npm-publish@v3
+              uses: JS-DevTools/npm-publish@v4
               with:
                   token: ${{secrets.NPM_TOKEN}}
                   access: public

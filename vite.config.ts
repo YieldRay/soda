@@ -57,7 +57,7 @@ export default defineConfig({
                     'utf-8',
                 ),
                 // api: 'modern-compiler',
-                silenceDeprecations: ['mixed-decls', 'import'],
+                silenceDeprecations: ['import'],
             },
         },
     },
