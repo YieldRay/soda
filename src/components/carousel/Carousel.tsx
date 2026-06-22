@@ -46,10 +46,9 @@ export const Carousel = forwardRef<
         const key = item.key ?? index
         return (
             <div
-                {...props}
-                className={clsx('sd-carousel-item', className)}
+                className="sd-carousel-item"
                 key={key}
-                style={{ flex, height, ...style }}
+                style={{ flex, height }}
                 onDragStart={(e) => e.preventDefault()}
             >
                 <div className="sd-carousel-value">{value}</div>
@@ -64,9 +63,11 @@ export const Carousel = forwardRef<
 
     return (
         <div
+            {...props}
             ref={containerRef}
             tabIndex={0}
-            className="sd-carousel"
+            className={clsx('sd-carousel', className)}
+            style={style}
             onKeyDown={(e) => {
                 if (e.key === 'ArrowRight') {
                     setItems((prev) => updateFlex(prev, 'rr'))

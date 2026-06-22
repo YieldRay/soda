@@ -157,14 +157,30 @@ export function ModalDatePicker({
                                     onLeft={() =>
                                         state === 'calendar' &&
                                         startViewTransitionFlushSync(
-                                            () => setMonth((m) => m - 1),
+                                            () => {
+                                                setMonth((m) => {
+                                                    if (m <= 1) {
+                                                        setYear((y) => y - 1)
+                                                        return 12
+                                                    }
+                                                    return m - 1
+                                                })
+                                            },
                                             ...slideLeftToRight,
                                         )
                                     }
                                     onRight={() =>
                                         state === 'calendar' &&
                                         startViewTransitionFlushSync(
-                                            () => setMonth((m) => m + 1),
+                                            () => {
+                                                setMonth((m) => {
+                                                    if (m >= 12) {
+                                                        setYear((y) => y + 1)
+                                                        return 1
+                                                    }
+                                                    return m + 1
+                                                })
+                                            },
                                             ...slideRightToLeft,
                                         )
                                     }
