@@ -1,5 +1,4 @@
 import { forwardRef, useImperativeHandle, useState } from 'react'
-import { css } from '@emotion/react'
 import {
     autoUpdate,
     flip,
@@ -74,23 +73,21 @@ export const PopoverHolder = forwardRef<
 
     return (
         <div
-            css={css`
-                position: relative;
-                display: inline-block;
-                vertical-align: middle;
-            `}
+            style={{
+                position: 'relative',
+                display: 'inline-block',
+                verticalAlign: 'middle',
+            }}
         >
             <div ref={refs.setReference} {...getReferenceProps()}>
                 {trigger}
             </div>
 
             <div
-                css={css`
-                    width: max-content;
-                    transition: opacity 200ms;
-                `}
                 ref={refs.setFloating}
                 style={{
+                    width: 'max-content',
+                    transition: 'opacity 200ms',
                     ...floatingStyles,
                     zIndex,
                     pointerEvents: isOpen ? undefined : 'none',

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 /**
  * This hook provide a mechanism that can support both controlled and uncontrolled state
@@ -28,12 +28,18 @@ export function useAutoState<T>(
     const isControlled = value$co !== undefined
     const [value$un, setValue$un] = useState(defaultValue)
 
-    const setValue = (v: T) => {
-        onChange?.(v)
-        if (!isControlled) {
+    const onChangeRef = useRef(onChange)
+    onChangeRef.current = onChange
+
+    const isControlledRef = useRef(isControlled)
+    isControlledRef.current = isControlled
+
+    const setValue = useCallback((v: T) => {
+        onChangeRef.current?.(v)
+        if (!isControlledRef.current) {
             setValue$un(v)
         }
-    }
+    }, [])
 
     return [isControlled ? value$co : value$un!, setValue]
 }

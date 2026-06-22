@@ -1,86 +1,5 @@
-import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import { ripple } from '@/ripple/ripple-effect'
 import { getFormatCalendar, isSameDay } from './calendar'
-
-const Day = styled.time<{
-    isToday: boolean
-    selected: boolean
-    disabled: boolean
-}>`
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    transition: all 200ms;
-    margin: 2px 0;
-
-    & > * {
-        flex: 0 0 auto;
-    }
-
-    ${(props) =>
-        !props.selected &&
-        css`
-            &:active {
-                background: rgba(0 0 0 / 0.08);
-            }
-        `}
-
-    ${(props) =>
-        props.isToday &&
-        css`
-            border: solid 1px;
-            overflow: hidden;
-        `}
-
-    ${(props) =>
-        props.disabled
-            ? css`
-                  background: none;
-                  filter: grayscale(1) opacity(0.6);
-              `
-            : css`
-                  cursor: pointer;
-                  revert: true;
-              `}
-
-
-              
-    ${(props) =>
-        props.selected &&
-        css`
-            background: var(--md-sys-color-primary);
-            color: var(--md-sys-color-on-primary);
-        `}
-
-
-        ${(props) =>
-        !props.disabled &&
-        !props.selected &&
-        css`
-            @media (any-hover: hover) {
-                &:hover {
-                    background: rgba(0 0 0 / 0.04);
-                }
-            }
-        `}
-`
-
-const SelectDayRow = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-`
-
-const SelectDayHeader = styled(SelectDayRow)`
-    margin-block-start: 30px;
-    margin-block-end: 16px;
-`.withComponent('header')
 
 export function SelectDay({
     year,
@@ -95,14 +14,8 @@ export function SelectDay({
 }) {
     const calendar = getFormatCalendar(year, month)
     return (
-        <div
-            css={css`
-                user-select: none;
-                margin: 14px;
-                -webkit-tap-highlight-color: transparent; // remove webkit blue tap effect
-            `}
-        >
-            <SelectDayHeader>
+        <div className="sd-date_picker-day_container">
+            <header className="sd-date_picker-day_header">
                 {['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun'].map(
                     (day) => (
                         <div key={day}>
@@ -110,20 +23,16 @@ export function SelectDay({
                         </div>
                     ),
                 )}
-            </SelectDayHeader>
+            </header>
             <div>
                 {calendar.map((row, i) => (
-                    <SelectDayRow
-                        key={i}
-                        css={css`
-                            margin-block-start: 6px;
-                        `}
-                    >
+                    <div className="sd-date_picker-day_row" key={i}>
                         {row.map((col, j) => (
-                            <Day
-                                isToday={col.isToday}
-                                selected={isSameDay(col.date, current)}
-                                disabled={!col.isThisMonth}
+                            <time
+                                className="sd-date_picker-day"
+                                data-sd-today={col.isToday}
+                                data-sd-selected={isSameDay(col.date, current)}
+                                data-sd-disabled={!col.isThisMonth}
                                 key={j}
                                 dateTime={`${year}-${month}-${col.day}`}
                                 onClick={() => {
@@ -133,9 +42,9 @@ export function SelectDay({
                                 ref={(el) => el && ripple(el)}
                             >
                                 {col.day}
-                            </Day>
+                            </time>
                         ))}
-                    </SelectDayRow>
+                    </div>
                 ))}
             </div>
         </div>

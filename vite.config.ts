@@ -86,7 +86,7 @@ export default defineConfig({
                      * Seems that vite ignore our options for rollupOptions.treeshake
                      * so we have to set it here
                      */
-                    const info = getModuleInfo(id)
+                    const info = getModuleInfo(id)!
                     info.moduleSideEffects = false
                 },
             },
@@ -94,12 +94,7 @@ export default defineConfig({
     },
     plugins: [
         tsconfigAliasPlugin(),
-        react({
-            jsxImportSource: '@emotion/react',
-            babel: {
-                plugins: ['@emotion/babel-plugin'],
-            },
-        }),
+        react(),
         dts({
             exclude: [
                 'node_modules/**',
