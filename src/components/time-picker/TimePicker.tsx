@@ -296,7 +296,9 @@ export const TimePicker = forwardRef<
                                     e.key === 'ArrowUp'
                                 ) {
                                     e.preventDefault() // prevent scroll
-                                    degreeAddDelta(degree, -10)
+                                    setDegree((degree) =>
+                                        degreeAddDelta(degree, -10),
+                                    )
                                 }
                             }}
                             ref={clockRef}

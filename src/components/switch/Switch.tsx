@@ -46,7 +46,7 @@ export const Switch = forwardRef<
             aria-checked={checked}
             aria-disabled={disabled}
             onClick={useMergeEventHandlers(props.onClick, () => {
-                setChecked(!checked)
+                if (!disabled) setChecked(!checked)
             })}
             onKeyDown={useMergeEventHandlers(props.onKeyDown, (e) => {
                 if (!disabled && (e.key === 'Enter' || e.key === ' ')) {

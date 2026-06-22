@@ -36,14 +36,6 @@ export const ScrollArea = ({
         const contentEl = contentRef.current
         const thumbEl = thumbRef.current
 
-        /** The total height of the scrollable content */
-        let totalHeight = 0
-        /** The visible height of the scrollable content */
-        let visibleHeight = 0
-        /** The current scrollTop */
-        let scrollPos = 0
-        /** How far we've scrolled on a scale of 0 to 1 */
-        let scrollPosRatio = 0
         /** The ratio of scroll of visible area to total area on a scale of 0 to 1: */
         let visibleToTotalRatio = 0
 
@@ -51,11 +43,11 @@ export const ScrollArea = ({
         function updateThumb() {
             if (contentEl && thumbEl && wrapperEl) {
                 // Update our cached values:
-                totalHeight = contentEl.scrollHeight
-                visibleHeight = contentEl.clientHeight
-                scrollPos = contentEl.scrollTop
+                const totalHeight = contentEl.scrollHeight
+                const visibleHeight = contentEl.clientHeight
+                const scrollPos = contentEl.scrollTop
                 // Update calculated values:
-                scrollPosRatio = scrollPos / totalHeight
+                const scrollPosRatio = scrollPos / totalHeight
                 visibleToTotalRatio = visibleHeight / totalHeight
 
                 if (visibleToTotalRatio >= 1) {
@@ -69,8 +61,11 @@ export const ScrollArea = ({
                         Math.max(visibleToTotalRatio * 100, 10) + '%'
                 }
             }
+        }
 
-            // Keep the updates coming:
+        /** Debounced update using rAF to coalesce multiple events in one frame */
+        function scheduleUpdate() {
+            cancelAnimationFrame(frameUpdateRef.current)
             frameUpdateRef.current = requestAnimationFrame(updateThumb)
         }
 
@@ -127,14 +122,22 @@ export const ScrollArea = ({
         }
 
         // Listen for mousedown on the thumb:
-        thumbRef.current?.addEventListener('mousedown', onDragStart)
+        thumbEl?.addEventListener('mousedown', onDragStart)
 
-        // Start updates every frame:
-        frameUpdateRef.current = requestAnimationFrame(updateThumb)
+        // Listen for scroll events to update thumb position:
+        contentEl?.addEventListener('scroll', scheduleUpdate, { passive: true })
 
-        // Cancel the requestAnimationFrame and unbind potential listeners before leaving
+        // Observe size changes to update thumb when content resizes:
+        const resizeObserver = new ResizeObserver(scheduleUpdate)
+        if (contentEl) resizeObserver.observe(contentEl)
+
+        // Initial update:
+        updateThumb()
+
         return () => {
             cancelAnimationFrame(frameUpdateRef.current)
+            contentEl?.removeEventListener('scroll', scheduleUpdate)
+            resizeObserver.disconnect()
             thumbEl?.removeEventListener('mousedown', onDragStart)
             window.removeEventListener('mousemove', onDragMove)
             window.removeEventListener('mouseup', onDragEnd)
