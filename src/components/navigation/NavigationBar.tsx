@@ -57,11 +57,12 @@ export const NavigationBar = forwardRef<
                 style,
             )}
         >
-            {items.map((item) => (
+            {items.map(({ key, ...rest }) => (
                 <Helper
-                    {...item}
-                    onClick={() => onChange?.(item)}
-                    onKeyDownEnter={() => onChange?.(item)}
+                    {...rest}
+                    key={key}
+                    onClick={() => onChange?.({ key, ...rest })}
+                    onKeyDownEnter={() => onChange?.({ key, ...rest })}
                 ></Helper>
             ))}
         </div>

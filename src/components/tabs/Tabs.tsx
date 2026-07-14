@@ -152,7 +152,7 @@ export const Tabs = forwardRef<
                         }
                         style={{ flexDirection }}
                         key={item.value}
-                        onClick={() => setValue(item.value)}
+                        onClick={() => !disabled && setValue(item.value)}
                         aria-selected={value === item.value}
                         aria-controls={`${tabsId}-panel-${item.value}`}
                         id={`${tabsId}-tab-${item.value}`}

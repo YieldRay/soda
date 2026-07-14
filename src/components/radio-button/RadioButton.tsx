@@ -71,7 +71,7 @@ export const RadioButton = forwardRef<
             data-sd-checked={checked}
             data-sd-disabled={disabled}
             role="radio"
-            onClick={() => setChecked(!checked)}
+            onClick={() => !disabled && setChecked(!checked)}
             tabIndex={disabled ? undefined : 0}
             onKeyDown={(e) => {
                 if (!disabled && (e.key === 'Enter' || e.key === ' ')) {

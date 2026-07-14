@@ -61,8 +61,12 @@ export const NavigationRail = forwardRef<
         >
             <div className="sd-navigation_rail-fab">{fab}</div>
             <div className="sd-navigation_rail-items">
-                {items.map((item) => (
-                    <Helper {...item} onClick={() => onChange?.(item)}></Helper>
+                {items.map(({ key, ...rest }) => (
+                    <Helper
+                        {...rest}
+                        key={key}
+                        onClick={() => onChange?.({ key, ...rest })}
+                    ></Helper>
                 ))}
             </div>
         </div>

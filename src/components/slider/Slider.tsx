@@ -77,6 +77,10 @@ export const Slider = forwardRef<
     const thumbRef = useRef<HTMLDivElement>(null)
 
     const [value, setValue] = useAutoState(onChange, value$co, defaultValue)
+    // mirror the latest value in a ref so keyboard handlers don't read stale
+    // closure state when multiple key events fire before a re-render
+    const valueRef = useRef(value)
+    valueRef.current = value
     const { valueLimitStep, valueLimitRange } = useSliderUtils(
         steps,
         minValue,
@@ -172,10 +176,10 @@ export const Slider = forwardRef<
                     const step = (maxValue - minValue) / (steps ?? 10)
                     if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
                         e.preventDefault() // prevent scroll
-                        setValue(value - step)
+                        setValue(valueRef.current - step)
                     } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
                         e.preventDefault() // prevent scroll
-                        setValue(value + step)
+                        setValue(valueRef.current + step)
                     }
                 }
             }}

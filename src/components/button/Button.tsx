@@ -48,12 +48,13 @@ export const Button = forwardRef<
             as="button"
             ref={ref}
             type={type ?? 'button'}
+            disabled={disabled}
             className={clsx('sd-button', `sd-button-${variant}`, className)}
             rippleColor={
                 variant === 'filled' ? getReversedRippleColor() : undefined
             }
-            onClick={() => onClick?.()}
-            onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
+            onClick={() => !disabled && onClick?.()}
+            onKeyDown={(e) => e.key === 'Enter' && !disabled && onClick?.()}
             data-sd-disabled={disabled}
             aria-disabled={disabled}
             aria-label={ariaLabel}

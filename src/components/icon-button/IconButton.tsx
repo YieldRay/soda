@@ -51,6 +51,7 @@ export const IconButton = forwardRef<
             {...props}
             ref={ref}
             as="button"
+            disabled={disabled}
             className={clsx(
                 'sd-icon_button',
                 `sd-icon_button-${variant}`,

@@ -32,10 +32,12 @@ export const ActionButton = forwardRef<
             {...props}
             ref={ref}
             as="button"
+            disabled={disabled}
             className={clsx('sd-action_button', className)}
             rippleColor={rippleColor}
             data-sd-inverse={inverse}
             data-sd-disabled={disabled}
+            aria-disabled={disabled}
             role="button"
         >
             {children}

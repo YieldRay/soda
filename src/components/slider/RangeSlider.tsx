@@ -77,6 +77,10 @@ export const RangeSlider = forwardRef<
     const thumbRef2 = useRef<HTMLDivElement>(null)
 
     const [value, setValue] = useAutoState(onChange, value$co, defaultValue)
+    // mirror the latest value in a ref so keyboard handlers don't read stale
+    // closure state when multiple key events fire before a re-render
+    const valueRef = useRef(value)
+    valueRef.current = value
     const { valueLimitStep, valueLimitRange } = useSliderUtils(
         steps,
         minValue,
@@ -263,17 +267,19 @@ export const RangeSlider = forwardRef<
                     if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
                         e.preventDefault() // prevent scroll
                         // Move the min handle
+                        const current = valueRef.current
                         const newRange: [number, number] = [
-                            Math.max(minValue, value[0] - step),
-                            value[1],
+                            Math.max(minValue, current[0] - step),
+                            current[1],
                         ]
                         setValue(newRange)
                     } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
                         e.preventDefault() // prevent scroll
                         // Move the max handle
+                        const current = valueRef.current
                         const newRange: [number, number] = [
-                            value[0],
-                            Math.min(maxValue, value[1] + step),
+                            current[0],
+                            Math.min(maxValue, current[1] + step),
                         ]
                         setValue(newRange)
                     }

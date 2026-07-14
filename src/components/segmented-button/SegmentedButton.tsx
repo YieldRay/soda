@@ -63,9 +63,9 @@ export const SegmentedButton = forwardRef<
                         className="sd-segmented_button-item"
                         data-sd-active={value$i === value}
                         data-sd-disabled={disabled}
-                        onClick={() => setValue(value$i)}
+                        onClick={() => !disabled && setValue(value$i)}
                         onKeyDown={(e) => {
-                            if (onChange && e.key === 'Enter' && !disabled) {
+                            if (e.key === 'Enter' && !disabled) {
                                 setValue(value$i)
                             }
                         }}

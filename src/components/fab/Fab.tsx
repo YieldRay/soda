@@ -39,6 +39,7 @@ export const Fab = forwardRef<
             {...props}
             ref={ref}
             as="button"
+            disabled={disabled}
             className={clsx('sd-fab', className)}
             data-sd={variant}
             data-sd-size={size}
