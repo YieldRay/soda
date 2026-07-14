@@ -120,15 +120,41 @@ $label_text_gap_size: 3.2px;
         .sd-text_field-filled_helper[class] {
             position: absolute;
         }
+
+        // Pull the textarea's bottom-right corner out to the container border so
+        // the native resize grabber sits flush against the field edge instead of
+        // being inset by the container's 0.75rem padding.
+        textarea {
+            margin-inline-end: -0.75rem;
+            margin-block-end: -0.75rem;
+            // keep the resizer inside the rounded corner clip
+            min-width: calc(100% + 0.75rem);
+            min-height: calc(100% + 0.75rem);
+        }
     }
 }
 
 //! outlined (default filled)
 .sd-text_field[data-sd='outlined'] {
-    @include outline;
-    border-width: 2px;
     background: transparent;
     border-radius: 0.25rem;
+    // The border is drawn on a pseudo-element (rather than the container box)
+    // so that, when the label is populated, we can cut a real notch in the
+    // top border instead of hiding it with an opaque color fill. This keeps
+    // the field working on any background (the field itself is transparent).
+    border: none;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 2px solid var(--md-sys-color-outline);
+        border-radius: inherit;
+        pointer-events: none;
+        transition:
+            border-color 200ms,
+            -webkit-mask 200ms;
+    }
 
     //? limit the leading_icon to has max width 1rem
     //? this make the component do not need javascript to calculate
@@ -159,20 +185,74 @@ $label_text_gap_size: 3.2px;
         }
     }
 
-    &[data-sd-label_text='populated'] .sd-text_field-label_text {
-        left: 8px;
-        top: -8px;
-        background: var(--md-sys-color-surface);
-        font-size: $label_text_populated_size;
-        padding: 0 4px;
+    &[data-sd-label_text='populated'] {
+        .sd-text_field-label_text {
+            left: 8px;
+            top: -8px;
+            // transparent: the notch in the border (below) removes the border
+            // line behind the label, so no color fill is needed and the label
+            // reads correctly on any page background.
+            background: transparent;
+            font-size: $label_text_populated_size;
+            padding: 0 4px;
+        }
+
+        // Notch the top border where the label overlaps it. The label's actual
+        // rendered width (already including its 4px horizontal padding) is
+        // measured in JS and exposed as `--sd-label_text-width`. We punch a
+        // transparent gap of that width into the top edge of the border,
+        // aligned to the label's `left: 8px` offset (start pulled in slightly
+        // so the notch fully clears the label). The rest of the border box
+        // stays fully opaque.
+        &::before {
+            $notch-height: 3px;
+            // populated label always sits at `left: 8px` (see rule above),
+            // regardless of leading icon. Pull the notch start 2px earlier so
+            // it fully clears the label's left edge.
+            $notch-start: 6px;
+            $notch-end: calc(8px + var(--sd-label_text-width, 0px));
+            // Two opaque layers composited together: everything below the top
+            // edge (keeps side + bottom borders), plus the top edge minus the
+            // notch window (keeps the top border except under the label).
+            -webkit-mask:
+                linear-gradient(#000 0 0) 0 100% / 100%
+                    calc(100% - #{$notch-height}) no-repeat,
+                linear-gradient(
+                        to right,
+                        #000 $notch-start,
+                        transparent $notch-start,
+                        transparent $notch-end,
+                        #000 $notch-end
+                    )
+                    0 0 / 100% $notch-height no-repeat;
+            mask:
+                linear-gradient(#000 0 0) 0 100% / 100%
+                    calc(100% - #{$notch-height}) no-repeat,
+                linear-gradient(
+                        to right,
+                        #000 $notch-start,
+                        transparent $notch-start,
+                        transparent $notch-end,
+                        #000 $notch-end
+                    )
+                    0 0 / 100% $notch-height no-repeat;
+            -webkit-mask-composite: source-over;
+            mask-composite: add;
+        }
     }
 
     &[data-sd-focus='true'] {
-        border: 2px solid var(--md-sys-color-primary);
-        outline: 1px solid var(--md-sys-color-primary);
+        &::before {
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+        }
         .sd-text_field-label_text {
             color: var(--md-sys-color-primary);
         }
+    }
+
+    &[data-sd-error='true']::before {
+        border-color: var(--md-sys-color-error);
     }
 
     // override default

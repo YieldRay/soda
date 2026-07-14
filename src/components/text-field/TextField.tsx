@@ -99,6 +99,30 @@ export const TextField = forwardRef<
     // but we use js here so we can bypass that limitation
     const placeholder = populated || !labelText ? initPlaceholder : undefined
     const innerRef = useRef<InternalHTMLElement>(null)
+    const labelTextRef = useRef<HTMLDivElement>(null)
+    const rootRef = useRef<HTMLDivElement | null>(null)
+
+    // Measure the label width so the outlined border can be notched to exactly
+    // fit the (populated) label. Uses the populated font-size for a stable
+    // measurement independent of the current empty/populated scale.
+    useEffect(() => {
+        const label = labelTextRef.current
+        const root = rootRef.current
+        if (!label || !root) return
+        const measure = () => {
+            // scrollWidth reflects the label's intrinsic width regardless of
+            // any transform/scale applied for the empty state.
+            const width = label.getBoundingClientRect().width
+            root.style.setProperty(
+                '--sd-label_text-width',
+                `${Math.round(width)}px`,
+            )
+        }
+        measure()
+        const ro = new ResizeObserver(measure)
+        ro.observe(label)
+        return () => ro.disconnect()
+    }, [labelText, populated, variant])
 
     const handleChange = (e: React.FormEvent<InternalHTMLElement>) => {
         const value = (e.target as InternalHTMLElement).value
@@ -120,6 +144,7 @@ export const TextField = forwardRef<
                 {labelText && (
                     <div
                         key="sd-text_field-label_text"
+                        ref={labelTextRef}
                         className="sd-text_field-label_text"
                         id={labelId}
                     >
@@ -164,7 +189,10 @@ export const TextField = forwardRef<
     return (
         <div
             {...props}
-            ref={ref}
+            ref={(node) => {
+                rootRef.current = node
+                setReactRef(ref, node)
+            }}
             className={clsx('sd-text_field', className)}
             style={style}
             onClick={useMergeEventHandlers(props.onClick, () => {
