@@ -4,6 +4,7 @@ import {
     forwardRef,
     useCallback,
     useDeferredValue,
+    useEffect,
     useMemo,
     useRef,
     useState,
@@ -138,8 +139,15 @@ export const Select = forwardRef<
             [options, value],
         )
         const [activeIndex, setActiveIndex] = useState<number | null>(null)
-        /** Cannot determinate position */
-        const fallbackRef = useRef(false)
+        /**
+         * Whether `inner` positioning cannot be used (reference too close to a
+         * viewport edge / not enough items visible) and we must fall back to
+         * standard anchored positioning. This MUST be state (not a ref) so that
+         * changing it re-renders and rebuilds the middleware array below —
+         * otherwise the floating panel keeps using `inner` and overflows the
+         * screen. See https://floating-ui.com/docs/inner#onfallbackchange
+         */
+        const [fallback, setFallback] = useState(false)
         const touch = 'ontouchstart' in document.documentElement
 
         const { refs, floatingStyles, context } = useFloating({
@@ -147,20 +155,22 @@ export const Select = forwardRef<
             open,
             onOpenChange: (open) => {
                 setOpen(open)
-                if (!open) fallbackRef.current = false
+                if (!open) setFallback(false)
             },
             whileElementsMounted: autoUpdate,
             transform: false,
-            middleware: fallbackRef.current
+            middleware: fallback
                 ? [
                       offset(5),
                       touch
                           ? shift({ crossAxis: true, padding: 10 })
                           : flip({ padding: 10 }),
                       size({
-                          apply({ availableHeight }) {
+                          apply({ availableHeight, availableWidth }) {
                               Object.assign(scrollRef.current?.style ?? {}, {
-                                  maxHeight: `${availableHeight}px`,
+                                  maxHeight: `${Math.max(0, availableHeight)}px`,
+                                  maxWidth: `${Math.max(0, availableWidth)}px`,
+                                  overflowY: 'auto',
                               })
                           },
                           padding: 10,
@@ -173,9 +183,7 @@ export const Select = forwardRef<
                           scrollRef,
                           index: selectedIndex,
                           offset: 0,
-                          onFallbackChange: (fallback) => {
-                              fallbackRef.current = fallback
-                          },
+                          onFallbackChange: setFallback,
                           padding: 10,
                           minItemsVisible: touch ? 8 : 4,
                           referenceOverflowThreshold: 20,
@@ -183,6 +191,18 @@ export const Select = forwardRef<
                       offset({ crossAxis: -4 }),
                   ],
         })
+
+        // The `size` middleware (fallback path) imperatively writes maxWidth /
+        // overflowY onto the scroll element. When we leave fallback mode (e.g.
+        // reopen with `inner` positioning) those styles would linger and clip
+        // the panel, so clear them whenever we are not in fallback mode.
+        useEffect(() => {
+            if (fallback) return
+            const el = scrollRef.current
+            if (!el) return
+            el.style.maxWidth = ''
+            el.style.overflowY = ''
+        }, [fallback, open])
 
         const { getReferenceProps, getFloatingProps, getItemProps } =
             useInteractions([
@@ -206,7 +226,7 @@ export const Select = forwardRef<
                 transitionTimingFunction: 'cubic-bezier(0.2, 0, 0, 1)',
             },
             initial: () => {
-                if (fallbackRef.current) return { opacity: 0 }
+                if (fallback) return { opacity: 0 }
                 return {
                     opacity: 0.5,
                     clipPath: `inset(${

@@ -74,6 +74,13 @@ export const BottomSheet = forwardRef<
     )
     const [visible, setVisible] = useState(false) // = isOpen
 
+    // Keep the latest onChange in a ref so the drag-attach effect below does
+    // NOT depend on its identity. Otherwise an inline onChange would re-run the
+    // effect on every parent render, re-attaching listeners and resetting the
+    // sheet's internal state flag to 'hide' — silently closing an open sheet.
+    const onChangeRef = useRef(onChange)
+    onChangeRef.current = onChange
+
     // useLayoutEffect() rather than useEffect()
     // this make sure ref.current exists in useImperativeHandle()
     useLayoutEffect(() => {
@@ -84,16 +91,16 @@ export const BottomSheet = forwardRef<
         const handler = attachDragEvent(sheet, handle, {
             onShow() {
                 setVisible(true)
-                onChange?.(true)
+                onChangeRef.current?.(true)
             },
             onHide() {
                 setVisible(false)
-                onChange?.(false)
+                onChangeRef.current?.(false)
             },
         })
         dragHandlerRef.current = handler
         return handler.cleanup
-    }, [fixed, onChange, hideDragHandle])
+    }, [fixed, hideDragHandle])
 
     useImperativeHandle(ref, () => dragHandlerRef.current!)
 
@@ -226,12 +233,12 @@ function attachDragEvent(
         const { height } = sheet.getBoundingClientRect() // the sheet height
 
         if (pointerMoveDuration <= 200 /** ms */) {
-            // if quickly drag it to the bottom, hide it
-            if (distanceY >= 32 || (distanceY <= 0 && distanceY >= -32)) {
+            // quick gesture (a flick): a downward flick past a small threshold
+            // dismisses the sheet; anything else (upward flick, or a tap with
+            // negligible movement) keeps it open.
+            if (distanceY >= 32) {
                 hide()
-            }
-            // if quickly drag it to the top, show it in its entirely
-            else {
+            } else {
                 show()
             }
         } else {
@@ -259,7 +266,14 @@ function attachDragEvent(
         show,
         hide,
         visible() {
-            return translateY > 0
+            // Derive from the authoritative state flag rather than translateY:
+            // translateY starts at 0 while the sheet is initially hidden (its
+            // CSS transform is translateY(100%)), so translateY alone is not a
+            // reliable indicator of visibility.
+            return (
+                sheet.dataset.sdState === 'show' ||
+                sheet.dataset.sdState === 'showing'
+            )
         },
     }
 }
