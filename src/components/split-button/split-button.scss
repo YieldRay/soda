@@ -1,0 +1,437 @@
+// https://m3.material.io/components/split-button/specs
+
+.sd-split_button {
+    display: inline-flex;
+    align-items: stretch;
+    position: relative;
+    vertical-align: middle;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    // Base button styles
+    button {
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        overflow: hidden;
+    }
+
+    // Divider between buttons (2dp spacing per spec)
+    &-divider {
+        width: 2px;
+        background: transparent;
+    }
+
+    // Content wrapper for icon and label
+    &-content {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    &-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &-label {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+    }
+
+    &-menu-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s;
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    // Disabled state
+    &[data-sd-disabled='true'] {
+        pointer-events: none;
+        button {
+            color: var(--md-sys-color-on-surface);
+            opacity: 0.38;
+            pointer-events: none;
+        }
+    }
+
+    // Size configurations - XS
+    &-XS {
+        height: 24px;
+        border-radius: 12px;
+
+        button {
+            height: 24px;
+        }
+
+        .sd-split_button-leading {
+            min-width: 40px;
+            padding: 0 12px;
+            border-radius: 12px 0 0 12px;
+        }
+
+        .sd-split_button-trailing {
+            width: 24px;
+            padding: 0;
+            border-radius: 0 12px 12px 0;
+            
+            // Menu icon offset when unselected: -1dp from center
+            &:not([data-sd-selected='true']) .sd-split_button-menu-icon {
+                transform: translateX(-1px);
+            }
+        }
+
+        // Inner corner radius: 4dp for XS
+        .sd-split_button-leading {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 12px 4px 4px 12px;
+            }
+        }
+
+        .sd-split_button-trailing {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 4px 12px 12px 4px;
+            }
+        }
+    }
+
+    // Size configurations - S
+    &-S {
+        height: 32px;
+        border-radius: 16px;
+
+        button {
+            height: 32px;
+        }
+
+        .sd-split_button-leading {
+            min-width: 48px;
+            padding: 0 16px;
+            border-radius: 16px 0 0 16px;
+        }
+
+        .sd-split_button-trailing {
+            width: 32px;
+            padding: 0;
+            border-radius: 0 16px 16px 0;
+            
+            // Menu icon offset when unselected: -1dp from center
+            &:not([data-sd-selected='true']) .sd-split_button-menu-icon {
+                transform: translateX(-1px);
+            }
+        }
+
+        // Inner corner radius: 4dp for S
+        .sd-split_button-leading {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 16px 4px 4px 16px;
+            }
+        }
+
+        .sd-split_button-trailing {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 4px 16px 16px 4px;
+            }
+        }
+    }
+
+    // Size configurations - M (default)
+    &-M {
+        height: 40px;
+        border-radius: 20px;
+
+        button {
+            height: 40px;
+        }
+
+        .sd-split_button-leading {
+            min-width: 56px;
+            padding: 0 20px;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .sd-split_button-trailing {
+            width: 40px;
+            padding: 0;
+            border-radius: 0 20px 20px 0;
+            
+            // Menu icon offset when unselected: -2dp from center
+            &:not([data-sd-selected='true']) .sd-split_button-menu-icon {
+                transform: translateX(-1px);
+            }
+        }
+
+        // Inner corner radius: 4dp for M
+        .sd-split_button-leading {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 20px 4px 4px 20px;
+            }
+        }
+
+        .sd-split_button-trailing {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 4px 20px 20px 4px;
+            }
+        }
+    }
+
+    // Size configurations - L
+    &-L {
+        height: 48px;
+        border-radius: 24px;
+
+        button {
+            height: 48px;
+        }
+
+        .sd-split_button-leading {
+            min-width: 64px;
+            padding: 0 24px;
+            border-radius: 24px 0 0 24px;
+        }
+
+        .sd-split_button-trailing {
+            width: 48px;
+            padding: 0;
+            border-radius: 0 24px 24px 0;
+            
+            // Menu icon offset when unselected: -3dp from center
+            &:not([data-sd-selected='true']) .sd-split_button-menu-icon {
+                transform: translateX(-3px);
+            }
+        }
+
+        // Inner corner radius: 8dp for L
+        .sd-split_button-leading {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 24px 8px 8px 24px;
+            }
+        }
+
+        .sd-split_button-trailing {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 8px 24px 24px 8px;
+            }
+        }
+    }
+
+    // Size configurations - XL
+    &-XL {
+        height: 56px;
+        border-radius: 28px;
+
+        button {
+            height: 56px;
+        }
+
+        .sd-split_button-leading {
+            min-width: 72px;
+            padding: 0 28px;
+            border-radius: 28px 0 0 28px;
+        }
+
+        .sd-split_button-trailing {
+            width: 56px;
+            padding: 0;
+            border-radius: 0 28px 28px 0;
+            
+            // Menu icon offset when unselected: -6dp from center
+            &:not([data-sd-selected='true']) .sd-split_button-menu-icon {
+                transform: translateX(-6px);
+            }
+        }
+
+        // Inner corner radius: 12dp for XL
+        .sd-split_button-leading {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 28px 12px 12px 28px;
+            }
+        }
+
+        .sd-split_button-trailing {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                border-radius: 12px 28px 28px 12px;
+            }
+        }
+    }
+
+    // Elevated variant
+    &-elevated {
+        .sd-split_button-leading,
+        .sd-split_button-trailing {
+            background: var(--md-sys-color-surface-container-low);
+            color: var(--md-sys-color-primary);
+            @include elevation-level1;
+        }
+
+        .sd-split_button-divider {
+            background: var(--md-sys-color-outline-variant);
+        }
+
+        .sd-split_button-leading,
+        .sd-split_button-trailing {
+            @media (any-hover: hover) {
+                &:hover {
+                    opacity: 0.8;
+                    @include elevation-level2;
+                }
+            }
+            &:active {
+                opacity: unset;
+                filter: brightness(95%);
+            }
+            &:focus-visible {
+                outline: none;
+                opacity: unset;
+                filter: brightness(90%);
+            }
+        }
+
+        .sd-split_button-trailing[data-sd-selected='true'] {
+            @include background-focus(var(--md-sys-color-primary));
+        }
+    }
+
+    // Filled variant
+    &-filled {
+        .sd-split_button-leading,
+        .sd-split_button-trailing {
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .sd-split_button-divider {
+            background: var(--md-sys-color-on-primary);
+            opacity: 0.12;
+        }
+
+        .sd-split_button-leading,
+        .sd-split_button-trailing {
+            @media (any-hover: hover) {
+                &:hover {
+                    @include elevation-level1;
+                }
+            }
+            &:active {
+                box-shadow: unset;
+                filter: contrast(120%);
+            }
+            &:focus-visible {
+                outline: none;
+                box-shadow: unset;
+                filter: contrast(110%);
+            }
+        }
+
+        .sd-split_button-trailing[data-sd-selected='true'] {
+            @include background-focus(var(--md-sys-color-on-primary));
+        }
+    }
+
+    // Tonal variant
+    &-tonal {
+        .sd-split_button-leading,
+        .sd-split_button-trailing {
+            background: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+        }
+
+        .sd-split_button-divider {
+            background: var(--md-sys-color-on-secondary-container);
+            opacity: 0.12;
+        }
+
+        .sd-split_button-leading,
+        .sd-split_button-trailing {
+            @media (any-hover: hover) {
+                &:hover {
+                    @include elevation-level1;
+                    filter: brightness(96%);
+                }
+            }
+            &:active {
+                filter: brightness(92%);
+            }
+            &:focus-visible {
+                outline: none;
+                filter: brightness(88%);
+            }
+        }
+
+        .sd-split_button-trailing[data-sd-selected='true'] {
+            @include background-focus(var(--md-sys-color-on-secondary-container));
+        }
+    }
+
+    // Outlined variant
+    &-outlined {
+        .sd-split_button-leading,
+        .sd-split_button-trailing {
+            background: var(--md-sys-color-surface);
+            color: var(--md-sys-color-primary);
+            @include outline;
+        }
+
+        .sd-split_button-divider {
+            background: var(--md-sys-color-outline);
+        }
+
+        .sd-split_button-leading,
+        .sd-split_button-trailing {
+            @media (any-hover: hover) {
+                &:hover {
+                    filter: brightness(96%);
+                }
+            }
+            &:active {
+                filter: brightness(92%);
+            }
+            &:focus-visible {
+                outline: 1px solid var(--md-sys-color-outline);
+                filter: brightness(88%);
+            }
+        }
+
+        .sd-split_button-trailing[data-sd-selected='true'] {
+            @include background-focus(var(--md-sys-color-primary));
+        }
+    }
+}
